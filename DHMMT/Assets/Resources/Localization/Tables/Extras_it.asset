@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Extras_it
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: it
+  m_SharedData: {fileID: 11400000, guid: 7495771ad8049df4f9faf7152587249f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 17837092864
+    m_Localized: "\tEhi, sono Sam dalla Russia, uno studente programmatore di 20
+      anni. \xC8 il mio primo gioco in assoluto, so che questo gioco \xE8 lungi dall'essere
+      perfetto, ma \xE8 quello che le mie conoscenze mi permettono di creare. Ho
+      intenzione di aggiungere nuove funzionalit\xE0, miglioramenti e mappe a questo
+      gioco.\r\n\tSe hai acquistato questo gioco, ti ringrazio molto e se lo stai
+      giocando gratuitamente, il che capisco, puoi parlare di questo gioco ai tuoi
+      amici o dare una valutazione a questo gioco dove puoi. "
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Extras_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: 7495771ad8049df4f9faf7152587249f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 17837092864
+    m_Localized: "\tHey, ben Rusya'dan Sam, 20 ya\u015F\u0131nda bir programc\u0131
+      \xF6\u011Frencisi. \u015Eimdiye kadarki ilk oyunum, bu oyunun m\xFCkemmel olmaktan
+      uzak oldu\u011Funu biliyorum ama bilgilerimin yaratmama izin verdi\u011Fi \u015Fey
+      bu. Bu oyuna yeni \xF6zellikler, iyile\u015Ftirmeler ve haritalar eklemeyi
+      planl\u0131yorum.\r\n\tBu oyunu sat\u0131n ald\u0131ysan\u0131z size \xE7ok
+      te\u015Fekk\xFCr ediyorum ve \xFCcretsiz oynuyorsan\u0131z anlad\u0131\u011F\u0131m
+      kadar\u0131yla arkada\u015Flar\u0131n\u0131za bu oyunu anlatabilir veya yapabilece\u011Finiz
+      bu oyuna puan verebilirsiniz. "
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

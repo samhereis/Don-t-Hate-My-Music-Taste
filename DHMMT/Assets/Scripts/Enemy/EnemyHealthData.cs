@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyHealthData : MonoBehaviour, IHealthData
+{
+    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
+    [SerializeField] bool _isAlive;
+
+    public float Health { get => _health; set => _health = value; }
+    [SerializeField] float _health;
+
+    public float MaxHealth { get => _MaxHealth; set => _MaxHealth = value; }
+    [SerializeField] float _MaxHealth;
+
+    public GameObject HealthLoot;
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
+        if (_health < 0)
+        {
+            Instantiate(HealthLoot, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
+        };
+    }
+}

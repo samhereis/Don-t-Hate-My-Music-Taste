@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Korean (ko)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Korean (ko)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ba48da5ca8ec231498e6c06a5ca88ff5
+  m_SerializeEntries:
+  - m_GUID: fc3dc058557a8b343821b7887cb84d50
+    m_Address: Universal_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: 0436178c780109049a708e9b3d40ef1c
+    m_Address: mainMenuUiTableCollection_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: 07cd635f1da4d8e41b4ce53470ad4b95
+    m_Address: Lebels_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: 6f0722b769225524498b469ae28140d8
+    m_Address: Errors_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: 435e8c9d781884c468a1d6e04898f814
+    m_Address: Extras_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 890082356c4f7bf4aaa5977347e5d177, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6681efdf12972924dab79b33fefe8ac8, type: 2}
+    - {fileID: 11400000, guid: 0d4531bf53303464eb7c3140673ddaf9, type: 2}
