@@ -8,6 +8,10 @@ public class HealthBar : MonoBehaviour
     public static HealthBar instance;
     public Slider slider;
 
+    [SerializeField] Gradient gradient;
+    [SerializeField] Image Fill;
+    [SerializeField] Image HurtEffect;
+
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
@@ -17,5 +21,7 @@ public class HealthBar : MonoBehaviour
     public void SetValue(float value)
     {
         slider.value = value;
+        Fill.color = gradient.Evaluate(slider.normalizedValue);
+        HurtEffect.color = new Color(1, 1, 1, (1 - slider.normalizedValue));
     }
 }

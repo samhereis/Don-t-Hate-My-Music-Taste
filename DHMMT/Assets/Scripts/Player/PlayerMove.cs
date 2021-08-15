@@ -12,24 +12,24 @@ public class PlayerMove : MonoBehaviour
     Vector2 MoveInputValue;
     void Awake()
     {
-        if(!characterController) characterController = GetComponent<CharacterController>(); 
+        instance = this;
+        if (!characterController) characterController = GetComponent<CharacterController>(); 
     }
     void OnEnable()
     {
-        instance = this;
-        
-        PlayerInput.input.Gameplay.Move.performed += context => { this.MoveInputValue = context.ReadValue<Vector2>(); }; 
-        PlayerInput.input.Gameplay.Move.canceled += context => { this.MoveInputValue = Vector2.zero; }; 
+
+        PlayerInput.input.Gameplay.Move.performed += context => { MoveInputValue = context.ReadValue<Vector2>(); };
+        PlayerInput.input.Gameplay.Move.canceled  += context => { MoveInputValue = Vector2.zero; };
 
         PlayerInput.input.Gameplay.Sprint.performed += context => { speedMultiplier = 3; };
-        PlayerInput.input.Gameplay.Sprint.canceled += context => { speedMultiplier = 1; };
+        PlayerInput.input.Gameplay.Sprint.canceled  += context => { speedMultiplier = 1; };
 
         PlayerInput.input.Gameplay.Fire.performed += context => { speedMultiplier = 1; };
     }
-    void OnDisable() { instance = null; }
+
     void FixedUpdate()
     {
         move = transform.right * MoveInputValue.x  + transform.forward * MoveInputValue.y;
-        characterController.Move(move * (speed * speedMultiplier) * Time.deltaTime);
+        characterController.Move((speed * speedMultiplier) * Time.deltaTime * move);
     }
 }

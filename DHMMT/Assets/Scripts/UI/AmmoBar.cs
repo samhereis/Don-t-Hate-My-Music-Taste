@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class AmmoBar : MonoBehaviour
 {
     [SerializeField] Slider slider;
+
+    [SerializeField] Gradient gradient;
+    [SerializeField] Image Fill;
+
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref slider, GetComponent<Slider>());
@@ -27,5 +31,6 @@ public class AmmoBar : MonoBehaviour
 
         slider.maxValue = PlayerWeaponDataHolder.instance.gunUse.maxAmmo;
         slider.value = PlayerWeaponDataHolder.instance.gunUse.CurrentAmmo;
+        Fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }

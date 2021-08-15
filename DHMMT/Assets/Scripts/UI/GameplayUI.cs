@@ -2,38 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayUI : MonoBehaviour
+public class GameplayUI : MonoBehaviour, IUIPage
 {
     public static GameplayUI instance;
+
+    public GameObject Page { get => _page; set => _page = value; }
+    [SerializeField] GameObject _page;
 
     void Awake()
     {
         instance = this;
-        gameObject.SetActive(true);
-    }
-
-    void Start()
-    {
-
-    }
-
-    void OnEnable()
-    {
-
-    }
-
-    void OnDisable()
-    {
-        
     }
 
     public void Enable()
     {
-        gameObject.SetActive(true); 
+        Page.SetActive(true); 
     }
 
     public void Disable()
     {
-        gameObject.SetActive(false);
+        Page.SetActive(false);
     }
 }

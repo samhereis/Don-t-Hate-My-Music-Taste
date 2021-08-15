@@ -17,14 +17,14 @@ public class BackButton : MonoBehaviour
             page = transform.parent.GetComponentInParent<IUIPage>();
         }
 
-        Back.OnBack = () => { GetBack(); };
+        Back.OnBack = () => GetBack();
     }
 
     void GetBack()
     {
         if(IsUIPage)
         {
-            Back.OnBack = null;
+            Back.OnBack = () => {  }; ;
             page.Disable();
 
             return;

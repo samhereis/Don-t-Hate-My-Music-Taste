@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Emission: 2.5
+    - _Emission: 3
     - _Saturation: 2
     m_Colors:
     - _Color: {r: 1, g: 0.30588236, b: 0, a: 0}

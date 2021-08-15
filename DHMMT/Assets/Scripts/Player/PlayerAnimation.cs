@@ -7,6 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     Animator animator;
     int velocityHashY, velocityHashX;
     public Vector2 MoveInputValue;
+    int SpeedMultiplier = 1;
     void Awake()
     {
         if(!animator) animator = GetComponent<Animator>();
@@ -16,15 +17,15 @@ public class PlayerAnimation : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerInput.input.Gameplay.Move.performed += context => { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(MoveInputValue); };
-        PlayerInput.input.Gameplay.Move.canceled += context =>  { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(MoveInputValue); };
+        PlayerInput.input.Gameplay.Move.performed += context =>  { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(); };
+        PlayerInput.input.Gameplay.Move.canceled  += context =>  { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(); };
 
-        PlayerInput.input.Gameplay.Sprint.performed += context => { SetAnimationValue(MoveInputValue * 2); };
-        PlayerInput.input.Gameplay.Sprint.canceled += context =>  { SetAnimationValue(MoveInputValue); };
+        PlayerInput.input.Gameplay.Sprint.performed += context =>  { SpeedMultiplier = 2; SetAnimationValue(); };
+        PlayerInput.input.Gameplay.Sprint.canceled  += context =>  { SpeedMultiplier = 1; SetAnimationValue(); };
     }
-    void SetAnimationValue(Vector2 context)
+
+    void SetAnimationValue()
     {
-        animator.SetFloat(velocityHashY, context.y);
-        animator.SetFloat(velocityHashX, context.x); 
+        animator.SetFloat(velocityHashY, MoveInputValue.y * SpeedMultiplier);
     }
 }

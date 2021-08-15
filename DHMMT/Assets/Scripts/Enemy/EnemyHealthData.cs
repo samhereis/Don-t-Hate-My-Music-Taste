@@ -18,9 +18,14 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
     public void TakeDamage(float damage)
     {
         _health -= damage;
+
         if (_health < 0)
         {
             Instantiate(HealthLoot, transform.position, Quaternion.identity);
+
+            Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+
+            PlayerKillCount.instance.IncreaseKillCount();
 
             Destroy(gameObject);
         };

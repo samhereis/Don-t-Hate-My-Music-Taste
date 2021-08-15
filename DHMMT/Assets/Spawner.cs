@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
 
-        Spawn(playerPref,SpawnPoints.instance.GetRandomSpawn().position);
+        Spawn(playerPref, SpawnPoints.instance.GetRandomSpawn().position);
         SpawnEnemies();
     }
     private void OnEnable()
@@ -60,5 +60,17 @@ public class Spawner : MonoBehaviour
     public void SpawnEnemy(Transform pos)
     {
         Instantiate(enemyPref, pos.position, Quaternion.identity);
+    }
+    public void RepawnPlayer(GameObject caller,Transform pos)
+    {
+        Destroy(caller);
+
+        PlayerKillCount.instance.NullKillCount();
+
+        HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
+
+        PlayerInput.input = new InputSettings();
+
+        Instantiate(playerPref, pos.position, Quaternion.identity);
     }
 }

@@ -40,6 +40,8 @@ public class EnemyStates : MonoBehaviour
 
     [SerializeField] EnemyWeaponDataHolder weaponDataHolder;
 
+    [SerializeField]  float ShootRate;
+
     Action stateAction;
 
     float distance;
@@ -82,16 +84,21 @@ public class EnemyStates : MonoBehaviour
     }
     public void chaseEnemyWhoIsInRange()
     {
+        if(followEnemy == null)
+        {
+            state = States.searchForEnemy;
+        }
+
         distance = Vector3.Distance(this.transform.position, followEnemy.position);
-         if (distance > distanceToEnemy)
-         {
-            enemyMovement.navMeshAgent.speed = 3f;
-            enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
-            enemyMovement.MoveTo(followEnemy, 3);
-         }
-         else if(distance < distanceToEnemy)
-         {
-            state = States.attack;
+        if (distance > distanceToEnemy)
+        {
+           enemyMovement.navMeshAgent.speed = 3f;
+           enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
+           enemyMovement.MoveTo(followEnemy, 3);
+        }
+        else if(distance < distanceToEnemy)
+        {
+           state = States.attack;
         }
     }
     public IEnumerator attack()
@@ -110,7 +117,7 @@ public class EnemyStates : MonoBehaviour
 
                 enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
 
-                yield return Wait.NewWait(1.5f);
+                yield return Wait.NewWait(ShootRate);
                 weaponDataHolder.gunUse?.Shoot();
             }
         }

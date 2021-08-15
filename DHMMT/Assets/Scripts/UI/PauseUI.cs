@@ -2,37 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI : MonoBehaviour, IUIPage
 {
     public static PauseUI instance;
+
+    public GameObject Page { get => _page; set => _page = value; }
+    [SerializeField] GameObject _page;
 
     void Awake()
     {
         instance = this;
-        gameObject.SetActive(false);
-    }
-
-    void Start()
-    {
-    }
-
-    void OnEnable()
-    {
-
-    }
-
-    void OnDisable()
-    {
-
     }
 
     public void Enable()
     {
-        gameObject.SetActive(true);
+        PauseUnpause.SetPause(true);
+
+        GameplayUI.instance.Disable();
+
+        Page.SetActive(true);
     }
 
     public void Disable()
     {
-        gameObject.SetActive(false);
+        PauseUnpause.SetPause(false);
+
+        GameplayUI.instance.Enable();
+
+        Page.SetActive(false);
     }
 }

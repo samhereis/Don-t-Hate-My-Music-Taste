@@ -4,21 +4,14 @@ using UnityEngine.Events;
 
 public static class PlayerInput
 {
-                #region InputData
     public enum  InputState { Gameplay, UI }
     public static InputState state;
     public static InputSettings input = new InputSettings();
-                #endregion InputData
 
-                #region InputsEvents
-    public static Action OnFire;
-    public static Action OnReload;
-    public static Action<Transform> OnAim;
-                #endregion
-
-                #region  Methods
     public static void SetInput(InputState setTo)
     {
+        input.Enable();
+
         if (setTo == state) return;
 
         if(setTo == InputState.Gameplay)
@@ -34,5 +27,4 @@ public static class PlayerInput
 
         state = setTo;
     }
-                #endregion  Methods
 }

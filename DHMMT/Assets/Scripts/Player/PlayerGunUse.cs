@@ -5,28 +5,26 @@ using UnityEngine;
 public class PlayerGunUse : MonoBehaviour
 {
     PlayerWeaponDataHolder weaponDataHolder;
+    [SerializeField] InteractableEquipWeapon gun;
     bool IsShooting = false;
 
-    private void OnEnable()
+    void OnEnable()
     {
         weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
 
+        gun.Interact(gameObject);
+
         PlayerInput.input.Gameplay.Fire.performed += (_) => IsShooting = true;
         PlayerInput.input.Gameplay.Fire.canceled += (_) => IsShooting = false;
+
+        PlayerInput.input.Gameplay.Reload.performed += (_) => StartCoroutine(weaponDataHolder.gunUse?.Reload());
     }
-    private void OnDisable()
-    {
-        weaponDataHolder = null;
-    }
-    private void FixedUpdate()
+
+    void FixedUpdate()
     {
         if(IsShooting)
         {
-            Shoot();
+            weaponDataHolder.gunUse?.Shoot();
         }
-    }
-    void Shoot()
-    {
-        weaponDataHolder.gunUse?.Shoot();
     }
 }

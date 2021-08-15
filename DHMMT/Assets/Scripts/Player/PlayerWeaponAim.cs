@@ -14,11 +14,4 @@ public class PlayerWeaponAim : MonoBehaviour
 
         PlayerInput.input.Gameplay.Aim.performed += (_) => weaponDataHolder.gunAim?.Aim(weaponPosition);
     }
-    void OnDisable()
-    {
-        weaponDataHolder = null;
-        weaponPosition = null;
-
-        PlayerInput.input.Gameplay.Aim.performed -= (_) => weaponDataHolder.gunAim.Aim(weaponPosition);
-    }
 }

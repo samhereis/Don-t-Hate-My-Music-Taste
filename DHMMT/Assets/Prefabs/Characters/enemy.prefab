@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322940068582355172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 1, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7010315650923318047}
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 135618078336120121}
   - component: {fileID: 6188888498736696643}
   - component: {fileID: 715024889744891478}
-  - component: {fileID: -8366475486143650185}
+  - component: {fileID: 2938201030753303005}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -1244,6 +1244,7 @@ MonoBehaviour:
   followEnemy: {fileID: 0}
   currentDestination: {fileID: 0}
   weaponDataHolder: {fileID: 715024889744891478}
+  ShootRate: 1
 --- !u!114 &2413848665578746314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,7 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4eddad9cb36004e838b8d03353e811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8366475486143650185
+--- !u!114 &2938201030753303005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1347,7 +1348,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3296317459984324053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c39fcc8bed276544b94dc5356ca4f84, type: 3}
+  m_Script: {fileID: 11500000, guid: 977c4bb6fed181a45b1ddea31e632a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3325724658735170878

@@ -610,13 +610,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266962812}
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalRotation: {x: 0.9848078, y: 0, z: 0, w: 0.17364825}
   m_LocalPosition: {x: 546, y: -52, z: 582}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 160, y: 0, z: 0}
 --- !u!1001 &270997929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1203,8 +1203,8 @@ MonoBehaviour:
   SettingsName: _EmissionColor
   start: 30
   end: 30
-  min: 0.5
-  mult: 1
+  min: 0.3
+  mult: 0.3
 --- !u!114 &905011615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,8 +1221,8 @@ MonoBehaviour:
   SettingsName: _EmissionColor
   start: 5
   end: 5
-  min: 0.5
-  mult: 1
+  min: 0.3
+  mult: 0.3
 --- !u!114 &905011616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,7 +1258,7 @@ MonoBehaviour:
   start: 1
   end: 5
   min: 0.3
-  mult: 1
+  mult: 0.3
 --- !u!1001 &992890046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1312,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755986, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: t
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755986, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: objectsReactingToNB.Array.size
@@ -2107,7 +2107,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
@@ -2497,7 +2497,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1

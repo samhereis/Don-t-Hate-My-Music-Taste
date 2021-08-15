@@ -17,7 +17,9 @@ public class CameraMovement : MonoBehaviour
         instance = this;
 
         Cursor.lockState = CursorLockMode.Locked;
-
+    }
+    void OnEnable()
+    {
         PlayerInput.input.Gameplay.Look.performed += _ => { Look(_); };
         PlayerInput.input.Gameplay.Look.canceled += _ => { Look(_); };
     }

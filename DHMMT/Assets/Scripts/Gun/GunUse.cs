@@ -46,7 +46,7 @@ public class GunUse : MonoBehaviour
             }
         }
     }
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         while(currentAmmo < maxAmmo)
         {

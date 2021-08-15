@@ -40,5 +40,5 @@ Material:
     - _Emission: 3
     - _Saturation: 3
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.116336346, a: 0}
+    - _Color: {r: 0, g: 1, b: 0.11764706, a: 0}
   m_BuildTextureStacks: []

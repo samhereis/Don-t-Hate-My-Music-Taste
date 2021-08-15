@@ -27,7 +27,6 @@ public class LootScript : MonoBehaviour
             {
                 target.Health += PlusToHealth;
             }
-            Debug.Log(target.Health);
             Destroy(gameObject);
         }
     }
