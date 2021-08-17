@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
     }
     private void OnEnable()
     {
-        StartCoroutine(SpawnEnemies());
+        if (numberOfEnemies > 0) StartCoroutine(SpawnEnemies());
     }
 
     IEnumerator SpawnEnemies()

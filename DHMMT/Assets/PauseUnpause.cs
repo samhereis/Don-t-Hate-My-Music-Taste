@@ -19,8 +19,6 @@ public class PauseUnpause : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             PlayerInput.SetInput(PlayerInput.InputState.UI);
-
-            PlayerInput.input.UI.Back.performed += (_) => Back.OnBack();
         }
         else
         {
@@ -30,8 +28,6 @@ public class PauseUnpause : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
             PlayerInput.SetInput(PlayerInput.InputState.Gameplay);
-
-            PlayerInput.input.UI.Back.performed -= (_) => Back.OnBack();
         }
     }
 }

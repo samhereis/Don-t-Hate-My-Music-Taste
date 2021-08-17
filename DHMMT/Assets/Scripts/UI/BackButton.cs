@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BackButton : MonoBehaviour
 {
@@ -10,27 +10,28 @@ public class BackButton : MonoBehaviour
 
     public bool IsUIPage;
 
-    private void OnEnable()
+    [SerializeField] Button button;
+
+    void OnEnable()
     {
-        if(IsUIPage)
+        if (IsUIPage)
         {
-            page = transform.parent.GetComponentInParent<IUIPage>();
+            BackStatics.IsUIPage = IsUIPage;
+            BackStatics.page = transform.parent.GetComponentInParent<IUIPage>();
+        }
+        else
+        {
+            BackStatics.IsUIPage = IsUIPage;
+            BackStatics.page = null;
         }
 
-        Back.OnBack = () => GetBack();
+        BackStatics.toEnable = toEnable;
+        BackStatics.ToDisable = ToDisable;
+
+        BackStatics.button = button;
     }
-
-    void GetBack()
+    public void Back()
     {
-        if(IsUIPage)
-        {
-            Back.OnBack = () => {  }; ;
-            page.Disable();
-
-            return;
-        }
-
-        toEnable.SetActive(false);
-        ToDisable.SetActive(true);
+        BackStatics.GetBack();
     }
 }

@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class PlayerGunUse : MonoBehaviour
 {
-    PlayerWeaponDataHolder weaponDataHolder;
-    [SerializeField] InteractableEquipWeapon gun;
-    bool IsShooting = false;
+    [SerializeField] InteractableEquipWeapon DefaultWeapon;
+
+    public InteractableEquipWeapon SecodWeapon;
+
+    void Awake()
+    {
+        DefaultWeapon.Interact(gameObject);
+    }
 
     void OnEnable()
     {
-        weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
+        PlayerInput.input.Gameplay.Fire.performed += (_) => PlayerWeaponDataHolder.instance.gunUse.Use(true);
+        PlayerInput.input.Gameplay.Fire.canceled += (_) => PlayerWeaponDataHolder.instance.gunUse.Use(false);
 
-        gun.Interact(gameObject);
-
-        PlayerInput.input.Gameplay.Fire.performed += (_) => IsShooting = true;
-        PlayerInput.input.Gameplay.Fire.canceled += (_) => IsShooting = false;
-
-        PlayerInput.input.Gameplay.Reload.performed += (_) => StartCoroutine(weaponDataHolder.gunUse?.Reload());
-    }
-
-    void FixedUpdate()
-    {
-        if(IsShooting)
-        {
-            weaponDataHolder.gunUse?.Shoot();
-        }
+        PlayerInput.input.Gameplay.Reload.performed += (_) => StartCoroutine(PlayerWeaponDataHolder.instance.gunUse?.Reload());
     }
 }

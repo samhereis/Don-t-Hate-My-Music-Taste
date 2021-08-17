@@ -19,6 +19,7 @@ public class GunUse : MonoBehaviour
 
     public bool isReloading = false;
     public bool canShoot = true;
+    public bool IsShooting = false;
 
     Ray ray;
 
@@ -28,11 +29,25 @@ public class GunUse : MonoBehaviour
     {
         ExtentionMethods.SetWithNullCheck(ref WeaponAnimator, GetComponent<GunData>().animator);
     }
-    public void OnDisable()
+    void OnDisable()
     {
         WeaponAnimator = null;
     }
-    public void Shoot()
+
+    void FixedUpdate()
+    {
+        if (IsShooting)
+        {
+            Shoot();
+        }
+    }
+
+    public void Use(bool use)
+    {
+        IsShooting = use;
+    }
+
+    void Shoot()
     {
         if (Time.time > nextFire && canShoot)
         {

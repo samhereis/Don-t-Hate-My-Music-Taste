@@ -21,10 +21,14 @@ public class PauseUI : MonoBehaviour, IUIPage
         GameplayUI.instance.Disable();
 
         Page.SetActive(true);
+
+        PlayerInput.input.UI.Back.performed += BackStatics.Back;
     }
 
     public void Disable()
     {
+        PlayerInput.input.UI.Back.performed -= BackStatics.Back;
+
         PauseUnpause.SetPause(false);
 
         GameplayUI.instance.Enable();
