@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class PlayerMove : MonoBehaviour
     public float speedMultiplier = 1, speed = 150;
     CharacterController characterController;
     Vector3 move;
-    Vector2 MoveInputValue;
+    public Vector2 MoveInputValue;
+    public bool IsMoving = false;
+    public float sprint;
     void Awake()
     {
         instance = this;
@@ -18,13 +21,41 @@ public class PlayerMove : MonoBehaviour
     void OnEnable()
     {
 
-        PlayerInput.input.Gameplay.Move.performed += context => { MoveInputValue = context.ReadValue<Vector2>(); };
-        PlayerInput.input.Gameplay.Move.canceled  += context => { MoveInputValue = Vector2.zero; };
+        PlayerInput.input.Gameplay.Move.performed += Move;
+        PlayerInput.input.Gameplay.Move.canceled  += Move;
 
-        PlayerInput.input.Gameplay.Sprint.performed += context => { speedMultiplier = 3; };
-        PlayerInput.input.Gameplay.Sprint.canceled  += context => { speedMultiplier = 1; };
+        PlayerInput.input.Gameplay.Sprint.performed += Sprint;
+        PlayerInput.input.Gameplay.Sprint.canceled  += Sprint;
 
-        PlayerInput.input.Gameplay.Fire.performed += context => { speedMultiplier = 1; };
+        PlayerInput.input.Gameplay.Fire.performed += Fire;
+
+        PlayerInput.input.Gameplay.Aim.performed += Fire;
+    }
+
+    void Move(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<Vector2>() == Vector2.zero)
+        {
+            IsMoving = false;
+        }
+        else
+        {
+            IsMoving = true;
+        }
+
+        MoveInputValue = context.ReadValue<Vector2>();
+    }
+
+    void Sprint(InputAction.CallbackContext context)
+    {
+        sprint = context.ReadValue<float>();
+
+        speedMultiplier = 1 + sprint * 2 ;
+    }
+
+    void Fire(InputAction.CallbackContext context)
+    {
+        speedMultiplier = 1;
     }
 
     void FixedUpdate()

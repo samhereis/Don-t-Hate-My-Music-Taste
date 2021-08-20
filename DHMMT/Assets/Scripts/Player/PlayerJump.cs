@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
     CharacterController characterController;
-    public float jumpHeight = 0.1f, gravityValue = -0.2f; bool doubleJump;
+    public float jumpHeight = 0.1f, gravityValue = -0.03f; bool doubleJump;
     Vector3 playerVelocity;
     void Awake()
     {
@@ -13,25 +14,32 @@ public class PlayerJump : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerInput.input.Gameplay.Jump.performed += context => Jump();
+        PlayerInput.input.Gameplay.Jump.performed += Jump;
     }
 
     void FixedUpdate()
     {
-        characterController.Move(playerVelocity);
+        if(characterController.isGrounded == false || doubleJump == true)
+        {
+            characterController.Move(playerVelocity);
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
+            playerVelocity.y += gravityValue * Time.deltaTime;
+        }
     }
-    void Jump()
+    void Jump(InputAction.CallbackContext context)
     {
         if(characterController.isGrounded)
         {
             doubleJump = true;
             playerVelocity.y = jumpHeight;
         }
-        else if(doubleJump)
+        else if(doubleJump && characterController.isGrounded == false)
         {
-            playerVelocity.y += jumpHeight;
+            playerVelocity.y += jumpHeight * 2;
+            doubleJump = false;
+        }
+        else
+        {
             doubleJump = false;
         }
     }

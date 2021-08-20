@@ -111,3 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   PlusToHealth: 40
+  speed: 0.1

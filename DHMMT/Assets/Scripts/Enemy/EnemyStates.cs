@@ -62,24 +62,17 @@ public class EnemyStates : MonoBehaviour
     }
     public void searchForEnemy()
     {
-        if(enemyMovement.navMeshAgent.destination == null || currentDestination == null)
-        {
-            currentDestination = SpawnPoints.instance.GetRandomSpawn();
-            enemyMovement.MoveTo(currentDestination, 2);
-            return;
-        }
-
-        if(enemyMovement.navMeshAgent.remainingDistance < 2)
-        {
-            currentDestination = SpawnPoints.instance.GetRandomSpawn();
-            enemyMovement.MoveTo(currentDestination, 2);
-            return;
-        }
-
         if (followEnemy != null)
         {
             state = States.chaseEnemyWhoIsInRange;
             currentDestination = null;
+        }
+
+        if (enemyMovement.navMeshAgent.hasPath == false || currentDestination == null || enemyMovement.navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            currentDestination = SpawnPoints.instance.GetRandomSpawn();
+            enemyMovement.MoveTo(currentDestination, 2);
+            return;
         }
     }
     public void chaseEnemyWhoIsInRange()

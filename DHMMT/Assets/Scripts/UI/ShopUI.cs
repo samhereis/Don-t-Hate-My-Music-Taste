@@ -57,7 +57,7 @@ public class ShopUI : MonoBehaviour, IUIPage
         {
             GameObject gunSlotPrefab = Instantiate(GunSlotPrefab);
 
-            gunSlotPrefab.GetComponent<DisplayGunOnShop>().SetData(gun.gunIcon, gun.gunName, gun.gunDamage, gun.gunCost);
+            gunSlotPrefab.GetComponent<DisplayGunOnShop>().SetData(gun);
 
             if(gun.gunType == ScriptableGun.GunTypes.Pistol)
             {

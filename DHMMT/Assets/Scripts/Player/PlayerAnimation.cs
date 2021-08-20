@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimation : MonoBehaviour
 {
     Animator animator;
     int velocityHashY, velocityHashX;
-    public Vector2 MoveInputValue;
-    int SpeedMultiplier = 1;
+
     void Awake()
     {
         if(!animator) animator = GetComponent<Animator>();
@@ -17,15 +18,36 @@ public class PlayerAnimation : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerInput.input.Gameplay.Move.performed += context =>  { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(); };
-        PlayerInput.input.Gameplay.Move.canceled  += context =>  { MoveInputValue = context.ReadValue<Vector2>(); SetAnimationValue(); };
+        PlayerInput.input.Gameplay.Move.performed += SetAnimationValue;
+        PlayerInput.input.Gameplay.Move.canceled  += SetAnimationValue;
 
-        PlayerInput.input.Gameplay.Sprint.performed += context =>  { SpeedMultiplier = 2; SetAnimationValue(); };
-        PlayerInput.input.Gameplay.Sprint.canceled  += context =>  { SpeedMultiplier = 1; SetAnimationValue(); };
+        PlayerInput.input.Gameplay.Sprint.performed += SetSpeedMultiplier;
+        PlayerInput.input.Gameplay.Sprint.canceled += SetSpeedMultiplier;
+
+        PlayerInput.input.Gameplay.Aim.performed += Fire;
     }
 
-    void SetAnimationValue()
+    void SetAnimationValue(InputAction.CallbackContext context)
     {
-        animator.SetFloat(velocityHashY, MoveInputValue.y * SpeedMultiplier);
+        animator.SetFloat(velocityHashY, PlayerMove.instance.MoveInputValue.y);
+        animator.SetFloat(velocityHashX, PlayerMove.instance.MoveInputValue.x);
+    }
+
+    void SetSpeedMultiplier(InputAction.CallbackContext context)
+    {
+        if (PlayerMove.instance.IsMoving == true)
+        {
+            animator.SetFloat(velocityHashY, 2);
+            animator.SetFloat(velocityHashX, 2);
+        }
+    }
+
+    void Fire(InputAction.CallbackContext context)
+    {
+        if (PlayerMove.instance.IsMoving == true)
+        {
+            animator.SetFloat(velocityHashY, 1);
+            animator.SetFloat(velocityHashX, 1);
+        }
     }
 }

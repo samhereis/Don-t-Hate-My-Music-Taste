@@ -12,5 +12,5 @@ public class ScriptableGun : ScriptableObject
     public GameObject gunPrefab;
     public float gunDamage { get => gunPrefab.GetComponent<GunUse>().damage; }
     public int gunCost;
-    
+    public InteractableEquipWeapon interact;
 }

@@ -29,6 +29,13 @@ public static class BackStatics
 
     public static void Back(InputAction.CallbackContext context)
     {
-        button.onClick.Invoke();
+        if(button?.onClick != null)
+        {
+            button.onClick.Invoke();
+        }
+        else
+        {
+            GetBack();
+        }
     }
 }

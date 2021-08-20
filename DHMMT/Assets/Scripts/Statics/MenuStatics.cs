@@ -30,6 +30,7 @@ public static class MenuStatics
                 {
                     Loading = false;
                     Time.timeScale = 1;
+                    PlayerInput.input = new InputSettings();
                     asyncOperation.allowSceneActivation = true;
                 }
 

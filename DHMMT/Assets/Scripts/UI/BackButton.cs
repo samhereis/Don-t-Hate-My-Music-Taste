@@ -12,8 +12,15 @@ public class BackButton : MonoBehaviour
 
     [SerializeField] Button button;
 
+    void Awake()
+    {
+        ExtentionMethods.SetWithNullCheck(ref button, GetComponent<Button>());
+    }
+
     void OnEnable()
     {
+        BackStatics.button = button;
+
         if (IsUIPage)
         {
             BackStatics.IsUIPage = IsUIPage;
@@ -27,8 +34,6 @@ public class BackButton : MonoBehaviour
 
         BackStatics.toEnable = toEnable;
         BackStatics.ToDisable = ToDisable;
-
-        BackStatics.button = button;
     }
     public void Back()
     {

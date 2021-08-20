@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PlayerGunUse : MonoBehaviour
 {
-    [SerializeField] InteractableEquipWeapon DefaultWeapon;
+    public static PlayerGunUse instance;
+
+    public InteractableEquipWeapon DefaultWeapon;
 
     public InteractableEquipWeapon SecodWeapon;
 
     void Awake()
     {
+        ExtentionMethods.SetWithNullCheck(ref instance, this);
         DefaultWeapon.Interact(gameObject);
     }
 

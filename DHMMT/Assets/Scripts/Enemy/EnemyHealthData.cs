@@ -13,7 +13,7 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
     public float MaxHealth { get => _MaxHealth; set => _MaxHealth = value; }
     [SerializeField] float _MaxHealth;
 
-    public GameObject HealthLoot;
+    public List<Transform> loots;
 
     public void TakeDamage(float damage)
     {
@@ -21,7 +21,7 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
 
         if (_health < 0)
         {
-            Instantiate(HealthLoot, transform.position, Quaternion.identity);
+            Instantiate(loots[Random.Range(0, loots.Count)], transform.position, Quaternion.identity);
 
             Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
 
