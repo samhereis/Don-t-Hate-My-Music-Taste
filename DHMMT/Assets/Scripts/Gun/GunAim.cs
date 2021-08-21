@@ -13,9 +13,9 @@ public class GunAim : MonoBehaviour
         _aimPosition = GetComponent<GunData>().aimPosition;
         _initialPosition = GetComponent<GunData>().initialLocalPosition;
     }
-    public void Aim(Transform aimData)
+    public void Aim(Transform aimData, bool aim)
     {
-        if(_aimed)
+        if(aim == false)
         {
             aimData.DOLocalMove(_initialPosition, animationDuration);
             _aimed = false;

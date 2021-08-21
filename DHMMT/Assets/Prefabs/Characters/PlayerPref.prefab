@@ -837,6 +837,9 @@ MonoBehaviour:
   velocityX: 0
   speedMultiplier: 1
   speed: 4
+  MoveInputValue: {x: 0, y: 0}
+  IsMoving: 0
+  sprint: 0
 --- !u!114 &3962204800103098786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720dd8945e37ce146a223d7b6bd7945e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveInputValue: {x: 0, y: 0}
 --- !u!114 &666725337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,7 +1474,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -8545447256379345787, guid: 384de6672d657044692f3984d600f9e1, type: 3}
   m_Bones:
@@ -1855,7 +1857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 123
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6051601908129184352
 Transform:
   m_ObjectHideFlags: 0
@@ -1878,7 +1880,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4452706503501810641}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 3
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -2457,7 +2459,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

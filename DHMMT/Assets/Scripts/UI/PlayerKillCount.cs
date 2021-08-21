@@ -14,6 +14,7 @@ public class PlayerKillCount : MonoBehaviour
     {
         instance = this;
         ExtentionMethods.SetWithNullCheck(text, GetComponent<TextMeshProUGUI>());
+        text.text = KillCount.ToString();
     }
 
     public int GetKillCount()
