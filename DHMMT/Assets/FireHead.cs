@@ -22,6 +22,7 @@ public class FireHead : MonoBehaviour
         if(CameraMovement.instance != null)
         {
             transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, speed);
+            transform.LookAt(CameraMovement.instance.transform);
         }    
     }
 
