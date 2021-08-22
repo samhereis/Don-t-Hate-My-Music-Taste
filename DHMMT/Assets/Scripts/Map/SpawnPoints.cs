@@ -8,6 +8,8 @@ public class SpawnPoints : MonoBehaviour
     public static SpawnPoints instance;
     public List<GameObject> spawnPoints;
 
+    public List<GameObject> BackUpspawnPoints;
+
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
@@ -15,6 +17,13 @@ public class SpawnPoints : MonoBehaviour
 
     public Transform GetRandomSpawn()
     {
-        return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
+        if(spawnPoints.Count > 0)
+        {
+            return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
+        }
+        else
+        {
+            return BackUpspawnPoints[Random.Range(0, BackUpspawnPoints.Count)].transform;
+        }
     }
 }

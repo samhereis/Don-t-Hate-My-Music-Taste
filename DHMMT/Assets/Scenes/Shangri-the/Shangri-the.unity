@@ -299,6 +299,58 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[9]
       value: 
       objectReference: {fileID: 1137183684}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1299302018}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1666819133}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 2142017209}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 107157529}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 1137183684}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 2033545624}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 15220940}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[7]
+      value: 
+      objectReference: {fileID: 15220940}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[8]
+      value: 
+      objectReference: {fileID: 15220940}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[9]
+      value: 
+      objectReference: {fileID: 15220940}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.data[10]
+      value: 
+      objectReference: {fileID: 15220940}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: enemyPref
+      value: 
+      objectReference: {fileID: 3296317459984324053, guid: 90536cecdd0182a4a9a24511821782a2, type: 3}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: numberOfEnemies
       value: 5
@@ -1894,7 +1946,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2539,7 +2591,7 @@ Transform:
   - {fileID: 1985865007}
   - {fileID: 1252825252}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1706667055
 MonoBehaviour:

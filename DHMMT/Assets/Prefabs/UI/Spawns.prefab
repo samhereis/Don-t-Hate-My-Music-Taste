@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &871517903394405511
 Transform:
@@ -50,6 +50,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  BackUpspawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &871517903394405509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,4 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPref: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
-  enemyPref: {fileID: 3296317459984324053, guid: 90536cecdd0182a4a9a24511821782a2, type: 3}
+  enemyPref: {fileID: 3296317459984324053, guid: c9d279a21bdec44419bd471b058e60b5, type: 3}
+  spawnOnStart: 1
+  numberOfEnemies: 2

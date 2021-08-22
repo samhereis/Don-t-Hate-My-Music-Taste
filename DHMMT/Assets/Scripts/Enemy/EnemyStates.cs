@@ -12,17 +12,21 @@ public class EnemyStates : MonoBehaviour
             switch(value)
             {
                 case States.searchForEnemy:
-                    stateAction = null;
-                    stateAction = () => searchForEnemy();
+                        StopAllCoroutines();
+                        stateAction = null;
+                        stateAction = () => { if (followEnemy != null) { state = States.chaseEnemyWhoIsInRange; currentDestination = null; } };
+                        StartCoroutine(searchForEnemy());
                     break;
                 case States.chaseEnemyWhoIsInRange:
-                    stateAction = null;
-                    stateAction = () => chaseEnemyWhoIsInRange();
+                        StopAllCoroutines();
+                        stateAction = null;
+                        stateAction = () => chaseEnemyWhoIsInRange();
                     break;
                 case States.attack:
-                    stateAction = null;
-                    stateAction = () => { transform.LookAt(followEnemy); };
-                    StartCoroutine(attack());
+                        StopAllCoroutines();
+                        stateAction = null;
+                        stateAction = () => { transform.LookAt(followEnemy); };
+                        StartCoroutine(attack());
                     break;
             }
             State = value;
@@ -46,10 +50,9 @@ public class EnemyStates : MonoBehaviour
 
     float distance;
 
-    private void Awake()
+    private void Start()
     {
-
-        stateAction = () => searchForEnemy();
+        state = States.searchForEnemy;
 
         ExtentionMethods.SetWithNullCheck(ref enemyMovement, GetComponent<EnemyMovement>());
 
@@ -60,20 +63,16 @@ public class EnemyStates : MonoBehaviour
     {
         stateAction();
     }
-    public void searchForEnemy()
+    public IEnumerator searchForEnemy()
     {
-        if (followEnemy != null)
-        {
-            state = States.chaseEnemyWhoIsInRange;
-            currentDestination = null;
-        }
 
-        if (enemyMovement.navMeshAgent.hasPath == false || currentDestination == null || enemyMovement.navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (currentDestination == null || enemyMovement.navMeshAgent.remainingDistance == 3)
         {
             currentDestination = SpawnPoints.instance.GetRandomSpawn();
             enemyMovement.MoveTo(currentDestination, 2);
-            return;
         }
+
+        yield return Wait.NewWait(10);
     }
     public void chaseEnemyWhoIsInRange()
     {

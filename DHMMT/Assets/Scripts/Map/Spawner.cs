@@ -9,29 +9,32 @@ public class Spawner : MonoBehaviour
     public GameObject playerPref;
     public GameObject enemyPref;
 
+    [SerializeField] bool spawnOnStart = true;
+
     public int numberOfEnemies;
+
+    private void Awake()
+    {
+        ExtentionMethods.SetWithNullCheck(ref instance, this);
+    }
 
     private void Start()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
-
-        Spawn(playerPref, SpawnPoints.instance.GetRandomSpawn().position);
-        SpawnEnemies();
-    }
-    private void OnEnable()
-    {
         if (numberOfEnemies > 0) StartCoroutine(SpawnEnemies());
+
+        if (spawnOnStart == true)
+        {
+            Spawn(playerPref, SpawnPoints.instance.GetRandomSpawn().position);
+        }
     }
 
     IEnumerator SpawnEnemies()
     {
         yield return Wait.NewWait(5);
 
-        int i = 0;
-        while (i <= numberOfEnemies)
+        for (int i = 0;  i < numberOfEnemies; i++)
         {
             Spawn(enemyPref, SpawnPoints.instance.GetRandomSpawn().position);
-            i++;
         }
 
         StopAllCoroutines();

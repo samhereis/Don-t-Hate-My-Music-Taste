@@ -6,6 +6,10 @@ public class ReactorToXSpawn : MonoBehaviour
 {
     public int numberOfCubes;
 
+    public enum Axis { X, Y, Z }
+
+    public Axis axis;
+
     public int distance;
 
     public List<GameObject> cubes;
@@ -14,13 +18,49 @@ public class ReactorToXSpawn : MonoBehaviour
 
     void Start()
     {
+        if (axis == Axis.X)
+        {
+            SpawnX();
+        }
+        else
+        {
+            SpawnZ();
+        }
+    }
+
+    void SpawnX()
+    {
         int i = 0;
 
-        while(i < numberOfCubes)
+        while (i < numberOfCubes)
         {
             Transform o = Instantiate(cubes[Random.Range(0, cubes.Count)], transform).transform;
 
-            if(i == 0)
+            if (i == 0)
+            {
+
+            }
+            else
+            {
+                lastLoc += new Vector3(o.localPosition.x + o.localScale.x + distance, 0, 0);
+            }
+
+            o.localPosition = lastLoc;
+
+            //o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
+
+            i++;
+        }
+    }
+    void SpawnZ()
+    {
+        int i = 0;
+
+        while (i < numberOfCubes)
+        {
+            Transform o = Instantiate(cubes[Random.Range(0, cubes.Count)], transform).transform;
+
+            if (i == 0)
             {
 
             }
@@ -31,7 +71,7 @@ public class ReactorToXSpawn : MonoBehaviour
 
             o.localPosition = lastLoc;
 
-            o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
+            //o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
 
             i++;
         }
