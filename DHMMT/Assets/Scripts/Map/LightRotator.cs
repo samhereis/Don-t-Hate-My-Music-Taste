@@ -24,6 +24,8 @@ public class LightRotator : MonoBehaviour
     }
     void OnEnable()
     {
+        r = 0;
+
         switch (axis)
         {
             case (Axis.X):
@@ -38,23 +40,18 @@ public class LightRotator : MonoBehaviour
                 StartCoroutine(RotateZ());
                 break;
         }
+
+        if (UnityEngine.Random.Range(0, 2) == 1)
+        {
+            RotateVal = RotateVal * -1;
+            Debug.Log(RotateVal);
+        }
+
+        StartCoroutine(changeRotateVal());
     }
     void OnDisable()
     {
-        switch (axis)
-        {
-            case (Axis.X):
-                StopCoroutine(RotateX());
-                break;
-
-            case (Axis.Y):
-                StopCoroutine(RotateY());
-                break;
-
-            case (Axis.Z):
-                StopCoroutine(RotateZ());
-                break;
-        }
+        StopAllCoroutines();
     }
     IEnumerator RotateX()
     {
@@ -66,7 +63,7 @@ public class LightRotator : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(r += RotateVal, 0, 0);
 
-            if (r >= 360 - RotateVal)
+            if (r >= 360 - RotateVal || r < -362 || r > 362)
             {
                 r = 0;
             }
@@ -108,5 +105,15 @@ public class LightRotator : MonoBehaviour
             }
         }
         goto Start;
+    }
+
+    IEnumerator changeRotateVal()
+    {
+        while (true)
+        {
+            yield return Wait.NewWait(UnityEngine.Random.Range(40, 80));
+
+            RotateVal *= -1;
+        }
     }
 }

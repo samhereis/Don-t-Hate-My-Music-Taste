@@ -4,13 +4,8 @@ using UnityEngine;
 
 public static class Wait
 {
-    public static IEnumerable<WaitForSecondsRealtime> NewWaitYieldFree(float time)
+    public static WaitForSeconds NewWait(float time)
     {
-        yield return new WaitForSecondsRealtime(time);
-    }
-
-    public static WaitForSecondsRealtime NewWait(float time)
-    {
-        return new WaitForSecondsRealtime(time);
+        return new WaitForSeconds(time);
     }
 }

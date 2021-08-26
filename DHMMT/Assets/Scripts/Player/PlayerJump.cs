@@ -17,6 +17,11 @@ public class PlayerJump : MonoBehaviour
         PlayerInput.input.Gameplay.Jump.performed += Jump;
     }
 
+    void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Jump.performed -= Jump;
+    }
+
     void FixedUpdate()
     {
         if(characterController.isGrounded == false || doubleJump == true)

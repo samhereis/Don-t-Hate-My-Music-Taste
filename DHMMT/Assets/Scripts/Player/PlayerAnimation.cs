@@ -27,6 +27,17 @@ public class PlayerAnimation : MonoBehaviour
         PlayerInput.input.Gameplay.Aim.performed += Fire;
     }
 
+    private void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Move.performed -= SetAnimationValue;
+        PlayerInput.input.Gameplay.Move.canceled  -= SetAnimationValue;
+
+        PlayerInput.input.Gameplay.Sprint.performed -= SetSpeedMultiplier;
+        PlayerInput.input.Gameplay.Sprint.canceled  -= SetSpeedMultiplier;
+
+        PlayerInput.input.Gameplay.Aim.performed -= Fire;
+    }
+
     void SetAnimationValue(InputAction.CallbackContext context)
     {
         animator.SetFloat(velocityHashY, PlayerMove.instance.MoveInputValue.y);

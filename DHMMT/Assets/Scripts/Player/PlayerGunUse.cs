@@ -23,4 +23,12 @@ public class PlayerGunUse : MonoBehaviour
 
         PlayerInput.input.Gameplay.Reload.performed += (_) => StartCoroutine(PlayerWeaponDataHolder.instance.gunUse?.Reload());
     }
+
+    void OnDisable ()
+    {
+        PlayerInput.input.Gameplay.Fire.performed -= (_) => PlayerWeaponDataHolder.instance.gunUse.Use(true);
+        PlayerInput.input.Gameplay.Fire.canceled  -= (_) => PlayerWeaponDataHolder.instance.gunUse.Use(false);
+
+        PlayerInput.input.Gameplay.Reload.performed -= (_) => StartCoroutine(PlayerWeaponDataHolder.instance.gunUse?.Reload());
+    }
 }

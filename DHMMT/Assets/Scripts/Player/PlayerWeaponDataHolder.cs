@@ -10,7 +10,7 @@ public class PlayerWeaponDataHolder : MonoBehaviour, WeaponDataHolder
     public GunUse gunUse { get; set; }
     public GunAim gunAim { get; set; }
 
-    private void Awake()
+    void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, GetComponent<PlayerWeaponDataHolder>());
     }

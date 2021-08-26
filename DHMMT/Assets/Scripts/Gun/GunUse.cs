@@ -21,11 +21,7 @@ public class GunUse : MonoBehaviour
     public bool canShoot = true;
     public bool IsShooting = false;
 
-    public GameObject obj;
-
-    Ray ray;
-
-    WaitForSecondsRealtime wait = new WaitForSecondsRealtime(1);
+    [SerializeField] float reloadTime;
 
     void OnEnable()
     {
@@ -68,7 +64,8 @@ public class GunUse : MonoBehaviour
         while(currentAmmo < maxAmmo)
         {
             currentAmmo++;
-            yield return wait;
+
+            yield return Wait.NewWait(reloadTime);
         }
         if(currentAmmo >= maxAmmo)
         {

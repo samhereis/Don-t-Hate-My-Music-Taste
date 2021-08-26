@@ -14,6 +14,8 @@ public class ReactorToXSpawn : MonoBehaviour
 
     public List<GameObject> cubes;
 
+    public bool Shake = true;
+
     Vector3 lastLoc = new Vector3(0,0,0);
 
     void Start()
@@ -47,7 +49,7 @@ public class ReactorToXSpawn : MonoBehaviour
 
             o.localPosition = lastLoc;
 
-            //o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
+            if(Shake) o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
 
             i++;
         }
@@ -71,7 +73,7 @@ public class ReactorToXSpawn : MonoBehaviour
 
             o.localPosition = lastLoc;
 
-            //o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
+            if (Shake) o.SetParent(MakeObjectsShake.instance.Reactors[Random.Range(0, MakeObjectsShake.instance.Reactors.Count)].transform, true);
 
             i++;
         }

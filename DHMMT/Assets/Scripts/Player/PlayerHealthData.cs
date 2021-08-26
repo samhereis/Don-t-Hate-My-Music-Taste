@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealthData : MonoBehaviour,  IHealthData
@@ -14,6 +15,8 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
     public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     [SerializeField] float _maxHealth;
 
+    public List<checkPlayerInRange> numberOfCheckers;
+
     void Awake()
     {
         instance = this;
@@ -22,6 +25,7 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
     void OnEnable()
     {
         InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
+        StartCoroutine(TakeDamageContinuously(2, 20));
     }
 
     public void TakeDamage(float damage)
@@ -30,9 +34,29 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
 
         if (Health < 0)
         {
-            Spawner.instance.RepawnPlayer(gameObject, SpawnPoints.instance.GetRandomSpawn());
+            GetComponent<IMatchController>().Loose();
         }
     }
+
+    public IEnumerator TakeDamageContinuously(float time, float damage)
+    {
+        yield return Wait.NewWait(5);
+
+        while (true)
+        {
+            if (numberOfCheckers.Count < 1)
+            {
+                TakeDamage(damage);
+            }
+            else
+            {
+
+            }
+
+            yield return Wait.NewWait(time);
+        }
+    }
+
     void SetMaxHealth()
     {
         if (HealthBar.instance == null || HealthBar.instance.slider == null || HealthBar.instance.slider.maxValue == MaxHealth)

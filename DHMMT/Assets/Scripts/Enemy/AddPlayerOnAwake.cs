@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class AddPlayerOnAwake : MonoBehaviour
 {
-    private void OnEnable()
+    void Awake()
     {
-        GetComponent<EnemyStates>().followEnemy = CameraRaycast.instance.transform;
+        StartCoroutine(AddPlayer());
+    }
+
+    IEnumerator AddPlayer()
+    {
+        while(true)
+        {
+            GetComponent<EnemyStates>().followEnemy = PlayerHealthData.instance.gameObject.transform;
+
+            yield return Wait.NewWait(5);
+        }
     }
 }

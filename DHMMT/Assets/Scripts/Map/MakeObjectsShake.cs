@@ -24,7 +24,7 @@ public class MakeObjectsShake : MonoBehaviour
 
         if (shakeType == ShakeType.Scale)
         {
-            Shake =makeObjectsShakeScale;
+            Shake = makeObjectsShakeScale;
         }
         else
         {

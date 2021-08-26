@@ -24,6 +24,9 @@ MonoBehaviour:
     id: 5
   m_Metadata:
     m_Items: []
+  m_ProjectLocaleIdentifier:
+    m_Code: en
+  m_InitializeSynchronously: 1
   references:
     version: 1
     00000000:
@@ -44,7 +47,7 @@ MonoBehaviour:
       data:
         m_DefaultTableReference:
           m_TableCollectionName: 
-        m_UseFallback: 0
+        m_UseFallback: 1
     00000005:
       type: {class: LocalizedStringDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:

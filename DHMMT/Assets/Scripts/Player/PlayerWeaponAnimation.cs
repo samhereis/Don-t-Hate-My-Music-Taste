@@ -24,6 +24,19 @@ public class PlayerWeaponAnimation : MonoBehaviour
         PlayerInput.input.Gameplay.Aim.performed += Fire;
     }
 
+    private void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Move.performed -= Move;
+        PlayerInput.input.Gameplay.Move.canceled  -= Move;
+
+        PlayerInput.input.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.input.Gameplay.Sprint.canceled  -= Sprint;
+
+        PlayerInput.input.Gameplay.Fire.performed -= Fire;
+
+        PlayerInput.input.Gameplay.Aim.performed -= Fire;
+    }
+
     void Move(InputAction.CallbackContext context)
     {
         if (context.ReadValue<Vector2>() == Vector2.zero)

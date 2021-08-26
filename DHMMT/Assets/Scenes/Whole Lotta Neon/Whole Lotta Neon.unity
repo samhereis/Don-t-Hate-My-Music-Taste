@@ -236,12 +236,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1 &67650202
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,12 +550,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &251759773
 Transform:
   m_ObjectHideFlags: 0
@@ -903,7 +907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647546576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1488535373}
@@ -953,12 +957,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1001 &668256149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -969,6 +975,22 @@ PrefabInstance:
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: ShouldSearch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: HighSoundMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: bassSoundMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: middleSoundMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: nextToBassSoundMult
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755984, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_RootOrder
@@ -1021,6 +1043,10 @@ PrefabInstance:
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: t
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: shakeType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: Reactors.Array.size
@@ -1120,12 +1146,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1001 &879801686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1213,12 +1241,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &901190037
 Transform:
   m_ObjectHideFlags: 0
@@ -1263,12 +1293,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &912013174
 Transform:
   m_ObjectHideFlags: 0
@@ -1960,12 +1992,24 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 647546576}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: enemyPref
       value: 
       objectReference: {fileID: 689875120053197801, guid: 07375d8fbb95dff40906cce193d4f3df, type: 3}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: numberOfEnemies
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: AddComponentToPlayer
+      value: 
+      objectReference: {fileID: 999450375}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: WaitBeforeSpawnPlayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
@@ -1982,15 +2026,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405511, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405511, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 5.86
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405511, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.8
+      value: -36.4
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405511, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2022,6 +2066,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+--- !u!1 &999450374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+  m_PrefabInstance: {fileID: 999450373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &999450375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999450374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25170c094f230b046b5b890ae0a2efe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1081879532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,12 +2253,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1001 &1157671080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2368,12 +2431,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1001 &1266562287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2811,12 +2876,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &1491683014
 Transform:
   m_ObjectHideFlags: 0
@@ -2891,12 +2958,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &1576627663
 Transform:
   m_ObjectHideFlags: 0
@@ -2955,12 +3024,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!1 &2025677463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,12 +3188,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 5
+  axis: 2
   distance: 2
   cubes:
   - {fileID: 8470526452043686, guid: 15a68910d4e0cb44984cfc73ed2a8a53, type: 3}
   - {fileID: 8470526452043686, guid: 66263c0f582e2e34a8dfba8f5f619ca7, type: 3}
   - {fileID: 8470526452043686, guid: fbe936c7ef307be439c86756e678cec6, type: 3}
   - {fileID: 8470526452043686, guid: c9dd442946edaa24592ed58fbf49a616, type: 3}
+  Shake: 1
 --- !u!4 &2053760361
 Transform:
   m_ObjectHideFlags: 0

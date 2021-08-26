@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponAnimator: {fileID: 5959839914279399045}
-  damage: 10
+  damage: 20
   range: 100
   CurrentAmmo: 30
   maxAmmo: 30
@@ -162,7 +162,7 @@ MonoBehaviour:
   isReloading: 0
   canShoot: 1
   IsShooting: 0
-  obj: {fileID: 6874750439154559274}
+  reloadTime: 0.2
 --- !u!95 &5959839914279399045
 Animator:
   serializedVersion: 3

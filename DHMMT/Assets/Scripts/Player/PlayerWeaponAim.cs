@@ -15,7 +15,13 @@ public class PlayerWeaponAim : MonoBehaviour
         weaponPosition = GetComponent<EquipWeaponData>().weaponPosition;
 
         PlayerInput.input.Gameplay.Aim.performed += Aim;
-        PlayerInput.input.Gameplay.Aim.canceled += Aim;
+        PlayerInput.input.Gameplay.Aim.canceled  += Aim;
+    }
+
+    void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Aim.performed -= Aim;
+        PlayerInput.input.Gameplay.Aim.canceled  -= Aim;
     }
 
     void Aim(InputAction.CallbackContext context)

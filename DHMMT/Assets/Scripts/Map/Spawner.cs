@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class Spawner : MonoBehaviour
     public GameObject playerPref;
     public GameObject enemyPref;
 
+    public Component AddComponentToPlayer;
+
+    [SerializeField] float WaitBeforeSpawnEnemies = 10;
+    [SerializeField] float WaitBeforeSpawnPlayer = 5;
+
     [SerializeField] bool spawnOnStart = true;
 
     public int numberOfEnemies;
@@ -16,28 +22,16 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
+
+        if (spawnOnStart == true)
+        {
+            StartCoroutine(SpawnPlayer());
+        }
     }
 
     private void Start()
     {
         if (numberOfEnemies > 0) StartCoroutine(SpawnEnemies());
-
-        if (spawnOnStart == true)
-        {
-            Spawn(playerPref, SpawnPoints.instance.GetRandomSpawn().position);
-        }
-    }
-
-    IEnumerator SpawnEnemies()
-    {
-        yield return Wait.NewWait(5);
-
-        for (int i = 0;  i < numberOfEnemies; i++)
-        {
-            Spawn(enemyPref, SpawnPoints.instance.GetRandomSpawn().position);
-        }
-
-        StopAllCoroutines();
     }
 
     private void OnDisable()
@@ -60,13 +54,39 @@ public class Spawner : MonoBehaviour
         Instantiate(obj, pos.position, Quaternion.identity);
     }
 
+    IEnumerator SpawnEnemies()
+    {
+        yield return Wait.NewWait(WaitBeforeSpawnEnemies);
+
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            Spawn(enemyPref, SpawnPoints.instance.GetRandomSpawn().position);
+        }
+
+        StopCoroutine(SpawnEnemies());
+    }
+
     public void SpawnEnemy(Transform pos)
     {
         Instantiate(enemyPref, pos.position, Quaternion.identity);
     }
+
+    IEnumerator SpawnPlayer()
+    {
+        yield return Wait.NewWait(WaitBeforeSpawnPlayer);
+
+        GameObject obj = Instantiate(playerPref);
+
+        obj.AddComponent(AddComponentToPlayer.GetType());
+
+        obj.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
+
+        StopCoroutine(SpawnPlayer());
+    }
+
     public void RepawnPlayer(GameObject caller,Transform pos)
     {
-        if(PlayerHealthData.instance.Health < 0)
+        if(PlayerHealthData.instance.Health < 0 || PlayerHealthData.instance == null)
         {
             Destroy(caller);
 
@@ -76,7 +96,21 @@ public class Spawner : MonoBehaviour
 
             PlayerInput.input = new InputSettings();
 
-            Instantiate(playerPref, pos.position, Quaternion.identity);
+            StartCoroutine(SpawnPlayer());
+        }
+    }
+
+    public void RepawnPlayer(Transform pos)
+    {
+        if (PlayerHealthData.instance.Health < 0 || PlayerHealthData.instance == null)
+        {
+            PlayerKillCount.instance.NullKillCount();
+
+            HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
+
+            PlayerInput.input = new InputSettings();
+
+            StartCoroutine(SpawnPlayer());
         }
     }
 }

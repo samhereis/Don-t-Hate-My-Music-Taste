@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public Vector2 MoveInputValue;
     public bool IsMoving = false;
     public float sprint;
+
     void Awake()
     {
         instance = this;
@@ -20,7 +21,6 @@ public class PlayerMove : MonoBehaviour
     }
     void OnEnable()
     {
-
         PlayerInput.input.Gameplay.Move.performed += Move;
         PlayerInput.input.Gameplay.Move.canceled  += Move;
 
@@ -30,6 +30,19 @@ public class PlayerMove : MonoBehaviour
         PlayerInput.input.Gameplay.Fire.performed += Fire;
 
         PlayerInput.input.Gameplay.Aim.performed += Fire;
+    }
+
+    void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Move.performed -= Move;
+        PlayerInput.input.Gameplay.Move.canceled  -= Move;
+
+        PlayerInput.input.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.input.Gameplay.Sprint.canceled  -= Sprint;
+
+        PlayerInput.input.Gameplay.Fire.performed -= Fire;
+
+        PlayerInput.input.Gameplay.Aim.performed -= Fire;
     }
 
     void Move(InputAction.CallbackContext context)

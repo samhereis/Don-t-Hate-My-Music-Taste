@@ -40,7 +40,7 @@ public class EnemyStates : MonoBehaviour
 
     public Transform currentDestination;
 
-    private int distanceToEnemy = 10;
+    public int distanceToEnemy = 10;
 
     [SerializeField] EnemyWeaponDataHolder weaponDataHolder;
 
@@ -109,8 +109,9 @@ public class EnemyStates : MonoBehaviour
 
                 enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
 
-                yield return Wait.NewWait(ShootRate);
                 weaponDataHolder.gunUse?.Use(true);
+
+                yield return Wait.NewWait(ShootRate);
             }
         }
     }
