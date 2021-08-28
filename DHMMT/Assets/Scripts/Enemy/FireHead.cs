@@ -45,6 +45,7 @@ public class FireHead : MonoBehaviour
         while(enemy != null)
         {
             enemy.TakeDamage(damage);
+
             yield return Wait.NewWait(1);
         }
     }

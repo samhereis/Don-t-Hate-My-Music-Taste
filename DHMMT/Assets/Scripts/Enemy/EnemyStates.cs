@@ -44,7 +44,7 @@ public class EnemyStates : MonoBehaviour
 
     [SerializeField] EnemyWeaponDataHolder weaponDataHolder;
 
-    [SerializeField]  float ShootRate;
+    public float ShootRate;
 
     Action stateAction;
 

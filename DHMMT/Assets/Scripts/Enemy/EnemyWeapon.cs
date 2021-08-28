@@ -8,6 +8,8 @@ public class EnemyWeapon : MonoBehaviour
 
     void OnEnable()
     {
+        DefaultltWeapon.GetComponent<GunUse>().fireRate = GetComponent<EnemyStates>().ShootRate;
+
         DefaultltWeapon.Interact(gameObject);
     }
 }

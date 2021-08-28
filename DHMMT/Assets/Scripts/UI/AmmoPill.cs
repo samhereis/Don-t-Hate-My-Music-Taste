@@ -14,6 +14,8 @@ public class AmmoPill : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (PlayerHealthData.instance == null) return;
+
         transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, speed);
     }
     void OnTriggerEnter(Collider _triggerEnteredObject_)
@@ -26,7 +28,7 @@ public class AmmoPill : MonoBehaviour
             }
             else
             {
-                target.gunUse.CurrentAmmo += target.gunUse.CurrentAmmo / 2;
+                target.gunUse.CurrentAmmo += target.gunUse.CurrentAmmo / 3;
             }
             Destroy(gameObject);
         }

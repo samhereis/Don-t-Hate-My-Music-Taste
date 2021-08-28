@@ -9,6 +9,10 @@ public class GameplayUI : MonoBehaviour, IUIPage
     public GameObject Page { get => _page; set => _page = value; }
     [SerializeField] GameObject _page;
 
+    public GameObject Camera;
+
+    public GameObject Standart;
+
     public GameObject E_F_H_page;
     public GameObject SH_l_page;
     public GameObject TS_D_page;

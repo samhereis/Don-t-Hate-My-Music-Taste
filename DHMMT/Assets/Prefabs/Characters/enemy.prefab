@@ -1244,8 +1244,9 @@ MonoBehaviour:
   enemyMovement: {fileID: 2413848665578746312}
   followEnemy: {fileID: 0}
   currentDestination: {fileID: 0}
+  distanceToEnemy: 5
   weaponDataHolder: {fileID: 715024889744891478}
-  ShootRate: 1
+  ShootRate: 2
 --- !u!114 &2413848665578746314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,8 +1326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAlive: 1
-  _health: 200
-  _MaxHealth: 200
+  _health: 100
+  _MaxHealth: 100
   loots:
   - {fileID: 1929565375958654711, guid: 6b3de782fb1112644898b0b1aca9f543, type: 3}
   - {fileID: 1929565375958654711, guid: f44c0b291de288c4faff93bcfd35dd85, type: 3}

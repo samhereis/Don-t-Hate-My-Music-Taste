@@ -25,7 +25,6 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
     void OnEnable()
     {
         InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
-        StartCoroutine(TakeDamageContinuously(2, 20));
     }
 
     public void TakeDamage(float damage)
@@ -34,7 +33,7 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
 
         if (Health < 0)
         {
-            GetComponent<IMatchController>().Loose();
+            GetComponent<IMatchLosable>().Loose();
         }
     }
 

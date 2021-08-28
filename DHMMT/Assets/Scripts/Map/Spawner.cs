@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     public GameObject enemyPref;
 
     public Component AddComponentToPlayer;
+    public Component AddComponentToEnemy;
 
     [SerializeField] float WaitBeforeSpawnEnemies = 10;
     [SerializeField] float WaitBeforeSpawnPlayer = 5;
@@ -39,28 +40,13 @@ public class Spawner : MonoBehaviour
         instance = null;
     }
 
-    public void Spawn(GameObject obj)
-    {
-        Instantiate(obj);
-    }
-
-    public void Spawn(GameObject obj, Vector3 pos)
-    {
-        Instantiate(obj, pos, Quaternion.identity);
-    }
-
-    public void Spawn(GameObject obj, Transform pos)
-    {
-        Instantiate(obj, pos.position, Quaternion.identity);
-    }
-
     IEnumerator SpawnEnemies()
     {
         yield return Wait.NewWait(WaitBeforeSpawnEnemies);
 
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            Spawn(enemyPref, SpawnPoints.instance.GetRandomSpawn().position);
+            SpawnEnemy(SpawnPoints.instance.GetRandomSpawn());
         }
 
         StopCoroutine(SpawnEnemies());
@@ -68,18 +54,20 @@ public class Spawner : MonoBehaviour
 
     public void SpawnEnemy(Transform pos)
     {
-        Instantiate(enemyPref, pos.position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPref, pos.position, Quaternion.identity);
+        enemy.AddComponent(AddComponentToEnemy.GetType());
     }
 
     IEnumerator SpawnPlayer()
     {
         yield return Wait.NewWait(WaitBeforeSpawnPlayer);
 
-        GameObject obj = Instantiate(playerPref);
+        GameObject obj = Instantiate(playerPref, SpawnPoints.instance.GetRandomSpawn().position, Quaternion.identity);
 
-        obj.AddComponent(AddComponentToPlayer.GetType());
-
-        obj.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
+        if(AddComponentToPlayer != null)
+        {
+            obj.AddComponent(AddComponentToPlayer.GetType());
+        }
 
         StopCoroutine(SpawnPlayer());
     }
@@ -89,8 +77,6 @@ public class Spawner : MonoBehaviour
         if(PlayerHealthData.instance.Health < 0 || PlayerHealthData.instance == null)
         {
             Destroy(caller);
-
-            PlayerKillCount.instance.NullKillCount();
 
             HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
 
@@ -104,7 +90,6 @@ public class Spawner : MonoBehaviour
     {
         if (PlayerHealthData.instance.Health < 0 || PlayerHealthData.instance == null)
         {
-            PlayerKillCount.instance.NullKillCount();
 
             HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
 
@@ -112,5 +97,20 @@ public class Spawner : MonoBehaviour
 
             StartCoroutine(SpawnPlayer());
         }
+    }
+
+    public void Spawn(GameObject obj)
+    {
+        Instantiate(obj);
+    }
+
+    public void Spawn(GameObject obj, Vector3 pos)
+    {
+        Instantiate(obj, pos, Quaternion.identity);
+    }
+
+    public void Spawn(GameObject obj, Transform pos)
+    {
+        Instantiate(obj, pos.position, Quaternion.identity);
     }
 }

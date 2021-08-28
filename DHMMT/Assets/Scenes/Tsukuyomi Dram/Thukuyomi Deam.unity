@@ -334,13 +334,33 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[10]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: BackUpspawnPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: enemyPref
+      value: 
+      objectReference: {fileID: 3296317459984324053, guid: 90536cecdd0182a4a9a24511821782a2, type: 3}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: numberOfEnemies
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: AddComponentToEnemy
+      value: 
+      objectReference: {fileID: 550466102}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: AddComponentToPlayer
+      value: 
+      objectReference: {fileID: 550466103}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: WaitBeforeSpawnPlayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: WaitBeforeSpawnEnemies
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_Name
@@ -773,6 +793,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd66f26e0821264e8589f5c30afeb1c, type: 3}
+--- !u!1 &550466101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+  m_PrefabInstance: {fileID: 204566200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &550466102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550466101}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1cf2539e8314341979df97f9dbac54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecondsAmmountToAddWhenDying: 100
+--- !u!114 &550466103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550466101}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13323ed1dc7c89143863419494c8f232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653452734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,6 +1946,10 @@ PrefabInstance:
       propertyPath: objectsReactingToMiddles.Array.data[0]
       value: 
       objectReference: {fileID: 653768182}
+    - target: {fileID: 6130885768556755987, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755989, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_Name
       value: Audio Source
