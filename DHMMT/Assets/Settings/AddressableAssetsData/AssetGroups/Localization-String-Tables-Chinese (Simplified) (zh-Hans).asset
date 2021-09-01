@@ -17,28 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 5c7bca0e675fb3a47ab568e8353aebba
   m_SerializeEntries:
-  - m_GUID: 6d31fb9653889e7498e7b4e8df72f52f
-    m_Address: Universal_zh-Hans
+  - m_GUID: 5ff5b3357c64a834fbb6eaa6ddb7a77c
+    m_Address: GamePlayOutput_zh-Hans
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-Hans
-  - m_GUID: aaa9d8a55ca63e64e84ee871412adb02
-    m_Address: mainMenuUiTableCollection_zh-Hans
+  - m_GUID: 9ec0f5a0708fa8e45a8bfde1b9d95af5
+    m_Address: Labels_zh-Hans
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-Hans
-  - m_GUID: eec411eca7c69354e9a0656d3a27b595
-    m_Address: Lebels_zh-Hans
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-zh-Hans
-  - m_GUID: 1a44126bdc5f20242bcf8db3e9eac9cf
-    m_Address: Errors_zh-Hans
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-zh-Hans
-  - m_GUID: a7fe9ae072eee7246adc219c8d606f8b
-    m_Address: Extras_zh-Hans
+  - m_GUID: 7397726afe85fe9408b2e97dc6afec31
+    m_Address: Buttons_zh-Hans
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-Hans

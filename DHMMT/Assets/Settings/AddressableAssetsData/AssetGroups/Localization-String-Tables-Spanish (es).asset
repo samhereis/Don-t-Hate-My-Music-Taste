@@ -17,28 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 4afc45fb47cf7ab47a26a0ff15d7c505
   m_SerializeEntries:
-  - m_GUID: b60a2f8706ce6964b9ce774cf212a5de
-    m_Address: Universal_es
+  - m_GUID: 66d7bdb940a728548bc9be892e0c41f1
+    m_Address: GamePlayOutput_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
-  - m_GUID: dd5976c6cbc9d50429e87c3929d9165a
-    m_Address: mainMenuUiTableCollection_es
+  - m_GUID: 25e34cd181f811c4ab898d3d57064688
+    m_Address: Labels_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
-  - m_GUID: 50b3addd2e8e6154a886b793714103fc
-    m_Address: Lebels_es
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-es
-  - m_GUID: a23dd05153258ce44a7aa78a899e9de5
-    m_Address: Errors_es
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-es
-  - m_GUID: 8339f9109ced33943ba63d9d36ceefec
-    m_Address: Extras_es
+  - m_GUID: 1952a5f7abd892747b7ea99f2ca3ac84
+    m_Address: Buttons_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es

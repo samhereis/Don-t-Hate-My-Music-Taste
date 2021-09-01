@@ -18,6 +18,8 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] bool spawnOnStart = true;
 
+    public List<GameObject> enemies;
+
     public int numberOfEnemies;
 
     private void Awake()
@@ -55,7 +57,10 @@ public class Spawner : MonoBehaviour
     public void SpawnEnemy(Transform pos)
     {
         GameObject enemy = Instantiate(enemyPref, pos.position, Quaternion.identity);
+
         enemy.AddComponent(AddComponentToEnemy.GetType());
+
+        enemies.Add(enemy);
     }
 
     IEnumerator SpawnPlayer()

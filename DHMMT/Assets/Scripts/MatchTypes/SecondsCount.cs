@@ -21,12 +21,24 @@ public class SecondsCount : MonoBehaviour
     {
         return _seconds;
     }
-
-    public void ChagneSeconds(int value)
+    public void IncreaseSeconds(int value)
     {
-        _seconds = value;
+        _seconds += value;
         text.text = _seconds.ToString();
     }
+
+    public void DecreaseSeconds(int value)
+    {
+        _seconds -= value;
+        text.text = _seconds.ToString();
+    }
+
+    public void NullSeconds()
+    {
+        _seconds = 0;
+        text.text = _seconds.ToString();
+    }
+
 
     public void Beggin(float waitBeforeExecute)
     {
@@ -50,7 +62,7 @@ public class SecondsCount : MonoBehaviour
 
     public void Stop()
     {
-        ChagneSeconds(0);
+        NullSeconds();
         StopAllCoroutines();
     }
 
@@ -60,8 +72,7 @@ public class SecondsCount : MonoBehaviour
 
         while (true)
         {
-            _seconds++;
-            ChagneSeconds(_seconds);
+            IncreaseSeconds(1);
             yield return Wait.NewWait(1);
         }
     }
@@ -74,8 +85,7 @@ public class SecondsCount : MonoBehaviour
 
         while (true)
         {
-            _seconds--;
-            ChagneSeconds(_seconds);
+            DecreaseSeconds(1);
 
             if (_seconds < 1)
             {

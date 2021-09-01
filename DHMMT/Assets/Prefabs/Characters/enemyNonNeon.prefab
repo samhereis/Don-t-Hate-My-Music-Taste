@@ -1327,9 +1327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAlive: 1
-  _health: 200
-  _MaxHealth: 200
+  _health: 100
+  _MaxHealth: 100
   loots:
+  - {fileID: 1929565375958654711, guid: 6b3de782fb1112644898b0b1aca9f543, type: 3}
   - {fileID: 1929565375958654711, guid: f44c0b291de288c4faff93bcfd35dd85, type: 3}
 --- !u!114 &715024889744891478
 MonoBehaviour:

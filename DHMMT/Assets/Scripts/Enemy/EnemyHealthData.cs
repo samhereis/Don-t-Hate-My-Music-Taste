@@ -23,11 +23,18 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
         {
             Instantiate(loots[Random.Range(0, loots.Count)], transform.position, Quaternion.identity);
 
-            Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+            if(GetComponent<IOnEnemyDie>() != null)
+            {
+                GetComponent<IOnEnemyDie>().OnDie();
+            }
+            else
+            {
+                Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
 
-            PlayerKillCount.instance.IncreaseKillCount();
+                PlayerKillCount.instance.IncreaseKillCount();
 
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
         };
     }
 }

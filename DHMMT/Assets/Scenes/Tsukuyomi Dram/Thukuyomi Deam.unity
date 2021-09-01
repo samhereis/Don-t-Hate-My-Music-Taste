@@ -356,11 +356,11 @@ PrefabInstance:
       objectReference: {fileID: 550466103}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: WaitBeforeSpawnPlayer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: WaitBeforeSpawnEnemies
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_Name
@@ -810,7 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1cf2539e8314341979df97f9dbac54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SecondsAmmountToAddWhenDying: 100
 --- !u!114 &550466103
 MonoBehaviour:
   m_ObjectHideFlags: 0

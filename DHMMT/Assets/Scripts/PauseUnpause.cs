@@ -1,12 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseUnpause : MonoBehaviour
 {
     void OnEnable ()
     {
-        PlayerInput.input.Gameplay.Pause.performed += _ => PauseUI.instance.Enable();
+        PlayerInput.input.Gameplay.Pause.performed += Pause;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Pause.performed -= Pause;
+    }
+
+    private void Pause(InputAction.CallbackContext obj)
+    {
+        PauseUI.instance.Enable();
     }
 
     public static void SetPause(bool pause)

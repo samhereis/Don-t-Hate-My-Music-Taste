@@ -14,7 +14,7 @@ public class GameplayUI : MonoBehaviour, IUIPage
     public GameObject Standart;
 
     public GameObject E_F_H_page;
-    public GameObject SH_l_page;
+    public GameObject SH_TH_page;
     public GameObject TS_D_page;
     public GameObject WH_L_N_page;
 

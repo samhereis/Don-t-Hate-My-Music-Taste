@@ -6,8 +6,14 @@ public class TS_D_Page : MonoBehaviour
 {
     public static TS_D_Page instance;
 
+    [SerializeField] MatchSO matchSO;
+
     [SerializeField] GameObject GamePlayWindow;
+
+    [Header("Win Window")]
     [SerializeField] GameObject WinWindow;
+    [SerializeField] CurrentScore currentScore;
+    [SerializeField] YourRecord yourRecord;
 
     void Start()
     {
@@ -23,6 +29,18 @@ public class TS_D_Page : MonoBehaviour
 
     public void OnWin()
     {
+        if (PlayerKillCount.instance.GetKillCount() < matchSO.GetRecordForTheScene())
+        {
+
+        }
+        else
+        {
+            matchSO.SetRecordForTheScene(PlayerKillCount.instance.GetKillCount());
+        }
+
+        yourRecord.SetRecotrdText(matchSO.GetRecordForTheScene());
+        currentScore.SetScoreText(PlayerKillCount.instance.GetKillCount());
+
         PauseUnpause.SetPause(true);
         WinWindow.SetActive(true);
         GamePlayWindow.SetActive(false);

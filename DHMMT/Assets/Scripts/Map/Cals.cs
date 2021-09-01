@@ -23,12 +23,15 @@ public class Cals : MonoBehaviour
     {
         if(ShouldSearch)
         {
-            foreach (string file in System.IO.Directory.GetFiles(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)/*  + "/1" */))
+            foreach (string file in System.IO.Directory.GetFiles($"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT"))
             {
                 www = new WWW("file:///" + file);
                 try
                 {
-                    arrayOfSongs.Add(www.GetAudioClip(true, true));
+                    if (www.GetAudioClip(true, true).GetType() == typeof(AudioClip))
+                    {
+                        arrayOfSongs.Add(www.GetAudioClip(true, true));
+                    }
                 }
                 catch(System.Exception ex)
                 {
