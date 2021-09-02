@@ -8,7 +8,7 @@ public class SpawnPoints : MonoBehaviour
     public static SpawnPoints instance;
     public List<GameObject> spawnPoints;
 
-    public List<GameObject> BackUpspawnPoints;
+    public List<GameObject> playerSpawn;
 
     private void Awake()
     {
@@ -23,7 +23,19 @@ public class SpawnPoints : MonoBehaviour
         }
         else
         {
-            return BackUpspawnPoints[Random.Range(0, BackUpspawnPoints.Count)].transform;
+            return playerSpawn[Random.Range(0, playerSpawn.Count)].transform;
+        }
+    }
+
+    public Transform GetRandomSpawnForPlayer()
+    {
+        if (playerSpawn.Count > 0)
+        {
+            return playerSpawn[Random.Range(0, playerSpawn.Count)].transform;
+        }
+        else
+        {
+            return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
         }
     }
 }

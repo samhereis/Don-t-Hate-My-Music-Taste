@@ -40,13 +40,15 @@ public class SecondsCount : MonoBehaviour
     }
 
 
-    public void Beggin(float waitBeforeExecute)
+    public void Beggin(float waitBeforeExecute, int BegginFrom)
     {
-        StartCoroutine(StartCount(waitBeforeExecute));
+        Stop();
+        StartCoroutine(StartCount(waitBeforeExecute, BegginFrom));
     }
 
     public void BegginCountDown(float waitBeforeExecute, int BegginFrom)
     {
+        Stop();
         StartCoroutine(StartnCountDown(waitBeforeExecute, BegginFrom));
     }
 
@@ -66,14 +68,16 @@ public class SecondsCount : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator StartCount(float waitBeforeExecute)
+    IEnumerator StartCount(float waitBeforeExecute, int BegginFrom)
     {
         yield return Wait.NewWait(waitBeforeExecute);
+
+        _seconds = BegginFrom;
 
         while (true)
         {
             IncreaseSeconds(1);
-            yield return Wait.NewWait(1);
+            yield return Wait.NewWaitRealTime(1);
         }
     }
 
@@ -92,7 +96,7 @@ public class SecondsCount : MonoBehaviour
                 PlayerHealthData.instance.GetComponent<IMatchWinable>().Win();
             }
 
-            yield return Wait.NewWait(1);
+            yield return Wait.NewWaitRealTime(1);
         }
     }
 }

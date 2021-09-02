@@ -18,5 +18,6 @@ public class MatchSO : ScriptableObject
     public void SetRecordForTheScene(int value)
     {
         PlayerPrefs.SetInt(RecordCode, value);
+        PlayerPrefs.Save();
     }
 }

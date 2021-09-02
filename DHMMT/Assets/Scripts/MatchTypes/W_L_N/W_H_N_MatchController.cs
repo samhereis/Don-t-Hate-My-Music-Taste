@@ -5,7 +5,6 @@ public class W_H_N_MatchController : MonoBehaviour, IMatchWinable, IMatchLosable
     void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.WH_L_N_page);
-        GameplayUI.instance.Disable(GameplayUI.instance.Camera);
     }
 
     public void Loose()
@@ -21,6 +20,6 @@ public class W_H_N_MatchController : MonoBehaviour, IMatchWinable, IMatchLosable
 
     private void OnDisable()
     {
-        GameplayUI.instance.Enable(GameplayUI.instance.Camera);
+        GameplayUI.instance.Disable(GameplayUI.instance.WH_L_N_page);
     }
 }

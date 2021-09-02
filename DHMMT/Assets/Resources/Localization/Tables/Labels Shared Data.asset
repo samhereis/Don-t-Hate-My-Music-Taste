@@ -32,7 +32,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Key: MaunMenu.MakeSureHaveMusic
+    m_Key: MaunMenu.MakeSureHaveMusic_NotFound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 472228869263360
+    m_Key: MaunMenu.MakeSureHaveMusic_Found
     m_Metadata:
       m_Items: []
   m_Metadata:

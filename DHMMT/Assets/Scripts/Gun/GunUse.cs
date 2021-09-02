@@ -7,24 +7,34 @@ public class GunUse : MonoBehaviour
 {
     public Animator WeaponAnimator;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] AudioSource audioSource;
+
+    [Header("Shoot Capacity")]
     public float damage = 10;
     public float range = 100f;
 
+    [Header("Ammo")]
     public int CurrentAmmo = 8;
     private int currentAmmo { get { return CurrentAmmo; } set { CurrentAmmo = value; if (CurrentAmmo <= 0) { canShoot = false; StartCoroutine(Reload()); } } }
     public int maxAmmo = 50;
+    [SerializeField] float reloadTime;
 
+    [Header("Shoot Timing")]
     public float fireRate = 0.2f;
     public float nextFire;
 
+    [Header("Shoot States")]
     public bool isReloading = false;
     public bool canShoot = true;
     public bool IsShooting = false;
 
-    [SerializeField] float reloadTime;
-
     void OnEnable()
     {
+        audioSource.clip = shootSound;
+
+        ExtentionMethods.SetWithNullCheck(ref audioSource, GetComponent<AudioSource>());
         ExtentionMethods.SetWithNullCheck(ref WeaponAnimator, GetComponent<GunData>().animator);
     }
     void OnDisable()
@@ -51,7 +61,8 @@ public class GunUse : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             currentAmmo--;
-            
+            audioSource.Play();
+
             WeaponAnimator.SetTrigger("Shoot");
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, range) && hit.collider.GetComponent<IHealthData>() != null)
             {

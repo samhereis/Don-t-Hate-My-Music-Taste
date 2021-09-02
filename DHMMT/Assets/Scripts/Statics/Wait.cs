@@ -8,4 +8,9 @@ public static class Wait
     {
         return new WaitForSeconds(time);
     }
+
+    public static WaitForSecondsRealtime NewWaitRealTime(float time)
+    {
+        return new WaitForSecondsRealtime(time);
+    }
 }

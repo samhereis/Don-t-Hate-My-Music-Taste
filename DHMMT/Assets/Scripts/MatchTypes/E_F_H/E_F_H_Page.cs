@@ -23,6 +23,11 @@ public class E_F_H_Page : MonoBehaviour
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
         GamePlayWindow.SetActive(true);
+
+        if(SecondsCount.instance != null)
+        {
+            SecondsCount.instance.Beggin(0, SecondsCount.instance.GetSeconds());
+        }
     }
 
     public void OnWin()

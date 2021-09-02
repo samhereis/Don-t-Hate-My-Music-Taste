@@ -11,7 +11,7 @@ public class PauseUnpause : MonoBehaviour
         PlayerInput.input.Gameplay.Pause.performed += Pause;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         PlayerInput.input.Gameplay.Pause.performed -= Pause;
     }
@@ -25,7 +25,7 @@ public class PauseUnpause : MonoBehaviour
     {
         if(pause == true)
         {
-            Cals.instance.PauseMusic(true);
+            AudioListener.pause = true;
 
             Time.timeScale = 0;
 
@@ -35,7 +35,7 @@ public class PauseUnpause : MonoBehaviour
         }
         else
         {
-            Cals.instance.PauseMusic(false);
+            AudioListener.pause = false;
 
             Time.timeScale = 1;
 

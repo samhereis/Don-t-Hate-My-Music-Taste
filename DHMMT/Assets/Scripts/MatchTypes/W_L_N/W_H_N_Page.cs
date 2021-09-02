@@ -18,8 +18,17 @@ public class W_H_N_Page : MonoBehaviour
     void Start()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
+
         SecondsCount.instance.Stop();
-        SecondsCount.instance.BegginCountDown(3, 10);
+        SecondsCount.instance.BegginCountDown(3, 500);
+    }
+
+    void OnEnable()
+    {
+        if (SecondsCount.instance != null)
+        {
+            SecondsCount.instance.BegginCountDown(0, SecondsCount.instance.GetSeconds());
+        }
     }
 
     public void OnLoose()

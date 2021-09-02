@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Awake()
     {
-        if(!animator) animator = GetComponent<Animator>();
+        if(animator == null) animator = GetComponent<Animator>();
 
         velocityHashY = Animator.StringToHash("moveVelocityY");
         velocityHashX = Animator.StringToHash("moveVelocityX");
@@ -27,7 +27,7 @@ public class PlayerAnimation : MonoBehaviour
         PlayerInput.input.Gameplay.Aim.performed += Fire;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         PlayerInput.input.Gameplay.Move.performed -= SetAnimationValue;
         PlayerInput.input.Gameplay.Move.canceled  -= SetAnimationValue;

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class TerrainSpawnHolder : MonoBehaviour
 {
-    public GameObject Spawn;
-
     void Start()
     {
-        SpawnPoints.instance.spawnPoints.Add(Spawn);
+        SpawnPoints.instance.spawnPoints.Add(gameObject);
     }
 }

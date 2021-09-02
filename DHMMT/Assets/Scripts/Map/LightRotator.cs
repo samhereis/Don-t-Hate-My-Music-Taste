@@ -6,7 +6,7 @@ using System;
 [System.Serializable]
 public class LightRotator : MonoBehaviour
 {
-    public float waitForStart = 3;
+    public float waitForStart = 0;
 
     public float RotateVal, Duration;
     public float r = 0;
@@ -111,7 +111,7 @@ public class LightRotator : MonoBehaviour
     {
         while (true)
         {
-            yield return Wait.NewWait(UnityEngine.Random.Range(40, 80));
+            yield return Wait.NewWait(UnityEngine.Random.Range(40, 90));
 
             RotateVal *= -1;
         }

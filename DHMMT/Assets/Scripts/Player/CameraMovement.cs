@@ -14,14 +14,26 @@ public class CameraMovement : MonoBehaviour
     {
         transform.position = moveCameraTowards.position;
 
+        if(GameSettings.instance == null)
+        {
+            PauseUI.instance.Enable();
+            PauseUI.instance.Disable();
+        }
+
         instance = this;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
     void OnEnable()
     {
-        PlayerInput.input.Gameplay.Look.performed += _ => { Look(_); };
-        PlayerInput.input.Gameplay.Look.canceled += _ => { Look(_); };
+        PlayerInput.input.Gameplay.Look.performed += Look;
+        PlayerInput.input.Gameplay.Look.canceled += Look;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.input.Gameplay.Look.performed -= Look;
+        PlayerInput.input.Gameplay.Look.canceled -= Look;
     }
     void Update()
     {
@@ -33,9 +45,10 @@ public class CameraMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(XRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
+
     void Look(InputAction.CallbackContext ctx)
     {
-        context = ctx.ReadValue<Vector2>() * mouseSensitivity;
+        context = ctx.ReadValue<Vector2>() * GameSettings.instance.sensitivity;
 
         mouseX = context.x;
         mouseY = context.y;

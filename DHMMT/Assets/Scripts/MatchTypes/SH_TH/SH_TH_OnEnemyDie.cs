@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SH_TH_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 {
-    void Awake()
+    void OnEnable()
     {
-        PlayerKillCount.instance.KillCount = Spawner.instance.enemies.Count;
+        
     }
 
     public void OnDie()

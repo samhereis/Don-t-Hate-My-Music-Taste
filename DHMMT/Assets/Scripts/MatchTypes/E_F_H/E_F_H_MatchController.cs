@@ -7,8 +7,9 @@ public class E_F_H_MatchController : MonoBehaviour, IMatchWinable, IMatchLosable
     void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.E_F_H_page);
-        SecondsCount.instance.Stop();
-        SecondsCount.instance.Beggin(1);
+
+        SecondsCount.instance.Beggin(0, 0);
+
         StartCoroutine(PlayerHealthData.instance.TakeDamageContinuously(2, 20));
     }
 

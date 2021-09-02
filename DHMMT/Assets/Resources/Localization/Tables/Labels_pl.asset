@@ -41,9 +41,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - id: 0
+  - m_Id: 472228869263360
+    m_Localized: "Masz {musicCount}  dost\u0119pnych utwor\xF3w"
+    m_Metadata:
+      m_Items:
+      - id: 0
   references:
     version: 1
     00000000:
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 005001350300000000508172950c0000
+        m_Entries: 005001350300000000508172950c00000050015a7dad0100

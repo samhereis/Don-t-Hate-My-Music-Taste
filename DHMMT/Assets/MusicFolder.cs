@@ -5,10 +5,14 @@ using UnityEngine;
 public class MusicFolder : MonoBehaviour
 {
     public string musicFolder;
+    public int musicCount;
 
     public List<AudioClip> arrayOfSongs;
 
     WWW www;
+
+    [SerializeField] GameObject Found;
+    [SerializeField] GameObject NotFound;
 
     private void Awake()
     {
@@ -35,13 +39,15 @@ public class MusicFolder : MonoBehaviour
 
         if(arrayOfSongs.Count == 0)
         {
-            gameObject.SetActive(true);
-
             musicFolder = $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
+
+            NotFound.SetActive(true);
         }
-        else
+        else if(arrayOfSongs.Count > 0)
         {
-            gameObject.SetActive(false);
+            musicCount = arrayOfSongs.Count;
+
+            Found.SetActive(true);
         }
     }
 }

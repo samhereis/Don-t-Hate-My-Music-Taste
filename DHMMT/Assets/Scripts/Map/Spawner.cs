@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     public Component AddComponentToEnemy;
 
     [SerializeField] float WaitBeforeSpawnEnemies = 10;
-    [SerializeField] float WaitBeforeSpawnPlayer = 5;
+    public float WaitBeforeSpawnPlayer = 5;
 
     [SerializeField] bool spawnOnStart = true;
 
@@ -52,6 +52,8 @@ public class Spawner : MonoBehaviour
         }
 
         StopCoroutine(SpawnEnemies());
+
+        PlayerKillCount.instance.KillCount = Spawner.instance.enemies.Count;
     }
 
     public void SpawnEnemy(Transform pos)
@@ -67,9 +69,9 @@ public class Spawner : MonoBehaviour
     {
         yield return Wait.NewWait(WaitBeforeSpawnPlayer);
 
-        GameObject obj = Instantiate(playerPref, SpawnPoints.instance.GetRandomSpawn().position, Quaternion.identity);
+        GameObject obj = Instantiate(playerPref, SpawnPoints.instance.GetRandomSpawnForPlayer().position, Quaternion.identity);
 
-        if(AddComponentToPlayer != null)
+        if (AddComponentToPlayer != null)
         {
             obj.AddComponent(AddComponentToPlayer.GetType());
         }

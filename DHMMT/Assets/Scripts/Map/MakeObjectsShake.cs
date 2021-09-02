@@ -18,7 +18,7 @@ public class MakeObjectsShake : MonoBehaviour
 
     Action Shake;
 
-    void Awake()
+    void OnEnable()
     {
         instance = this;
 

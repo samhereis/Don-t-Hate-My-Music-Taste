@@ -18,8 +18,16 @@ public class TS_D_Page : MonoBehaviour
     void Start()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
-        SecondsCount.instance.Stop();
+
         SecondsCount.instance.BegginCountDown(3, 20);
+    }
+
+    void OnEnable()
+    {
+        if (SecondsCount.instance != null)
+        {
+            SecondsCount.instance.BegginCountDown(0, SecondsCount.instance.GetSeconds());
+        }
     }
 
     public void OnLoose()
