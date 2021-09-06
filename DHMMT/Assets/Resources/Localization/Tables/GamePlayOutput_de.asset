@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - id: 0
+  - m_Id: 2428433732816896
+    m_Localized: E - Interagieren
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

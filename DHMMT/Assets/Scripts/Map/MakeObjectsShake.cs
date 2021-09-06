@@ -12,15 +12,25 @@ public class MakeObjectsShake : MonoBehaviour
     public ShakeType shakeType = ShakeType.Scale;
 
     public List<Transform> objectsReactingToBasses, objectsReactingToNB, objectsReactingToMiddles, objectsReactingToHighs;
+    public List<List<Transform>> objectsReacting;
     public List<Transform> Reactors;
 
     public float t = 0.2f;
 
     Action Shake;
 
-    void OnEnable()
+    void Awake()
     {
         instance = this;
+
+        objectsReacting.Add(objectsReactingToBasses);
+        objectsReacting.Add(objectsReactingToNB);
+        objectsReacting.Add(objectsReactingToMiddles);
+        objectsReacting.Add(objectsReactingToHighs);
+    }
+
+    void OnEnable()
+    {
 
         if (shakeType == ShakeType.Scale)
         {
@@ -61,19 +71,19 @@ public class MakeObjectsShake : MonoBehaviour
     {
         foreach (Transform obj in objectsReactingToBasses)
         {
-            obj.DOMoveY(Cals.instance.setSoundFreq(0, 7, Cals.instance.bassSoundMult), t);
+            obj.DOLocalMoveY(Cals.instance.setSoundFreq(0, 7, Cals.instance.bassSoundMult), t);
         }
         foreach (Transform obj in objectsReactingToNB)
         {
-            obj.DOMoveY(Cals.instance.setSoundFreq(7, 15, Cals.instance.nextToBassSoundMult), t);
+            obj.DOLocalMoveY(Cals.instance.setSoundFreq(7, 15, Cals.instance.nextToBassSoundMult), t);
         }
         foreach (Transform obj in objectsReactingToMiddles)
         {
-            obj.DOMoveY(Cals.instance.setSoundFreq(15, 30, Cals.instance.middleSoundMult), t);
+            obj.DOLocalMoveY(Cals.instance.setSoundFreq(15, 30, Cals.instance.middleSoundMult), t);
         }
         foreach (Transform obj in objectsReactingToHighs)
         {
-            obj.DOMoveY(Cals.instance.setSoundFreq(30, 32, Cals.instance.HighSoundMult), t);
+            obj.DOLocalMoveY(Cals.instance.setSoundFreq(30, 32, Cals.instance.HighSoundMult), t);
         }
     }
 }

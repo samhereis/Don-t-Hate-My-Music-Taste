@@ -18,8 +18,15 @@ public class GameSettings : MonoBehaviour
 
     void Awake()
     {
-        if(PlayerPrefs.GetFloat(nameof(Sensitivity)) == 0f)
+        if(PlayerPrefs.HasKey(nameof(Sensitivity)) == false)
         {
+            Sensitivity.value = 0.5f;
+            ChangeSensitivity(Sensitivity);
+        }
+
+        if (PlayerPrefs.HasKey(nameof(Volume)) == false)
+        {
+            Volume.value = -20;
             ChangeSensitivity(Volume);
         }
 
@@ -44,6 +51,12 @@ public class GameSettings : MonoBehaviour
         sensitivity = slider.value;
 
         PlayerPrefs.SetFloat(nameof(Sensitivity), slider.value);
+        PlayerPrefs.Save();
+    }
+
+    public void DeleteAllGameData()
+    {
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
     }
 }

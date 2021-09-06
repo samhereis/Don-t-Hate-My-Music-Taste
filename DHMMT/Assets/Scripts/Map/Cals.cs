@@ -13,6 +13,8 @@ public class Cals : MonoBehaviour
     WWW www;
     public bool ShouldSearch;
 
+    [SerializeField] MakeObjectsShake makeObjectsShake;
+
     void Awake()
     {
         spectrumWidth = new float[64];
@@ -43,6 +45,8 @@ public class Cals : MonoBehaviour
         }
         
         InvokeRepeating("checkForAudio", 0f, 2f);       /* checkForAudio every * seconds */
+
+        ExtentionMethods.SetWithNullCheck(ref makeObjectsShake, GetComponent<MakeObjectsShake>());
     }
 
     public void PauseMusic(bool pause)
@@ -68,6 +72,11 @@ public class Cals : MonoBehaviour
         {
             audioSource.clip = arrayOfSongs[Random.Range(0, arrayOfSongs.Count)];      /*Play random song from <<arrayOfSongs>>*/
             audioSource.Play();
+
+            if(makeObjectsShake.enabled == false)
+            {
+                makeObjectsShake.enabled = true;
+            }
         }
     }
 

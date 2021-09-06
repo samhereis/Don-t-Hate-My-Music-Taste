@@ -33,7 +33,7 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
 
         if (Health < 0)
         {
-            GetComponent<IMatchLosable>().Loose();
+            GetComponent<IMatchLoosable>().Loose();
         }
     }
 

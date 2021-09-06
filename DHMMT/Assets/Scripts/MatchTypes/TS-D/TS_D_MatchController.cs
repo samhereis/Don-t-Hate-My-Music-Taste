@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TS_D_MatchController : MonoBehaviour, IMatchWinable, IMatchLosable
+public class TS_D_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
 {
     void OnEnable()
     {

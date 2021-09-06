@@ -35,6 +35,14 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""a9e4fe26-eafc-49c7-8426-7ee402f45c71"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""1b93994b-b4c7-4112-9e7b-f92820703537"",
@@ -363,6 +371,28 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01ecbd5d-6194-4b5e-9e7d-68124ba3dcfc"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=5,y=5)"",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14bf7a58-35f5-484f-8613-6e2f28f7f4b2"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Touch;Keyboard"",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -612,6 +642,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
+        m_Gameplay_ChangeWeapon = m_Gameplay.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
@@ -684,6 +715,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Look;
+    private readonly InputAction m_Gameplay_ChangeWeapon;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_Aim;
@@ -698,6 +730,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         public GameplayActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Gameplay_ChangeWeapon;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
@@ -721,6 +754,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Look.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @ChangeWeapon.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeWeapon;
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
@@ -755,6 +791,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @ChangeWeapon.started += instance.OnChangeWeapon;
+                @ChangeWeapon.performed += instance.OnChangeWeapon;
+                @ChangeWeapon.canceled += instance.OnChangeWeapon;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -900,6 +939,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);

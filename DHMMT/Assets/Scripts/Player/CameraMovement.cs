@@ -53,4 +53,11 @@ public class CameraMovement : MonoBehaviour
         mouseX = context.x;
         mouseY = context.y;
     }
+
+    public void Shake()
+    {
+        transform.position = moveCameraTowards.position;
+
+        AnimationStatics.NormalShake(transform, 2);
+    }
 }

@@ -10,6 +10,7 @@ public class E_F_H_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 
         PlayerKillCount.instance.IncreaseKillCount();
 
+        Spawner.instance.enemies.Remove(gameObject);
 
         Destroy(gameObject);
     }

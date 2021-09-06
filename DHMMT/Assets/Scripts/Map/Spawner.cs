@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] bool spawnOnStart = true;
 
     public List<GameObject> enemies;
+    public List<GameObject> enemiesReserve;
 
     public int numberOfEnemies;
 
@@ -34,7 +35,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        if (numberOfEnemies > 0) StartCoroutine(SpawnEnemies());
+        if (numberOfEnemies > 0) SpawnEnemies(numberOfEnemies);
     }
 
     private void OnDisable()
@@ -42,27 +43,39 @@ public class Spawner : MonoBehaviour
         instance = null;
     }
 
-    IEnumerator SpawnEnemies()
+    public void SpawnEnemies(int number)
+    {
+        StartCoroutine(SpawnEnemiesCoroutines(number));
+    }
+
+    IEnumerator SpawnEnemiesCoroutines(int number)
     {
         yield return Wait.NewWait(WaitBeforeSpawnEnemies);
 
-        for (int i = 0; i < numberOfEnemies; i++)
+        for (int i = 0; i < number; i++)
         {
             SpawnEnemy(SpawnPoints.instance.GetRandomSpawn());
         }
 
-        StopCoroutine(SpawnEnemies());
-
-        PlayerKillCount.instance.KillCount = Spawner.instance.enemies.Count;
+        StopCoroutine(SpawnEnemiesCoroutines(number));
     }
 
     public void SpawnEnemy(Transform pos)
     {
-        GameObject enemy = Instantiate(enemyPref, pos.position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPref);
 
         enemy.AddComponent(AddComponentToEnemy.GetType());
 
-        enemies.Add(enemy);
+        if(enemies.Count < 11)
+        {
+            enemies.Add(enemy);
+            enemy.transform.position = pos.position;
+        }
+        else
+        {
+            enemy.SetActive(false);
+            enemiesReserve.Add(enemy);
+        }
     }
 
     IEnumerator SpawnPlayer()

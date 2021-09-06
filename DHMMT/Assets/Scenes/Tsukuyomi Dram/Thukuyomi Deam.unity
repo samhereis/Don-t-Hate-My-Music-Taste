@@ -287,9 +287,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
-      propertyPath: spawnPoints.Array.size
+      propertyPath: playerSpawn.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: playerSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 871517902365496714}
     - target: {fileID: 871517903394405508, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
@@ -1959,7 +1967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: t
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: shakeType
@@ -2284,7 +2292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871517902365496714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.4, y: 2, z: 0.7}
+  m_LocalPosition: {x: 105.13, y: 2, z: 167.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 357401527}

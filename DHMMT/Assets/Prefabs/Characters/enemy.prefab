@@ -1244,9 +1244,9 @@ MonoBehaviour:
   enemyMovement: {fileID: 2413848665578746312}
   followEnemy: {fileID: 0}
   currentDestination: {fileID: 0}
-  distanceToEnemy: 5
+  distanceToEnemy: 10
   weaponDataHolder: {fileID: 715024889744891478}
-  ShootRate: 2
+  ShootRate: 1
 --- !u!114 &2413848665578746314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,7 +1370,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!1 &3325724658735170878
 GameObject:
   m_ObjectHideFlags: 0

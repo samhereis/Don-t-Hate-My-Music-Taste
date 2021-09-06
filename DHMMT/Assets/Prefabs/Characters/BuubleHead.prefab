@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAlive: 1
-  _health: 100
-  _MaxHealth: 100
+  _health: 200
+  _MaxHealth: 200
   loots:
   - {fileID: 1929565375958654711, guid: 6b3de782fb1112644898b0b1aca9f543, type: 3}
   - {fileID: 1929565375958654711, guid: f44c0b291de288c4faff93bcfd35dd85, type: 3}
@@ -108,7 +108,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0.05, y: -0.1, z: 0}
 --- !u!1001 &689875119959696854
 PrefabInstance:

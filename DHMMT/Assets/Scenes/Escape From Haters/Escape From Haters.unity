@@ -1172,7 +1172,7 @@ PrefabInstance:
       objectReference: {fileID: 1186959928}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: numberOfEnemies
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 871517903394405509, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: AddComponentToEnemy
@@ -2065,7 +2065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3438530436760064206, guid: 95c929b14906d9d4797372caf950abd0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4142272623358740043, guid: 95c929b14906d9d4797372caf950abd0, type: 3}
       propertyPath: m_RootOrder
@@ -2260,7 +2260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: t
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_Enabled

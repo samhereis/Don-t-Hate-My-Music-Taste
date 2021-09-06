@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "ChangeWeapon",
+                    "type": "Value",
+                    "id": "a9e4fe26-eafc-49c7-8426-7ee402f45c71",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "1b93994b-b4c7-4112-9e7b-f92820703537",
@@ -348,6 +356,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01ecbd5d-6194-4b5e-9e7d-68124ba3dcfc",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=5,y=5)",
+                    "groups": ";Gamepad",
+                    "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14bf7a58-35f5-484f-8613-6e2f28f7f4b2",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Touch;Keyboard",
+                    "action": "ChangeWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

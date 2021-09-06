@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: WinWindow.CurrentScore
     m_Metadata:
       m_Items: []
+  - m_Id: 2428433732816896
+    m_Key: GamePlay.Interact
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

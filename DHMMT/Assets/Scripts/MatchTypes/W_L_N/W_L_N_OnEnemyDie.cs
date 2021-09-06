@@ -10,6 +10,8 @@ public class W_L_N_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 
         PlayerKillCount.instance.IncreaseKillCount();
 
+        Spawner.instance.enemies.Remove(gameObject);
+
         Destroy(gameObject);
     }
 }

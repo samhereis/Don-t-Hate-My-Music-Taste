@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SH_TH_MatchController : MonoBehaviour
+public class SH_TH_MatchController : MonoBehaviour, IMatchLoosable, IMatchWinable
 {
     void OnEnable()
     {
@@ -11,13 +11,14 @@ public class SH_TH_MatchController : MonoBehaviour
 
     public void Loose()
     {
-        SecondsCount.instance.Stop();
-        E_F_H_Page.instance.OnLoose();
+        SH_TH_Page.instance.OnLoose();
+
+        Destroy(gameObject);
     }
 
     public void Win()
     {
-        E_F_H_Page.instance.OnWin();
+        SH_TH_Page.instance.OnWin();
     }
 
     void OnDisable()

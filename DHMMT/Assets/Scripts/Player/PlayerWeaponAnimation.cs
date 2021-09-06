@@ -5,14 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerWeaponAnimation : MonoBehaviour
 {
+    public static PlayerWeaponAnimation instance;
+
     string SPEED = "Speed";
 
     bool sprint = false;
 
     bool move;
 
-    private void OnEnable()
+    void OnEnable()
     {
+        instance = this;
+
         PlayerInput.input.Gameplay.Move.performed += Move;
         PlayerInput.input.Gameplay.Move.canceled += Move;
 
@@ -24,8 +28,10 @@ public class PlayerWeaponAnimation : MonoBehaviour
         PlayerInput.input.Gameplay.Aim.performed += Fire;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
+        instance = null;
+
         PlayerInput.input.Gameplay.Move.performed -= Move;
         PlayerInput.input.Gameplay.Move.canceled  -= Move;
 
@@ -65,7 +71,7 @@ public class PlayerWeaponAnimation : MonoBehaviour
         SetSpeed();
     }
 
-    void SetSpeed()
+    public void SetSpeed()
     {
         if(move == true && sprint == false)
         {

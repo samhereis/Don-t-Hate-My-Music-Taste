@@ -10,7 +10,11 @@ public class TS_D_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 
         PlayerKillCount.instance.IncreaseKillCount();
 
-        SecondsCount.instance.IncreaseSeconds(5);
+        SecondsCount.instance.IncreaseSeconds(8);
+
+        AnimationStatics.NormalShake(SecondsCount.instance.transform, 2);
+
+        Spawner.instance.enemies.Remove(gameObject);
 
         Destroy(gameObject);
     }

@@ -8,6 +8,8 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
 {
     public bool equiped = false;
 
+    public bool Interactable { get; set; }
+
     private string itemName = "Head Swaper";
     public string ItemName { get { return itemName;} set { itemName = value; }}
 
@@ -28,6 +30,7 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         Animator animator = caller.GetComponent<Animator>();
 
         equiped = true;
+        Interactable = false;
 
         {   //Manage Position and Rotation
             transform.SetParent(equipData.weaponPosition, false);
@@ -56,6 +59,21 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
             caller.GetComponent<WeaponDataHolder>().Set(gunData, GetComponent<GunUse>(), GetComponent<GunAim>());
         }
         caller.GetComponent<RigBuilder>().Build();
+    }
+
+    public void Remove()
+    {
+        Destroy(gameObject);
+    }
+
+    public void Activate(bool value)
+    {
+        gameObject.SetActive(value);
+    }
+
+    public void MoveTo(Transform parent)
+    {
+        transform.SetParent(parent);
     }
 
     void setParentConstraint(Transform[] source)

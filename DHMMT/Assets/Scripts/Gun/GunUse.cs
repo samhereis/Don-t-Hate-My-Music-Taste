@@ -55,12 +55,13 @@ public class GunUse : MonoBehaviour
         IsShooting = use;
     }
 
-    void Shoot()
+    public void Shoot()
     {
         if (Time.time > nextFire && canShoot)
         {
             nextFire = Time.time + fireRate;
             currentAmmo--;
+            audioSource.Stop();
             audioSource.Play();
 
             WeaponAnimator.SetTrigger("Shoot");

@@ -20,6 +20,7 @@ public static class ExtentionMethods
     public static bool SetWithNullCheck<T>(T obj, T value)
     {
         obj = value;
+
         if (obj == null)
         {
             return true;

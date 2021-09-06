@@ -1,6 +1,4 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +13,7 @@ public class DisplayGunOnShop : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
 
     public void SetData(ScriptableGun Sentgun)
@@ -25,24 +23,49 @@ public class DisplayGunOnShop : MonoBehaviour
         GunIcon.sprite = gun.gunIcon;
         GunName.text = gun.gunName;
         GunDamage.text = gun.gunDamage.ToString();
-        GunCost.text = gun.gunCost.ToString();
+        GunCost.text = $"ㄙ {gun.gunCost}";
     }
 
     public void TryBuy()
     {
+        transform.DOShakePosition(2f, 10f, 10, 50, false, true);
+
         if (PlayerKillCount.instance.GetKillCount() >= gun.gunCost)
         {
             GameObject newGun = Instantiate(gun.gunPrefab.gameObject);
 
-            PlayerGunUse.instance.SecodWeapon = newGun.GetComponent<InteractableEquipWeapon>();
+            if (gun.gunType == ScriptableGun.GunTypes.Pistol)
+            {
+                if (PlayerGunUse.instance.DefaultWeapon != null)
+                {
+                    PlayerGunUse.instance.DefaultWeapon.Remove();
+                }
 
-            PlayerGunUse.instance.SecodWeapon.Interact(PlayerGunUse.instance.gameObject);
+                PlayerGunUse.instance.DefaultWeapon = newGun.GetComponent<InteractableEquipWeapon>();
 
-            PlayerGunUse.instance.DefaultWeapon.gameObject.SetActive(false);
+                PlayerGunUse.instance.DefaultWeapon.Interact(PlayerGunUse.instance.gameObject);
+
+                PlayerGunUse.instance.ChangeWeapon(ScriptableGun.GunTypes.Pistol);
+            }
+            else if (gun.gunType == ScriptableGun.GunTypes.Rifle)
+            {
+                if (PlayerGunUse.instance.SecodWeapon != null)
+                {
+                    PlayerGunUse.instance.SecodWeapon.Remove();
+                }
+
+                PlayerGunUse.instance.SecodWeapon = newGun.GetComponent<InteractableEquipWeapon>();
+
+                PlayerGunUse.instance.SecodWeapon.Interact(PlayerGunUse.instance.gameObject);
+
+                PlayerGunUse.instance.ChangeWeapon(ScriptableGun.GunTypes.Rifle);
+            }
         }
         else
         {
-            transform.DOShakePosition(2f, 10f, 10, 50, true, true);
+            AnimationStatics.NormalShake(transform, 2);
+
+            MessageScript.instance.ShowMessage(MessageScript.instance.DontHaveEnoughKillsMessage, 5);
         }
     }
 }

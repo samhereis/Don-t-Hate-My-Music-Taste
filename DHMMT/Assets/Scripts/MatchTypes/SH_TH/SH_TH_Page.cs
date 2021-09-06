@@ -14,11 +14,15 @@ public class SH_TH_Page : MonoBehaviour
     void Start()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
+
+        PlayerKillCount.instance.StartCheckingForEnemies(3);
     }
 
     public void OnLoose()
     {
-        PlayerKillCount.instance.KillCount -= 10;
+        Spawner.instance.SpawnEnemies(15);
+
+        Spawner.instance.RepawnPlayer(SpawnPoints.instance.GetRandomSpawnForPlayer());
     }
 
     public void OnWin()
@@ -31,6 +35,6 @@ public class SH_TH_Page : MonoBehaviour
     public void Replay()
     {
         PauseUnpause.SetPause(false);
-        StartCoroutine(MenuStatics.LoadScene(5));
+        StartCoroutine(MenuStatics.LoadScene(4));
     }
 }

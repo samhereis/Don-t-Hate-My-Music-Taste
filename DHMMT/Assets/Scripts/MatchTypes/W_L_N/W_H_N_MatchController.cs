@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class W_H_N_MatchController : MonoBehaviour, IMatchWinable, IMatchLosable
+public class W_H_N_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
 {
     void OnEnable()
     {

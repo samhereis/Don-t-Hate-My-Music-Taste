@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IMatchLosable
+public interface IMatchLoosable
 {
     void Loose();
 }

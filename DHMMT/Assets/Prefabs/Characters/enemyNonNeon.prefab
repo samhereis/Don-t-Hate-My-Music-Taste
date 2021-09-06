@@ -1245,7 +1245,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2413848665578746312}
   followEnemy: {fileID: 0}
   currentDestination: {fileID: 0}
-  distanceToEnemy: 3
+  distanceToEnemy: 5
   weaponDataHolder: {fileID: 715024889744891478}
   ShootRate: 2
 --- !u!114 &2413848665578746314

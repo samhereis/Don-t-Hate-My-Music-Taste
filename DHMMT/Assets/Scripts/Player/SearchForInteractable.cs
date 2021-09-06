@@ -6,7 +6,6 @@ public class SearchForInteractable : MonoBehaviour
 {
     public static SearchForInteractable instance;
     public IInteractable Interactable;
-    public string T;
 
     void OnEnable()
     {
@@ -17,14 +16,13 @@ public class SearchForInteractable : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(CameraRaycast.Cast(out Interactable))
+        if(CameraRaycast.Cast(out Interactable) && Interactable.Interactable == true)
         {
-            T = Interactable.ItemName;
+            MessageScript.instance.InteractMessage.SetActive(true);
         }
         else
         {
-            Interactable = null;
-            T = null;
+            MessageScript.instance.InteractMessage.SetActive(false);
         }
     }
 

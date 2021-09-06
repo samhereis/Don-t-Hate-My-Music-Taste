@@ -6,8 +6,6 @@ using System;
 [System.Serializable]
 public class LightRotator : MonoBehaviour
 {
-    public float waitForStart = 0;
-
     public float RotateVal, Duration;
     public float r = 0;
     public enum Axis
@@ -55,7 +53,7 @@ public class LightRotator : MonoBehaviour
     }
     IEnumerator RotateX()
     {
-        yield return Wait.NewWait(UnityEngine.Random.Range(waitForStart, waitForStart + 3));
+        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
 
         Start:
         {
@@ -72,7 +70,7 @@ public class LightRotator : MonoBehaviour
     }
     IEnumerator RotateY()
     {
-        yield return Wait.NewWait(UnityEngine.Random.Range(waitForStart, waitForStart + 3));
+        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
 
         Start:
         {
@@ -90,7 +88,7 @@ public class LightRotator : MonoBehaviour
     }
     IEnumerator RotateZ()
     {
-        yield return Wait.NewWait(UnityEngine.Random.Range(waitForStart, waitForStart + 3));
+        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
 
         Start:
         {

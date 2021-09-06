@@ -15,5 +15,5 @@ MonoBehaviour:
   gunType: 1
   gunIcon: {fileID: 21300000, guid: 3e9abb315bb40d847831ccb22504da0b, type: 3}
   gunPrefab: {fileID: 4994754164053536615, guid: 30efd1a8f57324a458847f056e249bf1, type: 3}
-  gunCost: 10
+  gunCost: 40
   interact: {fileID: 5301167372661590049, guid: 30efd1a8f57324a458847f056e249bf1, type: 3}

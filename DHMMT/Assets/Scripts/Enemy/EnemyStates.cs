@@ -105,11 +105,13 @@ public class EnemyStates : MonoBehaviour
             }
             else
             {
+                Debug.Log(Vector3.Distance(this.transform.position, followEnemy.position));
+
                 enemyMovement.navMeshAgent.speed = 0;
 
                 enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
 
-                weaponDataHolder.gunUse?.Use(true);
+                weaponDataHolder.gunUse?.Shoot();
 
                 yield return Wait.NewWait(ShootRate);
             }
