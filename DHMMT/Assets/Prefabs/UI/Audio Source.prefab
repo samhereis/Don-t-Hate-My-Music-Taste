@@ -147,7 +147,9 @@ MonoBehaviour:
   HighSoundMult: 1
   spectrumWidth: []
   arrayOfSongs: []
-  ShouldSearch: 0
+  musicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+  ShouldSearch: 1
+  makeObjectsShake: {fileID: 0}
 --- !u!114 &6921058632634339305
 MonoBehaviour:
   m_ObjectHideFlags: 0

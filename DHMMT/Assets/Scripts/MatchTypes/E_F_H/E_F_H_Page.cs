@@ -19,7 +19,12 @@ public class E_F_H_Page : MonoBehaviour
     [Header("Loose Window")]
     [SerializeField] GameObject LooseWindow;
 
-    private void OnEnable()
+    void Awake()
+    {
+        MessageScript.instance.ShowMessage(MessageScript.instance.StayUnderTheLightAndFindTheExit, 10);
+    }
+
+    void OnEnable()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
         GamePlayWindow.SetActive(true);

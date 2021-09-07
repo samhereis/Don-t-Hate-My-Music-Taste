@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MessagesToUser_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 627ff29698da31a418d9d08f11b91818, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 190673145856
+    m_Localized: "Reste sous la lumi\xE8re et trouve la sortie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30891134976
+    m_Localized: "Vous n'avez pas assez de kills - \"\u3119\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5144112615424
+    m_Localized: Vous pouvez acheter des armes dans la boutique
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

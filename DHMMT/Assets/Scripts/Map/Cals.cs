@@ -9,6 +9,8 @@ public class Cals : MonoBehaviour
     public float bassSoundMult = 1, nextToBassSoundMult =1, middleSoundMult = 1, HighSoundMult = 1;    /* Frequencies */
     public float[] spectrumWidth;   /* range of sprectrums or width, usually used by  <<GetSpectrumData()>> and it also contained values set by <<GetSpectrumData()>> */
     public List<AudioClip> arrayOfSongs;    /* Array of Songs that should play in the scene */
+    public ScriptableMusicList musicList;
+
     private AudioSource audioSource;    /* Playing audio */
     WWW www;
     public bool ShouldSearch;
@@ -39,6 +41,11 @@ public class Cals : MonoBehaviour
                 {
                     Debug.Log(ex.Message);
                 }
+            }
+
+            if (arrayOfSongs.Count < 1)
+            {
+                arrayOfSongs = musicList.musicList;
             }
 
             audioSource.clip = arrayOfSongs[Random.Range(0, arrayOfSongs.Count)];

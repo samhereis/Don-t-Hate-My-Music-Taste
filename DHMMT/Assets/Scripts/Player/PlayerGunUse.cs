@@ -53,6 +53,10 @@ public class PlayerGunUse : MonoBehaviour
 
                 PlayerWeaponAnimation.instance.SetSpeed();
             }
+            else
+            {
+                MessageScript.instance.ShowMessage(MessageScript.instance.YouCanBuyGunsInTheShop, 3);
+            }
         }
         else if(SecodWeapon.gameObject.activeSelf)
         {
@@ -94,6 +98,10 @@ public class PlayerGunUse : MonoBehaviour
                 FirstGunSlotUI.instance.Activate();
 
                 SecodWeapon?.Activate(false);
+            }
+            else
+            {
+                MessageScript.instance.ShowMessage(MessageScript.instance.YouCanBuyGunsInTheShop, 3);
             }
         }
     }

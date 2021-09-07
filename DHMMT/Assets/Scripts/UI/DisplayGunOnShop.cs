@@ -65,7 +65,7 @@ public class DisplayGunOnShop : MonoBehaviour
         {
             AnimationStatics.NormalShake(transform, 2);
 
-            MessageScript.instance.ShowMessage(MessageScript.instance.DontHaveEnoughKillsMessage, 5);
+            MessageScript.instance.ShowMessage(MessageScript.instance.DontHaveEnoughKills, 5);
         }
     }
 }

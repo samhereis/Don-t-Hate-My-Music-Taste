@@ -7,7 +7,9 @@ public class MessageScript : MonoBehaviour
 {
     public static MessageScript instance;
 
-    public GameObject DontHaveEnoughKillsMessage;
+    public GameObject DontHaveEnoughKills;
+    public GameObject StayUnderTheLightAndFindTheExit;
+    public GameObject YouCanBuyGunsInTheShop;
 
     public GameObject InteractMessage;
 

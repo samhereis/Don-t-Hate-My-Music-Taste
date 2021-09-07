@@ -3,7 +3,9 @@ guid: 0643a56c2e4225f46804e241f74fd8e4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - musicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+  - makeObjectsShake: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

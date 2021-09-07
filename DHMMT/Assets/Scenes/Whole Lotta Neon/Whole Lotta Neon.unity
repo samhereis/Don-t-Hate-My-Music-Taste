@@ -973,6 +973,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: musicList
+      value: 
+      objectReference: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: ShouldSearch
       value: 1
       objectReference: {fileID: 0}
@@ -988,6 +992,10 @@ PrefabInstance:
       propertyPath: middleSoundMult
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: makeObjectsShake
+      value: 
+      objectReference: {fileID: 668256150}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: nextToBassSoundMult
       value: 2
@@ -1106,6 +1114,17 @@ PrefabInstance:
       objectReference: {fileID: 342191138}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+--- !u!114 &668256150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+  m_PrefabInstance: {fileID: 668256149}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795a8f3885d95d94681aede7698f5b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &685544689
 GameObject:
   m_ObjectHideFlags: 0
