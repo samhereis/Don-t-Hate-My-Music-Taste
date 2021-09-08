@@ -8,7 +8,16 @@ public class LanguageManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return LocalizationSettings.InitializationOperation;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("Language")];
+
+        if(PlayerPrefs.HasKey("Language"))
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("Language")];
+        }
+        else
+        {
+            ChangeLanguage(2);
+        }
+
     }
 
     public void ChangeLanguage(int index)

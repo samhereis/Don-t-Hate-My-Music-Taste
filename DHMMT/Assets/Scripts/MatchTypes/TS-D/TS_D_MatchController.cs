@@ -7,6 +7,8 @@ public class TS_D_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
     void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.TS_D_page);
+
+        GetComponent<PlayerJump>().doubleJumpable = false;
     }
 
     public void Loose()

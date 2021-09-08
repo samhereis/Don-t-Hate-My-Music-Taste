@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 603, y: -180}
-  m_SizeDelta: {x: 1206, y: 100}
+  m_AnchoredPosition: {x: 1200, y: -180}
+  m_SizeDelta: {x: 2400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &486296489
 CanvasRenderer:
@@ -1499,8 +1499,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 603, y: -50}
-  m_SizeDelta: {x: 1206, y: 100}
+  m_AnchoredPosition: {x: 1200, y: -50}
+  m_SizeDelta: {x: 2400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4618302515306183324
 CanvasRenderer:
@@ -1988,7 +1988,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -10, y: 0}
-  m_SizeDelta: {x: -60, y: -258}
+  m_SizeDelta: {x: -60, y: -930}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4618302515644734213
 MonoBehaviour:
@@ -2677,6 +2677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeleteAllData
       objectReference: {fileID: 0}
+    - target: {fileID: 3302485580574905910, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
+      propertyPath: m_text
+      value: Reset All Game Data
+      objectReference: {fileID: 0}
     - target: {fileID: 3562997200482651146, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
       propertyPath: ToDisable
       value: 
@@ -2687,6 +2691,7 @@ PrefabInstance:
       objectReference: {fileID: 1660545701}
     m_RemovedComponents:
     - {fileID: 3562997200482651146, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
+    - {fileID: 1520027178385856191, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
 --- !u!224 &2430562396650143171 stripped
 RectTransform:

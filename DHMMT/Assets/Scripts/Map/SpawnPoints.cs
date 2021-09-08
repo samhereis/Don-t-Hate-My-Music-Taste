@@ -17,7 +17,7 @@ public class SpawnPoints : MonoBehaviour
 
     public Transform GetRandomSpawn()
     {
-        if(spawnPoints.Count > 0)
+        if(spawnPoints.Count >= 1)
         {
             return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
         }

@@ -11,6 +11,8 @@ public class E_F_H_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosabl
         SecondsCount.instance.Beggin(0, 0);
 
         StartCoroutine(PlayerHealthData.instance.TakeDamageContinuously(2, 20));
+
+        GetComponent<PlayerJump>().doubleJumpable = false;
     }
 
     public void Loose()

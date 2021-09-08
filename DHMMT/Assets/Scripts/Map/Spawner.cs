@@ -69,7 +69,7 @@ public class Spawner : MonoBehaviour
         if(enemies.Count < 11)
         {
             enemies.Add(enemy);
-            enemy.transform.position = pos.position;
+            enemy.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
         }
         else
         {
@@ -82,7 +82,9 @@ public class Spawner : MonoBehaviour
     {
         yield return Wait.NewWait(WaitBeforeSpawnPlayer);
 
-        GameObject obj = Instantiate(playerPref, SpawnPoints.instance.GetRandomSpawnForPlayer().position, Quaternion.identity);
+        Transform loc = SpawnPoints.instance.GetRandomSpawnForPlayer();
+
+        GameObject obj = Instantiate(playerPref, loc.position, loc.localRotation);
 
         if (AddComponentToPlayer != null)
         {

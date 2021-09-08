@@ -6,6 +6,8 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadScene(int index)
     {
-        StartCoroutine(MenuStatics.LoadScene(index));
+        LoadingWindow.instance.Window.SetActive(true);
+
+        StartCoroutine(MenuStatics.LoadScene(index, LoadingWindow.instance.Window));
     }
 }

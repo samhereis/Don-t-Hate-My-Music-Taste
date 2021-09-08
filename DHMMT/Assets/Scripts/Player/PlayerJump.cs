@@ -5,24 +5,30 @@ using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
-    CharacterController characterController;
-    public float jumpHeight = 0.1f, gravityValue = -0.03f; bool doubleJump;
-    Vector3 playerVelocity;
-    void Awake()
+    private CharacterController characterController;
+
+    public float jumpHeight = 0.1f, gravityValue = -0.1f;
+
+    bool doubleJump;
+    public bool doubleJumpable = true;
+
+    private Vector3 playerVelocity;
+
+    private void Awake()
     {
         if(!characterController) characterController = GetComponent<CharacterController>(); 
     }
-    void OnEnable()
+    private void OnEnable()
     {
         PlayerInput.input.Gameplay.Jump.performed += Jump;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         PlayerInput.input.Gameplay.Jump.performed -= Jump;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if(characterController.isGrounded == false || doubleJump == true)
         {
@@ -31,20 +37,17 @@ public class PlayerJump : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
         }
     }
-    void Jump(InputAction.CallbackContext context)
+
+    private void Jump(InputAction.CallbackContext context)
     {
         if(characterController.isGrounded)
         {
             doubleJump = true;
             playerVelocity.y = jumpHeight;
         }
-        else if(doubleJump && characterController.isGrounded == false)
+        else if(doubleJump && characterController.isGrounded == false && doubleJumpable == true)
         {
-            playerVelocity.y += jumpHeight * 2;
-            doubleJump = false;
-        }
-        else
-        {
+            playerVelocity.y += jumpHeight * 1.25f;
             doubleJump = false;
         }
     }

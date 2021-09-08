@@ -12,7 +12,9 @@ public class SpawnExitRandomlyOnStart : MonoBehaviour
     {
         if (spawns.Count > 0)
         {
-            exit.transform.position = spawns[Random.Range(0, spawns.Count)].transform.position;
+            Vector3 loc = spawns[Random.Range(0, spawns.Count)].transform.position;
+
+            exit.transform.position = new Vector3(loc.x, 11, loc.z);
         }
     }
 }
