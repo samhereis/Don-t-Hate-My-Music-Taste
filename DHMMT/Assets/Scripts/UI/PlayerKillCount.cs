@@ -6,16 +6,20 @@ using DG.Tweening;
 
 public class PlayerKillCount : MonoBehaviour
 {
-    public static PlayerKillCount instance;
-    [SerializeField] TextMeshProUGUI text;
-    public int KillCount { get => _killCount; set { _killCount = value; text.text = $"ㄙ {KillCount}"; AnimationStatics.NormalShake(transform, 2); } }
-    [SerializeField] int _killCount;
+    // Show player kills number while gameplay
 
-    void Awake()
+    public static PlayerKillCount instance;
+
+    [SerializeField] private TextMeshProUGUI _text;
+
+    public int KillCount { get => _killCount; set { _killCount = value; _text.text = $"ㄙ {KillCount}"; AnimationStatics.NormalShake(transform, 2); } }
+    [SerializeField] private int _killCount;
+
+    private void Awake()
     {
         instance = this;
-        ExtentionMethods.SetWithNullCheck(text, GetComponent<TextMeshProUGUI>());
-        text.text = KillCount.ToString();
+        ExtentionMethods.SetWithNullCheck(_text, GetComponent<TextMeshProUGUI>());
+        _text.text = KillCount.ToString();
     }
 
     public int GetKillCount()
@@ -38,11 +42,11 @@ public class PlayerKillCount : MonoBehaviour
         StartCoroutine(ConstanclyCheckEnemies(time));
     }
 
-    IEnumerator ConstanclyCheckEnemies(int time)
+    private IEnumerator ConstanclyCheckEnemies(int time)
     {
         while(true)
         {
-            KillCount = Spawner.instance.enemies.Count + Spawner.instance.enemiesReserve.Count;
+            KillCount = Spawner.instance.Enemies.Count + Spawner.instance.EnemiesReserve.Count;
 
             yield return Wait.NewWaitRealTime(time);
         }

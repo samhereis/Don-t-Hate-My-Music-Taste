@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "Certifique-se de que tem m\xFAsica em \"{musicFolder}\""
+    m_Localized: "Certifique-se de que tem m\xFAsica em \"{MusicFolderPath}\""
     m_Metadata:
       m_Items:
       - id: 0
   - m_Id: 472228869263360
-    m_Localized: "Voc\xEA tem {musicCount} m\xFAsicas dispon\xEDveis"
+    m_Localized: "Voc\xEA tem {MusicCount} m\xFAsicas dispon\xEDveis"
     m_Metadata:
       m_Items:
       - id: 0

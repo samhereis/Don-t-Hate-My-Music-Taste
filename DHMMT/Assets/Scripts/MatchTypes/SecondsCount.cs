@@ -5,38 +5,40 @@ using TMPro;
 
 public class SecondsCount : MonoBehaviour
 {
+    // Controlls time in seconds HUD while gameplay
+
     public static SecondsCount instance;
 
-    TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI _text;
 
-    public int _seconds;
+    public int Seconds;
 
     void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
-        ExtentionMethods.SetWithNullCheck(ref text, GetComponent<TextMeshProUGUI>());
+        ExtentionMethods.SetWithNullCheck(ref _text, GetComponent<TextMeshProUGUI>());
     }
 
     public int GetSeconds()
     {
-        return _seconds;
+        return Seconds;
     }
     public void IncreaseSeconds(int value)
     {
-        _seconds += value;
-        text.text = _seconds.ToString();
+        Seconds += value;
+        _text.text = Seconds.ToString();
     }
 
     public void DecreaseSeconds(int value)
     {
-        _seconds -= value;
-        text.text = _seconds.ToString();
+        Seconds -= value;
+        _text.text = Seconds.ToString();
     }
 
     public void NullSeconds()
     {
-        _seconds = 0;
-        text.text = _seconds.ToString();
+        Seconds = 0;
+        _text.text = Seconds.ToString();
     }
 
 
@@ -72,7 +74,7 @@ public class SecondsCount : MonoBehaviour
     {
         yield return Wait.NewWait(waitBeforeExecute);
 
-        _seconds = BegginFrom;
+        Seconds = BegginFrom;
 
         while (true)
         {
@@ -85,13 +87,13 @@ public class SecondsCount : MonoBehaviour
     {
         yield return Wait.NewWait(waitBeforeExecute);
 
-        _seconds = BegginFrom;
+        Seconds = BegginFrom;
 
         while (true)
         {
             DecreaseSeconds(1);
 
-            if (_seconds < 1)
+            if (Seconds < 1)
             {
                 PlayerHealthData.instance.GetComponent<IMatchWinable>().Win();
             }

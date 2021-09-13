@@ -6,7 +6,7 @@ public class Crosshair : MonoBehaviour
 {
     public static Crosshair instance;
 
-    void Awake()
+    private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
     }

@@ -5,12 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable Object/Gun")]
 public class ScriptableGun : ScriptableObject
 {
+    // Plan for a gun for UI show
+
     public enum GunTypes { Pistol, Rifle }
-    public GunTypes gunType;
-    public string gunName { get => this.name; }
-    public Sprite gunIcon;
-    public GameObject gunPrefab;
-    public float gunDamage { get => gunPrefab.GetComponent<GunUse>().damage; }
-    public int gunCost;
-    public InteractableEquipWeapon interact;
+    public GunTypes GunType;
+    public string GunName { get => this.name; }
+    public Sprite GunIcon;
+    public GameObject GunPrefab;
+    public float GunDamage { get => GunPrefab.GetComponent<GunUse>().Damage; }
+    public int GunCost;
+    public InteractableEquipWeapon Interact;
 }

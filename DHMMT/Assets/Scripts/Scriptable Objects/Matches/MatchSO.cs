@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Match", menuName = "Scriptable Object/Match")]
 public class MatchSO : ScriptableObject
 {
+    // A map's data holder
+
     public string SceneCodeName;
     public int SceneId;
 

@@ -1,30 +1,33 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public static class PlayerInput
 {
+    // Player's input data manager
+
     public enum  InputState { Gameplay, UI }
-    public static InputState state;
-    public static InputSettings input = new InputSettings();
+    public static InputState State;
+    public static InputSettings PlayersInputState = new InputSettings();
 
     public static void SetInput(InputState setTo)
     {
-        input.Enable();
+        PlayersInputState.Enable();
 
-        if (setTo == state) return;
+        if (setTo == State) return;
 
         if(setTo == InputState.Gameplay)
         {
-            input.Gameplay.Enable();
-            input.UI.Disable();
+            PlayersInputState.Gameplay.Enable();
+            PlayersInputState.UI.Disable();
         }
         else
         {
-            input.Gameplay.Disable();
-            input.UI.Enable();
+            PlayersInputState.Gameplay.Disable();
+            PlayersInputState.UI.Enable();
         }
 
-        state = setTo;
+        State = setTo;
     }
 }

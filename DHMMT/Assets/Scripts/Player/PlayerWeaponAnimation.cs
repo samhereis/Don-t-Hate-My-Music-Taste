@@ -5,85 +5,87 @@ using UnityEngine.InputSystem;
 
 public class PlayerWeaponAnimation : MonoBehaviour
 {
+    // Controlls main player's weapon animation
+
     public static PlayerWeaponAnimation instance;
 
-    string SPEED = "Speed";
+    private string _speed = "Speed";
 
-    bool sprint = false;
+    private bool _sprint = false;
 
-    bool move;
+    private bool _move;
 
-    void OnEnable()
+    private void OnEnable()
     {
         instance = this;
 
-        PlayerInput.input.Gameplay.Move.performed += Move;
-        PlayerInput.input.Gameplay.Move.canceled += Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.performed += Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled += Move;
 
-        PlayerInput.input.Gameplay.Sprint.performed += Sprint;
-        PlayerInput.input.Gameplay.Sprint.canceled += Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled += Sprint;
 
-        PlayerInput.input.Gameplay.Fire.performed += Fire; 
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed += Fire; 
         
-        PlayerInput.input.Gameplay.Aim.performed += Fire;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Fire;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         instance = null;
 
-        PlayerInput.input.Gameplay.Move.performed -= Move;
-        PlayerInput.input.Gameplay.Move.canceled  -= Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.performed -= Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled  -= Move;
 
-        PlayerInput.input.Gameplay.Sprint.performed -= Sprint;
-        PlayerInput.input.Gameplay.Sprint.canceled  -= Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  -= Sprint;
 
-        PlayerInput.input.Gameplay.Fire.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed -= Fire;
 
-        PlayerInput.input.Gameplay.Aim.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Fire;
     }
 
-    void Move(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
         if (context.ReadValue<Vector2>() == Vector2.zero)
         {
-            move = false;
+            _move = false;
         }
         else
         {
-            move = true;
+            _move = true;
         }
 
         SetSpeed();
     }
 
-    void Sprint(InputAction.CallbackContext context)
+    private void Sprint(InputAction.CallbackContext context)
     {
-        sprint = context.ReadValueAsButton();
+        _sprint = context.ReadValueAsButton();
 
         SetSpeed();
     }
 
-    void Fire(InputAction.CallbackContext context)
+    private void Fire(InputAction.CallbackContext context)
     {
-        sprint = false;
+        _sprint = false;
 
         SetSpeed();
     }
 
     public void SetSpeed()
     {
-        if(move == true && sprint == false)
+        if(_move == true && _sprint == false)
         {
-            PlayerWeaponDataHolder.instance.gunData?.animator.SetFloat(SPEED, 1);
+            PlayerWeaponDataHolder.instance.DunDataCompoenent?.animator.SetFloat(_speed, 1);
         }
-        else if(move == true && sprint == true)
+        else if(_move == true && _sprint == true)
         {
-            PlayerWeaponDataHolder.instance.gunData?.animator.SetFloat(SPEED, 2);
+            PlayerWeaponDataHolder.instance.DunDataCompoenent?.animator.SetFloat(_speed, 2);
         }
         else
         {
-            PlayerWeaponDataHolder.instance.gunData?.animator.SetFloat(SPEED, 0);
+            PlayerWeaponDataHolder.instance.DunDataCompoenent?.animator.SetFloat(_speed, 0);
         }
     }
 }

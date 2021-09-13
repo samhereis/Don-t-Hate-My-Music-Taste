@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GameplayUI : MonoBehaviour, IUIPage
 {
+    // Gameplay canvas
+
     public static GameplayUI instance;
 
     public GameObject Page { get => _page; set => _page = value; }
-    [SerializeField] GameObject _page;
+    [SerializeField] private GameObject _page;
 
     public GameObject Standart;
 
@@ -16,7 +18,7 @@ public class GameplayUI : MonoBehaviour, IUIPage
     public GameObject TS_D_page;
     public GameObject WH_L_N_page;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }

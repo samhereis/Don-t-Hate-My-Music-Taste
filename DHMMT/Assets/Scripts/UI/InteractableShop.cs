@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InteractableShop : MonoBehaviour, IInteractable
 {
+    // How shop interacts with an interactor
+
     public bool Interactable { get => true; set => throw new NotImplementedException(); }
 
     public string ItemName { get => "Open Shop"; set => ItemName = value; }

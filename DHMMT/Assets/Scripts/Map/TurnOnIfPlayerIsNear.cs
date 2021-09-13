@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TurnOnIfPlayerIsNear : MonoBehaviour
 {
-    [SerializeField] List<GameObject> objects;
+    // If player is near, turn every objects in "this.objects" on
+
+    [SerializeField] private List<GameObject> _objects;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerGunUse>())
         {
-            foreach (var item in objects)
+            foreach (var item in _objects)
             {
                 item.SetActive(true);
             }
@@ -21,7 +23,7 @@ public class TurnOnIfPlayerIsNear : MonoBehaviour
     {
         if (other.GetComponent<PlayerGunUse>())
         {
-            foreach (var item in objects)
+            foreach (var item in _objects)
             {
                 item.SetActive(false);
             }

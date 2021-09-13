@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "\u300C{musicFolder}\u300D\u306B\u97F3\u697D\u304C\u3042\u308B\u3053\u3068\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044 "
+    m_Localized: "\u300C{MusicFolderPath}\u300D\u306B\u97F3\u697D\u304C\u3042\u308B\u3053\u3068\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044 "
     m_Metadata:
       m_Items:
       - id: 0
   - m_Id: 472228869263360
-    m_Localized: "{musicCount}\u306E\u66F2\u304C\u3042\u308A\u307E\u3059"
+    m_Localized: "{MusicCount}\u306E\u66F2\u304C\u3042\u308A\u307E\u3059"
     m_Metadata:
       m_Items:
       - id: 0

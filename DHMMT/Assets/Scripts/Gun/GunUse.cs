@@ -5,44 +5,49 @@ using UnityEngine;
 
 public class GunUse : MonoBehaviour
 {
+    // Controlls shoot of a weapon
+
     public Animator WeaponAnimator;
 
     [Header("Sounds")]
-    [SerializeField] AudioClip shootSound;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private AudioSource _audioSource;
 
     [Header("Shoot Capacity")]
-    public float damage = 10;
-    public float range = 100f;
+    public float Damage = 10;
+    public float Range = 100f;
 
     [Header("Ammo")]
-    public int CurrentAmmo = 8;
-    private int currentAmmo { get { return CurrentAmmo; } set { CurrentAmmo = value; if (CurrentAmmo <= 0) { canShoot = false; StartCoroutine(Reload()); } } }
-    public int maxAmmo = 50;
-    [SerializeField] float reloadTime;
+    [SerializeField] private int _currentAmmo = 8;
+    public int CurrentAmmo { get { return _currentAmmo; } set { _currentAmmo = value; if (_currentAmmo <= 0) { CanShoot = false; StartCoroutine(Reload()); } } }
+    public int MaxAmmo = 50;
+    [SerializeField] private float _reloadTime;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private Transform _bulletPosition;
 
     [Header("Shoot Timing")]
-    public float fireRate = 0.2f;
-    public float nextFire;
+    public float FireRate = 0.2f;
+    public float NextFire;
 
     [Header("Shoot States")]
-    public bool isReloading = false;
-    public bool canShoot = true;
+    public bool IsReloading = false;
+    public bool CanShoot = true;
     public bool IsShooting = false;
 
-    void OnEnable()
+    private void OnEnable()
     {
-        audioSource.clip = shootSound;
+        _audioSource.clip = _shootSound;
 
-        ExtentionMethods.SetWithNullCheck(ref audioSource, GetComponent<AudioSource>());
+        ExtentionMethods.SetWithNullCheck(ref _audioSource, GetComponent<AudioSource>());
         ExtentionMethods.SetWithNullCheck(ref WeaponAnimator, GetComponent<GunData>().animator);
     }
-    void OnDisable()
+
+    private void OnDisable()
     {
         WeaponAnimator = null;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (IsShooting)
         {
@@ -57,31 +62,33 @@ public class GunUse : MonoBehaviour
 
     public void Shoot()
     {
-        if (Time.time > nextFire && canShoot)
+        if ((Time.time > NextFire) && (CanShoot == true))
         {
-            nextFire = Time.time + fireRate;
-            currentAmmo--;
-            audioSource.Stop();
-            audioSource.Play();
+            NextFire = Time.time + FireRate;
+            CurrentAmmo--;
+            Instantiate(_bullet, _bulletPosition.position, _bulletPosition.rotation);
+            _audioSource.Stop();
+            _audioSource.Play();
 
             WeaponAnimator.SetTrigger("Shoot");
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, range) && hit.collider.GetComponent<IHealthData>() != null)
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Range) && hit.collider.GetComponent<IHealthData>() != null)
             {
-                hit.collider.GetComponent<IHealthData>().TakeDamage(damage);
+                hit.collider.GetComponent<IHealthData>().TakeDamage(Damage);
             }
         }
     }
+
     public IEnumerator Reload()
     {
-        while(currentAmmo < maxAmmo)
+        while(_currentAmmo < MaxAmmo)
         {
-            currentAmmo++;
+            _currentAmmo++;
 
-            yield return Wait.NewWait(reloadTime);
+            yield return Wait.NewWait(_reloadTime);
         }
-        if(currentAmmo >= maxAmmo)
+        if(_currentAmmo >= MaxAmmo)
         {
-            canShoot = true;
+            CanShoot = true;
             StopCoroutine(Reload());
         }
     }

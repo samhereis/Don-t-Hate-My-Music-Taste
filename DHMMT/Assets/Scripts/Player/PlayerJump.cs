@@ -5,36 +5,39 @@ using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
+    // Controlls main player's jump
+
     private CharacterController characterController;
 
-    public float jumpHeight = 0.1f, gravityValue = -0.1f;
+    public float JumpHeight = 0.1f, GravityValue = -0.1f;
 
-    bool doubleJump;
-    public bool doubleJumpable = true;
+    private bool _doubleJump;
+    public bool DoubleJumpable = true;
 
-    private Vector3 playerVelocity;
+    private Vector3 _playerVelocity;
 
     private void Awake()
     {
         if(!characterController) characterController = GetComponent<CharacterController>(); 
     }
+
     private void OnEnable()
     {
-        PlayerInput.input.Gameplay.Jump.performed += Jump;
+        PlayerInput.PlayersInputState.Gameplay.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        PlayerInput.input.Gameplay.Jump.performed -= Jump;
+        PlayerInput.PlayersInputState.Gameplay.Jump.performed -= Jump;
     }
 
     private void FixedUpdate()
     {
-        if(characterController.isGrounded == false || doubleJump == true)
+        if(characterController.isGrounded == false || _doubleJump == true)
         {
-            characterController.Move(playerVelocity);
+            characterController.Move(_playerVelocity);
 
-            playerVelocity.y += gravityValue * Time.deltaTime;
+            _playerVelocity.y += GravityValue * Time.deltaTime;
         }
     }
 
@@ -42,13 +45,13 @@ public class PlayerJump : MonoBehaviour
     {
         if(characterController.isGrounded)
         {
-            doubleJump = true;
-            playerVelocity.y = jumpHeight;
+            _doubleJump = true;
+            _playerVelocity.y = JumpHeight;
         }
-        else if(doubleJump && characterController.isGrounded == false && doubleJumpable == true)
+        else if(_doubleJump && characterController.isGrounded == false && DoubleJumpable == true)
         {
-            playerVelocity.y += jumpHeight * 1.25f;
-            doubleJump = false;
+            _playerVelocity.y += JumpHeight * 1.25f;
+            _doubleJump = false;
         }
     }
 }

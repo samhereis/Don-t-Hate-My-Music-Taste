@@ -1,17 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class W_L_N_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 {
+    // How an enemy dies on "Whole Lotta Neon" map
+
     public void OnDie()
     {
-        Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+        Spawner.instance.SpawnEnemies(1);
 
         PlayerKillCount.instance.IncreaseKillCount();
 
-        Spawner.instance.enemies.Remove(gameObject);
+        Spawner.instance.Enemies.Remove(gameObject);
 
-        Destroy(gameObject);
+        EnableRagdoll();
+
+        Destroy(gameObject, 3);
+    }
+
+
+    public void EnableRagdoll()
+    {
+        GetComponent<FireHead>().enabled = false;
+
+        transform.DOShakePosition(3, 1, 10, 50, false, true).SetUpdate(true);
+        transform.DOScale(0, 3);
     }
 }

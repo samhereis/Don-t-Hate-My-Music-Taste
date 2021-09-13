@@ -138,18 +138,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6130885768556755989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0643a56c2e4225f46804e241f74fd8e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b39aa5d945aaf84ca8197a48f00497e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bassSoundMult: 1
-  nextToBassSoundMult: 1
-  middleSoundMult: 1
+  BassSoundMult: 1
+  NextToBassSoundMult: 1
+  MiddleSoundMult: 1
   HighSoundMult: 1
-  spectrumWidth: []
-  arrayOfSongs: []
-  musicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+  SpectrumWidth: []
+  ArrayOfSongs: []
+  MusicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
   ShouldSearch: 1
-  makeObjectsShake: {fileID: 0}
+  _audioSource: {fileID: 6130885768556755987}
+  _makeObjectsShake: {fileID: 6921058632634339305}
 --- !u!114 &6921058632634339305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,10 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795a8f3885d95d94681aede7698f5b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeType: 1
-  objectsReactingToBasses: []
-  objectsReactingToNB: []
-  objectsReactingToMiddles: []
-  objectsReactingToHighs: []
+  WayOfReactingToMusic: 0
+  ObjectsReactingToBasses: []
+  ObjectsReactingToNB: []
+  ObjectsReactingToMiddles: []
+  ObjectsReactingToHighs: []
   Reactors: []
-  t: 2.5
+  t: 3

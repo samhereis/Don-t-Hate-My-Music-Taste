@@ -2339,6 +2339,7 @@ Transform:
   - {fileID: 5640223137834228444}
   - {fileID: 6731177950534119860}
   - {fileID: 7967185730415520328}
+  - {fileID: 3854495778786560308}
   m_Father: {fileID: 7573814635724731661}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3928,8 +3929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d27fc9ea9434284ea90fc9bcac0e30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equiped: 1
-  gunData: {fileID: 7967185729476643056}
+  Equiped: 0
+  GunDataComponent: {fileID: 7967185729476643056}
 --- !u!114 &7967185729476643060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3942,7 +3943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fba17ebe05a3a4e840443ee2b1441b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 0.025
+  AnimationDuration: 0.05
 --- !u!114 &4536568833899093491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3956,17 +3957,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponAnimator: {fileID: 4536568834229794503}
-  shootSound: {fileID: 8300000, guid: 88f34c941fb1bed4d895712111bde53f, type: 3}
-  audioSource: {fileID: 3287311792087109142}
-  damage: 300
-  range: 100
-  CurrentAmmo: 2
-  maxAmmo: 5
-  reloadTime: 1.5
-  fireRate: 2
-  nextFire: 0
-  isReloading: 0
-  canShoot: 1
+  _shootSound: {fileID: 8300000, guid: 88f34c941fb1bed4d895712111bde53f, type: 3}
+  _audioSource: {fileID: 3287311792087109142}
+  Damage: 300
+  Range: 100
+  _currentAmmo: 8
+  MaxAmmo: 3
+  _reloadTime: 1.9
+  _bullet: {fileID: 8872171098656000684, guid: 6ffb98cd46b1fbe4789200a68360b6a1, type: 3}
+  _bulletPosition: {fileID: 3854495778786560308}
+  FireRate: 2
+  NextFire: 0
+  IsReloading: 0
+  CanShoot: 1
   IsShooting: 0
 --- !u!82 &3287311792087109142
 AudioSource:
@@ -4146,6 +4149,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7293787670444396872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3854495778786560308}
+  m_Layer: 0
+  m_Name: BulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3854495778786560308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7293787670444396872}
+  m_LocalRotation: {x: -0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.1011, y: 0.079, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4143197500930661047}
+  m_RootOrder: 65
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7603258501668840805
 GameObject:
   m_ObjectHideFlags: 0

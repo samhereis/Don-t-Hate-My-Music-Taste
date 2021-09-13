@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class OnEnableAddToCals : MonoBehaviour
 {
-    int indexInReactors;
+    // When this object enables add this object to "MakeObjectsShake" list;
+
+    [SerializeField] private int _indexInReactors;
 
     private void Awake()
     {
-        indexInReactors = Random.Range(0, 5);
+        _indexInReactors = Random.Range(0, 5);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         if(MakeObjectsShake.instance.enabled == false)
         {
             MakeObjectsShake.instance.enabled = true;
         }
 
-        MakeObjectsShake.instance.objectsReactingToBasses.Add(transform);
+        MakeObjectsShake.instance.ObjectsReactingToBasses.Add(transform);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        MakeObjectsShake.instance.objectsReactingToBasses.Add(transform);
+        MakeObjectsShake.instance.ObjectsReactingToBasses.Add(transform);
     }
 }

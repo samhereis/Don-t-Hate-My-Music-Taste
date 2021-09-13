@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class SH_TH_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 {
-    void OnEnable()
-    {
-        
-    }
+    // TODO: finish "EnableRagdoll()"
+
+    // How an enemy dies on "Shangri The" map
 
     public void OnDie()
     {
-        Spawner.instance.enemies.Remove(gameObject);
+        Spawner.instance.Enemies.Remove(gameObject);
 
-        if(Spawner.instance.enemiesReserve.Count > 0)
+        if(Spawner.instance.EnemiesReserve.Count > 0)
         {
-            var obj = Spawner.instance.enemiesReserve[Random.Range(0, Spawner.instance.enemiesReserve.Count)];
+            var obj = Spawner.instance.EnemiesReserve[Random.Range(0, Spawner.instance.EnemiesReserve.Count)];
 
             obj.SetActive(true);
 
             obj.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
-
-            Spawner.instance.enemiesReserve.Remove(obj);
         }
 
-        if(Spawner.instance.enemies.Count + Spawner.instance.enemiesReserve.Count == 0)
+        if(Spawner.instance.Enemies.Count + Spawner.instance.EnemiesReserve.Count == 0)
         {
             SH_TH_Page.instance.OnWin();
         }
 
-        PlayerKillCount.instance.KillCount = Spawner.instance.enemies.Count + Spawner.instance.enemiesReserve.Count;
+        PlayerKillCount.instance.KillCount = Spawner.instance.Enemies.Count + Spawner.instance.EnemiesReserve.Count;
 
-        Destroy(gameObject);
+        EnableRagdoll();
+
+        Destroy(gameObject, 5);
+    }
+
+    public void EnableRagdoll()
+    {
+        GetComponent<Animator>().enabled = false;
+
+        GetComponent<EnemyStates>().enabled = false;
+
+        Destroy(GetComponent<HumanoidEquipWeaponData>().CurrentWeapon);
     }
 }

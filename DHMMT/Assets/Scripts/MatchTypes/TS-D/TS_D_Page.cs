@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class TS_D_Page : MonoBehaviour
 {
+    // Controll main UI on "TS-D" map. "TS-D_MatchType" controls main player's part on this map
+
     public static TS_D_Page instance;
 
-    [SerializeField] MatchSO matchSO;
+    [SerializeField] private MatchSO _matchSO;
 
-    [SerializeField] GameObject GamePlayWindow;
+    [SerializeField] private GameObject _gamePlayWindow;
 
     [Header("Win Window")]
-    [SerializeField] GameObject WinWindow;
-    [SerializeField] CurrentScore currentScore;
-    [SerializeField] YourRecord yourRecord;
+    [SerializeField] private GameObject _winWindow;
+    [SerializeField] private CurrentScore _currentScore;
+    [SerializeField] private YourRecord _yourRecord;
 
     void Start()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
 
-        SecondsCount.instance.BegginCountDown(3, 30);
+        SecondsCount.instance.BegginCountDown(0, 60);
     }
 
     void OnEnable()
@@ -37,21 +39,21 @@ public class TS_D_Page : MonoBehaviour
 
     public void OnWin()
     {
-        if (PlayerKillCount.instance.GetKillCount() < matchSO.GetRecordForTheScene())
+        if (PlayerKillCount.instance.GetKillCount() < _matchSO.GetRecordForTheScene())
         {
 
         }
         else
         {
-            matchSO.SetRecordForTheScene(PlayerKillCount.instance.GetKillCount());
+            _matchSO.SetRecordForTheScene(PlayerKillCount.instance.GetKillCount());
         }
 
-        yourRecord.SetRecotrdText(matchSO.GetRecordForTheScene());
-        currentScore.SetScoreText(PlayerKillCount.instance.GetKillCount());
+        _yourRecord.SetRecotrdText(_matchSO.GetRecordForTheScene());
+        _currentScore.SetScoreText(PlayerKillCount.instance.GetKillCount());
 
         PauseUnpause.SetPause(true);
-        WinWindow.SetActive(true);
-        GamePlayWindow.SetActive(false);
+        _winWindow.SetActive(true);
+        _gamePlayWindow.SetActive(false);
 
         SecondsCount.instance.Stop();
     }
@@ -59,6 +61,6 @@ public class TS_D_Page : MonoBehaviour
     public void Replay()
     {
         PauseUnpause.SetPause(false);
-        StartCoroutine(MenuStatics.LoadScene(3));
+        StartCoroutine(SceneLoadController.LoadScene(3));
     }
 }

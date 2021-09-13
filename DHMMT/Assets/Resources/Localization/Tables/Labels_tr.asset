@@ -37,13 +37,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "L\xFCtfen \"{musicFolder}\" i\xE7inde m\xFCzi\u011Finiz oldu\u011Fundan
+    m_Localized: "L\xFCtfen \"{MusicFolderPath}\" i\xE7inde m\xFCzi\u011Finiz oldu\u011Fundan
       emin olun"
     m_Metadata:
       m_Items:
       - id: 0
   - m_Id: 472228869263360
-    m_Localized: "{musicCount} \u015Fark\u0131n\u0131z var"
+    m_Localized: "{MusicCount} \u015Fark\u0131n\u0131z var"
     m_Metadata:
       m_Items:
       - id: 0

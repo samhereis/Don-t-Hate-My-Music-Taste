@@ -1,33 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeaponDataHolder : MonoBehaviour, WeaponDataHolder
 {
+    // Main player's weapons data
+
     public static PlayerWeaponDataHolder instance;
 
-    public GunData gunData { get; set; }
-    public GunUse gunUse { get; set; }
-    public GunAim gunAim { get; set; }
+    public GunData DunDataCompoenent { get; set; }
+    public GunUse GunUseComponent { get; set; }
+    public GunAim GunAimComponent { get; set; }
 
-    void Awake()
+    private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, GetComponent<PlayerWeaponDataHolder>());
     }
 
     public void Set(GunData gunData)
     {
-        this.gunData = gunData;
+        this.DunDataCompoenent = gunData;
     }
+
     public void Set(GunData gunData, GunUse gunUse)
     {
-        this.gunData = gunData;
-        this.gunUse = gunUse;
+        this.DunDataCompoenent = gunData;
+        this.GunUseComponent = gunUse;
     }
+
     public void Set(GunData gunData, GunUse gunUse, GunAim gunAim)
     {
-        this.gunData = gunData;
-        this.gunUse = gunUse;
-        this.gunAim = gunAim;
+        this.DunDataCompoenent = gunData;
+        this.GunUseComponent = gunUse;
+        this.GunAimComponent = gunAim;
     }
 }

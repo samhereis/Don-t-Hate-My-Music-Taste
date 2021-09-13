@@ -223,4 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8bb0efa1dfca624ba32c3d0c788c018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingIcon: {fileID: 0}
+  LoadingIcon: {fileID: 2845022216742913489}

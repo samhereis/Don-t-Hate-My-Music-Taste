@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class SearchForInteractable : MonoBehaviour
 {
+    // Constantly cast raycast to see near interactable objects
+
     public static SearchForInteractable instance;
+
     public IInteractable Interactable;
 
-    void OnEnable()
+    private void OnEnable()
     {
         instance = this;
 
-        PlayerInput.input.Gameplay.Interact.performed += _ => { Interact(); };
+        PlayerInput.PlayersInputState.Gameplay.Interact.performed += _ => { Interact(); };
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if(CameraRaycast.Cast(out Interactable) && Interactable.Interactable == true)
         {

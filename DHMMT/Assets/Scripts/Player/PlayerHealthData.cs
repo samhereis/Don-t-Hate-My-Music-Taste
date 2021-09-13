@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealthData : MonoBehaviour,  IHealthData
 {
+    // Controlls main players health
+
     public static PlayerHealthData instance;
 
     public bool IsAlive { get => _isAlive; set => _isAlive = value; }
@@ -17,12 +19,12 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
 
     public List<checkPlayerInRange> numberOfCheckers;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
     }
@@ -56,14 +58,14 @@ public class PlayerHealthData : MonoBehaviour,  IHealthData
         }
     }
 
-    void SetMaxHealth()
+    private void SetMaxHealth()
     {
-        if (HealthBar.instance == null || HealthBar.instance.slider == null || HealthBar.instance.slider.maxValue == MaxHealth)
+        if (HealthBar.instance == null || HealthBar.instance.SliderComponent == null || HealthBar.instance.SliderComponent.maxValue == MaxHealth)
         {
             return;
         }
 
-        HealthBar.instance.slider.maxValue = MaxHealth;
+        HealthBar.instance.SliderComponent.maxValue = MaxHealth;
         HealthBar.instance.SetValue(MaxHealth);
         HealthBar.instance.SetValue(_health);
 

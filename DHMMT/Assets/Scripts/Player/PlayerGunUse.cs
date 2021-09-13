@@ -5,37 +5,43 @@ using UnityEngine.InputSystem;
 
 public class PlayerGunUse : MonoBehaviour
 {
+    // Controlls the use of the gun that main players holds
+
     public static PlayerGunUse instance;
 
     public InteractableEquipWeapon DefaultWeapon;
 
     public InteractableEquipWeapon SecodWeapon;
 
-    void Awake()
+    private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
         DefaultWeapon.Interact(gameObject);
         FirstGunSlotUI.instance.Activate();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        PlayerInput.input.Gameplay.Fire.performed += Fire;
-        PlayerInput.input.Gameplay.Fire.canceled  += Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed += Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.canceled  += Fire;
 
-        PlayerInput.input.Gameplay.Reload.performed += Reload;
+        PlayerInput.PlayersInputState.Gameplay.Reload.performed += Reload;
 
-        PlayerInput.input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+        PlayerInput.PlayersInputState.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += Sprint;
     }
 
-    void OnDisable ()
+    private void OnDisable ()
     {
-        PlayerInput.input.Gameplay.Fire.performed -= Fire;
-        PlayerInput.input.Gameplay.Fire.canceled  -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.canceled  -= Fire;
 
-        PlayerInput.input.Gameplay.Reload.performed -= Reload;
+        PlayerInput.PlayersInputState.Gameplay.Reload.performed -= Reload;
 
-        PlayerInput.input.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
+        PlayerInput.PlayersInputState.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
+
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= Sprint;
     }
 
     public void ChangeWeapon(InputAction.CallbackContext context)
@@ -106,13 +112,18 @@ public class PlayerGunUse : MonoBehaviour
         }
     }
 
-    void Fire(InputAction.CallbackContext context)
+    private void Sprint(InputAction.CallbackContext context)
     {
-        PlayerWeaponDataHolder.instance.gunUse.Use(context.ReadValueAsButton());
+        PlayerWeaponDataHolder.instance.GunUseComponent.Use(false);
     }
 
-    void Reload(InputAction.CallbackContext context)
+    private void Fire(InputAction.CallbackContext context)
     {
-        StartCoroutine(PlayerWeaponDataHolder.instance.gunUse?.Reload());
+        PlayerWeaponDataHolder.instance.GunUseComponent.Use(context.ReadValueAsButton());
+    }
+
+    private void Reload(InputAction.CallbackContext context)
+    {
+        StartCoroutine(PlayerWeaponDataHolder.instance.GunUseComponent?.Reload());
     }
 }

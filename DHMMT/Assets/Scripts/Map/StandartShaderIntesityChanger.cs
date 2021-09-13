@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StandartShaderIntesityChanger : MonoBehaviour
 {
+    // TODO: Refactor this script
+
     public Material sun;
     public string SettingsName;
     public int start, end;
@@ -17,6 +19,6 @@ public class StandartShaderIntesityChanger : MonoBehaviour
     }
     void FixedUpdate()
     {
-        sun.SetVector(SettingsName, new Color(r, g, b) * Cals.instance.setSoundFreq(start, end, mult, min));
+        sun.SetVector(SettingsName, new Color(r, g, b) * PlayingMusicData.instance.setSoundFreq(start, end, mult, min));
     }
 }

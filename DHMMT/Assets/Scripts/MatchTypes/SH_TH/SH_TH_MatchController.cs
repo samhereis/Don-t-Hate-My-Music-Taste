@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SH_TH_MatchController : MonoBehaviour, IMatchLoosable, IMatchWinable
 {
-    void OnEnable()
+    // Controll main players part on "SH-TH" map. "SH-TH_Page" controls UI part on this map
+
+    private void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.SH_TH_page);
     }
@@ -21,7 +23,7 @@ public class SH_TH_MatchController : MonoBehaviour, IMatchLoosable, IMatchWinabl
         SH_TH_Page.instance.OnWin();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         GameplayUI.instance.Disable(GameplayUI.instance.SH_TH_page);
         StopAllCoroutines();

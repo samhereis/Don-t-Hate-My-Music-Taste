@@ -1,28 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDetectPlayer : MonoBehaviour
 {
-    Collider[] colliders;
-    private float radius = 20;
+    //Use to detect main player near Enemy
 
-    public LayerMask targetMask = 3;
+    private Collider[] _colliders;
 
-    [SerializeField] EnemyStates enemyStates;
+    private float _radius = 20;
+
+    public LayerMask TargetMask = 3;
+
+    [SerializeField] private EnemyStates _enemyStates;
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref enemyStates, GetComponent<EnemyStates>());
+        ExtentionMethods.SetWithNullCheck(ref _enemyStates, GetComponent<EnemyStates>());
     }
 
     private void FixedUpdate()
     {
-        colliders = Physics.OverlapSphere(transform.position, radius, targetMask);
+        _colliders = Physics.OverlapSphere(transform.position, _radius, TargetMask);
 
-        if (colliders.Length != 0)
+        if (_colliders.Length != 0)
         {
-            enemyStates.followEnemy = colliders[0].transform;
+            _enemyStates.FollowedEnemy = _colliders[0].transform;
         }
     }
 }

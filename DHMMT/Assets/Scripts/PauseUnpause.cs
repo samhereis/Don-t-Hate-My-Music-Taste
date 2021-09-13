@@ -6,42 +6,42 @@ using UnityEngine.InputSystem;
 
 public class PauseUnpause : MonoBehaviour
 {
-    void OnEnable ()
-    {
-        PlayerInput.input.Gameplay.Pause.performed += Pause;
-    }
-
-    void OnDisable()
-    {
-        PlayerInput.input.Gameplay.Pause.performed -= Pause;
-    }
-
-    private void Pause(InputAction.CallbackContext obj)
-    {
-        PauseUI.instance.Enable();
-    }
-
     public static void SetPause(bool pause)
     {
         if(pause == true)
         {
+            PlayerInput.SetInput(PlayerInput.InputState.UI);
+
             AudioListener.pause = true;
 
             Time.timeScale = 0;
 
             Cursor.lockState = CursorLockMode.None;
-
-            PlayerInput.SetInput(PlayerInput.InputState.UI);
         }
         else
         {
+            PlayerInput.SetInput(PlayerInput.InputState.Gameplay);
+
             AudioListener.pause = false;
 
             Time.timeScale = 1;
 
             Cursor.lockState = CursorLockMode.Locked;
-
-            PlayerInput.SetInput(PlayerInput.InputState.Gameplay);
         }
+    }
+
+    private void OnEnable()
+    {
+        PlayerInput.PlayersInputState.Gameplay.Pause.performed += Pause;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.PlayersInputState.Gameplay.Pause.performed -= Pause;
+    }
+
+    private void Pause(InputAction.CallbackContext obj)
+    {
+        PauseUI.instance.Enable();
     }
 }

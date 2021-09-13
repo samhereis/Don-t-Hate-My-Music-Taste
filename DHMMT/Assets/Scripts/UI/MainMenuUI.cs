@@ -1,23 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainMenuUI : MonoBehaviour
 {
-    public static MainMenuUI instance;
+    // Initialize back button on main menu load
 
-    void Awake()
-    {
-        instance = this;
-    }
-
-    void OnEnable()
-    {
-        PlayerInput.input.UI.Back.performed += BackStatics.Back;
-    }
-
-    void OnDisable()
-    {
-        PlayerInput.input.UI.Back.performed -= BackStatics.Back;
-    }
 }

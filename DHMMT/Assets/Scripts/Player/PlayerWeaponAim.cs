@@ -6,34 +6,37 @@ using UnityEngine.InputSystem;
 
 public class PlayerWeaponAim : MonoBehaviour
 {
-    PlayerWeaponDataHolder weaponDataHolder;
-    Transform weaponPosition;
+    // Controlls main player's weapon aim
+
+    private PlayerWeaponDataHolder _weaponDataHolder;
+
+    private Transform _weaponPosition;
 
     void OnEnable()
     {
-        weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
-        weaponPosition = GetComponent<EquipWeaponData>().weaponPosition;
+        _weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
+        _weaponPosition = GetComponent<HumanoidEquipWeaponData>().WeaponPosition;
 
-        PlayerInput.input.Gameplay.Aim.performed += Aim;
-        PlayerInput.input.Gameplay.Aim.canceled  += Aim;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Aim;
+        PlayerInput.PlayersInputState.Gameplay.Aim.canceled  += Aim;
     }
 
     void OnDisable()
     {
-        PlayerInput.input.Gameplay.Aim.performed -= Aim;
-        PlayerInput.input.Gameplay.Aim.canceled  -= Aim;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Aim;
+        PlayerInput.PlayersInputState.Gameplay.Aim.canceled  -= Aim;
     }
 
     void Aim(InputAction.CallbackContext context)
     {
         if(context.ReadValueAsButton() == true)
         {
-            weaponDataHolder.gunAim?.Aim(weaponPosition, true);
+            _weaponDataHolder.GunAimComponent?.Aim(_weaponPosition, true);
             Crosshair.instance.SetActive(false);
         }
         else
         {
-            weaponDataHolder.gunAim?.Aim(weaponPosition, false);
+            _weaponDataHolder.GunAimComponent?.Aim(_weaponPosition, false);
             Crosshair.instance.SetActive(true);
         }
     }

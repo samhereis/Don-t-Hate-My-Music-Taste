@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64573d49c8393c4bab3b6f964173640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  Target: {fileID: 0}
   PlusToHealth: 40
-  speed: 0.1
+  _speed: 0.1

@@ -6,59 +6,63 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    Animator animator;
-    int velocityHashY, velocityHashX;
+    // Controlles players animations
 
-    void Awake()
+    private Animator _animator;
+
+    private int _velocityHashY, _velocityHashX;
+
+    private  void Awake()
     {
-        if(animator == null) animator = GetComponent<Animator>();
+        if(_animator == null) _animator = GetComponent<Animator>();
 
-        velocityHashY = Animator.StringToHash("moveVelocityY");
-        velocityHashX = Animator.StringToHash("moveVelocityX");
-    }
-    void OnEnable()
-    {
-        PlayerInput.input.Gameplay.Move.performed += SetAnimationValue;
-        PlayerInput.input.Gameplay.Move.canceled  += SetAnimationValue;
-
-        PlayerInput.input.Gameplay.Sprint.performed += SetSpeedMultiplier;
-        PlayerInput.input.Gameplay.Sprint.canceled += SetSpeedMultiplier;
-
-        PlayerInput.input.Gameplay.Aim.performed += Fire;
+        _velocityHashY = Animator.StringToHash("moveVelocityY");
+        _velocityHashX = Animator.StringToHash("moveVelocityX");
     }
 
-    void OnDisable()
+    private void OnEnable()
     {
-        PlayerInput.input.Gameplay.Move.performed -= SetAnimationValue;
-        PlayerInput.input.Gameplay.Move.canceled  -= SetAnimationValue;
+        PlayerInput.PlayersInputState.Gameplay.Move.performed += SetAnimationValue;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled  += SetAnimationValue;
 
-        PlayerInput.input.Gameplay.Sprint.performed -= SetSpeedMultiplier;
-        PlayerInput.input.Gameplay.Sprint.canceled  -= SetSpeedMultiplier;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += SetSpeedMultiplier;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled += SetSpeedMultiplier;
 
-        PlayerInput.input.Gameplay.Aim.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Fire;
     }
 
-    void SetAnimationValue(InputAction.CallbackContext context)
+    private void OnDisable()
     {
-        animator.SetFloat(velocityHashY, PlayerMove.instance.MoveInputValue.y);
-        animator.SetFloat(velocityHashX, PlayerMove.instance.MoveInputValue.x);
+        PlayerInput.PlayersInputState.Gameplay.Move.performed -= SetAnimationValue;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled  -= SetAnimationValue;
+
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= SetSpeedMultiplier;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  -= SetSpeedMultiplier;
+
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Fire;
     }
 
-    void SetSpeedMultiplier(InputAction.CallbackContext context)
+    private void SetAnimationValue(InputAction.CallbackContext context)
+    {
+        _animator?.SetFloat(_velocityHashY, PlayerMove.instance.MoveInputValue.y);
+        _animator?.SetFloat(_velocityHashX, PlayerMove.instance.MoveInputValue.x);
+    }
+
+    private void SetSpeedMultiplier(InputAction.CallbackContext context)
     {
         if (PlayerMove.instance.IsMoving == true)
         {
-            animator.SetFloat(velocityHashY, 2);
-            animator.SetFloat(velocityHashX, 2);
+            _animator.SetFloat(_velocityHashY, 2);
+            _animator.SetFloat(_velocityHashX, 2);
         }
     }
 
-    void Fire(InputAction.CallbackContext context)
+    private void Fire(InputAction.CallbackContext context)
     {
         if (PlayerMove.instance.IsMoving == true)
         {
-            animator.SetFloat(velocityHashY, 1);
-            animator.SetFloat(velocityHashX, 1);
+            _animator.SetFloat(_velocityHashY, 1);
+            _animator.SetFloat(_velocityHashX, 1);
         }
     }
 }

@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 4defbf15c96ea314a8d42b3ea6f7e009, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_text: DorlyKiller
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 4defbf15c96ea314a8d42b3ea6f7e009, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_text: 60
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 4defbf15c96ea314a8d42b3ea6f7e009, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -517,11 +517,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2172c17d94c3547a53aad47d60a472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 2b37720daaf2c0f46bdb6dcb6ced4d51, type: 2}
-  GunIcon: {fileID: 5764572227971525394}
-  GunName: {fileID: 3339148197068402485}
-  GunDamage: {fileID: 4075014328275472859}
-  GunCost: {fileID: 2805789511260834272}
+  _gun: {fileID: 0}
+  _gunIcon: {fileID: 5764572227971525394}
+  _gunName: {fileID: 3339148197068402485}
+  _gunDamage: {fileID: 4075014328275472859}
+  _gunCost: {fileID: 2805789511260834272}
 --- !u!1 &7880210467063010480
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMatchPage
 {
-
+    // Bluepring of a canvas in during a match
 }

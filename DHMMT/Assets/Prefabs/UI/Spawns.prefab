@@ -44,20 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cafd2f0abdebb1479c62bc9292786fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  BackUpspawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  SpawnPointsList: []
+  PlayerSpawnPointList: []
 --- !u!114 &871517903394405509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +58,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0867f5af2c33bc44a8ff9c9fa82a5b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPref: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
-  enemyPref: {fileID: 3296317459984324053, guid: c9d279a21bdec44419bd471b058e60b5, type: 3}
-  spawnOnStart: 1
-  numberOfEnemies: 2
+  PlayerPref: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
+  EnemyPref: {fileID: 0}
+  AddComponentToPlayer: {fileID: 0}
+  AddComponentToEnemy: {fileID: 0}
+  _waitBeforeSpawnEnemies: 4
+  WaitBeforeSpawnPlayer: 2
+  _spawnOnStart: 1
+  Enemies: []
+  EnemiesReserve: []
+  NumberOfEnemies: 0

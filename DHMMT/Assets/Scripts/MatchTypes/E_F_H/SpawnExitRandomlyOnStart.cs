@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SpawnExitRandomlyOnStart : MonoBehaviour
 {
-    public GameObject exit;
+    // Randoly spawns Exit on "E-F-H" map
 
-    [SerializeField] List<GameObject> spawns;
+    public static SpawnExitRandomlyOnStart instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public List<GameObject> _spawns;
 
     private void OnEnable()
     {
-        if (spawns.Count > 0)
+        if (_spawns.Count > 0)
         {
-            Vector3 loc = spawns[Random.Range(0, spawns.Count)].transform.position;
+            Vector3 loc = _spawns[Random.Range(0, _spawns.Count)].transform.position;
 
-            exit.transform.position = new Vector3(loc.x, 11, loc.z);
+            transform.position = new Vector3(loc.x, 11, loc.z);
         }
     }
 }

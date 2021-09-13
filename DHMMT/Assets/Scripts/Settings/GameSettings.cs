@@ -4,53 +4,64 @@ using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
+    // Controlls game setting 
+
     public static GameSettings instance;
 
     [Header("Sensitivity")]
-    public float sensitivity;
+    public float SensitivityValue;
 
     [Header("Audio")]
     public AudioMixer Mixer;
 
     [Header("Settings")]
-    [SerializeField] Slider Volume;
-    [SerializeField] Slider Sensitivity;
+    [SerializeField] private Slider _volumeSlider;
+    [SerializeField] private Slider _sensitivitySlider;
 
-    void Awake()
+    private void Awake()
     {
-        if(PlayerPrefs.HasKey(nameof(Sensitivity)) == false)
+        // Initialize Audio
+        if (PlayerPrefs.HasKey(Settings.Volume.VOLUME_KEY) == false)
         {
-            Sensitivity.value = 0.5f;
-            ChangeSensitivity(Sensitivity);
+            _volumeSlider.value = Settings.Volume.VolumeDefault;
+            ChangeVolume(_volumeSlider);
+        }
+        else
+        {
+            _volumeSlider.value = PlayerPrefs.GetFloat(Settings.Volume.VOLUME_KEY);
+            ChangeVolume(_volumeSlider);
         }
 
-        if (PlayerPrefs.HasKey(nameof(Volume)) == false)
+        // Initialize Sensitivity
+        if (PlayerPrefs.HasKey(Settings.Sensitivity.SENSITIVITY_KEY) == false)
         {
-            Volume.value = -20;
-            ChangeSensitivity(Volume);
+            _sensitivitySlider.value = Settings.Sensitivity.SensitivityDefault;
+            ChangeSensitivity(_sensitivitySlider);
         }
-
-        Volume.value = PlayerPrefs.GetFloat(nameof(Volume));
-        Sensitivity.value = PlayerPrefs.GetFloat(nameof(Sensitivity));
+        else
+        {
+            _sensitivitySlider.value = PlayerPrefs.GetFloat(Settings.Sensitivity.SENSITIVITY_KEY);
+            ChangeSensitivity(_sensitivitySlider);
+        }
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
     }
 
     public void ChangeVolume(Slider slider)
     {
-        Mixer.SetFloat(nameof(Volume), slider.value);
-        PlayerPrefs.SetFloat(nameof(Volume), slider.value);
+        Mixer.SetFloat(Settings.Volume.VOLUME_KEY, slider.value);
+        PlayerPrefs.SetFloat(Settings.Volume.VOLUME_KEY, slider.value);
         PlayerPrefs.Save();
     }
 
     public void ChangeSensitivity(Slider slider)
     {
-        sensitivity = slider.value;
+        SensitivityValue = slider.value;
 
-        PlayerPrefs.SetFloat(nameof(Sensitivity), slider.value);
+        PlayerPrefs.SetFloat(Settings.Sensitivity.SENSITIVITY_KEY, slider.value);
         PlayerPrefs.Save();
     }
 

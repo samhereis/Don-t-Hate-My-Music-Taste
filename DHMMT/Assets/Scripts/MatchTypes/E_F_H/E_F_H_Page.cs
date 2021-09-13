@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class E_F_H_Page : MonoBehaviour
 {
+    // Controll main UI on "E-F-H" map. "E-F-H_MatchType" controls main player's part on this map
+
     public static E_F_H_Page instance;
 
-    [SerializeField] MatchSO matchSO;
+    [SerializeField] private MatchSO _matchSO;
 
-    [SerializeField] GameObject GamePlayWindow;
+    [SerializeField] private GameObject _gamePlayWindow;
 
     [Header("Win Window")]
-    [SerializeField] GameObject WinWindow;
-    [SerializeField] CurrentScore currentScore;
-    [SerializeField] YourRecord yourRecord;
+    [SerializeField] private GameObject _winWindow;
+    [SerializeField] private CurrentScore _currentScore;
+    [SerializeField] private YourRecord _yourRecord;
 
     [Header("Loose Window")]
-    [SerializeField] GameObject LooseWindow;
+    [SerializeField] private GameObject _looseWindow;
 
     void Awake()
     {
@@ -27,9 +26,9 @@ public class E_F_H_Page : MonoBehaviour
     void OnEnable()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
-        GamePlayWindow.SetActive(true);
+        _gamePlayWindow.SetActive(true);
 
-        if(SecondsCount.instance != null)
+        if (SecondsCount.instance != null)
         {
             SecondsCount.instance.Beggin(0, SecondsCount.instance.GetSeconds());
         }
@@ -37,37 +36,37 @@ public class E_F_H_Page : MonoBehaviour
 
     public void OnWin()
     {
-        if(SecondsCount.instance.GetSeconds() < matchSO.GetRecordForTheScene())
+        if (SecondsCount.instance.GetSeconds() < _matchSO.GetRecordForTheScene())
         {
-            matchSO.SetRecordForTheScene(SecondsCount.instance.GetSeconds());
+            _matchSO.SetRecordForTheScene(SecondsCount.instance.GetSeconds());
         }
-        else if (matchSO.GetRecordForTheScene() < 5)
+        else if (_matchSO.GetRecordForTheScene() < 5)
         {
-            matchSO.SetRecordForTheScene(SecondsCount.instance.GetSeconds());
+            _matchSO.SetRecordForTheScene(SecondsCount.instance.GetSeconds());
         }
 
-        yourRecord.SetRecotrdText(matchSO.GetRecordForTheScene());
-        currentScore.SetScoreText(SecondsCount.instance.GetSeconds());
+        _yourRecord.SetRecotrdText(_matchSO.GetRecordForTheScene());
+        _currentScore.SetScoreText(SecondsCount.instance.GetSeconds());
 
         PauseUnpause.SetPause(true);
-        GamePlayWindow.SetActive(false);
-        WinWindow.SetActive(true);
+        _gamePlayWindow.SetActive(false);
+        _winWindow.SetActive(true);
     }
 
     public void OnLoose()
     {
-        currentScore.SetScoreText(SecondsCount.instance.GetSeconds());
-        yourRecord.SetRecotrdText(PlayerPrefs.GetInt(""));
+        _currentScore.SetScoreText(SecondsCount.instance.GetSeconds());
+        _yourRecord.SetRecotrdText(PlayerPrefs.GetInt(""));
 
         PauseUnpause.SetPause(true);
-        GamePlayWindow.SetActive(false);
-        LooseWindow.SetActive(true);
+        _gamePlayWindow.SetActive(false);
+        _looseWindow.SetActive(true);
     }
 
     public void OnReplay()
     {
         Destroy(PlayerHealthData.instance.gameObject);
         PauseUnpause.SetPause(false);
-        StartCoroutine(MenuStatics.LoadScene(2));
+        StartCoroutine(SceneLoadController.LoadScene(2));
     }
 }

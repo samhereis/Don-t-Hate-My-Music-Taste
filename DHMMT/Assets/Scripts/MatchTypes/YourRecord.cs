@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class YourRecord : MonoBehaviour
 {
-    public int yourRecord;
+    // Show record on this map
+
+    public int RecordOnThisMap;
 
     public void SetRecotrdText(int value)
     {
-        yourRecord = value;
+        RecordOnThisMap = value;
     }
 }

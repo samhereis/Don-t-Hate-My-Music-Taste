@@ -5,47 +5,62 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    public static PlayerMove instance;
-    public float velocityY = 0.0f, velocityX = 0.0f; 
-    public float speedMultiplier = 1, speed = 150;
-    CharacterController characterController;
-    Vector3 move;
-    public Vector2 MoveInputValue;
-    public bool IsMoving = false;
-    public float sprint;
+    // Controlls player's move
 
-    void Awake()
+    public static PlayerMove instance;
+
+    public float SpeedMultiplier = 1, Speed = 150;
+
+    private CharacterController _characterControllerComponent;
+
+    private Vector3 move;
+
+    public Vector2 MoveInputValue;
+
+    public bool IsMoving = false;
+
+    public float SprintValue;
+
+    private void Awake()
     {
         instance = this;
-        if (!characterController) characterController = GetComponent<CharacterController>(); 
+
+        if (!_characterControllerComponent) _characterControllerComponent = GetComponent<CharacterController>(); 
     }
-    void OnEnable()
+
+    private void OnEnable()
     {
-        PlayerInput.input.Gameplay.Move.performed += Move;
-        PlayerInput.input.Gameplay.Move.canceled  += Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.performed += Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled  += Move;
 
-        PlayerInput.input.Gameplay.Sprint.performed += Sprint;
-        PlayerInput.input.Gameplay.Sprint.canceled  += Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  += Sprint;
 
-        PlayerInput.input.Gameplay.Fire.performed += Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed += Fire;
 
-        PlayerInput.input.Gameplay.Aim.performed += Fire;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Fire;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        PlayerInput.input.Gameplay.Move.performed -= Move;
-        PlayerInput.input.Gameplay.Move.canceled  -= Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.performed -= Move;
+        PlayerInput.PlayersInputState.Gameplay.Move.canceled  -= Move;
 
-        PlayerInput.input.Gameplay.Sprint.performed -= Sprint;
-        PlayerInput.input.Gameplay.Sprint.canceled  -= Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  -= Sprint;
 
-        PlayerInput.input.Gameplay.Fire.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Fire.performed -= Fire;
 
-        PlayerInput.input.Gameplay.Aim.performed -= Fire;
+        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Fire;
     }
 
-    void Move(InputAction.CallbackContext context)
+    private void FixedUpdate()
+    {
+        move = transform.right * MoveInputValue.x + transform.forward * MoveInputValue.y;
+        _characterControllerComponent.Move((Speed * SpeedMultiplier) * Time.deltaTime * move);
+    }
+
+    private void Move(InputAction.CallbackContext context)
     {
         if (context.ReadValue<Vector2>() == Vector2.zero)
         {
@@ -59,21 +74,15 @@ public class PlayerMove : MonoBehaviour
         MoveInputValue = context.ReadValue<Vector2>();
     }
 
-    void Sprint(InputAction.CallbackContext context)
+    private void Sprint(InputAction.CallbackContext context)
     {
-        sprint = context.ReadValue<float>();
+        SprintValue = context.ReadValue<float>();
 
-        speedMultiplier = 1 + sprint * 2 ;
+        SpeedMultiplier = 1 + SprintValue * 2 ;
     }
 
-    void Fire(InputAction.CallbackContext context)
+    private void Fire(InputAction.CallbackContext context)
     {
-        speedMultiplier = 1;
-    }
-
-    void FixedUpdate()
-    {
-        move = transform.right * MoveInputValue.x  + transform.forward * MoveInputValue.y;
-        characterController.Move((speed * speedMultiplier) * Time.deltaTime * move);
+        SpeedMultiplier = 1;
     }
 }

@@ -3,16 +3,26 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    // Controlls main players camera
+
     public static CameraMovement instance;
-    [SerializeField] [Range(0, 1)] public float mouseSensitivity = 0.2f;
-    Vector2 context;
-    public Transform moveCameraTowards;
-    public Transform playerBody;
-    float mouseX; float mouseY;
-    float XRotation;
-    void Awake()
+
+    [SerializeField] [Range(0, 1)] public float MouseSensitivity = 0.2f;
+
+    private Vector2 _context;
+
+    public Transform MoveCameraTowards;
+
+    public Transform PlayerBody;
+
+    private float _mouseX;
+    private float _mouseY;
+
+    private float _xRotation;
+
+    private void Awake()
     {
-        transform.position = moveCameraTowards.position;
+        transform.position = MoveCameraTowards.position;
 
         if(GameSettings.instance == null)
         {
@@ -24,39 +34,41 @@ public class CameraMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
     }
-    void OnEnable()
+
+    private void OnEnable()
     {
-        PlayerInput.input.Gameplay.Look.performed += Look;
-        PlayerInput.input.Gameplay.Look.canceled += Look;
+        PlayerInput.PlayersInputState.Gameplay.Look.performed += Look;
+        PlayerInput.PlayersInputState.Gameplay.Look.canceled += Look;
     }
 
     private void OnDisable()
     {
-        PlayerInput.input.Gameplay.Look.performed -= Look;
-        PlayerInput.input.Gameplay.Look.canceled -= Look;
-    }
-    void Update()
-    {
-        transform.position = moveCameraTowards.position;
-
-        XRotation -= mouseY;
-        XRotation = Mathf.Clamp(XRotation, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(XRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        PlayerInput.PlayersInputState.Gameplay.Look.performed -= Look;
+        PlayerInput.PlayersInputState.Gameplay.Look.canceled -= Look;
     }
 
-    void Look(InputAction.CallbackContext ctx)
+    private void Update()
     {
-        context = ctx.ReadValue<Vector2>() * GameSettings.instance.sensitivity;
+        transform.position = MoveCameraTowards.position;
 
-        mouseX = context.x;
-        mouseY = context.y;
+        _xRotation -= _mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+        PlayerBody.Rotate(Vector3.up * _mouseX);
+    }
+
+    private void Look(InputAction.CallbackContext ctx)
+    {
+        _context = ctx.ReadValue<Vector2>() * GameSettings.instance.SensitivityValue;
+
+        _mouseX = _context.x;
+        _mouseY = _context.y;
     }
 
     public void Shake()
     {
-        transform.position = moveCameraTowards.position;
+        transform.position = MoveCameraTowards.position;
 
         AnimationStatics.NormalShake(transform, 2);
     }

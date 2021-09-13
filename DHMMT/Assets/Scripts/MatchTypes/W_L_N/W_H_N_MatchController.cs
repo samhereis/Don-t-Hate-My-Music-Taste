@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class W_H_N_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
 {
-    void OnEnable()
+    // Controll main players part on "W-H-N" map. "W_H_N_Page" controls UI part on this map
+
+    private void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.WH_L_N_page);
     }

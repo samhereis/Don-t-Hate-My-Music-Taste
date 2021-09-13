@@ -1,22 +1,23 @@
-using UnityEngine.AI;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent;
-    public Animator animator;
+    // Moves enemy to position. Controlled by other scripts
+
+    public NavMeshAgent NavMeshAgentOfEnemy;
+    public Animator AnimatorOfEnemy;
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref navMeshAgent, GetComponent<NavMeshAgent>());
-        ExtentionMethods.SetWithNullCheck(ref animator, GetComponent<Animator>());
+        ExtentionMethods.SetWithNullCheck(ref NavMeshAgentOfEnemy, GetComponent<NavMeshAgent>());
+        ExtentionMethods.SetWithNullCheck(ref AnimatorOfEnemy, GetComponent<Animator>());
     }
 
     public void MoveTo(Transform moveTo, int speed)
     {
-        navMeshAgent.speed = speed;
-        animator.SetFloat("moveVelocityY", navMeshAgent.speed);
-        navMeshAgent.SetDestination(moveTo.position);
+        NavMeshAgentOfEnemy.speed = speed;
+        AnimatorOfEnemy.SetFloat("moveVelocityY", NavMeshAgentOfEnemy.speed);
+        NavMeshAgentOfEnemy.SetDestination(moveTo.position);
     }
 }

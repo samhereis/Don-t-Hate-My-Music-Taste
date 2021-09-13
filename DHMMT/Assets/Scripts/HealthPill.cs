@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class HealthPill : MonoBehaviour
 {
-    Vector3 velocity;
-    public PlayerHealthData target;
+    // Health loot after an enemy dies
+
+    private Vector3 _velocity;
+
+    public PlayerHealthData Target;
+
     public float PlusToHealth = 40;
-    [SerializeField] float speed = 0.5f;
+
+    [SerializeField] private float _speed = 0.5f;
+
     private void OnEnable()
     {
-        target = PlayerHealthData.instance;
+        Target = PlayerHealthData.instance;
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, speed);
+        if(CameraMovement.instance != null)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref _velocity, _speed);
+        }
+        else
+        {
+            AnimationStatics.NormalShake(transform, 2);
+            Destroy(gameObject, 3);
+        }
     }
-    void OnTriggerEnter(Collider _triggerEnteredObject_)
+
+    private void OnTriggerEnter(Collider _triggerEnteredObject_)
     {
         if(_triggerEnteredObject_.GetComponent<PlayerHealthData>())
         {
-            if(target.MaxHealth >= target.Health + PlusToHealth)
+            if(Target.MaxHealth >= Target.Health + PlusToHealth)
             {
-                target.Health = target.MaxHealth;
+                Target.Health = Target.MaxHealth;
             }
             else
             {
-                target.Health += PlusToHealth;
+                Target.Health += PlusToHealth;
             }
             Destroy(gameObject);
         }

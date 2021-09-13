@@ -6,23 +6,23 @@ using System;
 [System.Serializable]
 public class LightRotator : MonoBehaviour
 {
+    // Constantly rotates an object
+
     public float RotateVal, Duration;
-    public float r = 0;
+    public float RotationValue = 0;
+
     public enum Axis
     {
         X,
         Y,
         Z,
     }
-    [SerializeField] Axis axis;
 
-    void Awake()
-    {
+    [SerializeField] private Axis axis;
 
-    }
-    void OnEnable()
+    private void OnEnable()
     {
-        r = 0;
+        RotationValue = 0;
 
         switch (axis)
         {
@@ -47,27 +47,28 @@ public class LightRotator : MonoBehaviour
 
         StartCoroutine(changeRotateVal());
     }
-    void OnDisable()
+
+    private void OnDisable()
     {
         StopAllCoroutines();
     }
+
     IEnumerator RotateX()
     {
-        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
-
         Start:
         {
             yield return new WaitForSecondsRealtime(Duration);
 
-            transform.rotation = Quaternion.Euler(r += RotateVal, 0, 0);
+            transform.rotation = Quaternion.Euler(RotationValue += RotateVal, 0, 0);
 
-            if (r >= 360 - RotateVal || r < -362 || r > 362)
+            if (RotationValue >= 360 - RotateVal || RotationValue < -362 || RotationValue > 362)
             {
-                r = 0;
+                RotationValue = 0;
             }
         }
         goto Start;
     }
+
     IEnumerator RotateY()
     {
         yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
@@ -76,16 +77,17 @@ public class LightRotator : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(Duration);
 
-            transform.DORotate(new Vector3(0, r += RotateVal, 0), Duration);
+            transform.DORotate(new Vector3(0, RotationValue += RotateVal, 0), Duration);
 
-            if (r >= 360-RotateVal)
+            if (RotationValue >= 360-RotateVal)
             {
-                r = 0;
+                RotationValue = 0;
                 transform.DORotate(new Vector3(0, 0, 0), Duration);
             }
         }
         goto Start;
     }
+
     IEnumerator RotateZ()
     {
         yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
@@ -94,11 +96,11 @@ public class LightRotator : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(Duration);
 
-            transform.DORotate(new Vector3(0, 0, r += RotateVal), Duration);
+            transform.DORotate(new Vector3(0, 0, RotationValue += RotateVal), Duration);
 
-            if (r >= 360 - RotateVal)
+            if (RotationValue >= 360 - RotateVal)
             {
-                r = 0;
+                RotationValue = 0;
                 transform.DORotate(new Vector3(0, 0, 0), Duration);
             }
         }

@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class EnemyWeaponDataHolder : MonoBehaviour, WeaponDataHolder
 {
-    public GunData gunData { get; set; }
-    public GunUse gunUse { get; set; }
-    public GunAim gunAim { get; set; }
+    // Data for enemie's weapon for fast reference on other scripts
 
-    private void Awake()
-    {
-
-    }
+    public GunData DunDataCompoenent { get; set; }
+    public GunUse GunUseComponent { get; set; }
+    public GunAim GunAimComponent { get; set; }
 
     public void Set(GunData gunData)
     {
-        this.gunData = gunData;
+        this.DunDataCompoenent = gunData;
     }
     public void Set(GunData gunData, GunUse gunUse)
     {
-        this.gunData = gunData;
-        this.gunUse = gunUse;
+        this.DunDataCompoenent = gunData;
+        this.GunUseComponent = gunUse;
     }
     public void Set(GunData gunData, GunUse gunUse, GunAim gunAim)
     {
-        this.gunData = gunData;
-        this.gunUse = gunUse;
-        this.gunAim = gunAim;
+        this.DunDataCompoenent = gunData;
+        this.GunUseComponent = gunUse;
+        this.GunAimComponent = gunAim;
     }
 }

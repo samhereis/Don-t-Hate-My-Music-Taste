@@ -5,29 +5,31 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    // Controlls object spawning
+
     public static Spawner instance;
 
-    public GameObject playerPref;
-    public GameObject enemyPref;
+    public GameObject PlayerPref;
+    public GameObject EnemyPref;
 
     public Component AddComponentToPlayer;
     public Component AddComponentToEnemy;
 
-    [SerializeField] float WaitBeforeSpawnEnemies = 10;
+    [SerializeField] private float _waitBeforeSpawnEnemies = 10;
     public float WaitBeforeSpawnPlayer = 5;
 
-    [SerializeField] bool spawnOnStart = true;
+    [SerializeField] private bool _spawnOnStart = true;
 
-    public List<GameObject> enemies;
-    public List<GameObject> enemiesReserve;
+    public List<GameObject> Enemies;
+    public List<GameObject> EnemiesReserve;
 
-    public int numberOfEnemies;
+    public int NumberOfEnemies;
 
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
 
-        if (spawnOnStart == true)
+        if (_spawnOnStart == true)
         {
             StartCoroutine(SpawnPlayer());
         }
@@ -35,7 +37,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        if (numberOfEnemies > 0) SpawnEnemies(numberOfEnemies);
+        if (NumberOfEnemies > 0) SpawnEnemies(NumberOfEnemies);
     }
 
     private void OnDisable()
@@ -48,9 +50,9 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnEnemiesCoroutines(number));
     }
 
-    IEnumerator SpawnEnemiesCoroutines(int number)
+    private IEnumerator SpawnEnemiesCoroutines(int number)
     {
-        yield return Wait.NewWait(WaitBeforeSpawnEnemies);
+        yield return Wait.NewWait(_waitBeforeSpawnEnemies);
 
         for (int i = 0; i < number; i++)
         {
@@ -62,29 +64,28 @@ public class Spawner : MonoBehaviour
 
     public void SpawnEnemy(Transform pos)
     {
-        GameObject enemy = Instantiate(enemyPref);
+        GameObject enemy = Instantiate(EnemyPref, SpawnPoints.instance.GetRandomSpawn().position, Quaternion.identity);
 
         enemy.AddComponent(AddComponentToEnemy.GetType());
 
-        if(enemies.Count < 11)
+        if(Enemies.Count < 11)
         {
-            enemies.Add(enemy);
-            enemy.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
+            Enemies.Add(enemy);
         }
         else
         {
             enemy.SetActive(false);
-            enemiesReserve.Add(enemy);
+            EnemiesReserve.Add(enemy);
         }
     }
 
-    IEnumerator SpawnPlayer()
+    private IEnumerator SpawnPlayer()
     {
         yield return Wait.NewWait(WaitBeforeSpawnPlayer);
 
         Transform loc = SpawnPoints.instance.GetRandomSpawnForPlayer();
 
-        GameObject obj = Instantiate(playerPref, loc.position, loc.localRotation);
+        GameObject obj = Instantiate(PlayerPref, loc.position, loc.localRotation);
 
         if (AddComponentToPlayer != null)
         {
@@ -100,9 +101,9 @@ public class Spawner : MonoBehaviour
         {
             Destroy(caller);
 
-            HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
+            HealthBar.instance.SetValue(HealthBar.instance.SliderComponent.maxValue);
 
-            PlayerInput.input = new InputSettings();
+            PlayerInput.PlayersInputState = new InputSettings();
 
             StartCoroutine(SpawnPlayer());
         }
@@ -113,9 +114,9 @@ public class Spawner : MonoBehaviour
         if (PlayerHealthData.instance.Health < 0 || PlayerHealthData.instance == null)
         {
 
-            HealthBar.instance.SetValue(HealthBar.instance.slider.maxValue);
+            HealthBar.instance.SetValue(HealthBar.instance.SliderComponent.maxValue);
 
-            PlayerInput.input = new InputSettings();
+            PlayerInput.PlayersInputState = new InputSettings();
 
             StartCoroutine(SpawnPlayer());
         }

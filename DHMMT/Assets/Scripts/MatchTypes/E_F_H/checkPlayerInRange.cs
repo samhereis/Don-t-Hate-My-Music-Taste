@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class checkPlayerInRange : MonoBehaviour
 {
-    PlayerHealthData player;
+    // Check if main player is in range of this object's Collider
+
+    private PlayerHealthData _player;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerHealthData>())
         {
-            player = other.GetComponent<PlayerHealthData>();
-            if(player.numberOfCheckers.Contains(this) == false)
+            _player = other.GetComponent<PlayerHealthData>();
+            if(_player.numberOfCheckers.Contains(this) == false)
             {
-                player.numberOfCheckers.Add(this);
+                _player.numberOfCheckers.Add(this);
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerHealthData>().numberOfCheckers.Count > 0)
+        if (other?.GetComponent<PlayerHealthData>()?.numberOfCheckers.Count > 0)
         {
-            if (player.numberOfCheckers.Contains(this) == true)
+            if (_player.numberOfCheckers.Contains(this) == true)
             {
-                player.numberOfCheckers.Remove(this);
+                _player.numberOfCheckers.Remove(this);
             }
         }
     }

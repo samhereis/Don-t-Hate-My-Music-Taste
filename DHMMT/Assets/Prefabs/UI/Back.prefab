@@ -146,10 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5836f223cd6304185967756e39918b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toEnable: {fileID: 0}
+  ToEnable: {fileID: 0}
   ToDisable: {fileID: 0}
   IsUIPage: 0
-  button: {fileID: 6999334066772271065}
+  ButtonComponent: {fileID: 6999334066772271065}
 --- !u!1 &5379414541876191523
 GameObject:
   m_ObjectHideFlags: 0

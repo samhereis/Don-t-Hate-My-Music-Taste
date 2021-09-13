@@ -833,13 +833,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712ca6b8823954d40ba5caed35ce70b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityY: 0
-  velocityX: 0
-  speedMultiplier: 1
-  speed: 4
+  SpeedMultiplier: 1
+  Speed: 4
   MoveInputValue: {x: 0, y: 0}
   IsMoving: 0
-  sprint: 0
+  SprintValue: 0
 --- !u!114 &3962204800103098786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,8 +862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8207bb788ecc07419f18d82dcbfcd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 0.15
-  gravityValue: -0.3
+  JumpHeight: 0.13
+  GravityValue: -0.3
+  DoubleJumpable: 1
 --- !u!114 &2754681447268202540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,17 +889,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7207d9b10cb24146aa313d8c743e54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightSholder: {fileID: 9170677863445727429}
-  weaponAimPosition: {fileID: 4781324354433597713}
-  weaponPosition: {fileID: 522865125595312457}
-  aimTo: {fileID: 1522051917}
-  cam: {fileID: 7499450797164221475}
-  allWeapons: {fileID: 672303218}
-  rightHandIK: {fileID: 1785284635601927086}
-  leftHandIK: {fileID: 8182843588149872904}
-  currentWeapon: {fileID: 0}
-  animator: {fileID: 4980200780456763487}
-  rigBuilder: {fileID: 3577843186660539665}
+  RightSholder: {fileID: 9170677863445727429}
+  WeaponAimPosition: {fileID: 4781324354433597713}
+  WeaponPosition: {fileID: 522865125595312457}
+  AimTo: {fileID: 1522051917}
+  Cam: {fileID: 7499450797164221475}
+  AllWeapons: {fileID: 672303218}
+  RightHandIK: {fileID: 1785284635601927086}
+  LeftHandIK: {fileID: 8182843588149872904}
+  CurrentWeapon: {fileID: 5499261933320848517}
+  AnimatorOfHumanoid: {fileID: 4980200780456763487}
+  RigBuilderOfHumanoid: {fileID: 3577843186660539665}
 --- !u!114 &666725341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,9 +2520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f6f9147d878c949bfa0b33f003e28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 0.5
-  moveCameraTowards: {fileID: 194247547830913028}
-  playerBody: {fileID: 1440332666082851365}
+  MouseSensitivity: 0.2
+  MoveCameraTowards: {fileID: 194247547830913028}
+  PlayerBody: {fileID: 1440332666082851365}
 --- !u!114 &1801337418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3437,6 +3436,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
+--- !u!1 &5499261933320848517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7956945597098544381, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
+  m_PrefabInstance: {fileID: 2467394576587950200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5123580403165863487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7288917050873517639, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
@@ -3447,7 +3451,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7110574739933375419, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
   m_PrefabInstance: {fileID: 2467394576587950200}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5499261933320848517}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d27fc9ea9434284ea90fc9bcac0e30d, type: 3}

@@ -6,35 +6,37 @@ using UnityEngine.Animations.Rigging;
 
 public class InteractableEquipWeapon : MonoBehaviour, IInteractable
 {
-    public bool equiped = false;
+    // Controlls how a weapon equips
+
+    public bool Equiped = false;
 
     public bool Interactable { get; set; }
 
-    private string itemName = "Head Swaper";
-    public string ItemName { get { return itemName;} set { itemName = value; }}
+    private string _itemName = "Head Swaper";
+    public string ItemName { get { return _itemName;} set { _itemName = value; }}
 
     public GameObject InteractableObject { get => gameObject; set { } }
 
-    public Type InteractorDataType { get => typeof(EquipWeaponData); set => throw new NotImplementedException(); }
+    //public Type InteractorDataType { get => typeof(HumanoidEquipWeaponData); set => throw new NotImplementedException(); }
 
-    public GunData gunData;
+    public GunData GunDataComponent;
 
     private void Awake ()
     {
-        ExtentionMethods.SetWithNullCheck(ref gunData, GetComponent<GunData>());
+        ExtentionMethods.SetWithNullCheck(ref GunDataComponent, GetComponent<GunData>());
     }
 
-    public void Interact(GameObject caller)
+    public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid
     {
-        EquipWeaponData equipData = caller.GetComponent<EquipWeaponData>();
+        HumanoidEquipWeaponData equipData = caller.GetComponent<HumanoidEquipWeaponData>();
         Animator animator = caller.GetComponent<Animator>();
 
-        equiped = true;
+        Equiped = true;
         Interactable = false;
 
         {   //Manage Position and Rotation
-            transform.SetParent(equipData.weaponPosition, false);
-            equipData.weaponPosition.localPosition = gameObject.GetComponent<GunData>().initialLocalPosition;
+            transform.SetParent(equipData.WeaponPosition, false);
+            equipData.WeaponPosition.localPosition = gameObject.GetComponent<GunData>().initialLocalPosition;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
@@ -51,12 +53,12 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         }
 
         {   //Manage constraints and IKs
-            equipData.rightHandIK.data.target = gunData.rightHandIK;
-            equipData.leftHandIK.data.target = gunData.leftHandIK;
+            equipData.RightHandIK.data.target = GunDataComponent.rightHandIK;
+            equipData.LeftHandIK.data.target = GunDataComponent.leftHandIK;
         }
 
         {
-            caller.GetComponent<WeaponDataHolder>().Set(gunData, GetComponent<GunUse>(), GetComponent<GunAim>());
+            caller.GetComponent<WeaponDataHolder>().Set(GunDataComponent, GetComponent<GunUse>(), GetComponent<GunAim>());
         }
         caller.GetComponent<RigBuilder>().Build();
     }

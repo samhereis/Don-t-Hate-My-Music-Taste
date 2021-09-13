@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SH_TH_Page : MonoBehaviour
 {
+    // Controll main UI on "SH-TH" map. "SH-TH_MatchType" controls main player's part on this map
+
     public static SH_TH_Page instance;
 
-    [SerializeField] MatchSO matchSO;
+    [SerializeField] private MatchSO _matchSO;
 
-    [SerializeField] GameObject GamePlayWindow;
-    [SerializeField] GameObject WinWindow;
+    [SerializeField] private GameObject _gamePlayWindow;
+    [SerializeField] private GameObject _winWindow;
 
-    void Start()
+    private void Start()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
 
@@ -28,13 +30,13 @@ public class SH_TH_Page : MonoBehaviour
     public void OnWin()
     {
         PauseUnpause.SetPause(true);
-        WinWindow.SetActive(true);
-        GamePlayWindow.SetActive(false);
+        _winWindow.SetActive(true);
+        _gamePlayWindow.SetActive(false);
     }
 
     public void Replay()
     {
         PauseUnpause.SetPause(false);
-        StartCoroutine(MenuStatics.LoadScene(4));
+        StartCoroutine(SceneLoadController.LoadScene(4));
     }
 }

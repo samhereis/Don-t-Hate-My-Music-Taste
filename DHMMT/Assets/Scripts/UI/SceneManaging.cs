@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneManaging : MonoBehaviour
 {
-    void Awake()
+    // Usually used to load UI
+
+    private void Awake()
     {
         if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
         {
-            MenuStatics.LoadSceneAdditively(1);
+            SceneLoadController.LoadSceneAdditively(1);
         }
     }
 }

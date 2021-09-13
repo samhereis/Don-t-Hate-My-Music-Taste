@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class SceneLoader : MonoBehaviour
 {
+    // Scene loader attachable on gameobject
+
     public void LoadScene(int index)
     {
-        LoadingWindow.instance.Window.SetActive(true);
+        if(LoadingWindow.instance != null)
+        {
+            LoadingWindow.instance.Window.SetActive(true);
 
-        StartCoroutine(MenuStatics.LoadScene(index, LoadingWindow.instance.Window));
+            StartCoroutine(SceneLoadController.LoadScene(index, LoadingWindow.instance.Window));
+        }
+        else
+        {
+            StartCoroutine(SceneLoadController.LoadScene(index));
+        }
     }
 }

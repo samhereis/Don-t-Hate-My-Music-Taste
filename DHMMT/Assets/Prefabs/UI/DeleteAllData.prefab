@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2975299233813679875}
   - component: {fileID: 3582946938491417062}
   - component: {fileID: 7897122322908398339}
-  - component: {fileID: 3562997200482651146}
   m_Layer: 5
   m_Name: DeleteAllData
   m_TagString: Untagged
@@ -124,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameSettings, Assembly-CSharp
-        m_MethodName: DeleteAllGameData
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -134,22 +133,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3562997200482651146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747598906555597229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5836f223cd6304185967756e39918b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toEnable: {fileID: 0}
-  ToDisable: {fileID: 0}
-  IsUIPage: 0
-  button: {fileID: 7897122322908398339}
 --- !u!1 &5052215045209652729
 GameObject:
   m_ObjectHideFlags: 0

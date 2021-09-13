@@ -4,39 +4,30 @@ using UnityEngine.UI;
 
 public class BackButton : MonoBehaviour
 {
-    public IUIPage page;
+    // UI's back button
 
-    public GameObject toEnable, ToDisable;
+    public static BackButton instance;
 
-    public bool IsUIPage;
+    public Button ButtonComponent;
 
-    [SerializeField] Button button;
-
-    void Awake()
+    private void OnEnable()
     {
-        ExtentionMethods.SetWithNullCheck(ref button, GetComponent<Button>());
+        instance = this;
+
+        PlayerInput.PlayersInputState.UI.Back.performed += Back;
     }
 
-    void OnEnable()
+    private void OnDisable()
     {
-        BackStatics.button = button;
-
-        if (IsUIPage)
-        {
-            BackStatics.IsUIPage = IsUIPage;
-            BackStatics.page = transform.parent.GetComponentInParent<IUIPage>();
-        }
-        else
-        {
-            BackStatics.IsUIPage = IsUIPage;
-            BackStatics.page = null;
-        }
-
-        BackStatics.toEnable = toEnable;
-        BackStatics.ToDisable = ToDisable;
+        instance = null;
+        PlayerInput.PlayersInputState.UI.Back.performed -= Back;
     }
-    public void Back()
+
+    private void Back(InputAction.CallbackContext context)
     {
-        BackStatics.GetBack();
+        if (ButtonComponent != null)
+        {
+            ButtonComponent.onClick.Invoke();
+        }
     }
 }

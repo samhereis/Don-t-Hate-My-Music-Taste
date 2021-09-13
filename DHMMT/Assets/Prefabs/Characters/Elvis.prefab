@@ -403,5 +403,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985858cae7827404e8bfdc042f98de39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2450599377094752609}
-  animationClip: {fileID: 7400000, guid: c67b26e7d0720d54fa9cbe63de727231, type: 2}
+  AnimatorComponent: {fileID: 2450599377094752609}
+  Animation: {fileID: 0}

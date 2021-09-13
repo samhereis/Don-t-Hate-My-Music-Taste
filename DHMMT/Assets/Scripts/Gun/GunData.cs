@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GunData : MonoBehaviour
 {
+    // Equip data of a weapon
+
     [Header("PreSettings")]
     public Vector3 initialLocalPosition;
     public Vector3 aimPosition;

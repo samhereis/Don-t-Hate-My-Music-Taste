@@ -4,37 +4,34 @@ using UnityEngine.UI;
 
 public class DisplayGunOnShop : MonoBehaviour
 {
-    [SerializeField] ScriptableGun gun;
+    // On shop display a gun to buy
 
-    [SerializeField] Image GunIcon;
-    [SerializeField] TMPro.TextMeshProUGUI GunName;
-    [SerializeField] TMPro.TextMeshProUGUI GunDamage;
-    [SerializeField] TMPro.TextMeshProUGUI GunCost;
-
-    void Awake()
-    {
-
-    }
+    [SerializeField] private ScriptableGun _gun;
+      
+    [SerializeField] private Image _gunIcon;
+    [SerializeField] private TMPro.TextMeshProUGUI _gunName;
+    [SerializeField] private TMPro.TextMeshProUGUI _gunDamage;
+    [SerializeField] private TMPro.TextMeshProUGUI _gunCost;
 
     public void SetData(ScriptableGun Sentgun)
     {
-        gun = Sentgun;
+        _gun = Sentgun;
 
-        GunIcon.sprite = gun.gunIcon;
-        GunName.text = gun.gunName;
-        GunDamage.text = gun.gunDamage.ToString();
-        GunCost.text = $"ㄙ {gun.gunCost}";
+        _gunIcon.sprite = Sentgun.GunIcon;
+        _gunName.text = Sentgun.GunName;
+        _gunDamage.text = Sentgun.GunDamage.ToString();
+        _gunCost.text = $"ㄙ {Sentgun.GunCost}";
     }
 
     public void TryBuy()
     {
         transform.DOShakePosition(2f, 10f, 10, 50, false, true);
 
-        if (PlayerKillCount.instance.GetKillCount() >= gun.gunCost)
+        if (PlayerKillCount.instance.GetKillCount() >= _gun.GunCost)
         {
-            GameObject newGun = Instantiate(gun.gunPrefab.gameObject);
+            GameObject newGun = Instantiate(_gun.GunPrefab.gameObject);
 
-            if (gun.gunType == ScriptableGun.GunTypes.Pistol)
+            if (_gun.GunType == ScriptableGun.GunTypes.Pistol)
             {
                 if (PlayerGunUse.instance.DefaultWeapon != null)
                 {
@@ -47,7 +44,7 @@ public class DisplayGunOnShop : MonoBehaviour
 
                 PlayerGunUse.instance.ChangeWeapon(ScriptableGun.GunTypes.Pistol);
             }
-            else if (gun.gunType == ScriptableGun.GunTypes.Rifle)
+            else if (_gun.GunType == ScriptableGun.GunTypes.Rifle)
             {
                 if (PlayerGunUse.instance.SecodWeapon != null)
                 {

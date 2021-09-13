@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1405e6940c27b7b46acc7bb89cda7f8b, type: 3}
   m_Name: HitlerGun
   m_EditorClassIdentifier: 
-  gunType: 0
-  gunIcon: {fileID: 21300000, guid: ea1c9496a8347e646913b51cdc9b9516, type: 3}
-  gunPrefab: {fileID: 7956945597098544381, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
-  gunCost: 10
-  interact: {fileID: 7110574739933375419, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
+  GunType: 0
+  GunIcon: {fileID: 21300000, guid: ea1c9496a8347e646913b51cdc9b9516, type: 3}
+  GunPrefab: {fileID: 7956945597098544381, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
+  GunCost: 10
+  Interact: {fileID: 7110574739933375419, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}

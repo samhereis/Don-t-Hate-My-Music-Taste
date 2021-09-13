@@ -4,31 +4,39 @@ using UnityEngine;
 
 public class AmmoPill : MonoBehaviour
 {
-    Vector3 velocity;
-    public PlayerWeaponDataHolder target;
+    // Ammo loot after an enemy dies
+
+    private Vector3 velocity;
+
+    public PlayerWeaponDataHolder Target;
+
     public float PlusToHealth = 40;
-    [SerializeField] float speed = 0.5f;
+
+    [SerializeField] private float _speed = 0.5f;
+
     private void OnEnable()
     {
-        target = PlayerWeaponDataHolder.instance;
+        Target = PlayerWeaponDataHolder.instance;
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
         if (PlayerHealthData.instance == null) return;
 
-        transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, speed);
+        transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, _speed);
     }
-    void OnTriggerEnter(Collider _triggerEnteredObject_)
+
+    private void OnTriggerEnter(Collider _triggerEnteredObject_)
     {
         if (_triggerEnteredObject_.GetComponent<PlayerWeaponDataHolder>())
         {
-            if (target.gunUse.maxAmmo >= target.gunUse.CurrentAmmo + target.gunUse.CurrentAmmo/2)
+            if (Target.GunUseComponent.MaxAmmo >= Target.GunUseComponent.CurrentAmmo + Target.GunUseComponent.CurrentAmmo/2)
             {
-                target.gunUse.CurrentAmmo = target.gunUse.maxAmmo;
+                Target.GunUseComponent.CurrentAmmo = Target.GunUseComponent.MaxAmmo;
             }
             else
             {
-                target.gunUse.CurrentAmmo += target.gunUse.CurrentAmmo / 3;
+                Target.GunUseComponent.CurrentAmmo += Target.GunUseComponent.CurrentAmmo / 3;
             }
             Destroy(gameObject);
         }

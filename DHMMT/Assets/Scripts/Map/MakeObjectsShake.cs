@@ -5,85 +5,90 @@ using DG.Tweening;
 
 public class MakeObjectsShake : MonoBehaviour
 {
+    // Changes an objects based on playing music
+
     public static MakeObjectsShake instance;
 
     public enum ShakeType { Scale, Position }
 
-    public ShakeType shakeType = ShakeType.Scale;
+    public ShakeType WayOfReactingToMusic = ShakeType.Scale;
 
-    public List<Transform> objectsReactingToBasses, objectsReactingToNB, objectsReactingToMiddles, objectsReactingToHighs;
-    public List<List<Transform>> objectsReacting;
+    public List<Transform> ObjectsReactingToBasses = new List<Transform>(), ObjectsReactingToNB = new List<Transform>(), ObjectsReactingToMiddles = new List<Transform>(), ObjectsReactingToHighs = new List<Transform>();
+    public List<List<Transform>> ObjectsReacting = new List<List<Transform>>();
     public List<Transform> Reactors;
 
     public float t = 0.2f;
 
-    Action Shake;
+    private Action _shake;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
-
-        objectsReacting.Add(objectsReactingToBasses);
-        objectsReacting.Add(objectsReactingToNB);
-        objectsReacting.Add(objectsReactingToMiddles);
-        objectsReacting.Add(objectsReactingToHighs);
     }
 
-    void OnEnable()
+    private void Start()
+    {
+        if (ObjectsReactingToBasses != null)    ObjectsReacting.Add(ObjectsReactingToBasses);
+        if (ObjectsReactingToNB != null)        ObjectsReacting.Add(ObjectsReactingToNB);
+        if (ObjectsReactingToMiddles != null)   ObjectsReacting.Add(ObjectsReactingToMiddles);
+        if (ObjectsReactingToHighs != null)     ObjectsReacting.Add(ObjectsReactingToHighs);
+    }
+
+    private void OnEnable()
     {
 
-        if (shakeType == ShakeType.Scale)
+        if (WayOfReactingToMusic == ShakeType.Scale)
         {
-            Shake = makeObjectsShakeScale;
+            _shake = makeObjectsShakeScale;
         }
         else
         {
-            Shake = makeObjectsShakePosition;
+            _shake = makeObjectsShakePosition;
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        Shake();
+        _shake();
     }
 
-    void makeObjectsShakeScale()
+    private void makeObjectsShakeScale()
     {
-        foreach (Transform obj in objectsReactingToBasses)
+        foreach (Transform obj in ObjectsReactingToBasses)
         {
-            obj.DOScaleY(Cals.instance.setSoundFreq(0, 7, Cals.instance.bassSoundMult), t);
+            obj.DOScaleY(PlayingMusicData.instance.setSoundFreq(0, 7, PlayingMusicData.instance.BassSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToNB)
+        foreach (Transform obj in ObjectsReactingToNB)
         {
-            obj.DOScaleY(Cals.instance.setSoundFreq(7, 15, Cals.instance.nextToBassSoundMult), t);
+            obj.DOScaleY(PlayingMusicData.instance.setSoundFreq(7, 15, PlayingMusicData.instance.NextToBassSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToMiddles)
+        foreach (Transform obj in ObjectsReactingToMiddles)
         {
-            obj.DOScaleY(Cals.instance.setSoundFreq(15, 30, Cals.instance.middleSoundMult), t);
+            obj.DOScaleY(PlayingMusicData.instance.setSoundFreq(15, 30, PlayingMusicData.instance.MiddleSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToHighs)
+        foreach (Transform obj in ObjectsReactingToHighs)
         {
-            obj.DOScaleY(Cals.instance.setSoundFreq(30, 32, Cals.instance.HighSoundMult), t);
+            obj.DOScaleY(PlayingMusicData.instance.setSoundFreq(30, 32, PlayingMusicData.instance.HighSoundMult), t);
         }
     }
 
-    void makeObjectsShakePosition()
+    private  void makeObjectsShakePosition()
     {
-        foreach (Transform obj in objectsReactingToBasses)
+        foreach (Transform obj in ObjectsReactingToBasses)
         {
-            obj.DOLocalMoveY(Cals.instance.setSoundFreq(0, 7, Cals.instance.bassSoundMult), t);
+            obj.DOLocalMoveY(PlayingMusicData.instance.setSoundFreq(0, 7, PlayingMusicData.instance.BassSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToNB)
+        foreach (Transform obj in ObjectsReactingToNB)
         {
-            obj.DOLocalMoveY(Cals.instance.setSoundFreq(7, 15, Cals.instance.nextToBassSoundMult), t);
+            obj.DOLocalMoveY(PlayingMusicData.instance.setSoundFreq(7, 15, PlayingMusicData.instance.NextToBassSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToMiddles)
+        foreach (Transform obj in ObjectsReactingToMiddles)
         {
-            obj.DOLocalMoveY(Cals.instance.setSoundFreq(15, 30, Cals.instance.middleSoundMult), t);
+            obj.DOLocalMoveY(PlayingMusicData.instance.setSoundFreq(15, 30, PlayingMusicData.instance.MiddleSoundMult), t);
         }
-        foreach (Transform obj in objectsReactingToHighs)
+        foreach (Transform obj in ObjectsReactingToHighs)
         {
-            obj.DOLocalMoveY(Cals.instance.setSoundFreq(30, 32, Cals.instance.HighSoundMult), t);
+            obj.DOLocalMoveY(PlayingMusicData.instance.setSoundFreq(30, 32, PlayingMusicData.instance.HighSoundMult), t);
         }
     }
 }

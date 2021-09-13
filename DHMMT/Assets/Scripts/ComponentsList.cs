@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class ComponentsList : MonoBehaviour
 {
-    List<Component> components = new List<Component>();
+    // All needed components on a gameobject
+
+    public List<Component> Components;
 }

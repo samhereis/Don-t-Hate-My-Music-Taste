@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseUI : MonoBehaviour, IUIPage
 {
+    // Pause menu manage
+
     public static PauseUI instance;
 
     public GameObject Page { get => _page; set => _page = value; }
     [SerializeField] GameObject _page;
-
-    void Awake()
-    {
-        instance = this;
-    }
 
     public void Enable()
     {
@@ -21,18 +19,24 @@ public class PauseUI : MonoBehaviour, IUIPage
         GameplayUI.instance.Disable();
 
         Page.SetActive(true);
-
-        PlayerInput.input.UI.Back.performed += BackStatics.Back;
     }
 
     public void Disable()
     {
-        PlayerInput.input.UI.Back.performed -= BackStatics.Back;
-
         PauseUnpause.SetPause(false);
 
-        GameplayUI.instance.Enable();
-
         Page.SetActive(false);
+
+        GameplayUI.instance.Enable();
+    }
+
+    private void OnEnable()
+    {
+        instance = this;
+    }
+
+    private void OnDisable()
+    {
+        instance = this;
     }
 }

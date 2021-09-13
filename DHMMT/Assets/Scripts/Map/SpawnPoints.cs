@@ -5,10 +5,12 @@ using System.Linq;
 
 public class SpawnPoints : MonoBehaviour
 {
-    public static SpawnPoints instance;
-    public List<GameObject> spawnPoints;
+    // Holds data of spawn points
 
-    public List<GameObject> playerSpawn;
+    public static SpawnPoints instance;
+
+    public List<GameObject> SpawnPointsList;
+    public List<GameObject> PlayerSpawnPointList;
 
     private void Awake()
     {
@@ -17,25 +19,25 @@ public class SpawnPoints : MonoBehaviour
 
     public Transform GetRandomSpawn()
     {
-        if(spawnPoints.Count >= 1)
+        if(SpawnPointsList.Count > 0)
         {
-            return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
+            return SpawnPointsList[Random.Range(0, SpawnPointsList.Count)].transform;
         }
         else
         {
-            return playerSpawn[Random.Range(0, playerSpawn.Count)].transform;
+            return PlayerSpawnPointList[Random.Range(0, PlayerSpawnPointList.Count)].transform;
         }
     }
 
     public Transform GetRandomSpawnForPlayer()
     {
-        if (playerSpawn.Count > 0)
+        if (PlayerSpawnPointList.Count > 0)
         {
-            return playerSpawn[Random.Range(0, playerSpawn.Count)].transform;
+            return PlayerSpawnPointList[Random.Range(0, PlayerSpawnPointList.Count)].transform;
         }
         else
         {
-            return spawnPoints[Random.Range(0, spawnPoints.Count)].transform;
+            return SpawnPointsList[Random.Range(0, SpawnPointsList.Count)].transform;
         }
     }
 }

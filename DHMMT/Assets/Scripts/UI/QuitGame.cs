@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class QuitGame : MonoBehaviour
 {
+    // Close game
+
     public void Quit()
     {
         Application.Quit();

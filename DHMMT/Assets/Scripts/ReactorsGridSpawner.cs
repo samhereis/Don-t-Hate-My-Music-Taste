@@ -5,10 +5,13 @@ using System.Linq;
 
 public class ReactorsGridSpawner : MonoBehaviour
 {
+    // Spawn reactors to a grid on awake
+
     public GameObject B, NB, M, H;
 
     public List<GameObject> Prefs;
-    public List<Vector2> dick = new List<Vector2>()
+
+    public List<Vector2> DickTionary = new List<Vector2>()
     {
         new Vector2 (0, 0   ),   new Vector2 (20, 0   ),   new Vector2 (40, 0   ),   new Vector2 (60, 0   ),   new Vector2 (80, 0   ),   new Vector2 (100, 0  ),
         new Vector2 (0, 20  ),   new Vector2 (20, 20  ),   new Vector2 (40, 20  ),   new Vector2 (60, 20  ),   new Vector2 (80, 20  ),   new Vector2 (100, 20 ),
@@ -27,16 +30,17 @@ public class ReactorsGridSpawner : MonoBehaviour
         Spawn(M, Prefs[2],  12);
         Spawn(H, Prefs[3],  12);
     }
-    void Spawn(GameObject Holder, GameObject Pref, int NumberOfCubes)
+
+    private void Spawn(GameObject Holder, GameObject Pref, int NumberOfCubes)
     {
-        for(int i =0; i <= NumberOfCubes; i++)
+        for(int i =0; i < NumberOfCubes; i++)
         {
-            Vector2 t = dick[Random.Range(0, dick.Count)];
+            Vector2 t = DickTionary[Random.Range(0, DickTionary.Count)];
 
             GameObject obj = Instantiate(Pref, Holder.transform);
             obj.transform.localPosition = new Vector3(t.y, 0, t.x);
 
-            dick.Remove(t);
+            DickTionary.Remove(t);
         }
     }
 }

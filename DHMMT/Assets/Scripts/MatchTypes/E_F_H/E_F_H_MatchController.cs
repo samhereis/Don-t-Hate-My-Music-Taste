@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class E_F_H_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
 {
+    // Controll main players part on "E-F-H" map. "E-F-H_Page" controls UI part on this map
+
     void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.E_F_H_page);
@@ -12,7 +14,7 @@ public class E_F_H_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosabl
 
         StartCoroutine(PlayerHealthData.instance.TakeDamageContinuously(2, 20));
 
-        GetComponent<PlayerJump>().doubleJumpable = false;
+        GetComponent<PlayerJump>().DoubleJumpable = false;
     }
 
     public void Loose()

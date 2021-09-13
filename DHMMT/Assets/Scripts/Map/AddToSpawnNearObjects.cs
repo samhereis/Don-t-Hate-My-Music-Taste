@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class AddToSpawnNearObjects : MonoBehaviour
 {
-    [SerializeField] bool PlayerInRange;
+    // On "Escape from haters" map, if a player near a light add light's spawns to "SpawnPoints.instance.spawnPoints"
 
-    [SerializeField] List<GameObject> spawns;
+    [SerializeField] private bool _playerInRange;
 
-    void OnTriggerEnter(Collider other)
+    [SerializeField] private List<GameObject> _spawns;
+
+    private void Awake()
     {
-        if (other.GetComponent<PlayerGunUse>())
+        foreach(GameObject obj in _spawns)
         {
-            SpawnPoints.instance.spawnPoints = spawns;
+            SpawnExitRandomlyOnStart.instance._spawns.Add(obj);
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerGunUse>())
+        {
+            SpawnPoints.instance.SpawnPointsList = _spawns;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
     {
 
     }

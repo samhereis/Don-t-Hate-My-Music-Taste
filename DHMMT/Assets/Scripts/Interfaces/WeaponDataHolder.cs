@@ -4,9 +4,11 @@ using UnityEngine;
 
 public interface WeaponDataHolder
 {
-    public GunData gunData { get; set; }
-    public GunUse gunUse { get; set; }
-    public GunAim gunAim { get; set; }
+    // Bluepring of a humanoids weapon data holder
+
+    public GunData DunDataCompoenent { get; set; }
+    public GunUse GunUseComponent { get; set; }
+    public GunAim GunAimComponent { get; set; }
 
     public void Set(GunData gunData);
     public void Set(GunData gunData, GunUse gunUse);

@@ -1418,8 +1418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985858cae7827404e8bfdc042f98de39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 424650728579755583}
-  animationClip: {fileID: 7400000, guid: 53c40083b66d3e844bd4817675f3bb96, type: 2}
+  AnimatorComponent: {fileID: 424650728579755583}
+  Animation: {fileID: 0}
 --- !u!1 &6548324869210372827
 GameObject:
   m_ObjectHideFlags: 0

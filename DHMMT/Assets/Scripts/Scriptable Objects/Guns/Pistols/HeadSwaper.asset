@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1405e6940c27b7b46acc7bb89cda7f8b, type: 3}
   m_Name: HeadSwaper
   m_EditorClassIdentifier: 
-  gunType: 0
-  gunIcon: {fileID: 21300000, guid: c937f6d3ec609354f85bc234b8b54179, type: 3}
-  gunPrefab: {fileID: 6675858250920545781, guid: 190d158e707f9b740b24120e0253e407, type: 3}
-  gunCost: 20
-  interact: {fileID: 5792755450575858355, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+  GunType: 0
+  GunIcon: {fileID: 21300000, guid: c937f6d3ec609354f85bc234b8b54179, type: 3}
+  GunPrefab: {fileID: 6675858250920545781, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+  GunCost: 20
+  Interact: {fileID: 5792755450575858355, guid: 190d158e707f9b740b24120e0253e407, type: 3}

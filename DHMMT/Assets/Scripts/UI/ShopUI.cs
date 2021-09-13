@@ -1,26 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShopUI : MonoBehaviour, IUIPage
 {
+    // Manage gun shop
+
     public static ShopUI instance;
 
-    public List<ScriptableGun> guns;
+    public List<ScriptableGun> Guns;
 
-    [SerializeField] List<Transform> gunCategories;
+    [SerializeField] private Transform _pistolCategoriyPage;
+    [SerializeField] private Transform _rifleCategoriyPage;
 
-    [SerializeField] GameObject GunSlotPrefab;
+    [SerializeField] private GameObject _gunSlotPrefab;
 
-    bool GunsAreLoaded = false;
+    private bool _gunsAreLoaded = false;
 
     public GameObject Page { get => _page; set => _page = value; }
-    [SerializeField] GameObject _page;
-
-    void Awake()
-    {
-        instance = this;
-    }
+    [SerializeField] private GameObject _page;
 
     public void Enable()
     {
@@ -31,44 +30,50 @@ public class ShopUI : MonoBehaviour, IUIPage
         LoadAllGuns();
 
         Page.SetActive(true);
-
-        PlayerInput.input.UI.Back.performed += BackStatics.Back;
     }
 
     public void Disable()
     {
-        PlayerInput.input.UI.Back.performed -= BackStatics.Back;
-
         PauseUnpause.SetPause(false);
 
-        GameplayUI.instance.Enable();
-
         Page.SetActive(false);
+
+        GameplayUI.instance.Enable();
     }
 
-    void LoadAllGuns()
+    private void LoadAllGuns()
     {
-        if(GunsAreLoaded == true)
+        if(_gunsAreLoaded == true)
         {
             return;
         }
 
-        foreach(ScriptableGun gun in guns)
+        foreach(ScriptableGun gun in Guns)
         {
-            GameObject gunSlotPrefab = Instantiate(GunSlotPrefab);
+            GameObject gunSlotPrefab = Instantiate(_gunSlotPrefab);
 
             gunSlotPrefab.GetComponent<DisplayGunOnShop>().SetData(gun);
 
-            if(gun.gunType == ScriptableGun.GunTypes.Pistol)
+            if(gun.GunType == ScriptableGun.GunTypes.Pistol)
             {
-                gunSlotPrefab.transform.SetParent(gunCategories[0]);
+                gunSlotPrefab.transform.SetParent(_pistolCategoriyPage);
             }
-            else  if (gun.gunType == ScriptableGun.GunTypes.Rifle)
+            else  if (gun.GunType == ScriptableGun.GunTypes.Rifle)
             {
-                gunSlotPrefab.transform.SetParent(gunCategories[1]);
+                gunSlotPrefab.transform.SetParent(_rifleCategoriyPage);
             }
 
-            GunsAreLoaded = true;
+            _gunsAreLoaded = true;
         }
+    }
+
+    private void OnEnable()
+    {
+        instance = this;
+    }
+
+    private void OnDisable()
+    {
+        instance = this;
     }
 }

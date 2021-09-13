@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class DancerScript : MonoBehaviour
 {
-    public Animator animator;
-    public AnimationClip animationClip;
+    // Controlld a dancers animation
 
-    void Start()
+    public Animator AnimatorComponent;
+    public AnimationClip Animation;
+
+    private void Start()
     {
-        PlayAnimation(animationClip);
+        PlayAnimation(Animation);
     }
-    void PlayAnimation(AnimationClip animation)
+
+    private void PlayAnimation(AnimationClip animation)
     {
-        animator.Play(animation.name);
+        AnimatorComponent.Play(animation.name);
     }
 }

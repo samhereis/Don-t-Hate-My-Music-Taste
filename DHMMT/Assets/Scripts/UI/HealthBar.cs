@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public static HealthBar instance;
-    public Slider slider;
+    // Health bar while gameplay
 
-    [SerializeField] Gradient gradient;
-    [SerializeField] Image Fill;
-    [SerializeField] Image HurtEffect;
+    public static HealthBar instance;
+
+    public Slider SliderComponent;
+
+    [SerializeField] private Gradient _gradient;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _hurtEffect;
 
     private void Awake()
     {
         ExtentionMethods.SetWithNullCheck(ref instance, this);
-        ExtentionMethods.SetWithNullCheck(ref slider, GetComponent<Slider>());
+        ExtentionMethods.SetWithNullCheck(ref SliderComponent, GetComponent<Slider>());
     }
 
     public void SetValue(float value)
     {
-        slider.value = value;
-        Fill.color = gradient.Evaluate(slider.normalizedValue);
-        HurtEffect.color = new Color(1, 1, 1, (1 - slider.normalizedValue));
+        SliderComponent.value = value;
+        _fill.color = _gradient.Evaluate(SliderComponent.normalizedValue);
+        _hurtEffect.color = new Color(1, 1, 1, (1 - SliderComponent.normalizedValue));
     }
 }

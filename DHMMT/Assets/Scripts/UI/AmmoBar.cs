@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class AmmoBar : MonoBehaviour
 {
-    [SerializeField] Slider slider;
+    // Ammo bar while gameplay
 
-    [SerializeField] Gradient gradient;
-    [SerializeField] Image Fill;
+    [SerializeField] private Slider _sliderComponent;
+
+    [SerializeField] private Gradient _gradientColor;
+    [SerializeField] private Image _fill;
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref slider, GetComponent<Slider>());
+        ExtentionMethods.SetWithNullCheck(ref _sliderComponent, GetComponent<Slider>());
     }
     private void OnEnable()
     {
@@ -24,13 +26,13 @@ public class AmmoBar : MonoBehaviour
     }
     void UpdateAmmo()
     {
-        if(PlayerWeaponDataHolder.instance == null || PlayerWeaponDataHolder.instance.gunUse == null)
+        if(PlayerWeaponDataHolder.instance == null || PlayerWeaponDataHolder.instance.GunUseComponent == null)
         {
             return;
         }
 
-        slider.maxValue = PlayerWeaponDataHolder.instance.gunUse.maxAmmo;
-        slider.value = PlayerWeaponDataHolder.instance.gunUse.CurrentAmmo;
-        Fill.color = gradient.Evaluate(slider.normalizedValue);
+        _sliderComponent.maxValue = PlayerWeaponDataHolder.instance.GunUseComponent.MaxAmmo;
+        _sliderComponent.value = PlayerWeaponDataHolder.instance.GunUseComponent.CurrentAmmo;
+        _fill.color = _gradientColor.Evaluate(_sliderComponent.normalizedValue);
     }
 }

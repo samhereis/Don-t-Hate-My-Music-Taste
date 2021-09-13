@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RecordUpdater : MonoBehaviour
 {
+    // Update a record of this map
+
     public static RecordUpdater instance;
 
     public string NameOfScene;

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class TS_D_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
 {
-    void OnEnable()
+    // Controll main players part on "SH-TH" map. "SH-TH_Page" controls UI part on this map
+
+    private void OnEnable()
     {
         GameplayUI.instance.Enable(GameplayUI.instance.TS_D_page);
 
-        GetComponent<PlayerJump>().doubleJumpable = false;
+        GetComponent<PlayerJump>().DoubleJumpable = false;
+    }
+
+    private void OnDisable()
+    {
+        GameplayUI.instance.Disable(GameplayUI.instance.TS_D_page);
     }
 
     public void Loose()
@@ -20,10 +27,5 @@ public class TS_D_MatchController : MonoBehaviour, IMatchWinable, IMatchLoosable
     public void Win()
     {
         TS_D_Page.instance.OnWin();
-    }
-
-    void OnDisable()
-    {
-        GameplayUI.instance.Disable(GameplayUI.instance.TS_D_page);
     }
 }

@@ -2293,10 +2293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7084c640ca6fb654db152a10774983e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 1
+  SensitivityValue: 0
   Mixer: {fileID: 24100000, guid: 7f325d2e21402ff4fb12dc272c931b9f, type: 2}
-  Volume: {fileID: 4618302514521750428}
-  Sensitivity: {fileID: 520565342}
+  _volumeSlider: {fileID: 4618302514521750428}
+  _sensitivitySlider: {fileID: 520565342}
 --- !u!1 &4618302516230734409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,6 +2689,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1660545701}
+    - target: {fileID: 7897122322908398339, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeleteAllGameData
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3562997200482651146, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}
     - {fileID: 1520027178385856191, guid: d6def9564b1c8104a97dc12ffeef5031, type: 3}

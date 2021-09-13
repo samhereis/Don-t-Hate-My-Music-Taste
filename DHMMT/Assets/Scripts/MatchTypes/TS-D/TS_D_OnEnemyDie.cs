@@ -14,8 +14,19 @@ public class TS_D_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 
         AnimationStatics.NormalShake(SecondsCount.instance.transform, 2);
 
-        Spawner.instance.enemies.Remove(gameObject);
+        Spawner.instance.Enemies.Remove(gameObject);
 
-        Destroy(gameObject);
+        EnableRagdoll();
+
+        Destroy(gameObject, 5);
+    }
+
+    public void EnableRagdoll()
+    {
+        GetComponent<Animator>().enabled = false;
+
+        GetComponent<EnemyStates>().enabled = false;
+
+        Destroy(GetComponent<HumanoidEquipWeaponData>().CurrentWeapon);
     }
 }

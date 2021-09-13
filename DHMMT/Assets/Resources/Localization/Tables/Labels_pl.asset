@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "Upewnij si\u0119, \u017Ce masz muzyk\u0119 w \u201E{musicFolder}\u201D"
+    m_Localized: "Upewnij si\u0119, \u017Ce masz muzyk\u0119 w \u201E{MusicFolderPath}\u201D"
     m_Metadata:
       m_Items:
       - id: 0
   - m_Id: 472228869263360
-    m_Localized: "Masz {musicCount}  dost\u0119pnych utwor\xF3w"
+    m_Localized: "Masz {MusicCount}  dost\u0119pnych utwor\xF3w"
     m_Metadata:
       m_Items:
       - id: 0

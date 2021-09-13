@@ -37,12 +37,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: Bitte stellen Sie sicher, dass Sie Musik in "{musicFolder}" haben.
+    m_Localized: Bitte stellen Sie sicher, dass Sie Musik in "{MusicFolderPath}"
+      haben.
     m_Metadata:
       m_Items:
       - id: 0
   - m_Id: 472228869263360
-    m_Localized: "Du hast {musicCount} Songs verf\xFCgbar"
+    m_Localized: "Du hast {MusicCount} Songs verf\xFCgbar"
     m_Metadata:
       m_Items:
       - id: 0

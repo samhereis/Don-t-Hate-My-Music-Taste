@@ -4,47 +4,56 @@ using UnityEngine;
 
 public class FireHead : MonoBehaviour
 {
-    [SerializeField] Vector3 velocity;
+    // Fire bubble head enemie's interaction with main player
 
-    [SerializeField] float Minspeed = 2f, MaxSpeed = 4f;
-    float speed;
-    [SerializeField] float damage = 20f;
+    [SerializeField] private Vector3 _velocity;
 
-    PlayerHealthData enemy;
+    [SerializeField] private float _minSpeed = 2f, _maxSpeed = 4f;
+    [SerializeField] private float _damage = 20f;
+
+    private PlayerHealthData _enemy;
+
+    private float _speed;
 
     void Awake()
     {
-        speed = Random.Range(Minspeed, MaxSpeed);
+        _speed = Random.Range(_minSpeed, _maxSpeed);
     }
 
     void FixedUpdate()
     {
         if(CameraMovement.instance != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref velocity, speed);
+            transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref _velocity, _speed);
             transform.LookAt(CameraMovement.instance.transform);
         }    
     }
 
     void OnTriggerEnter(Collider other)
     {
-        enemy = other.GetComponent<PlayerHealthData>();
+        _enemy = other?.GetComponent<PlayerHealthData>();
 
-        StartCoroutine(Damage());
+        if(_enemy != null)
+        {
+            StartCoroutine(Damage());
+        }
     }
 
-    void OnTriggerExit()
+    void OnTriggerExit(Collider other)
     {
-        StopAllCoroutines();
+        if(other.GetComponent<PlayerHealthData>() != null)
+        {
+            StopAllCoroutines();
 
-        enemy = null;
+            _enemy = null;
+        }
     }
 
     IEnumerator Damage()
     {
-        while(enemy != null)
+        while(_enemy != null)
         {
-            enemy.TakeDamage(damage);
+            _enemy.TakeDamage(_damage);
 
             yield return Wait.NewWait(1);
         }

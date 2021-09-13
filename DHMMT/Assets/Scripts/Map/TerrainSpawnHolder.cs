@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TerrainSpawnHolder : MonoBehaviour
 {
-    void Start()
+    // When a terrain with a spawnPoint instantiates, add its spawnPoint to "SpawnPints" class
+
+    private void Start()
     {
-        SpawnPoints.instance.spawnPoints.Add(gameObject);
+        SpawnPoints.instance.SpawnPointsList.Add(gameObject);
     }
 }

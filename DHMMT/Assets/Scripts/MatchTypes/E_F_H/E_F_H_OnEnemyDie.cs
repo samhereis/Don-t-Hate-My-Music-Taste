@@ -4,14 +4,35 @@ using UnityEngine;
 
 public class E_F_H_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 {
+    // TODO: finish "EnableRagdoll()"
+
+    // How an enemy dies on "Escape from Haters" map
+
     public void OnDie()
     {
-        Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+        StartCoroutine(Respwn());
 
         PlayerKillCount.instance.IncreaseKillCount();
 
-        Spawner.instance.enemies.Remove(gameObject);
+        Spawner.instance.Enemies.Remove(gameObject);
 
-        Destroy(gameObject);
+        EnableRagdoll();
+
+        Destroy(gameObject, 5);
+    }
+
+    public void EnableRagdoll()
+    {
+        GetComponent<Animator>().enabled = false;
+
+        GetComponent<EnemyStates>().enabled = false;
+
+        Destroy(GetComponent<HumanoidEquipWeaponData>().CurrentWeapon);
+    }
+
+    IEnumerator Respwn()
+    {
+        yield return Wait.NewWaitRealTime(Random.Range(2, 4));
+        Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
     }
 }

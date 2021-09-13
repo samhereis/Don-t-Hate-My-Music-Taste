@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class ExtentionMethods
 {
+    // Usefull methods
+
     public static bool SetWithNullCheck<T>(ref T obj, T value)
     {
         obj = value;

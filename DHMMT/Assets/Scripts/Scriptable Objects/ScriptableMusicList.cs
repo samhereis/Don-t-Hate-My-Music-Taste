@@ -5,5 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MusicList", menuName = "Scriptable Object/MusicList")]
 public class ScriptableMusicList : ScriptableObject
 {
-    public List<AudioClip> musicList;
+    // Default music to play when player doesn't have music on computer
+
+    public List<AudioClip> MusicList = new List<AudioClip>();
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Wait
 {
+    // Used for couroutines
+
     public static WaitForSeconds NewWait(float time)
     {
         return new WaitForSeconds(time);

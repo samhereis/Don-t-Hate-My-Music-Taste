@@ -6,26 +6,30 @@ using UnityEngine.AI;
 
 public class EnemyStates : MonoBehaviour
 {
+    // TODO: Make every state a separate script for better controll
+
+    // Controlls an enemie's state
     public enum States { searchForEnemy, chaseEnemyWhoIsInRange, attack }
+
     States state { get { return State; } set
         {
             switch(value)
             {
                 case States.searchForEnemy:
                         StopAllCoroutines();
-                        stateAction = null;
-                        stateAction = () => { if (followEnemy != null) { state = States.chaseEnemyWhoIsInRange; currentDestination = null; } };
+                        _stateAction = null;
+                        _stateAction = () => { if (FollowedEnemy != null) { state = States.chaseEnemyWhoIsInRange; CurrentDestination = null; } };
                         StartCoroutine(searchForEnemy());
                     break;
                 case States.chaseEnemyWhoIsInRange:
                         StopAllCoroutines();
-                        stateAction = null;
-                        stateAction = () => chaseEnemyWhoIsInRange();
+                        _stateAction = null;
+                        _stateAction = () => chaseEnemyWhoIsInRange();
                     break;
                 case States.attack:
                         StopAllCoroutines();
-                        stateAction = null;
-                        stateAction = () => { transform.LookAt(followEnemy); };
+                        _stateAction = null;
+                        _stateAction = () => { transform.LookAt(FollowedEnemy); };
                         StartCoroutine(attack());
                     break;
             }
@@ -34,61 +38,61 @@ public class EnemyStates : MonoBehaviour
 
     States State = States.searchForEnemy;
 
-    [SerializeField]  EnemyMovement enemyMovement;
+    [SerializeField] private EnemyMovement _enemyMovement;
 
-    public Transform followEnemy;
+    public Transform FollowedEnemy;
 
-    public Transform currentDestination;
+    public Transform CurrentDestination;
 
-    public int distanceToEnemy = 10;
+    public int DistanceToEnemy = 10;
 
-    [SerializeField] EnemyWeaponDataHolder weaponDataHolder;
+    [SerializeField] private EnemyWeaponDataHolder _weaponDataHolder;
 
     public float ShootRate;
 
-    Action stateAction;
+    private Action _stateAction;
 
-    float distance;
+    private float _distance;
 
     private void Start()
     {
         state = States.searchForEnemy;
 
-        ExtentionMethods.SetWithNullCheck(ref enemyMovement, GetComponent<EnemyMovement>());
+        ExtentionMethods.SetWithNullCheck(ref _enemyMovement, GetComponent<EnemyMovement>());
 
-        ExtentionMethods.SetWithNullCheck(weaponDataHolder, GetComponent<EnemyWeaponDataHolder>());
+        ExtentionMethods.SetWithNullCheck(_weaponDataHolder, GetComponent<EnemyWeaponDataHolder>());
     }
 
     private void FixedUpdate()
     {
-        stateAction();
+        _stateAction();
     }
     public IEnumerator searchForEnemy()
     {
 
-        if (currentDestination == null || enemyMovement.navMeshAgent.remainingDistance == 3)
+        if (CurrentDestination == null || _enemyMovement.NavMeshAgentOfEnemy.remainingDistance == 3)
         {
-            currentDestination = SpawnPoints.instance.GetRandomSpawn();
-            enemyMovement.MoveTo(currentDestination, 2);
+            CurrentDestination = SpawnPoints.instance.GetRandomSpawn();
+            _enemyMovement.MoveTo(CurrentDestination, 2);
         }
 
         yield return Wait.NewWait(10);
     }
     public void chaseEnemyWhoIsInRange()
     {
-        if(followEnemy == null)
+        if(FollowedEnemy == null)
         {
             state = States.searchForEnemy;
         }
 
-        distance = Vector3.Distance(this.transform.position, followEnemy.position);
-        if (distance > distanceToEnemy)
+        _distance = Vector3.Distance(this.transform.position, FollowedEnemy.position);
+        if (_distance > DistanceToEnemy)
         {
-           enemyMovement.navMeshAgent.speed = 3f;
-           enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
-           enemyMovement.MoveTo(followEnemy, 3);
+           _enemyMovement.NavMeshAgentOfEnemy.speed = 3f;
+           _enemyMovement.AnimatorOfEnemy.SetFloat("moveVelocityY", _enemyMovement.NavMeshAgentOfEnemy.speed);
+           _enemyMovement.MoveTo(FollowedEnemy, 3);
         }
-        else if(distance < distanceToEnemy)
+        else if(_distance < DistanceToEnemy)
         {
            state = States.attack;
         }
@@ -97,7 +101,7 @@ public class EnemyStates : MonoBehaviour
     {
         while(true)
         {
-            if (followEnemy == null || Vector3.Distance(this.transform.position, followEnemy.position) > distanceToEnemy)
+            if (FollowedEnemy == null || Vector3.Distance(this.transform.position, FollowedEnemy.position) > DistanceToEnemy)
             {
                 state = States.searchForEnemy;
                 StopCoroutine(attack());
@@ -105,13 +109,13 @@ public class EnemyStates : MonoBehaviour
             }
             else
             {
-                Debug.Log(Vector3.Distance(this.transform.position, followEnemy.position));
+                Debug.Log(Vector3.Distance(this.transform.position, FollowedEnemy.position));
 
-                enemyMovement.navMeshAgent.speed = 0;
+                _enemyMovement.NavMeshAgentOfEnemy.speed = 0;
 
-                enemyMovement.animator.SetFloat("moveVelocityY", enemyMovement.navMeshAgent.speed);
+                _enemyMovement.AnimatorOfEnemy.SetFloat("moveVelocityY", _enemyMovement.NavMeshAgentOfEnemy.speed);
 
-                weaponDataHolder.gunUse?.Shoot();
+                _weaponDataHolder.GunUseComponent?.Shoot();
 
                 yield return Wait.NewWait(ShootRate);
             }
@@ -120,6 +124,6 @@ public class EnemyStates : MonoBehaviour
 
     void changeDistanceToEnemy()
     {
-        distanceToEnemy = UnityEngine.Random.Range(10, 30);
+        DistanceToEnemy = UnityEngine.Random.Range(10, 30);
     }
 }
