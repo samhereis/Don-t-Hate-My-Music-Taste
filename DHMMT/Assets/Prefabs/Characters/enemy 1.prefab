@@ -1638,7 +1638,7 @@ MonoBehaviour:
   _enemyMovement: {fileID: 2413848665578746312}
   FollowedEnemy: {fileID: 0}
   CurrentDestination: {fileID: 0}
-  DistanceToEnemy: 10
+  DistanceToEnemy: 5
   _weaponDataHolder: {fileID: 715024889744891478}
   ShootRate: 2
 --- !u!114 &2413848665578746314

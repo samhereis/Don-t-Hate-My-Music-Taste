@@ -42,6 +42,8 @@ public class PlayingMusicData : MonoBehaviour
         {
             foreach (string file in FoundMusic)
             {
+                _www = new WWW("file:///" + file);
+
                 if (_www.GetAudioClip(true, true).GetType() == typeof(AudioClip))
                 {
                     ArrayOfSongs.Add(_www.GetAudioClip(true, true));

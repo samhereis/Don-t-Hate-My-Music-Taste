@@ -1645,11 +1645,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: HighSoundMult
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: MiddleSoundMult
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: makeObjectsShake
@@ -1657,7 +1657,7 @@ PrefabInstance:
       objectReference: {fileID: 25962690}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: NextToBassSoundMult
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755984, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_RootOrder
@@ -1829,7 +1829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: t
-      value: 3
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6921058632634339305, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_Enabled

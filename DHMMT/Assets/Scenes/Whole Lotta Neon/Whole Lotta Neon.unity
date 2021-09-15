@@ -1115,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: HighSoundMult
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: bassSoundMult

@@ -13,14 +13,13 @@ public class BackButton : MonoBehaviour
     private void OnEnable()
     {
         instance = this;
-
         PlayerInput.PlayersInputState.UI.Back.performed += Back;
     }
 
     private void OnDisable()
     {
-        instance = null;
         PlayerInput.PlayersInputState.UI.Back.performed -= Back;
+        instance = null;
     }
 
     private void Back(InputAction.CallbackContext context)
