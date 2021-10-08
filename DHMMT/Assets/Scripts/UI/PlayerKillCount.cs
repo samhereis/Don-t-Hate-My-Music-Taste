@@ -37,6 +37,12 @@ public class PlayerKillCount : MonoBehaviour
         KillCount = 0;
     }
 
+    public void SetInfinity()
+    {
+        _killCount = 9999;
+        _text.text = "∞";
+    }
+
     public void StartCheckingForEnemies(int time)
     {
         StartCoroutine(ConstanclyCheckEnemies(time));

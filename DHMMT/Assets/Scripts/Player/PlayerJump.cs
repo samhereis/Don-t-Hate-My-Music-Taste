@@ -54,4 +54,9 @@ public class PlayerJump : MonoBehaviour
             _doubleJump = false;
         }
     }
+
+    public void PerformJump(float height)
+    {
+        _playerVelocity.y = height;
+    }
 }

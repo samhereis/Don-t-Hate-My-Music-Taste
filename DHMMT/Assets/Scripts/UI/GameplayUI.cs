@@ -17,6 +17,7 @@ public class GameplayUI : MonoBehaviour, IUIPage
     public GameObject SH_TH_page;
     public GameObject TS_D_page;
     public GameObject WH_L_N_page;
+    public GameObject B_F_page;
 
     private void Awake()
     {

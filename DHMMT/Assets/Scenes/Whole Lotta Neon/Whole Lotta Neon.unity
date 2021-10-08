@@ -626,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204837813}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 34, y: 24, z: 130}
+  m_LocalPosition: {x: 34, y: 24, z: 135}
   m_LocalScale: {x: 60, y: 1, z: 100}
   m_Children:
   - {fileID: 446815600}
@@ -1110,12 +1110,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
+      propertyPath: _musicList
+      value: 
+      objectReference: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+    - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: ShouldSearch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: HighSoundMult
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: bassSoundMult
@@ -1123,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: MiddleSoundMult
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194594803, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: middleSoundMult
@@ -1663,6 +1667,10 @@ PrefabInstance:
       propertyPath: animationClip
       value: 
       objectReference: {fileID: 7400000, guid: 9fb7b954a905a514d8ec91a18e76c3b3, type: 2}
+    - target: {fileID: 424650728579755583, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 570441021133878617, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -2008,6 +2016,10 @@ PrefabInstance:
       propertyPath: animationClip
       value: 
       objectReference: {fileID: 7400000, guid: 9f1db1dded52ce344a254d709e1e0202, type: 2}
+    - target: {fileID: 424650728579755583, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 570441021133878617, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -3133,6 +3145,10 @@ PrefabInstance:
       propertyPath: animationClip
       value: 
       objectReference: {fileID: 7400000, guid: e6ccf9393be064e4295dbb5af53995a7, type: 2}
+    - target: {fileID: 424650728579755583, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 570441021133878617, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -4066,6 +4082,10 @@ PrefabInstance:
       propertyPath: Animation
       value: 
       objectReference: {fileID: 7400000, guid: 79d571ef301cc4c43b0bc8cb709164ce, type: 2}
+    - target: {fileID: 424650728579755583, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 570441021133878617, guid: fdae63739918a3c46b79d47f100145e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647

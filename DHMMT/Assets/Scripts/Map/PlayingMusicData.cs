@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayingMusicData : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class PlayingMusicData : MonoBehaviour
 
     public static PlayingMusicData instance;
 
-    [Header("Reactors")]
+    [Header("Reaction Value Multiple")]
     public float BassSoundMult = 1;
     public float NextToBassSoundMult = 1;
     public float MiddleSoundMult = 1;
@@ -16,11 +18,23 @@ public class PlayingMusicData : MonoBehaviour
 
     [Header("Music's gotten data")]
     public float[] SpectrumWidth;
-    public List<AudioClip> ArrayOfSongs;
-    public ScriptableMusicList MusicList;
+    public List<AudioClip> ArrayOfSongs 
+    {
+        get
+        {
+            if (_musicList == null)
+            {
+                return ScriptableMusicList.instance.MusicList;
+            }
+            else
+            {
+                return _musicList.MusicList;
+            }
+        }
+    }
+    public ScriptableMusicList _musicList;
 
     [Header("Search for music data")]
-    private WWW _www;
     public bool ShouldSearch;
 
     [Header("Components")]
@@ -33,30 +47,19 @@ public class PlayingMusicData : MonoBehaviour
     {
         SpectrumWidth = new float[64];
         instance = this;
-        _audioSource = GetComponent<AudioSource>();
+
+        if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
+
+        if (_musicList == null) _musicList = ScriptableMusicList.instance;
+
+        if (ShouldSearch)
+        {
+            StartCoroutine(_musicList.loadMusic());
+        }
     }
 
     private void Start()
     {
-        if (ShouldSearch && FoundMusic.Count > 0)
-        {
-            foreach (string file in FoundMusic)
-            {
-                _www = new WWW("file:///" + file);
-
-                if (_www.GetAudioClip(true, true).GetType() == typeof(AudioClip))
-                {
-                    ArrayOfSongs.Add(_www.GetAudioClip(true, true));
-                }
-            }
-        }
-        else
-        {
-            ArrayOfSongs = MusicList.MusicList;
-
-            _audioSource.clip = ArrayOfSongs[Random.Range(0, ArrayOfSongs.Count)];
-        }
-
         InvokeRepeating("checkForAudio", 0f, 2f);       /* checkForAudio if music is playing every * seconds */
 
         ExtentionMethods.SetWithNullCheck(ref _makeObjectsShake, GetComponent<MakeObjectsShake>());

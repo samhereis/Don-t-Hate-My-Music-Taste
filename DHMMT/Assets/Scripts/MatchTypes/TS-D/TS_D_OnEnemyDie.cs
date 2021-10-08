@@ -6,7 +6,7 @@ public class TS_D_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 {
     public void OnDie()
     {
-        Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+        Spawner.instance.RespawnEnemy(gameObject);
 
         PlayerKillCount.instance.IncreaseKillCount();
 

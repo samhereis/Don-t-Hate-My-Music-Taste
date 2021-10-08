@@ -33,6 +33,6 @@ public class E_F_H_OnEnemyDie : MonoBehaviour, IOnEnemyDie
     IEnumerator Respwn()
     {
         yield return Wait.NewWaitRealTime(Random.Range(2, 4));
-        Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+        Spawner.instance.RespawnEnemy(gameObject);
     }
 }

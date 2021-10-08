@@ -9,11 +9,9 @@ public class W_L_N_OnEnemyDie : MonoBehaviour, IOnEnemyDie
 
     public void OnDie()
     {
-        Spawner.instance.SpawnEnemies(1);
+        Spawner.instance.RespawnEnemy(gameObject);
 
         PlayerKillCount.instance.IncreaseKillCount();
-
-        Spawner.instance.Enemies.Remove(gameObject);
 
         EnableRagdoll();
 

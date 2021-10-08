@@ -17,6 +17,8 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
 
     public List<Transform> Loots;
 
+    private IOnEnemyDie _onEnemyDie;
+
     public void TakeDamage(float damage)
     {
         _health -= damage;
@@ -25,20 +27,27 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
         {
             IsAlive = false;
 
-            Instantiate(Loots[Random.Range(0, Loots.Count)], transform.position, Quaternion.identity);
-
-            if(GetComponent<IOnEnemyDie>() != null)
-            {
-                GetComponent<IOnEnemyDie>().OnDie();
-            }
-            else
-            {
-                Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
-
-                PlayerKillCount.instance.IncreaseKillCount();
-
-                Destroy(gameObject);
-            }
+            Die();
         };
+    }
+
+    private void Die()
+    {
+        Instantiate(Loots[Random.Range(0, Loots.Count)], transform.position, Quaternion.identity);
+
+        _onEnemyDie = GetComponent<IOnEnemyDie>();
+
+        if (_onEnemyDie != null)
+        {
+            _onEnemyDie.OnDie();
+        }
+        else
+        {
+            Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
+
+            PlayerKillCount.instance.IncreaseKillCount();
+
+            Destroy(gameObject);
+        }
     }
 }

@@ -79,6 +79,28 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    public void RespawnEnemy(GameObject caller)
+    {
+        Enemies.Remove(caller);
+        EnemiesReserve.Remove(caller);
+
+        Enemies.RemoveAll(x => !x);
+        EnemiesReserve.RemoveAll(x => !x);
+
+        if (EnemiesReserve.Count > 0)
+        {
+            var obj = EnemiesReserve[0];
+
+            obj.SetActive(true);
+
+            obj.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
+        }
+        else
+        {
+            SpawnEnemy(SpawnPoints.instance.GetRandomSpawn());
+        }
+    }
+
     private IEnumerator SpawnPlayer()
     {
         yield return Wait.NewWait(WaitBeforeSpawnPlayer);

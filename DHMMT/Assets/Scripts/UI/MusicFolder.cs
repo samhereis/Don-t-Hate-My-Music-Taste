@@ -1,55 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MusicFolder : MonoBehaviour
 {
     // Check if player has music on computer
 
-    public string MusicFolderPath;
+    public string MusicFolderPath { get => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT"; }
     public int MusicCount;
-
-    public List<AudioClip> ArrayOfSongs;
-
-    private WWW www;
 
     [SerializeField] private GameObject _found;
     [SerializeField] private GameObject _notFound;
 
+    [SerializeField] ScriptableMusicList _musicList;
+
+    [SerializeField] private UnityEngine.Localization.Components.LocalizeStringEvent foundText;
+
     private void Awake()
     {
-        if (System.IO.Directory.Exists($"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT") == false)
+        if (System.IO.Directory.Exists(MusicFolderPath) == false)
         {
-            System.IO.Directory.CreateDirectory($"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT");
+            System.IO.Directory.CreateDirectory(MusicFolderPath);
         }
 
-        foreach (string file in System.IO.Directory.GetFiles($"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT"))
-        {
-            www = new WWW("file:///" + file);
-            try
-            {
-                if(www.GetAudioClip(true, true).GetType() == typeof(AudioClip))
-                {
-                    ArrayOfSongs.Add(www.GetAudioClip(true, true));
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Debug.Log(ex.Message);
-            }
-        }
+        StartCoroutine(_musicList.loadMusic());
+    }
 
-        if(ArrayOfSongs.Count == 0)
+    private void FixedUpdate()
+    {
+        if (_musicList.MusicList.Count == 0)
         {
-            MusicFolderPath = $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
-
+            _found.SetActive(false);
             _notFound.SetActive(true);
         }
-        else if(ArrayOfSongs.Count > 0)
+        else if (_musicList.MusicList.Count > 0)
         {
-            MusicCount = ArrayOfSongs.Count;
+            MusicCount = _musicList.MusicList.Count;
 
+            _notFound.SetActive(false);
             _found.SetActive(true);
         }
+
+        foundText.RefreshString();
     }
 }

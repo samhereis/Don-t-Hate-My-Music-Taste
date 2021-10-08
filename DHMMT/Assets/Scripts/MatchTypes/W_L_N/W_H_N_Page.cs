@@ -62,6 +62,6 @@ public class W_H_N_Page : MonoBehaviour
     public void Replay()
     {
         PauseUnpause.SetPause(false);
-        StartCoroutine(SceneLoadController.LoadScene(5));
+        StartCoroutine(SceneLoadController.LoadScene(6));
     }
 }

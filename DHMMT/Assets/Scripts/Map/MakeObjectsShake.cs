@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class MakeObjectsShake : MonoBehaviour
 {
-    // Changes an objects based on playing music
+    // Changes objects based on playing music
 
     public static MakeObjectsShake instance;
 

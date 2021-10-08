@@ -12,16 +12,9 @@ public class SH_TH_OnEnemyDie : MonoBehaviour, IOnEnemyDie
     {
         Spawner.instance.Enemies.Remove(gameObject);
 
-        if(Spawner.instance.EnemiesReserve.Count > 0)
-        {
-            var obj = Spawner.instance.EnemiesReserve[Random.Range(0, Spawner.instance.EnemiesReserve.Count)];
+        Spawner.instance.RespawnEnemy(gameObject);
 
-            obj.SetActive(true);
-
-            obj.transform.position = SpawnPoints.instance.GetRandomSpawn().position;
-        }
-
-        if(Spawner.instance.Enemies.Count + Spawner.instance.EnemiesReserve.Count == 0)
+        if (Spawner.instance.Enemies.Count + Spawner.instance.EnemiesReserve.Count == 0)
         {
             SH_TH_Page.instance.OnWin();
         }

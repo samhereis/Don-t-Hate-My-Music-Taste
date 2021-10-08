@@ -11,7 +11,7 @@ public class FireHead : MonoBehaviour
     [SerializeField] private float _minSpeed = 2f, _maxSpeed = 4f;
     [SerializeField] private float _damage = 20f;
 
-    private PlayerHealthData _enemy;
+    private PlayerHealthData _player;
 
     private float _speed;
 
@@ -31,9 +31,9 @@ public class FireHead : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        _enemy = other?.GetComponent<PlayerHealthData>();
+        _player = other?.GetComponent<PlayerHealthData>();
 
-        if(_enemy != null)
+        if(_player != null)
         {
             StartCoroutine(Damage());
         }
@@ -45,15 +45,15 @@ public class FireHead : MonoBehaviour
         {
             StopAllCoroutines();
 
-            _enemy = null;
+            _player = null;
         }
     }
 
     IEnumerator Damage()
     {
-        while(_enemy != null)
+        while(_player != null)
         {
-            _enemy.TakeDamage(_damage);
+            _player.TakeDamage(_damage);
 
             yield return Wait.NewWait(1);
         }
