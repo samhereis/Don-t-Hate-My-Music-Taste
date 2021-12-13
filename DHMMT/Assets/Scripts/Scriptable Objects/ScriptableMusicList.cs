@@ -14,7 +14,7 @@ public class ScriptableMusicList : ScriptableObject
 
     public List<AudioClip> MusicList = new List<AudioClip>();
 
-    public List<AudioClip> _defaultMusicList = new List<AudioClip>();
+    public List<AudioClip> _defaultMusicList;
 
     public IEnumerator loadMusic()
     {
@@ -51,7 +51,7 @@ public class ScriptableMusicList : ScriptableObject
 
         if(MusicList.Count == 0)
         {
-            MusicList = _defaultMusicList;
+            MusicList.AddRange(_defaultMusicList);
         }
     }
 }

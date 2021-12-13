@@ -10,12 +10,14 @@ public class MusicFolder : MonoBehaviour
     public string MusicFolderPath { get => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT"; }
     public int MusicCount;
 
-    [SerializeField] private GameObject _found;
-    [SerializeField] private GameObject _notFound;
+    //[SerializeField] private GameObject _found;
+    //[SerializeField] private GameObject _notFound;
 
     [SerializeField] ScriptableMusicList _musicList;
 
     [SerializeField] private UnityEngine.Localization.Components.LocalizeStringEvent foundText;
+
+    [SerializeField] AudioSource _audioSource;
 
     private void Awake()
     {
@@ -23,24 +25,18 @@ public class MusicFolder : MonoBehaviour
         {
             System.IO.Directory.CreateDirectory(MusicFolderPath);
         }
-
-        StartCoroutine(_musicList.loadMusic());
     }
 
     private void FixedUpdate()
     {
-        if (_musicList.MusicList.Count == 0)
+        if (_audioSource.isPlaying == false && _musicList.MusicList.Count > 0)
         {
-            _found.SetActive(false);
-            _notFound.SetActive(true);
-        }
-        else if (_musicList.MusicList.Count > 0)
-        {
-            MusicCount = _musicList.MusicList.Count;
+            _audioSource.clip = _musicList.MusicList[Random.Range(0, _musicList.MusicList.Count)];
 
-            _notFound.SetActive(false);
-            _found.SetActive(true);
+            _audioSource.Play();
         }
+
+        MusicCount = _musicList.MusicList.Count;
 
         foundText.RefreshString();
     }

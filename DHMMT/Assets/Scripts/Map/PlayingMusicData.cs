@@ -22,13 +22,13 @@ public class PlayingMusicData : MonoBehaviour
     {
         get
         {
-            if (_musicList == null)
+            if (_musicList.MusicList.Count > 0)
             {
-                return ScriptableMusicList.instance.MusicList;
+                return _musicList.MusicList;
             }
             else
             {
-                return _musicList.MusicList;
+                return _musicList._defaultMusicList;
             }
         }
     }
@@ -50,8 +50,6 @@ public class PlayingMusicData : MonoBehaviour
 
         if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
 
-        if (_musicList == null) _musicList = ScriptableMusicList.instance;
-
         if (ShouldSearch)
         {
             StartCoroutine(_musicList.loadMusic());
@@ -60,7 +58,7 @@ public class PlayingMusicData : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("checkForAudio", 0f, 2f);       /* checkForAudio if music is playing every * seconds */
+        InvokeRepeating("checkForAudio", 2f, 2f);       /* checkForAudio if music is playing every * seconds */
 
         ExtentionMethods.SetWithNullCheck(ref _makeObjectsShake, GetComponent<MakeObjectsShake>());
     }
@@ -84,9 +82,10 @@ public class PlayingMusicData : MonoBehaviour
 
     private void checkForAudio()    /* Check if any audio is playing */
     {
-        if (!_audioSource.isPlaying)
+        if (!_audioSource.isPlaying && ArrayOfSongs.Count > 0 || _audioSource.clip == null && ArrayOfSongs.Count > 0)
         {
-            _audioSource.clip = ArrayOfSongs[Random.Range(0, ArrayOfSongs.Count)];      /*Play random song from <<arrayOfSongs>>*/
+            _audioSource.clip = ArrayOfSongs[Random.Range(0, ArrayOfSongs.Count)];
+
             _audioSource.Play();
 
             if (_makeObjectsShake.enabled == false)

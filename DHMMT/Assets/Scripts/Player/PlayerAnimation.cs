@@ -8,7 +8,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     // Controlles players animations
 
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
 
     private int _velocityHashY, _velocityHashX;
 
