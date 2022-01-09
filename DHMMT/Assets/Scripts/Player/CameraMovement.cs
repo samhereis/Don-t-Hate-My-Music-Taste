@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Scriptables.Gameplay;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class CameraMovement : MonoBehaviour
 
     public static CameraMovement instance;
 
-    [SerializeField] [Range(0, 1)] public float MouseSensitivity = 0.2f;
+    [SerializeField] private FloatSetting_SO _sensitivity;
 
     private Vector2 _context;
 
@@ -37,14 +38,14 @@ public class CameraMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Look.performed += Look;
-        PlayerInput.PlayersInputState.Gameplay.Look.canceled += Look;
+        PlayerInput.playersInputState.Gameplay.Look.performed += Look;
+        PlayerInput.playersInputState.Gameplay.Look.canceled += Look;
     }
 
     private void OnDisable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Look.performed -= Look;
-        PlayerInput.PlayersInputState.Gameplay.Look.canceled -= Look;
+        PlayerInput.playersInputState.Gameplay.Look.performed -= Look;
+        PlayerInput.playersInputState.Gameplay.Look.canceled -= Look;
     }
 
     private void Update()
@@ -60,7 +61,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Look(InputAction.CallbackContext ctx)
     {
-        _context = ctx.ReadValue<Vector2>() * GameSettings.instance.SensitivityValue;
+        _context = ctx.ReadValue<Vector2>() * _sensitivity.currentValue;
 
         _mouseX = _context.x;
         _mouseY = _context.y;

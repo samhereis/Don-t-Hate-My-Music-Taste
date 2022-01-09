@@ -27,7 +27,7 @@ public static class SceneLoadController
                     _loading = false;
 
                     Time.timeScale = 1;
-                    PlayerInput.PlayersInputState = new InputSettings();
+
                     asyncOperation.allowSceneActivation = true;
 
                 }

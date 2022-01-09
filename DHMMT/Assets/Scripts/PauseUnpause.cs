@@ -32,12 +32,12 @@ public class PauseUnpause : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Pause.performed += Pause;
+        PlayerInput.playersInputState.Gameplay.Pause.performed += Pause;
     }
 
     private void OnDisable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Pause.performed -= Pause;
+        PlayerInput.playersInputState.Gameplay.Pause.performed -= Pause;
     }
 
     private void Pause(InputAction.CallbackContext obj)

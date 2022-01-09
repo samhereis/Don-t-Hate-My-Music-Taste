@@ -23,12 +23,12 @@ public class PlayerJump : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Jump.performed += Jump;
+        PlayerInput.playersInputState.Gameplay.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Jump.performed -= Jump;
+        PlayerInput.playersInputState.Gameplay.Jump.performed -= Jump;
     }
 
     private void FixedUpdate()

@@ -17,14 +17,14 @@ public class PlayerWeaponAim : MonoBehaviour
         _weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
         _weaponPosition = GetComponent<HumanoidEquipWeaponData>().WeaponPosition;
 
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Aim;
-        PlayerInput.PlayersInputState.Gameplay.Aim.canceled  += Aim;
+        PlayerInput.playersInputState.Gameplay.Aim.performed += Aim;
+        PlayerInput.playersInputState.Gameplay.Aim.canceled  += Aim;
     }
 
     void OnDisable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Aim;
-        PlayerInput.PlayersInputState.Gameplay.Aim.canceled  -= Aim;
+        PlayerInput.playersInputState.Gameplay.Aim.performed -= Aim;
+        PlayerInput.playersInputState.Gameplay.Aim.canceled  -= Aim;
     }
 
     void Aim(InputAction.CallbackContext context)

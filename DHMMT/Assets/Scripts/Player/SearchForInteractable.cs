@@ -14,7 +14,7 @@ public class SearchForInteractable : MonoBehaviour
     {
         instance = this;
 
-        PlayerInput.PlayersInputState.Gameplay.Interact.performed += _ => { Interact(); };
+        PlayerInput.playersInputState.Gameplay.Interact.performed += _ => { Interact(); };
     }
 
     private void FixedUpdate()

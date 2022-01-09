@@ -11,11 +11,13 @@ public class inputEnabler : MonoBehaviour
 
     private void OnEnable()
     { 
-        PlayerInput.PlayersInputState.Enable(); PlayerInput.SetInput(OnEnableEnable); 
+        PlayerInput.Enable(); 
+        PlayerInput.SetInput(OnEnableEnable); 
     }
 
     private void OnDisable()
     { 
-        PlayerInput.SetInput(OnDisableEnable); PlayerInput.PlayersInputState.Disable(); 
+        PlayerInput.SetInput(OnDisableEnable); 
+        PlayerInput.Disable(); 
     }
 }

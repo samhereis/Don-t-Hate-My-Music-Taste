@@ -19,30 +19,30 @@ public class PlayerWeaponAnimation : MonoBehaviour
     {
         instance = this;
 
-        PlayerInput.PlayersInputState.Gameplay.Move.performed += Move;
-        PlayerInput.PlayersInputState.Gameplay.Move.canceled += Move;
+        PlayerInput.playersInputState.Gameplay.Move.performed += Move;
+        PlayerInput.playersInputState.Gameplay.Move.canceled += Move;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += Sprint;
-        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled += Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed += Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.canceled += Sprint;
 
-        PlayerInput.PlayersInputState.Gameplay.Fire.performed += Fire; 
+        PlayerInput.playersInputState.Gameplay.Fire.performed += Fire; 
         
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Fire;
+        PlayerInput.playersInputState.Gameplay.Aim.performed += Fire;
     }
 
     private void OnDisable()
     {
         instance = null;
 
-        PlayerInput.PlayersInputState.Gameplay.Move.performed -= Move;
-        PlayerInput.PlayersInputState.Gameplay.Move.canceled  -= Move;
+        PlayerInput.playersInputState.Gameplay.Move.performed -= Move;
+        PlayerInput.playersInputState.Gameplay.Move.canceled  -= Move;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= Sprint;
-        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  -= Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.canceled  -= Sprint;
 
-        PlayerInput.PlayersInputState.Gameplay.Fire.performed -= Fire;
+        PlayerInput.playersInputState.Gameplay.Fire.performed -= Fire;
 
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Fire;
+        PlayerInput.playersInputState.Gameplay.Aim.performed -= Fire;
     }
 
     private void Move(InputAction.CallbackContext context)

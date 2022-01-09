@@ -2328,10 +2328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7084c640ca6fb654db152a10774983e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SensitivityValue: 0
-  Mixer: {fileID: 24100000, guid: 7f325d2e21402ff4fb12dc272c931b9f, type: 2}
-  _volumeSlider: {fileID: 4618302514521750428}
+  _sensitivity: {fileID: 0}
   _sensitivitySlider: {fileID: 520565342}
+  Mixer: {fileID: 24100000, guid: 7f325d2e21402ff4fb12dc272c931b9f, type: 2}
+  _volume: {fileID: 0}
+  _volumeSlider: {fileID: 4618302514521750428}
 --- !u!114 &1660545702
 MonoBehaviour:
   m_ObjectHideFlags: 0

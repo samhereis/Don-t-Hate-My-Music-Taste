@@ -1,6 +1,10 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+using UI.Window;
+#endif
 
 namespace UI.Window
 {
@@ -48,3 +52,11 @@ namespace UI.Window
         }
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(OnClickOpenCloseWindow))]
+public class OnClickOpenCloseWindowEditor<T> : UnityEditor.Editor
+{
+
+}
+#endif

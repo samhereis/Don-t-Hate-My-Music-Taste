@@ -125,8 +125,6 @@ public class Spawner : MonoBehaviour
 
             HealthBar.instance.SetValue(HealthBar.instance.SliderComponent.maxValue);
 
-            PlayerInput.PlayersInputState = new InputSettings();
-
             StartCoroutine(SpawnPlayer());
         }
     }
@@ -137,8 +135,6 @@ public class Spawner : MonoBehaviour
         {
 
             HealthBar.instance.SetValue(HealthBar.instance.SliderComponent.maxValue);
-
-            PlayerInput.PlayersInputState = new InputSettings();
 
             StartCoroutine(SpawnPlayer());
         }

@@ -22,24 +22,24 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Move.performed += SetAnimationValue;
-        PlayerInput.PlayersInputState.Gameplay.Move.canceled  += SetAnimationValue;
+        PlayerInput.playersInputState.Gameplay.Move.performed += SetAnimationValue;
+        PlayerInput.playersInputState.Gameplay.Move.canceled  += SetAnimationValue;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += SetSpeedMultiplier;
-        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled += SetSpeedMultiplier;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed += SetSpeedMultiplier;
+        PlayerInput.playersInputState.Gameplay.Sprint.canceled += SetSpeedMultiplier;
 
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed += Fire;
+        PlayerInput.playersInputState.Gameplay.Aim.performed += Fire;
     }
 
     private void OnDisable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Move.performed -= SetAnimationValue;
-        PlayerInput.PlayersInputState.Gameplay.Move.canceled  -= SetAnimationValue;
+        PlayerInput.playersInputState.Gameplay.Move.performed -= SetAnimationValue;
+        PlayerInput.playersInputState.Gameplay.Move.canceled  -= SetAnimationValue;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= SetSpeedMultiplier;
-        PlayerInput.PlayersInputState.Gameplay.Sprint.canceled  -= SetSpeedMultiplier;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed -= SetSpeedMultiplier;
+        PlayerInput.playersInputState.Gameplay.Sprint.canceled  -= SetSpeedMultiplier;
 
-        PlayerInput.PlayersInputState.Gameplay.Aim.performed -= Fire;
+        PlayerInput.playersInputState.Gameplay.Aim.performed -= Fire;
     }
 
     private void SetAnimationValue(InputAction.CallbackContext context)

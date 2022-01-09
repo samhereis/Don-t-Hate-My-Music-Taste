@@ -22,26 +22,26 @@ public class PlayerGunUse : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.PlayersInputState.Gameplay.Fire.performed += Fire;
-        PlayerInput.PlayersInputState.Gameplay.Fire.canceled  += Fire;
+        PlayerInput.playersInputState.Gameplay.Fire.performed += Fire;
+        PlayerInput.playersInputState.Gameplay.Fire.canceled  += Fire;
 
-        PlayerInput.PlayersInputState.Gameplay.Reload.performed += Reload;
+        PlayerInput.playersInputState.Gameplay.Reload.performed += Reload;
 
-        PlayerInput.PlayersInputState.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+        PlayerInput.playersInputState.Gameplay.ChangeWeapon.performed += ChangeWeapon;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed += Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed += Sprint;
     }
 
     private void OnDisable ()
     {
-        PlayerInput.PlayersInputState.Gameplay.Fire.performed -= Fire;
-        PlayerInput.PlayersInputState.Gameplay.Fire.canceled  -= Fire;
+        PlayerInput.playersInputState.Gameplay.Fire.performed -= Fire;
+        PlayerInput.playersInputState.Gameplay.Fire.canceled  -= Fire;
 
-        PlayerInput.PlayersInputState.Gameplay.Reload.performed -= Reload;
+        PlayerInput.playersInputState.Gameplay.Reload.performed -= Reload;
 
-        PlayerInput.PlayersInputState.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
+        PlayerInput.playersInputState.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
 
-        PlayerInput.PlayersInputState.Gameplay.Sprint.performed -= Sprint;
+        PlayerInput.playersInputState.Gameplay.Sprint.performed -= Sprint;
     }
 
     public void ChangeWeapon(InputAction.CallbackContext context)
