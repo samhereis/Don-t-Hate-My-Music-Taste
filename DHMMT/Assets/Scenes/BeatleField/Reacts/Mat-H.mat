@@ -51,6 +51,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Emission: 2
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _Saturation: 2
     m_Colors:
     - _Color: {r: 0, g: 0.03938818, b: 1, a: 0}

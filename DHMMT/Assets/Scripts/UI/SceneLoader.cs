@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneLoader : MonoBehaviour
@@ -8,15 +6,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(int index)
     {
-        if(LoadingWindow.instance != null)
-        {
-            LoadingWindow.instance.Window.SetActive(true);
+        LoadingWindow.instance?.Open();
 
-            StartCoroutine(SceneLoadController.LoadScene(index, LoadingWindow.instance.Window));
-        }
-        else
-        {
-            StartCoroutine(SceneLoadController.LoadScene(index));
-        }
+        StartCoroutine(SceneLoadController.LoadScene(index));
     }
 }

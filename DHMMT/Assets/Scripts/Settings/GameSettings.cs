@@ -20,29 +20,15 @@ public class GameSettings : MonoBehaviour
 
     private void Awake()
     {
+        print("Awake");
+
         // Initialize Audio
-        if (PlayerPrefs.HasKey(Settings.Volume.VOLUME_KEY) == false)
-        {
-            _volumeSlider.value = Settings.Volume.VolumeDefault;
-            ChangeVolume(_volumeSlider);
-        }
-        else
-        {
-            _volumeSlider.value = PlayerPrefs.GetFloat(Settings.Volume.VOLUME_KEY);
-            ChangeVolume(_volumeSlider);
-        }
+        _volumeSlider.value = Settings.GetVolume();
+        ChangeVolume(_volumeSlider);
 
         // Initialize Sensitivity
-        if (PlayerPrefs.HasKey(Settings.Sensitivity.SENSITIVITY_KEY) == false)
-        {
-            _sensitivitySlider.value = Settings.Sensitivity.SensitivityDefault;
-            ChangeSensitivity(_sensitivitySlider);
-        }
-        else
-        {
-            _sensitivitySlider.value = PlayerPrefs.GetFloat(Settings.Sensitivity.SENSITIVITY_KEY);
-            ChangeSensitivity(_sensitivitySlider);
-        }
+        _sensitivitySlider.value = PlayerPrefs.GetFloat(Settings.Sensitivity.SENSITIVITY_KEY);
+        ChangeSensitivity(_sensitivitySlider);
     }
 
     private void OnEnable()
@@ -53,8 +39,8 @@ public class GameSettings : MonoBehaviour
     public void ChangeVolume(Slider slider)
     {
         Mixer.SetFloat(Settings.Volume.VOLUME_KEY, slider.value);
-        PlayerPrefs.SetFloat(Settings.Volume.VOLUME_KEY, slider.value);
-        PlayerPrefs.Save();
+
+        Settings.SetVolume(slider.value);
     }
 
     public void ChangeSensitivity(Slider slider)

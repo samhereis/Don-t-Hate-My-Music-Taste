@@ -8,8 +8,6 @@ public class LoadingWindow : MonoBehaviour
 
     public static LoadingWindow instance;
 
-    public GameObject Window;
-
     private void OnEnable()
     {
         instance = this;
@@ -18,5 +16,10 @@ public class LoadingWindow : MonoBehaviour
     private void OnDisable()
     {
         instance = null;
+    }
+
+    public void Open()
+    {
+        gameObject.SetActive(true);
     }
 }
