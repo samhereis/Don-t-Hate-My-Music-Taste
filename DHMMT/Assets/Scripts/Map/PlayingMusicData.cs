@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class PlayingMusicData : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class PlayingMusicData : MonoBehaviour
 
     [Header("Music's gotten data")]
     public float[] SpectrumWidth;
-    public List<AudioClip> ArrayOfSongs 
+    public List<AudioClip> ArrayOfSongs
     {
         get
         {
@@ -32,7 +30,7 @@ public class PlayingMusicData : MonoBehaviour
             }
         }
     }
-    public ScriptableMusicList _musicList;
+    public MusicList_SO _musicList;
 
     [Header("Search for music data")]
     public bool ShouldSearch;
@@ -48,7 +46,7 @@ public class PlayingMusicData : MonoBehaviour
         SpectrumWidth = new float[64];
         instance = this;
 
-        if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
 
         if (ShouldSearch)
         {

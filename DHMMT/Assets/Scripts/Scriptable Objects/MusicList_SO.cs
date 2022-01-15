@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[CreateAssetMenu(fileName = "MusicList", menuName = "Scriptable Object/MusicList")]
-public class ScriptableMusicList : ScriptableObject
+[CreateAssetMenu(fileName = "MusicList", menuName = "Scriptables/MusicList")]
+public class MusicList_SO : ScriptableObject
 {
-    public static ScriptableMusicList instance;
-
     // Default music to play when player doesn't have music on computer
 
-    public string MusicFolderPath { get => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT"; }
+    public static string MusicFolderPath => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
 
     public List<AudioClip> MusicList = new List<AudioClip>();
 
@@ -18,8 +16,6 @@ public class ScriptableMusicList : ScriptableObject
 
     public IEnumerator loadMusic()
     {
-        instance = this;
-
         MusicList.Clear();
 
         foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
