@@ -1,35 +1,26 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Threading.Tasks;
 
 public static class ExtentionMethods
 {
-    // Usefull methods
-
-    public static bool SetWithNullCheck<T>(ref T obj, T value)
+    public static async Task Delay(float delay)
     {
-        obj = value;
-
-        if(obj == null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        await Task.Delay((int)delay * 1000);
     }
-    public static bool SetWithNullCheck<T>(T obj, T value)
-    {
-        obj = value;
 
-        if (obj == null)
+    public static async Task Delay()
+    {
+        await Task.Yield();
+    }
+
+    public static void RemoveNulls<T>(this List<T> list)
+    {
+        foreach (var item in list)
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            if(item == null)
+            {
+                list.Remove(item);
+            }
         }
     }
 }

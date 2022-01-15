@@ -1,3 +1,4 @@
+using Scriptables.Holders.Music;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,21 @@ public class MaterialSettingsChanger : MonoBehaviour
 {
     // Changes a materials property based on playing music
 
-    public Material ChangedMaterial;
-    public string SettingsName;
-    public int Start, End;
-    public float Min, Mult;
+    [SerializeField] private SpectrumData _spectrumData;
 
-    private void FixedUpdate()
+    [Header("What to Change")]
+    [SerializeField] private Material _changedMaterial;
+    [SerializeField] private string _settingsName;
+
+    [Header("Indexes")] [SerializeField] private int _start, _end;
+    [Header("Value Changers")] [SerializeField] private float _min, _mult;
+
+    private float _value;
+
+    private async void Update()
     {
-        ChangedMaterial.SetFloat(SettingsName, PlayingMusicData.instance.setSoundFreq(Start, End, Mult, Min));
+        _value = await _spectrumData.SetData(_start, _end, _mult, _min);
+
+        _changedMaterial.SetFloat(_settingsName, _value);
     }
 }

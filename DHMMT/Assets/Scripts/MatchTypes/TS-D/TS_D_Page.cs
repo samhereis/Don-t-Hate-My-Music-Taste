@@ -19,7 +19,7 @@ public class TS_D_Page : MonoBehaviour
 
     void Start()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
 
         SecondsCount.instance.BegginCountDown(0, 60);
     }

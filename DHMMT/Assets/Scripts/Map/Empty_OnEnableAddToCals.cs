@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnEnableAddToCals : MonoBehaviour
+public class Empty_OnEnableAddToCals : MonoBehaviour
 {
     // When this object enables add this object to "MakeObjectsShake" list;
 
@@ -15,16 +15,11 @@ public class OnEnableAddToCals : MonoBehaviour
 
     private void OnEnable()
     {
-        if(MakeObjectsShake.instance.enabled == false)
-        {
-            MakeObjectsShake.instance.enabled = true;
-        }
 
-        MakeObjectsShake.instance.ObjectsReactingToBasses.Add(transform);
     }
 
     private void OnDisable()
     {
-        MakeObjectsShake.instance.ObjectsReactingToBasses.Add(transform);
+
     }
 }

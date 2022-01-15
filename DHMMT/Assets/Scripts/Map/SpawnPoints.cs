@@ -14,7 +14,7 @@ public class SpawnPoints : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
     }
 
     public Transform GetRandomSpawn()

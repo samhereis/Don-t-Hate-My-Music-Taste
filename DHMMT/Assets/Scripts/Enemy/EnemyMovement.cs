@@ -10,8 +10,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref NavMeshAgentOfEnemy, GetComponent<NavMeshAgent>());
-        ExtentionMethods.SetWithNullCheck(ref AnimatorOfEnemy, GetComponent<Animator>());
+        NavMeshAgentOfEnemy ??= GetComponent<NavMeshAgent>();
+        AnimatorOfEnemy ??= GetComponent<Animator>();
     }
 
     public void MoveTo(Transform moveTo, int speed)

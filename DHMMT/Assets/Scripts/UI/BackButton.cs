@@ -1,29 +1,31 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BackButton : MonoBehaviour
+public class BackButton : MonoBehaviour, IPointerClickHandler
 {
-    // UI's back button
-
-    public static BackButton instance;
-
-    public Button ButtonComponent;
+    [SerializeField] private UnityEvent _onClick = new UnityEvent();
 
     private void OnEnable()
     {
-        instance = this;
         PlayerInput.playersInputState.UI.Back.performed += Back;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.playersInputState.UI.Back.performed -= Back;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _onClick?.Invoke();
     }
 
     private void Back(InputAction.CallbackContext context)
     {
-        PlayerInput.playersInputState.UI.Back.performed -= Back;
-        instance = null;
-
-        if (ButtonComponent != null)
-        {
-            ButtonComponent.onClick.Invoke();
-        }
+        _onClick?.Invoke();
     }
+
 }

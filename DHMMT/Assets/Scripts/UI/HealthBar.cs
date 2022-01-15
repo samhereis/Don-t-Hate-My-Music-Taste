@@ -17,8 +17,9 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
-        ExtentionMethods.SetWithNullCheck(ref SliderComponent, GetComponent<Slider>());
+        instance ??= this;
+
+        SliderComponent ??= GetComponent<Slider>();
     }
 
     public void SetValue(float value)

@@ -33,9 +33,9 @@ public class FoundMusicManager_MainMenu : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_audioSource.isPlaying == false && _musicList.MusicList.Count > 0)
+        if (_audioSource.isPlaying == false && _musicList.musicList.Count > 0)
         {
-            _audioSource.clip = _musicList.MusicList[Random.Range(0, _musicList.MusicList.Count)];
+            _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.musicList.Count)];
 
             _audioSource.Play();
         }

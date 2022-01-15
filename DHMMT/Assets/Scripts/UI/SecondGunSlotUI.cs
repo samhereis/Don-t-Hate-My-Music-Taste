@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +15,7 @@ public class SecondGunSlotUI : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
     }
 
     public void Activate()

@@ -20,7 +20,7 @@ public class ReactorToAxisSpawn : MonoBehaviour
 
     Vector3 lastLoc = new Vector3(0,0,0);
 
-    void Start()
+    private void Start()
     {
         if (axis == Axis.X)
         {
@@ -32,7 +32,7 @@ public class ReactorToAxisSpawn : MonoBehaviour
         }
     }
 
-    void SpawnX()
+    private void SpawnX()
     {
         int i = 0;
 
@@ -51,12 +51,11 @@ public class ReactorToAxisSpawn : MonoBehaviour
 
             o.localPosition = lastLoc;
 
-            if(Shake) o.SetParent(MakeObjectsShake.instance.Reactors[o.GetComponent<OnStartSetParentTo>().MakeObjectsShakeReactorIndex].transform, true);
-
             i++;
         }
     }
-    void SpawnZ()
+
+    private void SpawnZ()
     {
         int i = 0;
 
@@ -74,8 +73,6 @@ public class ReactorToAxisSpawn : MonoBehaviour
             }
 
             o.localPosition = lastLoc;
-
-            if (Shake) o.SetParent(MakeObjectsShake.instance.Reactors[o.GetComponent<OnStartSetParentTo>().MakeObjectsShakeReactorIndex].transform, true);
 
             i++;
         }

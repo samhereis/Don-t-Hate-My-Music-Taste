@@ -5,15 +5,17 @@ namespace UI.Window
     {
         public override void Open()
         {
-            onOpenStart?.Invoke();
+            _windowEvents.onOpenStart?.Invoke();
 
             gameObject.SetActive(true);
-            transform.DOScale(1, 0.5f).OnComplete(() => onOpenEnd?.Invoke()).SetUpdate(true);
+            transform.DOScale(1, 0.5f).OnComplete(() => _windowEvents.onOpenEnd?.Invoke()).SetUpdate(true);
         }
 
         public override void Close()
         {
-            transform.DOScale(0, 0.5f).OnComplete(() => gameObject.SetActive(false)).SetUpdate(true);
+            _windowEvents.onCloseStart?.Invoke();
+
+            transform.DOScale(0, 0.5f).OnComplete(() => { gameObject.SetActive(false); _windowEvents.onCloseEnd?.Invoke(); }).SetUpdate(true);
         }
     }
 }

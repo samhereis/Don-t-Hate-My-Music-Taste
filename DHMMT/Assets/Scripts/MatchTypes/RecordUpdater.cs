@@ -12,7 +12,7 @@ public class RecordUpdater : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
     }
 
     public void Save(int value)

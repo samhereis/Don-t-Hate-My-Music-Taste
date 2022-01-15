@@ -58,9 +58,9 @@ public class EnemyStates : MonoBehaviour
     {
         state = States.searchForEnemy;
 
-        ExtentionMethods.SetWithNullCheck(ref _enemyMovement, GetComponent<EnemyMovement>());
+        _enemyMovement ??= GetComponent<EnemyMovement>();
 
-        ExtentionMethods.SetWithNullCheck(_weaponDataHolder, GetComponent<EnemyWeaponDataHolder>());
+        _weaponDataHolder ??= GetComponent<EnemyWeaponDataHolder>();
     }
 
     private void FixedUpdate()

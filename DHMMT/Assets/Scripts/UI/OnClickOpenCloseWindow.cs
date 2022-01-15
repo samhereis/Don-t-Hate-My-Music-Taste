@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 #if UNITY_EDITOR
 using UnityEditor;
 using UI.Window;
@@ -9,23 +10,17 @@ using UI.Window;
 namespace UI.Window
 {
     [DisallowMultipleComponent]
-    public class OnClickOpenCloseWindow : MonoBehaviour
+    public class OnClickOpenCloseWindow : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private Button _button;
         [SerializeField] private WindowBehaviorBase[] _openThese;
         [SerializeField] private WindowBehaviorBase[] _closeThese;
 
-        private void OnValidate()
+        public void OnPointerClick(PointerEventData eventData)
         {
-            _button ??= GetComponent<Button>();
+            Do();
         }
 
-        private void Awake()
-        {
-            _button.onClick.AddListener(Do);
-        }
-
-        private void Do()
+        public void Do()
         {
             Open();
             Close();
@@ -55,8 +50,11 @@ namespace UI.Window
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(OnClickOpenCloseWindow))]
-public class OnClickOpenCloseWindowEditor<T> : UnityEditor.Editor
+public class OnClickOpenCloseWindowEditor : UnityEditor.Editor
 {
-
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+    }
 }
 #endif

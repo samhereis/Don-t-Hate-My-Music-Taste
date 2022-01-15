@@ -15,8 +15,9 @@ public class SecondsCount : MonoBehaviour
 
     void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
-        ExtentionMethods.SetWithNullCheck(ref _text, GetComponent<TextMeshProUGUI>());
+        instance ??= this;
+
+        _text ??= GetComponent<TextMeshProUGUI>();
     }
 
     public int GetSeconds()

@@ -18,7 +18,8 @@ public class PlayerKillCount : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        ExtentionMethods.SetWithNullCheck(_text, GetComponent<TextMeshProUGUI>());
+        _text ??= GetComponent<TextMeshProUGUI>();
+
         _text.text = KillCount.ToString();
     }
 

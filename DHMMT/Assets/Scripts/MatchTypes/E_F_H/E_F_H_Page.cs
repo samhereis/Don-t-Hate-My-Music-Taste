@@ -25,7 +25,8 @@ public class E_F_H_Page : MonoBehaviour
 
     void OnEnable()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
+
         _gamePlayWindow.SetActive(true);
 
         if (SecondsCount.instance != null)

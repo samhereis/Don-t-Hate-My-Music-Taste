@@ -17,7 +17,7 @@ public class FirstGunSlotUI : MonoBehaviour
 
     void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+         instance ??= this;
     }
 
     public void Activate()

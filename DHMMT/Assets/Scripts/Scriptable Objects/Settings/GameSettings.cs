@@ -20,7 +20,7 @@ public class GameSettings : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
     }
 
     private void OnEnable()

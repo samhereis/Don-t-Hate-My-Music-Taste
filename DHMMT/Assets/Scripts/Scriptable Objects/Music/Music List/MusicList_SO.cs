@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,23 +9,26 @@ public class MusicList_SO : ScriptableObject
 
     public static string MusicFolderPath => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
 
-    public List<AudioClip> MusicList = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> _musicList = new List<AudioClip>();
+    public List<AudioClip> musicList { get { if (_musicList.Count < 1) return _musicList; else return _defaultMusicList; } }
 
-    public List<AudioClip> _defaultMusicList;
+    [SerializeField] private List<AudioClip> _defaultMusicList;
 
-    public IEnumerator loadMusic()
+    public async void LoadMusic()
     {
-        MusicList.Clear();
+        _musicList.Clear();
 
         foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
         {
+            await ExtentionMethods.Delay();
+
             if (System.IO.File.Exists(file))
             {
                 using (var uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + file, AudioType.MPEG))
                 {
                     ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
 
-                    yield return uwr.SendWebRequest();
+                    //await uwr.SendWebRequest();
 
                     DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
 
@@ -34,20 +36,20 @@ public class MusicList_SO : ScriptableObject
                     {
                         AudioClip audioClip = dlHandler.audioClip;
 
-                        if (audioClip != null && MusicList.Contains(dlHandler.audioClip) == false)
+                        if (audioClip != null && _musicList.Contains(dlHandler.audioClip) == false)
                         {
-                            MusicList.Add(dlHandler.audioClip);
+                            _musicList.Add(dlHandler.audioClip);
                         }
                     }
                 }
             }
         }
 
-        MusicList.RemoveAll(x => !x);
+        _musicList.RemoveNulls();
 
-        if(MusicList.Count == 0)
+        if (_musicList.Count == 0)
         {
-            MusicList.AddRange(_defaultMusicList);
+            _musicList.AddRange(_defaultMusicList);
         }
     }
 }

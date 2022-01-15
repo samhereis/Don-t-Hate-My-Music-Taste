@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
 
         if (_spawnOnStart == true)
         {

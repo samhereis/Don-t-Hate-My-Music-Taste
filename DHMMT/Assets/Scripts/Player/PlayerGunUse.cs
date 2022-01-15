@@ -15,7 +15,8 @@ public class PlayerGunUse : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this
+            ;
         DefaultWeapon.Interact(gameObject);
         FirstGunSlotUI.instance.Activate();
     }

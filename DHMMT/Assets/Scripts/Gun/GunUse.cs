@@ -38,8 +38,8 @@ public class GunUse : MonoBehaviour
     {
         _audioSource.clip = _shootSound;
 
-        ExtentionMethods.SetWithNullCheck(ref _audioSource, GetComponent<AudioSource>());
-        ExtentionMethods.SetWithNullCheck(ref WeaponAnimator, GetComponent<GunData>().animator);
+        _audioSource ??= GetComponent<AudioSource>();
+        WeaponAnimator ??= GetComponent<GunData>().animator;
     }
 
     private void OnDisable()

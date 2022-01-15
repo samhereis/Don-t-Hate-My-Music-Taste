@@ -12,7 +12,7 @@ public class PlayerWeaponDataHolder : MonoBehaviour, WeaponDataHolder
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, GetComponent<PlayerWeaponDataHolder>());
+        instance ??= GetComponent<PlayerWeaponDataHolder>();
     }
 
     public void Set(GunData gunData)

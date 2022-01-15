@@ -23,7 +23,7 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
 
     private void Awake ()
     {
-        ExtentionMethods.SetWithNullCheck(ref GunDataComponent, GetComponent<GunData>());
+        GunDataComponent ??= GetComponent<GunData>();
     }
 
     public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid

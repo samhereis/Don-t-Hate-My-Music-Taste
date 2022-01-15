@@ -14,7 +14,7 @@ public class AmmoBar : MonoBehaviour
 
     private void Awake()
     {
-        ExtentionMethods.SetWithNullCheck(ref _sliderComponent, GetComponent<Slider>());
+        _sliderComponent ??= GetComponent<Slider>();
     }
     private void OnEnable()
     {

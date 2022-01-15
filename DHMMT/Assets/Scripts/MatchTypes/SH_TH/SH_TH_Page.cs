@@ -15,7 +15,7 @@ public class SH_TH_Page : MonoBehaviour
 
     private void Start()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
 
         PlayerKillCount.instance.StartCheckingForEnemies(3);
     }

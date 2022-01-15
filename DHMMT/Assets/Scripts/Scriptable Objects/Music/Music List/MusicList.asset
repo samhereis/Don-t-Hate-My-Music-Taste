@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d558afc62cc53b4f81628b4d5a21703, type: 3}
   m_Name: MusicList
   m_EditorClassIdentifier: 
-  MusicList:
-  - {fileID: 0}
-  - {fileID: 0}
+  MusicList: []
   _defaultMusicList:
   - {fileID: 8300000, guid: b3c253360e78e764aaa02ebe95b20d02, type: 3}
   - {fileID: 8300000, guid: f84da089eab246a44be429560dc5bef4, type: 3}

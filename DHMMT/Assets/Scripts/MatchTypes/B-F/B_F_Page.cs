@@ -15,7 +15,7 @@ public class B_F_Page : MonoBehaviour
 
     private void Start()
     {
-        ExtentionMethods.SetWithNullCheck(ref instance, this);
+        instance ??= this;
     }
 
     public void OnLoose()

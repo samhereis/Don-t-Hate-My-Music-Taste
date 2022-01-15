@@ -86,18 +86,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onOpenStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onOpenEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  onCloseStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onCloseEnd:
-    m_PersistentCalls:
-      m_Calls: []
+  _windowEvents:
+    _onOpenStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onOpenEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseEnd:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2845022216742913488
 GameObject:
   m_ObjectHideFlags: 0
