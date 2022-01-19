@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: High
   m_EditorClassIdentifier: 
   _playingMusicFrequencies: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
-  _value: 0.015872223
-  _multiplier: 3
+  _value: 0.5096644
+  _multiplier: 1
   _rangeStart: 26
   _rangeEnd: 63

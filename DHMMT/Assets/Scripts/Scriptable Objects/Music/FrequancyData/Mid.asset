@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Mid
   m_EditorClassIdentifier: 
   _playingMusicFrequencies: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
-  _value: 0.009352071
-  _multiplier: 9
-  _rangeStart: 6
+  _value: 0.0012187066
+  _multiplier: 1
+  _defaultMultiplier: 1
+  _rangeStart: 4
   _rangeEnd: 25

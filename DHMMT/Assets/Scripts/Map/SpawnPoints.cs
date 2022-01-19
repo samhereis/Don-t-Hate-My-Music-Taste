@@ -9,35 +9,44 @@ public class SpawnPoints : MonoBehaviour
 
     public static SpawnPoints instance;
 
-    public List<GameObject> SpawnPointsList;
-    public List<GameObject> PlayerSpawnPointList;
+    public List<SpawnPoint> _spawnPointsList = new List<SpawnPoint>();
+    public List<SpawnPoint> _playerSpawnPointList = new List<SpawnPoint>();
 
     private void Awake()
     {
         instance ??= this;
     }
 
+    public async void UpdateSpawnPoints(List<SpawnPoint> sentSpawnPoints)
+    {
+        await ExtentionMethods.Delay();
+
+        _spawnPointsList.Clear();
+
+        _spawnPointsList.AddRange(sentSpawnPoints);
+    }
+
     public Transform GetRandomSpawn()
     {
-        if(SpawnPointsList.Count > 0)
+        if(_spawnPointsList.Count > 0)
         {
-            return SpawnPointsList[Random.Range(0, SpawnPointsList.Count)].transform;
+            return _spawnPointsList[Random.Range(0, _spawnPointsList.Count)].transform;
         }
         else
         {
-            return PlayerSpawnPointList[Random.Range(0, PlayerSpawnPointList.Count)].transform;
+            return _playerSpawnPointList[Random.Range(0, _playerSpawnPointList.Count)].transform;
         }
     }
 
     public Transform GetRandomSpawnForPlayer()
     {
-        if (PlayerSpawnPointList.Count > 0)
+        if (_playerSpawnPointList.Count > 0)
         {
-            return PlayerSpawnPointList[Random.Range(0, PlayerSpawnPointList.Count)].transform;
+            return _playerSpawnPointList[Random.Range(0, _playerSpawnPointList.Count)].transform;
         }
         else
         {
-            return SpawnPointsList[Random.Range(0, SpawnPointsList.Count)].transform;
+            return _spawnPointsList[Random.Range(0, _spawnPointsList.Count)].transform;
         }
     }
 }

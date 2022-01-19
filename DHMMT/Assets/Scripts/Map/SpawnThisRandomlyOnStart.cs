@@ -15,7 +15,7 @@ public class SpawnThisRandomlyOnStart : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2);
 
-        if (SpawnPoints.instance.SpawnPointsList.Count < 1)
+        if (SpawnPoints.instance._spawnPointsList.Count < 1)
         {
             goto StartCoroutine;
         }

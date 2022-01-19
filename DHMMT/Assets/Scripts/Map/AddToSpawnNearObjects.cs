@@ -8,13 +8,26 @@ public class AddToSpawnNearObjects : MonoBehaviour
 
     [SerializeField] private bool _playerInRange;
 
-    [SerializeField] private List<GameObject> _spawns;
+    [SerializeField] private List<SpawnPoint> _spawnPoints;
+
+    [SerializeField] private SpawnExitRandomlyOnStart _spawnExitRandomlyOnStart;
+
+    [SerializeField] private SpawnPoints _spawnPointsHolder;
+
+    private void OnValidate()
+    {
+        _spawnExitRandomlyOnStart ??= FindObjectOfType<SpawnExitRandomlyOnStart>(true);
+
+        _spawnPointsHolder ??= FindObjectOfType<SpawnPoints>(true);
+
+        _spawnPoints.RemoveNulls();
+    }
 
     private void Awake()
     {
-        foreach(GameObject obj in _spawns)
+        foreach(SpawnPoint obj in _spawnPoints)
         {
-            SpawnExitRandomlyOnStart.instance._spawns.Add(obj);
+            _spawnExitRandomlyOnStart.AddSpawnPoint(obj);
         }
     }
 
@@ -22,7 +35,7 @@ public class AddToSpawnNearObjects : MonoBehaviour
     {
         if (other.GetComponent<PlayerGunUse>())
         {
-            SpawnPoints.instance.SpawnPointsList = _spawns;
+            _spawnPointsHolder.UpdateSpawnPoints(_spawnPoints);
         }
     }
 

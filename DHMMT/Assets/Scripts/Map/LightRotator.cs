@@ -1,119 +1,93 @@
-using System.Collections;
-using UnityEngine;
 using DG.Tweening;
-using System;
+using System.Threading;
+using UnityEngine;
 
 [System.Serializable]
 public class LightRotator : MonoBehaviour
 {
     // Constantly rotates an object
 
-    public float RotateVal, Duration;
-    public float RotationValue = 0;
+    [Header("Settings")]
+    private float _directionValue;
+    [SerializeField] private float _duration = 1;
+    [SerializeField] private float _rotationValue = 0;
 
-    public enum Axis
-    {
-        X,
-        Y,
-        Z,
-    }
+    [Header("Direction")]
+    [SerializeField] private Axis _axis;
 
-    [SerializeField] private Axis axis;
+    public enum Axis { X, Y, Z, }
+
+    private CancellationTokenSource _cancellationTokenSource;
 
     private void OnEnable()
     {
-        RotationValue = 0;
+        _rotationValue = 0;
 
-        switch (axis)
+        switch (_axis)
         {
             case (Axis.X):
-                StartCoroutine(RotateX());
+                RotateX(_cancellationTokenSource = new CancellationTokenSource());
                 break;
 
             case (Axis.Y):
-                StartCoroutine(RotateY());
+                RotateY(_cancellationTokenSource = new CancellationTokenSource());
                 break;
 
             case (Axis.Z):
-                StartCoroutine(RotateZ());
+                RotateY(_cancellationTokenSource = new CancellationTokenSource());
                 break;
         }
 
-        if (UnityEngine.Random.Range(0, 2) == 1)
-        {
-            RotateVal = RotateVal * -1;
-            Debug.Log(RotateVal);
-        }
+        if (UnityEngine.Random.Range(0, 2) == 1) _directionValue = _directionValue * -1;
 
-        StartCoroutine(changeRotateVal());
+        ChangeRotateVal(_cancellationTokenSource = new CancellationTokenSource());
     }
 
     private void OnDisable()
     {
-        StopAllCoroutines();
+        _cancellationTokenSource.Cancel();
+
+        transform.DOKill();
     }
 
-    IEnumerator RotateX()
+    private void RotateX(CancellationTokenSource cancellationTokenSource)
     {
-        Start:
+        Rotate(cancellationTokenSource, Vector3.right);
+    }
+
+    private void RotateY(CancellationTokenSource cancellationTokenSource)
+    {
+        Rotate(cancellationTokenSource, Vector3.up);
+    }
+
+    private void RotateZ(CancellationTokenSource cancellationTokenSource)
+    {
+        Rotate(cancellationTokenSource, Vector3.forward);
+    }
+
+    private async void Rotate(CancellationTokenSource cancellationTokenSource, Vector3 axis)
+    {
+        while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy)
         {
-            yield return new WaitForSecondsRealtime(Duration);
+            await ExtentionMethods.Delay(_duration);
 
-            transform.rotation = Quaternion.Euler(RotationValue += RotateVal, 0, 0);
+            transform.DORotate(axis * (_rotationValue += _directionValue), _duration);
 
-            if (RotationValue >= 360 - RotateVal || RotationValue < -362 || RotationValue > 362)
+            if (_rotationValue >= 360 - _directionValue)
             {
-                RotationValue = 0;
+                _rotationValue = 0;
+                transform.DORotate(new Vector3(0, 0, 0), _duration);
             }
         }
-        goto Start;
     }
 
-    IEnumerator RotateY()
+    private async void ChangeRotateVal(CancellationTokenSource cancellationTokenSource)
     {
-        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
-
-        Start:
+        while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy)
         {
-            yield return new WaitForSecondsRealtime(Duration);
+            await ExtentionMethods.Delay(UnityEngine.Random.Range(40, 90));
 
-            transform.DORotate(new Vector3(0, RotationValue += RotateVal, 0), Duration);
-
-            if (RotationValue >= 360-RotateVal)
-            {
-                RotationValue = 0;
-                transform.DORotate(new Vector3(0, 0, 0), Duration);
-            }
-        }
-        goto Start;
-    }
-
-    IEnumerator RotateZ()
-    {
-        yield return Wait.NewWait(UnityEngine.Random.Range(0, 3));
-
-        Start:
-        {
-            yield return new WaitForSecondsRealtime(Duration);
-
-            transform.DORotate(new Vector3(0, 0, RotationValue += RotateVal), Duration);
-
-            if (RotationValue >= 360 - RotateVal)
-            {
-                RotationValue = 0;
-                transform.DORotate(new Vector3(0, 0, 0), Duration);
-            }
-        }
-        goto Start;
-    }
-
-    IEnumerator changeRotateVal()
-    {
-        while (true)
-        {
-            yield return Wait.NewWait(UnityEngine.Random.Range(40, 90));
-
-            RotateVal *= -1;
+            _directionValue *= -1;
         }
     }
 }

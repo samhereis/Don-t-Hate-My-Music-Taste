@@ -13,10 +13,15 @@ public static class ExtentionMethods
         await Task.Yield();
     }
 
-    public static void RemoveNulls<T>(this List<T> list)
+    public async static void RemoveNulls<T>(this List<T> list)
     {
-        foreach (var item in list)
+        List<T> listTemp = new List<T>();
+        listTemp.AddRange(list);
+
+        foreach (var item in listTemp)
         {
+            await ExtentionMethods.Delay();
+
             if(item == null)
             {
                 list.Remove(item);

@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: Please make sure you have music in "{music-folder.MusicFolderPath}"
+    m_Localized: Please make sure you have music in "{music-folder.musicFolderPath}"
     m_Metadata:
       m_Items:
       - rid: 0
   - m_Id: 472228869263360
-    m_Localized: You have {music-folder.MusicCount} songs available
+    m_Localized: You have {music-folder.musicCount} songs available
     m_Metadata:
       m_Items:
       - rid: 0

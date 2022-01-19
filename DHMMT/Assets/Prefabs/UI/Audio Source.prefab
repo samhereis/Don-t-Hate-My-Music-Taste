@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6130885768556755984}
   - component: {fileID: 6130885768556755987}
   - component: {fileID: 194594803}
-  - component: {fileID: 6921058632634339305}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -29,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 106.766556, y: 4.172837, z: 103.0063}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -141,32 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b39aa5d945aaf84ca8197a48f00497e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BassSoundMult: 1
-  NextToBassSoundMult: 1
-  MiddleSoundMult: 1
-  HighSoundMult: 1
-  SpectrumWidth: []
-  ArrayOfSongs: []
-  MusicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
-  ShouldSearch: 1
+  _spectrumData: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
+  _musicList: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
+  _shouldSearch: 0
   _audioSource: {fileID: 6130885768556755987}
-  _makeObjectsShake: {fileID: 6921058632634339305}
---- !u!114 &6921058632634339305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130885768556755989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795a8f3885d95d94681aede7698f5b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WayOfReactingToMusic: 0
-  ObjectsReactingToBasses: []
-  ObjectsReactingToNB: []
-  ObjectsReactingToMiddles: []
-  ObjectsReactingToHighs: []
-  Reactors: []
-  t: 3

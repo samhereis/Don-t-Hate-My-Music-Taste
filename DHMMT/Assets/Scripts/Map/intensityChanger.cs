@@ -15,8 +15,13 @@ public class intensityChanger : MonoBehaviour
 
     [SerializeField] private SpectrumData _spectrumData;
 
-    private async void Update()
+    private void Update()
     {
-        _lightObj.intensity = await _spectrumData.SetData(_start, _end, _mult, _min);
+        ChanageIntencity();
+    }
+
+    private void ChanageIntencity()
+    {
+        if (gameObject) _lightObj.intensity = _spectrumData.GetData(_start, _end, _mult, _min);
     }
 }

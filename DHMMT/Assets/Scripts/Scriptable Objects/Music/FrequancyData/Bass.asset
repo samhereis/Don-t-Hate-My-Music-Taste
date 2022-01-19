@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bass
   m_EditorClassIdentifier: 
   _playingMusicFrequencies: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
-  _value: 2.7230113
-  _multiplier: 15
+  _value: 0.011185657
+  _multiplier: 1
+  _defaultMultiplier: 1
   _rangeStart: 1
-  _rangeEnd: 5
+  _rangeEnd: 3

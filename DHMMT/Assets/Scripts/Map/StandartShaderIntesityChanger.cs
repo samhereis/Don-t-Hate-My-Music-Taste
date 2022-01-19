@@ -28,7 +28,7 @@ public class StandartShaderIntesityChanger : MonoBehaviour
 
     private async void FixedUpdate()
     {
-        _value = await _spectrumData.SetData(_start, _end, _mult, _min);
+        _value = await _spectrumData.SetDataAsync(_start, _end, _mult, _min);
 
         _sun.SetVector(_settingsName, new Color(_red, _green, _blue) * _value);
     }

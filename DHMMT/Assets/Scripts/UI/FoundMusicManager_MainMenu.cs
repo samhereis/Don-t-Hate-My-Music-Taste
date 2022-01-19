@@ -1,4 +1,4 @@
-using System;
+using UnityEngine.Localization.Components;
 using System.IO;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,17 +9,13 @@ public class FoundMusicManager_MainMenu : MonoBehaviour
 
     public string musicFolderPath => MusicList_SO.MusicFolderPath;
 
-    private int _musicCount;
-    public int musicCount => _musicCount;
+    public int musicCount => _musicList.count;
 
-    [SerializeField] private GameObject _found;
-    [SerializeField] private GameObject _notFound;
+    [SerializeField] private GameObject _found, _notFound;
 
     [SerializeField] private MusicList_SO _musicList;
 
-    //[SerializeField] private UnityEngine.Localization.Components.LocalizeStringEvent _foundText;
-
-    [SerializeField] AudioSource _audioSource;
+    [SerializeField] private LocalizeStringEvent _musicCountString;
 
     private void Awake()
     {
@@ -27,21 +23,13 @@ public class FoundMusicManager_MainMenu : MonoBehaviour
         {
             Directory.CreateDirectory(musicFolderPath);
         }
-
-        _audioSource.Stop();
     }
 
     private void FixedUpdate()
     {
-        if (_audioSource.isPlaying == false && _musicList.musicList.Count > 0)
-        {
-            _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.musicList.Count)];
+        _musicCountString.RefreshString();
 
-            _audioSource.Play();
-        }
-
-        //musicCount = _musicList.MusicList.Count;
-
-        //_foundText.RefreshString();
+        _found.SetActive(_musicList._hasMusic);
+        _notFound.SetActive(!_musicList._hasMusic);
     }
 }

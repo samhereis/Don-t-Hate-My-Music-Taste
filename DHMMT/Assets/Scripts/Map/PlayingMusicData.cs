@@ -1,4 +1,5 @@
 ﻿using Scriptables.Holders.Music;
+using System.Threading;
 using UnityEngine;
 
 public class PlayingMusicData : MonoBehaviour
@@ -12,19 +13,33 @@ public class PlayingMusicData : MonoBehaviour
     [Header("Components")]
     [SerializeField] private AudioSource _audioSource;
 
+    private CancellationTokenSource _cancellationTokenSource;
+
     private void Awake()
     {
-        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+        _audioSource ??= GetComponent<AudioSource>();
+    }
 
-        if (_shouldSearch)
-        {
-            _musicList.LoadMusic();
-        }
+    private async void OnEnable()
+    {
+        await ExtentionMethods.Delay(2);
+
+        CheckForAudio(_cancellationTokenSource = new CancellationTokenSource());
+    }
+
+    private void Start()
+    {
+        if (_shouldSearch) _musicList.LoadMusic();
     }
 
     private void Update()
     {
         _spectrumData.SetSpectrumWidth(_audioSource);
+    }
+
+    private void OnDisable()
+    {
+        _cancellationTokenSource.Cancel();
     }
 
     public void PauseMusic(bool pause)
@@ -39,14 +54,28 @@ public class PlayingMusicData : MonoBehaviour
         }
     }
 
-    private void checkForAudio()    /* Check if any audio is playing */
+    private bool _isCheckingForAudio = false;
+    private async void CheckForAudio(CancellationTokenSource cancellationTokenSource)
     {
-        if (!_audioSource.isPlaying && _musicList.musicList.Count > 0)
-        {
-            _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.musicList.Count)];
+        if (_isCheckingForAudio) return;
 
-            _audioSource.Play();
+        _isCheckingForAudio = true;
+
+        while (!cancellationTokenSource.IsCancellationRequested)
+        {
+            if ((!_audioSource.isPlaying || _audioSource.clip == null) && _musicList.count > 0)
+            {
+                _audioSource.clip = null;
+
+                _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];
+
+                _audioSource.Play();
+            }
+
+            await ExtentionMethods.Delay(1);
         }
+
+        _isCheckingForAudio = false;
     }
 }
 

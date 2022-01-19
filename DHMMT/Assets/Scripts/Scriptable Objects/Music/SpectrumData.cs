@@ -23,18 +23,28 @@ namespace Scriptables.Holders.Music
             return _frequencies;
         }
 
-        public async Task<float> SetData(int start, int end, float multiplier)
+        public float GetData(int start, int end, float multiplier)
         {
-            await ExtentionMethods.Delay();
-
-            return frequencies[start..end].Average() * start * start * multiplier;
+            return frequencies[start..end].Average() * multiplier;
         }
 
-        public async Task<float> SetData(int start, int end, float multiplier, float minValue)
+        public async Task<float> GetDataAsync(int start, int end, float multiplier)
         {
             await ExtentionMethods.Delay();
 
-            return minValue + frequencies[start..end].Average() * start * start * multiplier;
+            return frequencies[start..end].Average() * multiplier;
+        }
+
+        public float GetData(int start, int end, float multiplier, float minValue)
+        {
+            return minValue + frequencies[start..end].Average() * multiplier;
+        }
+
+        public async Task<float> SetDataAsync(int start, int end, float multiplier, float minValue)
+        {
+            await ExtentionMethods.Delay();
+
+            return minValue + frequencies[start..end].Average() * multiplier;
         }
     }
 }

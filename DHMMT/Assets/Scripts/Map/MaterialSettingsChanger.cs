@@ -1,6 +1,4 @@
 using Scriptables.Holders.Music;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MaterialSettingsChanger : MonoBehaviour
@@ -11,6 +9,7 @@ public class MaterialSettingsChanger : MonoBehaviour
 
     [Header("What to Change")]
     [SerializeField] private Material _changedMaterial;
+    [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private string _settingsName;
 
     [Header("Indexes")] [SerializeField] private int _start, _end;
@@ -18,10 +17,20 @@ public class MaterialSettingsChanger : MonoBehaviour
 
     private float _value;
 
-    private async void Update()
+    private void Awake()
     {
-        _value = await _spectrumData.SetData(_start, _end, _mult, _min);
+        _meshRenderer ??= GetComponentInChildren<MeshRenderer>();
+    }
 
-        _changedMaterial.SetFloat(_settingsName, _value);
+    private void Update()
+    {
+        ChanageIntencity();
+    }
+
+    private void ChanageIntencity()
+    {
+        _value = _spectrumData.GetData(_start, _end, _mult, _min);
+
+        _meshRenderer.material.SetFloat(_settingsName, _value);
     }
 }

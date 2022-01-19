@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "\u8ACB\u78BA\u4FDD\u60A8\u5728\u201C{music-folder.MusicFolderPath}\u201D\u4E2D\u6709\u97F3\u6A02"
+    m_Localized: "\u8ACB\u78BA\u4FDD\u60A8\u5728\u201C{music-folder.musicFolderPath}\u201D\u4E2D\u6709\u97F3\u6A02"
     m_Metadata:
       m_Items:
       - rid: 0
   - m_Id: 472228869263360
-    m_Localized: "\u60A8\u6709 {music-folder.MusicCount} \u9996\u6B4C\u66F2\u53EF\u7528"
+    m_Localized: "\u60A8\u6709 {music-folder.musicCount} \u9996\u6B4C\u66F2\u53EF\u7528"
     m_Metadata:
       m_Items:
       - rid: 0

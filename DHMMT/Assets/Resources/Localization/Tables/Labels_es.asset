@@ -37,12 +37,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "Aseg\xFArate de tener m\xFAsica en \"{music-folder.MusicFolderPath}\""
+    m_Localized: "Aseg\xFArate de tener m\xFAsica en \"{music-folder.musicFolderPath}\""
     m_Metadata:
       m_Items:
       - rid: 0
   - m_Id: 472228869263360
-    m_Localized: Tienes {music-folder.MusicCount} canciones disponibles
+    m_Localized: Tienes {music-folder.musicCount} canciones disponibles
     m_Metadata:
       m_Items:
       - rid: 0
