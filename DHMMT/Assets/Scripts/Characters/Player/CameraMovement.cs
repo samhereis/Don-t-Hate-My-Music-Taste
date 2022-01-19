@@ -1,20 +1,22 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using Scriptables.Gameplay;
+using Helpers;
+using Scriptables;
 
 public class CameraMovement : MonoBehaviour
 {
     // Controlls main players camera
 
-    public static CameraMovement instance;
-
     [SerializeField] private FloatSetting_SO _sensitivity;
 
+    [SerializeField] private Transform _moveCameraTowards;
+    [SerializeField] private Transform _playerBody;
+
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     private Vector2 _context;
-
-    public Transform MoveCameraTowards;
-
-    public Transform PlayerBody;
 
     private float _mouseX;
     private float _mouseY;
@@ -23,40 +25,32 @@ public class CameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = MoveCameraTowards.position;
-
-        if(GameSettings.instance == null)
-        {
-            PauseUI.instance.Enable();
-            PauseUI.instance.Disable();
-        }
-
-        instance = this;
+        transform.position = _moveCameraTowards.position;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
     {
-        PlayerInput.playersInputState.Gameplay.Look.performed += Look;
-        PlayerInput.playersInputState.Gameplay.Look.canceled += Look;
+        _input.Gameplay.Look.performed += Look;
+        _input.Gameplay.Look.canceled += Look;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playersInputState.Gameplay.Look.performed -= Look;
-        PlayerInput.playersInputState.Gameplay.Look.canceled -= Look;
+        _input.Gameplay.Look.performed -= Look;
+        _input.Gameplay.Look.canceled -= Look;
     }
 
     private void Update()
     {
-        transform.position = MoveCameraTowards.position;
+        transform.position = _moveCameraTowards.position;
 
         _xRotation -= _mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        PlayerBody.Rotate(Vector3.up * _mouseX);
+        _playerBody.Rotate(Vector3.up * _mouseX);
     }
 
     private void Look(InputAction.CallbackContext ctx)
@@ -69,8 +63,8 @@ public class CameraMovement : MonoBehaviour
 
     public void Shake()
     {
-        transform.position = MoveCameraTowards.position;
+        transform.position = _moveCameraTowards.position;
 
-        AnimationStatics.NormalShake(transform, 2);
+        AnimationHelper.NormalShake(transform, 2);
     }
 }

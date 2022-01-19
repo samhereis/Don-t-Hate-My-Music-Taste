@@ -10,7 +10,7 @@ public class SingleMessageHandle : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(ShowMessage(_showTime));
+        ShowMessage(_showTime);
     }
 
     private void OnDisable()
@@ -18,13 +18,8 @@ public class SingleMessageHandle : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator ShowMessage(float ShowTime)
+    private void ShowMessage(float ShowTime)
     {
-        while(true)
-        {
-            yield return Wait.NewWaitRealTime(ShowTime);
 
-            gameObject.SetActive(false);
-        }
     }
 }

@@ -1,3 +1,4 @@
+using Scriptables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,23 +11,19 @@ public class SearchForInteractable : MonoBehaviour
 
     public IInteractable Interactable;
 
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     private void OnEnable()
     {
         instance = this;
 
-        PlayerInput.playersInputState.Gameplay.Interact.performed += _ => { Interact(); };
+        _input.Gameplay.Interact.performed += _ => { Interact(); };
     }
 
     private void FixedUpdate()
     {
-        if(CameraRaycast.Cast(out Interactable) && Interactable.Interactable == true)
-        {
-            MessageScript.instance.InteractMessage.SetActive(true);
-        }
-        else
-        {
-            MessageScript.instance.InteractMessage.SetActive(false);
-        }
+
     }
 
     public void Interact()

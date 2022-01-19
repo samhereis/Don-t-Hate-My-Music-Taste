@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 public class MessageScript : MonoBehaviour
 {
     // Controll messages to main player
-
-    public static MessageScript instance;
 
     public GameObject DontHaveEnoughKills;
     public GameObject StayUnderTheLightAndFindTheExit;
@@ -15,30 +11,18 @@ public class MessageScript : MonoBehaviour
 
     public GameObject InteractMessage;
 
-    private void OnEnable()
-    {
-        instance = this;
-    }
-
-    private void OnDisable()
-    {
-        instance = null;
-    }
-
     public void ShowMessage(GameObject message, float Duration)
     {
-        StartCoroutine(ShowMessageCoroutine(message, Duration));
+        ShowMessageCoroutine(message, Duration);
     }
 
-    private IEnumerator ShowMessageCoroutine(GameObject message, float Duration)
+    private void ShowMessageCoroutine(GameObject message, float Duration)
     {
-        if(message != null && message.gameObject.activeSelf == false)
+        if (message != null && message.gameObject.activeSelf == false)
         {
             message.gameObject.SetActive(true);
 
             message.transform.DOLocalMoveY(-100, 1).SetUpdate(true);
-
-            yield return Wait.NewWaitRealTime(Duration);
 
             message.transform.DOLocalMoveY(100, 1).SetUpdate(true);
 

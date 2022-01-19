@@ -19,7 +19,7 @@ public class EnemyStates : MonoBehaviour
                         StopAllCoroutines();
                         _stateAction = null;
                         _stateAction = () => { if (FollowedEnemy != null) { state = States.chaseEnemyWhoIsInRange; CurrentDestination = null; } };
-                        StartCoroutine(searchForEnemy());
+                        searchForEnemy();
                     break;
                 case States.chaseEnemyWhoIsInRange:
                         StopAllCoroutines();
@@ -30,7 +30,7 @@ public class EnemyStates : MonoBehaviour
                         StopAllCoroutines();
                         _stateAction = null;
                         _stateAction = () => { transform.LookAt(FollowedEnemy); };
-                        StartCoroutine(attack());
+                        attack();
                     break;
             }
             State = value;
@@ -67,17 +67,12 @@ public class EnemyStates : MonoBehaviour
     {
         _stateAction();
     }
-    public IEnumerator searchForEnemy()
+
+    public void searchForEnemy()
     {
 
-        if (CurrentDestination == null || _enemyMovement.NavMeshAgentOfEnemy.remainingDistance == 3)
-        {
-            CurrentDestination = SpawnPoints.instance.GetRandomSpawn();
-            _enemyMovement.MoveTo(CurrentDestination, 2);
-        }
-
-        yield return Wait.NewWait(10);
     }
+
     public void chaseEnemyWhoIsInRange()
     {
         if(FollowedEnemy == null)
@@ -97,15 +92,13 @@ public class EnemyStates : MonoBehaviour
            state = States.attack;
         }
     }
-    public IEnumerator attack()
+    public void attack()
     {
         while(true)
         {
             if (FollowedEnemy == null || Vector3.Distance(this.transform.position, FollowedEnemy.position) > DistanceToEnemy)
             {
                 state = States.searchForEnemy;
-                StopCoroutine(attack());
-                yield break;
             }
             else
             {
@@ -116,8 +109,6 @@ public class EnemyStates : MonoBehaviour
                 _enemyMovement.AnimatorOfEnemy.SetFloat("moveVelocityY", _enemyMovement.NavMeshAgentOfEnemy.speed);
 
                 _weaponDataHolder.GunUseComponent?.Shoot();
-
-                yield return Wait.NewWait(ShootRate);
             }
         }
     }

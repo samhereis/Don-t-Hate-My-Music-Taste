@@ -11,7 +11,7 @@ public class ExitArrow : MonoBehaviour
 
     void OnEnable()
     {
-        StartCoroutine(ChangePosition());
+        ChangePosition();
     }
 
     void OnDisable()
@@ -19,22 +19,17 @@ public class ExitArrow : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator ChangePosition()
+    private void ChangePosition()
     {
-        while(true)
+        if (_upped == true)
         {
-            if(_upped == true)
-            {
-                transform.DOMoveY(25, 2, false);
-                _upped = false;
-            }
-            else
-            {
-                transform.DOMoveY(35, 2, false);
-                _upped = true;
-            }
-
-            yield return Wait.NewWait(2.2f);
+            transform.DOMoveY(25, 2, false);
+            _upped = false;
+        }
+        else
+        {
+            transform.DOMoveY(35, 2, false);
+            _upped = true;
         }
     }
 }

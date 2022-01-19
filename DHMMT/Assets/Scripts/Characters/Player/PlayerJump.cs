@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Scriptables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +6,9 @@ public class PlayerJump : MonoBehaviour
 {
     // Controlls main player's jump
 
-    private CharacterController characterController;
+    [SerializeField] private Animator _animator;
+
+    [SerializeField] private CharacterController characterController;
 
     public float JumpHeight = 0.1f, GravityValue = -0.1f;
 
@@ -16,24 +17,27 @@ public class PlayerJump : MonoBehaviour
 
     private Vector3 _playerVelocity;
 
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     private void Awake()
     {
-        if(!characterController) characterController = GetComponent<CharacterController>(); 
+        if (!characterController) characterController = GetComponent<CharacterController>();
     }
 
     private void OnEnable()
     {
-        PlayerInput.playersInputState.Gameplay.Jump.performed += Jump;
+        _input.Gameplay.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playersInputState.Gameplay.Jump.performed -= Jump;
+        _input.Gameplay.Jump.performed -= Jump;
     }
 
     private void FixedUpdate()
     {
-        if(characterController.isGrounded == false || _doubleJump == true)
+        if (characterController.isGrounded == false || _doubleJump == true)
         {
             characterController.Move(_playerVelocity);
 
@@ -43,12 +47,12 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if(characterController.isGrounded)
+        if (characterController.isGrounded)
         {
             _doubleJump = true;
             _playerVelocity.y = JumpHeight;
         }
-        else if(_doubleJump && characterController.isGrounded == false && DoubleJumpable == true)
+        else if (_doubleJump && characterController.isGrounded == false && DoubleJumpable == true)
         {
             _playerVelocity.y += JumpHeight * 1.25f;
             _doubleJump = false;

@@ -1,3 +1,4 @@
+using Scriptables;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,42 +7,21 @@ using UnityEngine.InputSystem;
 
 public class PauseUnpause : MonoBehaviour
 {
-    public static void SetPause(bool pause)
-    {
-        if(pause == true)
-        {
-            PlayerInput.SetInput(PlayerInput.InputState.UI);
-
-            AudioListener.pause = true;
-
-            Time.timeScale = 0;
-
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            PlayerInput.SetInput(PlayerInput.InputState.Gameplay);
-
-            AudioListener.pause = false;
-
-            Time.timeScale = 1;
-
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
 
     private void OnEnable()
     {
-        PlayerInput.playersInputState.Gameplay.Pause.performed += Pause;
+        _input.Gameplay.Pause.performed += Pause;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playersInputState.Gameplay.Pause.performed -= Pause;
+        _input.Gameplay.Pause.performed -= Pause;
     }
 
     private void Pause(InputAction.CallbackContext obj)
     {
-        PauseUI.instance.Enable();
+
     }
 }

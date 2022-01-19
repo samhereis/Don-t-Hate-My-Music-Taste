@@ -2,30 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthData : MonoBehaviour, IHealthData
+public class EnemyHealthData : MonoBehaviour
 {
     // Handles enemie's health. The way of dying depends on match type. The way of dying script controlled by "Spawner.AddComponentToEnemy"
     
-    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
-    [SerializeField] bool _isAlive;
+    public bool isAlive { get => _isAlive; set => _isAlive = value; }
+    [SerializeField] private bool _isAlive;
 
-    public float Health { get => _health; set => _health = value; }
-    [SerializeField] float _health;
+    public float health { get => _health; set => _health = value; }
+    [SerializeField] private float _health;
 
-    public float MaxHealth { get => _MaxHealth; set => _MaxHealth = value; }
-    [SerializeField] float _MaxHealth;
+    public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+    [SerializeField] private float _maxHealth;
 
-    public List<Transform> Loots;
-
-    private IOnEnemyDie _onEnemyDie;
+    [SerializeField] private List<Transform> _loots;
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
 
-        if (_health < 0 && IsAlive == true)
+        if (_health < 0 && isAlive == true)
         {
-            IsAlive = false;
+            isAlive = false;
 
             Die();
         };
@@ -33,21 +31,6 @@ public class EnemyHealthData : MonoBehaviour, IHealthData
 
     private void Die()
     {
-        Instantiate(Loots[Random.Range(0, Loots.Count)], transform.position, Quaternion.identity);
 
-        _onEnemyDie = GetComponent<IOnEnemyDie>();
-
-        if (_onEnemyDie != null)
-        {
-            _onEnemyDie.OnDie();
-        }
-        else
-        {
-            Spawner.instance.SpawnEnemy(SpawnPoints.instance.GetRandomSpawn().transform);
-
-            PlayerKillCount.instance.IncreaseKillCount();
-
-            Destroy(gameObject);
-        }
     }
 }

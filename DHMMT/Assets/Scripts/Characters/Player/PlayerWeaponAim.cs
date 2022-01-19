@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Scriptables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,24 +10,27 @@ public class PlayerWeaponAim : MonoBehaviour
 
     private Transform _weaponPosition;
 
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     void OnEnable()
     {
         _weaponDataHolder = GetComponent<PlayerWeaponDataHolder>();
         _weaponPosition = GetComponent<HumanoidEquipWeaponData>().WeaponPosition;
 
-        PlayerInput.playersInputState.Gameplay.Aim.performed += Aim;
-        PlayerInput.playersInputState.Gameplay.Aim.canceled  += Aim;
+        _input.Gameplay.Aim.performed += Aim;
+        _input.Gameplay.Aim.canceled += Aim;
     }
 
     void OnDisable()
     {
-        PlayerInput.playersInputState.Gameplay.Aim.performed -= Aim;
-        PlayerInput.playersInputState.Gameplay.Aim.canceled  -= Aim;
+        _input.Gameplay.Aim.performed -= Aim;
+        _input.Gameplay.Aim.canceled -= Aim;
     }
 
     void Aim(InputAction.CallbackContext context)
     {
-        if(context.ReadValueAsButton() == true)
+        if (context.ReadValueAsButton() == true)
         {
             _weaponDataHolder.GunAimComponent?.Aim(_weaponPosition, true);
             Crosshair.instance.SetActive(false);

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Helpers;
 using UnityEngine;
 
 public class HealthPill : MonoBehaviour
@@ -21,15 +20,7 @@ public class HealthPill : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(CameraMovement.instance != null)
-        {
-            transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref _velocity, _speed);
-        }
-        else
-        {
-            AnimationStatics.NormalShake(transform, 2);
-            Destroy(gameObject, 3);
-        }
+
     }
 
     private void OnTriggerEnter(Collider _triggerEnteredObject_)

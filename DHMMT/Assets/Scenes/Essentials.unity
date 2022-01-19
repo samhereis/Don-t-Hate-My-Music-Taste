@@ -7989,7 +7989,6 @@ GameObject:
   - component: {fileID: 1530616894}
   - component: {fileID: 1530616893}
   - component: {fileID: 1530616892}
-  - component: {fileID: 1530616891}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -8018,18 +8017,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 200}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1530616891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530616889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2bb25fa61044e47a00618e5abf75f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1530616892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8074,7 +8061,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530616891}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
@@ -11003,11 +10990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _page: {fileID: 1199808269}
   Standart: {fileID: 415652262}
-  E_F_H_page: {fileID: 0}
-  SH_TH_page: {fileID: 210473818}
-  TS_D_page: {fileID: 1904969475}
-  WH_L_N_page: {fileID: 1760640628}
-  B_F_page: {fileID: 1641776923}
 --- !u!1001 &4771686791575243116
 PrefabInstance:
   m_ObjectHideFlags: 0

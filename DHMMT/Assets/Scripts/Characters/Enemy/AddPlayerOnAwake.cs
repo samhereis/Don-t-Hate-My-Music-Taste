@@ -7,16 +7,6 @@ public class AddPlayerOnAwake : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(AddPlayer());
-    }
 
-    private IEnumerator AddPlayer()
-    {
-        while (true)
-        {
-            GetComponent<EnemyStates>().FollowedEnemy = PlayerHealthData.instance.gameObject.transform;
-
-            yield return Wait.NewWait(5);
-        }
     }
 }

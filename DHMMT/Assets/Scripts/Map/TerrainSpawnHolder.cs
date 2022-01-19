@@ -16,6 +16,6 @@ public class TerrainSpawnHolder : MonoBehaviour
 
     private void Start()
     {
-        SpawnPoints.instance._spawnPointsList.Add(GetComponent<SpawnPoint>());
+
     }
 }

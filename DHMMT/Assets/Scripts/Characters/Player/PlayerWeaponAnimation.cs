@@ -1,48 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using Scriptables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerWeaponAnimation : MonoBehaviour
 {
     // Controlls main player's weapon animation
-
-    public static PlayerWeaponAnimation instance;
-
     private string _speed = "Speed";
 
     private bool _sprint = false;
 
     private bool _move;
 
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     private void OnEnable()
     {
-        instance = this;
+        _input.Gameplay.Move.performed += Move;
+        _input.Gameplay.Move.canceled += Move;
 
-        PlayerInput.playersInputState.Gameplay.Move.performed += Move;
-        PlayerInput.playersInputState.Gameplay.Move.canceled += Move;
+        _input.Gameplay.Sprint.performed += Sprint;
+        _input.Gameplay.Sprint.canceled += Sprint;
 
-        PlayerInput.playersInputState.Gameplay.Sprint.performed += Sprint;
-        PlayerInput.playersInputState.Gameplay.Sprint.canceled += Sprint;
+        _input.Gameplay.Fire.performed += Fire;
 
-        PlayerInput.playersInputState.Gameplay.Fire.performed += Fire; 
-        
-        PlayerInput.playersInputState.Gameplay.Aim.performed += Fire;
+        _input.Gameplay.Aim.performed += Fire;
     }
 
     private void OnDisable()
     {
-        instance = null;
+        _input.Gameplay.Move.performed -= Move;
+        _input.Gameplay.Move.canceled -= Move;
 
-        PlayerInput.playersInputState.Gameplay.Move.performed -= Move;
-        PlayerInput.playersInputState.Gameplay.Move.canceled  -= Move;
+        _input.Gameplay.Sprint.performed -= Sprint;
+        _input.Gameplay.Sprint.canceled -= Sprint;
 
-        PlayerInput.playersInputState.Gameplay.Sprint.performed -= Sprint;
-        PlayerInput.playersInputState.Gameplay.Sprint.canceled  -= Sprint;
+        _input.Gameplay.Fire.performed -= Fire;
 
-        PlayerInput.playersInputState.Gameplay.Fire.performed -= Fire;
-
-        PlayerInput.playersInputState.Gameplay.Aim.performed -= Fire;
+        _input.Gameplay.Aim.performed -= Fire;
     }
 
     private void Move(InputAction.CallbackContext context)
@@ -75,11 +70,11 @@ public class PlayerWeaponAnimation : MonoBehaviour
 
     public void SetSpeed()
     {
-        if(_move == true && _sprint == false)
+        if (_move == true && _sprint == false)
         {
             PlayerWeaponDataHolder.instance.DunDataCompoenent?.animator.SetFloat(_speed, 1);
         }
-        else if(_move == true && _sprint == true)
+        else if (_move == true && _sprint == true)
         {
             PlayerWeaponDataHolder.instance.DunDataCompoenent?.animator.SetFloat(_speed, 2);
         }

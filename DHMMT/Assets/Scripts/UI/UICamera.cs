@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UICamera : MonoBehaviour
 {
-    public static UICamera instance;
-
     [SerializeField] private Camera _uICamera;
 
     private void Awake()
@@ -16,28 +14,8 @@ public class UICamera : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        instance = this;
-    }
-
-    private void OnDisable()
-    {
-        instance = null;
-    }
-
     public void SetEnabled(bool value)
     {
-        StartCoroutine(SetEnabledCoroutine(value));
-    }
 
-    public IEnumerator SetEnabledCoroutine(bool value)
-    {
-        if(value == true)
-        {
-            yield return Wait.NewWaitRealTime(1);
-        }
-
-        _uICamera.enabled = value;
     }
 }

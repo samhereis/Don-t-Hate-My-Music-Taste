@@ -1,3 +1,4 @@
+using Scriptables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,42 +8,47 @@ public class PlayerGunUse : MonoBehaviour
 {
     // Controlls the use of the gun that main players holds
 
-    public static PlayerGunUse instance;
+    [SerializeField] private Animator _animator;
 
-    public InteractableEquipWeapon DefaultWeapon;
+    [SerializeField] private InteractableEquipWeapon DefaultWeapon;
 
-    public InteractableEquipWeapon SecodWeapon;
+    [SerializeField] private InteractableEquipWeapon SecodWeapon;
+
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
+    private int _velocityHashY, _velocityHashX;
 
     private void Awake()
     {
-        instance ??= this
-            ;
+        _velocityHashY = Animator.StringToHash("moveVelocityY");
+        _velocityHashX = Animator.StringToHash("moveVelocityX");
+
         DefaultWeapon.Interact(gameObject);
-        FirstGunSlotUI.instance.Activate();
     }
 
     private void OnEnable()
     {
-        PlayerInput.playersInputState.Gameplay.Fire.performed += Fire;
-        PlayerInput.playersInputState.Gameplay.Fire.canceled  += Fire;
+        _input.Gameplay.Fire.performed += Fire;
+        _input.Gameplay.Fire.canceled  += Fire;
 
-        PlayerInput.playersInputState.Gameplay.Reload.performed += Reload;
+        _input.Gameplay.Reload.performed += Reload;
 
-        PlayerInput.playersInputState.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+        _input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
 
-        PlayerInput.playersInputState.Gameplay.Sprint.performed += Sprint;
+        _input.Gameplay.Sprint.performed += Sprint;
     }
 
     private void OnDisable ()
     {
-        PlayerInput.playersInputState.Gameplay.Fire.performed -= Fire;
-        PlayerInput.playersInputState.Gameplay.Fire.canceled  -= Fire;
+        _input.Gameplay.Fire.performed -= Fire;
+        _input.Gameplay.Fire.canceled  -= Fire;
 
-        PlayerInput.playersInputState.Gameplay.Reload.performed -= Reload;
+        _input.Gameplay.Reload.performed -= Reload;
 
-        PlayerInput.playersInputState.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
+        _input.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
 
-        PlayerInput.playersInputState.Gameplay.Sprint.performed -= Sprint;
+        _input.Gameplay.Sprint.performed -= Sprint;
     }
 
     public void ChangeWeapon(InputAction.CallbackContext context)
@@ -54,15 +60,11 @@ public class PlayerGunUse : MonoBehaviour
                 SecodWeapon.Activate(true);
                 SecodWeapon.Interact(gameObject);
 
-                SecondGunSlotUI.instance.Activate();
-
                 DefaultWeapon?.Activate(false);
-
-                PlayerWeaponAnimation.instance.SetSpeed();
             }
             else
             {
-                MessageScript.instance.ShowMessage(MessageScript.instance.YouCanBuyGunsInTheShop, 3);
+
             }
         }
         else if(SecodWeapon.gameObject.activeSelf)
@@ -72,11 +74,7 @@ public class PlayerGunUse : MonoBehaviour
                 DefaultWeapon.Activate(true);
                 DefaultWeapon.Interact(gameObject);
 
-                FirstGunSlotUI.instance.Activate();
-
                 SecodWeapon?.Activate(false);
-
-                PlayerWeaponAnimation.instance.SetSpeed();
             }
         }
     }
@@ -90,8 +88,6 @@ public class PlayerGunUse : MonoBehaviour
                 SecodWeapon.Activate(true);
                 SecodWeapon.Interact(gameObject);
 
-                SecondGunSlotUI.instance.Activate();
-
                 DefaultWeapon?.Activate(false);
             }
         }
@@ -102,29 +98,28 @@ public class PlayerGunUse : MonoBehaviour
                 DefaultWeapon.Activate(true);
                 DefaultWeapon.Interact(gameObject);
 
-                FirstGunSlotUI.instance.Activate();
-
                 SecodWeapon?.Activate(false);
             }
             else
             {
-                MessageScript.instance.ShowMessage(MessageScript.instance.YouCanBuyGunsInTheShop, 3);
+
             }
         }
     }
 
     private void Sprint(InputAction.CallbackContext context)
     {
-        PlayerWeaponDataHolder.instance.GunUseComponent.Use(false);
+
     }
 
     private void Fire(InputAction.CallbackContext context)
     {
-        PlayerWeaponDataHolder.instance.GunUseComponent.Use(context.ReadValueAsButton());
+        _animator.SetFloat(_velocityHashY, 1);
+        _animator.SetFloat(_velocityHashX, 1);
     }
 
     private void Reload(InputAction.CallbackContext context)
     {
-        StartCoroutine(PlayerWeaponDataHolder.instance.GunUseComponent?.Reload());
+
     }
 }

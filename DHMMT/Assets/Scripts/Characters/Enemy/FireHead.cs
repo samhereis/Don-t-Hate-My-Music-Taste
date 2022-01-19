@@ -22,11 +22,7 @@ public class FireHead : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(CameraMovement.instance != null)
-        {
-            transform.position = Vector3.SmoothDamp(transform.position, CameraMovement.instance.transform.position, ref _velocity, _speed);
-            transform.LookAt(CameraMovement.instance.transform);
-        }    
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -35,7 +31,7 @@ public class FireHead : MonoBehaviour
 
         if(_player != null)
         {
-            StartCoroutine(Damage());
+            Damage();
         }
     }
 
@@ -49,13 +45,8 @@ public class FireHead : MonoBehaviour
         }
     }
 
-    IEnumerator Damage()
+    void Damage()
     {
-        while(_player != null)
-        {
-            _player.TakeDamage(_damage);
 
-            yield return Wait.NewWait(1);
-        }
     }
 }

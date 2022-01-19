@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Scriptables;
 using UnityEngine;
 
 public class inputEnabler : MonoBehaviour
 {
-    // update player's input when an object that this script is attached on enables/disables 
+    private enum InputStates { Gameplay, UI }
+    [SerializeField] private InputStates _onEnableSetInputState;
 
-    public PlayerInput.InputState OnEnableEnable;
-    public PlayerInput.InputState OnDisableEnable;
+    [SerializeField] private Input_SO _inputContainer;
 
     private void OnEnable()
-    { 
-        PlayerInput.Enable(); 
-        PlayerInput.SetInput(OnEnableEnable); 
-    }
+    {
+        _inputContainer.Enable();
 
-    private void OnDisable()
-    { 
-        PlayerInput.SetInput(OnDisableEnable); 
-        PlayerInput.Disable(); 
+        if (_onEnableSetInputState == InputStates.Gameplay)
+        {
+            _inputContainer.input.Gameplay.Enable();
+        }
+        else
+        {
+            _inputContainer.input.UI.Enable();
+        }
     }
 }

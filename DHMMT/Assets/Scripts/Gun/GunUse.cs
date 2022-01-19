@@ -19,7 +19,7 @@ public class GunUse : MonoBehaviour
 
     [Header("Ammo")]
     [SerializeField] private int _currentAmmo = 8;
-    public int CurrentAmmo { get { return _currentAmmo; } set { _currentAmmo = value; if (_currentAmmo <= 0) { CanShoot = false; StartCoroutine(Reload()); } } }
+    public int CurrentAmmo { get { return _currentAmmo; } set { _currentAmmo = value; if (_currentAmmo <= 0) { CanShoot = false; Reload(); } } }
     public int MaxAmmo = 50;
     [SerializeField] private float _reloadTime;
     [SerializeField] private GameObject _bullet;
@@ -71,25 +71,23 @@ public class GunUse : MonoBehaviour
             _audioSource.Play();
 
             WeaponAnimator.SetTrigger("Shoot");
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Range) && hit.collider.GetComponent<IHealthData>() != null)
+
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Range))
             {
-                hit.collider.GetComponent<IHealthData>().TakeDamage(Damage);
+
             }
         }
     }
 
-    public IEnumerator Reload()
+    public void Reload()
     {
         while(_currentAmmo < MaxAmmo)
         {
             _currentAmmo++;
-
-            yield return Wait.NewWait(_reloadTime);
         }
         if(_currentAmmo >= MaxAmmo)
         {
             CanShoot = true;
-            StopCoroutine(Reload());
         }
     }
 }

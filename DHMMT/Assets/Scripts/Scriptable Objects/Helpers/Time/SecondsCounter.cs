@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,39 +10,41 @@ namespace Helpers
     public class SecondsCounter : ScriptableObject
     {
         [SerializeField] private int _seconds;
+        public int seconds { get { return _seconds; } set { _seconds = value; _onSecondsChange.Invoke(_seconds); } }
 
         private UnityEvent<int> _onSecondsChange = new UnityEvent<int>();
         public UnityEvent<int> onSecondsChange => _onSecondsChange;
 
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
         public void IncreaseSeconds(int value)
         {
-            Seconds += value;
-            _text.text = Seconds.ToString();
+            seconds += value;
         }
 
         public void DecreaseSeconds(int value)
         {
-            Seconds -= value;
-            _text.text = Seconds.ToString();
+            seconds -= value;
         }
 
-        public void NullSeconds()
+        public void Stop()
         {
-            Seconds = 0;
-            _text.text = Seconds.ToString();
+            seconds = 0;
+
+            _cancellationTokenSource.Cancel();
         }
 
 
         public void Beggin(float waitBeforeExecute, int BegginFrom)
         {
             Stop();
-            StartCoroutine(StartCount(waitBeforeExecute, BegginFrom));
+            StartCount(waitBeforeExecute, BegginFrom, _cancellationTokenSource = new CancellationTokenSource());
         }
 
         public void BegginCountDown(float waitBeforeExecute, int BegginFrom)
         {
             Stop();
-            StartCoroutine(StartnCountDown(waitBeforeExecute, BegginFrom));
+            StartnCountDown(waitBeforeExecute, BegginFrom, _cancellationTokenSource = new CancellationTokenSource());
         }
 
         public void Pause()
@@ -54,41 +57,36 @@ namespace Helpers
 
         }
 
-        public void Stop()
+        private async void StartCount(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
-            NullSeconds();
-            StopAllCoroutines();
-        }
+           await ExtentionMethods.Delay(waitBeforeExecute);
 
-        IEnumerator StartCount(float waitBeforeExecute, int BegginFrom)
-        {
-            yield return Wait.NewWait(waitBeforeExecute);
+            seconds = BegginFrom;
 
-            Seconds = BegginFrom;
-
-            while (true)
+            while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
                 IncreaseSeconds(1);
-                yield return Wait.NewWaitRealTime(1);
+
+                await ExtentionMethods.Delay(1);
             }
         }
 
-        IEnumerator StartnCountDown(float waitBeforeExecute, int BegginFrom)
+        private async void StartnCountDown(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
-            yield return Wait.NewWait(waitBeforeExecute);
+            await ExtentionMethods.Delay(waitBeforeExecute);
 
-            Seconds = BegginFrom;
+            seconds = BegginFrom;
 
-            while (true)
+            while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
                 DecreaseSeconds(1);
 
-                if (Seconds < 1)
+                if (seconds < 1)
                 {
-                    PlayerHealthData.instance.GetComponent<IMatchWinable>().Win();
+                    Stop();
                 }
 
-                yield return Wait.NewWaitRealTime(1);
+                await ExtentionMethods.Delay(1);
             }
         }
     }

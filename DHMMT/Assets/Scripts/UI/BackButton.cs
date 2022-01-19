@@ -1,3 +1,4 @@
+using Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -8,14 +9,17 @@ public class BackButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private UnityEvent _onClick = new UnityEvent();
 
+    [SerializeField] private Input_SO _inputContainer;
+    private InputSettings _input => _inputContainer.input;
+
     private void OnEnable()
     {
-        PlayerInput.playersInputState.UI.Back.performed += Back;
+        _input.UI.Back.performed += Back;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playersInputState.UI.Back.performed -= Back;
+        _input.UI.Back.performed -= Back;
     }
 
     public void OnPointerClick(PointerEventData eventData)
