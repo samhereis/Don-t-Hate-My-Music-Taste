@@ -1,4 +1,5 @@
 using Scriptables;
+using Scriptables.Values;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerGunUse : MonoBehaviour
     [SerializeField] private InteractableEquipWeapon DefaultWeapon;
 
     [SerializeField] private InteractableEquipWeapon SecodWeapon;
+
+    [SerializeField] private BoolValue_SO _isShooting;
 
     [SerializeField] private Input_SO _inputContainer;
     private InputSettings _input => _inputContainer.input;
@@ -53,58 +56,12 @@ public class PlayerGunUse : MonoBehaviour
 
     public void ChangeWeapon(InputAction.CallbackContext context)
     {
-        if(DefaultWeapon.gameObject.activeSelf)
-        {
-            if (SecodWeapon != null)
-            {
-                SecodWeapon.Activate(true);
-                SecodWeapon.Interact(gameObject);
 
-                DefaultWeapon?.Activate(false);
-            }
-            else
-            {
-
-            }
-        }
-        else if(SecodWeapon.gameObject.activeSelf)
-        {
-            if (DefaultWeapon != null)
-            {
-                DefaultWeapon.Activate(true);
-                DefaultWeapon.Interact(gameObject);
-
-                SecodWeapon?.Activate(false);
-            }
-        }
     }
 
     public void ChangeWeapon(ScriptableGun.GunTypes slot)
     {
-        if (slot == ScriptableGun.GunTypes.Pistol)
-        {
-            if (SecodWeapon != null)
-            {
-                SecodWeapon.Activate(true);
-                SecodWeapon.Interact(gameObject);
 
-                DefaultWeapon?.Activate(false);
-            }
-        }
-        else if (slot == ScriptableGun.GunTypes.Rifle)
-        {
-            if (DefaultWeapon != null)
-            {
-                DefaultWeapon.Activate(true);
-                DefaultWeapon.Interact(gameObject);
-
-                SecodWeapon?.Activate(false);
-            }
-            else
-            {
-
-            }
-        }
     }
 
     private void Sprint(InputAction.CallbackContext context)
@@ -114,6 +71,8 @@ public class PlayerGunUse : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
+        _isShooting.ChangeValue(context.ReadValueAsButton());
+
         _animator.SetFloat(_velocityHashY, 1);
         _animator.SetFloat(_velocityHashX, 1);
     }

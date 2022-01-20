@@ -1,50 +1,48 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Events;
 
 public class InteractableEquipWeapon : MonoBehaviour, IInteractable
 {
     // Controlls how a weapon equips
 
-    public bool Equiped = false;
+    [SerializeField] private bool _equiped = false;
+    public bool isInteractable => !_equiped;
 
-    public bool Interactable { get; set; }
+    [SerializeField] private string _itemName = "Head Swaper";
 
-    private string _itemName = "Head Swaper";
-    public string ItemName { get { return _itemName;} set { _itemName = value; }}
+    public string ItemName { get { return _itemName; } private set { _itemName = value; } }
 
-    public GameObject InteractableObject { get => gameObject; set { } }
+    [Header("Inverse Kinematics Tramsform")]
+    public Transform rightHandIK;
+    public Transform leftHandIK;
 
-    //public Type InteractorDataType { get => typeof(HumanoidEquipWeaponData); set => throw new NotImplementedException(); }
+    [Header("Components")]
+    [SerializeField] private Animator _animatorComponent;
+    [SerializeField] private Rigidbody _rigidbodyComponent;
+    [SerializeField] private Collider _colliderComponent;
 
-    public GunData GunDataComponent;
-
-    private void Awake ()
-    {
-        GunDataComponent ??= GetComponent<GunData>();
-    }
+    [Header("Events")]
+    public readonly UnityEvent<HumanoidEquipWeaponData> onEquip = new UnityEvent<HumanoidEquipWeaponData>();
+    public readonly UnityEvent<HumanoidEquipWeaponData> onUnequip = new UnityEvent<HumanoidEquipWeaponData>();
 
     public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid
     {
         HumanoidEquipWeaponData equipData = caller.GetComponent<HumanoidEquipWeaponData>();
         Animator animator = caller.GetComponent<Animator>();
 
-        Equiped = true;
-        Interactable = false;
+        _equiped = true;
 
         {   //Manage Position and Rotation
             transform.SetParent(equipData.WeaponPosition, false);
-            equipData.WeaponPosition.localPosition = gameObject.GetComponent<GunData>().initialLocalPosition;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
 
         {   //Manage RigidBody
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<BoxCollider>().enabled = false;
+            _rigidbodyComponent.isKinematic = true;
+            _rigidbodyComponent.useGravity = false;
+            _colliderComponent.enabled = false;
         }
 
         {   //Manage player animation layer
@@ -53,32 +51,16 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         }
 
         {   //Manage constraints and IKs
-            equipData.RightHandIK.data.target = GunDataComponent.rightHandIK;
-            equipData.LeftHandIK.data.target = GunDataComponent.leftHandIK;
+            equipData.RightHandIK.data.target = rightHandIK;
+            equipData.LeftHandIK.data.target = leftHandIK;
         }
 
-        {
-            caller.GetComponent<WeaponDataHolder>().Set(GunDataComponent, GetComponent<GunUse>(), GetComponent<GunAim>());
-        }
         caller.GetComponent<RigBuilder>().Build();
+
+        onEquip?.Invoke(equipData);
     }
 
-    public void Remove()
-    {
-        Destroy(gameObject);
-    }
-
-    public void Activate(bool value)
-    {
-        gameObject.SetActive(value);
-    }
-
-    public void MoveTo(Transform parent)
-    {
-        transform.SetParent(parent);
-    }
-
-    void setParentConstraint(Transform[] source)
+    private void setParentConstraint(Transform[] source)
     {
         var data = GetComponent<MultiParentConstraint>().data.sourceObjects;
         data.Clear();
@@ -90,13 +72,13 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         GetComponent<MultiParentConstraint>().data.constrainedObject = this.transform;
     }
 
-    void clearParentConstraint()
+    private void clearParentConstraint()
     {
         GetComponent<MultiParentConstraint>().data.sourceObjects.Clear();
         GetComponent<MultiParentConstraint>().data.constrainedObject = null;
     }
 
-    void setAimConstraint(Transform source)
+    private void setAimConstraint(Transform source)
     {
         var data = GetComponent<MultiAimConstraint>().data.sourceObjects;
         data.Clear();
@@ -105,7 +87,7 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         GetComponent<MultiAimConstraint>().data.constrainedObject = this.transform;
     }
 
-    void clearAimConstraint()
+    private void clearAimConstraint()
     {
         GetComponent<MultiAimConstraint>().data.sourceObjects.Clear();
         GetComponent<MultiAimConstraint>().data.constrainedObject = null;

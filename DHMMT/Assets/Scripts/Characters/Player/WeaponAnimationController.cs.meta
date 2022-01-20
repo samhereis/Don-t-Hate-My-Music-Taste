@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 66b9e98e9a9698a44913b608d75045a6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _animator: {instanceID: 0}
+  - _isMoving: {fileID: 11400000, guid: e1bbc9f8f00489646a71b72dc6460ae1, type: 2}
+  - _sprint: {fileID: 11400000, guid: d232bbbbc12eb58488f2fb94d6b20544, type: 2}
+  - _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
+  - _interactableEquipWeapon: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

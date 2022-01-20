@@ -50,11 +50,11 @@ public class ShopUI : MonoBehaviour
 
             gunSlotPrefab.GetComponent<DisplayGunOnShop>().SetData(gun);
 
-            if(gun.GunType == ScriptableGun.GunTypes.Pistol)
+            if(gun.gunType == ScriptableGun.GunTypes.Pistol)
             {
                 gunSlotPrefab.transform.SetParent(_pistolCategoriyPage);
             }
-            else  if (gun.GunType == ScriptableGun.GunTypes.Rifle)
+            else  if (gun.gunType == ScriptableGun.GunTypes.Rifle)
             {
                 gunSlotPrefab.transform.SetParent(_rifleCategoriyPage);
             }

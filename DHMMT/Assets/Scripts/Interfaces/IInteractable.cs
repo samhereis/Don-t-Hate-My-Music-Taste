@@ -5,8 +5,7 @@ public interface IInteractable
 {
     // Blueprint of an interactable  object
 
-    bool Interactable { get; set; }
-    string ItemName { get; set; }
-    GameObject InteractableObject { get; set; }
+    bool isInteractable { get; }
+    string ItemName { get; }
     void Interact(GameObject caller);
 }

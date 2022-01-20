@@ -18,10 +18,10 @@ public class DisplayGunOnShop : MonoBehaviour
     {
         _gun = Sentgun;
 
-        _gunIcon.sprite = Sentgun.GunIcon;
-        _gunName.text = Sentgun.GunName;
-        _gunDamage.text = Sentgun.GunDamage.ToString();
-        _gunCost.text = $"ㄙ {Sentgun.GunCost}";
+        _gunIcon.sprite = Sentgun.gunIcon;
+        _gunName.text = Sentgun.gunName;
+        _gunDamage.text = Sentgun.gunDamage.ToString();
+        _gunCost.text = $"ㄙ {Sentgun.gunCost}";
     }
 
     public void TryBuy()
@@ -30,7 +30,7 @@ public class DisplayGunOnShop : MonoBehaviour
 
         if (true)
         {
-            GameObject newGun = Instantiate(_gun.GunPrefab.gameObject);
+            GameObject newGun = Instantiate(_gun.gunPrefab.gameObject);
         }
         else
         {

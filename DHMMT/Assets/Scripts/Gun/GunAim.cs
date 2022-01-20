@@ -2,34 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
+using Scriptables.Values;
 
 public class GunAim : MonoBehaviour
 {
     // Aims a weapon
 
-    private Vector3 _aimPosition, _initialPosition;
+    [SerializeField] private Vector3 _aimPosition;
+    [SerializeField] private Vector3 _initialPosition;
 
-    public float AnimationDuration = 0.05f;
+    [SerializeField] private float _animationDuration = 0.05f;
 
-    private bool _aimed = false;
+    [SerializeField] private BoolValue_SO _aimed;
 
-    private void OnEnable()
+    [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
+
+    [SerializeField] private HumanoidEquipWeaponData _equipData;
+
+    private void Awake()
     {
-        _aimPosition = GetComponent<GunData>().aimPosition;
-        _initialPosition = GetComponent<GunData>().initialLocalPosition;
+        _interactableEquipWeapon = GetComponent<InteractableEquipWeapon>();
+        _interactableEquipWeapon.onEquip.AddListener(OnEquip);
+        _interactableEquipWeapon.onUnequip.AddListener(OnUnequip);
     }
 
-    public void Aim(Transform aimData, bool aim)
+    private void OnEquip(HumanoidEquipWeaponData sentEquipData)
     {
-        if(aim == false)
+        _equipData = sentEquipData;
+
+        _equipData.WeaponPosition.localPosition = _initialPosition;
+
+        _aimed.AddListener(Aim);
+    }
+
+    private void OnUnequip(HumanoidEquipWeaponData sentEquipData)
+    {
+        _equipData = null;
+
+        _aimed.RemoveListener(Aim);
+    }
+
+    public void Aim(bool isAimed)
+    {
+        if(isAimed == false)
         {
-            aimData.DOLocalMove(_initialPosition, AnimationDuration);
-            _aimed = false;
+            _equipData.weapnHolder.DOLocalMove(_initialPosition, _animationDuration);
         }
         else
         {
-            aimData.DOLocalMove(_aimPosition, AnimationDuration);
-            _aimed = true;
+            _equipData.weapnHolder.DOLocalMove(_aimPosition, _animationDuration);
         }
     }
 }

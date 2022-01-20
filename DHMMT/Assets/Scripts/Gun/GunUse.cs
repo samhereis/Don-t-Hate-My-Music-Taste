@@ -1,3 +1,4 @@
+using Scriptables.Values;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,87 +8,116 @@ public class GunUse : MonoBehaviour
 {
     // Controlls shoot of a weapon
 
-    public Animator WeaponAnimator;
+    [SerializeField] private Animator _weaponAnimator;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip _shootSound;
     [SerializeField] private AudioSource _audioSource;
 
-    [Header("Shoot Capacity")]
-    public float Damage = 10;
-    public float Range = 100f;
-
     [Header("Ammo")]
     [SerializeField] private int _currentAmmo = 8;
-    public int CurrentAmmo { get { return _currentAmmo; } set { _currentAmmo = value; if (_currentAmmo <= 0) { CanShoot = false; Reload(); } } }
-    public int MaxAmmo = 50;
+    [SerializeField] private int _maxAmmo = 50;
     [SerializeField] private float _reloadTime;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _bulletPosition;
 
     [Header("Shoot Timing")]
-    public float FireRate = 0.2f;
-    public float NextFire;
+    [SerializeField] private float _fireRate = 0.2f;
+    [SerializeField] private float _nextFire;
 
     [Header("Shoot States")]
-    public bool IsReloading = false;
-    public bool CanShoot = true;
-    public bool IsShooting = false;
+    [SerializeField] private bool _isReloading = false;
+    [SerializeField] private bool _canShoot = true;
+    [SerializeField] private bool _shoot = false;
+
+    [Header("Events")]
+    [SerializeField] private BoolValue_SO _isShooting;
+
+    [Header("Components")]
+    [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
+
+    private void Awake()
+    {
+        _audioSource ??= GetComponent<AudioSource>();
+        _weaponAnimator ??= GetComponentInChildren<Animator>();
+
+        _interactableEquipWeapon.onEquip.AddListener(OnEquip);
+        _interactableEquipWeapon.onUnequip.AddListener(OnUnEquip);
+    }
 
     private void OnEnable()
     {
         _audioSource.clip = _shootSound;
-
-        _audioSource ??= GetComponent<AudioSource>();
-        WeaponAnimator ??= GetComponent<GunData>().animator;
-    }
-
-    private void OnDisable()
-    {
-        WeaponAnimator = null;
     }
 
     private void FixedUpdate()
     {
-        if (IsShooting)
+        if (_shoot)
         {
             Shoot();
         }
     }
 
-    public void Use(bool use)
+    private void OnEquip(HumanoidEquipWeaponData sentData)
     {
-        IsShooting = use;
+        _isShooting.AddListener(SetShoot);
     }
 
-    public void Shoot()
+    private void OnUnEquip(HumanoidEquipWeaponData sentData)
     {
-        if ((Time.time > NextFire) && (CanShoot == true))
+        _isShooting.RemoveListener(SetShoot);
+    }
+
+    public void SetShoot(bool value)
+    {
+        _shoot = value;
+    }
+
+    private void Shoot()
+    {
+        if ((Time.time > _nextFire) && (_canShoot == true))
         {
-            NextFire = Time.time + FireRate;
-            CurrentAmmo--;
+            _nextFire = Time.time + _fireRate;
+            DecreaseAmmo();
+
             Instantiate(_bullet, _bulletPosition.position, _bulletPosition.rotation);
+
             _audioSource.Stop();
             _audioSource.Play();
 
-            WeaponAnimator.SetTrigger("Shoot");
+            _weaponAnimator.SetTrigger("Shoot");
+        }
+    }
 
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Range))
-            {
+    public void DecreaseAmmo(int value = 1)
+    {
+        _currentAmmo -= value;
+    }
 
-            }
+    public void IncreaseAmmo(int value = 1)
+    {
+        _currentAmmo += value;
+    }
+
+    public void IncreaseAmmoAmmoInPersentageRelativeToMaxAmmo(int value)
+    {
+        _currentAmmo = _maxAmmo * value;
+
+        if(_currentAmmo > _maxAmmo)
+        {
+            _currentAmmo = _maxAmmo;
         }
     }
 
     public void Reload()
     {
-        while(_currentAmmo < MaxAmmo)
+        while(_currentAmmo < _maxAmmo)
         {
-            _currentAmmo++;
+            IncreaseAmmo();
         }
-        if(_currentAmmo >= MaxAmmo)
+        if(_currentAmmo >= _maxAmmo)
         {
-            CanShoot = true;
+            _canShoot = true;
         }
     }
 }

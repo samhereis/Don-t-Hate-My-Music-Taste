@@ -3682,6 +3682,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _fill: {fileID: 288750130}
+  _currentPlayerAmmo: {fileID: 11400000, guid: 4ed0726e840355744a0c9b5c89d28558, type: 2}
 --- !u!114 &612422648
 MonoBehaviour:
   m_ObjectHideFlags: 0

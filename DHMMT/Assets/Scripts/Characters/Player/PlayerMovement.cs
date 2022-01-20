@@ -1,8 +1,9 @@
 using Scriptables;
+using Scriptables.Values;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     // Controlls player's move
 
@@ -16,9 +17,9 @@ public class PlayerMove : MonoBehaviour
 
     public Vector2 MoveInputValue;
 
-    public bool IsMoving = false;
+    [SerializeField] private BoolValue_SO _isMoving;
 
-    public float SprintValue;
+    [SerializeField] private BoolValue_SO _isSprinting;
 
     [SerializeField] private Input_SO _inputContainer;
     private InputSettings _input => _inputContainer.input;
@@ -63,36 +64,23 @@ public class PlayerMove : MonoBehaviour
     {
         move = transform.right * MoveInputValue.x + transform.forward * MoveInputValue.y;
         _characterControllerComponent.Move((Speed * SpeedMultiplier) * Time.deltaTime * move);
+
+        _animator?.SetFloat(_velocityHashY, MoveInputValue.y * SpeedMultiplier);
+        _animator?.SetFloat(_velocityHashX, MoveInputValue.x * SpeedMultiplier);
     }
 
     private void Move(InputAction.CallbackContext context)
     {
         MoveInputValue = context.ReadValue<Vector2>();
 
-        if (MoveInputValue == Vector2.zero)
-        {
-            IsMoving = false;
-        }
-        else
-        {
-            IsMoving = true;
-        }
-
-        _animator?.SetFloat(_velocityHashY, MoveInputValue.y);
-        _animator?.SetFloat(_velocityHashX, MoveInputValue.x);
+        _isMoving.ChangeValue(MoveInputValue != Vector2.zero);
     }
 
     private void Sprint(InputAction.CallbackContext context)
     {
-        SprintValue = context.ReadValue<float>();
+        SpeedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * 2;
 
-        SpeedMultiplier = 1 + SprintValue * 2;
-
-        if (IsMoving == true)
-        {
-            _animator.SetFloat(_velocityHashY, 2);
-            _animator.SetFloat(_velocityHashX, 2);
-        }
+        _isSprinting.ChangeValue(SpeedMultiplier > 1);
     }
 
     private void Fire(InputAction.CallbackContext context)

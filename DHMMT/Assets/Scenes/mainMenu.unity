@@ -1649,7 +1649,6 @@ GameObject:
   - component: {fileID: 854649437}
   - component: {fileID: 854649436}
   - component: {fileID: 854649435}
-  - component: {fileID: 854649438}
   - component: {fileID: 854649439}
   m_Layer: 0
   m_Name: Canvas
@@ -1743,18 +1742,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &854649438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854649433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d197bcfd4f9415b48baf0e95332d5535, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &854649439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,8 +1754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55fe37299f2e0f4ab8c0b35178ebcdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnableEnable: 1
-  OnDisableEnable: 0
+  _onEnableSetInputState: 1
+  _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!1 &873805747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,6 +1972,7 @@ MonoBehaviour:
   _smoothness: 0.1
   _minValue: 1
   _multiplier: 50
+  _useDefaultMultiplier: 0
   _axis: 0
 --- !u!1 &966249396
 GameObject:
@@ -4246,6 +4234,7 @@ MonoBehaviour:
   _smoothness: 0.1
   _minValue: 1
   _multiplier: 0.5
+  _useDefaultMultiplier: 0
   _axis: 0
 --- !u!1 &1764409636
 GameObject:
@@ -4858,6 +4847,7 @@ MonoBehaviour:
   _smoothness: 0.1
   _minValue: 1
   _multiplier: 5
+  _useDefaultMultiplier: 0
   _axis: 0
 --- !u!1 &2127836557
 GameObject:

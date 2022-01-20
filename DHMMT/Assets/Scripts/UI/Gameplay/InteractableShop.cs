@@ -7,7 +7,7 @@ public class InteractableShop : MonoBehaviour, IInteractable
 {
     // How shop interacts with an interactor
 
-    public bool Interactable { get => true; set => throw new NotImplementedException(); }
+    public bool isInteractable { get => true; set => throw new NotImplementedException(); }
 
     public string ItemName { get => "Open Shop"; set => ItemName = value; }
     public GameObject InteractableObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

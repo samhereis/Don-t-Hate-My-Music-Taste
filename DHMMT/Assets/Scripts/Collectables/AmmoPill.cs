@@ -8,15 +8,13 @@ public class AmmoPill : MonoBehaviour
 
     private Vector3 velocity;
 
-    public PlayerWeaponDataHolder Target;
-
     public float PlusToHealth = 40;
 
     [SerializeField] private float _speed = 0.5f;
 
     private void OnEnable()
     {
-        Target = PlayerWeaponDataHolder.instance;
+
     }
 
     private void FixedUpdate()
@@ -26,17 +24,6 @@ public class AmmoPill : MonoBehaviour
 
     private void OnTriggerEnter(Collider _triggerEnteredObject_)
     {
-        if (_triggerEnteredObject_.GetComponent<PlayerWeaponDataHolder>())
-        {
-            if (Target.GunUseComponent.MaxAmmo >= Target.GunUseComponent.CurrentAmmo + Target.GunUseComponent.CurrentAmmo/2)
-            {
-                Target.GunUseComponent.CurrentAmmo = Target.GunUseComponent.MaxAmmo;
-            }
-            else
-            {
-                Target.GunUseComponent.CurrentAmmo += Target.GunUseComponent.CurrentAmmo / 3;
-            }
-            Destroy(gameObject);
-        }
+
     }
 }

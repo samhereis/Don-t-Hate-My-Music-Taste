@@ -1,3 +1,4 @@
+using Scriptables.Values;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class AmmoBar : MonoBehaviour
 
     [SerializeField] private Gradient _gradientColor;
     [SerializeField] private Image _fill;
+
+    [SerializeField] private IntValue_SO _currentPlayerAmmo;
 
     private void Awake()
     {
@@ -26,13 +29,7 @@ public class AmmoBar : MonoBehaviour
     }
     void UpdateAmmo()
     {
-        if(PlayerWeaponDataHolder.instance == null || PlayerWeaponDataHolder.instance.GunUseComponent == null)
-        {
-            return;
-        }
-
-        _sliderComponent.maxValue = PlayerWeaponDataHolder.instance.GunUseComponent.MaxAmmo;
-        _sliderComponent.value = PlayerWeaponDataHolder.instance.GunUseComponent.CurrentAmmo;
+        _sliderComponent.value = _currentPlayerAmmo.value;
         _fill.color = _gradientColor.Evaluate(_sliderComponent.normalizedValue);
     }
 }

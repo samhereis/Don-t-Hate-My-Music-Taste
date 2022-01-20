@@ -6,15 +6,13 @@ public class EnemyWeapon : MonoBehaviour
 {
     //Equips weapon on an enemy of awake if "DefaultltWeapon" is not null
 
-    public InteractableEquipWeapon DefaultltWeapon;
+    [SerializeField] private InteractableEquipWeapon _defaultltWeapon;
 
     void OnEnable()
     {
-        if(DefaultltWeapon != null)
+        if(_defaultltWeapon != null)
         {
-            DefaultltWeapon.GetComponent<GunUse>().FireRate = GetComponent<EnemyStates>().ShootRate;
-
-            DefaultltWeapon.Interact(gameObject);
+            _defaultltWeapon.Interact(gameObject);
         }
     }
 }
