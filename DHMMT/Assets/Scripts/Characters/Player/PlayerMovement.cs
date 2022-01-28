@@ -7,16 +7,20 @@ public class PlayerMovement : MonoBehaviour
 {
     // Controlls player's move
 
+    [Header("Components")]
     [SerializeField] private Animator _animator;
 
-    public float SpeedMultiplier = 1, Speed = 150;
+    [SerializeField] private CharacterController _characterControllerComponent;
 
-    private CharacterController _characterControllerComponent;
+    [Header("Settings")]
 
-    private Vector3 move;
+    [SerializeField] private float _speedMultiplier = 1;
 
-    public Vector2 MoveInputValue;
+    [SerializeField] private float _speed = 3;
 
+    [SerializeField] private Vector3 _move;
+
+    [Header("SO")]
     [SerializeField] private BoolValue_SO _isMoving;
 
     [SerializeField] private BoolValue_SO _isSprinting;
@@ -24,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Input_SO _inputContainer;
     private InputSettings _input => _inputContainer.input;
 
+    [SerializeField] private Vector2 _moveInputValue;
     private int _velocityHashY, _velocityHashX;
 
     private void Awake()
@@ -62,29 +67,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        move = transform.right * MoveInputValue.x + transform.forward * MoveInputValue.y;
-        _characterControllerComponent.Move((Speed * SpeedMultiplier) * Time.deltaTime * move);
+        _move = transform.right * _moveInputValue.x + transform.forward * _moveInputValue.y;
+        _characterControllerComponent.Move((_speed * _speedMultiplier) * Time.deltaTime * _move);
 
-        _animator?.SetFloat(_velocityHashY, MoveInputValue.y * SpeedMultiplier);
-        _animator?.SetFloat(_velocityHashX, MoveInputValue.x * SpeedMultiplier);
+        _animator?.SetFloat(_velocityHashY, _moveInputValue.y * _speedMultiplier);
+        _animator?.SetFloat(_velocityHashX, _moveInputValue.x * _speedMultiplier);
     }
 
     private void Move(InputAction.CallbackContext context)
     {
-        MoveInputValue = context.ReadValue<Vector2>();
+        _moveInputValue = context.ReadValue<Vector2>();
 
-        _isMoving.ChangeValue(MoveInputValue != Vector2.zero);
+        _isMoving.ChangeValue(_moveInputValue != Vector2.zero);
     }
 
     private void Sprint(InputAction.CallbackContext context)
     {
-        SpeedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * 2;
+        _speedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * 2;
 
-        _isSprinting.ChangeValue(SpeedMultiplier > 1);
+        _isSprinting.ChangeValue(_speedMultiplier > 1);
     }
 
     private void Fire(InputAction.CallbackContext context)
     {
-        SpeedMultiplier = 1;
+        _speedMultiplier = 1;
     }
 }

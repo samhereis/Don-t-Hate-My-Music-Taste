@@ -14,7 +14,7 @@ namespace Helpers.UI
         {
             if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
             {
-                await ExtentionMethods.Delay();
+                await AsyncHelper.Delay();
 
                 _sceneLoader.LoadSceneAdditively(1);
             }

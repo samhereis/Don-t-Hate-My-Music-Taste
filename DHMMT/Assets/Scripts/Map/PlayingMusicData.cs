@@ -1,6 +1,7 @@
 ﻿using Scriptables.Holders.Music;
 using System.Threading;
 using UnityEngine;
+using Helpers;
 
 public class PlayingMusicData : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PlayingMusicData : MonoBehaviour
 
     private async void OnEnable()
     {
-        await ExtentionMethods.Delay(2);
+        await AsyncHelper.Delay(2);
 
         CheckForAudio(_cancellationTokenSource = new CancellationTokenSource());
     }
@@ -72,7 +73,7 @@ public class PlayingMusicData : MonoBehaviour
                 _audioSource.Play();
             }
 
-            await ExtentionMethods.Delay(1);
+            await AsyncHelper.Delay(1);
         }
 
         _isCheckingForAudio = false;

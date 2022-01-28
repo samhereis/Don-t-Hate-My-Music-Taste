@@ -1,5 +1,5 @@
+using Helpers;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -32,7 +32,7 @@ public class MusicList_SO : ScriptableObject
 
                     var wait = uwr.SendWebRequest();
 
-                    while (!wait.isDone) { await ExtentionMethods.Delay(); }
+                    while (!wait.isDone) { await AsyncHelper.Delay(); }
 
                     DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
 

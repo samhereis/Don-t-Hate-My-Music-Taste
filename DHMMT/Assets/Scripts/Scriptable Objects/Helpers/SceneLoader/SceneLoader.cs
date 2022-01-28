@@ -44,7 +44,7 @@ namespace Helpers
 
                     }
 
-                    await ExtentionMethods.Delay();
+                    await AsyncHelper.Delay();
                 }
             }
         }

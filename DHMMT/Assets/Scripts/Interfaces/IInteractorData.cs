@@ -6,5 +6,5 @@ public interface IInteractorData
 {
     // Blueprint of something that can interact with something else
 
-    string InteractorName { get; set; }
+    string InteractorName { get; }
 }

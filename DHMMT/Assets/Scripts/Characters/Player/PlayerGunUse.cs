@@ -9,12 +9,15 @@ public class PlayerGunUse : MonoBehaviour
 {
     // Controlls the use of the gun that main players holds
 
+    [Header("Components")]
     [SerializeField] private Animator _animator;
 
-    [SerializeField] private InteractableEquipWeapon DefaultWeapon;
+    [Header("Guns")]
+    [SerializeField] private InteractableEquipWeapon _defaultWeapon;
 
-    [SerializeField] private InteractableEquipWeapon SecodWeapon;
+    [SerializeField] private InteractableEquipWeapon _secodWeapon;
 
+    [Header("SO")]
     [SerializeField] private BoolValue_SO _isShooting;
 
     [SerializeField] private Input_SO _inputContainer;
@@ -27,7 +30,7 @@ public class PlayerGunUse : MonoBehaviour
         _velocityHashY = Animator.StringToHash("moveVelocityY");
         _velocityHashX = Animator.StringToHash("moveVelocityX");
 
-        DefaultWeapon.Interact(gameObject);
+        _defaultWeapon.Interact(gameObject);
     }
 
     private void OnEnable()
@@ -55,11 +58,6 @@ public class PlayerGunUse : MonoBehaviour
     }
 
     public void ChangeWeapon(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public void ChangeWeapon(ScriptableGun.GunTypes slot)
     {
 
     }

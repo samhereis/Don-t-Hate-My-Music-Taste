@@ -59,7 +59,7 @@ namespace Helpers
 
         private async void StartCount(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
-           await ExtentionMethods.Delay(waitBeforeExecute);
+           await AsyncHelper.Delay(waitBeforeExecute);
 
             seconds = BegginFrom;
 
@@ -67,13 +67,13 @@ namespace Helpers
             {
                 IncreaseSeconds(1);
 
-                await ExtentionMethods.Delay(1);
+                await AsyncHelper.Delay(1);
             }
         }
 
         private async void StartnCountDown(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
-            await ExtentionMethods.Delay(waitBeforeExecute);
+            await AsyncHelper.Delay(waitBeforeExecute);
 
             seconds = BegginFrom;
 
@@ -86,7 +86,7 @@ namespace Helpers
                     Stop();
                 }
 
-                await ExtentionMethods.Delay(1);
+                await AsyncHelper.Delay(1);
             }
         }
     }

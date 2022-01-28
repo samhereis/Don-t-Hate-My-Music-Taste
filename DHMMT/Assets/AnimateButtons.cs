@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Helpers;
 
 [DisallowMultipleComponent]
 public class AnimateButtons : MonoBehaviour, IPointerExitHandler, IPointerClickHandler, IPointerEnterHandler
@@ -28,7 +29,7 @@ public class AnimateButtons : MonoBehaviour, IPointerExitHandler, IPointerClickH
 
     public async void OnPointerExit(PointerEventData eventData)
     {
-        await ExtentionMethods.Delay(_delayBetweenAnimations);
+        await AsyncHelper.Delay(_delayBetweenAnimations);
 
         transform.DOScale(_normaleScale, _animationDuration).SetEase(Ease.InOutBack);
     }

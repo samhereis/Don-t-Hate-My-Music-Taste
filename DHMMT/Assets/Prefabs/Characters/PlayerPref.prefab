@@ -845,12 +845,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4980200780456763487}
-  SpeedMultiplier: 1
-  Speed: 4
-  MoveInputValue: {x: 0, y: 0}
+  _characterControllerComponent: {fileID: 4116582457067492845}
+  _speedMultiplier: 1
+  _speed: 3
+  _move: {x: 0, y: 0, z: 0}
   _isMoving: {fileID: 11400000, guid: e1bbc9f8f00489646a71b72dc6460ae1, type: 2}
   _isSprinting: {fileID: 11400000, guid: d232bbbbc12eb58488f2fb94d6b20544, type: 2}
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
+  _moveInputValue: {x: 0, y: 0}
 --- !u!114 &666725337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,10 +866,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4980200780456763487}
-  characterController: {fileID: 4116582457067492845}
-  JumpHeight: 0.13
-  GravityValue: -0.3
-  DoubleJumpable: 1
+  _characterController: {fileID: 4116582457067492845}
+  _jumpHeight: 0.1
+  _gravityValue: -0.1
+  _doubleJump: 0
+  _doubleJumpable: 1
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &2754681447268202540
 MonoBehaviour:
@@ -902,8 +905,8 @@ MonoBehaviour:
   RightHandIK: {fileID: 1785284635601927086}
   LeftHandIK: {fileID: 8182843588149872904}
   CurrentWeapon: {fileID: 5499261933320848517}
-  AnimatorOfHumanoid: {fileID: 4980200780456763487}
-  RigBuilderOfHumanoid: {fileID: 3577843186660539665}
+  _animatorOfHumanoid: {fileID: 0}
+  _rigBuilderOfHumanoid: {fileID: 0}
   _weaponHolder: {fileID: 522865125595312457}
 --- !u!114 &666725341
 MonoBehaviour:
@@ -932,8 +935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4980200780456763487}
-  DefaultWeapon: {fileID: 4652258298556851139}
-  SecodWeapon: {fileID: 0}
+  _defaultWeapon: {fileID: 4652258298556851139}
+  _secodWeapon: {fileID: 0}
   _isShooting: {fileID: 11400000, guid: a649fbd209d93e347a603456331f9389, type: 2}
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &2012174647

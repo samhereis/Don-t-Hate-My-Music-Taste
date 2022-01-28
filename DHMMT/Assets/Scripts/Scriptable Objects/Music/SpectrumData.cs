@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using Helpers;
 
 namespace Scriptables.Holders.Music
 {
@@ -30,7 +31,7 @@ namespace Scriptables.Holders.Music
 
         public async Task<float> GetDataAsync(int start, int end, float multiplier)
         {
-            await ExtentionMethods.Delay();
+            await AsyncHelper.Delay();
 
             return frequencies[start..end].Average() * multiplier;
         }
@@ -42,7 +43,7 @@ namespace Scriptables.Holders.Music
 
         public async Task<float> SetDataAsync(int start, int end, float multiplier, float minValue)
         {
-            await ExtentionMethods.Delay();
+            await AsyncHelper.Delay();
 
             return minValue + frequencies[start..end].Average() * multiplier;
         }

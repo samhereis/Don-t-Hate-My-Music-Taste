@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Threading;
 using UnityEngine;
+using Helpers;
 
 [System.Serializable]
 public class ObjectRotator : MonoBehaviour
@@ -69,7 +70,7 @@ public class ObjectRotator : MonoBehaviour
     {
         while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy)
         {
-            await ExtentionMethods.Delay(_duration);
+            await AsyncHelper.Delay(_duration);
 
             transform.DORotate(axis * (_rotationValue += _directionValue), _duration);
 
@@ -85,7 +86,7 @@ public class ObjectRotator : MonoBehaviour
     {
         while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy)
         {
-            await ExtentionMethods.Delay(UnityEngine.Random.Range(40, 90));
+            await AsyncHelper.Delay(UnityEngine.Random.Range(40, 90));
 
             _directionValue *= -1;
         }

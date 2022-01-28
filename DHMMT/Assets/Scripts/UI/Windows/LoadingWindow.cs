@@ -36,7 +36,7 @@ public class LoadingWindow : MonoBehaviour
 
             _loadingIcon.rotation = Quaternion.Euler(0, 0, rot);
 
-            await ExtentionMethods.Delay(0.1f);
+            await AsyncHelper.Delay(0.1f);
         }
     }
 

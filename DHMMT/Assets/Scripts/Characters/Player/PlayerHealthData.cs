@@ -1,45 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Helpers;
+using Interfaces;
+using System.Threading.Tasks;
+using UnityEngine;using Helpers;
 
-public class PlayerHealthData : MonoBehaviour
+public class PlayerHealthData : MonoBehaviour, IDamagable
 {
-    // Controlls main players health
-
-    public static PlayerHealthData instance;
-
-    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
     [SerializeField] bool _isAlive = true;
 
-    public float Health { get => _health; set { _health = value; HealthBar.instance.SetValue(_health); } }
+    public float health { get => _health; private set { _health = value; HealthBar.instance.SetValue(_health); } }
     [SerializeField] float _health;
 
-    public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     [SerializeField] float _maxHealth;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void OnEnable()
     {
         InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
     }
 
-    public void TakeDamage(float damage)
+    public float TakeDamage(float damage)
     {
-        Health -= damage;
+        health -= damage;
 
-        if (Health < 0)
+        if (health < 0)
         {
 
         }
+
+        return health;
     }
 
-    public IEnumerator TakeDamageContinuously(float time, float damage)
+    public async Task TakeDamageContinuously(float time, float damage)
     {
-        yield return new WaitForSeconds(time);
+        await AsyncHelper.Delay();
     }
 
     private void SetMaxHealth()
