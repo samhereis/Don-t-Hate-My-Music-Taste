@@ -12,7 +12,7 @@ namespace Sripts
 
         private async void Awake()
         {
-            await AsyncHelper.Delay();
+            await AsyncHelper.Delay(0.2f);
 
             Bounds bounds = _boxColliders[CollectionsHelper.GetRandomIndex(_boxColliders.Length)].bounds;
 
