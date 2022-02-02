@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
+  m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 100
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -594,7 +594,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394738875}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
   m_Speed: 3.5
@@ -704,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5083821651730015857, guid: c6169646452c49641ae6b8b883796e03, type: 3}
       propertyPath: m_Name
-      value: Global Volume
+      value: WorldBehaviors
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6169646452c49641ae6b8b883796e03, type: 3}
@@ -1099,16 +1099,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 503231824}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.5
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1143,6 +1143,23 @@ MonoBehaviour:
   _agent: {fileID: 503231826}
   _target: {fileID: 394738880}
   _speed: 1
+--- !u!1 &516725629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5083821651730015857, guid: c6169646452c49641ae6b8b883796e03, type: 3}
+  m_PrefabInstance: {fileID: 401346796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &516725632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516725629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbe55257054321428cca0b3b4aef931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &557993846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,7 +1926,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.035
+  m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 8a7951c75e723ae408f85e3ca94b79a6, type: 2}
 --- !u!1 &1186959928
@@ -2578,7 +2595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714027347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2617,8 +2634,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 10
+  m_Intensity: 60
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -3092,6 +3109,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1601407200960980443, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601407200960980443, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
+      propertyPath: _speedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
       propertyPath: m_Name
       value: PlayerPref
@@ -3179,6 +3204,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1904338013}
   - component: {fileID: 1904338014}
+  - component: {fileID: 1904338015}
+  - component: {fileID: 1904338016}
   m_Layer: 0
   m_Name: Reactors
   m_TagString: Untagged
@@ -3214,8 +3241,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: c7669a2ef0e7c274fa82149977802bc0, type: 2}
-  _property: _EmissionMap
+  _property: _EmissionColor
   _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
+  _minValue: 0.2
+  _multiplier: 2
+  _originalColor: {r: 1, g: 0, b: 0, a: 4.212012}
+--- !u!114 &1904338015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904338012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b8423681ac1442a277f1a2a603d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: fb34a5bc139f420419aee978971e8cbf, type: 2}
+  _property: _EmissionColor
+  _aFrequancyData: {fileID: 11400000, guid: 108f1d784363a38459493f5f1c5a6bc7, type: 2}
+  _minValue: 0.2
+  _multiplier: 10
+  _originalColor: {r: 0, g: 0, b: 1, a: 1}
+--- !u!114 &1904338016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904338012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b8423681ac1442a277f1a2a603d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: c0c0e388ea8f6f84d81e12f82bc3ebe8, type: 2}
+  _property: _EmissionColor
+  _aFrequancyData: {fileID: 11400000, guid: f088e47471e70184292155af20eeb020, type: 2}
+  _minValue: 0.2
+  _multiplier: 100
+  _originalColor: {r: 0.13919175, g: 1, b: 0, a: 3.712012}
 --- !u!1 &1951298923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3478,7 +3544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755987, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6130885768556755989, guid: 18d9aca852959d34b83569b5c27944f9, type: 3}
       propertyPath: m_Name

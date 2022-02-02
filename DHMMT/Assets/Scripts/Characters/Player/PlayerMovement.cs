@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Settings")]
 
     [SerializeField] private float _speedMultiplier = 1;
+    private float _currentSpeedMultiplier = 1;
 
     [SerializeField] private float _speed = 3;
 
@@ -68,10 +69,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         _move = transform.right * _moveInputValue.x + transform.forward * _moveInputValue.y;
-        _characterControllerComponent.Move((_speed * _speedMultiplier) * Time.deltaTime * _move);
+        _characterControllerComponent.Move((_speed * _currentSpeedMultiplier) * Time.deltaTime * _move);
 
-        _animator?.SetFloat(_velocityHashY, _moveInputValue.y * _speedMultiplier);
-        _animator?.SetFloat(_velocityHashX, _moveInputValue.x * _speedMultiplier);
+        _animator?.SetFloat(_velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);
+        _animator?.SetFloat(_velocityHashX, _moveInputValue.x * _currentSpeedMultiplier);
     }
 
     private void Move(InputAction.CallbackContext context)
@@ -83,13 +84,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint(InputAction.CallbackContext context)
     {
-        _speedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * 2;
+        _currentSpeedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * _speedMultiplier;
 
-        _isSprinting.ChangeValue(_speedMultiplier > 1);
+        _isSprinting.ChangeValue(_currentSpeedMultiplier > 1);
     }
 
     private void Fire(InputAction.CallbackContext context)
     {
-        _speedMultiplier = 1;
+        _currentSpeedMultiplier = 1;
     }
 }

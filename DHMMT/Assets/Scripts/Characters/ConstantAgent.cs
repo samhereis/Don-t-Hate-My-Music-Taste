@@ -17,31 +17,41 @@ namespace Characters
         [Header("Settings")]
         [SerializeField] private float _speed = 1.5f;
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private bool _isReachedTarget = false;
 
         private void OnEnable()
         {
-            Move(_cancellationTokenSource = new CancellationTokenSource());
+            Move();
+
+            _agent.speed = _speed;
+        }
+
+        private void OnDisable()
+        {
+            Stop();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out Exit exit))
+            if (other.TryGetComponent(out Exit exit))
             {
-                _cancellationTokenSource.Cancel();
+                _isReachedTarget = true;
+                Stop();
             }
         }
 
-        private async void Move(CancellationTokenSource cancellationTokenSource)
+        private void FixedUpdate()
         {
-            while(!cancellationTokenSource.IsCancellationRequested && gameObject)
-            {
-                await AsyncHelper.Delay(2);
+            if (_agent.velocity.magnitude < 0.1f && _isReachedTarget == false) Move();
+        }
 
-                _agent.speed = _speed;
-                _agent.SetDestination(_target.position);
-            }
+        private void Move()
+        {
+            _agent.SetDestination(_target.position);
+        }
 
+        private void Stop()
+        {
             _agent.isStopped = true;
 
             _agent.speed = 0;

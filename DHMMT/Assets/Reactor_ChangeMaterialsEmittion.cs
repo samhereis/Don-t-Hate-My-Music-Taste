@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
-using Helpers;
 using Scriptables.Holders.Music;
+using UnityEngine;
 
 namespace Reactors
 {
@@ -12,33 +8,23 @@ namespace Reactors
         [SerializeField] private Material _material;
         [SerializeField] private string _property;
 
+        [Header("SO")]
         [SerializeField] private AFrequancyData _aFrequancyData;
 
-        private Task _task;
+        [Header("Settings")]
+        [SerializeField] private float _minValue = 1.5f;
+        [SerializeField] private float _multiplier;
+
+        [SerializeField] private Color _originalColor;
 
         private void OnValidate()
         {
-            _material.SetFloat(_property, _aFrequancyData.value * Random.Range(1, 200));
+            _originalColor = _material.color;
         }
 
-        private void Awake()
+        private void Update()
         {
-            _task = React();
-        }
-
-        private void OnDestroy()
-        {
-            _task.Dispose();
-        }
-
-        private async Task React()
-        {
-            while(enabled)
-            {
-                await AsyncHelper.Delay(Time.deltaTime);
-
-                _material.SetFloat(_property, _aFrequancyData.value);
-            }
+            _material.SetColor(_property, new Color(_originalColor.r, _originalColor.g, _originalColor.b) * (_minValue + (_aFrequancyData.value * _multiplier)));
         }
     }
 }

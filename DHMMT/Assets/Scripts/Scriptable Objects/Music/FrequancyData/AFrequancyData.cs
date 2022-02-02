@@ -8,7 +8,8 @@ namespace Scriptables.Holders.Music
         [SerializeField] private SpectrumData _playingMusicFrequencies;
 
         [SerializeField] private float _value;
-        public float value => _value;
+        public float value => _value; 
+        public float valueWithDefaultMultiplier => _value * defaultMultiplier;
 
         [Header("Multiplier")]
         [SerializeField] private float _multiplier = 1;
@@ -24,6 +25,8 @@ namespace Scriptables.Holders.Music
         {
             _playingMusicFrequencies.onValueChanged += GetData;
         }
+
+        public float GetDatWithDefaultMultiplier() => _value * defaultMultiplier;
 
         private async void GetData(float[] spectrumData)
         {
