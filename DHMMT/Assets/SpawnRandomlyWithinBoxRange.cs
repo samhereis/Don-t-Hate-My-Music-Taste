@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Helpers;
 
-namespace Sripts
+namespace Identifiers
 {
     public class SpawnRandomlyWithinBoxRange : MonoBehaviour
     {

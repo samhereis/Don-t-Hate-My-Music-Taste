@@ -747,8 +747,9 @@ GameObject:
   - component: {fileID: 2012174647}
   - component: {fileID: 1835056285469830451}
   - component: {fileID: 7986397554230428356}
+  - component: {fileID: 853112009}
   m_Layer: 3
-  m_Name: PlayerPref
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -846,7 +847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 4980200780456763487}
   _characterControllerComponent: {fileID: 4116582457067492845}
-  _speedMultiplier: 1
+  _speedMultiplier: 2
   _speed: 3
   _move: {x: 0, y: 0, z: 0}
   _isMoving: {fileID: 11400000, guid: e1bbc9f8f00489646a71b72dc6460ae1, type: 2}
@@ -905,8 +906,8 @@ MonoBehaviour:
   RightHandIK: {fileID: 1785284635601927086}
   LeftHandIK: {fileID: 8182843588149872904}
   CurrentWeapon: {fileID: 5499261933320848517}
-  _animatorOfHumanoid: {fileID: 0}
-  _rigBuilderOfHumanoid: {fileID: 0}
+  _animatorOfHumanoid: {fileID: 4980200780456763487}
+  _rigBuilderOfHumanoid: {fileID: 3577843186660539665}
   _weaponHolder: {fileID: 522865125595312457}
 --- !u!114 &666725341
 MonoBehaviour:
@@ -981,6 +982,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onEnableSetInputState: 0
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
+--- !u!114 &853112009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780828685733077151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f825bcc7a1da09e4681202941c01a407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1794364599374829750
 GameObject:
   m_ObjectHideFlags: 0
