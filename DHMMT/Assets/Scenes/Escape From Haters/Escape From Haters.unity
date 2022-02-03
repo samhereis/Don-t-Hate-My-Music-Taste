@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1598626851}
-  m_IndirectSpecularColor: {r: 0.03487969, g: 0.23089015, b: 0.39042994, a: 1}
+  m_IndirectSpecularColor: {r: 0.002714529, g: 0.043034058, b: 0.12466501, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1878,7 +1878,8 @@ Transform:
   m_LocalPosition: {x: 154, y: 0, z: 142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1787554583}
   m_Father: {fileID: 1632037929}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1894,10 +1895,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47dd51c875c70e4ba0c4e46141802f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnCollider: []
+  _spawnCollider:
+  - {fileID: 1787554584}
   _prefab: {fileID: 2807167464053985135, guid: c153dd1ff548da24ea734f2a34a74a5e, type: 3}
   _eventWithOneParameter: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
   _eventWithNoParameters: {fileID: 0}
+  _spawnOnAwake: 1
 --- !u!1 &1199808269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,6 +3080,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 50, y: 1, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1787554582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787554583}
+  - component: {fileID: 1787554584}
+  m_Layer: 0
+  m_Name: Bounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1787554583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787554582}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -105.9, y: 0.94, z: -101.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1186959929}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1787554584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787554582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 1, z: 50}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849444199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3288,7 +3336,7 @@ MonoBehaviour:
   _aFrequancyData: {fileID: 11400000, guid: f088e47471e70184292155af20eeb020, type: 2}
   _minValue: 0.2
   _multiplier: 100
-  _originalColor: {r: 0.13919175, g: 1, b: 0, a: 3.712012}
+  _originalColor: {r: 0.13919172, g: 1, b: 0, a: 3.712012}
 --- !u!1 &1938843039
 GameObject:
   m_ObjectHideFlags: 0

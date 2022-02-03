@@ -22,6 +22,8 @@ public class SpawnNearPlayer : MonoBehaviour
     {
         _eventWithNoParameters?.AdListener(Spawn);
         _eventWithOneParameter?.AdListener((x) => Spawn());
+
+        if (_spawnOnAwake) Spawn();
     }
 
     public async void Spawn()
