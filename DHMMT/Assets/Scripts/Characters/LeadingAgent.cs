@@ -9,9 +9,11 @@ using System.Threading;
 namespace Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class ConstantAgent : MonoBehaviour
+    public class LeadingAgent : MonoBehaviour
     {
         [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private Material _lightMaterial;
+
         [SerializeField] private Transform _target;
 
         [Header("Settings")]
