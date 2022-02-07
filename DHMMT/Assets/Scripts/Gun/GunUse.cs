@@ -41,8 +41,8 @@ public class GunUse : MonoBehaviour
         _audioSource ??= GetComponent<AudioSource>();
         _weaponAnimator ??= GetComponentInChildren<Animator>();
 
-        _interactableEquipWeapon.onEquip.AddListener(OnEquip);
-        _interactableEquipWeapon.onUnequip.AddListener(OnUnEquip);
+        _interactableEquipWeapon?.onEquip.AddListener(OnEquip);
+        _interactableEquipWeapon?.onUnequip.AddListener(OnUnEquip);
     }
 
     private void OnEnable()

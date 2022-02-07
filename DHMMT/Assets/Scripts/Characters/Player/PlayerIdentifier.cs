@@ -10,9 +10,11 @@ namespace Identifiers
 {
     public class PlayerIdentifier : MonoBehaviour
     {
+        public static PlayerIdentifier instance { get; private set; }
+
         private void Awake()
         {
-            
+            instance = this;
         }
 
         private void OnEnable()

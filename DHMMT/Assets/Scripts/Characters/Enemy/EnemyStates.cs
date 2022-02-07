@@ -31,7 +31,7 @@ public class EnemyStates : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _stateAction();
+        if(_stateAction != null) _stateAction();
     }
 
     public void searchForEnemy()
@@ -43,6 +43,7 @@ public class EnemyStates : MonoBehaviour
     {
 
     }
+
     public void attack()
     {
 

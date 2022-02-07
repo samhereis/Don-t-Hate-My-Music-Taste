@@ -8,7 +8,7 @@ public class EnemyWeapon : MonoBehaviour
 
     [SerializeField] private InteractableEquipWeapon _defaultltWeapon;
 
-    void OnEnable()
+    private void OnEnable()
     {
         if(_defaultltWeapon != null)
         {

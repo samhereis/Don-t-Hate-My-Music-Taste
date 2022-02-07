@@ -16,14 +16,4 @@ public class EnemyDetectPlayer : MonoBehaviour
     {
         _enemyStates ??= GetComponent<EnemyStates>();
     }
-
-    private void FixedUpdate()
-    {
-        _colliders = Physics.OverlapSphere(transform.position, _radius, _targetMask);
-
-        if (_colliders.Length != 0)
-        {
-            _enemyStates.FollowedEnemy = _colliders[0].transform;
-        }
-    }
 }

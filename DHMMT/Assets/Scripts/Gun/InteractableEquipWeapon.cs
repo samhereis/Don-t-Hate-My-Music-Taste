@@ -42,6 +42,7 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         {   //Manage RigidBody
             _rigidbodyComponent.isKinematic = true;
             _rigidbodyComponent.useGravity = false;
+
             _colliderComponent.enabled = false;
         }
 

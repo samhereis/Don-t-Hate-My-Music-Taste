@@ -4,6 +4,7 @@ using Identifiers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnNearPlayer : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class SpawnNearPlayer : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private bool _spawnOnAwake;
+    [SerializeField] private float _maxRadiusFromPlayer = 30f;
+    [SerializeField] private float _minRadiusFromPlayer = 10f;
 
     private void Awake()
     {
@@ -38,6 +41,27 @@ public class SpawnNearPlayer : MonoBehaviour
 
         Transform newObj = Instantiate(_prefab);
 
-        newObj.position = bounds.center + new Vector3(offsetX, offsetY, offsetZ);
+        Vector3 p = Test();
+
+        newObj.position = bounds.center + new Vector3(p.x, p.y, p.z);
+    }
+
+    public Vector3 Test()
+    {
+        Vector3 player = PlayerIdentifier.instance.transform.position;
+
+        float radius = Random.Range(_minRadiusFromPlayer, _maxRadiusFromPlayer);
+
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+
+        randomDirection += player;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
+
+        Vector3 finalPosition = hit.position;
+
+        return finalPosition;
     }
 }

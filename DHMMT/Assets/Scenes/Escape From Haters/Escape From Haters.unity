@@ -15,11 +15,11 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.5753543, g: 0.1814853, b: 0.77666676, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 100
+  m_LinearFogEnd: 71
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -1542,8 +1542,9 @@ MonoBehaviour:
   m_TileSize: 256
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
+  m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8a7951c75e723ae408f85e3ca94b79a6, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1106722116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1923,9 @@ MonoBehaviour:
   _prefab: {fileID: 2807167464053985135, guid: c153dd1ff548da24ea734f2a34a74a5e, type: 3}
   _eventWithOneParameter: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
   _eventWithNoParameters: {fileID: 0}
-  _spawnOnAwake: 0
+  _spawnOnAwake: 1
+  _maxRadiusFromPlayer: 30
+  _minRadiusFromPlayer: 10
 --- !u!1 &1199808269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,7 +3055,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 48.10196}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3201,6 +3204,10 @@ PrefabInstance:
     - target: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
       propertyPath: m_Name
       value: PlayerPref
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652258298556851148, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707864e341b1de04e967beca971fdcc4, type: 3}

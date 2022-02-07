@@ -1544,7 +1544,6 @@ GameObject:
   - component: {fileID: 2413848665578746312}
   - component: {fileID: 135618078336120121}
   - component: {fileID: 6188888498736696643}
-  - component: {fileID: 715024889744891478}
   - component: {fileID: 2938201030753303005}
   - component: {fileID: 902166660165243976}
   m_Layer: 0
@@ -1666,7 +1665,6 @@ MonoBehaviour:
   FollowedEnemy: {fileID: 0}
   CurrentDestination: {fileID: 0}
   DistanceToEnemy: 5
-  _weaponDataHolder: {fileID: 715024889744891478}
   ShootRate: 1
 --- !u!114 &2413848665578746314
 MonoBehaviour:
@@ -1681,7 +1679,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RightSholder: {fileID: 5353887082492345743}
-  WeaponAimPosition: {fileID: 7631680152987844056}
   WeaponPosition: {fileID: 1225618319830385776}
   AimTo: {fileID: 1033459485873777154}
   Cam: {fileID: 7010315650923318047}
@@ -1689,8 +1686,9 @@ MonoBehaviour:
   RightHandIK: {fileID: 4486332053205675096}
   LeftHandIK: {fileID: 5812931857850558011}
   CurrentWeapon: {fileID: 9068806161496639357}
-  AnimatorOfHumanoid: {fileID: 8076400247271920917}
-  RigBuilderOfHumanoid: {fileID: 3688741872743447335}
+  _animatorOfHumanoid: {fileID: 0}
+  _rigBuilderOfHumanoid: {fileID: 0}
+  _weaponHolder: {fileID: 0}
 --- !u!114 &2413848665578746313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,9 +1701,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b163bff7d7745644a88abe1e2297213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetMask:
+  _colliders: []
+  _radius: 20
+  _targetMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 3
   _enemyStates: {fileID: 2413848665578746315}
 --- !u!114 &2413848665578746312
 MonoBehaviour:
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923a709023b6eb74bb12caa78c464dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultltWeapon: {fileID: 8150309119783559227}
+  _defaultltWeapon: {fileID: 0}
 --- !u!114 &6188888498736696643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,22 +1748,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isAlive: 1
   _health: 100
-  _MaxHealth: 100
-  Loots:
-  - {fileID: 1929565375958654711, guid: 6b3de782fb1112644898b0b1aca9f543, type: 3}
-  - {fileID: 1929565375958654711, guid: f44c0b291de288c4faff93bcfd35dd85, type: 3}
---- !u!114 &715024889744891478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296317459984324053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4eddad9cb36004e838b8d03353e811, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _loots: []
 --- !u!114 &2938201030753303005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4144,10 +4130,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8942232456965031729}
     m_Modifications:
-    - target: {fileID: 5792755450575858355, guid: 190d158e707f9b740b24120e0253e407, type: 3}
-      propertyPath: GunDataComponent
-      value: 
-      objectReference: {fileID: 8150309119783559226}
+    - target: {fileID: -7823946648576168876, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -7823946648576168876, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7823946648576168876, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792755450575858365, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792755450575858365, guid: 190d158e707f9b740b24120e0253e407, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4198,28 +4200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 190d158e707f9b740b24120e0253e407, type: 3}
---- !u!114 &8150309119783559226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5792755450575858354, guid: 190d158e707f9b740b24120e0253e407, type: 3}
-  m_PrefabInstance: {fileID: 2413848664550886024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068806161496639357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5ee0fca8193ad45834e8242be7f8ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8150309119783559227 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5792755450575858355, guid: 190d158e707f9b740b24120e0253e407, type: 3}
-  m_PrefabInstance: {fileID: 2413848664550886024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068806161496639357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d27fc9ea9434284ea90fc9bcac0e30d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8543627059288726983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
