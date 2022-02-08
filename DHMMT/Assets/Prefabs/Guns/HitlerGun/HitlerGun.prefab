@@ -1580,7 +1580,7 @@ MonoBehaviour:
   _currentAmmo: 8
   _maxAmmo: 50
   _reloadTime: 0.2
-  _bullet: {fileID: 8872171098656000684, guid: 49892df371a9e7b40879030d48ce1def, type: 3}
+  _bullet: {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
   _bulletPosition: {fileID: 3474678327784978044}
   _fireRate: 0.2
   _nextFire: 0
@@ -1700,7 +1700,6 @@ MonoBehaviour:
   _animator: {fileID: 881851449525041963}
   _isMoving: {fileID: 11400000, guid: e1bbc9f8f00489646a71b72dc6460ae1, type: 2}
   _sprint: {fileID: 11400000, guid: d232bbbbc12eb58488f2fb94d6b20544, type: 2}
-  _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
   _interactableEquipWeapon: {fileID: 7110574739933375419}
 --- !u!1 &8039902769550646550
 GameObject:

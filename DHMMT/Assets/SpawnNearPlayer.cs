@@ -8,8 +8,6 @@ using UnityEngine.AI;
 
 public class SpawnNearPlayer : MonoBehaviour
 {
-    [SerializeField] private Collider[] _spawnCollider;
-
     [SerializeField] private Transform _prefab;
 
     [Header("Events")]
@@ -25,7 +23,10 @@ public class SpawnNearPlayer : MonoBehaviour
     {
         _eventWithNoParameters?.AdListener(Spawn);
         _eventWithOneParameter?.AdListener((x) => Spawn());
+    }
 
+    private void OnEnable()
+    {
         if (_spawnOnAwake) Spawn();
     }
 
@@ -33,17 +34,11 @@ public class SpawnNearPlayer : MonoBehaviour
     {
         await AsyncHelper.Delay(0.2f);
 
-        Bounds bounds = _spawnCollider[CollectionsHelper.GetRandomIndex(_spawnCollider.Length)].bounds;
-
-        float offsetX = Random.Range(-bounds.extents.x, bounds.extents.x);
-        float offsetY = Random.Range(-bounds.extents.y, bounds.extents.y);
-        float offsetZ = Random.Range(-bounds.extents.z, bounds.extents.z);
-
         Transform newObj = Instantiate(_prefab);
 
         Vector3 p = Test();
 
-        newObj.position = bounds.center + new Vector3(p.x, p.y, p.z);
+        newObj.position =  new Vector3(p.x, p.y, p.z);
     }
 
     public Vector3 Test()

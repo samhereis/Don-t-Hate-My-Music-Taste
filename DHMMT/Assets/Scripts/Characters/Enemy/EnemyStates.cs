@@ -3,54 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyStates : MonoBehaviour
 {
-    // TODO: Make every state a separate script for better controll
-
-    // Controlls an enemie's state
-
     [SerializeField] private EnemyMovement _enemyMovement;
 
-    public Transform FollowedEnemy;
+    [Header("Unity Components")]
+    [SerializeField] private Rigidbody _rigidbody;
+    public Rigidbody rigidbody => _rigidbody;
 
-    public Transform CurrentDestination;
+    [SerializeField] private NavMeshAgent _agent;
+    public NavMeshAgent agent => _agent;
 
-    public int DistanceToEnemy = 10;
+    [SerializeField] private Animator _animator;
+    public Animator animator => _animator;
 
-    public float ShootRate;
-
-    private Action _stateAction;
-
-    private float _distance;
+    [Header("Events")]
+    public readonly UnityEvent<Collider> _onTriggerEnter = new UnityEvent<Collider>();
+    public readonly UnityEvent<Collider> _onTriggerExit = new UnityEvent<Collider>();
 
     private void Start()
     {
         _enemyMovement ??= GetComponent<EnemyMovement>();
     }
 
-    private void FixedUpdate()
+    private void OnTriggerEnter(Collider other)
     {
-        if(_stateAction != null) _stateAction();
+        _onTriggerEnter?.Invoke(other);
     }
 
-    public void searchForEnemy()
+    private void OnTriggerExit(Collider other)
     {
-
+        _onTriggerExit?.Invoke(other);
     }
 
-    public void chaseEnemyWhoIsInRange()
+#if UNITY_EDITOR
+    [ContextMenu(nameof(Setup))]
+    public void Setup()
     {
-
+        _animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
-
-    public void attack()
-    {
-
-    }
-
-    void changeDistanceToEnemy()
-    {
-        DistanceToEnemy = UnityEngine.Random.Range(10, 30);
-    }
+#endif
 }

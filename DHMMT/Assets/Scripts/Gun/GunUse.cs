@@ -1,3 +1,4 @@
+using Pooling;
 using Scriptables.Values;
 using System;
 using System.Collections;
@@ -18,7 +19,7 @@ public class GunUse : MonoBehaviour
     [SerializeField] private int _currentAmmo = 8;
     [SerializeField] private int _maxAmmo = 50;
     [SerializeField] private float _reloadTime;
-    [SerializeField] private GameObject _bullet;
+    [SerializeField] private BulletPooling_SO _bullet;
     [SerializeField] private Transform _bulletPosition;
 
     [Header("Shoot Timing")]
@@ -78,14 +79,15 @@ public class GunUse : MonoBehaviour
         if ((Time.time > _nextFire) && (_canShoot == true))
         {
             _nextFire = Time.time + _fireRate;
-            DecreaseAmmo();
 
-            Instantiate(_bullet, _bulletPosition.position, _bulletPosition.rotation);
+            _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
 
             _audioSource.Stop();
             _audioSource.Play();
 
             _weaponAnimator.SetTrigger("Shoot");
+
+            DecreaseAmmo();
         }
     }
 
