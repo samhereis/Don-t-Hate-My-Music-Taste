@@ -1,3 +1,4 @@
+using Sripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,13 +6,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class EnemyStates : MonoBehaviour
+public class EnemyStates : HumanoidData
 {
-    [SerializeField] private EnemyMovement _enemyMovement;
-
     [Header("Unity Components")]
     [SerializeField] private Rigidbody _rigidbody;
-    public Rigidbody rigidbody => _rigidbody;
+    public Rigidbody rigidbodyComponent => _rigidbody;
 
     [SerializeField] private NavMeshAgent _agent;
     public NavMeshAgent agent => _agent;
@@ -20,22 +19,22 @@ public class EnemyStates : MonoBehaviour
     public Animator animator => _animator;
 
     [Header("Events")]
-    public readonly UnityEvent<Collider> _onTriggerEnter = new UnityEvent<Collider>();
-    public readonly UnityEvent<Collider> _onTriggerExit = new UnityEvent<Collider>();
+    public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
+    public readonly UnityEvent<Collider> onTriggerExit = new UnityEvent<Collider>();
 
     private void Start()
     {
-        _enemyMovement ??= GetComponent<EnemyMovement>();
+        _humanoidMovementStateData ??= GetComponent<EnemyMovement>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        _onTriggerEnter?.Invoke(other);
+        onTriggerEnter?.Invoke(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _onTriggerExit?.Invoke(other);
+        onTriggerExit?.Invoke(other);
     }
 
 #if UNITY_EDITOR

@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 167dbffc1ed4f0147a3701835fa6da96, type: 2}
   - {fileID: 11400000, guid: e372f89e52b2f604cb6b06c44ed16092, type: 2}
   - {fileID: 11400000, guid: 1fca4216ccc51a248bcc7cde31f6add2, type: 2}
+  - {fileID: 11400000, guid: 247aecc75adbc1347bc0a08fe891950b, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -114,6 +115,7 @@ MonoBehaviour:
     - Locale-ru
     - Locale-tr
     - Locale-ar
+    - Poolers
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ea43ab110588fc943a477dc7358a7b88, type: 2}
@@ -133,6 +135,3 @@ MonoBehaviour:
     m_Settings: {fileID: 11400000}
     m_NextInstanceId: 0
     m_RegisteredServiceTypeRefs: []
-    m_GlobalProfileVariablesInfos:
-    - key: PrivateIpAddress
-      value: 192.168.155.88

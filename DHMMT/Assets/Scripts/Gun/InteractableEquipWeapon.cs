@@ -23,18 +23,18 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
     [SerializeField] private Collider _colliderComponent;
 
     [Header("Events")]
-    public readonly UnityEvent<HumanoidEquipWeaponData> onEquip = new UnityEvent<HumanoidEquipWeaponData>();
-    public readonly UnityEvent<HumanoidEquipWeaponData> onUnequip = new UnityEvent<HumanoidEquipWeaponData>();
+    public readonly UnityEvent<HumanoidData> onEquip = new UnityEvent<HumanoidData>();
+    public readonly UnityEvent<HumanoidData> onUnequip = new UnityEvent<HumanoidData>();
 
     public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid
     {
-        HumanoidEquipWeaponData equipData = caller.GetComponent<HumanoidEquipWeaponData>();
+        HumanoidData equipData = caller.GetComponent<HumanoidData>();
         Animator animator = caller.GetComponent<Animator>();
 
         _equiped = true;
 
         {   //Manage Position and Rotation
-            transform.SetParent(equipData.WeaponPosition, false);
+            transform.SetParent(equipData.weapnHolder, false);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }

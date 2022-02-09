@@ -1541,7 +1541,6 @@ GameObject:
   - component: {fileID: 5571758132159476914}
   - component: {fileID: 2413848665578746315}
   - component: {fileID: 2413848665578746312}
-  - component: {fileID: 2413848665578746314}
   - component: {fileID: 2413848665578746313}
   - component: {fileID: 135618078336120121}
   - component: {fileID: 6188888498736696643}
@@ -1633,7 +1632,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.75
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 2
 --- !u!136 &1992712274373831030
 CapsuleCollider:
@@ -1677,7 +1676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e897380cb328fb547bd4c6b2a6283f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMovement: {fileID: 2413848665578746312}
+  _humanoidMovementStateData: {fileID: 2413848665578746312}
+  RightHandIK: {fileID: 4486332053205675096}
+  LeftHandIK: {fileID: 5812931857850558011}
+  _weaponHolder: {fileID: 1225618319830385776}
   _rigidbody: {fileID: 5571758132159476914}
   _agent: {fileID: 2413848665578746317}
   _animator: {fileID: 8076400247271920917}
@@ -1693,31 +1695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6823dc91c50b0c646ac81e6c7ffc1fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NavMeshAgentOfEnemy: {fileID: 2413848665578746317}
-  AnimatorOfEnemy: {fileID: 8076400247271920917}
---- !u!114 &2413848665578746314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296317459984324053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7207d9b10cb24146aa313d8c743e54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RightSholder: {fileID: 5353887082492345743}
-  WeaponPosition: {fileID: 1225618319830385776}
-  AimTo: {fileID: 1033459485873777154}
-  Cam: {fileID: 7010315650923318047}
-  AllWeapons: {fileID: 8942232456965031729}
-  RightHandIK: {fileID: 4486332053205675096}
-  LeftHandIK: {fileID: 5812931857850558011}
-  CurrentWeapon: {fileID: 9068806161496639357}
-  _animatorOfHumanoid: {fileID: 8076400247271920917}
-  _rigBuilderOfHumanoid: {fileID: 3688741872743447335}
-  _weaponHolder: {fileID: 1225618319830385776}
+  _enemyStates: {fileID: 2413848665578746315}
+  _isMoving: 0
+  _isSprinting: 0
+  _currentPath: {x: 0, y: 0, z: 0}
 --- !u!114 &2413848665578746313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4185,7 +4166,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5792755450575858355, guid: 190d158e707f9b740b24120e0253e407, type: 3}
   m_PrefabInstance: {fileID: 2413848664550886024}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068806161496639357}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d27fc9ea9434284ea90fc9bcac0e30d, type: 3}
@@ -4194,10 +4175,5 @@ MonoBehaviour:
 --- !u!4 &8543627059288726983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
-  m_PrefabInstance: {fileID: 2413848664550886024}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9068806161496639357 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6675858250920545781, guid: 190d158e707f9b740b24120e0253e407, type: 3}
   m_PrefabInstance: {fileID: 2413848664550886024}
   m_PrefabAsset: {fileID: 0}

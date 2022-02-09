@@ -8,13 +8,15 @@ using Helpers;
 
 namespace Sripts
 {
-    public class EnemyMovementStateBase
+    public abstract class EnemyMovementStateBase
     {
-        [SerializeField] private EnemyStates _enemy;
+        [SerializeField] protected EnemyStates _enemy;
 
-        EnemyMovementStateBase(EnemyStates enemyStates)
+        public EnemyMovementStateBase(EnemyStates enemyStates)
         {
             _enemy = enemyStates;
         }
+
+        public abstract void Move();
     }
 }

@@ -22,10 +22,12 @@ namespace Scriptables.Gameplay
         {
             _currentValue = PlayerPrefs.GetFloat(KEY, _defaultValue);
 
-            if(name.StartsWith("_Key") == false)
+#if UNITY_EDITOR
+            if (name.StartsWith("_Key") == false)
             {
                 _KEY = keyStartsWith + name + keyEndsWith;
             }
+#endif
         }
 
         private void OnEnable()

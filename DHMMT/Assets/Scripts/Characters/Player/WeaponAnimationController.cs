@@ -1,5 +1,6 @@
 using Scriptables;
 using Scriptables.Values;
+using Sripts;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,13 +9,17 @@ public class WeaponAnimationController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
 
-    private string _speed = "Speed";
-
-    [SerializeField] private BoolValue_SO _isMoving;
-
-    [SerializeField] private BoolValue_SO _sprint;
+    private const string _speed = "Speed";
 
     [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
+
+    [SerializeField] private HumanoidMovementStateData _humanoidMovementStateData;
+
+    [Header("Debug")]
+    [SerializeField] float _currentSpeed;
+
+    private bool _isSpring => _humanoidMovementStateData.isSprinting;
+    private bool _isMoving => _humanoidMovementStateData.isMoving;
 
     private void Awake()
     {
@@ -22,29 +27,29 @@ public class WeaponAnimationController : MonoBehaviour
         _interactableEquipWeapon.onUnequip.AddListener(DegisterEvents);
     }
 
-    private void RegisterEvents(HumanoidEquipWeaponData sentData)
+    private void RegisterEvents(HumanoidData sentData)
     {
-        _isMoving.AddListener(SetSpeed);
+        _humanoidMovementStateData = sentData.humanoidMovementStateData;
 
-        _sprint.AddListener(SetSpeed);
+        _humanoidMovementStateData.onIsMovingChange += SetSpeed;
     }
 
-    private void DegisterEvents(HumanoidEquipWeaponData sentData)
+    private void DegisterEvents(HumanoidData sentData)
     {
-        _isMoving.RemoveListener(SetSpeed);
+        _humanoidMovementStateData.onIsMovingChange -= SetSpeed;
 
-        _sprint.RemoveListener(SetSpeed);
+        _humanoidMovementStateData = null;
     }
 
-    public void SetSpeed(bool value)
+    public void SetSpeed(bool value, float speed)
     {
-        if (_isMoving.value && _sprint.value == false)
+        if (_isMoving == true && _isSpring == false)
         {
-            _animator.SetFloat(_speed, 1);
+            _animator.SetFloat(_speed, speed);
         }
-        else if (_isMoving.value == true && _sprint.value == true)
+        else if (_isMoving == true && _isSpring == true)
         {
-            _animator.SetFloat(_speed, 2);
+            _animator.SetFloat(_speed, speed * 2);
         }
         else
         {

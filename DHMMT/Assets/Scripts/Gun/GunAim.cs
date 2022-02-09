@@ -18,7 +18,7 @@ public class GunAim : MonoBehaviour
 
     [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
 
-    [SerializeField] private HumanoidEquipWeaponData _equipData;
+    [SerializeField] private HumanoidData _equipData;
 
     private void Awake()
     {
@@ -27,16 +27,16 @@ public class GunAim : MonoBehaviour
         _interactableEquipWeapon.onUnequip.AddListener(OnUnequip);
     }
 
-    private void OnEquip(HumanoidEquipWeaponData sentEquipData)
+    private void OnEquip(HumanoidData sentEquipData)
     {
         _equipData = sentEquipData;
 
-        _equipData.WeaponPosition.localPosition = _initialPosition;
+        _equipData.weapnHolder.localPosition = _initialPosition;
 
         _aimed.AddListener(Aim);
     }
 
-    private void OnUnequip(HumanoidEquipWeaponData sentEquipData)
+    private void OnUnequip(HumanoidData sentEquipData)
     {
         _equipData = null;
 

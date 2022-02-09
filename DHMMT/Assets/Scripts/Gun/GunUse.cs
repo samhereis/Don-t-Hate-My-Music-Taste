@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class GunUse : MonoBehaviour
 {
@@ -18,21 +19,21 @@ public class GunUse : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _currentAmmo = 8;
     [SerializeField] private int _maxAmmo = 50;
-    [SerializeField] private float _reloadTime;
+
+    [Header("Bullet")]
     [SerializeField] private BulletPooling_SO _bullet;
+    [SerializeField] private string _bulletPoolerKey;
     [SerializeField] private Transform _bulletPosition;
 
     [Header("Shoot Timing")]
     [SerializeField] private float _fireRate = 0.2f;
     [SerializeField] private float _nextFire;
+    [SerializeField] private float _reloadTime;
 
     [Header("Shoot States")]
     [SerializeField] private bool _isReloading = false;
     [SerializeField] private bool _canShoot = true;
     [SerializeField] private bool _shoot = false;
-
-    [Header("Events")]
-    [SerializeField] private BoolValue_SO _isShooting;
 
     [Header("Components")]
     [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
@@ -44,6 +45,16 @@ public class GunUse : MonoBehaviour
 
         _interactableEquipWeapon?.onEquip.AddListener(OnEquip);
         _interactableEquipWeapon?.onUnequip.AddListener(OnUnEquip);
+
+        if(!_bullet)
+        {
+            var hanlde = Addressables.LoadAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
+
+            hanlde.Completed += (operation) =>
+            {
+                _bullet = operation.Result;
+            };
+        }
     }
 
     private void OnEnable()
@@ -59,14 +70,14 @@ public class GunUse : MonoBehaviour
         }
     }
 
-    private void OnEquip(HumanoidEquipWeaponData sentData)
+    private void OnEquip(HumanoidData sentData)
     {
-        _isShooting.AddListener(SetShoot);
+
     }
 
-    private void OnUnEquip(HumanoidEquipWeaponData sentData)
+    private void OnUnEquip(HumanoidData sentData)
     {
-        _isShooting.RemoveListener(SetShoot);
+
     }
 
     public void SetShoot(bool value)
@@ -74,13 +85,13 @@ public class GunUse : MonoBehaviour
         _shoot = value;
     }
 
-    private void Shoot()
+    private async void Shoot()
     {
         if ((Time.time > _nextFire) && (_canShoot == true))
         {
             _nextFire = Time.time + _fireRate;
 
-            _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
+            await _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
 
             _audioSource.Stop();
             _audioSource.Play();

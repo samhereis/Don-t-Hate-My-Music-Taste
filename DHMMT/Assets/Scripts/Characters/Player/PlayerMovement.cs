@@ -1,36 +1,36 @@
 using Scriptables;
 using Scriptables.Values;
+using Sripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : HumanoidMovementStateData
 {
     // Controlls player's move
 
     [Header("Components")]
     [SerializeField] private Animator _animator;
-
     [SerializeField] private CharacterController _characterControllerComponent;
 
     [Header("Settings")]
-
     [SerializeField] private float _speedMultiplier = 1;
-    private float _currentSpeedMultiplier = 1;
-
     [SerializeField] private float _speed = 3;
-
-    [SerializeField] private Vector3 _move;
 
     [Header("SO")]
     [SerializeField] private BoolValue_SO _isMoving;
-
     [SerializeField] private BoolValue_SO _isSprinting;
 
     [SerializeField] private Input_SO _inputContainer;
     private InputSettings _input => _inputContainer.input;
 
+    [Header("Debug")]
     [SerializeField] private Vector2 _moveInputValue;
-    private int _velocityHashY, _velocityHashX;
+    [SerializeField] private Vector3 _move;
+    [SerializeField] private int _velocityHashY, _velocityHashX;
+    [SerializeField] private float _currentSpeedMultiplier = 1;
+
+    public override bool isMoving => _isMoving.value;
+    public override bool isSprinting => _isSprinting.value;
 
     private void Awake()
     {
@@ -79,14 +79,18 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveInputValue = context.ReadValue<Vector2>();
 
-        _isMoving.ChangeValue(_moveInputValue != Vector2.zero);
+        _isMoving?.ChangeValue(_moveInputValue != Vector2.zero);
+        onIsMovingChange?.Invoke(isMoving, _moveInputValue.magnitude);
     }
 
     private void Sprint(InputAction.CallbackContext context)
     {
         _currentSpeedMultiplier = 1 + (context.ReadValueAsButton() && _isMoving.value ? 1 : 0) * _speedMultiplier;
 
-        _isSprinting.ChangeValue(_currentSpeedMultiplier > 1);
+        _isSprinting?.ChangeValue(_currentSpeedMultiplier > 1);
+
+        onIsSprintingChange?.Invoke(isSprinting);
+        onIsMovingChange?.Invoke(isMoving, _moveInputValue.magnitude);
     }
 
     private void Fire(InputAction.CallbackContext context)
