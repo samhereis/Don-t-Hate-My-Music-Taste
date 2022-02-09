@@ -25,7 +25,23 @@ namespace Sripts
 
         public override void Move()
         {
-            if(_isNearPlayer == false) _enemyMovement.MoveTo(PlayerIdentifier.instance.transform);
+            if(Vector3.Distance(PlayerIdentifier.instance.transform.position, _enemyMovement.transform.position) > _enemyMovement.currentDistanceToAttack)
+            {
+                _isNearPlayer = false;
+            }
+            else
+            {
+                _isNearPlayer = true;
+            }
+
+            if(_isNearPlayer == false)
+            {
+                _enemyMovement.MoveTo(PlayerIdentifier.instance.transform);
+            }
+            else
+            {
+                _enemyMovement.Stop();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
