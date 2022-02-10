@@ -856,6 +856,7 @@ MonoBehaviour:
   _move: {x: 0, y: 0, z: 0}
   _velocityHashY: 0
   _velocityHashX: 0
+  _currentSpeedMultiplier: 1
 --- !u!114 &666725337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _humanoidMovementStateData: {fileID: 1601407200960980443}
-  WeaponPosition: {fileID: 522865125595312457}
+  _humanoidAttackingStateData: {fileID: 7467988608207581382}
   RightHandIK: {fileID: 1785284635601927086}
   LeftHandIK: {fileID: 8182843588149872904}
   _weaponHolder: {fileID: 522865125595312457}

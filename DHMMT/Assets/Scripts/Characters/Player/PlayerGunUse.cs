@@ -5,78 +5,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerGunUse : MonoBehaviour
+namespace Characters.States.Data
 {
-    // Controlls the use of the gun that main players holds
-
-    [Header("Components")]
-    [SerializeField] private Animator _animator;
-
-    [Header("Guns")]
-    [SerializeField] private InteractableEquipWeapon _defaultWeapon;
-
-    [SerializeField] private InteractableEquipWeapon _secodWeapon;
-
-    [Header("SO")]
-    [SerializeField] private BoolValue_SO _isShooting;
-
-    [SerializeField] private Input_SO _inputContainer;
-    private InputSettings _input => _inputContainer.input;
-
-    private int _velocityHashY, _velocityHashX;
-
-    private void Awake()
+    public class PlayerGunUse : HumanoidAttackingStateData
     {
-        _velocityHashY = Animator.StringToHash("moveVelocityY");
-        _velocityHashX = Animator.StringToHash("moveVelocityX");
+        // Controlls the use of the gun that main players holds
 
-        _defaultWeapon.Interact(gameObject);
-    }
+        [Header("Components")]
+        [SerializeField] private Animator _animator;
 
-    private void OnEnable()
-    {
-        _input.Gameplay.Fire.performed += Fire;
-        _input.Gameplay.Fire.canceled  += Fire;
+        [Header("Guns")]
+        [SerializeField] private InteractableEquipWeapon _defaultWeapon;
 
-        _input.Gameplay.Reload.performed += Reload;
+        [SerializeField] private InteractableEquipWeapon _secodWeapon;
 
-        _input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+        [Header("SO")]
+        [SerializeField] private BoolValue_SO _isShooting;
 
-        _input.Gameplay.Sprint.performed += Sprint;
-    }
+        [SerializeField] private Input_SO _inputContainer;
+        private InputSettings _input => _inputContainer.input;
 
-    private void OnDisable ()
-    {
-        _input.Gameplay.Fire.performed -= Fire;
-        _input.Gameplay.Fire.canceled  -= Fire;
+        private int _velocityHashY, _velocityHashX;
 
-        _input.Gameplay.Reload.performed -= Reload;
+        private void Awake()
+        {
+            _velocityHashY = Animator.StringToHash("moveVelocityY");
+            _velocityHashX = Animator.StringToHash("moveVelocityX");
 
-        _input.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
+            _defaultWeapon.Interact(gameObject);
+        }
 
-        _input.Gameplay.Sprint.performed -= Sprint;
-    }
+        private void OnEnable()
+        {
+            _input.Gameplay.Fire.performed += Fire;
+            _input.Gameplay.Fire.canceled += Fire;
 
-    public void ChangeWeapon(InputAction.CallbackContext context)
-    {
+            _input.Gameplay.Reload.performed += Reload;
 
-    }
+            _input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
 
-    private void Sprint(InputAction.CallbackContext context)
-    {
+            _input.Gameplay.Sprint.performed += Sprint;
+        }
 
-    }
+        private void OnDisable()
+        {
+            _input.Gameplay.Fire.performed -= Fire;
+            _input.Gameplay.Fire.canceled -= Fire;
 
-    private void Fire(InputAction.CallbackContext context)
-    {
-        _isShooting.ChangeValue(context.ReadValueAsButton());
+            _input.Gameplay.Reload.performed -= Reload;
 
-        _animator.SetFloat(_velocityHashY, 1);
-        _animator.SetFloat(_velocityHashX, 1);
-    }
+            _input.Gameplay.ChangeWeapon.performed -= ChangeWeapon;
 
-    private void Reload(InputAction.CallbackContext context)
-    {
+            _input.Gameplay.Sprint.performed -= Sprint;
+        }
 
+        public void ChangeWeapon(InputAction.CallbackContext context)
+        {
+
+        }
+
+        private void Sprint(InputAction.CallbackContext context)
+        {
+
+        }
+
+        private void Fire(InputAction.CallbackContext context)
+        {
+            _isShooting.ChangeValue(context.ReadValueAsButton());
+
+            onAttack?.Invoke(_isShooting.value);
+
+            _animator.SetFloat(_velocityHashY, 1);
+            _animator.SetFloat(_velocityHashX, 1);
+        }
+
+        private void Reload(InputAction.CallbackContext context)
+        {
+
+        }
     }
 }

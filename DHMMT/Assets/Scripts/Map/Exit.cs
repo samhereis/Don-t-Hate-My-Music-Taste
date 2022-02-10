@@ -1,5 +1,6 @@
 using Events;
 using Helpers;
+using Identifiers;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +22,7 @@ public class Exit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out PlayerMovement player))
+        if(other.TryGetComponent(out PlayerIdentifier player))
         {
             _onWin?.Invoke();
         }

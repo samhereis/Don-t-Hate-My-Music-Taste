@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using Helpers;
 using Identifiers;
 
-namespace Sripts
+namespace Characters.States.Data
 {
     public class FoolowPlayer_EnemyMovementState : EnemyMovementStateBase
     {

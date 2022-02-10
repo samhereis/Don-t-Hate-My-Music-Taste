@@ -72,12 +72,12 @@ public class GunUse : MonoBehaviour
 
     private void OnEquip(HumanoidData sentData)
     {
-
+        sentData.humanoidAttackingStateData.onAttack += SetShoot;
     }
 
     private void OnUnEquip(HumanoidData sentData)
     {
-
+        sentData.humanoidAttackingStateData.onAttack += SetShoot;
     }
 
     public void SetShoot(bool value)

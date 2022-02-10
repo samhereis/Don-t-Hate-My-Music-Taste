@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
 using System;
-using UnityEngine.Events;
-using Helpers;
+using UnityEngine;
 
-namespace Sripts
+namespace Characters.States.Data
 {
     public abstract class HumanoidMovementStateData : MonoBehaviour
     {

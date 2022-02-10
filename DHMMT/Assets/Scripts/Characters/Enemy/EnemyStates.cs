@@ -6,36 +6,38 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class EnemyStates : HumanoidData
+namespace Characters.States.Data
 {
-    [Header("Unity Components")]
-    [SerializeField] private Rigidbody _rigidbody;
-    public Rigidbody rigidbodyComponent => _rigidbody;
-
-    [SerializeField] private NavMeshAgent _agent;
-    public NavMeshAgent agent => _agent;
-
-    [SerializeField] private Animator _animator;
-    public Animator animator => _animator;
-
-    [Header("Events")]
-    public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
-    public readonly UnityEvent<Collider> onTriggerExit = new UnityEvent<Collider>();
-
-    private void Start()
+    public class EnemyStates : HumanoidData
     {
-        _humanoidMovementStateData ??= GetComponent<EnemyMovement>();
-    }
+        [Header("Unity Components")]
+        [SerializeField] private Rigidbody _rigidbody;
+        public Rigidbody rigidbodyComponent => _rigidbody;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        onTriggerEnter?.Invoke(other);
-    }
+        [SerializeField] private NavMeshAgent _agent;
+        public NavMeshAgent agent => _agent;
 
-    private void OnTriggerExit(Collider other)
-    {
-        onTriggerExit?.Invoke(other);
-    }
+        [SerializeField] private Animator _animator;
+        public Animator animator => _animator;
+
+        [Header("Events")]
+        public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
+        public readonly UnityEvent<Collider> onTriggerExit = new UnityEvent<Collider>();
+
+        private void Start()
+        {
+            _humanoidMovementStateData ??= GetComponent<EnemyMovement>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            onTriggerEnter?.Invoke(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            onTriggerExit?.Invoke(other);
+        }
 
 #if UNITY_EDITOR
     [ContextMenu(nameof(Setup))]
@@ -46,4 +48,5 @@ public class EnemyStates : HumanoidData
         _rigidbody = GetComponent<Rigidbody>();
     }
 #endif
+    }
 }

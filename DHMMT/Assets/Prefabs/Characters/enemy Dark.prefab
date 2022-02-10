@@ -1542,8 +1542,9 @@ GameObject:
   - component: {fileID: 2413848665578746312}
   - component: {fileID: 2413848665578746313}
   - component: {fileID: 135618078336120121}
-  - component: {fileID: 6188888498736696643}
   - component: {fileID: 2938201030753303005}
+  - component: {fileID: 7838422122771901544}
+  - component: {fileID: -4979341589662894296}
   m_Layer: 0
   m_Name: enemy Dark
   m_TagString: Untagged
@@ -1660,6 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _humanoidMovementStateData: {fileID: 2413848665578746312}
+  _humanoidAttackingStateData: {fileID: 0}
   RightHandIK: {fileID: 4486332053205675096}
   LeftHandIK: {fileID: 5812931857850558011}
   _weaponHolder: {fileID: 1225618319830385776}
@@ -1716,22 +1718,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultltWeapon: {fileID: 8150309119783559227}
---- !u!114 &6188888498736696643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296317459984324053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09735e34444e381479ac39b438f5b967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isAlive: 1
-  _health: 50
-  _maxHealth: 0
-  _loots: []
 --- !u!114 &2938201030753303005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,6 +1728,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 977c4bb6fed181a45b1ddea31e632a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7838422122771901544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296317459984324053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedf41e6510d034439fb7ca650d98d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
+  _onEnemyDie: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
+--- !u!114 &-4979341589662894296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296317459984324053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba9dfaef01127448a4f4bfb6e756129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3325724658735170878
