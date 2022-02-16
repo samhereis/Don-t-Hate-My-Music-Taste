@@ -1,22 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using Scriptables;
+using Sripts;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI : UIWIndowBase
 {
-    // Pause menu manage
+    [SerializeField] private Input_SO _input;
 
-    public GameObject Page { get => _page; set => _page = value; }
-    [SerializeField] GameObject _page;
-
-    public void Enable()
+    private void Awake()
     {
-        Page.SetActive(true);
+        if (!_input)
+        {
+            AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) =>
+            {
+                _input = result;
+            });
+        }
     }
 
-    public void Disable()
+    protected override void Disable()
     {
-        Page.SetActive(false);
+        
+    }
+    protected override void Enable()
+    {
+
+    }
+    public override void Setup()
+    {
+        
     }
 }

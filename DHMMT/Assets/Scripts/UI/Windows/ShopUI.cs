@@ -23,8 +23,6 @@ public class ShopUI : MonoBehaviour
 
     public void Enable()
     {
-        GameplayUI.instance.Disable();
-
         LoadAllGuns();
 
         Page.SetActive(true);
@@ -33,8 +31,6 @@ public class ShopUI : MonoBehaviour
     public void Disable()
     {
         Page.SetActive(false);
-
-        GameplayUI.instance.Enable();
     }
 
     private void LoadAllGuns()

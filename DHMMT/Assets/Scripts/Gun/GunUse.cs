@@ -1,5 +1,6 @@
 using Pooling;
 using Scriptables.Values;
+using Sripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,12 +49,10 @@ public class GunUse : MonoBehaviour
 
         if(!_bullet)
         {
-            var hanlde = Addressables.LoadAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
-
-            hanlde.Completed += (operation) =>
+            AddressableGetter.GetAddressable<BulletPooling_SO>(_bulletPoolerKey, (result) =>
             {
-                _bullet = operation.Result;
-            };
+                _bullet = result;
+            });
         }
     }
 
