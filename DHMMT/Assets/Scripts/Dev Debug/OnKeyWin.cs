@@ -19,6 +19,8 @@ namespace Sripts
         {
             if(Input.GetKeyUp(_key))
             {
+                Debug.Log(_key);
+
                 _eventWithNoParameters?.Invoke();
             }
         }
