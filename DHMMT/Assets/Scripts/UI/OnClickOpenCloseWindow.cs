@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 using UI.Window;
@@ -15,9 +16,16 @@ namespace UI.Window
         [SerializeField] private WindowBehaviorBase[] _openThese;
         [SerializeField] private WindowBehaviorBase[] _closeThese;
 
+        [Header("Events")]
+        [SerializeField] private UnityEvent _onOpen;
+        [SerializeField] private UnityEvent _onClose;
+
+        [Header("Settings")]
+        [SerializeField] private bool _isSelfControlled = true;
+
         public void OnPointerClick(PointerEventData eventData)
         {
-            Do();
+            if(_isSelfControlled) Do();
         }
 
         public void Do()
@@ -34,6 +42,8 @@ namespace UI.Window
 
                 await Task.Yield();
             }
+
+            _onOpen?.Invoke();
         }
 
         private async void Close()
@@ -44,6 +54,8 @@ namespace UI.Window
 
                 await Task.Yield();
             }
+
+            _onClose?.Invoke();
         }
     }
 }

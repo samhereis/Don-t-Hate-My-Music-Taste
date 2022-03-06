@@ -13,9 +13,9 @@ namespace Pooling
     {
         public override async Task<TimeSpan> Spawn(int quantity = 5, Transform parent = null)
         {
-            DateTime start = DateTime.Now;
+            if (parent != null) _parent = parent; else Init();
 
-            if (parent) _parent = parent; else Init();
+            DateTime start = DateTime.Now;
 
             for (int i = 0; i < quantity; i++)
             {

@@ -7,7 +7,7 @@ namespace Helpers
     [DisallowMultipleComponent]
     public class UIWindowEditorHelper : MonoBehaviour
     {
-        [SerializeField] private bool _rename;
+        [SerializeField] private bool _rename = false;
 
         [ContextMenu("Auto Configure")]
         public void Hide()

@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
 using System;
-using UnityEngine.Events;
-using Helpers;
+using UnityEngine;
 
-namespace Sripts
+namespace UI.Window
 {
     public abstract class UIWIndowBase : MonoBehaviour
     {
         protected static Action<UIWIndowBase> onAWindowOpen;
 
-        protected abstract void Enable();
+        [SerializeField] protected bool _isOpen = false;
 
-        protected abstract void Disable();
+        [Header("Components")]
+        [SerializeField] protected WindowBehaviorBase _windowBehavior;
+
+        public abstract void OnAWindowOpen(UIWIndowBase uIWIndow);
+
+        public abstract void Enable();
 
 #if UNITY_EDITOR
         [ContextMenu("Setup")] public abstract void Setup();
