@@ -1211,6 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isOpen: 0
   _windowBehavior: {fileID: 1199808272}
+  _input: {fileID: 0}
 --- !u!114 &1199808272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2378,7 +2379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventWithNoParameters: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}
-  _key: 43
+  _key: 270
 --- !u!4 &1855583398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1068874702274323210, guid: 3dd66f26e0821264e8589f5c30afeb1c, type: 3}

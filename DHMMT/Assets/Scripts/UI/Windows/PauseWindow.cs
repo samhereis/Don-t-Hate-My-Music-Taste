@@ -39,6 +39,8 @@ namespace UI.Window
 
         public override void Enable()
         {
+            Cursor.lockState = CursorLockMode.None;
+
             _windowBehavior?.Open();
             onAWindowOpen?.Invoke(this);
 
