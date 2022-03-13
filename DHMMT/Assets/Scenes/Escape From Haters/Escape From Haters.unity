@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.043974638, g: 0.17915022, b: 0.7982466, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -447,14 +447,13 @@ GameObject:
   - component: {fileID: 503231827}
   - component: {fileID: 503231826}
   - component: {fileID: 503231828}
-  - component: {fileID: 503231829}
   m_Layer: 0
   m_Name: The Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &503231826
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -509,24 +508,6 @@ MonoBehaviour:
   _lightMaterial: {fileID: 2100000, guid: a5d3c38310ac7f949ae6ddda0fa812e9, type: 2}
   _target: {fileID: 394738880}
   _speed: 1
---- !u!114 &503231829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503231824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
-  _smoothness: 0.2
-  _minValue: 1
-  _multiplier: 10
-  _useDefaultMultiplier: 0
-  _axis: 0
 --- !u!1 &516725629 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5083821651730015857, guid: c6169646452c49641ae6b8b883796e03, type: 3}
@@ -1723,14 +1704,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598626849}
-  m_LocalRotation: {x: -0.4880881, y: 0, z: 0, w: 0.8727944}
-  m_LocalPosition: {x: 327.16785, y: -164.5751, z: 461.91098}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -58.43, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1630643332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2012,7 @@ GameObject:
   - component: {fileID: 1714027348}
   - component: {fileID: 1714027353}
   - component: {fileID: 1714027352}
+  - component: {fileID: 1714027354}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -2148,10 +2130,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
+  m_Intensity: 200
   m_Range: 20
-  m_SpotAngle: 100
-  m_InnerSpotAngle: 70
+  m_SpotAngle: 179
+  m_InnerSpotAngle: 100
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -2198,6 +2180,24 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1714027354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714027347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
+  _smoothness: 0.2
+  _minValue: 1
+  _multiplier: 10
+  _useDefaultMultiplier: 0
+  _axis: 0
 --- !u!1 &1774276850
 GameObject:
   m_ObjectHideFlags: 0
