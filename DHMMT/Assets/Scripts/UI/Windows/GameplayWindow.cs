@@ -12,7 +12,7 @@ namespace UI.Window
     {
         [SerializeField] private Input_SO _input;
 
-        private void Awake()
+        protected override void Awake()
         {
             if (!_input) AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
 

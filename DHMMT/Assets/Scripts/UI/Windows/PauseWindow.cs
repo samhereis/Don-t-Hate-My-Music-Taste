@@ -9,7 +9,7 @@ namespace UI.Window
     {
         [SerializeField] private Input_SO _input;
 
-        private void Awake()
+        protected override void Awake()
         {
             if (!_input) AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
 
@@ -26,11 +26,6 @@ namespace UI.Window
 
                 _isOpen = false;
             }
-
-            if(uIWIndow is PauseWindow)
-            {
-                _input.input.Gameplay.Pause.performed -= Enable;
-            }
         }
         protected void Enable(InputAction.CallbackContext context)
         {
@@ -43,6 +38,8 @@ namespace UI.Window
 
             _windowBehavior?.Open();
             onAWindowOpen?.Invoke(this);
+
+            _input.input.Gameplay.Pause.performed -= Enable;
 
             _input.input.Gameplay.Disable();
             _input.input.UI.Enable();

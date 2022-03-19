@@ -9,14 +9,13 @@ namespace UI.Window
     {
         [Header("Slace Settings")]
         [SerializeField] private Transform _scaledObject;
+        [SerializeField] private Transform _currentScaledObject => _scaledObject != null ? _scaledObject : transform;
         [SerializeField] private Vector3 _upscaledValue = Vector3.one;
         [SerializeField] private Vector3 _downscaledValue = Vector3.zero;
         [SerializeField] private bool _revereseScaleAfterScale;
 
         protected override void Awake()
         {
-            if (!_scaledObject) _scaledObject = transform;
-
             base.Awake();
         }
 
@@ -26,12 +25,12 @@ namespace UI.Window
 
             _windowEvents.onOpenStart?.Invoke();
 
-            _scaledObject.DOScale(_upscaledValue, _openDuration).SetEase(_openEase).OnComplete(() =>
+            _currentScaledObject.DOScale(_upscaledValue, _openDuration).SetEase(_openEase).OnComplete(() =>
             {
 
-                if (_revereseScaleAfterScale) _scaledObject.DOScale(_downscaledValue, _closeDuration);
+                if (_revereseScaleAfterScale) _currentScaledObject.DOScale(_downscaledValue, _closeDuration);
 
-                if (_disableEnableOnOpenClose) _scaledObject.gameObject.SetActive(true);
+                if (_disableEnableOnOpenClose) _currentScaledObject.gameObject.SetActive(true);
 
                 _windowEvents.onOpenEnd?.Invoke();
             }).SetUpdate(true);
@@ -39,11 +38,9 @@ namespace UI.Window
 
         public override Task InstantlyClose()
         {
-            if (!_scaledObject) _scaledObject = transform;
+            _currentScaledObject.DOScale(_downscaledValue, 0);
 
-            _scaledObject.DOScale(_downscaledValue, 0);
-
-            if (_disableEnableOnOpenClose) _scaledObject.gameObject.SetActive(false);
+            if (_disableEnableOnOpenClose) _currentScaledObject.gameObject.SetActive(false);
 
             _windowEvents.onInstantClose?.Invoke();
 
@@ -56,11 +53,11 @@ namespace UI.Window
 
             _windowEvents.onCloseStart?.Invoke();
 
-            _scaledObject.DOScale(_downscaledValue, _closeDuration).SetEase(_closeEase).OnComplete(() =>
+            _currentScaledObject.DOScale(_downscaledValue, _closeDuration).SetEase(_closeEase).OnComplete(() =>
             {
 
-                if (_revereseScaleAfterScale) _scaledObject.DOScale(_upscaledValue, _openDuration);
-                if (_disableEnableOnOpenClose) _scaledObject.gameObject.SetActive(false);
+                if (_revereseScaleAfterScale) _currentScaledObject.DOScale(_upscaledValue, _openDuration);
+                if (_disableEnableOnOpenClose) _currentScaledObject.gameObject.SetActive(false);
 
                 _windowEvents.onCloseEnd?.Invoke();
             }).SetUpdate(true);
@@ -68,12 +65,12 @@ namespace UI.Window
 
         public void ScaleToOne(Transform obj)
         {
-            _scaledObject.DOScale(1, _closeDuration).SetEase(_closeEase);
+            _currentScaledObject.DOScale(1, _closeDuration).SetEase(_closeEase);
         }
 
         public void ScaleToZero(Transform obj)
         {
-            _scaledObject.DOScale(0, _closeDuration).SetEase(_closeEase);
+            _currentScaledObject.DOScale(0, _closeDuration).SetEase(_closeEase);
         }
     }
 }

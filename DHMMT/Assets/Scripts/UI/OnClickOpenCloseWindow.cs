@@ -17,8 +17,7 @@ namespace UI.Window
         [SerializeField] private WindowBehaviorBase[] _closeThese;
 
         [Header("Events")]
-        [SerializeField] private UnityEvent _onOpen;
-        [SerializeField] private UnityEvent _onClose;
+        [SerializeField] private OnClickOpenCloseWindowEvents _events;
 
         [Header("Settings")]
         [SerializeField] private bool _isSelfControlled = true;
@@ -43,7 +42,7 @@ namespace UI.Window
                 await Task.Yield();
             }
 
-            _onOpen?.Invoke();
+            _events._onOpen?.Invoke();
         }
 
         private async void Close()
@@ -55,9 +54,15 @@ namespace UI.Window
                 await Task.Yield();
             }
 
-            _onClose?.Invoke();
+            _events._onClose?.Invoke();
         }
     }
+}
+
+[System.Serializable] internal class OnClickOpenCloseWindowEvents
+{
+    [SerializeField] internal UnityEvent _onOpen;
+    [SerializeField] internal UnityEvent _onClose;
 }
 
 #if UNITY_EDITOR

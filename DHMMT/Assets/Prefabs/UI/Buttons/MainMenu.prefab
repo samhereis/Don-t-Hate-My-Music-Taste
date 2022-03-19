@@ -95,9 +95,16 @@ MonoBehaviour:
   _normaleScale: 1
   _animationDuration: 0.5
   _delayBetweenAnimations: 0.1
-  _onClick:
-    m_PersistentCalls:
-      m_Calls: []
+  _events:
+    _onHover:
+      m_PersistentCalls:
+        m_Calls: []
+    _onClick:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExit:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &7482039609390347210
 MonoBehaviour:
   m_ObjectHideFlags: 0

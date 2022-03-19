@@ -14,8 +14,9 @@ namespace Helpers
 
         private static bool _loading = false;
 
-        public void LoadScene(int index)
+        public async void LoadScene(int index)
         {
+            await AsyncHelper.Delay();
             StartLoadScene(index);
         }
 
@@ -49,8 +50,9 @@ namespace Helpers
             }
         }
 
-        public void LoadSceneAdditively(int sceneId)
+        public async void LoadSceneAdditively(int sceneId)
         {
+            await AsyncHelper.Delay();
             SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
         }
     }

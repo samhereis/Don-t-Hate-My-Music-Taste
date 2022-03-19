@@ -106,9 +106,10 @@ MonoBehaviour:
   _closeEase: 26
   _closeDuration: 0.5
   _closeDelay: 0
-  _canvasGroup: {fileID: 0}
+  _canvasGroup: {fileID: 14647054}
   _upFadeValue: 1
   _downFadeValue: 0
+  _influenceIgnoreParentGroups: 1
 --- !u!1001 &2896155965993276800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +228,14 @@ PrefabInstance:
     - target: {fileID: 3070321845262392695, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: m_Name
       value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396560621053259068, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396560621053259068, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
+      propertyPath: m_Maskable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}

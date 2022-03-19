@@ -67,6 +67,7 @@ MonoBehaviour:
   _isOpen: 0
   _windowBehavior: {fileID: -7386170254739377980}
   _eventWithNoParameters: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}
+  _input: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &-7386170254739377980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +110,7 @@ MonoBehaviour:
   _canvasGroup: {fileID: -6796586599801704957}
   _upFadeValue: 1
   _downFadeValue: 0
+  _influenceIgnoreParentGroups: 1
 --- !u!1001 &2398157009795440815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,10 +201,6 @@ PrefabInstance:
     - target: {fileID: 1491705165459611197, guid: 9d2ada0461cfffa4aaa8e1bf62773ed8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073031523845391656, guid: 9d2ada0461cfffa4aaa8e1bf62773ed8, type: 3}
-      propertyPath: _onOverScale
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2073031523845391656, guid: 9d2ada0461cfffa4aaa8e1bf62773ed8, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.size

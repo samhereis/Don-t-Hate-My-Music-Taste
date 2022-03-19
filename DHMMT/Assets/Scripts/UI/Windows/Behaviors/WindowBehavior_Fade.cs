@@ -14,6 +14,12 @@ namespace UI.Window
         [Header("Fade Settings")]
         [SerializeField] private float _upFadeValue = 1;
         [SerializeField] private float _downFadeValue = 0;
+        [SerializeField] private bool _influenceIgnoreParentGroups = true;
+
+        private void OnValidate()
+        {
+            if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
+        }
 
         protected override void Awake()
         {
@@ -85,6 +91,8 @@ namespace UI.Window
             _canvasGroup.blocksRaycasts = value;
 
             if (_disableEnableOnOpenClose) _canvasGroup?.gameObject.SetActive(value);
+
+            if(_influenceIgnoreParentGroups) _canvasGroup.ignoreParentGroups = value;
         }
     }
 }

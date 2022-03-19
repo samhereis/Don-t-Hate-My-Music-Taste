@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using Helpers;
 
 [DisallowMultipleComponent]
-public class AnimateButtons : MonoBehaviour, IPointerExitHandler, IPointerClickHandler, IPointerEnterHandler
+public class AnimateButtons : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField] private float _onOverScale = 1.1f;
     [SerializeField] private float _normaleScale = 1;
@@ -15,22 +15,33 @@ public class AnimateButtons : MonoBehaviour, IPointerExitHandler, IPointerClickH
     [SerializeField] private float _delayBetweenAnimations = 0.1f;
 
     [Header("Events")]
-    [SerializeField] private UnityEvent _onClick = new UnityEvent();
+    [SerializeField] private AnimateButtonsEvents _events;
+
+    public async void OnPointerEnter(PointerEventData eventData)
+    {
+        await AsyncHelper.Delay(_delayBetweenAnimations);
+        transform.DOScale(_onOverScale, _animationDuration).SetEase(Ease.InOutBack);
+
+        _events._onHover?.Invoke();
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _onClick?.Invoke();
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        transform.DOScale(_onOverScale, _animationDuration).SetEase(Ease.InOutBack);
+        _events._onClick?.Invoke();
     }
 
     public async void OnPointerExit(PointerEventData eventData)
     {
-        await AsyncHelper.Delay(_delayBetweenAnimations);
-
+        await AsyncHelper.Delay(_delayBetweenAnimations); 
         transform.DOScale(_normaleScale, _animationDuration).SetEase(Ease.InOutBack);
+
+        _events._onExit?.Invoke();
     }
+}
+
+[System.Serializable] internal class AnimateButtonsEvents
+{
+    [SerializeField] internal UnityEvent _onHover = new UnityEvent();
+    [SerializeField] internal UnityEvent _onClick = new UnityEvent();
+    [SerializeField] internal UnityEvent _onExit = new UnityEvent();
 }

@@ -12,6 +12,13 @@ namespace UI.Window
         [Header("Components")]
         [SerializeField] protected WindowBehaviorBase _windowBehavior;
 
+        protected virtual void Awake()
+        {
+            _windowBehavior = GetComponent<WindowBehaviorBase>();
+
+            if (_windowBehavior == null) Debug.LogWarning("_windowBehavior us null", this);
+        }
+
         public abstract void OnAWindowOpen(UIWIndowBase uIWIndow);
 
         public abstract void Enable();
