@@ -34,7 +34,7 @@ public class DisplayGunOnShop : MonoBehaviour
         }
         else
         {
-            AnimationHelper.NormalShake(transform, 2);
+            TweeningHelper.NormalShake(transform, 2);
         }
     }
 }

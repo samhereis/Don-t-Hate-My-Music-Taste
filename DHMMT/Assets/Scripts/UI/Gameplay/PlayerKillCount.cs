@@ -9,7 +9,7 @@ public class PlayerKillCount : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _text;
 
-    public int KillCount { get => _killCount; set { _killCount = value; _text.text = $"ㄙ {KillCount}"; AnimationHelper.NormalShake(transform, 2); } }
+    public int KillCount { get => _killCount; set { _killCount = value; _text.text = $"ㄙ {KillCount}"; TweeningHelper.NormalShake(transform, 2); } }
     [SerializeField] private int _killCount;
 
     private void Awake()

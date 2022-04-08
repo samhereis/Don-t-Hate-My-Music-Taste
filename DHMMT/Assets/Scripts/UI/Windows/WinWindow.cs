@@ -20,12 +20,12 @@ namespace UI.Window
 
         private void OnValidate()
         {
-            if (!_input) AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (!_input) AddressableHelper.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
         }
 
         protected override void Awake()
         {
-            if (!_input) AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (!_input) AddressableHelper.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
             _eventWithNoParameters.AdListener(Enable);
         }
 

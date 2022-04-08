@@ -53,11 +53,4 @@ public class CameraMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         _playerBody.Rotate(Vector3.up * _mouseX);
     }
-
-    public void Shake()
-    {
-        transform.position = _moveCameraTowards.position;
-
-        AnimationHelper.NormalShake(transform, 2);
-    }
 }

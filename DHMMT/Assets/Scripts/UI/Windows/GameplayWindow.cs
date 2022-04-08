@@ -14,7 +14,7 @@ namespace UI.Window
 
         protected override void Awake()
         {
-            if (!_input) AddressableGetter.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (!_input) AddressableHelper.GetAddressable<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
 
             onAWindowOpen += OnAWindowOpen;
         }

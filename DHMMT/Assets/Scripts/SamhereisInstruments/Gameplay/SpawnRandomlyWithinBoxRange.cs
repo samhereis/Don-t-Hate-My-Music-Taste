@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
 using Helpers;
+using UnityEngine;
 
-namespace Identifiers
+namespace Scripts
 {
     public class SpawnRandomlyWithinBoxRange : MonoBehaviour
     {
-        [SerializeField] private BoxCollider[] _boxColliders;
+        [SerializeField] private Collider[] _colliders;
 
-        private async void Awake()
+        private void Awake()
         {
-            await AsyncHelper.Delay(0.2f);
+            Spawn();
+        }
 
-            Bounds bounds = _boxColliders[CollectionsHelper.GetRandomIndex(_boxColliders.Length)].bounds;
+        private async void Spawn()
+        {
+            await AsyncHelper.Delay(1f);
+
+            Bounds bounds = _colliders[NumberHelper.GetRandom(_colliders.Length)].bounds;
 
             float offsetX = Random.Range(-bounds.extents.x, bounds.extents.x);
             float offsetY = Random.Range(-bounds.extents.y, bounds.extents.y);
@@ -26,7 +28,7 @@ namespace Identifiers
 #if UNITY_EDITOR
         [ContextMenu("Setup")] public void Setup()
         {
-            _boxColliders = GetComponents<BoxCollider>();
+            _colliders = GetComponents<BoxCollider>();
         }
 #endif
     }

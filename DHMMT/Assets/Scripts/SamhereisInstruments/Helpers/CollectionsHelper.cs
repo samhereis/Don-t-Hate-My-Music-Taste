@@ -7,7 +7,7 @@ namespace Helpers
 {
     public static class CollectionsHelper
     {
-        public static async  Task RemoveNullsAsync<T>(this List<T> list)
+        public static async Task RemoveNullsAsync<T>(this List<T> list)
         {
             List<T> listTemp = new List<T>();
             listTemp.AddRange(list);
@@ -23,9 +23,9 @@ namespace Helpers
             }
         }
 
-        public static int GetRandomIndex(int maxValue)
+        public static T GetRandomIndex<T>(this List<T> list, int maxValue)
         {
-            return Random.Range(0, maxValue);
+            return list[Random.Range(0, maxValue)];
         }
     }
 }

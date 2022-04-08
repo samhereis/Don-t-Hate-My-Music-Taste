@@ -3183,10 +3183,6 @@ PrefabInstance:
       propertyPath: _boxColliders.Array.data[7]
       value: 
       objectReference: {fileID: 1487444939}
-    - target: {fileID: 394738884, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
-      propertyPath: _onWin
-      value: 
-      objectReference: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}
     - target: {fileID: 8225959055217038793, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
       propertyPath: m_Name
       value: Exit

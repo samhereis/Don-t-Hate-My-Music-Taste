@@ -175,15 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a61d218c1e7164eb7e0bf36061fa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxColliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _colliders: []
 --- !u!195 &394738883
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -219,3 +211,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 394738883}
+  _onWin: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}
