@@ -8,8 +8,6 @@ namespace Helpers
 
     public class SceneLoader : ScriptableObject
     {
-        // Scene loader attachable on gameobject
-
         public readonly UnityEvent onSceneStartLoading = new UnityEvent();
 
         private static bool _loading = false;
@@ -22,6 +20,8 @@ namespace Helpers
 
         private async void StartLoadScene(int sceneId)
         {
+            await AsyncHelper.Delay();
+
             if (_loading == false)
             {
                 _loading = true;
@@ -33,6 +33,8 @@ namespace Helpers
 
                 while(asyncOperation.isDone == false)
                 {
+                    await AsyncHelper.Delay();
+
                     if (asyncOperation.progress == 0.9f)
                     {
                         _loading = false;
@@ -42,10 +44,7 @@ namespace Helpers
                         asyncOperation.allowSceneActivation = true;
 
                         break;
-
                     }
-
-                    await AsyncHelper.Delay();
                 }
             }
         }

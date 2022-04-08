@@ -1,6 +1,7 @@
 using Helpers;
 using Interfaces;
 using Pooling;
+using Sripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,11 @@ public class Bullet : MonoBehaviour
             damagable.TakeDamage(_damage);
 
             Debug.Log(damagable);
+        }
+
+        if (other.TryGetComponent(out TerrainModifier terrainModifier))
+        {
+            terrainModifier.Deform(transform.position);
         }
     }
 

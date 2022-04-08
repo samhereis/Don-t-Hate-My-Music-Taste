@@ -745,9 +745,9 @@ GameObject:
   - component: {fileID: 7467988608207581382}
   - component: {fileID: 2012174647}
   - component: {fileID: 1835056285469830451}
-  - component: {fileID: 7986397554230428356}
   - component: {fileID: 853112009}
   - component: {fileID: 7548385107038505316}
+  - component: {fileID: 1849444201}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -948,20 +948,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
---- !u!114 &7986397554230428356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780828685733077151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55fe37299f2e0f4ab8c0b35178ebcdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onEnableSetInputState: 0
-  _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &853112009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +977,20 @@ MonoBehaviour:
   RightHandIK: {fileID: 1785284635601927086}
   LeftHandIK: {fileID: 8182843588149872904}
   _weaponHolder: {fileID: 522865125595312457}
+--- !u!114 &1849444201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780828685733077151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f8ab55cd391ba4196325f69ae28849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventWithNoParameters: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}
+  _key: 270
 --- !u!1 &1794364599374829750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,6 +3394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 672303218}
     m_Modifications:
+    - target: {fileID: 7110574739933375412, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7288917050873517639, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -6,57 +6,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpawnNearPlayer : MonoBehaviour
+namespace Helpers
 {
-    [SerializeField] private Transform _prefab;
-
-    [Header("Events")]
-    [SerializeField] private EventWithOneParameterBase<EnemyIdentifier> _eventWithOneParameter;
-    [SerializeField] private EventWithNoParameters _eventWithNoParameters;
-
-    [Header("Settings")]
-    [SerializeField] private bool _spawnOnAwake;
-    [SerializeField] private float _maxRadiusFromPlayer = 30f;
-    [SerializeField] private float _minRadiusFromPlayer = 10f;
-
-    private void Awake()
+    public class SpawnNearPlayer : MonoBehaviour
     {
-        _eventWithNoParameters?.AdListener(Spawn);
-        _eventWithOneParameter?.AdListener((x) => Spawn());
-    }
+        [SerializeField] private Transform _prefab;
 
-    private void OnEnable()
-    {
-        if (_spawnOnAwake) Spawn();
-    }
+        [Header("Events")]
+        [SerializeField] private EventWithOneParameterBase<EnemyIdentifier> _eventWithOneParameter;
+        [SerializeField] private EventWithNoParameters _eventWithNoParameters;
 
-    public async void Spawn()
-    {
-        await AsyncHelper.Delay(0.2f);
+        [Header("Settings")]
+        [SerializeField] private bool _spawnOnAwake;
+        [SerializeField] private float _maxRadiusFromPlayer = 30f;
+        [SerializeField] private float _minRadiusFromPlayer = 10f;
 
-        Transform newObj = Instantiate(_prefab);
+        private void Awake()
+        {
+            _eventWithNoParameters?.AdListener(Spawn);
+            _eventWithOneParameter?.AdListener((x) => Spawn());
+        }
 
-        Vector3 p = Test();
+        private void OnEnable()
+        {
+            if (_spawnOnAwake) Spawn();
+        }
 
-        newObj.position =  new Vector3(p.x, p.y, p.z);
-    }
+        public async void Spawn()
+        {
+            await AsyncHelper.Delay(0.2f);
 
-    public Vector3 Test()
-    {
-        Vector3 player = PlayerIdentifier.instance.transform.position;
+            Instantiate(_prefab, ApplyPosition(), Quaternion.identity);
+        }
 
-        float radius = Random.Range(_minRadiusFromPlayer, _maxRadiusFromPlayer);
+        public Vector3 ApplyPosition()
+        {
+            Vector3 player = PlayerIdentifier.instance.transform.position;
 
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+            float radius = Random.Range(_minRadiusFromPlayer, _maxRadiusFromPlayer);
 
-        randomDirection += player;
+            Vector3 randomDirection = Random.insideUnitSphere * radius;
 
-        NavMeshHit hit;
+            randomDirection += player;
 
-        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
+            NavMeshHit hit;
 
-        Vector3 finalPosition = hit.position;
+            NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
 
-        return finalPosition;
+            Vector3 finalPosition = hit.position;
+
+            return finalPosition;
+        }
+
+        [System.Serializable] private class SpawnNearPlayer_DebugSpawn
+        {
+            private SpawnNearPlayer _component;
+
+            private SpawnNearPlayer_DebugSpawn(SpawnNearPlayer component)
+            {
+                _component = component;
+            }
+
+            [ContextMenu("SpawnConstantly")] public async void SpawnConstantly()
+            {
+                while (_component.enabled)
+                {
+                    await AsyncHelper.Delay(1000);
+                    _component.Spawn();
+                }
+            }
+        }
     }
 }

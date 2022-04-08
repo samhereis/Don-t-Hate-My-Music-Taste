@@ -2,14 +2,17 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _EMISSION
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _EMISSION
+  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -107,7 +110,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.13919175, g: 1, b: 0, a: 3.712012}
     - _Color: {r: 0.13919172, g: 1, b: 0, a: 3.712012}
-    - _EmissionColor: {r: 0.028256692, g: 0.20300555, b: 0, a: 0.20300555}
+    - _EmissionColor: {r: 0.03161591, g: 0.2271393, b: 0, a: 0.2271393}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5476271286875395496
