@@ -9,8 +9,12 @@ using UnityEngine.UI;
 
 public class ScrollSnapRect : MonoBehaviour
 {
+    public enum Direction { Horizontal, Vertical }
+    private Action _updateAction;
+
     [Header("Settings")]
     [SerializeField] private float _listValue = 100;
+    [SerializeField] private Direction _direction = Direction.Horizontal;
 
     [Header("Componenets")]
     [SerializeField] private List<SingleScrollElement> _buttons = new List<SingleScrollElement>();
@@ -18,7 +22,7 @@ public class ScrollSnapRect : MonoBehaviour
     [SerializeField] private Image _center;
 
     [Header("Degub")]
-    [SerializeField] private ScrollElement _selectedButton;
+    [SerializeField] private SingleScrollElement _selectedButton;
     [SerializeField] private float _contentVector;
     [SerializeField] float _nearestPos;
     [SerializeField] float _distance;
@@ -27,12 +31,16 @@ public class ScrollSnapRect : MonoBehaviour
     [SerializeField] private float _minPos;
     [SerializeField] private float _maxPos;
 
-    private float maxPos => _minPos = _buttons.Last()._position.y - _substractFromLast;
-    private float minPos => _maxPos = _buttons.First()._position.y - _substractFromFirst;
+    private float minPosVertical => _maxPos = _buttons.First()._position.y - _substractFromFirst;
+    private float maxPosVertical => _minPos = _buttons.Last()._position.y - _substractFromLast;
+
+    private float minPosHorizontal => _maxPos = _buttons.First()._position.x - _substractFromFirst;
+    private float maxPosHorizontal => _minPos = _buttons.Last()._position.x - _substractFromLast;
+
 
     private void OnEnable()
     {
-        Init();
+        if (_direction == Direction.Horizontal) _updateAction = UpdateHorizontal; else _updateAction = UpdateVertical;
     }
 
     private void OnDisable()
@@ -40,55 +48,52 @@ public class ScrollSnapRect : MonoBehaviour
         var buttonList = new List<SingleScrollElement>();
     }
 
-    private async void Init()
+    private void FixedUpdate()
     {
-        _buttons.Clear();
+        if (_buttons.Count == 0 || _buttons == null || ScrollElement.isInAction) return;
 
-        var buttonList = new List<SingleScrollElement>();
+        _nearestPos = float.MaxValue;
 
-        _contentVector = 0;
-
-        foreach (var button in GetComponentsInChildren<ScrollElement>())
+        foreach (var button in _buttons)
         {
-            await AsyncHelper.Delay();
-            try { _buttons.Add(new SingleScrollElement(button, -button.transform.localPosition)); } catch (Exception ex) { Debug.LogWarning(ex); };
+            _distance = Vector3.Distance(_center.transform.position, button._button.transform.position);
+
+            if (_distance < _nearestPos)
+            {
+                _nearestPos = _distance;
+                _selectedButton = button;
+            }
         }
 
-        foreach(var button in _buttons)
-        {
-            await AsyncHelper.Delay();
-            button._position = -button._button.transform.localPosition;
-        }
-
-        _buttons.AddRange(buttonList);
+        foreach (var button in _buttons) if (_selectedButton._button == button._button) button._button.Enable(); else button._button.Disable();
     }
 
     private void Update()
     {
-        if (_buttons.Count == 0 || _buttons == null) return;
-
-        try
+        if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction)
         {
-            _nearestPos = float.MaxValue;
+            _updateAction?.Invoke();
+        }
+    }
 
-            foreach (var button in _buttons)
-            {
-                _distance = Vector3.Distance(_center.transform.position, button._button.transform.position);
+    public void RegidterElement(ScrollElement scrollElement)
+    {
+        _buttons.Add(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
+    }
 
-                if (_distance < _nearestPos)
-                {
-                    _nearestPos = _distance;
-                    _selectedButton = button._button;
-                }
-            }
+    public void DeregidterElement(ScrollElement scrollElement)
+    {
+        _buttons.Remove(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
+    }
 
-            _contentVector = Mathf.Clamp(_contentVector, minPos, maxPos);
+    private void UpdateVertical()
+    {
+        _contentRect.DOAnchorPosY(_selectedButton._position.y, 0.1f);
+    }
 
-            _contentRect.DOAnchorPosY(_contentVector, 0.1f);
-
-            foreach (var button in _buttons) if (_selectedButton == button._button) button._button.Enable(); else button._button.Disable();
-
-        } catch (System.Exception ex) { Debug.LogWarning(ex); Init(); }
+    private void UpdateHorizontal()
+    {
+        _contentRect.DOAnchorPosX(_selectedButton._position.x - _substractFromFirst, 0.1f);
     }
 
     public void ListContent(int value)
@@ -98,9 +103,7 @@ public class ScrollSnapRect : MonoBehaviour
 
     [ContextMenu(nameof(DebugView))] public void DebugView()
     {
-        Init();
-
-        Update();
+        FixedUpdate();
 
         ListContent(1);
     }

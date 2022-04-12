@@ -32,13 +32,6 @@ namespace Helpers
             if (_spawnOnAwake) Spawn();
         }
 
-        public async void Spawn()
-        {
-            await AsyncHelper.Delay(0.2f);
-
-            Instantiate(_prefab, ApplyPosition(), Quaternion.identity);
-        }
-
         public Vector3 ApplyPosition()
         {
             Vector3 player = PlayerIdentifier.instance.transform.position;
@@ -75,6 +68,13 @@ namespace Helpers
                     _component.Spawn();
                 }
             }
+        }
+
+        public async void Spawn()
+        {
+            await AsyncHelper.Delay(0.2f);
+
+            Instantiate(_prefab, ApplyPosition(), Quaternion.identity);
         }
     }
 }

@@ -27,7 +27,7 @@ public class AnimateButtons : MonoBehaviour, IPointerEnterHandler, IPointerClick
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _events._onClick?.Invoke();
+        //_events._onClick?.Invoke();
     }
 
     public async void OnPointerExit(PointerEventData eventData)
