@@ -231,14 +231,17 @@ BillboardRenderer:
   m_Billboard: {fileID: 226327520943128602}
 --- !u!21 &21020108225064288
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Optimized Sprout Material 1.0
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
-  m_ShaderKeywords: GEOM_TYPE_LEAF _WINDQUALITY_BEST
+  m_ValidKeywords:
+  - _WINDQUALITY_BEST
+  m_InvalidKeywords:
+  - GEOM_TYPE_LEAF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
@@ -290,14 +293,16 @@ Material:
   m_BuildTextureStacks: []
 --- !u!21 &21188514508268742
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Optimized Bark Material
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
-  m_ShaderKeywords: _WINDQUALITY_NONE
+  m_ValidKeywords:
+  - _WINDQUALITY_NONE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -349,14 +354,16 @@ Material:
   m_BuildTextureStacks: []
 --- !u!21 &21957505105192198
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Billboard Material
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
-  m_ShaderKeywords: _WINDQUALITY_NONE
+  m_ValidKeywords:
+  - _WINDQUALITY_NONE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
