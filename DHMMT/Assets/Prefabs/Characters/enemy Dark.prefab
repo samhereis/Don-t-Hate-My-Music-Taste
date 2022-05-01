@@ -1545,7 +1545,7 @@ GameObject:
   - component: {fileID: 2938201030753303005}
   - component: {fileID: 7838422122771901544}
   - component: {fileID: -4979341589662894296}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: enemy Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

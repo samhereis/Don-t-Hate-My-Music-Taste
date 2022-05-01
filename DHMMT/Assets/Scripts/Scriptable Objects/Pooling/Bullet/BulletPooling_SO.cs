@@ -12,9 +12,10 @@ namespace Pooling
     [CreateAssetMenu(fileName = "New Bullet Pooler", menuName = "Scriptables/Pooling Managers/Bullet Pooler")]
     public class BulletPooling_SO : PoolingManagerBase<ProjectileBase>
     {
-        private void OnValidate()
+        public virtual async void Init(ProjectileBase projectile)
         {
-            _poolable.Init(this);
+            await AsyncHelper.Delay();
+            _poolable = projectile;
         }
     }
 }

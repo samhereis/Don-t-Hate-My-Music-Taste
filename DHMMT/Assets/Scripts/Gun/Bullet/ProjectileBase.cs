@@ -10,10 +10,9 @@ namespace Gameplay.Bullets
     {
         [SerializeField] protected BulletPooling_SO _pooling;
 
-        public virtual async void Init(BulletPooling_SO bulletPooling)
+        private void OnValidate()
         {
-            await AsyncHelper.Delay();
-            _pooling = bulletPooling;
+            _pooling.Init(this);
         }
     }
 }

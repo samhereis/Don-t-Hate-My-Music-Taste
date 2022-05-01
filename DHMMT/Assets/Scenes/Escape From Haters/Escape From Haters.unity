@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 1062972404}
   - component: {fileID: 1062972407}
   - component: {fileID: 1062972408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -3151,6 +3151,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 822373723}
     m_Modifications:
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1416560241}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 373864167}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[2]
+      value: 
+      objectReference: {fileID: 557993848}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[3]
+      value: 
+      objectReference: {fileID: 1774276852}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[4]
+      value: 
+      objectReference: {fileID: 1974201183}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[5]
+      value: 
+      objectReference: {fileID: 1668978941}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[6]
+      value: 
+      objectReference: {fileID: 1866785271}
+    - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
+      propertyPath: _colliders.Array.data[7]
+      value: 
+      objectReference: {fileID: 1487444939}
     - target: {fileID: 394738881, guid: 45a36dc567df20b46be31e55deafe348, type: 3}
       propertyPath: _boxColliders.Array.data[0]
       value: 

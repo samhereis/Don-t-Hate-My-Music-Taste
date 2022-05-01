@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class ProjectileView : MonoBehaviour
 {
-    public float hitOffset = 0f;
-    public bool UseFirePointRotation;
-    public Vector3 rotationOffset = new Vector3(0, 0, 0);
     public GameObject hit;
     public GameObject flash;
     public GameObject[] Detached;
@@ -24,7 +21,7 @@ public class ProjectileView : MonoBehaviour
         if (_flash == null) _flash = Instantiate(flash, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
         if (_hit == null) _hit = Instantiate(hit, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
 
-        foreach(var trans in GetComponentsInChildren<Transform>())
+        foreach(var trans in GetComponentsInChildren<Transform>(true))
         {
             trans.localScale = Vector3.one;
             trans.localPosition = Vector3.zero;
@@ -38,7 +35,14 @@ public class ProjectileView : MonoBehaviour
             if(_detached.Contains(p.GetComponent<ParticleSystem>()) == false) _detached.Add(p.GetComponent<ParticleSystem>());
         }
 
-        if (_parent == null && transform.Find("Parent") != null) _parent = transform.Find("Parent").GetComponent<ParticleSystem>();
+        if (_parent == null)
+        {
+            if (transform.Find("Parent") != null) _parent = transform.Find("Parent").GetComponent<ParticleSystem>();
+            else
+            {
+                Debug.LogError(gameObject.name + "  doesnt have a PARENT");
+            }
+        }
     }
 
     public async Task Init()

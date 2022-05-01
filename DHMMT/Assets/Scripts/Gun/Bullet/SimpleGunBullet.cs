@@ -1,13 +1,18 @@
 using Helpers;
 using Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.Bullets
 {
     public class SimpleGunBullet : ProjectileBase
     {
+        public Action onCollided;
+
         [Header("Components")]
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private ProjectileView _projectileView;
@@ -31,11 +36,13 @@ namespace Gameplay.Bullets
         {
             _projectileView?.Init();
 
-            _angle = new Vector3(Random.Range(-_angleDifference, _angleDifference), Random.Range(-_angleDifference, _angleDifference), _speed);
+            _angle = new Vector3(Random.Range(-_angleDifference, _angleDifference), Random.Range(-_angleDifference, _angleDifference), _speed * 100);
+            onCollided += OnEnd;
 
             _rigidbody.AddRelativeForce(_angle);
 
             await AsyncHelper.Delay(_selfPutinToPoolTime);
+            OnEnd();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -43,19 +50,26 @@ namespace Gameplay.Bullets
             if (other.TryGetComponent(out IDamagable damagable))
             {
                 damagable.TakeDamage(_damage);
+                _rigidbody.velocity = Vector3.zero;
+                _rigidbody.angularVelocity = Vector3.zero;
+                _rigidbody.ResetInertiaTensor();
 
-                Debug.Log(damagable);
+                onCollided?.Invoke();
             }
         }
 
-        private void OnDisable()
+        private void OnEnd()
         {
+            onCollided -= OnEnd;
+
             _projectileView?.OnEnd(() =>
             {
-                _pooling.PutIn(this, 0.25f);
-
                 _rigidbody.velocity = Vector3.zero;
+                _rigidbody.ResetInertiaTensor();
+
                 transform.position = Vector3.zero;
+
+                _pooling.PutIn(this);
             });
         }
     }
