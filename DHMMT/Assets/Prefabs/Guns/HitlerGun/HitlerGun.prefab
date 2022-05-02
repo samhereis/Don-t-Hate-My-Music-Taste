@@ -1539,8 +1539,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equiped: 0
   _itemName: Head Swaper
-  rightHandIK: {fileID: 7110574739202917812}
-  leftHandIK: {fileID: 7110574738850719936}
+  _rightHandIK: {fileID: 7110574739202917812}
+  _leftHandIK: {fileID: 7110574738850719936}
   _animatorComponent: {fileID: 881851449525041963}
   _rigidbodyComponent: {fileID: 7110574739933375413}
   _colliderComponent: {fileID: 7110574739933375412}

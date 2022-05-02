@@ -10,25 +10,21 @@ namespace Characters.States.Data
         [SerializeField] private EnemyStates _enemyStates;
 
         [Header("Settings")]
-        [SerializeField] private float _minDistanceToPlayerToAttack = 5;
-        [SerializeField] private float _maxDistanceToPlayerToAttack = 10;
-        [SerializeField] private float _currentDistanceToPlayerToAttack;
-        public float currentDistanceToAttack { get => _currentDistanceToPlayerToAttack; private set => _currentDistanceToPlayerToAttack = value; }
+        [SerializeField] private float _minDistanceToPlayer = 5;
+        public float currentDistanceToAttack => _minDistanceToPlayer;
 
         [Header("Debug")]
         [SerializeField] private bool _isMoving;
         [SerializeField] private bool _isSprinting;
+        [SerializeField] private EnemyMovementStateBase _enemyMovementState;
 
         public override bool isMoving => _isMoving;
         public override bool isSprinting => _isSprinting;
 
-        private EnemyMovementStateBase _enemyMovementState;
 
         private void OnEnable()
         {
             _enemyMovementState = new FoolowPlayer_EnemyMovementState(_enemyStates, this);
-
-            currentDistanceToAttack = Random.Range(_minDistanceToPlayerToAttack, _maxDistanceToPlayerToAttack);
         }
 
         public void MoveTo(Transform moveTo, int speed = 2)
@@ -45,7 +41,7 @@ namespace Characters.States.Data
                 _enemyStates.agent.speed = speed;
                 _enemyStates.agent.SetDestination(moveTo);
 
-                _enemyStates.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
+                _enemyStates.animationAgent.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
 
                 _isMoving = true;
             }
@@ -62,7 +58,7 @@ namespace Characters.States.Data
 
             _enemyStates.agent.speed = 0;
 
-            _enemyStates.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
+            _enemyStates.animationAgent.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
 
             _enemyStates.agent.ResetPath();
 

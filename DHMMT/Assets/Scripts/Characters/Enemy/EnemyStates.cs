@@ -10,23 +10,21 @@ namespace Characters.States.Data
 {
     public class EnemyStates : HumanoidData
     {
-        [Header("Unity Components")]
-        [SerializeField] private Rigidbody _rigidbody;
-        public Rigidbody rigidbodyComponent => _rigidbody;
+        [Header("Components")]
 
         [SerializeField] private NavMeshAgent _agent;
         public NavMeshAgent agent => _agent;
 
-        [SerializeField] private Animator _animator;
-        public Animator animator => _animator;
+        [SerializeField] private AnimationAgent _animationAgent;
+        public AnimationAgent animationAgent => _animationAgent;
 
         [Header("Events")]
         public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
         public readonly UnityEvent<Collider> onTriggerExit = new UnityEvent<Collider>();
 
-        private void Start()
+        private void OnValidate()
         {
-            _humanoidMovementStateData ??= GetComponent<EnemyMovement>();
+            Setup();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -39,14 +37,13 @@ namespace Characters.States.Data
             onTriggerExit?.Invoke(other);
         }
 
-#if UNITY_EDITOR
-    [ContextMenu(nameof(Setup))]
-    public void Setup()
-    {
-        _animator = GetComponent<Animator>();
-        _agent = GetComponent<NavMeshAgent>();
-        _rigidbody = GetComponent<Rigidbody>();
-    }
-#endif
+        [ContextMenu(nameof(Setup))]
+        public void Setup()
+        {
+            if(_animationAgent == null) _animationAgent = GetComponentInChildren<AnimationAgent>();
+            if (_agent == null) _agent = GetComponent<NavMeshAgent>();
+
+            if (_humanoidMovementStateData == null) _humanoidMovementStateData = GetComponent<EnemyMovement>();
+        }
     }
 }

@@ -49,7 +49,7 @@ public class GunUse : MonoBehaviour
 
         if(!_bullet)
         {
-            AddressableHelper.GetAddressable<BulletPooling_SO>(_bulletPoolerKey, (result) =>
+            AddressablesHelper.LoadAndDo<BulletPooling_SO>(_bulletPoolerKey, (result) =>
             {
                 _bullet = result;
             });

@@ -8,7 +8,7 @@ using Helpers;
 
 namespace Identifiers
 {
-    public class PlayerIdentifier : MonoBehaviour
+    public class PlayerIdentifier : IdentifierBase
     {
         public static PlayerIdentifier instance { get; private set; }
 
@@ -16,22 +16,5 @@ namespace Identifiers
         {
             instance = this;
         }
-
-        private void OnEnable()
-        {
-            
-        }
-
-        private void OnDisable()
-        {
-            
-        }
-
-#if UNITY_EDITOR
-        [ContextMenu("Setup")] public void Setup()
-        {
-
-        }
-#endif
     }
 }

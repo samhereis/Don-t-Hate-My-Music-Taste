@@ -1540,7 +1540,6 @@ GameObject:
   - component: {fileID: 902166660165243976}
   - component: {fileID: 1992712274373831030}
   - component: {fileID: 2413848665578746315}
-  - component: {fileID: 2413848665578746313}
   - component: {fileID: 2413848665578746312}
   - component: {fileID: 135618078336120121}
   - component: {fileID: 2938201030753303005}
@@ -1680,27 +1679,8 @@ MonoBehaviour:
   RightHandIK: {fileID: 4486332053205675096}
   LeftHandIK: {fileID: 5812931857850558011}
   _weaponHolder: {fileID: 1225618319830385776}
-  _rigidbody: {fileID: 902166660165243976}
   _agent: {fileID: 2413848665578746317}
-  _animator: {fileID: 8076400247271920917}
---- !u!114 &2413848665578746313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296317459984324053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b163bff7d7745644a88abe1e2297213, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colliders: []
-  _radius: 20
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 3
-  _enemyStates: {fileID: 2413848665578746315}
+  _animationAgent: {fileID: 0}
 --- !u!114 &2413848665578746312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1714,11 +1694,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyStates: {fileID: 2413848665578746315}
-  _minDistanceToPlayerToAttack: 5
-  _maxDistanceToPlayerToAttack: 10
-  _currentDistanceToPlayerToAttack: 0
+  _minDistanceToPlayer: 5
   _isMoving: 0
   _isSprinting: 0
+  _enemyMovementState:
+    _target: {fileID: 0}
+    _enemy: {fileID: 0}
 --- !u!114 &135618078336120121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1732,6 +1713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultltWeapon: {fileID: 0}
+  _enemyIdentifier: {fileID: 0}
 --- !u!114 &2938201030753303005
 MonoBehaviour:
   m_ObjectHideFlags: 0

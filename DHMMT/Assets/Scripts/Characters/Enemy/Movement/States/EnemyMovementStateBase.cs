@@ -1,9 +1,13 @@
+using Identifiers;
 using UnityEngine;
 
 namespace Characters.States.Data
 {
-    public abstract class EnemyMovementStateBase
+    [System.Serializable] public class EnemyMovementStateBase
     {
+        [SerializeField] protected IdentifierBase _target;
+        public IdentifierBase target => _target;
+
         [SerializeField] protected EnemyStates _enemy;
 
         public EnemyMovementStateBase(EnemyStates enemyStates)
@@ -11,6 +15,9 @@ namespace Characters.States.Data
             _enemy = enemyStates;
         }
 
-        public abstract void Move();
+        public virtual void Move()
+        {
+
+        }
     }
 }

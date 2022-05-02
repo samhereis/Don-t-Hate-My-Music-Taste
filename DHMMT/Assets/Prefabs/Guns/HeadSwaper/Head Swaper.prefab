@@ -208,8 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equiped: 0
   _itemName: Head Swaper
-  rightHandIK: {fileID: 5792755450803799228}
-  leftHandIK: {fileID: 5792755451657464264}
+  _rightHandIK: {fileID: 5792755450803799228}
+  _leftHandIK: {fileID: 5792755451657464264}
   _animatorComponent: {fileID: 214016788423113658}
   _rigidbodyComponent: {fileID: 5792755450575858365}
   _colliderComponent: {fileID: 5792755450575858364}
@@ -248,15 +248,15 @@ MonoBehaviour:
   _audioSource: {fileID: -7823946648576168876}
   _currentAmmo: 8
   _maxAmmo: 50
-  _reloadTime: 0.3
   _bullet: {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
+  _bulletPoolerKey: 
   _bulletPosition: {fileID: 5885461951779915215}
   _fireRate: 0.2
   _nextFire: 0
+  _reloadTime: 0.3
   _isReloading: 0
   _canShoot: 1
   _shoot: 0
-  _isShooting: {fileID: 0}
   _interactableEquipWeapon: {fileID: 5792755450575858355}
 --- !u!82 &-7823946648576168876
 AudioSource:

@@ -1,3 +1,4 @@
+using Identifiers;
 using Scriptables;
 using Scriptables.Values;
 using System.Collections;
@@ -13,6 +14,7 @@ namespace Characters.States.Data
 
         [Header("Components")]
         [SerializeField] private Animator _animator;
+        [SerializeField] private IdentifierBase _identifier;
 
         [Header("Guns")]
         [SerializeField] private InteractableEquipWeapon _defaultWeapon;
@@ -27,12 +29,17 @@ namespace Characters.States.Data
 
         private int _velocityHashY, _velocityHashX;
 
+        private void OnValidate()
+        {
+            if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
+        }
+
         private void Awake()
         {
             _velocityHashY = Animator.StringToHash("moveVelocityY");
             _velocityHashX = Animator.StringToHash("moveVelocityX");
 
-            _defaultWeapon.Interact(gameObject);
+            _defaultWeapon.Interact(_identifier);
         }
 
         private void OnEnable()

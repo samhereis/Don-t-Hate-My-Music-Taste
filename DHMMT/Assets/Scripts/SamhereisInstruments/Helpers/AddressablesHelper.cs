@@ -7,9 +7,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Sripts
 {
-    public class AddressableHelper : MonoBehaviour
+    public class AddressablesHelper : MonoBehaviour
     {
-        public static void GetAddressable<T>(string name, UnityAction<T> callback)
+        public static void LoadAndDo<T>(string name, UnityAction<T> callback)
         {
             var handle = Addressables.LoadAssetAsync<T>(name);
 

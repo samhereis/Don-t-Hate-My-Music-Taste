@@ -1,3 +1,4 @@
+using Identifiers;
 using Scriptables;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,13 @@ public class SearchForInteractable : MonoBehaviour
     [SerializeField] private Input_SO _inputContainer;
     private InputSettings _input => _inputContainer.input;
 
+    [SerializeField] private IdentifierBase _identifier;
+
+    private void OnValidate()
+    {
+        if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
+    }
+
     private void OnEnable()
     {
         _input.Gameplay.Interact.performed += Interact;
@@ -24,6 +32,6 @@ public class SearchForInteractable : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
-        _interactable?.Interact(gameObject);
+        _interactable?.Interact(_identifier);
     }
 }

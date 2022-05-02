@@ -1,3 +1,4 @@
+using Identifiers;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
@@ -14,8 +15,8 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
     public string ItemName { get { return _itemName; } private set { _itemName = value; } }
 
     [Header("Inverse Kinematics Tramsform")]
-    public Transform rightHandIK;
-    public Transform leftHandIK;
+    [SerializeField] private Transform _rightHandIK;
+    [SerializeField] private Transform _leftHandIK;
 
     [Header("Components")]
     [SerializeField] private Animator _animatorComponent;
@@ -26,10 +27,10 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
     public readonly UnityEvent<HumanoidData> onEquip = new UnityEvent<HumanoidData>();
     public readonly UnityEvent<HumanoidData> onUnequip = new UnityEvent<HumanoidData>();
 
-    public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid
+    public void Interact(IdentifierBase caller) // in other words - equiod this weapon to the humanoid
     {
-        HumanoidData equipData = caller.GetComponent<HumanoidData>();
-        Animator animator = caller.GetComponent<Animator>();
+        HumanoidData equipData = caller.TryGet<HumanoidData>();
+        Animator animator = caller.TryGet<Animator>();
 
         _equiped = true;
 
@@ -52,45 +53,12 @@ public class InteractableEquipWeapon : MonoBehaviour, IInteractable
         }
 
         {   //Manage constraints and IKs
-            equipData.RightHandIK.data.target = rightHandIK;
-            equipData.LeftHandIK.data.target = leftHandIK;
+            equipData.RightHandIK.data.target = _rightHandIK;
+            equipData.LeftHandIK.data.target = _leftHandIK;
         }
 
-        caller.GetComponent<RigBuilder>().Build();
+        caller.TryGet<RigBuilder>().Build();
 
         onEquip?.Invoke(equipData);
-    }
-
-    private void setParentConstraint(Transform[] source)
-    {
-        var data = GetComponent<MultiParentConstraint>().data.sourceObjects;
-        data.Clear();
-        foreach (Transform obj in source)
-        {
-            data.Add(new WeightedTransform(obj, 0.05f));
-        }
-        GetComponent<MultiParentConstraint>().data.sourceObjects = data;
-        GetComponent<MultiParentConstraint>().data.constrainedObject = this.transform;
-    }
-
-    private void clearParentConstraint()
-    {
-        GetComponent<MultiParentConstraint>().data.sourceObjects.Clear();
-        GetComponent<MultiParentConstraint>().data.constrainedObject = null;
-    }
-
-    private void setAimConstraint(Transform source)
-    {
-        var data = GetComponent<MultiAimConstraint>().data.sourceObjects;
-        data.Clear();
-        data.Add(new WeightedTransform(source, 1));
-        GetComponent<MultiAimConstraint>().data.sourceObjects = data;
-        GetComponent<MultiAimConstraint>().data.constrainedObject = this.transform;
-    }
-
-    private void clearAimConstraint()
-    {
-        GetComponent<MultiAimConstraint>().data.sourceObjects.Clear();
-        GetComponent<MultiAimConstraint>().data.constrainedObject = null;
     }
 }
