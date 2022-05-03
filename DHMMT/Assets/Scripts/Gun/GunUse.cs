@@ -1,9 +1,11 @@
+using Helpers;
 using Pooling;
 using Scriptables.Values;
 using Sripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -104,6 +106,11 @@ public class GunUse : MonoBehaviour
     public void DecreaseAmmo(int value = 1)
     {
         _currentAmmo -= value;
+        if (_currentAmmo <= 0)
+        {
+            _canShoot = false;
+            Reload();
+        }
     }
 
     public void IncreaseAmmo(int value = 1)
@@ -121,12 +128,14 @@ public class GunUse : MonoBehaviour
         }
     }
 
-    public void Reload()
+    public async void Reload()
     {
         while(_currentAmmo < _maxAmmo)
         {
+            await AsyncHelper.Delay();
             IncreaseAmmo();
         }
+
         if(_currentAmmo >= _maxAmmo)
         {
             _canShoot = true;

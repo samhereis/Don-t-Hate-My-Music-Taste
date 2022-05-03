@@ -1,11 +1,12 @@
 using Identifiers;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Characters.States
+namespace Characters.States.Attack
 {
     public abstract class EnemyAttackBase : MonoBehaviour
     {
-        [SerializeField] private IdentifierBase _target;
+        [SerializeField] protected List<IdentifierBase> _targets;
 
         public abstract bool CanAttack();
         public abstract void Attack();

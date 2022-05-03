@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8225959054436448215}
   - component: {fileID: 8225959054437144899}
   - component: {fileID: 8225959054438371709}
-  - component: {fileID: 8225959054703840416}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8225959054703840416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8225959054436000381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.07, z: 0.5}
-  m_Center: {x: 0, y: 0, z: -0.1}
 --- !u!1 &8225959055217038793
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,11 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8225959055217038798}
   - component: {fileID: 394738885}
-  - component: {fileID: 394738886}
   - component: {fileID: 394738881}
   - component: {fileID: 394738883}
-  - component: {fileID: 394738884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,19 +134,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!65 &394738886
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8225959055217038793}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &394738881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +146,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a61d218c1e7164eb7e0bf36061fa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colliders: []
+  _colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &394738883
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -198,17 +177,3 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &394738884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8225959055217038793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa530868d0647342a4bde4c84a5c3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 394738883}
-  _onWin: {fileID: 11400000, guid: 43a94ca35bdc0d843b9e3c9e13060f23, type: 2}

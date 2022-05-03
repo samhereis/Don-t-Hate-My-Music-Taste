@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class EnemyWeapon : MonoBehaviour
 {
-    //Equips weapon on an enemy of awake if "DefaultltWeapon" is not null
+    public GunUse currentWeapon => _currentWeapon;
 
+    [SerializeField] private GunUse _currentWeapon;
     [SerializeField] private InteractableEquipWeapon _defaultltWeapon;
     [SerializeField] private EnemyIdentifier _enemyIdentifier;
 
@@ -20,6 +21,7 @@ public class EnemyWeapon : MonoBehaviour
         if(_defaultltWeapon != null)
         {
             _defaultltWeapon.Interact(_enemyIdentifier);
+            _currentWeapon = _defaultltWeapon.GetComponent<GunUse>();
         }
     }
 }

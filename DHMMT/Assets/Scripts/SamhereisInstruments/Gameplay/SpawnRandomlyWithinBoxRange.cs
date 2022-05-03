@@ -7,7 +7,7 @@ namespace Scripts
     {
         [SerializeField] private Collider[] _colliders;
 
-        private void Awake()
+        private void OnEnable()
         {
             Spawn();
         }
