@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LeadingLightMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 447de63ec53ce884a887732c932be249, type: 3}
+  m_Name: Water Meterial
+  m_Shader: {fileID: -6465566751694194690, guid: 6533c4b01e38fcb459dbe6e977deb3e9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,8 +20,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
+    - _WaveTextureMain:
+        m_Texture: {fileID: 2800000, guid: a5884e30377ed0a45a18cca3365b29b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaveTextureSecondary:
+        m_Texture: {fileID: 2800000, guid: 0863767d18fdf28429226033c2630cd6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -38,14 +42,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Emission: 5
+    - _DeepWaterColor: 0
+    - _Depth: 0.3
+    - _Displacement: 0.5
+    - _MaxTime: 50
+    - _MinTIme: -50
+    - _NoiseScale: 50
+    - _NormalStrength: 329
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Saturation: 2
+    - _ShalowWaterColor: 0
+    - _Smoothness: 1
+    - _Strength: 2
     m_Colors:
-    - _Color: {r: 0.6679286, g: 0.14809322, b: 0.059328675, a: 1}
+    - _DeepWaterColor: {r: 1, g: 1, b: 1, a: 0.5803922}
+    - _ShalowWaterColor: {r: 0.082858585, g: 0.75619143, b: 0.9245283, a: 0.5803922}
   m_BuildTextureStacks: []
---- !u!114 &6062533242811176597
+--- !u!114 &8325842351261548208
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
