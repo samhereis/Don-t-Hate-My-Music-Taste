@@ -572,6 +572,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2807167464053985135}
     m_Modifications:
     - target: {fileID: 34213701325404943, guid: 71d4f42fdd6c73c46b42e8f2ece09c74, type: 3}
@@ -659,6 +660,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7010315650923318047}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4003600346891529552, guid: 71d4f42fdd6c73c46b42e8f2ece09c74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7010315650923318047}
+    - targetCorrespondingSourceObject: {fileID: 4003600346891529552, guid: 71d4f42fdd6c73c46b42e8f2ece09c74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8942232456965031729}
   m_SourcePrefab: {fileID: 100100000, guid: 71d4f42fdd6c73c46b42e8f2ece09c74, type: 3}
 --- !u!114 &596748599527497585 stripped
 MonoBehaviour:
@@ -713,6 +721,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 8942232456965031729}
     m_Modifications:
     - target: {fileID: 6336205243223283535, guid: 190d158e707f9b740b24120e0253e407, type: 3}
@@ -764,6 +773,7 @@ PrefabInstance:
       value: Head Swaper
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 190d158e707f9b740b24120e0253e407, type: 3}
 --- !u!114 &8150309119783559227 stripped
 MonoBehaviour:
@@ -786,6 +796,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2807167464053985135}
     m_Modifications:
     - target: {fileID: 498184781075110921, guid: 39ea9b16c9096524eadac5c90af55a20, type: 3}
@@ -841,6 +852,7 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ea9b16c9096524eadac5c90af55a20, type: 3}
 --- !u!114 &958247955307410359 stripped
 MonoBehaviour:
