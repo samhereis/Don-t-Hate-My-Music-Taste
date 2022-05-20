@@ -357,24 +357,24 @@ AnimatorController:
   m_Name: animatorController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: moveVelocityY
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: moveVelocityX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: hands
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
+  - m_Name: moveVelocityY
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: hands
@@ -940,7 +940,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 78b4534b102442b42a00a8a184e8ef53, type: 2}
     m_Threshold: 0.16666667
-    m_Position: {x: 0, y: 4}
+    m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: moveVelocityY
@@ -948,7 +948,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 25c5ba4bffd214f49843a86ddf0212b5, type: 2}
     m_Threshold: 0.33333334
-    m_Position: {x: 0, y: 8}
+    m_Position: {x: 0, y: 2}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: moveVelocityY
@@ -956,7 +956,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 1142d80388161be4f8d25be534208a1b, type: 2}
     m_Threshold: 0.5
-    m_Position: {x: 0, y: -4}
+    m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: moveVelocityY
@@ -964,7 +964,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 219f18a5ba8a87045b4aaf07c4ef0a3d, type: 2}
     m_Threshold: 0.6666667
-    m_Position: {x: 0, y: -8}
+    m_Position: {x: 0, y: -2}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: moveVelocityY
