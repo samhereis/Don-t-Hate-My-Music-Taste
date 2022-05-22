@@ -2,7 +2,6 @@ using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -24,7 +23,7 @@ namespace Sripts
 
         private void Awake()
         {
-            if(instance != this) instance = this;
+            if (instance != this) instance = this;
         }
 
         private void OnDestroy()
@@ -43,15 +42,13 @@ namespace Sripts
             {
                 foreach (AudioSource audioSource in _audioSourcePool)
                 {
-                    await AsyncHelper.Delay();
-
-                    audioSource.Stop();
+                    await AsyncHelper.Delay(() => audioSource.Stop());
                 }
 
                 _mainAudioSource.clip = audioClip;
                 _mainAudioSource.volume = volume;
 
-                if(distance > 0)
+                if (distance > 0)
                 {
                     _mainAudioSource.maxDistance = distance * 2;
                     _mainAudioSource.minDistance = 0;
@@ -105,7 +102,8 @@ namespace Sripts
             }
         }
 
-        [ContextMenu("Setup")] public void Setup()
+        [ContextMenu("Setup")]
+        public void Setup()
         {
             if (_mainAudioSource == null) _mainAudioSource = GetComponent<AudioSource>();
 
@@ -116,11 +114,11 @@ namespace Sripts
                 x.playOnAwake = false;
                 x.spatialBlend = 1;
                 x.rolloffMode = AudioRolloffMode.Linear;
-            } );
+            });
 
             _audioSourcePool.RemoveAll(x => x == null || x.gameObject == gameObject);
 
-            if(_audioSourcePool.Count != _auioSourcePoolCount)
+            if (_audioSourcePool.Count != _auioSourcePoolCount)
             {
                 foreach (AudioSource audioSource in _audioSourcePool)
                 {
@@ -138,7 +136,7 @@ namespace Sripts
                 }
             }
 
-            if(_mixer == null)
+            if (_mixer == null)
             {
                 AddressablesHelper.LoadAndDo<AudioMixer>("AudioMixer", (x) =>
                 {
@@ -154,7 +152,7 @@ namespace Sripts
             {
                 try
                 {
-                    if(_mixer.FindMatchingGroups("Effect").Count() > 0)
+                    if (_mixer.FindMatchingGroups("Effect").Count() > 0)
                     {
                         _mainAudioSource.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0];
                         _audioSourcePool.ForEach(x => { x.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0]; });
@@ -167,7 +165,8 @@ namespace Sripts
 
 
 
-    [Serializable] public class EventBasedAudio
+    [Serializable]
+    public class EventBasedAudio
     {
         public EventBasedAudio(string name)
         {
@@ -176,7 +175,8 @@ namespace Sripts
 
         [SerializeField] internal string eventName;
 
-        [SerializeField] internal AudioClip audioClip
+        [SerializeField]
+        internal AudioClip audioClip
         {
             get
             {
@@ -193,7 +193,8 @@ namespace Sripts
         public bool hasAudio => _audioClips.Length > 0;
     }
 
-    [Serializable] public class SimpleAudio
+    [Serializable]
+    public class SimpleAudio
     {
         internal AudioClip audioClip
         {

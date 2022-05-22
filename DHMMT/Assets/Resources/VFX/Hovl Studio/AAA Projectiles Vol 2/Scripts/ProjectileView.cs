@@ -1,92 +1,79 @@
 ﻿using Helpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ProjectileView : MonoBehaviour
+namespace Gameplay
 {
-    public GameObject hit;
-    public GameObject flash;
-    public GameObject[] Detached;
-
-    [SerializeField] private ParticleSystem _hit;
-    [SerializeField] private ParticleSystem _flash;
-    [SerializeField] private List<ParticleSystem> _detached;
-    [SerializeField] private ParticleSystem _parent;
-
-    private void OnValidate()
+    public class ProjectileView : MonoBehaviour
     {
-        if (_flash == null) _flash = Instantiate(flash, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
-        if (_hit == null) _hit = Instantiate(hit, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+        [SerializeField] private GameObject hit;
+        [SerializeField] private GameObject flash;
+        [SerializeField] private GameObject[] Detached;
 
-        foreach(var trans in GetComponentsInChildren<Transform>(true))
+        [SerializeField] private ParticleSystem _hit;
+        [SerializeField] private ParticleSystem _flash;
+        [SerializeField] private List<ParticleSystem> _detached;
+        [SerializeField] private ParticleSystem _parent;
+
+        private void OnValidate()
         {
-            trans.localScale = Vector3.one;
-            trans.localPosition = Vector3.zero;
-            trans.localEulerAngles = Vector3.zero;
-        }
+            if (_flash == null) _flash = Instantiate(flash, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+            if (_hit == null) _hit = Instantiate(hit, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
 
-        _detached.Clear();
-
-        foreach(var p in Detached)
-        {
-            if(_detached.Contains(p.GetComponent<ParticleSystem>()) == false) _detached.Add(p.GetComponent<ParticleSystem>());
-        }
-
-        if (_parent == null)
-        {
-            if (transform.Find("Parent") != null) _parent = transform.Find("Parent").GetComponent<ParticleSystem>();
-            else
+            foreach (var trans in GetComponentsInChildren<Transform>(true))
             {
-                Debug.LogError(gameObject.name + "  doesnt have a PARENT");
+                trans.localScale = Vector3.one;
+                trans.localPosition = Vector3.zero;
+                trans.localEulerAngles = Vector3.zero;
+            }
+
+            _detached.Clear();
+
+            foreach (var p in Detached)
+            {
+                if (_detached.Contains(p.GetComponent<ParticleSystem>()) == false) _detached.Add(p.GetComponent<ParticleSystem>());
+            }
+
+            if (_parent == null)
+            {
+                if (transform.Find("Parent") != null) _parent = transform.Find("Parent").GetComponent<ParticleSystem>();
+                else Debug.LogError(gameObject.name + "  doesnt have a PARENT");
             }
         }
-    }
 
-    public async Task Init()
-    {
-        _parent.gameObject.SetActive(true);
-        _parent.Play();
-
-        foreach (var partilce in _detached)
+        public async Task Init()
         {
-            await AsyncHelper.Delay();
-            partilce.Play();
+            _parent.gameObject.SetActive(true);
+            _parent.Play();
+
+            foreach (var partilce in _detached) await AsyncHelper.Delay(() => partilce.Play());
+
+            if (_flash == null) _flash = Instantiate(flash, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>(); ;
+            if (_hit == null) _hit = Instantiate(hit, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+
+            _hit.gameObject.SetActive(false);
+            _hit.Stop();
+
+            _flash.gameObject.SetActive(true);
+            _flash.Play();
         }
 
-        if (_flash == null) _flash = Instantiate(flash, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>(); ;
-        if (_hit == null) _hit = Instantiate(hit, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
-
-        _hit.gameObject.SetActive(false);
-        _hit.Stop();
-
-        _flash.gameObject.SetActive(true);
-        _flash.Play();
-    }
-
-    public async Task OnEnd(Action callback = null)
-    {
-        _parent?.gameObject.SetActive(false);
-        _parent.Stop();
-
-        foreach (var partilce in _detached)
+        public async Task OnEnd(Action callback = null)
         {
-            await AsyncHelper.Delay();
-            partilce.Stop();
-        }
+            _parent?.gameObject.SetActive(false);
+            _parent.Stop();
 
-        _flash.gameObject.SetActive(false);
-        _flash.Stop();
+            foreach (var partilce in _detached) await AsyncHelper.Delay(() => partilce.Stop());
 
-        _hit.gameObject.SetActive(true);
-        _hit.Play();
+            _flash.gameObject.SetActive(false);
+            _flash.Stop();
 
-        if(callback != null)
-        {
-            await AsyncHelper.Delay(_hit.main.duration);
-            callback.Invoke();
+            _hit.gameObject.SetActive(true);
+            _hit.Play();
+
+            if (callback != null) await AsyncHelper.Delay(_hit.main.duration, () => callback.Invoke());
         }
     }
 }

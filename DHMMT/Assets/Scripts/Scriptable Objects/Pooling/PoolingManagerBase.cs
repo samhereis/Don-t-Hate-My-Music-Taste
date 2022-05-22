@@ -1,21 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
-using System;
-using UnityEngine.Events;
 using Helpers;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Pooling
 {
     public abstract class PoolingManagerBase<T> : ScriptableObject where T : Component
     {
         [SerializeField] protected T _poolable;
-
         [SerializeField] protected Transform _parent;
-
         [SerializeField] protected Queue<T> _poolablesQueue = new Queue<T>();
-
         [SerializeField] protected List<T> _poolablesDequeued = new List<T>();
 
         protected virtual void Init()
@@ -32,9 +27,7 @@ namespace Pooling
             for (int i = 0; i < quantity; i++)
             {
                 T t = Instantiate(_poolable, parent);
-
                 PutIn(t);
-
                 await AsyncHelper.Delay();
             }
 
@@ -109,9 +102,7 @@ namespace Pooling
         {
             foreach (var poolable in _poolablesDequeued)
             {
-                PutIn(poolable);
-
-                await AsyncHelper.Delay();
+                await AsyncHelper.Delay(() => PutIn(poolable));
             }
 
             Clear();

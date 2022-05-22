@@ -1,5 +1,5 @@
 using Scriptables;
-using Sripts;
+using Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +11,7 @@ namespace UI.Window
 
         protected override void Awake()
         {
-            if (!_input) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (_input != null) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
 
             onAWindowOpen += OnAWindowOpen;
         }
@@ -21,12 +21,11 @@ namespace UI.Window
             if (uIWIndow is GameplayWindow)
             {
                 _input.input.Gameplay.Pause.performed += Enable;
-
                 _windowBehavior?.Close();
-
                 _isOpen = false;
             }
         }
+
         protected void Enable(InputAction.CallbackContext context)
         {
             Enable();

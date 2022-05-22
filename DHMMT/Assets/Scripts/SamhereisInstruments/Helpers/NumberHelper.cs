@@ -2,40 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class NumberHelper
+namespace Helpers
 {
-    public static float GetPercentageOf(float number , float maxNumber)
+    public static class NumberHelper
     {
-        return (number / maxNumber) * 100;
-    }
+        public static float GetPercentageOf(float number, float maxNumber)
+        {
+            return (number / maxNumber) * 100;
+        }
 
-    public static float GetNumberFromPercentage(float theNumber, float percentage)
-    {
-        return (percentage / 100) * theNumber; 
-    }
+        public static float GetNumberFromPercentage(float theNumber, float percentage)
+        {
+            return (percentage / 100) * theNumber;
+        }
 
-    public static bool IsMoreAbs(float one, float theOther)
-    {
-        return Mathf.Abs(one) > Mathf.Abs(theOther);
-    }
+        public static bool IsMoreAbs(float one, float theOther)
+        {
+            return Mathf.Abs(one) > Mathf.Abs(theOther);
+        }
 
-    public static bool IsEqualsAbs(float one, float theOther)
-    {
-        return Mathf.Abs(one) == Mathf.Abs(theOther);
-    }
+        public static bool IsEqualsAbs(float one, float theOther)
+        {
+            return Mathf.Abs(one) == Mathf.Abs(theOther);
+        }
 
-    public static bool IsLessAbs(float one, float theOther)
-    {
-        return Mathf.Abs(one) < Mathf.Abs(theOther);
-    }
+        public static bool IsLessAbs(float one, float theOther)
+        {
+            return Mathf.Abs(one) < Mathf.Abs(theOther);
+        }
 
-    public static int GetRandom(int maxValue, int minValue = 0)
-    {
-        return Random.Range(minValue, maxValue);
-    }
+        public static int GetRandom(int maxValue, int minValue = 0)
+        {
+            return Random.Range(minValue, maxValue);
+        }
 
-    public static float GetRandom(float maxValue, float minValue = 0)
-    {
-        return Random.Range(minValue, maxValue);
+        public static float GetRandom(float maxValue, float minValue = 0)
+        {
+            return Random.Range(minValue, maxValue);
+        }
     }
 }

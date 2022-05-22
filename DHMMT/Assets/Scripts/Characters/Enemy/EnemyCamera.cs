@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class EnemyCamera : MonoBehaviour
+namespace Gameplay.Camera
 {
-    // Used to move enemie's camera to certain position on Awake
-
-    [SerializeField] private Transform _moveCameraTowards;
-
-    void Awake()
+    public class EnemyCamera : MonoBehaviour
     {
-        transform.position = _moveCameraTowards.position;
+        [SerializeField] private Transform _moveCameraTowards;
+
+        void Awake()
+        {
+            transform.position = _moveCameraTowards.position;
+        }
     }
 }

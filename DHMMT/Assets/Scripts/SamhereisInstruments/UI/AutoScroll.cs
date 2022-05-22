@@ -3,52 +3,55 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AutoScroll : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+namespace UI
 {
-    [Header("Components")]
-    [SerializeField] private Scrollbar _scrollBar;
-
-    [SerializeField] private float _startDelay = 3;
-    [SerializeField][Range(0.003f, 0.07f)] private float _updateValue = 0.005f;
-
-    [Header("Debug")]
-    [SerializeField] private bool _isScrolling = false;
-
-    public void OnPointerUp(PointerEventData eventData)
+    public class AutoScroll : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
-        StartAutoscroll(_startDelay);
-    }
+        [Header("Components")]
+        [SerializeField] private Scrollbar _scrollBar;
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        StopAutoscroll();
-    }
+        [SerializeField] private float _startDelay = 3;
+        [SerializeField][Range(0.003f, 0.07f)] private float _updateValue = 0.005f;
 
-    public void Scroll(float value)
-    {
-        _scrollBar.value += value;
-    }
+        [Header("Debug")]
+        [SerializeField] private bool _isScrolling = false;
 
-    private void Update()
-    {
-        if (_isScrolling == true)
+        public void OnPointerUp(PointerEventData eventData)
         {
-            Scroll(-_updateValue);
-
-            if (_scrollBar.value <= 0) _scrollBar.value = 1;
+            StartAutoscroll(_startDelay);
         }
-    }
 
-    public void StopAutoscroll()
-    {
-        StopAllCoroutines();
-        _isScrolling = false;
-    }
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            StopAutoscroll();
+        }
 
-    public async void StartAutoscroll(float delay = 0)
-    {
-        await AsyncHelper.Delay(delay);
+        public void Scroll(float value)
+        {
+            _scrollBar.value += value;
+        }
 
-        _isScrolling = true;
+        private void Update()
+        {
+            if (_isScrolling == true)
+            {
+                Scroll(-_updateValue);
+
+                if (_scrollBar.value <= 0) _scrollBar.value = 1;
+            }
+        }
+
+        public void StopAutoscroll()
+        {
+            StopAllCoroutines();
+            _isScrolling = false;
+        }
+
+        public async void StartAutoscroll(float delay = 0)
+        {
+            await AsyncHelper.Delay(delay);
+
+            _isScrolling = true;
+        }
     }
 }

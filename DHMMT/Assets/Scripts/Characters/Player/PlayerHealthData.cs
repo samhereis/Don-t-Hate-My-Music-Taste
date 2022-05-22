@@ -3,39 +3,39 @@ using Interfaces;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerHealthData : MonoBehaviour, IDamagable
+namespace Gameplay
 {
-    [SerializeField] bool _isAlive = true;
-
-    public float health { get => _health; private set { _health = value; HealthBar.instance.SetValue(_health); } }
-    [SerializeField] float _health;
-
-    [SerializeField] float _maxHealth;
-
-    private void OnEnable()
+    public class PlayerHealthData : MonoBehaviour, IDamagable //TODO: complete this class
     {
-        InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
-    }
+        [SerializeField] private bool _isAlive = true;
+        [SerializeField] private float _health;
+        [SerializeField] private float _maxHealth;
 
-    public float TakeDamage(float damage)
-    {
-        health -= damage;
+        private void OnEnable()
+        {
+            InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
+        }
 
-        if (health < 0)
+        public float TakeDamage(float damage)
+        {
+            _health -= damage;
+
+            if (_health < 0)
+            {
+
+            }
+
+            return _health;
+        }
+
+        public async Task TakeDamageContinuously(float time, float damage)
+        {
+            await AsyncHelper.Delay();
+        }
+
+        private void SetMaxHealth()
         {
 
         }
-
-        return health;
-    }
-
-    public async Task TakeDamageContinuously(float time, float damage)
-    {
-        await AsyncHelper.Delay();
-    }
-
-    private void SetMaxHealth()
-    {
-
     }
 }

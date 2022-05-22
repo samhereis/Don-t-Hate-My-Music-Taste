@@ -1,14 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
 using System;
-using UnityEngine.Events;
-using Helpers;
+using UnityEngine;
 
 namespace Characters.States.Data
 {
-    public class HumanoidAttackingStateData : MonoBehaviour
+    public class HumanoidAttackingStateData : MonoBehaviour //TODO: complete this class
     {
         public Action<bool> onAttack;
     }

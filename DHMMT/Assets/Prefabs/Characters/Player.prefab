@@ -292,8 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b97cea8786123342bd2a03b81cb7fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
   _identifier: {fileID: 853112009}
+  _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &666725341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,11 +378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f588d63e1d0e9945b1de745c38e4fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _humanoidMovementStateData: {fileID: 1601407200960980443}
-  _humanoidAttackingStateData: {fileID: 7467988608207581382}
-  RightHandIK: {fileID: 1785284635601927086}
-  LeftHandIK: {fileID: 8182843588149872904}
-  _weaponHolder: {fileID: 522865125595312457}
+  <humanoidMovementStateData>k__BackingField: {fileID: 1601407200960980443}
+  <humanoidAttackingStateData>k__BackingField: {fileID: 7467988608207581382}
+  <RightHandIK>k__BackingField: {fileID: 8182843588149872904}
+  <LeftHandIK>k__BackingField: {fileID: 1785284635601927086}
+  <weaponHolder>k__BackingField: {fileID: 522865125595312457}
 --- !u!114 &1849444201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +540,10 @@ MonoBehaviour:
   _playerBody: {fileID: 1440332666082851365}
   _sensitivity: {fileID: 11400000, guid: b6db32550703799409a97017e49bcd9f, type: 2}
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
+  _context: {x: 0, y: 0}
+  _mouseX: 0
+  _mouseY: 0
+  _xRotation: 0
 --- !u!81 &295757704
 AudioListener:
   m_ObjectHideFlags: 0
@@ -553,6 +557,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1440332666082851365}
     m_Modifications:
     - target: {fileID: 1976265962596135478, guid: c3c5702e79c05e6428f6e52396ad5a58, type: 3}
@@ -624,6 +629,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9102566681447119640, guid: c3c5702e79c05e6428f6e52396ad5a58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7499450797164221475}
   m_SourcePrefab: {fileID: 100100000, guid: c3c5702e79c05e6428f6e52396ad5a58, type: 3}
 --- !u!4 &194247547830913028 stripped
 Transform:
@@ -672,6 +681,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 672303218}
     m_Modifications:
     - target: {fileID: 7110574739933375412, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
@@ -727,6 +737,7 @@ PrefabInstance:
       value: HitlerGun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
 --- !u!114 &4652258298556851139 stripped
 MonoBehaviour:

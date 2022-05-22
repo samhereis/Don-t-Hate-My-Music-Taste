@@ -11,22 +11,16 @@ namespace Events
 
         public virtual async void AdListener(Action<T> action)
         {
-            await AsyncHelper.Delay();
-
-            onInvoke += action;
+            await AsyncHelper.Delay(() => onInvoke += action);
         }
         public virtual async void RemoveListener(Action<T> action)
         {
-            await AsyncHelper.Delay();
-
-            onInvoke -= action;
+            await AsyncHelper.Delay(() => onInvoke -= action);
         }
 
         public virtual async void Invoke(T parameter)
         {
-            await AsyncHelper.Delay();
-
-            onInvoke?.Invoke(parameter);
+            await AsyncHelper.Delay(() => onInvoke?.Invoke(parameter));
         }
     }
 }

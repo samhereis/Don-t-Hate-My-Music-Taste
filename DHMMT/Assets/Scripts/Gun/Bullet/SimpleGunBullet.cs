@@ -1,10 +1,7 @@
 using Helpers;
 using Interfaces;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Gameplay.Bullets
@@ -41,8 +38,7 @@ namespace Gameplay.Bullets
 
             _rigidbody.AddRelativeForce(_angle);
 
-            await AsyncHelper.Delay(_selfPutinToPoolTime);
-            OnEnd();
+            await AsyncHelper.Delay(_selfPutinToPoolTime, () => OnEnd());
         }
 
         private void OnTriggerEnter(Collider other)

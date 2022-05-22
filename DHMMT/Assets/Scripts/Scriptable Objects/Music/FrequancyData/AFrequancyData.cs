@@ -7,15 +7,12 @@ namespace Scriptables.Holders.Music
     {
         [SerializeField] private SpectrumData _playingMusicFrequencies;
 
-        [SerializeField] private float _value;
-        public float value => _value; 
-        public float valueWithDefaultMultiplier => _value * defaultMultiplier;
+        [field: SerializeField] public float value { get; private set; }
+        public float valueWithDefaultMultiplier => value * defaultMultiplier;
 
         [Header("Multiplier")]
         [SerializeField] private float _multiplier = 1;
-
-        [SerializeField] private float _defaultMultiplier = 1;
-        public float defaultMultiplier => _defaultMultiplier;
+        [field: SerializeField] public float defaultMultiplier { get; private set; } = 1;
 
         [Header("Frequency Ranges")]
         [SerializeField] private int _rangeStart = 1;
@@ -26,11 +23,11 @@ namespace Scriptables.Holders.Music
             _playingMusicFrequencies.onValueChanged += GetData;
         }
 
-        public float GetDatWithDefaultMultiplier() => _value * defaultMultiplier;
+        public float GetDatWithDefaultMultiplier() => value * defaultMultiplier;
 
         private async void GetData(float[] spectrumData)
         {
-            _value = await _playingMusicFrequencies.GetDataAsync(_rangeStart, _rangeEnd, _multiplier);
+            value = await _playingMusicFrequencies.GetDataAsync(_rangeStart, _rangeEnd, _multiplier);
         }
     }
 }

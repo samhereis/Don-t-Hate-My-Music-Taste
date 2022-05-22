@@ -9,8 +9,8 @@ namespace Scriptables.Gameplay
         public float currentValue => _currentValue;
 
 #if UNITY_EDITOR
-        private string keyStartsWith = "";
-        private string keyEndsWith = "_Key";
+        private string _keyStartsWith = "";
+        private string _keyEndsWith = "_Key";
 #endif
 
         [SerializeField] private string _KEY;
@@ -23,10 +23,7 @@ namespace Scriptables.Gameplay
             _currentValue = PlayerPrefs.GetFloat(KEY, _defaultValue);
 
 #if UNITY_EDITOR
-            if (name.StartsWith("_Key") == false)
-            {
-                _KEY = keyStartsWith + name + keyEndsWith;
-            }
+            if (name.StartsWith("_Key") == false) _KEY = _keyStartsWith + name + _keyEndsWith;
 #endif
         }
 
@@ -39,7 +36,7 @@ namespace Scriptables.Gameplay
         {
             _currentValue = value;
 
-            PlayerPrefs.SetFloat(KEY, value);
+            PlayerPrefs.SetFloat(KEY, _currentValue);
             PlayerPrefs.Save();
         }
     }

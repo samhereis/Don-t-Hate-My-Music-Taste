@@ -1,20 +1,26 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class ScrollingUVs_Layers : MonoBehaviour 
+namespace UI
 {
-	//public int materialIndex = 0;
-	public Vector2 uvAnimationRate = new Vector2( 1.0f, 0.0f );
-	public string textureName = "_MainTex";
-	
-	Vector2 uvOffset = Vector2.zero;
-	
-	void LateUpdate() 
-	{
-		uvOffset += ( uvAnimationRate * Time.deltaTime );
-		if( GetComponent<Renderer>().enabled )
-		{
-			GetComponent<Renderer>().sharedMaterial.SetTextureOffset( textureName, uvOffset );
-		}
-	}
+    public class ScrollingUVs_Layers : MonoBehaviour
+    {
+        [SerializeField] private string _textureName = "_MainTex";
+        [SerializeField] private Vector2 _uvAnimationRate = new Vector2(1.0f, 0.0f);
+        [SerializeField] private Vector2 _uvOffset = Vector2.zero;
+
+        [Header("Components")]
+        [SerializeField] private Renderer _renderer;
+
+        private void Awake()
+        {
+            if (_renderer == null) _renderer = GetComponent<Renderer>();
+        }
+
+        void LateUpdate()
+        {
+            _uvOffset += (_uvAnimationRate * Time.deltaTime);
+
+            if (_renderer.enabled) _renderer.sharedMaterial.SetTextureOffset(_textureName, _uvOffset);
+        }
+    }
 }

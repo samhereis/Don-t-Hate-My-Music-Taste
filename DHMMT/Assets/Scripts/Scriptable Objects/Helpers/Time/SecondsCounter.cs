@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,7 +28,6 @@ namespace Helpers
         public void Stop()
         {
             seconds = 0;
-
             _cancellationTokenSource.Cancel();
         }
 
@@ -59,34 +56,24 @@ namespace Helpers
 
         private async void StartCount(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
-           await AsyncHelper.Delay(waitBeforeExecute);
-
+            await AsyncHelper.Delay(waitBeforeExecute);
             seconds = BegginFrom;
 
             while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
-                IncreaseSeconds(1);
-
-                await AsyncHelper.Delay(1);
+                await AsyncHelper.Delay(1, () => IncreaseSeconds(1));
             }
         }
 
         private async void StartnCountDown(float waitBeforeExecute, int BegginFrom, CancellationTokenSource sentCancellationTokenSource)
         {
             await AsyncHelper.Delay(waitBeforeExecute);
-
             seconds = BegginFrom;
 
             while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
                 DecreaseSeconds(1);
-
-                if (seconds < 1)
-                {
-                    Stop();
-                }
-
-                await AsyncHelper.Delay(1);
+                await AsyncHelper.Delay(1, () => { if (seconds < 1) Stop(); });
             }
         }
     }

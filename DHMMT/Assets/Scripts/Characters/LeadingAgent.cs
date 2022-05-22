@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using Helpers;
 using UnityEngine.AI;
-using System.Threading;
 
 namespace Characters
 {
@@ -13,7 +8,6 @@ namespace Characters
     {
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Material _lightMaterial;
-
         [SerializeField] private Transform _target;
 
         [Header("Settings")]
@@ -24,7 +18,6 @@ namespace Characters
         private void OnEnable()
         {
             Move();
-
             _agent.speed = _speed;
         }
 
@@ -55,16 +48,14 @@ namespace Characters
         private void Stop()
         {
             _agent.isStopped = true;
-
             _agent.speed = 0;
         }
 
 #if UNITY_EDITOR
         [ContextMenu("Setup")] public void Setup()
         {
-            if(!_agent) _agent = GetComponent<NavMeshAgent>();
-
-            if(!_target) _target = FindObjectOfType<Exit>().transform;
+            if (!_agent) _agent = GetComponent<NavMeshAgent>();
+            if (!_target) _target = FindObjectOfType<Exit>().transform;
         }
 #endif
     }

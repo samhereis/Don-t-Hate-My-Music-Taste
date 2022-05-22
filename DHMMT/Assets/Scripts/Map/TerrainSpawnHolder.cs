@@ -1,22 +1,23 @@
 using Identifiers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpawnPoint))]
-public class TerrainSpawnHolder : MonoBehaviour
+namespace Gameplay
 {
-    // When a terrain with a spawnPoint instantiates, add its spawnPoint to "SpawnPints" class
-
-    [SerializeField] private SpawnPoint _spawnPoint;
-
-    private void OnValidate()
+    [RequireComponent(typeof(SpawnPoint))]
+    public class TerrainSpawnHolder : MonoBehaviour
     {
-        _spawnPoint ??= GetComponent<SpawnPoint>();
-    }
+        // When a terrain with a spawnPoint instantiates, add its spawnPoint to "SpawnPints" class
 
-    private void Start()
-    {
+        [SerializeField] private SpawnPoint _spawnPoint;
 
+        private void OnValidate()
+        {
+            _spawnPoint ??= GetComponent<SpawnPoint>();
+        }
+
+        private void Start()
+        {
+
+        }
     }
 }

@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class AnimationAgent : MonoBehaviour
+namespace Agents
 {
-    [SerializeField] private Animator _animator;
-    public Animator animator => _animator;
+    public class AnimationAgent : MonoBehaviour
+    {
+        public Action<string> onAnimationCallback;
+        [field: SerializeField] public Animator animator { get; private set; }
+
+        public void CallCallback(string callbackName)
+        {
+            onAnimationCallback?.Invoke(callbackName);
+        }
+    }
 }

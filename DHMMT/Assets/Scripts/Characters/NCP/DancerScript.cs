@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DancerScript : MonoBehaviour
+namespace Gameplay
 {
-    // Controlld a dancers animation
-
-    public Animator AnimatorComponent;
-    public AnimationClip Animation;
-
-    private void Start()
+    public class DancerScript : MonoBehaviour
     {
-        PlayAnimation(Animation);
-    }
+        [SerializeField] private Animator _animatorComponent;
+        [SerializeField] private AnimationClip _animation;
 
-    private void PlayAnimation(AnimationClip animation)
-    {
-        AnimatorComponent.Play(animation.name);
+        private void Start()
+        {
+            PlayAnimation(_animation);
+        }
+
+        private void PlayAnimation(AnimationClip animation)
+        {
+            _animatorComponent.Play(animation.name);
+        }
     }
 }

@@ -1,24 +1,20 @@
+using Gameplay;
 using Identifiers;
 using Scriptables;
 using Scriptables.Values;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Characters.States.Data
 {
-    public class PlayerGunUse : HumanoidAttackingStateData
+    public class PlayerGunUse : HumanoidAttackingStateData //TODO: complete this
     {
-        // Controlls the use of the gun that main players holds
-
         [Header("Components")]
         [SerializeField] private Animator _animator;
         [SerializeField] private IdentifierBase _identifier;
 
         [Header("Guns")]
         [SerializeField] private InteractableEquipWeapon _defaultWeapon;
-
         [SerializeField] private InteractableEquipWeapon _secodWeapon;
 
         [Header("SO")]

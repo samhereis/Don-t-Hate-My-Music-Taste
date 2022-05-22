@@ -1,8 +1,5 @@
+using Helpers;
 using Scriptables;
-using Sripts;
-using System.Collections;
-using System.Collections.Generic;
-using UI.Window;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +12,6 @@ namespace UI.Window
         protected override void Awake()
         {
             if (!_input) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
-
             onAWindowOpen += OnAWindowOpen;
         }
 
@@ -24,12 +20,14 @@ namespace UI.Window
             if (uIWIndow is GameplayWindow == false && _isOpen)
             {
                 _windowBehavior.Close();
-
                 _isOpen = false;
             }
         }
 
-        protected void Enable(InputAction.CallbackContext context) => Enable(); 
+        protected void Enable(InputAction.CallbackContext context)
+        {
+            Enable();
+        }
 
         public override void Enable()
         {

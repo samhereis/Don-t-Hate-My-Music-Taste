@@ -1,60 +1,54 @@
 using Characters.States.Data;
-using Scriptables;
-using Scriptables.Values;
-using Sripts;
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class WeaponAnimationController : MonoBehaviour
+namespace Gameplay
 {
-    [SerializeField] private Animator _animator;
-
-    private const string _speed = "Speed";
-
-    [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
-
-    [SerializeField] private HumanoidMovementStateData _humanoidMovementStateData;
-
-    [Header("Debug")]
-    [SerializeField] float _currentSpeed;
-
-    private bool _isSpring => _humanoidMovementStateData.isSprinting;
-    private bool _isMoving => _humanoidMovementStateData.isMoving;
-
-    private void Awake()
+    public class WeaponAnimationController : MonoBehaviour
     {
-        _interactableEquipWeapon.onEquip.AddListener(RegisterEvents);
-        _interactableEquipWeapon.onUnequip.AddListener(DegisterEvents);
-    }
+        private const string _speed = "Speed";
 
-    private void RegisterEvents(HumanoidData sentData)
-    {
-        _humanoidMovementStateData = sentData.humanoidMovementStateData;
+        private bool _isSpring => _humanoidMovementStateData.isSprinting;
+        private bool _isMoving => _humanoidMovementStateData.isMoving;
 
-        _humanoidMovementStateData.onIsMovingChange += SetSpeed;
-    }
+        [SerializeField] private Animator _animator;
+        [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
+        [SerializeField] private HumanoidMovementStateData _humanoidMovementStateData;
 
-    private void DegisterEvents(HumanoidData sentData)
-    {
-        _humanoidMovementStateData.onIsMovingChange -= SetSpeed;
+        [Header("Debug")]
+        [SerializeField] float _currentSpeed;
 
-        _humanoidMovementStateData = null;
-    }
-
-    public void SetSpeed(bool value, float speed)
-    {
-        if (_isMoving == true && _isSpring == false)
+        private void Awake()
         {
-            _animator.SetFloat(_speed, speed);
+            _interactableEquipWeapon.onEquip.AddListener(RegisterEvents);
+            _interactableEquipWeapon.onUnequip.AddListener(DegisterEvents);
         }
-        else if (_isMoving == true && _isSpring == true)
+
+        private void RegisterEvents(HumanoidData sentData)
         {
-            _animator.SetFloat(_speed, speed * 2);
+            _humanoidMovementStateData = sentData.humanoidMovementStateData;
+            _humanoidMovementStateData.onIsMovingChange += SetSpeed;
         }
-        else
+
+        private void DegisterEvents(HumanoidData sentData)
         {
-            _animator.SetFloat(_speed, 0);
+            _humanoidMovementStateData.onIsMovingChange -= SetSpeed;
+            _humanoidMovementStateData = null;
+        }
+
+        public void SetSpeed(bool value, float speed)
+        {
+            if (_isMoving == true && _isSpring == false)
+            {
+                _animator.SetFloat(_speed, speed);
+            }
+            else if (_isMoving == true && _isSpring == true)
+            {
+                _animator.SetFloat(_speed, speed * 2);
+            }
+            else
+            {
+                _animator.SetFloat(_speed, 0);
+            }
         }
     }
 }

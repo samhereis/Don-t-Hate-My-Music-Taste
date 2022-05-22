@@ -3,31 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FirstGunSlotUI : MonoBehaviour
+namespace UI
 {
-    // First gun shower while gameplay
-
-    public static FirstGunSlotUI instance;
-
-    [SerializeField] private Color _activeColor;
-                    
-    [SerializeField] private Color _inactiveColor;
-                    
-    [SerializeField] private Image _image;
-
-    void Awake()
+    public class FirstGunSlotUI : MonoBehaviour
     {
-         instance ??= this;
-    }
+        [SerializeField] private Color _activeColor;
+        [SerializeField] private Color _inactiveColor;
+        [SerializeField] private Image _image;
 
-    public void Activate()
-    {
-        SecondGunSlotUI.instance.Deactivate();
-        _image.color = _activeColor;
-    }
+        public void Activate()
+        {
+            _image.color = _activeColor;
+        }
 
-    public void Deactivate()
-    {
-        _image.color = _inactiveColor;
+        public void Deactivate()
+        {
+            _image.color = _inactiveColor;
+        }
     }
 }

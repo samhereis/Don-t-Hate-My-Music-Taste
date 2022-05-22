@@ -106,7 +106,7 @@ MonoBehaviour:
         m_Calls: []
   _copyBehaviorTo: []
   _autoCloseInstantlyOnAwake: 0
-  _disableEnableOnOpenClose: 0
+  _disableEnableOnOpenClose: 1
   _autoAnimateOnEnable: 0
   _openEase: 27
   _openDuration: 0.5

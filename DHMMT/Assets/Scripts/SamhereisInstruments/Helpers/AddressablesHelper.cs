@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Sripts
+namespace Helpers
 {
     public class AddressablesHelper : MonoBehaviour
     {

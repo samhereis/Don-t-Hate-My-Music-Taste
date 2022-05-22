@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPill : MonoBehaviour
+namespace Gameplay.Pills
 {
-    // Ammo loot after an enemy dies
-
-    private Vector3 velocity;
-
-    public float PlusToHealth = 40;
-
-    [SerializeField] private float _speed = 0.5f;
-
-    private void OnEnable()
+    public class AmmoPill : MonoBehaviour
     {
+        [SerializeField] private Vector3 _velocity;
+        [SerializeField] private float _plusToHealth = 40;
+        [SerializeField] private float _speed = 0.5f;
 
-    }
+        private void OnEnable()
+        {
 
-    private void FixedUpdate()
-    {
+        }
 
-    }
+        private void FixedUpdate()
+        {
 
-    private void OnTriggerEnter(Collider _triggerEnteredObject_)
-    {
+        }
 
+        private void OnTriggerEnter(Collider triggerEnteredObject)
+        {
+
+        }
     }
 }

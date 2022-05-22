@@ -25,18 +25,12 @@ namespace Helpers
 
         public static TweenerCore<float, float, FloatOptions> TweenFloat(float value, float to, float duration, Action<float> onUpdateCallback = null)
         {
-            return DOTween.To(() => value, x => value = x, to, duration).OnUpdate(() =>
-            {
-                onUpdateCallback?.Invoke(value);
-            });
+            return DOTween.To(() => value, x => value = x, to, duration).OnUpdate(() => { onUpdateCallback?.Invoke(value); });
         }
 
         public static TweenerCore<int, int, NoOptions> TweenInt(int value, int to, float duration, Action<int> onUpdateCallback = null)
         {
-            return DOTween.To(() => value, x => value = x, to, duration).OnUpdate(() =>
-            {
-                onUpdateCallback?.Invoke(value);
-            });
+            return DOTween.To(() => value, x => value = x, to, duration).OnUpdate(() => { onUpdateCallback?.Invoke(value); });
         }
     }
 }

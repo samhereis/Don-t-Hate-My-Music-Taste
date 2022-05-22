@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using Gameplay;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Scriptable Object/Gun")]
-public class ScriptableGun : ScriptableObject
+namespace Data
 {
-    // Plan for a gun for UI show
-
-    public enum GunTypes { Pistol, Rifle }
-    public GunTypes gunType;
-    public string gunName;
-    public Sprite gunIcon;
-    public GameObject gunPrefab;
-    public float gunDamage;
-    public int gunCost;
-    public InteractableEquipWeapon interact;
+    [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable Object/Gun")]
+    public class ScriptableGun : ScriptableObject
+    {
+        public enum GunTypes { Pistol, Rifle }
+        [field: SerializeField] public GunTypes gunType { get; private set; }
+        [field: SerializeField] public string gunName { get; private set; }
+        [field: SerializeField] public Sprite gunIcon { get; private set; }
+        [field: SerializeField] public GameObject gunPrefab { get; private set; }
+        [field: SerializeField] public float gunDamage { get; private set; }
+        [field: SerializeField] public int gunCost { get; private set; }
+        [field: SerializeField] public InteractableEquipWeapon interact { get; private set; }
+    }
 }

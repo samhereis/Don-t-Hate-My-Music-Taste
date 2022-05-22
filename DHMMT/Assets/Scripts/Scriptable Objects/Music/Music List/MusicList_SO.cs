@@ -3,47 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[CreateAssetMenu(fileName = "MusicList", menuName = "Scriptables/MusicList")]
-public class MusicList_SO : ScriptableObject
+namespace Music
 {
-    // Default music to play when player doesn't have music on computer
-
-    public static string MusicFolderPath => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
-    public bool _hasMusic => _musicList.Count > 0;
-
-    [SerializeField] private List<AudioClip> _musicList = new List<AudioClip>();
-    public List<AudioClip> musicList { get { if (_musicList.Count > 0) return _musicList; else return _defaultMusicList; } }
-
-    [SerializeField] private List<AudioClip> _defaultMusicList;
-
-    public int count => _musicList.Count;
-
-    public async void LoadMusic()
+    [CreateAssetMenu(fileName = "MusicList", menuName = "Scriptables/MusicList")]
+    public class MusicList_SO : ScriptableObject
     {
-        Clear();
+        public static string MusicFolderPath => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
+        public bool _hasMusic => _musicList.Count > 0;
 
-        foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
+        [SerializeField] private List<AudioClip> _musicList = new List<AudioClip>();
+        public List<AudioClip> musicList { get { if (_musicList.Count > 0) return _musicList; else return _defaultMusicList; } }
+
+        [SerializeField] private List<AudioClip> _defaultMusicList;
+
+        public int count => _musicList.Count;
+
+        public async void LoadMusic()
         {
-            if (System.IO.File.Exists(file))
+            Clear();
+
+            foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
             {
-                using (var uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + file, AudioType.MPEG))
+                if (System.IO.File.Exists(file))
                 {
-                    ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
+                    using (var uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + file, AudioType.MPEG))
+                    {
+                        ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
 
-                    var wait = uwr.SendWebRequest();
+                        var wait = uwr.SendWebRequest();
 
-                    while (!wait.isDone) { await AsyncHelper.Delay(); }
+                        while (wait.isDone == false) { await AsyncHelper.Delay(); }
 
-                    DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
+                        DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
 
-                    if (dlHandler.isDone) if (dlHandler.audioClip != null && _musicList.Contains(dlHandler.audioClip) == false) _musicList.Add(dlHandler.audioClip);
+                        if (dlHandler.isDone) if (dlHandler.audioClip != null && _musicList.Contains(dlHandler.audioClip) == false) _musicList.Add(dlHandler.audioClip);
+                    }
                 }
             }
         }
-    }
 
-    private void Clear()
-    {
-        _musicList.Clear();
+        private void Clear()
+        {
+            _musicList.Clear();
+        }
     }
 }

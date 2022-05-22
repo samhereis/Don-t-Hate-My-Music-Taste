@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UICamera : MonoBehaviour
+namespace Gameplay.Camera
 {
-    [SerializeField] private Camera _uICamera;
-
-    private void Awake()
+    public class UICamera : MonoBehaviour
     {
-        if(_uICamera == null)
+        [SerializeField] private UnityEngine.Camera _uICamera;
+
+        private void Awake()
         {
-            _uICamera = GetComponentInChildren<Camera>();
+            if (_uICamera == null) _uICamera = GetComponentInChildren<UnityEngine.Camera>();
         }
-    }
 
-    public void SetEnabled(bool value)
-    {
+        public void SetEnabled(bool value)
+        {
 
+        }
     }
 }

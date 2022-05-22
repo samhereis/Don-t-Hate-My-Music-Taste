@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Match", menuName = "Scriptable Object/Match")]
-public class MatchSO : ScriptableObject
+namespace Data
 {
-    // A map's data holder
-
-    public string SceneCodeName;
-    public int SceneId;
-
-    public string RecordCode { get { return $"{SceneId}_{SceneCodeName}_Record"; } }
-
-    public int GetRecordForTheScene()
+    [CreateAssetMenu(fileName = "Match", menuName = "Scriptable Object/Match")]
+    public class MatchSO : ScriptableObject //TODO: rewrite this, this is a too old script
     {
-        return PlayerPrefs.GetInt(RecordCode);
-    }
+        public string SceneCodeName;
+        public int SceneId;
 
-    public void SetRecordForTheScene(int value)
-    {
-        PlayerPrefs.SetInt(RecordCode, value);
-        PlayerPrefs.Save();
+        public string RecordCode { get { return $"{SceneId}_{SceneCodeName}_Record"; } }
+
+        public int GetRecordForTheScene()
+        {
+            return PlayerPrefs.GetInt(RecordCode);
+        }
+
+        public void SetRecordForTheScene(int value)
+        {
+            PlayerPrefs.SetInt(RecordCode, value);
+            PlayerPrefs.Save();
+        }
     }
 }

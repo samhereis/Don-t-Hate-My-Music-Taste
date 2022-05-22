@@ -1,21 +1,22 @@
 #if UNITY_EDITOR
+using Helpers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
-using System;
-using UnityEngine.Events;
-using Helpers;
 using System.IO;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Sripts
 {
     public sealed class ProjectHelper : MonoBehaviour
     {
 
-        [ContextMenu("DeleteAllPersistentDataPath")] public void DeleteAllPersistentDataPath()
+        [ContextMenu("DeleteAllPersistentDataPath")]
+        public void DeleteAllPersistentDataPath()
         {
-            string[] filePaths = Directory.GetFiles(Application.persistentDataPath); 
+            string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
             foreach (string filePath in filePaths) File.Delete(filePath);
         }
     }

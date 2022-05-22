@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleMessageHandle : MonoBehaviour
+namespace UI
 {
-    // A message to a player
-
-    [SerializeField] private float _showTime = 5;
-
-    private void OnEnable()
+    public class SingleMessageHandle : MonoBehaviour
     {
-        ShowMessage(_showTime);
-    }
+        [SerializeField] private float _showTime = 5;
 
-    private void OnDisable()
-    {
-        StopAllCoroutines();
-    }
+        private void OnEnable()
+        {
+            ShowMessage(_showTime);
+        }
 
-    private void ShowMessage(float ShowTime)
-    {
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
 
+        private void ShowMessage(float ShowTime)
+        {
+
+        }
     }
 }

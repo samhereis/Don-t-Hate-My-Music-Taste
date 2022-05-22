@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class EnemyRespawnAfterDeath : MonoBehaviour
+namespace Empty
 {
+    public class EnemyRespawnAfterDeath : MonoBehaviour
+    {
 
+    }
 }

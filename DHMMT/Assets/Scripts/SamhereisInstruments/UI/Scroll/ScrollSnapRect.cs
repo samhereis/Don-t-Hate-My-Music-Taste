@@ -1,118 +1,116 @@
 ﻿using DG.Tweening;
-using Helpers;
-using Sripts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollSnapRect : MonoBehaviour
+namespace UI
 {
-    public enum Direction { Horizontal, Vertical }
-    private Action _updateAction;
-
-    [Header("Settings")]
-    [SerializeField] private float _listValue = 100;
-    [SerializeField] private Direction _direction = Direction.Horizontal;
-
-    [Header("Componenets")]
-    [SerializeField] private List<SingleScrollElement> _buttons = new List<SingleScrollElement>();
-    [SerializeField] private RectTransform _contentRect;
-    [SerializeField] private Image _center;
-
-    [Header("Degub")]
-    [SerializeField] private SingleScrollElement _selectedButton;
-    [SerializeField] private float _contentVector;
-    [SerializeField] float _nearestPos;
-    [SerializeField] float _distance;
-    [SerializeField] private float _substractFromFirst;
-    [SerializeField] private float _substractFromLast;
-    [SerializeField] private float _minPos;
-    [SerializeField] private float _maxPos;
-
-    private float minPosVertical => _maxPos = _buttons.First()._position.y - _substractFromFirst;
-    private float maxPosVertical => _minPos = _buttons.Last()._position.y - _substractFromLast;
-
-    private float minPosHorizontal => _maxPos = _buttons.First()._position.x - _substractFromFirst;
-    private float maxPosHorizontal => _minPos = _buttons.Last()._position.x - _substractFromLast;
-
-
-    private void OnEnable()
+    public class ScrollSnapRect : MonoBehaviour
     {
-        if (_direction == Direction.Horizontal) _updateAction = UpdateHorizontal; else _updateAction = UpdateVertical;
-    }
+        public enum Direction { Horizontal, Vertical }
+        private Action _updateAction;
 
-    private void OnDisable()
-    {
-        var buttonList = new List<SingleScrollElement>();
-    }
+        [Header("Settings")]
+        [SerializeField] private float _listValue = 100;
+        [SerializeField] private Direction _direction = Direction.Horizontal;
 
-    private void FixedUpdate()
-    {
-        if (_buttons.Count == 0 || _buttons == null || ScrollElement.isInAction) return;
+        [Header("Componenets")]
+        [SerializeField] private List<SingleScrollElement> _buttons = new List<SingleScrollElement>();
+        [SerializeField] private RectTransform _contentRect;
+        [SerializeField] private Image _center;
 
-        _nearestPos = float.MaxValue;
+        [Header("Degub")]
+        [SerializeField] private SingleScrollElement _selectedButton;
+        [SerializeField] private float _contentVector;
+        [SerializeField] float _nearestPos;
+        [SerializeField] float _distance;
+        [SerializeField] private float _substractFromFirst;
+        [SerializeField] private float _substractFromLast;
+        [SerializeField] private float _minPos;
+        [SerializeField] private float _maxPos;
 
-        foreach (var button in _buttons)
+        private float minPosVertical => _maxPos = _buttons.First()._position.y - _substractFromFirst;
+        private float maxPosVertical => _minPos = _buttons.Last()._position.y - _substractFromLast;
+
+        private float minPosHorizontal => _maxPos = _buttons.First()._position.x - _substractFromFirst;
+        private float maxPosHorizontal => _minPos = _buttons.Last()._position.x - _substractFromLast;
+
+
+        private void OnEnable()
         {
-            _distance = Vector3.Distance(_center.transform.position, button._button.transform.position);
+            if (_direction == Direction.Horizontal) _updateAction = UpdateHorizontal; else _updateAction = UpdateVertical;
+        }
 
-            if (_distance < _nearestPos)
+        private void FixedUpdate()
+        {
+            if (_buttons.Count == 0 || _buttons == null || ScrollElement.isInAction) return;
+
+            _nearestPos = float.MaxValue;
+
+            foreach (var button in _buttons)
             {
-                _nearestPos = _distance;
-                _selectedButton = button;
+                _distance = Vector3.Distance(_center.transform.position, button._button.transform.position);
+
+                if (_distance < _nearestPos)
+                {
+                    _nearestPos = _distance;
+                    _selectedButton = button;
+                }
+            }
+
+            foreach (var button in _buttons) if (_selectedButton._button == button._button) button._button.Enable(); else button._button.Disable();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction)
+            {
+                _updateAction?.Invoke();
             }
         }
 
-        foreach (var button in _buttons) if (_selectedButton._button == button._button) button._button.Enable(); else button._button.Disable();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction)
+        public void RegidterElement(ScrollElement scrollElement)
         {
-            _updateAction?.Invoke();
+            _buttons.Add(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
+        }
+
+        public void DeregidterElement(ScrollElement scrollElement)
+        {
+            _buttons.Remove(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
+        }
+
+        private void UpdateVertical()
+        {
+            _contentRect.DOAnchorPosY(_selectedButton._position.y, 0.1f);
+        }
+
+        private void UpdateHorizontal()
+        {
+            _contentRect.DOAnchorPosX(_selectedButton._position.x - _substractFromFirst, 0.1f);
+        }
+
+        public void ListContent(int value)
+        {
+            _contentVector -= value * _listValue;
+        }
+
+        [ContextMenu(nameof(DebugView))]
+        public void DebugView()
+        {
+            FixedUpdate();
+
+            ListContent(1);
         }
     }
 
-    public void RegidterElement(ScrollElement scrollElement)
+    [System.Serializable]
+    internal class SingleScrollElement
     {
-        _buttons.Add(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
+        internal SingleScrollElement(ScrollElement sentButton, Vector2 sentPosition) { _button = sentButton; _position = sentPosition; }
+
+        [SerializeField] internal ScrollElement _button;
+        [SerializeField] internal Vector2 _position;
     }
-
-    public void DeregidterElement(ScrollElement scrollElement)
-    {
-        _buttons.Remove(new SingleScrollElement(scrollElement, -scrollElement.transform.localPosition));
-    }
-
-    private void UpdateVertical()
-    {
-        _contentRect.DOAnchorPosY(_selectedButton._position.y, 0.1f);
-    }
-
-    private void UpdateHorizontal()
-    {
-        _contentRect.DOAnchorPosX(_selectedButton._position.x - _substractFromFirst, 0.1f);
-    }
-
-    public void ListContent(int value)
-    {
-        _contentVector -= value * _listValue;
-    }
-
-    [ContextMenu(nameof(DebugView))] public void DebugView()
-    {
-        FixedUpdate();
-
-        ListContent(1);
-    }
-}
-
-[System.Serializable] internal class SingleScrollElement
-{
-    internal SingleScrollElement(ScrollElement sentButton, Vector2 sentPosition) { _button = sentButton; _position = sentPosition; }
-
-    [SerializeField] internal ScrollElement _button;
-    [SerializeField] internal Vector2 _position;
 }

@@ -1,8 +1,7 @@
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using Helpers;
 #if UNITY_EDITOR
 using UnityEditor;
 using UI.Window;
@@ -24,7 +23,7 @@ namespace UI.Window
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(_isSelfControlled) Do();
+            if (_isSelfControlled) Do();
         }
 
         public void Do()
@@ -35,31 +34,20 @@ namespace UI.Window
 
         private async void Open()
         {
-            foreach (var window in _openThese)
-            {
-                window.Open();
-
-                await Task.Yield();
-            }
-
+            foreach (var window in _openThese) await AsyncHelper.Delay(() => window.Open());
             _events._onOpen?.Invoke();
         }
 
         private async void Close()
         {
-            foreach (var window in _closeThese)
-            {
-                window.Close();
-
-                await Task.Yield();
-            }
-
+            foreach (var window in _closeThese) await AsyncHelper.Delay(() => window.Close());
             _events._onClose?.Invoke();
         }
     }
 }
 
-[System.Serializable] internal class OnClickOpenCloseWindowEvents
+[System.Serializable]
+internal class OnClickOpenCloseWindowEvents
 {
     [SerializeField] internal UnityEvent _onOpen;
     [SerializeField] internal UnityEvent _onClose;

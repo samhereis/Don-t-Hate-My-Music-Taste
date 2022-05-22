@@ -3,48 +3,25 @@ using Helpers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts
+namespace UI
 {
     public class DoFillAmountUpToPoint : MonoBehaviour
     {
         private enum Origin { Left, Right }
 
         [SerializeField] private Image _filledImage;
-
         [SerializeField] private Image _fillToThisPoint;
-
         [SerializeField] private RectTransform _borderHolder;
-
         [SerializeField] private Origin _origin;
 
         [Header("Debug")]
         [SerializeField] private float _percent;
-
         [SerializeField] private Vector3 _wordPos;
-
         [SerializeField] private float _value;
-
         [SerializeField] private int _screenWidth;
-
         [SerializeField] private Camera _camera;
 
-        private Camera camera
-        {
-            get
-            {
-                if (_camera == null)
-                {
-                    _camera = FindObjectOfType<Camera>();
-
-                    if (_camera == null)
-                    {
-                        _camera = new GameObject().AddComponent<Camera>();
-                    }
-                }
-
-                return _camera;
-            }
-        }
+        private Camera camera => _camera != null ? _camera : _camera = FindObjectOfType<Camera>();
 
         public void Awake()
         {
@@ -75,7 +52,7 @@ namespace Scripts
 
         private void Do()
         {
-            _wordPos = _camera.WorldToScreenPoint(_fillToThisPoint.rectTransform.position);
+            _wordPos = camera.WorldToScreenPoint(_fillToThisPoint.rectTransform.position);
 
             _value = _wordPos.x;
 

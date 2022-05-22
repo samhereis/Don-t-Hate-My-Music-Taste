@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class MessageToPlayer : MonoBehaviour
+namespace UI
 {
-    // A sible message to player
-
-    [SerializeField] private TextMeshProUGUI _text;
-
-    private void OnEnable()
+    public class MessageToPlayer : MonoBehaviour
     {
-        _text = GetComponent<TextMeshProUGUI>();
-    }
+        [SerializeField] private TextMeshProUGUI _text;
 
-    public void ShowMessage(string message)
-    {
-        _text.text = message;
+        private void OnEnable()
+        {
+            _text = GetComponent<TextMeshProUGUI>();
+        }
+
+        public void ShowMessage(string message)
+        {
+            _text.text = message;
+        }
     }
 }

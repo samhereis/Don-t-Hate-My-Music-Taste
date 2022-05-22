@@ -8,8 +8,6 @@ namespace Characters.States.Data
 {
     public class PlayerMovement : HumanoidMovementStateData
     {
-        // Controlls player's move
-
         [Header("Components")]
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterController _characterControllerComponent;
@@ -39,7 +37,7 @@ namespace Characters.States.Data
             _velocityHashY = Animator.StringToHash("moveVelocityY");
             _velocityHashX = Animator.StringToHash("moveVelocityX");
 
-            if (!_characterControllerComponent) _characterControllerComponent = GetComponent<CharacterController>();
+            if (_characterControllerComponent == null) _characterControllerComponent = GetComponent<CharacterController>();
         }
 
         private void OnEnable()

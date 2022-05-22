@@ -2,39 +2,41 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Helpers;
+using Data;
 
-public class DisplayGunOnShop : MonoBehaviour
+namespace UI.Displayers
 {
-    // On shop display a gun to buy
-
-    [SerializeField] private ScriptableGun _gun;
-      
-    [SerializeField] private Image _gunIcon;
-    [SerializeField] private TMPro.TextMeshProUGUI _gunName;
-    [SerializeField] private TMPro.TextMeshProUGUI _gunDamage;
-    [SerializeField] private TMPro.TextMeshProUGUI _gunCost;
-
-    public void SetData(ScriptableGun Sentgun)
+    public class GunOnShopDisplayer : MonoBehaviour
     {
-        _gun = Sentgun;
+        [SerializeField] private ScriptableGun _gun;
 
-        _gunIcon.sprite = Sentgun.gunIcon;
-        _gunName.text = Sentgun.gunName;
-        _gunDamage.text = Sentgun.gunDamage.ToString();
-        _gunCost.text = $"ㄙ {Sentgun.gunCost}";
-    }
+        [SerializeField] private Image _gunIcon;
+        [SerializeField] private TMPro.TextMeshProUGUI _gunName;
+        [SerializeField] private TMPro.TextMeshProUGUI _gunDamage;
+        [SerializeField] private TMPro.TextMeshProUGUI _gunCost;
 
-    public void TryBuy()
-    {
-        transform.DOShakePosition(2f, 10f, 10, 50, false, true);
-
-        if (true)
+        public void SetData(ScriptableGun Sentgun)
         {
-            GameObject newGun = Instantiate(_gun.gunPrefab.gameObject);
+            _gun = Sentgun;
+
+            _gunIcon.sprite = _gun.gunIcon;
+            _gunName.text = _gun.gunName;
+            _gunDamage.text = _gun.gunDamage.ToString();
+            _gunCost.text = $"ㄙ {_gun.gunCost}";
         }
-        else
+
+        public void TryBuy() //TODO: rewrite this
         {
-            TweeningHelper.NormalShake(transform, 2);
+            transform.DOShakePosition(2f, 10f, 10, 50, false, true);
+
+            if (true)
+            {
+                GameObject newGun = Instantiate(_gun.gunPrefab.gameObject);
+            }
+            else
+            {
+                TweeningHelper.NormalShake(transform, 2);
+            }
         }
     }
 }

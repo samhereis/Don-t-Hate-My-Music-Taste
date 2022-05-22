@@ -1,7 +1,4 @@
-using Sripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Agents;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -10,13 +7,8 @@ namespace Characters.States.Data
 {
     public class EnemyStates : HumanoidData
     {
-        [Header("Components")]
-
-        [SerializeField] private NavMeshAgent _agent;
-        public NavMeshAgent agent => _agent;
-
-        [SerializeField] private AnimationAgent _animationAgent;
-        public AnimationAgent animationAgent => _animationAgent;
+        [field: SerializeField] public NavMeshAgent agent { get; private set; }
+        [field: SerializeField] public AnimationAgent animationAgent { get; private set; }
 
         [Header("Events")]
         public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
@@ -40,10 +32,9 @@ namespace Characters.States.Data
         [ContextMenu(nameof(Setup))]
         public void Setup()
         {
-            if(_animationAgent == null) _animationAgent = GetComponentInChildren<AnimationAgent>();
-            if (_agent == null) _agent = GetComponent<NavMeshAgent>();
-
-            if (_humanoidMovementStateData == null) _humanoidMovementStateData = GetComponent<EnemyMovement>();
+            if (animationAgent == null) animationAgent = GetComponentInChildren<AnimationAgent>();
+            if (agent == null) agent = GetComponent<NavMeshAgent>();
+            if (humanoidMovementStateData == null) humanoidMovementStateData = GetComponent<EnemyMovement>();
         }
     }
 }

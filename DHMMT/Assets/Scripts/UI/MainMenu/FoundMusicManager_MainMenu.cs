@@ -1,35 +1,30 @@
-using UnityEngine.Localization.Components;
+using Music;
 using System.IO;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Localization.Components;
 
-public class FoundMusicManager_MainMenu : MonoBehaviour
+namespace UI
 {
-    // Check if player has music on computer
-
-    public string musicFolderPath => MusicList_SO.MusicFolderPath;
-
-    public int musicCount => _musicList.count;
-
-    [SerializeField] private GameObject _found, _notFound;
-
-    [SerializeField] private MusicList_SO _musicList;
-
-    [SerializeField] private LocalizeStringEvent _musicCountString;
-
-    private void Awake()
+    public class FoundMusicManager_MainMenu : MonoBehaviour
     {
-        if (Directory.Exists(musicFolderPath) == false)
+        public string musicFolderPath => MusicList_SO.MusicFolderPath;
+        public int musicCount => _musicList.count;
+
+        [SerializeField] private GameObject _found, _notFound;
+        [SerializeField] private MusicList_SO _musicList;
+        [SerializeField] private LocalizeStringEvent _musicCountString;
+
+        private void Awake()
         {
-            Directory.CreateDirectory(musicFolderPath);
+            if (Directory.Exists(musicFolderPath) == false) Directory.CreateDirectory(musicFolderPath);
         }
-    }
 
-    private void FixedUpdate()
-    {
-        _musicCountString.RefreshString();
+        private void FixedUpdate()
+        {
+            _musicCountString.RefreshString();
 
-        _found.SetActive(_musicList._hasMusic);
-        _notFound.SetActive(!_musicList._hasMusic);
+            _found.SetActive(_musicList._hasMusic);
+            _notFound.SetActive(!_musicList._hasMusic);
+        }
     }
 }

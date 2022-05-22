@@ -1,8 +1,5 @@
 using Events;
-using Helpers;
 using Identifiers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,23 +32,18 @@ namespace Helpers
         public Vector3 ApplyPosition()
         {
             Vector3 player = PlayerIdentifier.instance.transform.position;
-
             float radius = Random.Range(_minRadiusFromPlayer, _maxRadiusFromPlayer);
-
             Vector3 randomDirection = Random.insideUnitSphere * radius;
-
             randomDirection += player;
-
             NavMeshHit hit;
-
             NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
-
             Vector3 finalPosition = hit.position;
 
             return finalPosition;
         }
 
-        [System.Serializable] private class SpawnNearPlayer_DebugSpawn
+        [System.Serializable]
+        private class SpawnNearPlayer_DebugSpawn
         {
             private SpawnNearPlayer _component;
 
@@ -60,21 +52,19 @@ namespace Helpers
                 _component = component;
             }
 
-            [ContextMenu("SpawnConstantly")] public async void SpawnConstantly()
+            [ContextMenu("SpawnConstantly")]
+            public async void SpawnConstantly()
             {
                 while (_component.enabled)
                 {
-                    await AsyncHelper.Delay(1000);
-                    _component.Spawn();
+                    await AsyncHelper.Delay(1000, () => _component.Spawn() );
                 }
             }
         }
 
         public async void Spawn()
         {
-            await AsyncHelper.Delay(0.2f);
-
-            Instantiate(_prefab, ApplyPosition(), Quaternion.identity);
+            await AsyncHelper.Delay(0.2f, () => Instantiate(_prefab, ApplyPosition(), Quaternion.identity) );
         }
     }
 }

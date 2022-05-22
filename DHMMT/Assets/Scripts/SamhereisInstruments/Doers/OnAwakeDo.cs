@@ -1,15 +1,16 @@
-using Helpers;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnAwakeDo : MonoBehaviour
+namespace Helpers
 {
-    [SerializeField] private UnityEvent _onAwakeDo; 
-    [SerializeField][Range(0, 10)] private float _delay;
-
-    private async void Awake()
+    public class OnAwakeDo : MonoBehaviour
     {
-        await AsyncHelper.Delay(_delay);
-        _onAwakeDo?.Invoke();
+        [SerializeField] private UnityEvent _onAwakeDo;
+        [SerializeField][Range(0, 10)] private float _delay;
+
+        private async void Awake()
+        {
+            await AsyncHelper.Delay(_delay, () => _onAwakeDo?.Invoke());
+        }
     }
 }

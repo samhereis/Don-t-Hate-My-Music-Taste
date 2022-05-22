@@ -7,7 +7,6 @@ namespace Scriptables.Values
     public class IntValue_SO : Value_SO_Base<int>
     {
         public override int value => _value;
-
         protected override UnityEvent<int> onValueChange { get; } = new UnityEvent<int>();
     }
 }

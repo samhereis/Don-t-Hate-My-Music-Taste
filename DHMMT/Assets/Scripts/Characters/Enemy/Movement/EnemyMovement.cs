@@ -1,6 +1,4 @@
-using Sripts;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Characters.States.Data
 {
@@ -16,7 +14,7 @@ namespace Characters.States.Data
         [Header("Debug")]
         [SerializeField] private bool _isMoving;
         [SerializeField] private bool _isSprinting;
-        [SerializeField] private EnemyMovementStateBase _enemyMovementState;
+        [SerializeReference] private EnemyMovementStateBase _enemyMovementState;
 
         public override bool isMoving => _isMoving;
         public override bool isSprinting => _isSprinting;
@@ -34,13 +32,12 @@ namespace Characters.States.Data
 
         public void MoveTo(Vector3 moveTo, int speed = 2)
         {
-            if (_enemyStates.agent.isStopped == true) _enemyStates.agent.isStopped = false;
+            _enemyStates.agent.isStopped = false;
 
             if (_enemyStates.agent.destination != moveTo)
             {
                 _enemyStates.agent.speed = speed;
                 _enemyStates.agent.SetDestination(moveTo);
-
                 _enemyStates.animationAgent.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
 
                 _isMoving = true;
@@ -55,11 +52,8 @@ namespace Characters.States.Data
         public void Stop()
         {
             _enemyStates.agent.isStopped = true;
-
             _enemyStates.agent.speed = 0;
-
             _enemyStates.animationAgent.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
-
             _enemyStates.agent.ResetPath();
 
             _isMoving = false;

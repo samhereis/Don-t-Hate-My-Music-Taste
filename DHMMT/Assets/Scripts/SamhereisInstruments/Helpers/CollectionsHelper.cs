@@ -9,23 +9,17 @@ namespace Helpers
     {
         public static async Task RemoveNullsAsync<T>(this List<T> list)
         {
-            List<T> listTemp = new List<T>();
-            listTemp.AddRange(list);
-
-            foreach (var item in listTemp)
-            {
-                await AsyncHelper.Delay();
-
-                if (item == null)
-                {
-                    list.Remove(item);
-                }
-            }
+            await AsyncHelper.Delay(() => list.RemoveAll(x => x == null) );
         }
 
-        public static T GetRandomIndex<T>(this List<T> list, int maxValue)
+        public static void RemoveNulls<T>(this List<T> list)
         {
-            return list[Random.Range(0, maxValue)];
+            list.RemoveAll(x => x == null);
+        }
+
+        public static T GetRandomIndex<T>(this List<T> list)
+        {
+            return list[Random.Range(0, list.Count)];
         }
     }
 }

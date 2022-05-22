@@ -1,8 +1,6 @@
-using Characters.States.Data;
 using DG.Tweening;
+using Gameplay;
 using Identifiers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.States.Attack
@@ -11,8 +9,7 @@ namespace Characters.States.Attack
     {
         [SerializeField] private UnitTriggers _unitTriggers;
 
-        [SerializeField] private EnemyWeapon _enemyWeapon;
-        private GunUse _gunUse => _enemyWeapon.currentWeapon;
+        [field: SerializeField] private EnemyWeapon _enemyWeapon;
 
         private void OnValidate()
         {
@@ -45,19 +42,19 @@ namespace Characters.States.Attack
         {
             if (other is PlayerIdentifier)
             {
-                if(_targets.Contains(other)) _targets.Remove(other);
+                if (_targets.Contains(other)) _targets.Remove(other);
             }
         }
 
         private void FixedUpdate()
         {
-            if(CanAttack()) Attack();
+            if (CanAttack()) Attack();
         }
 
         public override void Attack()
         {
             _enemyWeapon.transform.DOLookAt(_targets[0].transform.position, 0.25f);
-            _gunUse.SetShoot(true);
+            _enemyWeapon.currentWeapon.SetShoot(true);
         }
 
         public override bool CanAttack()

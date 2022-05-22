@@ -5,8 +5,6 @@ namespace Helpers.UI
 {
     public class UILoader : MonoBehaviour
     {
-        // Usually used to load UI
-
         [Header("Helpers")]
         [SerializeField] private SceneLoader _sceneLoader;
 
@@ -14,9 +12,7 @@ namespace Helpers.UI
         {
             if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
             {
-                await AsyncHelper.Delay();
-
-                _sceneLoader.LoadSceneAdditively(1);
+                await AsyncHelper.Delay(() => _sceneLoader.LoadSceneAdditively(1));
             }
         }
     }

@@ -1,16 +1,16 @@
-using Helpers;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnEnableDo : MonoBehaviour
+namespace Helpers
 {
-    [SerializeField] private UnityEvent _onEnableDo;
-    [SerializeField][Range(0, 10)] private float _delay;
-
-    private async void OnEnable()
+    public class OnEnableDo : MonoBehaviour
     {
-        await AsyncHelper.Delay(_delay);
+        [SerializeField] private UnityEvent _onEnableDo;
+        [SerializeField] [Range(0, 10)] private float _delay;
 
-        _onEnableDo?.Invoke();
+        private async void OnEnable()
+        {
+            await AsyncHelper.Delay(_delay, () => _onEnableDo?.Invoke());
+        }
     }
 }

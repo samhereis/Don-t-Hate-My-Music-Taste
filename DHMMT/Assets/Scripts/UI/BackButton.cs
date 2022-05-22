@@ -3,33 +3,34 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
-public class BackButton : MonoBehaviour, IPointerClickHandler
+namespace UI
 {
-    [SerializeField] private UnityEvent _onClick = new UnityEvent();
-
-    [SerializeField] private Input_SO _inputContainer;
-    private InputSettings _input => _inputContainer.input;
-
-    private void OnEnable()
+    public class BackButton : MonoBehaviour, IPointerClickHandler
     {
-        _input.UI.Back.performed += Back;
-    }
+        [SerializeField] private UnityEvent _onClick = new UnityEvent();
 
-    private void OnDisable()
-    {
-        _input.UI.Back.performed -= Back;
-    }
+        [SerializeField] private Input_SO _inputContainer;
+        private InputSettings _input => _inputContainer.input;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        _onClick?.Invoke();
-    }
+        private void OnEnable()
+        {
+            _input.UI.Back.performed += Back;
+        }
 
-    private void Back(InputAction.CallbackContext context)
-    {
-        _onClick?.Invoke();
-    }
+        private void OnDisable()
+        {
+            _input.UI.Back.performed -= Back;
+        }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _onClick?.Invoke();
+        }
+
+        private void Back(InputAction.CallbackContext context)
+        {
+            _onClick?.Invoke();
+        }
+    }
 }

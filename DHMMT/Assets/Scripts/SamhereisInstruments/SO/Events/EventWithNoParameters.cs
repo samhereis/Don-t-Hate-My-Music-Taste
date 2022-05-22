@@ -11,22 +11,16 @@ namespace Events
 
         public async void AdListener(Action action)
         {
-            await AsyncHelper.Delay();
-
-            onInvoke += action;
+            await AsyncHelper.Delay(() => onInvoke += action);
         }
         public async void RemoveListener(Action action)
         {
-            await AsyncHelper.Delay();
-
-            onInvoke -= action;
+            await AsyncHelper.Delay(() => onInvoke -= action);
         }
 
         public async void Invoke()
         {
-            await AsyncHelper.Delay();
-
-            onInvoke?.Invoke();
+            await AsyncHelper.Delay(() => onInvoke?.Invoke());
         }
     }
 }

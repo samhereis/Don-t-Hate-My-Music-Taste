@@ -1,71 +1,57 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
+using UI.Displayers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShopUI : MonoBehaviour
+namespace UI
 {
-    // Manage gun shop
-
-    public static ShopUI instance;
-
-    public List<ScriptableGun> Guns;
-
-    [SerializeField] private Transform _pistolCategoriyPage;
-    [SerializeField] private Transform _rifleCategoriyPage;
-
-    [SerializeField] private GameObject _gunSlotPrefab;
-
-    private bool _gunsAreLoaded = false;
-
-    public GameObject Page { get => _page; set => _page = value; }
-    [SerializeField] private GameObject _page;
-
-    public void Enable()
+    public class ShopUI : MonoBehaviour
     {
-        LoadAllGuns();
+        [field: SerializeField] public List<ScriptableGun> guns { get; private set; }
 
-        Page.SetActive(true);
-    }
+        [SerializeField] private Transform _pistolCategoriyPage;
+        [SerializeField] private Transform _rifleCategoriyPage;
 
-    public void Disable()
-    {
-        Page.SetActive(false);
-    }
+        [SerializeField] private GameObject _gunSlotPrefab;
+        [field: SerializeField] public GameObject page { get; private set; }
 
-    private void LoadAllGuns()
-    {
-        if(_gunsAreLoaded == true)
+        private bool _gunsAreLoaded = false;
+
+        public void Enable()
         {
-            return;
+            LoadAllGuns();
+
+            page.SetActive(true);
         }
 
-        foreach(ScriptableGun gun in Guns)
+        public void Disable()
         {
-            GameObject gunSlotPrefab = Instantiate(_gunSlotPrefab);
-
-            gunSlotPrefab.GetComponent<DisplayGunOnShop>().SetData(gun);
-
-            if(gun.gunType == ScriptableGun.GunTypes.Pistol)
-            {
-                gunSlotPrefab.transform.SetParent(_pistolCategoriyPage);
-            }
-            else  if (gun.gunType == ScriptableGun.GunTypes.Rifle)
-            {
-                gunSlotPrefab.transform.SetParent(_rifleCategoriyPage);
-            }
-
-            _gunsAreLoaded = true;
+            page.SetActive(false);
         }
-    }
 
-    private void OnEnable()
-    {
-        instance = this;
-    }
+        private void LoadAllGuns()
+        {
+            if (_gunsAreLoaded == true) return;
 
-    private void OnDisable()
-    {
-        instance = this;
+            foreach (ScriptableGun gun in guns)
+            {
+                GameObject gunSlotPrefab = Instantiate(_gunSlotPrefab);
+
+                gunSlotPrefab.GetComponent<GunOnShopDisplayer>().SetData(gun);
+
+                if (gun.gunType == ScriptableGun.GunTypes.Pistol)
+                {
+                    gunSlotPrefab.transform.SetParent(_pistolCategoriyPage);
+                }
+                else if (gun.gunType == ScriptableGun.GunTypes.Rifle)
+                {
+                    gunSlotPrefab.transform.SetParent(_rifleCategoriyPage);
+                }
+
+                _gunsAreLoaded = true;
+            }
+        }
     }
 }

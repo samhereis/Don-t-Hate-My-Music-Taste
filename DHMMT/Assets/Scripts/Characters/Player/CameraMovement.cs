@@ -1,56 +1,57 @@
-using UnityEngine.InputSystem;
-using UnityEngine;
-using Scriptables.Gameplay;
-using Helpers;
 using Scriptables;
+using Scriptables.Gameplay;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class CameraMovement : MonoBehaviour
+namespace Gameplay.Camera
 {
-    [SerializeField] private Transform _moveCameraTowards;
-    [SerializeField] private Transform _playerBody;
-
-    [Header("SO")]
-    [SerializeField] private FloatSetting_SO _sensitivity;
-    [SerializeField] private Input_SO _inputContainer;
-    private InputSettings _input => _inputContainer.input;
-
-    private Vector2 _context;
-
-    private float _mouseX;
-    private float _mouseY;
-
-    private float _xRotation;
-
-    private void Awake()
+    public class CameraMovement : MonoBehaviour
     {
-        transform.position = _moveCameraTowards.position;
-    }
+        [SerializeField] private Transform _moveCameraTowards;
+        [SerializeField] private Transform _playerBody;
 
-    private void OnEnable()
-    {
-        _input.Gameplay.Look.performed += Look;
-        _input.Gameplay.Look.canceled += Look;
-    }
+        [Header("SO")]
+        [SerializeField] private FloatSetting_SO _sensitivity;
+        [SerializeField] private Input_SO _inputContainer;
+        private InputSettings _input => _inputContainer.input;
 
-    private void OnDisable()
-    {
-        _input.Gameplay.Look.performed -= Look;
-        _input.Gameplay.Look.canceled -= Look;
-    }
+        [Header("Debug")]
+        [SerializeField] private Vector2 _context;
+        [SerializeField] private float _mouseX;
+        [SerializeField] private float _mouseY;
+        [SerializeField] private float _xRotation;
 
-    private void Look(InputAction.CallbackContext ctx)
-    {
-        _context = ctx.ReadValue<Vector2>() * _sensitivity.currentValue;
+        private void Awake()
+        {
+            transform.position = _moveCameraTowards.position;
+        }
 
-        _mouseX = _context.x;
-        _mouseY = _context.y;
+        private void OnEnable()
+        {
+            _input.Gameplay.Look.performed += Look;
+            _input.Gameplay.Look.canceled += Look;
+        }
 
-        transform.position = _moveCameraTowards.position;
+        private void OnDisable()
+        {
+            _input.Gameplay.Look.performed -= Look;
+            _input.Gameplay.Look.canceled -= Look;
+        }
 
-        _xRotation -= _mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+        private void Look(InputAction.CallbackContext ctx)
+        {
+            _context = ctx.ReadValue<Vector2>() * _sensitivity.currentValue;
 
-        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        _playerBody.Rotate(Vector3.up * _mouseX);
+            _mouseX = _context.x;
+            _mouseY = _context.y;
+
+            transform.position = _moveCameraTowards.position;
+
+            _xRotation -= _mouseY;
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            _playerBody.Rotate(Vector3.up * _mouseX);
+        }
     }
 }

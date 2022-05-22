@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IInteractorData
+namespace Interfaces
 {
-    // Blueprint of something that can interact with something else
-
-    string InteractorName { get; }
+    public interface IInteractorData
+    {
+        string InteractorName { get; }
+    }
 }

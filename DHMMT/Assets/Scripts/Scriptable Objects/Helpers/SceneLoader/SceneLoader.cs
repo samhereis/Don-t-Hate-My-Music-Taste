@@ -14,8 +14,7 @@ namespace Helpers
 
         public async void LoadScene(int index)
         {
-            await AsyncHelper.Delay();
-            StartLoadScene(index);
+            await AsyncHelper.Delay(() => StartLoadScene(index));
         }
 
         private async void StartLoadScene(int sceneId)

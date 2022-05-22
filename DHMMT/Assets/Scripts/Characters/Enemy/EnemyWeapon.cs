@@ -1,27 +1,26 @@
 using Identifiers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWeapon : MonoBehaviour
+namespace Gameplay
 {
-    public GunUse currentWeapon => _currentWeapon;
-
-    [SerializeField] private GunUse _currentWeapon;
-    [SerializeField] private InteractableEquipWeapon _defaultltWeapon;
-    [SerializeField] private EnemyIdentifier _enemyIdentifier;
-
-    private void OnValidate()
+    public class EnemyWeapon : MonoBehaviour
     {
-        if (_enemyIdentifier == null) _enemyIdentifier = GetComponent<EnemyIdentifier>();
-    }
+        [field: SerializeField] public GunUse currentWeapon { get; private set; }
+        [SerializeField] private InteractableEquipWeapon _defaultltWeapon;
+        [SerializeField] private EnemyIdentifier _enemyIdentifier;
 
-    private void OnEnable()
-    {
-        if(_defaultltWeapon != null)
+        private void OnValidate()
         {
-            _defaultltWeapon.Interact(_enemyIdentifier);
-            _currentWeapon = _defaultltWeapon.GetComponent<GunUse>();
+            if (_enemyIdentifier == null) _enemyIdentifier = GetComponent<EnemyIdentifier>();
+        }
+
+        private void OnEnable()
+        {
+            if (_defaultltWeapon != null)
+            {
+                _defaultltWeapon.Interact(_enemyIdentifier);
+                currentWeapon = _defaultltWeapon.GetComponent<GunUse>();
+            }
         }
     }
 }

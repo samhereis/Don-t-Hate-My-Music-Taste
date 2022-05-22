@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
+using Scriptables.Values;
 using UnityEngine;
 
-public class Crosshair : MonoBehaviour
+namespace UI
 {
-    public static Crosshair instance;
-
-    private void Awake()
+    public class Crosshair : MonoBehaviour
     {
-        instance ??= this;
-    }
+        [SerializeField] private BoolValue_SO _isAiming;
+        [SerializeField] private CanvasGroup _canvasGroup;
 
-    public void SetActive(bool active)
-    {
-        gameObject.SetActive(active);
+        private void OnEnable()
+        {
+            _isAiming.AddListener(SetActive);
+        }
+
+        private void OnDisable()
+        {
+            _isAiming.RemoveListener(SetActive);
+        }
+
+        public void SetActive(bool active)
+        {
+            _canvasGroup.DOKill();
+            _canvasGroup.DOFade(active ? 1 : 0, 1);
+        }
     }
 }

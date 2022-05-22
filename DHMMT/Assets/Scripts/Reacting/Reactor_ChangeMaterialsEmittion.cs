@@ -14,7 +14,6 @@ namespace Reactors
         [Header("Settings")]
         [SerializeField] private float _minValue = 1.5f;
         [SerializeField] private float _multiplier;
-
         [SerializeField] private Color _originalColor;
 
         private void OnValidate()

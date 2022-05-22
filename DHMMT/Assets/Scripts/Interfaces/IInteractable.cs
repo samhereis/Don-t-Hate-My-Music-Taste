@@ -1,10 +1,11 @@
 using Identifiers;
-using System;
-using UnityEngine;
 
-public interface IInteractable
+namespace Interfaces
 {
-    bool isInteractable { get; }
-    string ItemName { get; }
-    void Interact(IdentifierBase caller);
+    public interface IInteractable
+    {
+        public bool isInteractable { get; }
+        public string ItemName { get; }
+        public void Interact(IdentifierBase caller);
+    }
 }

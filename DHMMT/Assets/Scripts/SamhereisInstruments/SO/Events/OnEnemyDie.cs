@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
-using System;
-using UnityEngine.Events;
-using Helpers;
 using Events;
-using Characters.States.Data;
+using UnityEngine;
 
 namespace Identifiers
 {

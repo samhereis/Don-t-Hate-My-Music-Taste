@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRagdollData : MonoBehaviour
+namespace Empty
 {
-    // Data for ragdoll enabling when enemy dies
+    public class EnemyRagdollData : MonoBehaviour
+    {
 
-
+    }
 }

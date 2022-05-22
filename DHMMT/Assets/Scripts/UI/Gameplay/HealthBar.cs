@@ -1,31 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+namespace UI
 {
-    // Health bar while gameplay
-
-    public static HealthBar instance;
-
-    public Slider SliderComponent;
-
-    [SerializeField] private Gradient _gradient;
-    [SerializeField] private Image _fill;
-    [SerializeField] private Image _hurtEffect;
-
-    private void Awake()
+    public class HealthBar : MonoBehaviour
     {
-        instance ??= this;
+        [SerializeField] private Slider _sliderComponent;
+        [SerializeField] private Gradient _gradient;
+        [SerializeField] private Image _fill;
+        [SerializeField] private Image _hurtEffect;
 
-        SliderComponent ??= GetComponent<Slider>();
-    }
+        private void Awake()
+        {
+            _sliderComponent ??= GetComponent<Slider>();
+        }
 
-    public void SetValue(float value)
-    {
-        SliderComponent.value = value;
-        _fill.color = _gradient.Evaluate(SliderComponent.normalizedValue);
-        _hurtEffect.color = new Color(1, 1, 1, (1 - SliderComponent.normalizedValue));
+        public void SetValue(float value)
+        {
+            _sliderComponent.value = value;
+            _fill.color = _gradient.Evaluate(_sliderComponent.normalizedValue);
+            _hurtEffect.color = new Color(1, 1, 1, (1 - _sliderComponent.normalizedValue));
+        }
     }
 }

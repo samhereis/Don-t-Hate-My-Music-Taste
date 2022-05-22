@@ -2,17 +2,19 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class CutoutMask : Image
+namespace UI
 {
-    public override Material materialForRendering
+    public class CutoutMask : Image
     {
-        get
+        public override Material materialForRendering
         {
-            Material material = new Material(base.materialForRendering);
+            get
+            {
+                Material material = new Material(base.materialForRendering);
+                material.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
 
-            material.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
-
-            return material;
+                return material;
+            }
         }
     }
 }

@@ -1,27 +1,25 @@
+using Helpers;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using Helpers;
 
 namespace Scriptables.Holders.Music
 {
     [CreateAssetMenu(fileName = "Spectrum Width Holder", menuName = "Scriptables/Music")]
     public class SpectrumData : ScriptableObject
     {
-        [SerializeField] private float[] _frequencies = new float[64];
-        public float[] frequencies => _frequencies;
+        [field: SerializeField] public float[] frequencies { get; private set; } = new float[64];
 
         public Action<float[]> onValueChanged;
 
         public float[] SetSpectrumWidth(AudioSource audioSource)
         {
-            audioSource.GetSpectrumData(_frequencies, 0, FFTWindow.Blackman);
+            audioSource.GetSpectrumData(frequencies, 0, FFTWindow.Blackman);
 
-            onValueChanged?.Invoke(_frequencies);
+            onValueChanged?.Invoke(frequencies);
 
-            return _frequencies;
+            return frequencies;
         }
 
         public float GetData(int start, int end, float multiplier)

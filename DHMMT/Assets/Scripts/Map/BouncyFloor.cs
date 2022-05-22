@@ -1,16 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Helpers;
 using UnityEngine;
 
-public class BouncyFloor : MonoBehaviour
+namespace Gameplay
 {
-    void OnTriggerEnter(Collider other)
+    public class BouncyFloor : MonoBehaviour
     {
-        other.GetComponent<PlayerJump>()?.PerformJump(1);
-    }
+        private async void OnTriggerEnter(Collider other)
+        {
+            await AsyncHelper.Delay(() =>
+            {
+                other.GetComponent<PlayerJump>()?.PerformJump(1);
+            });
+        }
 
-    void OnCollisionEnter(Collision other)
-    {
-        other.collider.GetComponent<PlayerJump>()?.PerformJump(1);
+        private async void OnCollisionEnter(Collision other)
+        {
+            await AsyncHelper.Delay(() =>
+            {
+                other.collider.GetComponent<PlayerJump>()?.PerformJump(1);
+            });
+        }
     }
 }

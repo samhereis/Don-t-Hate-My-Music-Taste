@@ -1,37 +1,37 @@
 using Identifiers;
+using Interfaces;
 using Scriptables;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SearchForInteractable : MonoBehaviour
+namespace Gameplay
 {
-    // Constantly cast raycast to see near interactable objects
-    private IInteractable _interactable;
-
-    [SerializeField] private Input_SO _inputContainer;
-    private InputSettings _input => _inputContainer.input;
-
-    [SerializeField] private IdentifierBase _identifier;
-
-    private void OnValidate()
+    public class SearchForInteractable : MonoBehaviour
     {
-        if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
-    }
+        private IInteractable _interactable;
 
-    private void OnEnable()
-    {
-        _input.Gameplay.Interact.performed += Interact;
-    }
+        [SerializeField] private IdentifierBase _identifier;
+        [SerializeField] private Input_SO _inputContainer;
+        private InputSettings _input => _inputContainer.input;
 
-    private void OnDisable()
-    {
-        _input.Gameplay.Interact.performed -= Interact;
-    }
+        private void OnValidate()
+        {
+            if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
+        }
 
-    private void Interact(InputAction.CallbackContext context)
-    {
-        _interactable?.Interact(_identifier);
+        private void OnEnable()
+        {
+            _input.Gameplay.Interact.performed += Interact;
+        }
+
+        private void OnDisable()
+        {
+            _input.Gameplay.Interact.performed -= Interact;
+        }
+
+        private void Interact(InputAction.CallbackContext context)
+        {
+            _interactable?.Interact(_identifier);
+        }
     }
 }

@@ -1,31 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using Helpers;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-public class LanguageManager : MonoBehaviour
+namespace UI
 {
-    // Manage interface language
-
-    private IEnumerator Start()
+    public class LanguageManager : MonoBehaviour //TODO: replace playerPrefs with json
     {
-        yield return LocalizationSettings.InitializationOperation;
-
-        if(PlayerPrefs.HasKey("Language"))
+        private async void Start()
         {
+            while (LocalizationSettings.InitializationOperation.IsDone == false) await AsyncHelper.Delay();
+
+            if (PlayerPrefs.HasKey("Language"))
+            {
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("Language")];
+            }
+            else
+            {
+                ChangeLanguage(2);
+            }
+        }
+
+        public void ChangeLanguage(int index)
+        {
+            PlayerPrefs.SetInt("Language", index);
+            PlayerPrefs.Save();
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("Language")];
         }
-        else
-        {
-            ChangeLanguage(2);
-        }
-
-    }
-
-    public void ChangeLanguage(int index)
-    {
-        PlayerPrefs.SetInt("Language", index);
-        PlayerPrefs.Save();
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("Language")];
     }
 }

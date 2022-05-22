@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
-using System;
-using UnityEngine.Events;
-using Helpers;
 using Events;
-using Sripts;
+using Helpers;
 using Scriptables;
+using UnityEngine;
 
 namespace UI.Window
 {
@@ -31,7 +25,7 @@ namespace UI.Window
 
         public override void OnAWindowOpen(UIWIndowBase uIWIndow)
         {
-            if(uIWIndow is not WinWindow)
+            if (uIWIndow is not WinWindow)
             {
                 _windowBehavior.Close();
 

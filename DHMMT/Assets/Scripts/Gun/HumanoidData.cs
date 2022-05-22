@@ -1,25 +1,18 @@
-using UnityEngine.Animations.Rigging;
+using Interfaces;
 using UnityEngine;
-using Sripts;
-using Characters.States.Data;
+using UnityEngine.Animations.Rigging;
 
-[DisallowMultipleComponent]
-public class HumanoidData : MonoBehaviour, IInteractorData
+namespace Characters.States.Data
 {
-    [Header("States")]
-    [SerializeField] protected HumanoidMovementStateData _humanoidMovementStateData; 
-    public HumanoidMovementStateData humanoidMovementStateData => _humanoidMovementStateData;
+    [DisallowMultipleComponent]
+    public class HumanoidData : MonoBehaviour, IInteractorData
+    {
+        public string InteractorName { get => transform.name; private set { } }
 
-    [SerializeField] protected HumanoidAttackingStateData _humanoidAttackingStateData;
-    public HumanoidAttackingStateData humanoidAttackingStateData => _humanoidAttackingStateData;
-
-    [Header("Hands For Equipping")]
-    public TwoBoneIKConstraint RightHandIK;
-    public TwoBoneIKConstraint LeftHandIK;
-
-    [Header("Other")]
-    [SerializeField] private Transform _weaponHolder;
-    public Transform weapnHolder => _weaponHolder;
-
-    public string InteractorName { get => transform.name; private set { } }
+        [field: SerializeField] public HumanoidMovementStateData humanoidMovementStateData { get; protected set; }
+        [field: SerializeField] public HumanoidAttackingStateData humanoidAttackingStateData { get; protected set; }
+        [field: SerializeField] public TwoBoneIKConstraint RightHandIK { get; protected set; }
+        [field: SerializeField] public TwoBoneIKConstraint LeftHandIK { get; protected set; }
+        [field: SerializeField] public Transform weaponHolder { get; protected set; }
+    }
 }

@@ -16,7 +16,7 @@ namespace UI.Window
         {
             _windowBehavior = GetComponent<WindowBehaviorBase>();
 
-            if (_windowBehavior == null) Debug.LogWarning("_windowBehavior us null", this);
+            if (_windowBehavior == null) Debug.LogWarning("_windowBehavior is null", this);
         }
 
         public abstract void OnAWindowOpen(UIWIndowBase uIWIndow);

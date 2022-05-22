@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading.Tasks;
-using System;
-using UnityEngine.Events;
-using Helpers;
 using DG.Tweening;
+using Helpers;
+using System;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sripts
+namespace UI
 {
     public sealed class ScrollElement : MonoBehaviour
     {
@@ -60,7 +56,7 @@ namespace Sripts
                 }
             }
 
-            if(_scrollSnapRect != null) _scrollSnapRect.RegidterElement(this);
+            if (_scrollSnapRect != null) _scrollSnapRect.RegidterElement(this);
         }
 
         private void OnDisable()
@@ -100,9 +96,9 @@ namespace Sripts
 
         private void SetCanMove()
         {
-            canMove = true; 
-            
-            if(_initialPosition == Vector3.zero)
+            canMove = true;
+
+            if (_initialPosition == Vector3.zero)
             {
                 _initialPosition = transform.localPosition;
             }
@@ -119,8 +115,8 @@ namespace Sripts
             canMove = false;
 
             transform.DOLocalMove(_initialPosition, 1);
-            
-            _dragEvents.onSwipeDown += SetCanMove; 
+
+            _dragEvents.onSwipeDown += SetCanMove;
             _dragEvents.onSwipeLeft += OnDragHorizontal;
             _dragEvents.onSwipeRight += OnDragHorizontal;
         }
@@ -140,7 +136,7 @@ namespace Sripts
 
         private void OnDragHorizontal()
         {
-            if(canMove == false)
+            if (canMove == false)
             {
                 _isScrolling = true;
                 transform.parent.DOMoveX(_startParentPosition + (Input.mousePosition.x - _start), 0);
