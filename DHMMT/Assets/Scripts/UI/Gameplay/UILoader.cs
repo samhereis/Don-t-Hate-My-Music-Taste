@@ -8,7 +8,24 @@ namespace Helpers.UI
         [Header("Helpers")]
         [SerializeField] private SceneLoader _sceneLoader;
 
-        private async void Awake()
+        private void Awake()
+        {
+            if(_sceneLoader == null)
+            {
+                AddressablesHelper.LoadAndDo<SceneLoader>("SceneLoader", (x) =>
+                {
+                    _sceneLoader = x;
+                    LoadUI();
+                });
+            }
+            else
+            {
+                LoadUI();
+            }
+
+        }
+
+        private async void LoadUI()
         {
             if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
             {
