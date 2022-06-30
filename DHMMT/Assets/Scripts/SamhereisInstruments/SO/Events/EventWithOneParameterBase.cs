@@ -1,21 +1,21 @@
-using Helpers;
+using Samhereis.Helpers;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Events
+namespace Samhereis.Events
 {
     public class EventWithOneParameterBase<T> : ScriptableObject
     {
         public Action<T> onInvoke { get; private set; }
 
-        public virtual async void AdListener(Action<T> action)
+        public virtual void AdListener(Action<T> action)
         {
-            await AsyncHelper.Delay(() => onInvoke += action);
+            onInvoke += action;
         }
-        public virtual async void RemoveListener(Action<T> action)
+
+        public virtual void RemoveListener(Action<T> action)
         {
-            await AsyncHelper.Delay(() => onInvoke -= action);
+            onInvoke -= action;
         }
 
         public virtual async void Invoke(T parameter)

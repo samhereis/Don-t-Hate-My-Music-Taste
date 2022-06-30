@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Agents
+namespace Samhereis.Agents
 {
     public class AnimationAgent : MonoBehaviour
     {

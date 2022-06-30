@@ -1,19 +1,22 @@
-using Sripts;
+using Samhereis.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoundPlayers
+namespace Samhereis.Sound
 {
     public class UISoundPlayer : MonoBehaviour
     {
         [SerializeField] private List<EventBasedAudio> _sounds = new List<EventBasedAudio>();
 
-        private void OnValidate()
+        private async void OnValidate()
         {
             foreach (var sound in _sounds)
             {
-                sound.volume = 1;
-                sound.distance = 1000;
+                await AsyncHelper.Delay(() =>
+                {
+                    sound.volume = 1;
+                    sound.distance = 1000;
+                });
             }
         }
 

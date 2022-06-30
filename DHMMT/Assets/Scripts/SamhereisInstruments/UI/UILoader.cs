@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Helpers.UI
+namespace Samhereis.Helpers
 {
     public class UILoader : MonoBehaviour
     {
@@ -18,11 +18,7 @@ namespace Helpers.UI
                     LoadUI();
                 });
             }
-            else
-            {
-                LoadUI();
-            }
-
+            else LoadUI();
         }
 
         private async void LoadUI()

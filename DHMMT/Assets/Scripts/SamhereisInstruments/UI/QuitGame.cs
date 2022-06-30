@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gameplay
+namespace Samhereis.UI
 {
     public class QuitGame : MonoBehaviour
     {

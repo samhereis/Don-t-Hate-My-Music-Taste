@@ -47,7 +47,6 @@ namespace Characters
 
         private void Stop()
         {
-            _agent.isStopped = true;
             _agent.speed = 0;
         }
 

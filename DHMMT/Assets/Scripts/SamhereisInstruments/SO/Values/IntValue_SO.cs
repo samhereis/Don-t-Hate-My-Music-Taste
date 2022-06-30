@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Scriptables.Values
+namespace Samhereis.Values
 {
     [CreateAssetMenu(fileName = "New Int Value", menuName = "Scriptables/Values/Int")]
     public class IntValue_SO : Value_SO_Base<int>

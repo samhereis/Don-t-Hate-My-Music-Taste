@@ -1,10 +1,10 @@
 using DG.Tweening;
+using Samhereis.Helpers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using Helpers;
 
-namespace UI
+namespace Samhereis.UI
 {
     [DisallowMultipleComponent]
     public class AnimateButtons : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler

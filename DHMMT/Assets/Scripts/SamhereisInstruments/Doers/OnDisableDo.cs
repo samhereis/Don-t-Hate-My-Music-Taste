@@ -1,12 +1,15 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-public class OnDisableDo : MonoBehaviour
+namespace Samhereis.Helpers.OnUnityEventDoers
 {
-    [SerializeField] private UnityEvent onDisable = new UnityEvent();
-
-    private void OnDisable() 
+    public class OnDisableDo : MonoBehaviour
     {
-        onDisable?.Invoke();
+        [SerializeField] private UnityEvent _onDisable = new UnityEvent();
+
+        private void OnDisable()
+        {
+            _onDisable?.Invoke();
+        }
     }
 }

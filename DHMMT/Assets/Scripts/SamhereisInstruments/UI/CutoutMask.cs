@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class CutoutMask : Image
     {

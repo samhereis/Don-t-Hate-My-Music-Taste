@@ -9,6 +9,11 @@ namespace Gameplay
         [SerializeField] private Animator _animatorComponent;
         [SerializeField] private AnimationClip _animation;
 
+        private void OnValidate()
+        {
+            if (_animatorComponent == null) _animatorComponent = GetComponent<Animator>();
+        }
+
         private void Start()
         {
             PlayAnimation(_animation);
@@ -16,7 +21,7 @@ namespace Gameplay
 
         private void PlayAnimation(AnimationClip animation)
         {
-            _animatorComponent.Play(animation.name);
+            if(animation != null) _animatorComponent.Play(animation.name);
         }
     }
 }

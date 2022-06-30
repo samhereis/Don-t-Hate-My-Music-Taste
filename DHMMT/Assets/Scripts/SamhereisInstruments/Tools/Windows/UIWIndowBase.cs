@@ -1,7 +1,8 @@
+using Samhereis.UI.Window;
 using System;
 using UnityEngine;
 
-namespace UI.Window
+namespace Samhereis.UI
 {
     public abstract class UIWIndowBase : MonoBehaviour
     {
@@ -14,7 +15,7 @@ namespace UI.Window
 
         protected virtual void Awake()
         {
-            _windowBehavior = GetComponent<WindowBehaviorBase>();
+            if (_windowBehavior == null) _windowBehavior = GetComponent<WindowBehaviorBase>();
 
             if (_windowBehavior == null) Debug.LogWarning("_windowBehavior is null", this);
         }

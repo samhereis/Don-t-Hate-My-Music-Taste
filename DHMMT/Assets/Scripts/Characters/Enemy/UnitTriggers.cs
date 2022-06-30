@@ -1,4 +1,4 @@
-using Identifiers;
+using Samhereis;
 using System;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Characters
 
         private void OnValidate()
         {
-            if(_rigidbody == null) _rigidbody = GetComponent<Rigidbody>();
+            if (_rigidbody == null) _rigidbody = GetComponent<Rigidbody>();
             if (_sphereCollider == null) _sphereCollider = GetComponent<SphereCollider>();
 
             _rigidbody.useGravity = false;
@@ -26,7 +26,7 @@ namespace Characters
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out IdentifierBase identifierBase)) onEnter(identifierBase);
+            if (other.TryGetComponent(out IdentifierBase identifierBase)) onEnter(identifierBase);
         }
 
         private void OnTriggerExit(Collider other)

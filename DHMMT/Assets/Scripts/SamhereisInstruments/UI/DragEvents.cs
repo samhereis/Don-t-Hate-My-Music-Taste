@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class DragEvents : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
@@ -24,15 +24,13 @@ namespace UI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _startPos = Input.mousePosition;
-
+            _startPos = eventData.position;
             onBeggingDrag?.Invoke();
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            _fingerPos = Input.mousePosition;
-
+            _fingerPos = eventData.position;
             CheckSwipe();
         }
 
@@ -76,14 +74,14 @@ namespace UI
 
         private void OnSwipeUp()
         {
-            onSwipeUp?.Invoke();
             _startPos = _fingerPos;
+            onSwipeUp?.Invoke();
         }
 
         private void OnSwipeDown()
         {
-            onSwipeDown?.Invoke();
             _startPos = _fingerPos;
+            onSwipeDown?.Invoke();
         }
     }
 }

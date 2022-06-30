@@ -12,7 +12,6 @@ namespace Reactors
         [SerializeField] private int _numberOfCubes;
         [SerializeField] private int _distance;
         [SerializeField] private List<GameObject> _cubes;
-        [SerializeField] private bool _shake = true;
         [SerializeField] private Vector3 _lastLoc = new Vector3(0, 0, 0);
 
         private void Start()

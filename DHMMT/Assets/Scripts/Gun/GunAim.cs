@@ -1,6 +1,6 @@
 using Characters.States.Data;
 using DG.Tweening;
-using Scriptables.Values;
+using Samhereis.Values;
 using UnityEngine;
 
 namespace Gameplay

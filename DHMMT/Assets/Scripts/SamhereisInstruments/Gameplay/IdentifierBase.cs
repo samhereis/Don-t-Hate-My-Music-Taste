@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Identifiers
+namespace Samhereis
 {
     public class IdentifierBase : MonoBehaviour
     {
@@ -19,10 +19,16 @@ namespace Identifiers
             else
             {
                 component = GetComponentInChildren<T>(true);
-                _components.Add(typeof(T), component);
+                if(component != null) _components.Add(typeof(T), component);
             }
 
             return component;
+        }
+
+        public bool TryGet<T>(out T result) where T : Component
+        {
+            result = TryGet<T>();
+            return result == null;
         }
     }
 }

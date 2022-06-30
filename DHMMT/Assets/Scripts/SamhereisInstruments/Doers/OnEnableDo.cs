@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Helpers
+namespace Samhereis.Helpers.OnUnityEventDoers
 {
     public class OnEnableDo : MonoBehaviour
     {
@@ -10,7 +10,7 @@ namespace Helpers
 
         private async void OnEnable()
         {
-            await AsyncHelper.Delay(_delay, () => _onEnableDo?.Invoke());
+            await AsyncHelper.DelayAndDo(_delay, () => _onEnableDo?.Invoke());
         }
     }
 }

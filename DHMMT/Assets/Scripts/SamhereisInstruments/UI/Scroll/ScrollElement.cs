@@ -1,18 +1,15 @@
 using DG.Tweening;
-using Helpers;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Samhereis.UI
 {
     public sealed class ScrollElement : MonoBehaviour
     {
         public static bool isInAction = false;
-
         private bool _canMove = false;
         private bool canMove { get => _canMove; set { _canMove = value; isInAction = value; } }
-
         private bool _isScrolling = false;
         public bool isScrolling { get => _isScrolling; set { _isScrolling = value; isInAction = value; } }
 
@@ -36,42 +33,32 @@ namespace UI
 
         private void OnValidate()
         {
-            _dragEvents = GetComponent<DragEvents>();
-            _image = GetComponent<Image>();
+            if (_dragEvents == null) _dragEvents = GetComponent<DragEvents>();
+            if (_image == null) _image = GetComponent<Image>();
         }
 
-        private async void OnEnable()
+        private void OnEnable()
         {
             RegisterEvents();
-
-            await AsyncHelper.Delay(1000);
 
             if (_scrollSnapRect == null)
             {
                 _scrollSnapRect = GetComponentInParent<ScrollSnapRect>();
-
-                if (_scrollSnapRect == null)
-                {
-                    _scrollSnapRect = FindObjectOfType<ScrollSnapRect>();
-                }
+                if (_scrollSnapRect == null) _scrollSnapRect = FindObjectOfType<ScrollSnapRect>();
             }
 
-            if (_scrollSnapRect != null) _scrollSnapRect.RegidterElement(this);
+            _scrollSnapRect?.RegidterElement(this);
         }
 
         private void OnDisable()
         {
             DeregisterEvents();
-
-            if (_scrollSnapRect != null) _scrollSnapRect.DeregidterElement(this);
+            _scrollSnapRect?.DeregidterElement(this);
         }
 
         private void Update()
         {
-            if (canMove && _isScrolling == false)
-            {
-                transform.position = Input.mousePosition;
-            }
+            if (canMove && _isScrolling == false) transform.position = Input.mousePosition;
         }
 
         private void RegisterEvents()
@@ -98,10 +85,7 @@ namespace UI
         {
             canMove = true;
 
-            if (_initialPosition == Vector3.zero)
-            {
-                _initialPosition = transform.localPosition;
-            }
+            if (_initialPosition == Vector3.zero) _initialPosition = transform.localPosition;
 
             _dragEvents.onSwipeDown -= SetCanMove;
             _dragEvents.onSwipeLeft -= OnDragHorizontal;
@@ -124,7 +108,6 @@ namespace UI
         private void OnBegginLeftDrag()
         {
             _start = Input.mousePosition.x;
-
             _startParentPosition = transform.parent.position.x;
         }
 
@@ -145,13 +128,16 @@ namespace UI
 
         public void Enable()
         {
-            transform.DOScale(_enableScale, 1f);
+            transform.DOKill();
 
+            transform.DOScale(_enableScale, 1f);
             onEnable?.Invoke();
         }
 
         public void Disable()
         {
+            transform.DOKill();
+
             transform.DOScale(_disableScale, 1f);
             onDisable?.Invoke();
         }

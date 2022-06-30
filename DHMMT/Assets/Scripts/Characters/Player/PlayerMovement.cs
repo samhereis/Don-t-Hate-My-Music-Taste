@@ -1,6 +1,5 @@
-using Scriptables;
-using Scriptables.Values;
-using Sripts;
+using Samhereis.PlayerInputHolder;
+using Samhereis.Values;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

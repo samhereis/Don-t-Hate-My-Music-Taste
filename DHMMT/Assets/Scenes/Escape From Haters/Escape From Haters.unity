@@ -1861,6 +1861,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1489469416}
     m_Modifications:
+    - target: {fileID: 1186959930, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
+      propertyPath: _eventWithOneParameter
+      value: 
+      objectReference: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
     - target: {fileID: 871517903394405510, guid: d93190d6ae7f53e4fb1354c7715b621d, type: 3}
       propertyPath: m_Name
       value: Spawns

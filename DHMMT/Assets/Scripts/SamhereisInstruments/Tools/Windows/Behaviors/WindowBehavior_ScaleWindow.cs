@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Helpers;
+using Samhereis.Helpers;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace UI.Window
+namespace Samhereis.UI.Window
 {
     public class WindowBehavior_ScaleWindow : WindowBehaviorBase
     {
@@ -55,7 +55,6 @@ namespace UI.Window
 
             _currentScaledObject.DOScale(_downscaledValue, _closeDuration).SetEase(_closeEase).OnComplete(() =>
             {
-
                 if (_revereseScaleAfterScale) _currentScaledObject.DOScale(_upscaledValue, _openDuration);
                 if (_disableEnableOnOpenClose) _currentScaledObject.gameObject.SetActive(false);
 

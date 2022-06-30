@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Helpers
+namespace Samhereis.Helpers.OnUnityEventDoers
 {
     public class OnAwakeDo : MonoBehaviour
     {
@@ -10,7 +10,7 @@ namespace Helpers
 
         private async void Awake()
         {
-            await AsyncHelper.Delay(_delay, () => _onAwakeDo?.Invoke());
+            await AsyncHelper.DelayAndDo(_delay, () => _onAwakeDo?.Invoke());
         }
     }
 }

@@ -1,5 +1,6 @@
 using DG.Tweening;
-using Scriptables.Values;
+using Samhereis.Helpers;
+using Samhereis.Values;
 using UnityEngine;
 
 namespace UI
@@ -9,8 +10,9 @@ namespace UI
         [SerializeField] private BoolValue_SO _isAiming;
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        private void OnEnable()
+        private async void OnEnable()
         {
+            if (_isAiming == null) _isAiming = await AddressablesHelper.GetAssetAsync<BoolValue_SO>("IsAiming");
             _isAiming.AddListener(SetActive);
         }
 

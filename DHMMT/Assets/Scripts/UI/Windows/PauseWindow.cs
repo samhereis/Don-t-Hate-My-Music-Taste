@@ -1,5 +1,7 @@
-using Scriptables;
-using Helpers;
+using Samhereis.DI;
+using Samhereis.Helpers;
+using Samhereis.PlayerInputHolder;
+using Samhereis.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,9 +11,9 @@ namespace UI.Window
     {
         [SerializeField] private Input_SO _input;
 
-        protected override void Awake()
+        protected override async void Awake()
         {
-            if (_input != null) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (_input == null) _input = await AddressablesHelper.GetAssetAsync<Input_SO>(_input.GetType().ToString());
 
             onAWindowOpen += OnAWindowOpen;
         }

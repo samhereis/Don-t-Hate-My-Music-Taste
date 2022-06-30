@@ -1,11 +1,11 @@
-using Helpers;
+using Samhereis.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Sripts
+namespace Samhereis.Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public sealed class SoundPlayer : MonoBehaviour
@@ -18,17 +18,17 @@ namespace Sripts
         [SerializeField] private AudioMixer _mixer;
 
         [Header("Settings")]
-        [SerializeField] private int _auioSourcePoolCount = 0;
+        [SerializeField] private int _auioSourcePoolCount = 2;
         [SerializeField] private bool _isUI;
 
         private void Awake()
         {
-            if (instance != this) instance = this;
+            if (instance == null && _isUI) instance = this;
         }
 
         private void OnDestroy()
         {
-            if (instance == this) instance = null;
+            if (instance == this && _isUI) instance = null;
         }
 
         private void OnValidate()
@@ -40,10 +40,7 @@ namespace Sripts
         {
             if (disableAll)
             {
-                foreach (AudioSource audioSource in _audioSourcePool)
-                {
-                    await AsyncHelper.Delay(() => audioSource.Stop());
-                }
+                foreach (AudioSource audioSource in _audioSourcePool) await AsyncHelper.Delay(() => audioSource.Stop());
 
                 _mainAudioSource.clip = audioClip;
                 _mainAudioSource.volume = volume;
@@ -120,20 +117,7 @@ namespace Sripts
 
             if (_audioSourcePool.Count != _auioSourcePoolCount)
             {
-                foreach (AudioSource audioSource in _audioSourcePool)
-                {
-                    DestroyImmediate(audioSource.gameObject);
-                }
-                _audioSourcePool.Clear();
-
-                for (int i = 0; i < _auioSourcePoolCount; i++)
-                {
-                    var obj = new GameObject("A sound");
-                    obj.transform.parent = transform;
-                    obj.AddComponent<AudioSource>();
-
-                    _audioSourcePool.Add(obj.GetComponent<AudioSource>());
-                }
+                Debug.LogWarning("AudioSource cound handle is reqiered", this);
             }
 
             if (_mixer == null)
@@ -142,10 +126,7 @@ namespace Sripts
                 {
                     _mixer = x;
                     _mainAudioSource.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0];
-                    _audioSourcePool.ForEach(x =>
-                    {
-                        x.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0];
-                    });
+                    _audioSourcePool.ForEach(x => { x.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0]; });
                 });
             }
             else
@@ -163,8 +144,6 @@ namespace Sripts
         }
     }
 
-
-
     [Serializable]
     public class EventBasedAudio
     {
@@ -180,8 +159,7 @@ namespace Sripts
         {
             get
             {
-                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)];
-                else return null;
+                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)]; else return null;
             }
         }
 
@@ -200,8 +178,7 @@ namespace Sripts
         {
             get
             {
-                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)];
-                else return null;
+                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)]; else return null;
             }
         }
 

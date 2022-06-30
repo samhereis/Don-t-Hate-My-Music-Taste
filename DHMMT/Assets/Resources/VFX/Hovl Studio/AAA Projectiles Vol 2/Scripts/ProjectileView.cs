@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Samhereis.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace Gameplay
             _hit.gameObject.SetActive(true);
             _hit.Play();
 
-            if (callback != null) await AsyncHelper.Delay(_hit.main.duration, () => callback.Invoke());
+            if (callback != null) await AsyncHelper.DelayAndDo(_hit.main.duration, () => callback.Invoke());
         }
     }
 }

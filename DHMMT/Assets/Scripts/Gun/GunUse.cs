@@ -1,6 +1,7 @@
 using Characters.States.Data;
 using Helpers;
 using Pooling;
+using Samhereis.Helpers;
 using UnityEngine;
 
 namespace Gameplay
@@ -34,7 +35,7 @@ namespace Gameplay
         [SerializeField] private bool _canShoot = true;
         [SerializeField] private bool _shoot = false;
 
-        private void Awake()
+        private async void Awake()
         {
             _audioSource ??= GetComponent<AudioSource>();
             _weaponAnimator ??= GetComponentInChildren<Animator>();
@@ -42,10 +43,7 @@ namespace Gameplay
             _interactableEquipWeapon?.onEquip.AddListener(OnEquip);
             _interactableEquipWeapon?.onUnequip.AddListener(OnUnEquip);
 
-            if (!_bullet)
-            {
-                AddressablesHelper.LoadAndDo<BulletPooling_SO>(_bulletPoolerKey, (result) => { _bullet = result; });
-            }
+            if (_bullet == null) _bullet = await AddressablesHelper.GetAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
         }
 
         private void OnEnable()

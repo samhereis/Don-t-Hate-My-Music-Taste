@@ -1,4 +1,4 @@
-using Agents;
+using Samhereis.Agents;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;

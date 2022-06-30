@@ -1,7 +1,7 @@
 using Gameplay;
-using Identifiers;
-using Scriptables;
-using Scriptables.Values;
+using Samhereis;
+using Samhereis.PlayerInputHolder;
+using Samhereis.Values;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

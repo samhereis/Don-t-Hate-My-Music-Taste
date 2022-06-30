@@ -1,7 +1,6 @@
-using Scriptables.Holders.Music;
 using UnityEngine;
 
-namespace Reactors
+namespace Samhereis.Music.Reactors
 {
     public class Reactor_ChangeMaterialsEmittion : MonoBehaviour
     {

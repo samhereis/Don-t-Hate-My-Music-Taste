@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Helpers;
+using Samhereis.Helpers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class DoFillAmountUpToPoint : MonoBehaviour
     {
@@ -19,9 +19,9 @@ namespace UI
         [SerializeField] private Vector3 _wordPos;
         [SerializeField] private float _value;
         [SerializeField] private int _screenWidth;
-        [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _cam;
 
-        private Camera camera => _camera != null ? _camera : _camera = FindObjectOfType<Camera>();
+        private Camera _camera => _cam != null ? _cam : _cam = FindObjectOfType<Camera>();
 
         public void Awake()
         {
@@ -34,8 +34,8 @@ namespace UI
 
         public void Close(float duration)
         {
-            if (_origin == Origin.Right) _fillToThisPoint.rectTransform.DOAnchorPosX(-_borderHolder.sizeDelta.x / 2, duration); 
-            else _fillToThisPoint.rectTransform.DOAnchorPosX(_borderHolder.sizeDelta.x / 2, duration); 
+            if (_origin == Origin.Right) _fillToThisPoint.rectTransform.DOAnchorPosX(-_borderHolder.sizeDelta.x / 2, duration);
+            else _fillToThisPoint.rectTransform.DOAnchorPosX(_borderHolder.sizeDelta.x / 2, duration);
         }
 
         private async void OnEnable()
@@ -52,18 +52,17 @@ namespace UI
 
         private void Do()
         {
-            _wordPos = camera.WorldToScreenPoint(_fillToThisPoint.rectTransform.position);
-
+            _wordPos = _camera.WorldToScreenPoint(_fillToThisPoint.rectTransform.position);
             _value = _wordPos.x;
 
-            if (_origin == Origin.Right) _value -= _screenWidth; 
+            if (_origin == Origin.Right) _value -= _screenWidth;
 
             _percent = NumberHelper.GetPercentageOf(_value, _screenWidth) / 100;
-
             _filledImage.fillAmount = Mathf.Abs(_percent);
         }
 
-        [ContextMenu(nameof(Test))] public void Test()
+        [ContextMenu(nameof(Test))]
+        public void Test()
         {
             Do();
         }

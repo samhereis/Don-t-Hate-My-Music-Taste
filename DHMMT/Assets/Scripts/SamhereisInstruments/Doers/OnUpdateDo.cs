@@ -1,12 +1,15 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-public class OnUpdateDo : MonoBehaviour
+namespace Samhereis.Helpers.OnUnityEventDoers
 {
-    [SerializeField] private UnityEvent _onUpdateDo;
-
-    private void Update()
+    public class OnUpdateDo : MonoBehaviour
     {
-        _onUpdateDo?.Invoke();
+        [SerializeField] private UnityEvent _onUpdateDo;
+
+        private void Update()
+        {
+            _onUpdateDo?.Invoke();
+        }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using DG.Tweening;
+using Samhereis.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class ScrollSnapRect : MonoBehaviour
     {
@@ -37,7 +38,6 @@ namespace UI
         private float minPosHorizontal => _maxPos = _buttons.First()._position.x - _substractFromFirst;
         private float maxPosHorizontal => _minPos = _buttons.Last()._position.x - _substractFromLast;
 
-
         private void OnEnable()
         {
             if (_direction == Direction.Horizontal) _updateAction = UpdateHorizontal; else _updateAction = UpdateVertical;
@@ -51,7 +51,7 @@ namespace UI
 
             foreach (var button in _buttons)
             {
-                _distance = Vector3.Distance(_center.transform.position, button._button.transform.position);
+                _distance = Vector3.Distance(_center.transform.position, button.button.transform.position);
 
                 if (_distance < _nearestPos)
                 {
@@ -60,14 +60,24 @@ namespace UI
                 }
             }
 
-            foreach (var button in _buttons) if (_selectedButton._button == button._button) button._button.Enable(); else button._button.Disable();
+            UpdateAllElements();
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction)
+            if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction) _updateAction?.Invoke();
+        }
+
+        private bool _isUpdating = false;
+        private async void UpdateAllElements()
+        {
+            if(_isUpdating == false)
             {
-                _updateAction?.Invoke();
+                _isUpdating = true;
+
+                foreach (var button in _buttons) await AsyncHelper.Delay(() => { if (_selectedButton.button == button.button) button.button.Enable(); else button.button.Disable(); });
+
+                _isUpdating = false;
             }
         }
 
@@ -100,7 +110,6 @@ namespace UI
         public void DebugView()
         {
             FixedUpdate();
-
             ListContent(1);
         }
     }
@@ -108,9 +117,9 @@ namespace UI
     [System.Serializable]
     internal class SingleScrollElement
     {
-        internal SingleScrollElement(ScrollElement sentButton, Vector2 sentPosition) { _button = sentButton; _position = sentPosition; }
+        internal SingleScrollElement(ScrollElement sentButton, Vector2 sentPosition) { button = sentButton; _position = sentPosition; }
 
-        [SerializeField] internal ScrollElement _button;
+        [SerializeField] internal ScrollElement button;
         [SerializeField] internal Vector2 _position;
     }
 }

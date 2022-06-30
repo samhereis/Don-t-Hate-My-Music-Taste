@@ -1,11 +1,11 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace Helpers
+namespace Samhereis.Helpers
 {
     [CreateAssetMenu(fileName = "ScemeLoader", menuName = "Scriptables/Helpers/Scene Loader")]
-
     public class SceneLoader : ScriptableObject
     {
         public readonly UnityEvent onSceneStartLoading = new UnityEvent();
@@ -14,17 +14,14 @@ namespace Helpers
 
         public async void LoadScene(int index)
         {
-            await AsyncHelper.Delay(() => StartLoadScene(index));
+            await StartLoadScene(index);
         }
 
-        private async void StartLoadScene(int sceneId)
+        private async Task StartLoadScene(int sceneId)
         {
-            await AsyncHelper.Delay();
-
             if (_loading == false)
             {
                 _loading = true;
-
                 onSceneStartLoading?.Invoke();
 
                 AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Single);
@@ -32,12 +29,11 @@ namespace Helpers
 
                 while(asyncOperation.isDone == false)
                 {
-                    await AsyncHelper.Delay();
+                    await AsyncHelper.Delay(40);
 
                     if (asyncOperation.progress == 0.9f)
                     {
                         _loading = false;
-
                         Time.timeScale = 1;
 
                         asyncOperation.allowSceneActivation = true;
@@ -50,8 +46,7 @@ namespace Helpers
 
         public async void LoadSceneAdditively(int sceneId)
         {
-            await AsyncHelper.Delay();
-            SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
+            await AsyncHelper.Delay(() => { SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive); });
         }
     }
 }

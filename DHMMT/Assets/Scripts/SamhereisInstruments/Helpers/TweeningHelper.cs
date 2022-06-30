@@ -4,23 +4,28 @@ using DG.Tweening.Plugins.Options;
 using System;
 using UnityEngine;
 
-namespace Helpers
+namespace Samhereis.Helpers
 {
     public static class TweeningHelper
     {
-        public static Tweener NormalShake(Transform obj, float duration, float strenght = 10)
+        public static Tweener NormalShake(this Transform obj, float duration, float strenght = 10)
         {
             return obj.DOShakePosition(duration, strenght, 10, 50, false, true).SetUpdate(true);
         }
 
-        public static Tweener ScaleDown(Transform obj, float duration, Ease ease = Ease.OutBack)
+        public static Tweener ScaleDown(this Transform obj, float duration, Ease ease = Ease.OutBack)
         {
-            return obj.DOScale(0, duration).SetEase(ease);
+            return obj.DOScale(0, duration).SetEase(ease).SetUpdate(true);
         }
 
-        public static Tweener ScaleUp(Transform obj, float duration, Ease ease = Ease.OutBack)
+        public static Tweener ScaleTo(this Transform obj,float value, float duration, Ease ease = Ease.OutBack)
         {
-            return obj.DOScale(0, duration).SetEase(ease);
+            return obj.DOScale(value, duration).SetEase(ease).SetUpdate(true);
+        }
+
+        public static Tweener ScaleUp(this Transform obj, float duration, Ease ease = Ease.OutBack)
+        {
+            return obj.DOScale(0, duration).SetEase(ease).SetUpdate(true);
         }
 
         public static TweenerCore<float, float, FloatOptions> TweenFloat(float value, float to, float duration, Action<float> onUpdateCallback = null)

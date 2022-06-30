@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Helpers
+namespace Samhereis.Helpers
 {
     public static class NumberHelper
     {

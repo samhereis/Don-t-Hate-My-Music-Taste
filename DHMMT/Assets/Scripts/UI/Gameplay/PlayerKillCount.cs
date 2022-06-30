@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Samhereis.Helpers;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Gameplay
 {
     public class PlayerKillCount : MonoBehaviour
     {
-        private int KillCount { get => _killCount; set { _killCount = value; _text.text = $"ㄙ {KillCount}"; TweeningHelper.NormalShake(transform, 2); } }
+        private int KillCount { get => _killCount; set { _killCount = value; _text.text = $"ㄙ {KillCount}"; transform.NormalShake(2); } }
 
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private int _killCount;

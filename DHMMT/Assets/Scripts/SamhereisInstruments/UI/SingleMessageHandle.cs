@@ -1,22 +1,10 @@
 using UnityEngine;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class SingleMessageHandle : MonoBehaviour
     {
-        [SerializeField] private float _showTime = 5;
-
-        private void OnEnable()
-        {
-            ShowMessage(_showTime);
-        }
-
-        private void OnDisable()
-        {
-            StopAllCoroutines();
-        }
-
-        private void ShowMessage(float ShowTime)
+        public void ShowMessage(float message)
         {
 
         }

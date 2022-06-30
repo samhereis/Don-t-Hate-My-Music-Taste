@@ -1,4 +1,5 @@
 using Gameplay.Bullets;
+using Samhereis.Pooling;
 using UnityEngine;
 
 namespace Pooling

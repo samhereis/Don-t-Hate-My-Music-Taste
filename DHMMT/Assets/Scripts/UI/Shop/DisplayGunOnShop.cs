@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Helpers;
 using Data;
+using Samhereis.Helpers;
 
 namespace UI.Displayers
 {
@@ -35,7 +36,7 @@ namespace UI.Displayers
             }
             else
             {
-                TweeningHelper.NormalShake(transform, 2);
+                transform.NormalShake(2);
             }
         }
     }

@@ -1,4 +1,4 @@
-using Helpers;
+using Samhereis.Helpers;
 using System.Threading;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ namespace UI
         private async void Rotate(CancellationTokenSource cancellationTokenSource)
         {
             int rot = 0;
-            while (!cancellationTokenSource.IsCancellationRequested)
+            while (cancellationTokenSource.IsCancellationRequested == false)
             {
                 rot -= 2;
                 _loadingIcon.rotation = Quaternion.Euler(0, 0, rot);

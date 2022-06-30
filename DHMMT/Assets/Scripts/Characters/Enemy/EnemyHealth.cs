@@ -1,4 +1,5 @@
 using Identifiers;
+using Samhereis.Events;
 using UnityEngine;
 
 namespace Characters.States.Data

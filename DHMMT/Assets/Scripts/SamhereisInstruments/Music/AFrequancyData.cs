@@ -1,12 +1,10 @@
 using UnityEngine;
 
-namespace Scriptables.Holders.Music
+namespace Samhereis.Music
 {
     [CreateAssetMenu(fileName = "A Frequancy Data", menuName = "Scriptables/Music/A Frequancy Data")]
     public class AFrequancyData : ScriptableObject
     {
-        [SerializeField] private SpectrumData _playingMusicFrequencies;
-
         [field: SerializeField] public float value { get; private set; }
         public float valueWithDefaultMultiplier => value * defaultMultiplier;
 
@@ -18,12 +16,13 @@ namespace Scriptables.Holders.Music
         [SerializeField] private int _rangeStart = 1;
         [SerializeField] private int _rangeEnd = 5;
 
+        [Header("SO")]
+        [SerializeField] private SpectrumData _playingMusicFrequencies;
+
         private void OnEnable()
         {
             _playingMusicFrequencies.onValueChanged += GetData;
         }
-
-        public float GetDatWithDefaultMultiplier() => value * defaultMultiplier;
 
         private async void GetData(float[] spectrumData)
         {

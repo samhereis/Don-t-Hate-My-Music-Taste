@@ -1,6 +1,8 @@
-using Events;
-using Helpers;
-using Scriptables;
+using Samhereis.DI;
+using Samhereis.Events;
+using Samhereis.Helpers;
+using Samhereis.PlayerInputHolder;
+using Samhereis.UI;
 using UnityEngine;
 
 namespace UI.Window
@@ -12,14 +14,9 @@ namespace UI.Window
         [SerializeField] private EventWithNoParameters _eventWithNoParameters;
         [SerializeField] private Input_SO _input;
 
-        private void OnValidate()
+        protected override async void Awake()
         {
-            if (!_input) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
-        }
-
-        protected override void Awake()
-        {
-            if (!_input) AddressablesHelper.LoadAndDo<Input_SO>(nameof(Input_SO), (result) => { _input = result; });
+            if (_input == null) _input = await AddressablesHelper.GetAssetAsync<Input_SO>(_input.GetType().ToString());
             _eventWithNoParameters.AdListener(Enable);
         }
 

@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
-using Helpers;
+using Samhereis.Helpers;
+using Samhereis.UI;
+using Samhereis.UI.Window;
 #if UNITY_EDITOR
 using UnityEditor;
-using UI.Window;
 #endif
 
-namespace UI.Window
+namespace Samhereis.UI
 {
     [DisallowMultipleComponent]
     public class OnClickOpenCloseWindow : MonoBehaviour, IPointerClickHandler

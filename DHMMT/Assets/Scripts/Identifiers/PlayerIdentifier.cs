@@ -1,12 +1,18 @@
+using Samhereis;
+using Samhereis.DI;
+
 namespace Identifiers
 {
     public class PlayerIdentifier : IdentifierBase
     {
-        public static PlayerIdentifier instance { get; private set; }
-
         private void Awake()
         {
-            instance = this;
+            DIBox.RegisterSingle<IdentifierBase>(this, CharacterKeysContainer.mainPlayer);
+        }
+
+        private void OnDestroy()
+        {
+            DIBox.RemoveSingel<IdentifierBase>(CharacterKeysContainer.mainPlayer);
         }
     }
 }

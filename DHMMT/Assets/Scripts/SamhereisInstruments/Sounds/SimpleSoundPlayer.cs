@@ -1,7 +1,6 @@
-using Sripts;
 using UnityEngine;
 
-namespace SoundPlayers
+namespace Samhereis.Sound
 {
     public class SimpleSoundPlayer : MonoBehaviour
     {

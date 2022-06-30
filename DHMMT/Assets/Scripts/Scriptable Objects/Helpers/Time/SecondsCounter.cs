@@ -1,3 +1,4 @@
+using Samhereis.Helpers;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
@@ -61,7 +62,7 @@ namespace Helpers
 
             while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
-                await AsyncHelper.Delay(1, () => IncreaseSeconds(1));
+                await AsyncHelper.DelayAndDo(1, () => IncreaseSeconds(1));
             }
         }
 
@@ -73,7 +74,7 @@ namespace Helpers
             while (sentCancellationTokenSource.IsCancellationRequested == false)
             {
                 DecreaseSeconds(1);
-                await AsyncHelper.Delay(1, () => { if (seconds < 1) Stop(); });
+                await AsyncHelper.DelayAndDo(1, () => { if (seconds < 1) Stop(); });
             }
         }
     }

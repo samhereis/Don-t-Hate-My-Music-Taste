@@ -1,34 +1,29 @@
-using Helpers;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GraphicHelper : MonoBehaviour
+namespace Samhereis.Helpers
 {
-    [SerializeField] private List<MeshRenderer> _meshRenderers;
-
-    [ContextMenu(nameof(FindAllMeshRenderers))]
-    public void FindAllMeshRenderers()
+    public class GraphicHelper : MonoBehaviour
     {
-        _meshRenderers = FindObjectsOfType<MeshRenderer>().ToList();
-    }
+        [SerializeField] private List<MeshRenderer> _meshRenderers;
 
-    [ContextMenu(nameof(DisableAllShadows))]
-    public async void DisableAllShadows()
-    {
-        await AsyncHelper.Delay(() =>
+        [ContextMenu(nameof(FindAllMeshRenderers))]
+        public void FindAllMeshRenderers()
         {
-            foreach(MeshRenderer meshRenderer in _meshRenderers) meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        });
-    }
+            _meshRenderers = FindObjectsOfType<MeshRenderer>().ToList();
+        }
 
-    [ContextMenu(nameof(DisableAllRecieveShadows))]
-    public async void DisableAllRecieveShadows()
-    {
-        await AsyncHelper.Delay(() =>
+        [ContextMenu(nameof(DisableAllShadows))]
+        public async void DisableAllShadows()
         {
-            foreach (MeshRenderer meshRenderer in _meshRenderers) meshRenderer.receiveShadows = false;
-        });
+            foreach (MeshRenderer meshRenderer in _meshRenderers) await AsyncHelper.Delay(() => meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off);
+        }
+
+        [ContextMenu(nameof(DisableAllRecieveShadows))]
+        public async void DisableAllRecieveShadows()
+        {
+            foreach (MeshRenderer meshRenderer in _meshRenderers) await AsyncHelper.Delay(() => meshRenderer.receiveShadows = false);
+        }
     }
 }

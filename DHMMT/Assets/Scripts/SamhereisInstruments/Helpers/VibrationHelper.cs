@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Helpers
+namespace Samhereis.Helpers
 {
     public static class VibrationHelper
     {

@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Helpers;
+using Samhereis.Helpers;
 using System.Threading;
 using UnityEngine;
 
-namespace Gameplay
+namespace Samhereis.Gameplay
 {
     public class ObjectRotator : MonoBehaviour
     {
@@ -69,23 +69,21 @@ namespace Gameplay
         {
             while (cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy == false)
             {
-                await AsyncHelper.Delay(_duration);
-
-                transform.DORotate(axis * (_rotationValue += _directionValue), _duration);
-                if (_rotationValue >= 360 - _directionValue)
+                await AsyncHelper.DelayAndDo(_duration, () =>
                 {
-                    _rotationValue = 0;
-                    transform.DORotate(new Vector3(0, 0, 0), _duration);
-                }
+                    transform.DORotate(axis * (_rotationValue += _directionValue), _duration);
+                    if (_rotationValue >= 360 - _directionValue)
+                    {
+                        _rotationValue = 0;
+                        transform.DORotate(new Vector3(0, 0, 0), _duration);
+                    }
+                });
             }
         }
 
         private async void ChangeRotateVal(CancellationTokenSource cancellationTokenSource)
         {
-            while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy)
-            {
-                await AsyncHelper.Delay(UnityEngine.Random.Range(40, 90), () => _directionValue *= -1);
-            }
+            while (!cancellationTokenSource.IsCancellationRequested && gameObject.activeInHierarchy) await AsyncHelper.DelayAndDo(UnityEngine.Random.Range(40, 90), () => _directionValue *= -1);
         }
     }
 }

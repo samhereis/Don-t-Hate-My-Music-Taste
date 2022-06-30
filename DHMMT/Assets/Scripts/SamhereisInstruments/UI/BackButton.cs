@@ -1,10 +1,10 @@
-using Scriptables;
+using Samhereis.PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace UI
+namespace Samhereis.UI
 {
     public class BackButton : MonoBehaviour, IPointerClickHandler
     {

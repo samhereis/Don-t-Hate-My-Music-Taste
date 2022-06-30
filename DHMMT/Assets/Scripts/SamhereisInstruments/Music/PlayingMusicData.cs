@@ -1,9 +1,8 @@
-﻿using Helpers;
-using Scriptables.Holders.Music;
+﻿using Samhereis.Helpers;
 using System.Threading;
 using UnityEngine;
 
-namespace Music
+namespace Samhereis.Music
 {
     public class PlayingMusicData : MonoBehaviour
     {
@@ -20,12 +19,12 @@ namespace Music
 
         private void Awake()
         {
-            _audioSource ??= GetComponent<AudioSource>();
+            if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
         }
 
         private async void OnEnable()
         {
-            await AsyncHelper.Delay(2, () => CheckForAudio(_cancellationTokenSource = new CancellationTokenSource()));
+            await AsyncHelper.DelayAndDo(2, () => CheckForAudio(_cancellationTokenSource = new CancellationTokenSource()));
         }
 
         private void Start()
@@ -54,9 +53,9 @@ namespace Music
             if (_isCheckingForAudio) return;
             _isCheckingForAudio = true;
 
-            while (!cancellationTokenSource.IsCancellationRequested)
+            while (cancellationTokenSource.IsCancellationRequested == false)
             {
-                if ((!_audioSource.isPlaying || _audioSource.clip == null) && _musicList.count > 0)
+                if ((_audioSource.isPlaying == false || _audioSource.clip == null) && _musicList.count > 0)
                 {
                     _audioSource.clip = null;
                     _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];

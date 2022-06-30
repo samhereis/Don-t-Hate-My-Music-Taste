@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Scriptables.Values
+namespace Samhereis.Values
 {
     [CreateAssetMenu(fileName = "New Bool Value", menuName = "Scriptables/Values/Bool")]
     public class BoolValue_SO : Value_SO_Base<bool>

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Scriptables.Values
+namespace Samhereis.Values
 {
     public abstract class Value_SO_Base<T> : ScriptableObject
     {

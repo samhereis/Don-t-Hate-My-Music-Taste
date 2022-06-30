@@ -1,4 +1,4 @@
-namespace Identifiers
+namespace Samhereis.Identifiers
 {
     public class SpawnPoint : IdentifierBase
     {

@@ -1,10 +1,9 @@
 using DG.Tweening;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UI.Window
+namespace Samhereis.UI.Window
 {
     [DisallowMultipleComponent]
     public abstract class WindowBehaviorBase : MonoBehaviour
@@ -38,7 +37,6 @@ namespace UI.Window
             if (_autoAnimateOnEnable)
             {
                 await InstantlyClose();
-
                 Open();
             }
         }

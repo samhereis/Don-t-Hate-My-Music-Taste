@@ -1,9 +1,9 @@
-using Helpers;
+using Samhereis.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Music
+namespace Samhereis.Music
 {
     [CreateAssetMenu(fileName = "MusicList", menuName = "Scriptables/MusicList")]
     public class MusicList_SO : ScriptableObject
@@ -36,7 +36,7 @@ namespace Music
 
                         DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
 
-                        if (dlHandler.isDone) if (dlHandler.audioClip != null && _musicList.Contains(dlHandler.audioClip) == false) _musicList.Add(dlHandler.audioClip);
+                        if (dlHandler.isDone) if (dlHandler.audioClip != null) _musicList.SafeAdd(dlHandler.audioClip);
                     }
                 }
             }

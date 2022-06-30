@@ -32,8 +32,6 @@ namespace Characters.States.Data
 
         public void MoveTo(Vector3 moveTo, int speed = 2)
         {
-            _enemyStates.agent.isStopped = false;
-
             if (_enemyStates.agent.destination != moveTo)
             {
                 _enemyStates.agent.speed = speed;
@@ -51,7 +49,6 @@ namespace Characters.States.Data
 
         public void Stop()
         {
-            _enemyStates.agent.isStopped = true;
             _enemyStates.agent.speed = 0;
             _enemyStates.animationAgent.animator.SetFloat("moveVelocityY", _enemyStates.agent.speed);
             _enemyStates.agent.ResetPath();

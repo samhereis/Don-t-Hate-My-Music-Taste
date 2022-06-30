@@ -1,3 +1,4 @@
+using Samhereis.Events;
 using UnityEngine;
 
 namespace Events

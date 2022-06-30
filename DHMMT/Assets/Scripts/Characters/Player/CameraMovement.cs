@@ -1,5 +1,5 @@
-using Scriptables;
-using Scriptables.Gameplay;
+using Samhereis.PlayerInputHolder;
+using Samhereis.Settings;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

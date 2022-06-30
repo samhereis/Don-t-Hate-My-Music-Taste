@@ -1,21 +1,22 @@
-using Helpers;
+using Samhereis.Helpers;
 using System;
 using UnityEngine;
 
-namespace Events
+namespace Samhereis.Events
 {
     [CreateAssetMenu(fileName = "New Event With No Parameter", menuName = "Scriptables/Events/Event With No Parameter")]
     public class EventWithNoParameters : ScriptableObject
     {
         public Action onInvoke { get; private set; }
 
-        public async void AdListener(Action action)
+        public void AdListener(Action action)
         {
-            await AsyncHelper.Delay(() => onInvoke += action);
+            onInvoke += action;
         }
-        public async void RemoveListener(Action action)
+
+        public void RemoveListener(Action action)
         {
-            await AsyncHelper.Delay(() => onInvoke -= action);
+            onInvoke -= action;
         }
 
         public async void Invoke()

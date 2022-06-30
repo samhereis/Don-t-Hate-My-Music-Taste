@@ -1,10 +1,10 @@
-using Helpers;
+using Samhereis.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Pooling
+namespace Samhereis.Pooling
 {
     public abstract class PoolingManagerBase<T> : ScriptableObject where T : Component
     {
@@ -24,12 +24,7 @@ namespace Pooling
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < quantity; i++)
-            {
-                T t = Instantiate(_poolable, parent);
-                PutIn(t);
-                await AsyncHelper.Delay();
-            }
+            for (int i = 0; i < quantity; i++) await AsyncHelper.Delay(() => { PutIn(Instantiate(_poolable, parent)); });
 
             TimeSpan time = DateTime.Now - start;
 
@@ -39,9 +34,7 @@ namespace Pooling
         public virtual void Clear()
         {
             _poolablesQueue.Clear();
-
             _poolablesDequeued.Clear();
-
             DestroyImmediate(_parent.gameObject);
         }
 
@@ -63,16 +56,14 @@ namespace Pooling
         {
             T t;
 
-            if (_poolablesQueue.Count < 1) await Spawn(5, _parent);
+            if (_poolablesQueue.Count < 1) await Spawn(2, _parent);
 
             t = _poolablesQueue.Dequeue();
 
             _poolablesDequeued.Add(t);
 
             t.transform.position = position;
-
             t.transform.rotation = rotation;
-
             t.gameObject.SetActive(true);
 
             return t;
@@ -85,25 +76,18 @@ namespace Pooling
             if (poolable)
             {
                 poolable.gameObject.SetActive(false);
-
                 poolable.transform.SetParent(_parent);
-
                 poolable.transform.position = Vector3.zero;
-
                 poolable.transform.rotation = Quaternion.identity;
 
                 _poolablesQueue.Enqueue(poolable);
-
                 _poolablesDequeued.Remove(poolable);
             }
         }
 
         public virtual async void PutInAll()
         {
-            foreach (var poolable in _poolablesDequeued)
-            {
-                await AsyncHelper.Delay(() => PutIn(poolable));
-            }
+            foreach (var poolable in _poolablesDequeued) await AsyncHelper.Delay(() => PutIn(poolable));
 
             Clear();
         }
