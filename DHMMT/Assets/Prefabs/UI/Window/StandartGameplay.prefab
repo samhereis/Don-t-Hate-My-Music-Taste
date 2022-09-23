@@ -631,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isAiming: {fileID: 0}
   _canvasGroup: {fileID: 4877770885183531957}
+  _fadeDuration: 0.5
 --- !u!225 &4877770885183531957
 CanvasGroup:
   m_ObjectHideFlags: 0

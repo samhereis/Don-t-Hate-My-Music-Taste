@@ -24,11 +24,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _WaveTextureMain:
-        m_Texture: {fileID: 2800000, guid: a5884e30377ed0a45a18cca3365b29b4, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaveTextureMain_1:
+        m_Texture: {fileID: 2800000, guid: 054b463c843b5a8449fe09e5e9757654, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaveTextureSecondary:
-        m_Texture: {fileID: 2800000, guid: 0863767d18fdf28429226033c2630cd6, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaveTextureSecondary_1:
+        m_Texture: {fileID: 2800000, guid: 99294a3f54d9154429a3a6f689bbb715, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,20 +54,20 @@ Material:
     m_Ints: []
     m_Floats:
     - _DeepWaterColor: 0
-    - _Depth: 0.3
-    - _Displacement: 0.5
-    - _MaxTime: 50
-    - _MinTIme: -50
-    - _NoiseScale: 50
-    - _NormalStrength: 329
+    - _Depth: 1
+    - _Displacement: 2.75
+    - _MaxTime: 25
+    - _MinTIme: -25
+    - _NoiseScale: -1.55
+    - _NormalStrength: 9
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ShalowWaterColor: 0
     - _Smoothness: 1
-    - _Strength: 2
+    - _Strength: 1
     m_Colors:
-    - _DeepWaterColor: {r: 1, g: 1, b: 1, a: 0.5803922}
-    - _ShalowWaterColor: {r: 0.082858585, g: 0.75619143, b: 0.9245283, a: 0.5803922}
+    - _DeepWaterColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShalowWaterColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &8325842351261548208
 MonoBehaviour:

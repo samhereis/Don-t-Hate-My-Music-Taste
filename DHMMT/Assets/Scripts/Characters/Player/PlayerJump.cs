@@ -8,6 +8,8 @@ namespace Gameplay
     {
         private bool _canJump => _characterController.isGrounded == false || _doubleJump == true;
 
+        [field: SerializeField] public Vector3 _playerVelocity { get; private set; }
+
         [Header("Components")]
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterController _characterController;
@@ -21,8 +23,6 @@ namespace Gameplay
         [Header("SO")]
         [SerializeField] private Input_SO _inputContainer;
         private InputSettings _input => _inputContainer.input;
-
-        private Vector3 _playerVelocity;
 
         private void Awake()
         {
@@ -43,8 +43,8 @@ namespace Gameplay
         {
             if (_canJump)
             {
-                _characterController.Move(_playerVelocity);
-                _playerVelocity.y += _gravityValue * Time.deltaTime;
+                transform.localPosition += _playerVelocity;
+                //_playerVelocity.y += _gravityValue * Time.deltaTime;
             }
         }
 
@@ -53,18 +53,18 @@ namespace Gameplay
             if (_characterController.isGrounded)
             {
                 _doubleJump = true;
-                _playerVelocity.y = _jumpHeight;
+                //_playerVelocity.y = _jumpHeight;
             }
             else if (_doubleJump && _characterController.isGrounded == false && _doubleJumpable == true)
             {
-                _playerVelocity.y += _jumpHeight * 1.25f;
+                //_playerVelocity.y += _jumpHeight * 1.25f;
                 _doubleJump = false;
             }
         }
 
         public void PerformJump(float height)
         {
-            _playerVelocity.y = height;
+            //_playerVelocity.y = height;
         }
     }
 }

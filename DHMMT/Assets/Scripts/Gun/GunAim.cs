@@ -15,7 +15,7 @@ namespace Gameplay
         [Header("Components")]
         [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
         [SerializeField] private HumanoidData _equipData;
-        [SerializeField] private BoolValue_SO _aimed;
+        [SerializeField] private BoolValue_SO _isAiming;
 
         private void Awake()
         {
@@ -28,18 +28,18 @@ namespace Gameplay
         {
             _equipData = sentEquipData;
             _equipData.weaponHolder.localPosition = _initialPosition;
-            _aimed.AddListener(Aim);
+            _isAiming.AddListener(Aim);
         }
 
         private void OnUnequip(HumanoidData sentEquipData)
         {
             _equipData = null;
-            _aimed.RemoveListener(Aim);
+            _isAiming.RemoveListener(Aim);
         }
 
-        public void Aim(bool isAimed)
+        public void Aim(bool isAiming)
         {
-            if (isAimed == false) _equipData.weaponHolder.DOLocalMove(_initialPosition, _animationDuration);
+            if (isAiming == false) _equipData.weaponHolder.DOLocalMove(_initialPosition, _animationDuration);
             else _equipData.weaponHolder.DOLocalMove(_aimPosition, _animationDuration);
         }
     }

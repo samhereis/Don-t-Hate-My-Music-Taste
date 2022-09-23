@@ -10,6 +10,9 @@ namespace UI
         [SerializeField] private BoolValue_SO _isAiming;
         [SerializeField] private CanvasGroup _canvasGroup;
 
+        [Header("Settings")]
+        [SerializeField] private float _fadeDuration = 0.5f;
+
         private async void OnEnable()
         {
             if (_isAiming == null) _isAiming = await AddressablesHelper.GetAssetAsync<BoolValue_SO>("IsAiming");
@@ -21,10 +24,20 @@ namespace UI
             _isAiming.RemoveListener(SetActive);
         }
 
-        public void SetActive(bool active)
+        public void SetActive(bool isAiming)
         {
             _canvasGroup.DOKill();
-            _canvasGroup.DOFade(active ? 1 : 0, 1);
+
+            if(isAiming)
+            {
+                _canvasGroup.DOFade(0, _fadeDuration);
+                _canvasGroup.transform.ScaleDown(_fadeDuration);
+            }
+            else
+            {
+                _canvasGroup.DOFade(1, _fadeDuration);
+                _canvasGroup.transform.ScaleUp(_fadeDuration);
+            }
         }
     }
 }

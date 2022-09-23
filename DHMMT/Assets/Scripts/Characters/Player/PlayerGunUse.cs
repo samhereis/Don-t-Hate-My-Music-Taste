@@ -15,6 +15,7 @@ namespace Characters.States.Data
 
         [Header("Guns")]
         [SerializeField] private InteractableEquipWeapon _defaultWeapon;
+        [SerializeField] private InteractableEquipWeapon _firstWeapon;
         [SerializeField] private InteractableEquipWeapon _secodWeapon;
 
         [Header("SO")]
@@ -32,10 +33,10 @@ namespace Characters.States.Data
 
         private void Awake()
         {
+            if(_defaultWeapon != null) Instantiate(_defaultWeapon, transform)?.Interact(_identifier);
+
             _velocityHashY = Animator.StringToHash("moveVelocityY");
             _velocityHashX = Animator.StringToHash("moveVelocityX");
-
-            _defaultWeapon.Interact(_identifier);
         }
 
         private void OnEnable()
