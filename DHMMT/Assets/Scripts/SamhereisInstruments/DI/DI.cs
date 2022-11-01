@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Samhereis.DI
+namespace DI
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method)]
-    public class DI : Attribute 
+    public class DI : Attribute
     {
         public string Id { get; }
 

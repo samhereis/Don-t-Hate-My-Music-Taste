@@ -1,4 +1,4 @@
-using Samhereis.Identifiers;
+using Identifiers;
 using UnityEngine;
 
 namespace Gameplay

@@ -1,6 +1,6 @@
+using Identifiers;
 using Interfaces;
-using Samhereis;
-using Samhereis.PlayerInputHolder;
+using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -1,13 +1,13 @@
-using Samhereis.Helpers;
+using Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Samhereis.Sound
+namespace Sound
 {
     public class EventSoundPlayer : MonoBehaviour
     {
         [SerializeField] private SoundPlayer _soundPlayer;
-        [SerializeField] private List<EventBasedAudio> _sounds = new List<EventBasedAudio>();
+        [SerializeField] private List<EventBasedSound> _sounds = new List<EventBasedSound>();
 
         private async void OnValidate()
         {

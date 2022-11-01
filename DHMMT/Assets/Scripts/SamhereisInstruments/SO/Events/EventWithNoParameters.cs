@@ -1,8 +1,8 @@
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using UnityEngine;
 
-namespace Samhereis.Events
+namespace Events
 {
     [CreateAssetMenu(fileName = "New Event With No Parameter", menuName = "Scriptables/Events/Event With No Parameter")]
     public class EventWithNoParameters : ScriptableObject

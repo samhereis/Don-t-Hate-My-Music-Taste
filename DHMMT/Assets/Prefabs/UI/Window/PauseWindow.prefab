@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 3376309678542061511}
   - component: {fileID: 3376309678542061508}
   - component: {fileID: 14647054}
-  - component: {fileID: 14647053}
   m_Layer: 5
   m_Name: PauseWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3376309678542061511
 RectTransform:
@@ -33,7 +32,7 @@ RectTransform:
   m_Children:
   - {fileID: 4360240286966582205}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -52,8 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53fccfb7107e4554f9a244024fe06a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isOpen: 0
-  _windowBehavior: {fileID: 14647053}
+  baseSettings:
+    enableDisable: 1
+    notifyOthers: 1
+    animationDuration: 0.5
+    canvasGroup: {fileID: 14647054}
   _input: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!225 &14647054
 CanvasGroup:
@@ -67,54 +69,12 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 1
---- !u!114 &14647053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3376309678542061510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d70d1ee799f76544b8ae8b8467f98ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowEvents:
-    _onOpenStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onOpenEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    _onInstantClose:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  _copyBehaviorTo:
-  - {fileID: 92282877}
-  _autoCloseInstantlyOnAwake: 1
-  _disableEnableOnOpenClose: 0
-  _autoAnimateOnEnable: 0
-  _openEase: 27
-  _openDuration: 0.5
-  _openDelay: 0
-  _closeEase: 26
-  _closeDuration: 0.5
-  _closeDelay: 0
-  _canvasGroup: {fileID: 14647054}
-  _upFadeValue: 1
-  _downFadeValue: 0
-  _influenceIgnoreParentGroups: 1
 --- !u!1001 &2896155965993276800
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3376309678542061511}
     m_Modifications:
     - target: {fileID: -4771325464159858480, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
@@ -229,6 +189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Back
       objectReference: {fileID: 0}
+    - target: {fileID: 3070321845262392695, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4396560621053259068, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: m_Type
       value: 0
@@ -237,7 +201,12 @@ PrefabInstance:
       propertyPath: m_Maskable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379414541876191523, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
 --- !u!1 &192194576093858039 stripped
 GameObject:

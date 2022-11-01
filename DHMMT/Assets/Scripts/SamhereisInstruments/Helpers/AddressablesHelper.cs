@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 
-namespace Samhereis.Helpers
+namespace Helpers
 {
     public class AddressablesHelper : MonoBehaviour
     {

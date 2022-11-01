@@ -1,4 +1,4 @@
-using Samhereis.PlayerInputHolder;
+using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

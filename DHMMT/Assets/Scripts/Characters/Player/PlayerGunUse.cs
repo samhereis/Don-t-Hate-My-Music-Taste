@@ -1,9 +1,9 @@
 using Gameplay;
-using Samhereis;
-using Samhereis.PlayerInputHolder;
-using Samhereis.Values;
+using Identifiers;
+using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Values;
 
 namespace Characters.States.Data
 {
@@ -33,7 +33,11 @@ namespace Characters.States.Data
 
         private void Awake()
         {
-            if(_defaultWeapon != null) Instantiate(_defaultWeapon, transform)?.Interact(_identifier);
+            if (_defaultWeapon != null)
+            {
+                _firstWeapon = Instantiate(_defaultWeapon, transform);
+                _firstWeapon?.Interact(_identifier);
+            }
 
             _velocityHashY = Animator.StringToHash("moveVelocityY");
             _velocityHashX = Animator.StringToHash("moveVelocityX");

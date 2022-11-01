@@ -1,11 +1,10 @@
-using Samhereis.DI;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace Samhereis.Settings
+namespace Settings
 {
-    public class GameSettings : MonoBehaviour, IDIDependent
+    public class GameSettings : MonoBehaviour
     {
         public static GameSettings instance;
 
@@ -14,17 +13,13 @@ namespace Samhereis.Settings
         [SerializeField] private Slider _sensitivitySlider;
 
         [Header("Audio")]
-        [Samhereis.DI.DI] [SerializeField] private AudioMixer _mixer;
+        [SerializeField] private AudioMixer _mixer;
         [SerializeField] private FloatSetting_SO _volume;
         [SerializeField] private Slider _volumeSlider;
 
-        private async void Awake()
+        private void Awake()
         {
-            await (this as IDIDependent).LoadDependencies();
-
             if (instance == null) instance = this;
-
-            ApplyVolume();
         }
 
         private void OnEnable()
@@ -40,7 +35,7 @@ namespace Samhereis.Settings
 
         public void ApplyVolume()
         {
-            _mixer?.SetFloat(_volume.name, _volume.currentValue);
+            _mixer.SetFloat(_volume.name, _volume.currentValue);
         }
 
         public void ChangeVolume(Slider slider)

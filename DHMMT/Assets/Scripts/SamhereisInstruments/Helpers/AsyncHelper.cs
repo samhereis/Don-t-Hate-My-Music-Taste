@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Samhereis.Helpers
+namespace Helpers
 {
     public static class AsyncHelper
     {
@@ -37,7 +37,7 @@ namespace Samhereis.Helpers
 
         public static async Task Delay(float delay)
         {
-            await Task.Delay((int)delay * 1000);
+            await Task.Delay(TimeSpan.FromSeconds(delay));
         }
 
         public static async Task Delay(int delay)

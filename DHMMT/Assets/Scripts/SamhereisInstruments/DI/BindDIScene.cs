@@ -1,59 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
-namespace Samhereis.DI
+namespace DI
 {
     public class BindDIScene : MonoBehaviour
     {
-        [SerializeField] private  List<ObjectToDI> _objects = new List<ObjectToDI>();
-        [SerializeField] private List<SOToDI> _scriptableObjects = new List<SOToDI>();
-
+        [SerializeField] private List<ObjectToDi> _objects = new List<ObjectToDi>();
         [SerializeField] private FactoryDI[] _manualBind;
 
-        [Header("Dependencies")]
-        [SerializeField] private AudioMixer _audioMixer;
-
-        [Header("Dependencies")]
-        [SerializeField] private MainMenuIdentifier _mainMenuPrefab;
-        private async void Awake()
+        private void Awake()
         {
-            DIBox.RegisterSingle<AudioMixer>(_audioMixer);
+            DIBox.RegisterSingle<Vector3>(new Vector3(9, 9, 9));
 
             foreach (var manual in _manualBind) manual.Create();
             foreach (var obj in _objects) DIBox.RegisterSingleType(obj.Instance, obj.id);
-            foreach (var obj in _scriptableObjects) DIBox.RegisterSingleType(obj.Instance, obj.id);
-
-            await DIBox.CreateObjectAndInjectDataToIt<IdentifierBase>(_mainMenuPrefab);
         }
 
         private void OnDestroy()
         {
             foreach (var manual in _manualBind) manual.DestroyDi();
-
             foreach (var obj in _objects)
             {
                 if (obj.IsUnbind) DIBox.RemoveSingleType(obj.Instance.GetType(), obj.id);
             }
-
-            foreach (var obj in _scriptableObjects)
-            {
-                if (obj.IsUnbind) DIBox.RemoveSingleType(obj.Instance.GetType(), obj.id);
-            }
         }
 
-        [System.Serializable] public class ObjectToDI
-        {
-            public bool IsUnbind= true;
-            public string id = "";
-            public Component Instance;
-        }
-
-        [System.Serializable] public class SOToDI
+        [System.Serializable]
+        public class ObjectToDi
         {
             public bool IsUnbind = true;
             public string id = "";
-            public ScriptableObject Instance;
+            public Component Instance;
         }
     }
 }

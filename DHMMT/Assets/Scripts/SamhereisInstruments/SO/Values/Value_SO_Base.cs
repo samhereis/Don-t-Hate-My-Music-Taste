@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Samhereis.Values
+namespace Values
 {
     public abstract class Value_SO_Base<T> : ScriptableObject
     {
-        [SerializeField] protected T _value;
-        public abstract T value { get; }
+        [field: SerializeField] public virtual T value { get; protected set; }
 
-        protected abstract UnityEvent<T> onValueChange { get; }
+        [SerializeField] protected UnityEvent<T> onValueChange { get; set; } = new UnityEvent<T>();
 
         public virtual void AddListener(UnityAction<T> listener)
         {
@@ -22,7 +21,7 @@ namespace Samhereis.Values
 
         public virtual void ChangeValue(T sentValue)
         {
-            _value = sentValue;
+            value = sentValue;
             onValueChange.Invoke(sentValue);
         }
     }

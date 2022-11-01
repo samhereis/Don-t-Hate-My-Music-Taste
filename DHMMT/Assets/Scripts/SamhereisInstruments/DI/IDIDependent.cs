@@ -1,12 +1,10 @@
-using System.Threading.Tasks;
-
-namespace Samhereis.DI
+namespace DI
 {
     public interface IDIDependent
     {
-        public async Task LoadDependencies()
+        public async void LoadDependencies()
         {
-            await DIBox.InjectDataToClass(this);
+            await DIBox.InjectDataTo(this);
         }
     }
 }

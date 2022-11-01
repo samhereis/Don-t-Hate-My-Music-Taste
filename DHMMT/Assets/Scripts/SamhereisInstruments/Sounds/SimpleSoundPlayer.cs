@@ -1,15 +1,16 @@
 using UnityEngine;
 
-namespace Samhereis.Sound
+namespace Sound
 {
     public class SimpleSoundPlayer : MonoBehaviour
     {
+        [SerializeField] private bool _useGlobal = false;
         [SerializeField] private SoundPlayer _soundPlayer;
-        [SerializeField] private SimpleAudio _soundSettings;
+        [SerializeField] private SimpleSound _soundSettings;
 
         public void Play()
         {
-            _soundPlayer?.TryPlay(_soundSettings);
+            if (_useGlobal) SoundPlayer.instance?.TryPlay(_soundSettings); else _soundPlayer?.TryPlay(_soundSettings);
         }
     }
 }

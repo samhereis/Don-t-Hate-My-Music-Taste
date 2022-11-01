@@ -1,51 +1,21 @@
-using Samhereis.Helpers;
-using Samhereis.PlayerInputHolder;
-using Samhereis.UI;
+using Helpers;
+using PlayerInputHolder;
+using UI.Canvases;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace UI.Window
 {
-    public class GameplayWindow : UIWIndowBase
+    public class GameplayWindow : UICanvasBase
     {
         [SerializeField] private Input_SO _input;
 
-        protected override async void Awake()
+        public override void Enable(float? duration = null)
         {
-            if (_input == null) _input = await AddressablesHelper.GetAssetAsync<Input_SO>(typeof(Input_SO).Name);
-            onAWindowOpen += OnAWindowOpen;
-        }
-
-        public override void OnAWindowOpen(UIWIndowBase uIWIndow)
-        {
-            if (uIWIndow is GameplayWindow == false && _isOpen)
-            {
-                _windowBehavior.Close();
-                _isOpen = false;
-            }
-        }
-
-        protected void Enable(InputAction.CallbackContext context)
-        {
-            Enable();
-        }
-
-        public override void Enable()
-        {
+            base.Enable(duration);
             Cursor.lockState = CursorLockMode.Locked;
-
-            _windowBehavior?.Open();
-            onAWindowOpen?.Invoke(this);
 
             _input.input.UI.Disable();
             _input.input.Gameplay.Enable();
-
-            _isOpen = true;
-        }
-
-        public override void Setup()
-        {
-
         }
     }
 }

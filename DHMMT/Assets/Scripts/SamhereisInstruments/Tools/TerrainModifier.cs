@@ -1,7 +1,7 @@
-using Samhereis.Helpers;
+using Helpers;
 using UnityEngine;
 
-namespace Samhereis.Experimental
+namespace Experimental
 {
     public sealed class TerrainModifier : MonoBehaviour
     {

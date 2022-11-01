@@ -1,9 +1,8 @@
-﻿using DG.Tweening;
+﻿using Data;
+using DG.Tweening;
+using Helpers;
 using UnityEngine;
 using UnityEngine.UI;
-using Helpers;
-using Data;
-using Samhereis.Helpers;
 
 namespace UI.Displayers
 {

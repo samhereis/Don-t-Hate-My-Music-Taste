@@ -1,5 +1,5 @@
-using Samhereis.PlayerInputHolder;
-using Samhereis.Settings;
+using PlayerInputHolder;
+using Settings;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

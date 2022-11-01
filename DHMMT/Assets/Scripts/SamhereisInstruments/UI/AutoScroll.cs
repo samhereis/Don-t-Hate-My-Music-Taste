@@ -1,9 +1,9 @@
-using Samhereis.Helpers;
+using Helpers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Samhereis.UI
+namespace UI
 {
     public class AutoScroll : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
@@ -49,7 +49,7 @@ namespace Samhereis.UI
 
         public async void StartAutoscroll(float delay = 0)
         {
-            await AsyncHelper.DelayAndDo(delay, () => _isScrolling = true );
+            await AsyncHelper.DelayAndDo(delay, () => _isScrolling = true);
         }
     }
 }

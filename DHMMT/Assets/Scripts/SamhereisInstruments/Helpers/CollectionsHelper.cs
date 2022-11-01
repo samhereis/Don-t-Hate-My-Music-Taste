@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Samhereis.Helpers
+namespace Helpers
 {
     public static class CollectionsHelper
     {
         public static async Task RemoveNullsAsync<T>(this List<T> list)
         {
-            foreach (var item in list) await AsyncHelper.Delay(() => { if (item == null) list.Remove(item); });
+            var listCopy = new List<T>();
+            listCopy.AddRange(list);
+
+            foreach (var item in listCopy) await AsyncHelper.Delay(() => { if (item == null) list.Remove(item); });
         }
 
         public static void RemoveNulls<T>(this List<T> list)
@@ -60,7 +63,7 @@ namespace Samhereis.Helpers
             }
         }
 
-        public static T GetRandomIndex<T>(this List<T> list)
+        public static T GetRandomElement<T>(this List<T> list)
         {
             return list[Random.Range(0, list.Count)];
         }

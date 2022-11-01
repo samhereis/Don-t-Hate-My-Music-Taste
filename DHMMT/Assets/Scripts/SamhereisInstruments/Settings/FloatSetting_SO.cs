@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Samhereis.Settings
+namespace Settings
 {
     [CreateAssetMenu(fileName = "Sensitivity", menuName = "Scriptables/Settings/FloatSetting")]
     public class FloatSetting_SO : ScriptableObject

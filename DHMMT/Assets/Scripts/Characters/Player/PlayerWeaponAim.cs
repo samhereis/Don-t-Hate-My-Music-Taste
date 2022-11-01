@@ -1,7 +1,7 @@
-using Samhereis.PlayerInputHolder;
-using Samhereis.Values;
+using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Values;
 
 namespace Characters
 {

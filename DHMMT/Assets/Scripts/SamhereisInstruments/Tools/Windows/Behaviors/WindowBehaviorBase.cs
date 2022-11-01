@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Samhereis.UI.Window
+namespace UI.Window
 {
     [DisallowMultipleComponent]
     public abstract class WindowBehaviorBase : MonoBehaviour
@@ -32,22 +32,22 @@ namespace Samhereis.UI.Window
             if (_autoCloseInstantlyOnAwake) InstantlyClose();
         }
 
-        protected virtual async void OnEnable()
+        protected virtual void OnEnable()
         {
             if (_autoAnimateOnEnable)
             {
-                await InstantlyClose();
+                InstantlyClose();
                 Open();
             }
         }
 
         protected virtual void OnDisable()
         {
-            if (_autoAnimateOnEnable) Close();
+            if (_autoAnimateOnEnable) InstantlyClose();
         }
 
         public abstract void Open();
-        public abstract Task InstantlyClose();
+        public abstract void InstantlyClose();
         public abstract void Close();
     }
 }

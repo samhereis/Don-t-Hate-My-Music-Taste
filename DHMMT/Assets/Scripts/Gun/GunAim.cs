@@ -1,7 +1,7 @@
 using Characters.States.Data;
 using DG.Tweening;
-using Samhereis.Values;
 using UnityEngine;
+using Values;
 
 namespace Gameplay
 {

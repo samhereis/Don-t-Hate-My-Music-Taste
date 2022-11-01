@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +15,7 @@ namespace Gameplay
         public static Action<Color> onWorldColorChanged;
 
         [SerializeField] private List<Material> _sharedMaterialsToChangeColorOf;
-         
+
         private async void OnEnable()
         {
             await AsyncHelper.Delay(1);
@@ -28,7 +28,7 @@ namespace Gameplay
 
             foreach (var material in _sharedMaterialsToChangeColorOf)
             {
-                await AsyncHelper.Delay(() =>  material.DOColor(_currentColor, 1));
+                await AsyncHelper.Delay(() => material.DOColor(_currentColor, 1));
             }
         }
 

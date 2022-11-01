@@ -1,6 +1,5 @@
+using DI;
 using Identifiers;
-using Samhereis;
-using Samhereis.DI;
 using UnityEngine;
 
 namespace Characters.States.Data
@@ -14,7 +13,7 @@ namespace Characters.States.Data
         public FoolowPlayer_EnemyMovementState(EnemyStates enemy, EnemyMovement enemyMovement) : base(enemy)
         {
             _enemyMovement = enemyMovement;
-            _target = DIBox.GetDependency<IdentifierBase>(CharacterKeysContainer.mainPlayer);
+            _target = DIBox.ResolveSingle<IdentifierBase>(CharacterKeysContainer.mainPlayer);
         }
 
         public override void Move()

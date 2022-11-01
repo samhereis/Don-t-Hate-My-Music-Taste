@@ -1,8 +1,8 @@
-﻿using Samhereis.Helpers;
+﻿using Helpers;
 using System.Threading;
 using UnityEngine;
 
-namespace Samhereis.Music
+namespace Music
 {
     public class PlayingMusicData : MonoBehaviour
     {
@@ -19,7 +19,7 @@ namespace Samhereis.Music
 
         private void Awake()
         {
-            if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
+            if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
         }
 
         private async void OnEnable()

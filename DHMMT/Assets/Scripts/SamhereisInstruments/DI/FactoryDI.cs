@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Samhereis.DI
+namespace DI
 {
     public abstract class FactoryDI : MonoBehaviour
     {

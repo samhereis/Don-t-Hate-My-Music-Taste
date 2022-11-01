@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
-namespace Samhereis.PlayerInputHolder
+namespace PlayerInputHolder
 {
     [CreateAssetMenu(fileName = "Input", menuName = "Scriptables/Input")]
     public class Input_SO : ScriptableObject

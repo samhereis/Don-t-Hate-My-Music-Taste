@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Samhereis.UI
+namespace UI
 {
     public sealed class ScrollElement : MonoBehaviour
     {

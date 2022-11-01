@@ -1,34 +1,33 @@
-using Samhereis.Helpers;
-using System;
+using Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Audio;
 
-namespace Samhereis.Sound
+namespace Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public sealed class SoundPlayer : MonoBehaviour
     {
         public static SoundPlayer instance { get; private set; }
 
+        public AudioClip currentMainAudioCLip => _mainAudioSource.clip;
+
         [Header("Componenets")]
         [SerializeField] private AudioSource _mainAudioSource;
         [SerializeField] private List<AudioSource> _audioSourcePool;
-        [SerializeField] private AudioMixer _mixer;
 
         [Header("Settings")]
-        [SerializeField] private int _auioSourcePoolCount = 2;
-        [SerializeField] private bool _isUI;
+        [SerializeField] private int _auioSourcePoolCount = 0;
+        [SerializeField] private bool _isGlobal;
 
         private void Awake()
         {
-            if (instance == null && _isUI) instance = this;
+            if (instance == null && _isGlobal == true) instance = this;
         }
 
         private void OnDestroy()
         {
-            if (instance == this && _isUI) instance = null;
+            if (instance == this && _isGlobal == true) instance = null;
         }
 
         private void OnValidate()
@@ -36,22 +35,28 @@ namespace Samhereis.Sound
             Setup();
         }
 
-        public async void Play(AudioClip audioClip, bool disableAll = false, float volume = 0.7f, float distance = 0)
+        public async void TryPlay(SoundBase sound)
         {
-            if (disableAll)
+            if (sound.audioClip == null) return;
+
+            if (sound.isMain)
             {
-                foreach (AudioSource audioSource in _audioSourcePool) await AsyncHelper.Delay(() => audioSource.Stop());
+                if (_mainAudioSource.clip == sound.audioClip) return;
 
-                _mainAudioSource.clip = audioClip;
-                _mainAudioSource.volume = volume;
+                _mainAudioSource.Stop();
+                _mainAudioSource.clip = sound.audioClip;
+                _mainAudioSource.volume = sound.volume;
 
-                if (distance > 0)
+                if (sound.distance > 0)
                 {
-                    _mainAudioSource.maxDistance = distance * 2;
+                    _mainAudioSource.maxDistance = sound.distance * 2;
                     _mainAudioSource.minDistance = 0;
                 }
 
+                _mainAudioSource.loop = sound.loop;
                 _mainAudioSource.Play();
+
+                if (sound.disableOthers) foreach (AudioSource audioSource in _audioSourcePool) await AsyncHelper.Delay(() => audioSource.Stop());
             }
             else
             {
@@ -60,42 +65,17 @@ namespace Samhereis.Sound
                 if (freeAudioSurce == null) freeAudioSurce = _audioSourcePool[0];
 
                 freeAudioSurce.Stop();
-                freeAudioSurce.clip = audioClip;
-                freeAudioSurce.volume = volume;
+                freeAudioSurce.clip = sound.audioClip;
+                freeAudioSurce.volume = sound.volume;
 
-                if (distance > 0)
+                if (sound.distance > 0)
                 {
-                    freeAudioSurce.maxDistance = distance * 2;
+                    freeAudioSurce.maxDistance = sound.distance * 2;
                     freeAudioSurce.minDistance = 0;
                 }
 
+                freeAudioSurce.loop = sound.loop;
                 freeAudioSurce.Play();
-            }
-        }
-
-        public bool TryPlay(SimpleAudio sound)
-        {
-            if (sound != null && sound.hasAudio)
-            {
-                Play(sound.audioClip, sound.disableAll, sound.volume, sound.distance);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool TryPlay(EventBasedAudio sound)
-        {
-            if (sound != null && sound.hasAudio)
-            {
-                Play(sound.audioClip, sound.disableAll, sound.volume, sound.distance);
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -106,88 +86,22 @@ namespace Samhereis.Sound
 
             _audioSourcePool = GetComponentsInChildren<AudioSource>().ToList();
 
-            _audioSourcePool.ForEach(x =>
-            {
-                x.playOnAwake = false;
-                x.spatialBlend = 1;
-                x.rolloffMode = AudioRolloffMode.Linear;
-            });
-
             _audioSourcePool.RemoveAll(x => x == null || x.gameObject == gameObject);
 
             if (_audioSourcePool.Count != _auioSourcePoolCount)
             {
-                Debug.LogWarning("AudioSource cound handle is reqiered", this);
-            }
+                foreach (AudioSource audioSource in _audioSourcePool) DestroyImmediate(audioSource.gameObject);
+                _audioSourcePool.Clear();
 
-            if (_mixer == null)
-            {
-                AddressablesHelper.LoadAndDo<AudioMixer>("AudioMixer", (x) =>
+                for (int i = 0; i < _auioSourcePoolCount; i++)
                 {
-                    _mixer = x;
-                    _mainAudioSource.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0];
-                    _audioSourcePool.ForEach(x => { x.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0]; });
-                });
-            }
-            else
-            {
-                try
-                {
-                    if (_mixer.FindMatchingGroups("Effect").Count() > 0)
-                    {
-                        _mainAudioSource.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0];
-                        _audioSourcePool.ForEach(x => { x.outputAudioMixerGroup = _mixer.FindMatchingGroups("Effect")[0]; });
-                    }
+                    var obj = new GameObject("A sound");
+                    obj.transform.parent = transform;
+                    obj.AddComponent<AudioSource>();
+
+                    _audioSourcePool.Add(obj.GetComponent<AudioSource>());
                 }
-                catch (Exception ex) { Debug.LogWarning(ex); }
             }
         }
-    }
-
-    [Serializable]
-    public class EventBasedAudio
-    {
-        public EventBasedAudio(string name)
-        {
-            eventName = name;
-        }
-
-        [SerializeField] internal string eventName;
-
-        [SerializeField]
-        internal AudioClip audioClip
-        {
-            get
-            {
-                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)]; else return null;
-            }
-        }
-
-        [SerializeField] internal AudioClip[] _audioClips;
-        [SerializeField] internal bool disableAll;
-        [SerializeField] internal float volume = 1;
-        [SerializeField] internal float distance = 50;
-
-        public bool hasAudio => _audioClips.Length > 0;
-    }
-
-    [Serializable]
-    public class SimpleAudio
-    {
-        internal AudioClip audioClip
-        {
-            get
-            {
-                if (_audioClips.Length > 0) return _audioClips[UnityEngine.Random.Range(0, _audioClips.Length)]; else return null;
-            }
-        }
-
-        [Header("Will play random one from the list")]
-        [SerializeField] internal AudioClip[] _audioClips;
-        [SerializeField] internal bool disableAll;
-        [SerializeField] internal float volume = 1;
-        [SerializeField] internal float distance = 50;
-
-        public bool hasAudio => _audioClips.Length > 0;
     }
 }

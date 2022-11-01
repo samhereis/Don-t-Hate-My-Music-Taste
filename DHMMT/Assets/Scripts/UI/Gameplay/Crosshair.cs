@@ -1,7 +1,7 @@
 using DG.Tweening;
-using Samhereis.Helpers;
-using Samhereis.Values;
+using Helpers;
 using UnityEngine;
+using Values;
 
 namespace UI
 {
@@ -28,7 +28,7 @@ namespace UI
         {
             _canvasGroup.DOKill();
 
-            if(isAiming)
+            if (isAiming)
             {
                 _canvasGroup.DOFade(0, _fadeDuration);
                 _canvasGroup.transform.ScaleDown(_fadeDuration);

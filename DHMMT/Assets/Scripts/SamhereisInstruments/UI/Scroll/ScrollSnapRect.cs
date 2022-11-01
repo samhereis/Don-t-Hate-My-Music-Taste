@@ -1,12 +1,12 @@
 ﻿using DG.Tweening;
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Samhereis.UI
+namespace UI
 {
     public class ScrollSnapRect : MonoBehaviour
     {
@@ -71,7 +71,7 @@ namespace Samhereis.UI
         private bool _isUpdating = false;
         private async void UpdateAllElements()
         {
-            if(_isUpdating == false)
+            if (_isUpdating == false)
             {
                 _isUpdating = true;
 

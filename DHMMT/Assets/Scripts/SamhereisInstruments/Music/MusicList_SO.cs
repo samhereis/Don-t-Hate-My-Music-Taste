@@ -1,9 +1,9 @@
-using Samhereis.Helpers;
+using Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Samhereis.Music
+namespace Music
 {
     [CreateAssetMenu(fileName = "MusicList", menuName = "Scriptables/MusicList")]
     public class MusicList_SO : ScriptableObject

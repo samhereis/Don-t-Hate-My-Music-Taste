@@ -1,4 +1,4 @@
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Object = System.Object;
 
-namespace Samhereis.DI
+namespace DI
 {
     public static class DIBox
     {
@@ -16,7 +16,7 @@ namespace Samhereis.DI
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionaryTransient = new Dictionary<Type, Dictionary<string, object>>();
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new Dictionary<Type, Dictionary<string, object>>();
 
-        public static void RemoveSingel<T>(string id = "") where T : class
+        public static void RemoveSingle<T>(string id = "") where T : class
         {
             if (_dictionarySingle.ContainsKey(typeof(T))) _dictionarySingle[typeof(T)].Remove(id);
             if (_dictionarySingle.Count == 0) _dictionarySingle.Remove(typeof(T));
@@ -52,7 +52,7 @@ namespace Samhereis.DI
         public static async void InjectAndRegisterAsSingle<T>(T instance, string id = "")
         {
             RegisterSingle<T>(instance, id);
-            await InjectDataToClass(instance);
+            await InjectDataTo(instance);
         }
 
         public static void RegisterTransient<T>(TransientMethod<T> transientMethod, string id = "") where T : class
@@ -75,7 +75,7 @@ namespace Samhereis.DI
             }
         }
 
-        public static T GetDependency<T>(string id = "") where T : class
+        public static T ResolveSingle<T>(string id = "") where T : class
         {
             if (_dictionarySingle.ContainsKey(typeof(T)) == false) throw new Exception($"DI container does not contain this type  - Type: {typeof(T)}");
             if (_dictionarySingle[typeof(T)].ContainsKey(id) == false) throw new Exception($"The container does not contain under this ID - Type: {typeof(T)} \\ Id: '{id}'");
@@ -83,7 +83,7 @@ namespace Samhereis.DI
             return _dictionarySingle[typeof(T)][id] as T;
         }
 
-        public static object GetDependency(Type type, string id = "")
+        public static object ResolveSingle(Type type, string id = "")
         {
             if (_dictionarySingle.ContainsKey(type) == false) throw new Exception($"DI container does not contain this type  - Type: {type}");
             if (_dictionarySingle[type].ContainsKey(id) == false) throw new Exception($"The container does not contain under this ID - Type: {type} \\ Id: '{id}'");
@@ -97,7 +97,7 @@ namespace Samhereis.DI
 
             if (_dictionarySingle.ContainsKey(typeof(T)))
             {
-                if(_dictionarySingle[typeof(T)].ContainsKey(id)) throw new Exception($"DI container already contains this type '{instance}' and this ID '{id}' ");
+                if (_dictionarySingle[typeof(T)].ContainsKey(id)) throw new Exception($"DI container already contains this type '{instance}' and this ID '{id}' ");
             }
             else AddToDictionary(instance, id, typeof(T));
         }
@@ -123,7 +123,7 @@ namespace Samhereis.DI
             prefab.gameObject.SetActive(false);
 
             var createdPrefab = UnityEngine.Object.Instantiate(prefab);
-            await InjectDataToGameobject(createdPrefab.gameObject);
+            await InjectDataTo(createdPrefab);
 
             prefab.gameObject.SetActive(initinalActiveStatePrefab);
             createdPrefab.gameObject.SetActive(initinalActiveStatePrefab);
@@ -131,12 +131,12 @@ namespace Samhereis.DI
             return createdPrefab;
         }
 
-        public static async Task InjectDataToGameobject(GameObject gameObject)
+        public static async Task InjectDataTo(GameObject gameObject)
         {
-            foreach (var monoBeh in gameObject.GetComponentsInChildren<MonoBehaviour>(true)) await InjectDataToClass(monoBeh);
+            foreach (var monoBeh in gameObject.GetComponentsInChildren<MonoBehaviour>(true)) await InjectDataTo(monoBeh);
         }
 
-        public static async Task InjectDataToClass(Object obj)
+        public static async Task InjectDataTo(Object obj)
         {
             if (obj == null) return;
 
@@ -149,7 +149,7 @@ namespace Samhereis.DI
                     var att = field.GetCustomAttribute<DI>();
                     try
                     {
-                        var gottenObj = GetDependency(field.FieldType, att.Id);
+                        var gottenObj = ResolveSingle(field.FieldType, att.Id);
                         field.SetValue(obj, gottenObj);
                     }
                     catch (Exception ex) { Debug.LogError(ex); }
@@ -163,7 +163,7 @@ namespace Samhereis.DI
                 await AsyncHelper.Delay(() =>
                 {
                     var att = prop.GetCustomAttribute<DI>();
-                    prop.SetValue(obj, GetDependency(prop.PropertyType, att.Id));
+                    prop.SetValue(obj, ResolveSingle(prop.PropertyType, att.Id));
                 });
             }
 
@@ -180,7 +180,7 @@ namespace Samhereis.DI
         {
             if (_dictionarySingle.ContainsKey(typeInstance))
             {
-                if(_dictionarySingle[typeInstance].ContainsValue(id) == false) _dictionarySingle[typeInstance].Add(id, instance);
+                if (_dictionarySingle[typeInstance].ContainsValue(id) == false) _dictionarySingle[typeInstance].Add(id, instance);
             }
             else
             {

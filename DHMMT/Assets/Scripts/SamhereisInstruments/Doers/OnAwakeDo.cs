@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Samhereis.Helpers.OnUnityEventDoers
+namespace Helpers.OnUnityEventDoers
 {
     public class OnAwakeDo : MonoBehaviour
     {

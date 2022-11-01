@@ -1,10 +1,10 @@
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Samhereis.Music
+namespace Music
 {
     [CreateAssetMenu(fileName = "Spectrum Width Holder", menuName = "Scriptables/Music")]
     public class SpectrumData : ScriptableObject

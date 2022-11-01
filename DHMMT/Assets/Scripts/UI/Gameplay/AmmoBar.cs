@@ -1,6 +1,6 @@
-using Samhereis.Values;
 using UnityEngine;
 using UnityEngine.UI;
+using Values;
 
 namespace UI
 {

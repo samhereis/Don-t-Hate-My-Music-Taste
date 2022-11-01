@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292556160081455
 RectTransform:
@@ -87,12 +87,13 @@ GameObject:
   - component: {fileID: 3390292556944913181}
   - component: {fileID: 3390292556944913179}
   - component: {fileID: 3390292556944913178}
+  - component: {fileID: 581820849}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292556944913181
 RectTransform:
@@ -211,6 +212,48 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _fill: {fileID: 3390292557057171308}
   _hurtEffect: {fileID: 3390292557547644420}
+--- !u!114 &581820849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390292556944913180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windowEvents:
+    _onOpenStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onOpenEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    _onInstantClose:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  _copyBehaviorTo: []
+  _autoCloseInstantlyOnAwake: 0
+  _disableEnableOnOpenClose: 0
+  _autoAnimateOnEnable: 0
+  _openEase: 27
+  _openDuration: 0.5
+  _openDelay: 0
+  _closeEase: 26
+  _closeDuration: 0.5
+  _closeDelay: 0
+  _scaledObject: {fileID: 0}
+  _upscaledValue: {x: 1, y: 1, z: 1}
+  _downscaledValue: {x: 0, y: 0, z: 0}
+  _revereseScaleAfterScale: 0
 --- !u!1 &3390292557057171310
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +270,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557057171311
 RectTransform:
@@ -304,7 +347,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!224 &3390292557064973539
 RectTransform:
@@ -479,7 +522,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557112337291
 RectTransform:
@@ -557,7 +600,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557135332390
 RectTransform:
@@ -654,12 +697,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3390292557235398152}
   - component: {fileID: 3390292557235398153}
+  - component: {fileID: 1830125804}
   m_Layer: 5
   m_Name: GunSlots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557235398152
 RectTransform:
@@ -709,6 +753,48 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &1830125804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390292557235398155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windowEvents:
+    _onOpenStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onOpenEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    _onInstantClose:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  _copyBehaviorTo: []
+  _autoCloseInstantlyOnAwake: 0
+  _disableEnableOnOpenClose: 0
+  _autoAnimateOnEnable: 0
+  _openEase: 27
+  _openDuration: 0.5
+  _openDelay: 0
+  _closeEase: 26
+  _closeDuration: 0.5
+  _closeDelay: 0
+  _scaledObject: {fileID: 0}
+  _upscaledValue: {x: 1, y: 1, z: 1}
+  _downscaledValue: {x: 0, y: 0, z: 0}
+  _revereseScaleAfterScale: 0
 --- !u!1 &3390292557547644422
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +811,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557547644423
 RectTransform:
@@ -796,12 +882,13 @@ GameObject:
   - component: {fileID: 3390292557562055992}
   - component: {fileID: 3390292557562055990}
   - component: {fileID: 3390292557562055993}
+  - component: {fileID: 1143229675}
   m_Layer: 5
   m_Name: Ammobar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557562055992
 RectTransform:
@@ -920,6 +1007,48 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _fill: {fileID: 3390292557921920252}
   _currentPlayerAmmo: {fileID: 11400000, guid: 4ed0726e840355744a0c9b5c89d28558, type: 2}
+--- !u!114 &1143229675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390292557562055995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windowEvents:
+    _onOpenStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onOpenEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    _onInstantClose:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    _onCloseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  _copyBehaviorTo: []
+  _autoCloseInstantlyOnAwake: 0
+  _disableEnableOnOpenClose: 0
+  _autoAnimateOnEnable: 0
+  _openEase: 27
+  _openDuration: 0.5
+  _openDelay: 0
+  _closeEase: 26
+  _closeDuration: 0.5
+  _closeDelay: 0
+  _scaledObject: {fileID: 0}
+  _upscaledValue: {x: 1, y: 1, z: 1}
+  _downscaledValue: {x: 0, y: 0, z: 0}
+  _revereseScaleAfterScale: 0
 --- !u!1 &3390292557576957142
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +1065,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557576957143
 RectTransform:
@@ -1012,7 +1141,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557609368510
 RectTransform:
@@ -1089,7 +1218,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557742897060
 RectTransform:
@@ -1179,7 +1308,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557767739241
 RectTransform:
@@ -1188,7 +1317,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3390292557767739240}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1200,7 +1329,7 @@ RectTransform:
   - {fileID: 3390292556944913181}
   - {fileID: 3390292557235398152}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1223,7 +1352,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292557921920255
 RectTransform:
@@ -1300,7 +1429,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3390292558010177065
 RectTransform:

@@ -1,8 +1,8 @@
-using Samhereis.Helpers;
+using Helpers;
 using System;
 using UnityEngine;
 
-namespace Samhereis.Events
+namespace Events
 {
     public class EventWithOneParameterBase<T> : ScriptableObject
     {

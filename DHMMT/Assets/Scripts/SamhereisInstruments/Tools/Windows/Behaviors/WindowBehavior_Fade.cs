@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Samhereis.Helpers;
+using Helpers;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Samhereis.UI.Window
+namespace UI.Window
 {
     [RequireComponent(typeof(CanvasGroup))]
     [DisallowMultipleComponent]
@@ -46,7 +46,7 @@ namespace Samhereis.UI.Window
 
             foreach (var window in _copyBehaviorTo) { await AsyncHelper.Delay(() => window.Open()); }
         }
-        public override async Task InstantlyClose()
+        public override async void InstantlyClose()
         {
             if (_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
             if (_canvasGroup == null)

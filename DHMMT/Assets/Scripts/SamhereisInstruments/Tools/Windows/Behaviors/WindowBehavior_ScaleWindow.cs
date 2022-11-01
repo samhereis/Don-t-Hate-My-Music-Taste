@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Samhereis.Helpers;
+using Helpers;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Samhereis.UI.Window
+namespace UI.Window
 {
     public class WindowBehavior_ScaleWindow : WindowBehaviorBase
     {
@@ -36,15 +36,13 @@ namespace Samhereis.UI.Window
             }).SetUpdate(true);
         }
 
-        public override Task InstantlyClose()
+        public override void InstantlyClose()
         {
             _currentScaledObject.DOScale(_downscaledValue, 0);
 
             if (_disableEnableOnOpenClose) _currentScaledObject.gameObject.SetActive(false);
 
             _windowEvents.onInstantClose?.Invoke();
-
-            return Task.CompletedTask;
         }
 
         public override async void Close()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Samhereis.Music
+namespace Music
 {
     [CreateAssetMenu(fileName = "A Frequancy Data", menuName = "Scriptables/Music/A Frequancy Data")]
     public class AFrequancyData : ScriptableObject
