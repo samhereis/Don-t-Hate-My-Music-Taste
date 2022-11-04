@@ -9,7 +9,7 @@ namespace Helpers
         [SerializeField] private Transform _prefab;
 
         [Header("Events")]
-        [SerializeField] private EventWithNoParameters _eventWithNoParameters;
+        [SerializeField] private EventWithNoParameters _onAnEnemyDied;
 
         [Header("Settings")]
         [SerializeField] private bool _spawnOnAwake;
@@ -19,12 +19,12 @@ namespace Helpers
 
         private void Awake()
         {
-            _eventWithNoParameters?.AdListener(Spawn);
+            _onAnEnemyDied?.AdListener(Spawn);
         }
 
         private void OnEnable()
         {
-            if (_spawnOnAwake) Spawn();
+            //if (_spawnOnAwake) Spawn();
         }
 
         public Vector3 ApplyPosition(Vector3 position)

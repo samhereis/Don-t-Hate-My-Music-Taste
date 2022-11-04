@@ -1,10 +1,12 @@
+using Interfaces;
+using Mirror;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
-    public class PlayerJump : MonoBehaviour
+    public class PlayerJump : NetworkBehaviour, IHasInput
     {
         private bool _canJump => _characterController.isGrounded == false || _doubleJump == true;
 
@@ -29,14 +31,21 @@ namespace Gameplay
             _characterController = GetComponent<CharacterController>();
         }
 
+        public override void OnStartLocalPlayer()
+        {
+            base.OnStartLocalPlayer();
+
+            EnableInput();
+        }
+
         private void OnEnable()
         {
-            _input.Gameplay.Jump.performed += Jump;
+            if(isLocalPlayer) EnableInput();
         }
 
         private void OnDisable()
         {
-            _input.Gameplay.Jump.performed -= Jump;
+            if (isLocalPlayer) EnableInput();
         }
 
         private void FixedUpdate()
@@ -65,6 +74,18 @@ namespace Gameplay
         public void PerformJump(float height)
         {
             //_playerVelocity.y = height;
+        }
+
+        public void EnableInput()
+        {
+            DisableInput();
+
+            _input.Gameplay.Jump.performed += Jump;
+        }
+
+        public void DisableInput()
+        {
+            _input.Gameplay.Jump.performed -= Jump;
         }
     }
 }

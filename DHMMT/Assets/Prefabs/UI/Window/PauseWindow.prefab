@@ -83,11 +83,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4771325464159858480, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Enable
+      value: Open
       objectReference: {fileID: 0}
     - target: {fileID: -4771325464159858480, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UI.Window.GameplayUI, Assembly-CSharp
+      value: UI.Canvases.UICanvasBase, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 729879261, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: _isSelfControlled

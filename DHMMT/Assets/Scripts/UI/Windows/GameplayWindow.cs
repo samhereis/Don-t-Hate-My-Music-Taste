@@ -1,14 +1,15 @@
 using Helpers;
 using PlayerInputHolder;
+using System;
 using UI.Canvases;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace UI.Window
 {
     public class GameplayWindow : UICanvasBase
     {
         [SerializeField] private Input_SO _input;
-
         public override void Enable(float? duration = null)
         {
             base.Enable(duration);
@@ -16,6 +17,11 @@ namespace UI.Window
 
             _input.input.UI.Disable();
             _input.input.Gameplay.Enable();
+        }
+
+        public override void Disable(float? duration = null)
+        {
+            base.Disable(duration);
         }
     }
 }

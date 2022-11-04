@@ -1,3 +1,4 @@
+using Interfaces;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,7 +6,7 @@ using Values;
 
 namespace Characters.States.Data
 {
-    public class PlayerMovement : HumanoidMovementStateData
+    public class PlayerMovement : HumanoidMovementStateData, IHasInput
     {
         [Header("Components")]
         [SerializeField] private Animator _animator;
@@ -39,30 +40,21 @@ namespace Characters.States.Data
             if (_characterControllerComponent == null) _characterControllerComponent = GetComponent<CharacterController>();
         }
 
+        public override void OnStartLocalPlayer()
+        {
+            base.OnStartLocalPlayer();
+
+            EnableInput();
+        }
+
         private void OnEnable()
         {
-            _input.Gameplay.Move.performed += Move;
-            _input.Gameplay.Move.canceled += Move;
-
-            _input.Gameplay.Sprint.performed += Sprint;
-            _input.Gameplay.Sprint.canceled += Sprint;
-
-            _input.Gameplay.Fire.performed += Fire;
-
-            _input.Gameplay.Aim.performed += Fire;
+            if(isLocalPlayer) EnableInput();
         }
 
         private void OnDisable()
         {
-            _input.Gameplay.Move.performed -= Move;
-            _input.Gameplay.Move.canceled -= Move;
-
-            _input.Gameplay.Sprint.performed -= Sprint;
-            _input.Gameplay.Sprint.canceled -= Sprint;
-
-            _input.Gameplay.Fire.performed -= Fire;
-
-            _input.Gameplay.Aim.performed -= Fire;
+            if (isLocalPlayer) EnableInput();
         }
 
         private void FixedUpdate()
@@ -95,6 +87,34 @@ namespace Characters.States.Data
         private void Fire(InputAction.CallbackContext context)
         {
             _currentSpeedMultiplier = 1;
+        }
+
+        public void EnableInput()
+        {
+            DisableInput();
+
+            _input.Gameplay.Move.performed += Move;
+            _input.Gameplay.Move.canceled += Move;
+
+            _input.Gameplay.Sprint.performed += Sprint;
+            _input.Gameplay.Sprint.canceled += Sprint;
+
+            _input.Gameplay.Fire.performed += Fire;
+
+            _input.Gameplay.Aim.performed += Fire;
+        }
+
+        public void DisableInput()
+        {
+            _input.Gameplay.Move.performed -= Move;
+            _input.Gameplay.Move.canceled -= Move;
+
+            _input.Gameplay.Sprint.performed -= Sprint;
+            _input.Gameplay.Sprint.canceled -= Sprint;
+
+            _input.Gameplay.Fire.performed -= Fire;
+
+            _input.Gameplay.Aim.performed -= Fire;
         }
     }
 }

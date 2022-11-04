@@ -1,6 +1,7 @@
 using Characters.States.Data;
 using Helpers;
 using Pooling;
+using Sound;
 using UnityEngine;
 
 namespace Gameplay
@@ -12,8 +13,7 @@ namespace Gameplay
         [SerializeField] private Animator _weaponAnimator;
 
         [Header("Sounds")]
-        [SerializeField] private AudioClip _shootSound;
-        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private SimpleSoundPlayer _shootSound;
 
         [Header("Ammo")]
         [SerializeField] private int _currentAmmo = 8;
@@ -36,18 +36,12 @@ namespace Gameplay
 
         private async void Awake()
         {
-            _audioSource ??= GetComponent<AudioSource>();
             _weaponAnimator ??= GetComponentInChildren<Animator>();
 
             _interactableEquipWeapon?.onEquip.AddListener(OnEquip);
             _interactableEquipWeapon?.onUnequip.AddListener(OnUnEquip);
 
             if (_bullet == null) _bullet = await AddressablesHelper.GetAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
-        }
-
-        private void OnEnable()
-        {
-            _audioSource.clip = _shootSound;
         }
 
         private void FixedUpdate()
@@ -78,8 +72,7 @@ namespace Gameplay
 
                 await _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
 
-                _audioSource.Stop();
-                _audioSource.Play();
+                _shootSound.Play();
 
                 _weaponAnimator.SetTrigger("Shoot");
 
