@@ -977,7 +977,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8787940485649821559}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7691793939616740896
 MonoBehaviour:
@@ -1526,6 +1526,7 @@ GameObject:
   - component: {fileID: 7110574739933375422}
   - component: {fileID: 3659691920289283769}
   - component: {fileID: 2781571036816211546}
+  - component: {fileID: 5717718319464219722}
   m_Layer: 0
   m_Name: HitlerGun
   m_TagString: Untagged
@@ -1628,13 +1629,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d74f12e2cf313f4ebafe3a1bc997c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _interactableEquipWeapon: {fileID: 7110574739933375419}
   _weaponAnimator: {fileID: 881851449525041963}
   _shootSound: {fileID: 7691793939616740896}
   _currentAmmo: 8
   _maxAmmo: 50
   _bullet: {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
-  _bulletPoolerKey: HeadSwaperBulletPooler
+  _bulletPoolerKey: HitlerGunBulletPooler
   _bulletPosition: {fileID: 3474678327784978044}
   _fireRate: 0.2
   _nextFire: 0
@@ -1658,6 +1661,23 @@ MonoBehaviour:
   _interactableEquipWeapon: {fileID: 7110574739933375419}
   _humanoidMovementStateData: {fileID: 0}
   _currentSpeed: 0
+--- !u!114 &5717718319464219722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956945597098544381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: a568e44e2ccfaf049985b1a33bc45cb5
+  hasSpawned: 0
 --- !u!1 &8039902769550646550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +2015,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 7288917050873517639}
     m_Modifications:
     - target: {fileID: 83394540077681933, guid: 1e3a5b334e30d064996d64f35f950ed2, type: 3}
@@ -2004,7 +2023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5063856442197867720, guid: 1e3a5b334e30d064996d64f35f950ed2, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5063856442197867720, guid: 1e3a5b334e30d064996d64f35f950ed2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2047,10 +2066,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1321111985995180432, guid: 1e3a5b334e30d064996d64f35f950ed2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1126154389619656459}
   m_SourcePrefab: {fileID: 100100000, guid: 1e3a5b334e30d064996d64f35f950ed2, type: 3}
 --- !u!4 &3307594375645133359 stripped
 Transform:

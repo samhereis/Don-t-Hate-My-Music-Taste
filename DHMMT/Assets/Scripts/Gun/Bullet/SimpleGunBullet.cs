@@ -1,5 +1,8 @@
+using Characters.States.Data;
 using Helpers;
 using Interfaces;
+using Mirror;
+using Network;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -45,12 +48,27 @@ namespace Gameplay.Bullets
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
-                damagable.TakeDamage(_damage);
+                if (other.TryGetComponent(out NetworkIdentity network))
+                {
+                    DamagePlayer(network.netId.ToString(), _damage);
+                }
+
                 _rigidbody.velocity = Vector3.zero;
                 _rigidbody.angularVelocity = Vector3.zero;
                 _rigidbody.ResetInertiaTensor();
 
                 onCollided?.Invoke();
+            }
+        }
+
+        [ClientRpc]
+        private async void DamagePlayer(string netID, float damage)
+        {
+            var player = await PlayersContainer.GetPlayer(netID);
+
+            if(player.TryGetComponent<IDamagable>(out IDamagable damagable))
+            {
+                damagable.TakeDamage(damage);
             }
         }
 

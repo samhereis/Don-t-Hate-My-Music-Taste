@@ -1,12 +1,14 @@
 using Characters.States.Data;
 using Helpers;
+using Mirror;
 using Pooling;
 using Sound;
 using UnityEngine;
+using static UnityEditor.Recorder.OutputPath;
 
 namespace Gameplay
 {
-    public class GunUse : MonoBehaviour
+    public class GunUse : NetworkBehaviour
     {
         [Header("Components")]
         [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
@@ -44,9 +46,15 @@ namespace Gameplay
             if (_bullet == null) _bullet = await AddressablesHelper.GetAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
         }
 
+        private void OnDestroy()
+        {
+            _interactableEquipWeapon?.onEquip.RemoveListener(OnEquip);
+            _interactableEquipWeapon?.onUnequip.RemoveListener(OnUnEquip);
+        }
+
         private void FixedUpdate()
         {
-            if (_shoot) Shoot();
+            if (_shoot) TryShoot();
         }
 
         private void OnEquip(HumanoidData sentData)
@@ -56,7 +64,7 @@ namespace Gameplay
 
         private void OnUnEquip(HumanoidData sentData)
         {
-            sentData.humanoidAttackingStateData.onAttack += SetShoot;
+            sentData.humanoidAttackingStateData.onAttack -= SetShoot;
         }
 
         public void SetShoot(bool value)
@@ -64,13 +72,14 @@ namespace Gameplay
             _shoot = value;
         }
 
-        private async void Shoot()
+        [Client]
+        private async void TryShoot()
         {
             if ((Time.time > _nextFire) && (_canShoot == true))
             {
                 _nextFire = Time.time + _fireRate;
 
-                await _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
+                var bullet = await _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
 
                 _shootSound.Play();
 

@@ -1,4 +1,5 @@
 using Helpers;
+using Mirror;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,17 +12,26 @@ namespace Pooling
         [SerializeField] protected Transform _parent;
         [SerializeField] protected Queue<T> _poolablesQueue = new Queue<T>();
         [SerializeField] protected List<T> _poolablesDequeued = new List<T>();
+        [SerializeField] protected bool _doSync = false;
 
         protected virtual void Init()
         {
             if (_parent == null) _parent = new GameObject(name).transform;
         }
 
+        [Command]
         public virtual async Task Spawn(int quantity = 5, Transform parent = null)
         {
             if (parent != null) _parent = parent; else Init();
 
-            for (int i = 0; i < quantity; i++) await AsyncHelper.Delay(() => { PutIn(Instantiate(_poolable, parent)); });
+            for (int i = 0; i < quantity; i++) await AsyncHelper.Delay(() =>
+            {
+                var obj = Instantiate(_poolable, parent);
+
+                if (_doSync) NetworkServer.Spawn(obj.gameObject);
+
+                PutIn(Instantiate(_poolable, parent));
+            });
         }
 
         public virtual void Clear()

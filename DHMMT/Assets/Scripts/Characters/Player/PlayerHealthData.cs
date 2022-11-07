@@ -1,31 +1,25 @@
+﻿using Characters.States.Data;
 using Helpers;
 using Interfaces;
+using Mirror;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Gameplay
 {
-    public class PlayerHealthData : MonoBehaviour, IDamagable //TODO: complete this class
+    public class PlayerHealthData : HumanoidHealthBase, IDamagable //TODO: complete this class
     {
-        [SerializeField] private bool _isAlive = true;
-        [SerializeField] private float _health;
-        [SerializeField] private float _maxHealth;
-
-        private void OnEnable()
+        [Command] 
+        public override void TakeDamage(float damage)
         {
-            InvokeRepeating(nameof(SetMaxHealth), 1, 0.5f);
-        }
+            Debug.Log(gameObject.name + " has been damaged for " + damage);
 
-        public float TakeDamage(float damage)
-        {
-            _health -= damage;
+            health -= damage;
 
-            if (_health < 0)
+            if (health < 0)
             {
 
             }
-
-            return _health;
         }
 
         public async Task TakeDamageContinuously(float time, float damage)

@@ -1,3 +1,4 @@
+using Agents;
 using Interfaces;
 using Mirror;
 using PlayerInputHolder;
@@ -13,7 +14,7 @@ namespace Gameplay
         [field: SerializeField] public Vector3 _playerVelocity { get; private set; }
 
         [Header("Components")]
-        [SerializeField] private Animator _animator;
+        [SerializeField] private AnimationAgent _animator;
         [SerializeField] private CharacterController _characterController;
 
         [Header("Settings")]

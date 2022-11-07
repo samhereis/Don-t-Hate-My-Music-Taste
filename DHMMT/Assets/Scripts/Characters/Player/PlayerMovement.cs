@@ -1,4 +1,6 @@
+using Agents;
 using Interfaces;
+using Mirror;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +11,7 @@ namespace Characters.States.Data
     public class PlayerMovement : HumanoidMovementStateData, IHasInput
     {
         [Header("Components")]
-        [SerializeField] private Animator _animator;
+        [SerializeField] private AnimationAgent _animator;
         [SerializeField] private CharacterController _characterControllerComponent;
 
         [Header("Settings")]
@@ -59,11 +61,7 @@ namespace Characters.States.Data
 
         private void FixedUpdate()
         {
-            _move = transform.right * _moveInputValue.x + transform.forward * _moveInputValue.y;
-            _characterControllerComponent.Move((_speed * _currentSpeedMultiplier) * Time.deltaTime * _move);
-
-            _animator?.SetFloat(_velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);
-            _animator?.SetFloat(_velocityHashX, _moveInputValue.x * _currentSpeedMultiplier);
+            DoMove();
         }
 
         private void Move(InputAction.CallbackContext context)
@@ -87,6 +85,22 @@ namespace Characters.States.Data
         private void Fire(InputAction.CallbackContext context)
         {
             _currentSpeedMultiplier = 1;
+        }
+
+        [Command]
+        private void DoMove()
+        {
+            _move = transform.right * _moveInputValue.x + transform.forward * _moveInputValue.y;
+            _characterControllerComponent.Move((_speed * _currentSpeedMultiplier) * Time.deltaTime * _move);
+
+            SetAnimation();
+        }
+
+        [ClientRpc]
+        private void SetAnimation()
+        {
+            _animator?.animator.SetFloat(_velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);
+            _animator?.animator.SetFloat(_velocityHashX, _moveInputValue.x * _currentSpeedMultiplier);
         }
 
         public void EnableInput()

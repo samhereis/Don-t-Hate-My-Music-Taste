@@ -9,8 +9,6 @@ namespace Characters.States.Data
         [SerializeField] private OnEnemyDie _onEnemyDie;
         [SerializeField] private EnemyIdentifier _enemyIdentifier;
 
-        public override bool isAlive { get; protected set; }
-
         private void OnValidate()
         {
             if (_enemyIdentifier == null) _enemyIdentifier = GetComponent<EnemyIdentifier>();
@@ -22,15 +20,13 @@ namespace Characters.States.Data
             isAlive = true;
         }
 
-        public override float TakeDamage(float damage)
+        public override void TakeDamage(float damage)
         {
             if (isAlive)
             {
                 health -= damage;
                 if (health <= 0) Die();
             }
-
-            return health;
         }
 
         private void Die()
