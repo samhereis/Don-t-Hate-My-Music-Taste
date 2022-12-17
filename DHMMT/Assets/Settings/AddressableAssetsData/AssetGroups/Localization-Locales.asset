@@ -22,66 +22,79 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eda0f74b07717f7469fb6f3364e7cbff
     m_Address: Turkish (tr)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d6373e0701cb0474a827a41756bd7043
     m_Address: Russian (ru)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 044f76c02adf96547a416f22a92e8171
     m_Address: Portuguese (pt)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f3a2fc98c92253b4f844ac82c31065d5
     m_Address: Polish (pl)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 97cdf7c827fb049419f96b8662929d60
     m_Address: Korean (ko)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9540a4dfda6f827428a69c1a5d6de422
     m_Address: Japanese (ja)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ae21d4ba9ff1634686086bed1bbd97c
     m_Address: Italian (it)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8265f11685388094f8d899e9dcf8d22b
     m_Address: French (fr)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e7f72260f8982f4d95ed2aefaa74587
     m_Address: Spanish (es)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa8d8bf6c56a6244fa9e6af4f6b52ad6
     m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 51cf3bd159b86954e82693ec5d6db060
     m_Address: German (de)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9a4824b30fc76f44b84ee37e0800dbd2
     m_Address: Chinese (Simplified) (zh-Hans)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 890082356c4f7bf4aaa5977347e5d177, type: 2}
   m_SchemaSet:

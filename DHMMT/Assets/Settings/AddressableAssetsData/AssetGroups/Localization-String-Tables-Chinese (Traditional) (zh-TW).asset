@@ -22,21 +22,25 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 87d43e2943b533547ada43de9b544991
     m_Address: Labels_zh-TW
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 918461a576d100e46902b2ea6eb5330b
     m_Address: Buttons_zh-TW
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a3114f0c50695c47a950b7da7952fb1
     m_Address: MessagesToUser_zh-TW
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 890082356c4f7bf4aaa5977347e5d177, type: 2}
   m_SchemaSet:

@@ -10,7 +10,7 @@ namespace Helpers
     {
         public static async Task<UnityWebRequest> Post(string uri, string json)
         {
-            UnityWebRequest webRequest = UnityWebRequest.Post(uri, "POST");
+            UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(uri, "POST");
 
             webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json)) as UploadHandler;
