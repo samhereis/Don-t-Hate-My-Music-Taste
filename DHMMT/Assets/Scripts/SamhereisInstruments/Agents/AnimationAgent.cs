@@ -1,27 +1,23 @@
-using Mirror;
 using System;
 using UnityEngine;
 
 namespace Agents
 {
-    public class AnimationAgent : NetworkBehaviour
+    public class AnimationAgent : MonoBehaviour
     {
         public Action<string> onAnimationCallback;
         [field: SerializeField] public Animator animator { get; private set; }
 
-        [Command]
         public void CallCallback(string callbackName)
         {
             onAnimationCallback?.Invoke(callbackName);
         }
 
-        [Command]
         public void PlayAnimation(int animationHash)
         {
             animator.Play(animationHash);
         }
 
-        [Command]
         public void PlayAnimation(string animationName)
         {
             animator.Play(animationName);

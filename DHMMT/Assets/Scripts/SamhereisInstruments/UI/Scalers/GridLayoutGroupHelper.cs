@@ -1,56 +1,39 @@
+using Helpers;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Helpers
 {
+    [ExecuteAlways]
     public sealed class GridLayoutGroupHelper : MonoBehaviour
     {
-        private enum GridLayoutGroupOffsetType { plus, mulpiply }
+        [SerializeField] private RectTransform _parent;
         private Action _updateAction;
 
         [Header("Componenets")]
         [SerializeField] private GridLayoutGroup _gridLayout;
 
         [Header("Settings")]
-        [SerializeField] private GridLayoutGroupOffsetType _gridLayoutGroupOffsetType;
         [SerializeField] private float _horrizontalOffset = 0;
         [SerializeField] private float _verticalOffset = 0;
 
-        [Header("Debug")]
-        [SerializeField] private Vector2 _currentScreenSize;
-
         private void OnEnable()
         {
-            if (_gridLayoutGroupOffsetType == GridLayoutGroupOffsetType.plus) _updateAction = SetGridLayoutSizes_Plus;
-            else if (_gridLayoutGroupOffsetType == GridLayoutGroupOffsetType.mulpiply) _updateAction = SetGridLayoutSizes_Multiply;
+            SetGridLayoutSizes();
         }
 
         private void Update()
         {
-            _currentScreenSize = new Vector2(Screen.width, Screen.height);
-
-            _updateAction?.Invoke();
+            SetGridLayoutSizes();
         }
 
-        private void SetGridLayoutSizes_Plus()
+        private void SetGridLayoutSizes()
         {
-            float horrizontal = _currentScreenSize.x + _horrizontalOffset;
-            float vertical = _currentScreenSize.y + _verticalOffset;
+            if (_parent == null) return;
 
-            if (_horrizontalOffset == 0) horrizontal = _gridLayout.cellSize.x;
-            if (_verticalOffset == 0) vertical = _gridLayout.cellSize.y;
-
-            _gridLayout.cellSize = new Vector2(horrizontal, vertical);
-        }
-
-        private void SetGridLayoutSizes_Multiply()
-        {
-            float horrizontal = _currentScreenSize.x * _horrizontalOffset;
-            float vertical = _currentScreenSize.y * _verticalOffset;
-
-            if (_horrizontalOffset == 0) horrizontal = _gridLayout.cellSize.x;
-            if (_verticalOffset == 0) vertical = _gridLayout.cellSize.y;
+            float horrizontal = NumberHelper.GetNumberFromPercentage(_parent.rect.size.x, _horrizontalOffset);
+            float vertical = NumberHelper.GetNumberFromPercentage(_parent.rect.size.y, _verticalOffset);
 
             _gridLayout.cellSize = new Vector2(horrizontal, vertical);
         }

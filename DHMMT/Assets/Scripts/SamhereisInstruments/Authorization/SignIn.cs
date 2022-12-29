@@ -3,13 +3,14 @@ using Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using UI;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Authorization.UI
 {
-    public sealed class SignIn : UIWIndowBase
+    public sealed class SignIn : CanvasBase
     {
         [Header("UI Elements")]
         [SerializeField] private EmailInputData _email;
@@ -19,11 +20,6 @@ namespace Authorization.UI
         [Header("Components")]
         [SerializeField] private Authorization _authorization;
         [SerializeField] private ForgotPassword _forgotPassord;
-
-        private void OnValidate()
-        {
-
-        }
 
         protected override void Awake()
         {
@@ -74,7 +70,7 @@ namespace Authorization.UI
             base.Enable(duration);
         }
 
-        public async void TrySignIn()
+        public void TrySignIn()
         {
             if (ApplicationHelper.HasInternetConnection() == false)
             {
@@ -90,7 +86,7 @@ namespace Authorization.UI
 
         private async Task OnSignIn()
         {
-
+            await AsyncHelper.Delay();
         }
 
         [Serializable]

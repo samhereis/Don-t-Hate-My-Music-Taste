@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2733954582693008345}
   - component: {fileID: 4396560621053259068}
   - component: {fileID: -4771325464159858480}
-  - component: {fileID: 729879261}
   - component: {fileID: 2073031523845391656}
   m_Layer: 5
   m_Name: Back
@@ -35,7 +34,7 @@ RectTransform:
   m_Children:
   - {fileID: 3478639040521090176}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -95,7 +94,7 @@ MonoBehaviour:
   _onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 729879261}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI.Window.OnClickOpenCloseWindow, Assembly-CSharp
         m_MethodName: Do
         m_Mode: 1
@@ -108,22 +107,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
---- !u!114 &729879261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3070321845262392695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a65bc0b747899d4e9be4c439ce3fd60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _openThese:
-  - {fileID: 0}
-  _closeThese:
-  - {fileID: 0}
 --- !u!114 &2073031523845391656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,9 +123,16 @@ MonoBehaviour:
   _normaleScale: 1
   _animationDuration: 0.5
   _delayBetweenAnimations: 0.1
-  _onClick:
-    m_PersistentCalls:
-      m_Calls: []
+  _events:
+    _onHover:
+      m_PersistentCalls:
+        m_Calls: []
+    _onClick:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExit:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &5379414541876191523
 GameObject:
   m_ObjectHideFlags: 0

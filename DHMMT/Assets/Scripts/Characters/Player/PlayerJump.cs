@@ -1,13 +1,12 @@
 using Agents;
 using Interfaces;
-using Mirror;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
-    public class PlayerJump : NetworkBehaviour, IHasInput
+    public class PlayerJump : MonoBehaviour, IHasInput
     {
         private bool _canJump => _characterController.isGrounded == false || _doubleJump == true;
 
@@ -25,28 +24,22 @@ namespace Gameplay
 
         [Header("SO")]
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-        }
-
-        public override void OnStartLocalPlayer()
-        {
-            base.OnStartLocalPlayer();
-
             EnableInput();
         }
 
         private void OnEnable()
         {
-            if(isLocalPlayer) EnableInput();
+            EnableInput();
         }
 
         private void OnDisable()
         {
-            if (isLocalPlayer) EnableInput();
+            EnableInput();
         }
 
         private void FixedUpdate()

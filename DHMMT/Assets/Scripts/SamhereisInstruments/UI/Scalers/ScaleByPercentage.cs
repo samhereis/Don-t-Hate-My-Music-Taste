@@ -1,4 +1,6 @@
 using Helpers;
+using LazyUpdators;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace UI.Helpers
@@ -15,26 +17,34 @@ namespace UI.Helpers
 
         private void OnValidate()
         {
-            Setup();
+            if (_rectTransform == null)
+            {
+                _rectTransform = GetComponent<RectTransform>();
+                this.TrySetDirty();
+            }
+            if (transform.parent != null)
+            {
+                _parent = transform.parent.GetComponent<RectTransform>();
+                this.TrySetDirty();
+            }
+
+            this.TrySetDirty();
         }
 
         private void Awake()
         {
-            Setup();
-        }
-
-        private void OnGUI()
-        {
-            Scale();
+            if (_rectTransform == null) _rectTransform = GetComponent<RectTransform>();
         }
 
         private void Update()
         {
-            Scale();
+            //DoAutoScale();
         }
 
-        private void Scale()
+        private async Task DoAutoScale()
         {
+            await AsyncHelper.Delay();
+
             if (_rectTransform != null)
             {
                 if (_parent != null)
@@ -53,21 +63,6 @@ namespace UI.Helpers
                     _rectTransform.SetLeft(NumberHelper.GetNumberFromPercentage(Screen.width, _left));
                     _rectTransform.SetRight(NumberHelper.GetNumberFromPercentage(Screen.width, _right));
                 }
-            }
-        }
-
-        private void Setup()
-        {
-            if (_rectTransform == null)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-                this.TrySetDirty();
-            }
-
-            if (_parent == null)
-            {
-                _parent = transform.parent.GetComponent<RectTransform>();
-                this.TrySetDirty();
             }
         }
     }

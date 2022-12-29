@@ -1,6 +1,5 @@
 using Agents;
 using Interfaces;
-using Mirror;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +22,7 @@ namespace Characters.States.Data
         [SerializeField] private BoolValue_SO _isSprinting;
 
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         [Header("Debug")]
         [SerializeField] private Vector2 _moveInputValue;
@@ -42,21 +41,14 @@ namespace Characters.States.Data
             if (_characterControllerComponent == null) _characterControllerComponent = GetComponent<CharacterController>();
         }
 
-        public override void OnStartLocalPlayer()
-        {
-            base.OnStartLocalPlayer();
-
-            EnableInput();
-        }
-
         private void OnEnable()
         {
-            if(isLocalPlayer) EnableInput();
+            EnableInput();
         }
 
         private void OnDisable()
         {
-            if (isLocalPlayer) EnableInput();
+            EnableInput();
         }
 
         private void FixedUpdate()
@@ -87,7 +79,6 @@ namespace Characters.States.Data
             _currentSpeedMultiplier = 1;
         }
 
-        [Command]
         private void DoMove()
         {
             _move = transform.right * _moveInputValue.x + transform.forward * _moveInputValue.y;
@@ -96,7 +87,6 @@ namespace Characters.States.Data
             SetAnimation();
         }
 
-        [ClientRpc]
         private void SetAnimation()
         {
             _animator?.animator.SetFloat(_velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);

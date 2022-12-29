@@ -7,7 +7,7 @@ namespace Gameplay
     public class PauseUnpause : MonoBehaviour //TODO: complete this
     {
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         private void OnEnable()
         {

@@ -17,7 +17,7 @@ namespace Authorization.UI
             Close();
         }
 
-        public async void SendNewPassword()
+        public void SendNewPassword()
         {
             if (StringHelper.IsEmail(_emailField.text))
             {

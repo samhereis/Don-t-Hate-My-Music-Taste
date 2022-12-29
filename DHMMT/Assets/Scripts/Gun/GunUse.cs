@@ -1,6 +1,5 @@
 using Characters.States.Data;
 using Helpers;
-using Mirror;
 using Pooling;
 using Sound;
 using UnityEngine;
@@ -8,7 +7,7 @@ using static UnityEditor.Recorder.OutputPath;
 
 namespace Gameplay
 {
-    public class GunUse : NetworkBehaviour
+    public class GunUse : MonoBehaviour
     {
         [Header("Components")]
         [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
@@ -72,14 +71,13 @@ namespace Gameplay
             _shoot = value;
         }
 
-        [Client]
         private async void TryShoot()
         {
             if ((Time.time > _nextFire) && (_canShoot == true))
             {
                 _nextFire = Time.time + _fireRate;
 
-                var bullet = await _bullet.PutOff(_bulletPosition, _bulletPosition.rotation);
+                var bullet = await _bullet.PutOffAsync(_bulletPosition, _bulletPosition.rotation);
 
                 _shootSound.Play();
 

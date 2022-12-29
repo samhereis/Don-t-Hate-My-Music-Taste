@@ -2,7 +2,7 @@ using Helpers;
 using System;
 using System.Threading.Tasks;
 using TMPro;
-using UI.Canvases;
+using UI;
 using UnityEngine;
 
 namespace Authorization.Data.Input
@@ -53,7 +53,7 @@ namespace Authorization.Data.Input
 
             if (ApplicationHelper.HasInternetConnection() == true)
             {
-
+                await AsyncHelper.Delay();
             }
 
             return exists;

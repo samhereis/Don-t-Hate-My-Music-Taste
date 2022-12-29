@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
@@ -107,7 +108,7 @@ namespace UI
 
         private void OnBegginLeftDrag()
         {
-            _start = Input.mousePosition.x;
+            _start = Mouse.current.position.ReadValue().x;
             _startParentPosition = transform.parent.position.x;
         }
 
@@ -122,7 +123,7 @@ namespace UI
             if (canMove == false)
             {
                 _isScrolling = true;
-                transform.parent.DOMoveX(_startParentPosition + (Input.mousePosition.x - _start), 0);
+                transform.parent.DOMoveX(_startParentPosition + (Mouse.current.position.ReadValue().x - _start), 0);
             }
         }
 

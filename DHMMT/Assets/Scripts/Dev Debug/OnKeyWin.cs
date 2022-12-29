@@ -10,7 +10,7 @@ namespace Events
 
         private void Update()
         {
-            if (Input.GetKeyUp(_key)) _eventWithNoParameters?.Invoke();
+            //if (Input.GetKeyUp(_key)) _eventWithNoParameters?.Invoke();
         }
     }
 }

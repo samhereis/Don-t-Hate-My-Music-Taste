@@ -1,5 +1,4 @@
 using Helpers;
-using Mirror;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -8,89 +7,123 @@ namespace Pooling
 {
     public abstract class PoolerBase<T> : ScriptableObject where T : Component
     {
-        [SerializeField] protected T _poolable;
-        [SerializeField] protected Transform _parent;
+        [field: SerializeField] public T poolable { get; private set; }
         [SerializeField] protected Queue<T> _poolablesQueue = new Queue<T>();
         [SerializeField] protected List<T> _poolablesDequeued = new List<T>();
-        [SerializeField] protected bool _doSync = false;
+
+#if UNITY_EDITOR
+        [SerializeField] protected List<T> _poolablesQueued = new List<T>();
+#endif
+
+        [Header("Settings")]
+        [SerializeField] protected bool _setParent = true;
+        [SerializeField] private int _defaultSpawnQuantity = 2;
 
         protected virtual void Init()
         {
-            if (_parent == null) _parent = new GameObject(name).transform;
+            Clear();
         }
 
-        [Command]
-        public virtual async Task Spawn(int quantity = 5, Transform parent = null)
+        public virtual async Task SpawnAsync(int quantity = 5, Transform parent = null)
         {
-            if (parent != null) _parent = parent; else Init();
-
-            for (int i = 0; i < quantity; i++) await AsyncHelper.Delay(() =>
+            for (int i = 0; i < quantity; i++)
             {
-                var obj = Instantiate(_poolable, parent);
-
-                if (_doSync) NetworkServer.Spawn(obj.gameObject);
-
-                PutIn(Instantiate(_poolable, parent));
-            });
-        }
-
-        public virtual void Clear()
-        {
-            _poolablesQueue.Clear();
-            _poolablesDequeued.Clear();
-            DestroyImmediate(_parent.gameObject);
-        }
-
-        public virtual async Task<T> PutOff(Transform position, Quaternion rotation)
-        {
-            return await PutOff(position.position, rotation);
-        }
-
-        public virtual async Task<T> PutOff(Transform position)
-        {
-            return await PutOff(position.position, Quaternion.identity);
-        }
-        public virtual async Task<T> PutOff(Vector3 position)
-        {
-            return await PutOff(position, Quaternion.identity);
-        }
-
-        public virtual async Task<T> PutOff(Vector3 position, Quaternion rotation)
-        {
-            T t;
-
-            if (_poolablesQueue.Count < 1) await Spawn(2, _parent);
-
-            t = _poolablesQueue.Dequeue();
-
-            _poolablesDequeued.Add(t);
-
-            t.transform.position = position;
-            t.transform.rotation = rotation;
-            t.gameObject.SetActive(true);
-
-            return t;
-        }
-
-        public virtual async void PutIn(T poolable, float delay = 0)
-        {
-            await AsyncHelper.Delay(delay);
-
-            if (poolable)
-            {
-                poolable.gameObject.SetActive(false);
-                poolable.transform.SetParent(_parent);
-                poolable.transform.position = Vector3.zero;
-                poolable.transform.rotation = Quaternion.identity;
-
-                _poolablesQueue.Enqueue(poolable);
-                _poolablesDequeued.Remove(poolable);
+                await AsyncHelper.Delay();
+                PutIn(Instantiate(poolable, parent));
             }
         }
 
-        public virtual void PutInAll()
+        public virtual void Spawn(int quantity = 5, Transform parent = null)
         {
-            _poolablesDequeued.ForEach(async (x) => await AsyncHelper.Delay(() => PutIn(x)));
+            for (int i = 0; i < quantity; i++)
+            {
+                PutIn(Instantiate(poolable, parent));
+            }
+        }
+
+        [ContextMenu(nameof(Clear))]
+        public virtual void Clear()
+        {
+            _poolablesQueue?.Clear();
+            _poolablesQueue = new Queue<T>();
+
+            _poolablesDequeued?.Clear();
+            _poolablesDequeued = new List<T>();
+
+#if UNITY_EDITOR
+            _poolablesQueued?.Clear();
+            _poolablesQueued = new List<T>();
+#endif
+        }
+
+        public virtual Task<T> PutOffAsync(Transform position, Quaternion rotation, Transform parent = null)
+        {
+            return PutOffAsync(position.position, rotation, parent);
+        }
+
+        public virtual Task<T> PutOffAsync(Transform position, Transform parent = null)
+        {
+            return PutOffAsync(position.position, Quaternion.identity, parent);
+        }
+
+        public virtual Task<T> PutOffAsync(Vector3 position, Transform parent = null)
+        {
+            return PutOffAsync(position, Quaternion.identity, parent);
+        }
+
+        public virtual async Task<T> PutOffAsync(Vector3 position, Quaternion rotation, Transform parent = null)
+        {
+            T poolable;
+
+            if (_poolablesQueue.Count < 1) await SpawnAsync(_defaultSpawnQuantity, parent);
+
+            poolable = _poolablesQueue.Dequeue();
+
+            _poolablesDequeued.SafeAdd(poolable);
+
+#if UNITY_EDITOR
+            _poolablesQueued.SafeRemove(poolable);
+#endif
+            if (parent != null) poolable.transform.parent = parent;
+
+            poolable.transform.position = position;
+            poolable.transform.rotation = rotation;
+
+            poolable.gameObject.SetActive(true);
+
+            return poolable;
+        }
+
+        public virtual void PutIn(T poolable)
+        {
+            if (poolable)
+            {
+                try
+                {
+                    _poolablesQueue?.Enqueue(poolable);
+                    _poolablesDequeued?.SafeRemove(poolable);
+
+#if UNITY_EDITOR
+                    _poolablesQueued?.SafeAdd(poolable);
+#endif
+
+                    poolable.gameObject.SetActive(false);
+
+                    if (_setParent) poolable.transform.parent = null;
+                }
+                finally
+                {
+
+                }
+            }
+        }
+
+        public virtual async void PutInAll()
+        {
+            var copy = new List<T>();
+            copy.AddRange(_poolablesDequeued);
+
+            foreach (var poolable in copy) await AsyncHelper.Delay(() => PutIn(poolable));
 
             Clear();
         }

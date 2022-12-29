@@ -13,7 +13,7 @@ namespace Gameplay.Camera
         [Header("SO")]
         [SerializeField] private FloatSetting_SO _sensitivity;
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         [Header("Debug")]
         [SerializeField] private Vector2 _context;

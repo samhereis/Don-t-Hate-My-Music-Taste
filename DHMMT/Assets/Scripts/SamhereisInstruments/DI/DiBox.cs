@@ -16,7 +16,7 @@ namespace DI
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionaryTransient = new Dictionary<Type, Dictionary<string, object>>();
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new Dictionary<Type, Dictionary<string, object>>();
 
-        public static void RemoveSingle<T>(string id = "") where T : class
+        public static void RemoveSingel<T>(string id = "") where T : class
         {
             if (_dictionarySingle.ContainsKey(typeof(T))) _dictionarySingle[typeof(T)].Remove(id);
             if (_dictionarySingle.Count == 0) _dictionarySingle.Remove(typeof(T));

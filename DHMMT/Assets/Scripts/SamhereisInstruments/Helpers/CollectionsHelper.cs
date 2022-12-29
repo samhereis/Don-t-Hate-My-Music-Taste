@@ -6,13 +6,8 @@ namespace Helpers
 {
     public static class CollectionsHelper
     {
-        public static async Task RemoveNullsAsync<T>(this List<T> list)
-        {
-            var listCopy = new List<T>();
-            listCopy.AddRange(list);
-
-            foreach (var item in listCopy) await AsyncHelper.Delay(() => { if (item == null) list.Remove(item); });
-        }
+        
+        #region List
 
         public static void RemoveNulls<T>(this List<T> list)
         {
@@ -31,41 +26,56 @@ namespace Helpers
 
         public static void RemoveDuplicates<T>(this List<T> list, T item)
         {
-            foreach (T itemToCheck in list)
+            var listCopy = new List<T>();
+            listCopy.AddRange(list);
+
+            foreach (T itemToCheck in listCopy)
             {
-                foreach (T itemToPotentiallyRemove in list)
+                foreach (T itemToPotentiallyRemove in listCopy)
                 {
-                    bool isSameIndex = list.IndexOf(itemToPotentiallyRemove) != list.IndexOf(itemToCheck);
                     bool isEqual = itemToPotentiallyRemove.Equals(itemToCheck);
 
-                    if (isSameIndex && isEqual) list.Remove(itemToPotentiallyRemove);
+                    if (isEqual) list.Remove(itemToPotentiallyRemove);
                 }
             }
         }
 
-        public static async Task RemoveDuplicatesAsync<T>(this List<T> list, T item)
+        public static async Task RemoveDuplicatesAsync<T>(this List<T> list)
         {
-            foreach (T itemToCheck in list)
+            var listCopy = new List<T>();
+            listCopy.AddRange(list);
+
+            foreach (T itemToCheck in listCopy)
             {
                 await AsyncHelper.Delay(async () =>
                 {
-                    foreach (T itemToPotentiallyRemove in list)
+                    foreach (T itemToPotentiallyRemove in listCopy)
                     {
                         await AsyncHelper.Delay(() =>
                         {
-                            bool isSameIndex = list.IndexOf(itemToPotentiallyRemove) != list.IndexOf(itemToCheck);
                             bool isEqual = itemToPotentiallyRemove.Equals(itemToCheck);
 
-                            if (isSameIndex && isEqual) list.Remove(itemToPotentiallyRemove);
+                            if (isEqual) list.Remove(itemToPotentiallyRemove);
                         });
                     }
                 });
             }
         }
 
-        public static T GetRandomElement<T>(this List<T> list)
+        public static T GetRandom<T>(this List<T> list)
         {
             return list[Random.Range(0, list.Count)];
         }
+
+        #endregion
+
+        #region Array
+
+        public static T GetRandom<T>(this T[] array)
+        {
+            return array[Random.Range(0, array.Length)];
+        }
+
+        #endregion
     }
 }

@@ -1,10 +1,9 @@
 using Interfaces;
-using Mirror;
 using UnityEngine;
 
 namespace Characters.States.Data
 {
-    public abstract class HumanoidHealthBase : NetworkBehaviour, IDamagable
+    public abstract class HumanoidHealthBase : MonoBehaviour, IDamagable
     {
         [field: SerializeField] public bool isAlive { get; protected set; }
 

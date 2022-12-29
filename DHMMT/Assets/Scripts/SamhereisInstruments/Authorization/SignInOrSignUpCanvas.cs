@@ -2,7 +2,7 @@ using UI.Canvases;
 
 namespace Authorization.UI
 {
-    public sealed class SignInOrSignUpCanvas : UIWIndowBase
+    public sealed class SignInOrSignUpCanvas : CanvasBase
     {
 
     }

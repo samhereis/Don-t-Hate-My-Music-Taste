@@ -2374,7 +2374,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4536568834229794503
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2391,7 +2391,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &4536568834229794500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,10 +3927,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7084242358341382071}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -3944,9 +3955,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7084242358341382071}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7967185729476643057
@@ -3963,8 +3982,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equiped: 0
   _itemName: Head Swaper
-  rightHandIK: {fileID: 0}
-  leftHandIK: {fileID: 0}
+  _rightHandIK: {fileID: 0}
+  _leftHandIK: {fileID: 0}
   _animatorComponent: {fileID: 0}
   _rigidbodyComponent: {fileID: 0}
   _colliderComponent: {fileID: 0}
@@ -3983,9 +4002,9 @@ MonoBehaviour:
   _aimPosition: {x: 0, y: 0, z: 0}
   _initialPosition: {x: 0, y: 0, z: 0}
   _animationDuration: 0.05
-  _aimed: {fileID: 0}
   _interactableEquipWeapon: {fileID: 0}
   _equipData: {fileID: 0}
+  _isAiming: {fileID: 0}
 --- !u!114 &4536568833899093491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3998,21 +4017,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d74f12e2cf313f4ebafe3a1bc997c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactableEquipWeapon: {fileID: 0}
   _weaponAnimator: {fileID: 0}
   _shootSound: {fileID: 8300000, guid: 88f34c941fb1bed4d895712111bde53f, type: 3}
-  _audioSource: {fileID: 3287311792087109142}
   _currentAmmo: 8
   _maxAmmo: 50
-  _reloadTime: 1.9
   _bullet: {fileID: 8872171098656000684, guid: 6ffb98cd46b1fbe4789200a68360b6a1, type: 3}
+  _bulletPoolerKey: 
   _bulletPosition: {fileID: 3854495778786560308}
   _fireRate: 0.2
   _nextFire: 0
+  _reloadTime: 1.9
   _isReloading: 0
   _canShoot: 1
   _shoot: 0
-  _isShooting: {fileID: 0}
-  _interactableEquipWeapon: {fileID: 0}
 --- !u!82 &3287311792087109142
 AudioSource:
   m_ObjectHideFlags: 0

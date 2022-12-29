@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace UI.Window
 {
-    public class PauseWindow : UICanvasBase
+    public class PauseWindow : CanvasBase
     {
         [SerializeField] private Input_SO _input;
 

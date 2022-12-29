@@ -1,4 +1,5 @@
 using Helpers;
+using UI;
 using UI.Canvases;
 using UnityEngine;
 
@@ -7,12 +8,12 @@ namespace Authorization.UI
     public sealed class Authorization : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private UICanvasBase _openIfNotLoggedIn;
-        [SerializeField] private UICanvasBase _mainMenuCanvas;
+        [SerializeField] private CanvasBase _openIfNotLoggedIn;
+        [SerializeField] private CanvasBase _mainMenuCanvas;
 
         [SerializeField] private SignIn _signIn;
         [SerializeField] private SignUp _signUp;
-        [SerializeField] private UIWIndowBase _codeVerificator;
+        [SerializeField] private CanvasBase _codeVerificator;
 
         private void Awake()
         {

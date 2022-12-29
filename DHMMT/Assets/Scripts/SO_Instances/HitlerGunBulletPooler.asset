@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441092cc3b8004142a612f8a29c92765, type: 3}
   m_Name: HitlerGunBulletPooler
   m_EditorClassIdentifier: 
-  _poolable: {fileID: 6290616708792387940, guid: 49892df371a9e7b40879030d48ce1def, type: 3}
-  _parent: {fileID: 0}
+  <poolable>k__BackingField: {fileID: 6290616708792387940, guid: 49892df371a9e7b40879030d48ce1def, type: 3}
   _poolablesDequeued: []
-  _doSync: 1
+  _poolablesQueued: []
+  _setParent: 1
+  _defaultSpawnQuantity: 2

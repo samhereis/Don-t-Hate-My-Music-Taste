@@ -12,7 +12,7 @@ namespace Gameplay
 
         [SerializeField] private IdentifierBase _identifier;
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         private void OnValidate()
         {

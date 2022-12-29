@@ -2,9 +2,9 @@ using DG.Tweening;
 using Helpers;
 using System;
 using TMPro;
-using UI.Canvases;
-using UnityEngine;
+using UI;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace Authorization.Data.Input
 {

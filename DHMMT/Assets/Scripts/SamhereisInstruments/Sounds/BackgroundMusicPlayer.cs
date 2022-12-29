@@ -23,10 +23,13 @@ namespace Sound
 
         public void PlayMusic(SoundBase sound)
         {
+            if(_audioSource.clip == sound.audioClip && _audioSource.isPlaying == true)
+            {
+                return;
+            }
+
             _audioSource.clip = sound.audioClip;
             _audioSource.loop = sound.loop;
-
-            PlayMusic();
 
             _audioSource.Play();
         }
@@ -41,6 +44,11 @@ namespace Sound
         {
             _audioSource.DOKill();
             _audioSource.DOFade(0, _transitionDuration);
+        }
+
+        public void ChangeVolume(float volume)
+        {
+            _audioSource.DOFade(volume, _transitionDuration);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Characters.States.Data
         public FoolowPlayer_EnemyMovementState(EnemyStates enemy, EnemyMovement enemyMovement) : base(enemy)
         {
             _enemyMovement = enemyMovement;
-            _target = Object.FindObjectsOfType<PlayerIdentifier>().ToList().GetRandomElement();
+            _target = Object.FindObjectsOfType<PlayerIdentifier>().ToList().GetRandom();
         }
 
         public override void Move()

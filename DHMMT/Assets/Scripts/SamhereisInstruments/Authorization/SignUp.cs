@@ -2,13 +2,14 @@ using Authorization.Data.Input;
 using Helpers;
 using System;
 using TMPro;
+using UI;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Authorization.UI
 {
-    public sealed class SignUp : UIWIndowBase
+    public sealed class SignUp : CanvasBase
     {
         [Header("UI Elements")]
         [SerializeField] private EmailInputData _email;
@@ -23,11 +24,6 @@ namespace Authorization.UI
         [Header("Components")]
         [SerializeField] private Authorization _authorization;
         [SerializeField] private bool _correctAge;
-
-        private void OnValidate()
-        {
-
-        }
 
         protected override void Awake()
         {
@@ -106,7 +102,7 @@ namespace Authorization.UI
             base.Enable(duration);
         }
 
-        public async void TrySignUp()
+        public void TrySignUp()
         {
             _email.ValidateEmail_SignUp();
             _nickName.ValidateNickName();
@@ -127,10 +123,13 @@ namespace Authorization.UI
 
             _signUp.onClick.RemoveListener(TrySignUp);
 
-            string sex = "";
 
-            if (_male.isOn == true && _female.isOn == false) sex = "male";
-            else if (_female.isOn == true && _male.isOn == false) sex = "female";
+            
+
+            //string sex = "";
+
+            //if (_male.isOn == true && _female.isOn == false) sex = "male";
+            //else if (_female.isOn == true && _male.isOn == false) sex = "female";
         }
 
         private void OnAgeSliderValueChanged(float value)

@@ -15,8 +15,6 @@ namespace Helpers
             webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json)) as UploadHandler;
 
-            Debug.Log($"{uri}");
-
             var sentRequest = webRequest.SendWebRequest();
 
             while (sentRequest.isDone == false) await AsyncHelper.Delay();
@@ -30,8 +28,6 @@ namespace Helpers
 
             if (token != null) webRequest.SetRequestHeader("Authorization", token.token);
             webRequest.SetRequestHeader("Content-Type", "application/json");
-
-            Debug.Log($"{uri} - {token?.token}");
 
             webRequest.url = uri;
 
@@ -55,7 +51,19 @@ namespace Helpers
             webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json)) as UploadHandler;
 
-            Debug.Log($"{uri} {json} - {token?.token}");
+            var sentRequest = webRequest.SendWebRequest();
+
+            while (sentRequest.isDone == false) await AsyncHelper.Delay();
+
+            return sentRequest.webRequest;
+        }
+
+        public static async Task<UnityWebRequest> Delete(string uri, Token token = null)
+        {
+            UnityWebRequest webRequest = UnityWebRequest.Delete(uri);
+
+            if (token != null) webRequest.SetRequestHeader("Authorization", token.token);
+            webRequest.SetRequestHeader("Content-Type", "application/json");
 
             var sentRequest = webRequest.SendWebRequest();
 

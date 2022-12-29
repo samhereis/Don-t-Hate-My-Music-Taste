@@ -1,10 +1,10 @@
 using DG.Tweening;
 using Helpers;
-using LazyUpdators;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using LazyUpdators;
 
 namespace Gameplay
 {
@@ -22,7 +22,6 @@ namespace Gameplay
         private bool _toRight = false;
 
         bool _up = false;
-        float y = 0;
 
         private void Awake()
         {

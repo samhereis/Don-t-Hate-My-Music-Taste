@@ -37,7 +37,7 @@ namespace Helpers
 
         public static async Task Delay(float delay)
         {
-            await Task.Delay(TimeSpan.FromSeconds(delay));
+            await Task.Delay((int)delay * 1000);
         }
 
         public static async Task Delay(int delay)

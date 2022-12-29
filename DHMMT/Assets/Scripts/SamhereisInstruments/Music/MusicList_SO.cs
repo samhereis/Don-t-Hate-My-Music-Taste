@@ -1,5 +1,6 @@
 using Helpers;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -20,25 +21,34 @@ namespace Music
 
         public async void LoadMusic()
         {
-            Clear();
-
-            foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
+            try
             {
-                if (System.IO.File.Exists(file))
+                Clear();
+
+                if (Directory.Exists(MusicFolderPath) == false) return;
+
+                foreach (string file in System.IO.Directory.GetFiles(MusicFolderPath))
                 {
-                    using (var uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + file, AudioType.MPEG))
+                    if (System.IO.File.Exists(file))
                     {
-                        ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
+                        using (var uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + file, AudioType.MPEG))
+                        {
+                            ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
 
-                        var wait = uwr.SendWebRequest();
+                            var wait = uwr.SendWebRequest();
 
-                        while (wait.isDone == false) { await AsyncHelper.Delay(); }
+                            while (wait.isDone == false) { await AsyncHelper.Delay(); }
 
-                        DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
+                            DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)uwr.downloadHandler;
 
-                        if (dlHandler.isDone) if (dlHandler.audioClip != null) _musicList.SafeAdd(dlHandler.audioClip);
+                            if (dlHandler.isDone) if (dlHandler.audioClip != null) _musicList.SafeAdd(dlHandler.audioClip);
+                        }
                     }
                 }
+            }
+            finally
+            {
+
             }
         }
 

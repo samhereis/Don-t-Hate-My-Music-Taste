@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI.Window
 {
-    public sealed class WinWindow : UICanvasBase
+    public sealed class WinWindow : CanvasBase
     {
         [Header("SO")]
         [SerializeField] private EventWithNoParameters _onWin;

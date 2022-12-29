@@ -1,7 +1,7 @@
 using Helpers;
 using System;
 using TMPro;
-using UI.Canvases;
+using UI;
 using UnityEngine;
 
 namespace Authorization.Data.Input

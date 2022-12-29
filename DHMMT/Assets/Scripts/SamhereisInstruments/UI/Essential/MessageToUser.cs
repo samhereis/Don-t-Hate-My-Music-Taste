@@ -3,7 +3,7 @@ using Helpers;
 using TMPro;
 using UnityEngine;
 
-namespace UI.Canvases
+namespace UI
 {
     public sealed class MessageToUser : MonoBehaviour
     {
@@ -25,9 +25,6 @@ namespace UI.Canvases
         [SerializeField] private float _showYPosition = 200f;
         [SerializeField] private float _hideYPosition = 200f;
         [SerializeField] private Ease _ease = Ease.InOutBack;
-
-        [Header("Log Error Settings")]
-        [SerializeField] private Ease _logErrorEase = Ease.InOutBack;
 
         [Header("Debug")]
         [SerializeField] private bool _isShowingMessage = false;

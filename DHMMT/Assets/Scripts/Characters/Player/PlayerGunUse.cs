@@ -22,7 +22,7 @@ namespace Characters.States.Data
         [SerializeField] private BoolValue_SO _isShooting;
 
         [SerializeField] private Input_SO _inputContainer;
-        private InputSettings _input => _inputContainer.input;
+        private InputActions _input => _inputContainer.input;
 
         private int _velocityHashY, _velocityHashX;
 

@@ -4,17 +4,24 @@ namespace Helpers
 {
     public static class MonobehaviorHelper
     {
-        public static async void TrySetDirty(this MonoBehaviour monoBehaviour)
+        public static void TrySetDirty(this MonoBehaviour monoBehaviour)
         {
 #if UNITY_EDITOR
-            await AsyncHelper.Delay(() => { UnityEditor.EditorUtility.SetDirty(monoBehaviour); });
+            UnityEditor.EditorUtility.SetDirty(monoBehaviour);
 #endif
         }
 
-        public static async void TrySetDirty(this ScriptableObject scriptableObject)
+        public static void TrySetDirty(this ScriptableObject scriptable)
         {
 #if UNITY_EDITOR
-            await AsyncHelper.Delay(() => { UnityEditor.EditorUtility.SetDirty(scriptableObject); });
+            UnityEditor.EditorUtility.SetDirty(scriptable);
+#endif
+        }
+
+        public static void TrySetDirty(this MonoBehaviour monoBehaviour, MonoBehaviour anotherMonoBehaviour)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(anotherMonoBehaviour);
 #endif
         }
     }

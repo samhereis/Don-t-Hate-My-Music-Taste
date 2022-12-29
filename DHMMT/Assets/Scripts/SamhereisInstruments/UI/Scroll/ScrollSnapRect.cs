@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
@@ -65,7 +66,7 @@ namespace UI
 
         private void Update()
         {
-            if (Input.GetMouseButtonUp(0) || ScrollElement.isInAction) _updateAction?.Invoke();
+            if (Mouse.current.leftButton.wasPressedThisFrame || ScrollElement.isInAction) _updateAction?.Invoke();
         }
 
         private bool _isUpdating = false;

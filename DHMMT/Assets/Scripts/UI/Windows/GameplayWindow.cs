@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace UI.Window
 {
-    public class GameplayWindow : UICanvasBase
+    public class GameplayWindow : CanvasBase
     {
         [SerializeField] private Input_SO _input;
         public override void Enable(float? duration = null)
