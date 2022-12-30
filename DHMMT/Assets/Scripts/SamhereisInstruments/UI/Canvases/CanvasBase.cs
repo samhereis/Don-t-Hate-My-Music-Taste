@@ -1,11 +1,18 @@
 using Helpers;
+using Photon.Pun;
 using System;
 using UI.Window;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Canvases
 {
-    public abstract class CanvasBase : MonoBehaviour
+    [RequireComponent(typeof(UICanvasEditorHelper))]
+    [RequireComponent(typeof(Canvas))]
+    [RequireComponent(typeof(CanvasScaler))]
+    [RequireComponent(typeof(GraphicRaycaster))]
+    [RequireComponent(typeof(CanvasGroup))]
+    public abstract class CanvasBase : MonoBehaviourPunCallbacks
     {
         protected static Action<CanvasBase> onACanvasOpen;
 
@@ -14,6 +21,8 @@ namespace UI.Canvases
         protected virtual void OnValidate()
         {
             Setup();
+
+            Destroy(GetComponent<WindowBehaviorBase>());
         }
 
         protected virtual void Awake()
@@ -44,8 +53,9 @@ namespace UI.Canvases
         public virtual void Enable(float? duration = null)
         {
             Debug.Log(gameObject.name + " Enable ");
+
             if (baseSettings.notifyOthers == true) onACanvasOpen?.Invoke(this);
-            if (baseSettings.enableDisable == true) gameObject.SetActive(true);
+            gameObject.SetActive(true);
 
             if (baseSettings.canvasGroup != null)
             {
@@ -60,6 +70,8 @@ namespace UI.Canvases
         public virtual void Disable(float? duration = null)
         {
             Debug.Log(gameObject.name + " Disable ");
+
+            if (baseSettings.enableDisable == true) gameObject.SetActive(false);
 
             if (baseSettings.canvasGroup != null)
             {

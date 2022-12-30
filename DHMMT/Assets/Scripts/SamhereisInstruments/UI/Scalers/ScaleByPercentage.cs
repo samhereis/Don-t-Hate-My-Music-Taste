@@ -27,8 +27,6 @@ namespace UI.Helpers
                 _parent = transform.parent.GetComponent<RectTransform>();
                 this.TrySetDirty();
             }
-
-            this.TrySetDirty();
         }
 
         private void Awake()
@@ -38,13 +36,11 @@ namespace UI.Helpers
 
         private void Update()
         {
-            //DoAutoScale();
+            DoAutoScale();
         }
 
-        private async Task DoAutoScale()
+        private void DoAutoScale()
         {
-            await AsyncHelper.Delay();
-
             if (_rectTransform != null)
             {
                 if (_parent != null)

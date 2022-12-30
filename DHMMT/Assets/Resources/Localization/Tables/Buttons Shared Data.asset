@@ -28,7 +28,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 52739264512
-    m_Key: MainMenu.Play
+    m_Key: MainMenu.PlaySInglePlayer
     m_Metadata:
       m_Items: []
   - m_Id: 57025843200
@@ -39,13 +39,18 @@ MonoBehaviour:
     m_Key: MainMenu.Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 176209767556530176
+    m_Key: MainMenu.PlayMultiPlayer
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    id: 0
+    rid: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1630396545712

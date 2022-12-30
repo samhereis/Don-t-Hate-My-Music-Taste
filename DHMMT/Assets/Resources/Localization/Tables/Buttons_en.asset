@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 52739264512
-    m_Localized: Play
+    m_Localized: singleplayer
     m_Metadata:
       m_Items: []
   - m_Id: 57025843200
@@ -42,5 +42,10 @@ MonoBehaviour:
     m_Localized: Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 176209767556530176
+    m_Localized: multiplayer
+    m_Metadata:
+      m_Items: []
   references:
-    version: 1
+    version: 2
+    RefIds: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6796586599801704957}
   - component: {fileID: -5662485925811874422}
   m_Layer: 5
-  m_Name: WinWindow
+  m_Name: WinCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
