@@ -105,7 +105,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2845022215434710106}
-  - component: {fileID: 1798395849}
   - component: {fileID: 3150665083606102661}
   - component: {fileID: 1860070047}
   - component: {fileID: 1092803486694751665}
@@ -128,7 +127,7 @@ RectTransform:
   m_GameObject: {fileID: 2845022215434710109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3588520683212123192}
@@ -140,48 +139,6 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1798395849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845022215434710109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowEvents:
-    _onOpenStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onOpenEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    _onInstantClose:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  _copyBehaviorTo: []
-  _autoCloseInstantlyOnAwake: 0
-  _disableEnableOnOpenClose: 1
-  _autoAnimateOnEnable: 0
-  _openEase: 27
-  _openDuration: 0.5
-  _openDelay: 0
-  _closeEase: 26
-  _closeDuration: 0.5
-  _closeDelay: 0
-  _scaledObject: {fileID: 0}
-  _upscaledValue: {x: 1, y: 1, z: 1}
-  _downscaledValue: {x: 0, y: 0, z: 0}
-  _revereseScaleAfterScale: 0
 --- !u!114 &3150665083606102661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +169,7 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration: 0.5
     canvasGroup: {fileID: 8436655706292944500}
-    windowBehavior: {fileID: 1798395849}
+    defaultWindow: {fileID: 0}
   _loadingText: {fileID: 6273999612630616795}
 --- !u!223 &1092803486694751665
 Canvas:

@@ -1,12 +1,15 @@
 using DG.Tweening;
 using Helpers;
+using Photon.Pun;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Canvases
+namespace UI.Window
 {
-    public abstract class CanvasWindowBase : MonoBehaviour
+    [RequireComponent(typeof(UIWindowEditorHelper))]
+    [RequireComponent(typeof(CanvasGroup))]
+    public abstract class CanvasWindowBase : MonoBehaviourPunCallbacks
     {
         protected static Action<CanvasWindowBase> onAWindowOpen;
 

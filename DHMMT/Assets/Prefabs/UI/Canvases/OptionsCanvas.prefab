@@ -2273,7 +2273,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4618302516201602653}
   - component: {fileID: 1660545701}
-  - component: {fileID: 1660545703}
   - component: {fileID: 2612337336645362923}
   - component: {fileID: 1392591784055936461}
   - component: {fileID: 2582895886427219031}
@@ -2301,7 +2300,7 @@ RectTransform:
   m_Children:
   - {fileID: 8558188303122165927}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2325,48 +2324,6 @@ MonoBehaviour:
   _mixer: {fileID: 24100000, guid: 7f325d2e21402ff4fb12dc272c931b9f, type: 2}
   _volume: {fileID: 11400000, guid: 050e900c038baae4ba2ecb4bd40f8ee9, type: 2}
   _volumeSlider: {fileID: 4618302514521750428}
---- !u!114 &1660545703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4618302516201602650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowEvents:
-    _onOpenStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onOpenEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    _onInstantClose:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  _copyBehaviorTo: []
-  _autoCloseInstantlyOnAwake: 0
-  _disableEnableOnOpenClose: 0
-  _autoAnimateOnEnable: 0
-  _openEase: 27
-  _openDuration: 0.5
-  _openDelay: 0
-  _closeEase: 26
-  _closeDuration: 0.5
-  _closeDelay: 0
-  _scaledObject: {fileID: 4618302516201602653}
-  _upscaledValue: {x: 1, y: 1, z: 1}
-  _downscaledValue: {x: 0, y: 0, z: 0}
-  _revereseScaleAfterScale: 0
 --- !u!114 &2612337336645362923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2384,7 +2341,7 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration: 0.5
     canvasGroup: {fileID: 6753997845471819629}
-    windowBehavior: {fileID: 1660545703}
+    defaultWindow: {fileID: 0}
 --- !u!114 &1392591784055936461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2920,10 +2877,6 @@ PrefabInstance:
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UI.Canvases.CanvasBase, Assembly-CSharp
       objectReference: {fileID: 0}
-    - target: {fileID: 729879261, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
-      propertyPath: _closeThese.Array.data[0]
-      value: 
-      objectReference: {fileID: 1660545703}
     - target: {fileID: 1491705165459611197, guid: 599c8a66bb4d9244db010143f1fdd676, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

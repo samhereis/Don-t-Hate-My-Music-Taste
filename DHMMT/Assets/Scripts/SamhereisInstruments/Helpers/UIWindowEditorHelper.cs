@@ -13,7 +13,6 @@ namespace Helpers
         public void Hide()
         {
             gameObject.SetActive(false);
-            transform.localScale = Vector3.zero;
         }
 
         private void OnValidate()

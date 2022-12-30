@@ -1295,7 +1295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3844229832396480753}
-  - component: {fileID: 3844229832396480751}
   - component: {fileID: 407698695722576404}
   - component: {fileID: 4280824493172915772}
   - component: {fileID: 3822749505435558955}
@@ -1318,7 +1317,7 @@ RectTransform:
   m_GameObject: {fileID: 3844229832396480754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3844229832789343578}
@@ -1333,48 +1332,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &3844229832396480751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3844229832396480754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7055d935ce4037c4d88aead86cf7b2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowEvents:
-    _onOpenStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onOpenEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    _onInstantClose:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseStart:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCloseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  _copyBehaviorTo: []
-  _autoCloseInstantlyOnAwake: 0
-  _disableEnableOnOpenClose: 0
-  _autoAnimateOnEnable: 0
-  _openEase: 27
-  _openDuration: 0.5
-  _openDelay: 0
-  _closeEase: 26
-  _closeDuration: 0.5
-  _closeDelay: 0
-  _scaledObject: {fileID: 0}
-  _upscaledValue: {x: 1, y: 1, z: 1}
-  _downscaledValue: {x: 0, y: 0, z: 0}
-  _revereseScaleAfterScale: 0
 --- !u!114 &407698695722576404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,7 +1349,7 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration: 0.5
     canvasGroup: {fileID: 4172754258452530401}
-    windowBehavior: {fileID: 3844229832396480751}
+    defaultWindow: {fileID: 0}
   _loadingCanvas: {fileID: 0}
   _multiplayerCanvas: {fileID: 0}
   _playMultiplayerButton: {fileID: 735583562}

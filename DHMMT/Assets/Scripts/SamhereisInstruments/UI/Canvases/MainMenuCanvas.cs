@@ -30,7 +30,7 @@ namespace UI.Canvases
 
         private void PlayerMultiplayer()
         {
-            _loadingCanvas?.SetText("ConnectingToServer");
+            _loadingCanvas?.SetText("Connecting...");
             _loadingCanvas?.Open();
 
             if (PhotonNetwork.ConnectUsingSettings() == false)
@@ -41,9 +41,18 @@ namespace UI.Canvases
 
         public override void OnConnectedToMaster()
         {
-            Debug.Log("OnConnectedToMaster");
+            _loadingCanvas?.SetText("Joining lobby...");
+            PhotonNetwork.JoinLobby();
+        }
 
+        public override void OnJoinedLobby()
+        {
             _multiplayerCanvas?.Open();
+        }
+
+        public override void OnLeftLobby()
+        {
+            Open();
         }
     }
 }

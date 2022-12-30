@@ -71,14 +71,15 @@ namespace Helpers
         public static Tweener FadeUp(this CanvasGroup obj, float duration = 0.5f, bool setInteractable = true, Ease ease = Ease.OutBack, Action completeCallback = null)
         {
             if (obj == null) return null;
+            
+            if (setInteractable)
+            {
+                obj.interactable = true;
+                obj.blocksRaycasts = true;
+            }
 
             return obj.FadeeTo(1, duration, ease).OnComplete(() =>
             {
-                if (setInteractable)
-                {
-                    obj.interactable = true;
-                    obj.blocksRaycasts = true;
-                }
 
                 completeCallback?.Invoke();
             });
