@@ -81,8 +81,7 @@ namespace UI.Window
 
         private void SpawnPlayer(Player player)
         {
-            var playerInstance = Instantiate(_roomPlayerUnit, _roomPlayerContent);
-            playerInstance.SetDetails(player);
+            PopulaterPlayers();
         }
 
         private void DestroyPlayer(Player player)

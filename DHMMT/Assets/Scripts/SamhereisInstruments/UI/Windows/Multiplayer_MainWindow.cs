@@ -21,12 +21,13 @@ namespace UI.Window
         [SerializeField] private Button _setNickname;
 
         [Header("Components")]
-        [SerializeField] private TextMeshProUGUI _nicknameText;
+        [SerializeField] private TMP_InputField _nicknameText;
 
         private void Start()
         {
             _joinRoomButton.onClick.AddListener(OnJoinRoomButtonClicked);
             _createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
+            _setNickname.onClick.AddListener(SetNickname);
         }
 
         protected override void OnDestroy()
@@ -34,7 +35,8 @@ namespace UI.Window
             base.OnDestroy();
 
             _joinRoomButton.onClick.RemoveListener(OnJoinRoomButtonClicked);
-            _createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
+            _createRoomButton.onClick.RemoveListener(OnCreateRoomButtonClicked);
+            _setNickname.onClick.RemoveListener(SetNickname);
         }
 
         private void OnJoinRoomButtonClicked()
@@ -49,7 +51,7 @@ namespace UI.Window
 
         public void SetNickname()
         {
-            if(StringHelper.IsNickName(_nicknameText.text))
+            if (StringHelper.IsNickName(_nicknameText.text))
             {
                 PhotonNetwork.NickName = _nicknameText.text;
             }

@@ -17,7 +17,7 @@ namespace UI.Elements
         public void SetDetails(Player player)
         {
             assossiatedPlayer = player;
-            _playerName.text = player.UserId;
+            _playerName.text = player.NickName;
         }
     }
 }

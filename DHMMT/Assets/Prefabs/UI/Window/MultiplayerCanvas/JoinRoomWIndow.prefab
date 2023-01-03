@@ -224,7 +224,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 1
   m_CellSize: {x: 0, y: 0}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 25}
   m_Constraint: 1
   m_ConstraintCount: 1
 --- !u!114 &3635166563097112163
@@ -804,8 +804,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 3015650083733532907}
   _rectTransform: {fileID: 3063579812452146914}
-  _top: 5
-  _bottom: 5
+  _top: 10
+  _bottom: 15
   _left: 5
   _right: 5
 --- !u!1 &7194035130545656877

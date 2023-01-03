@@ -31,7 +31,7 @@ namespace UI.Elements
 
             try
             {
-                _roomName.text += " " + PhotonNetwork.CurrentRoom.CustomProperties["SceneName"];
+                _roomName.text += " - " + roomInfo.CustomProperties["SceneName"];
             }
             finally
             {
