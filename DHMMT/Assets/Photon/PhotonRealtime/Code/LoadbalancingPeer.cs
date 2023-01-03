@@ -1855,7 +1855,7 @@ namespace Photon.Realtime
         /// The shorter your keys are, the better.
         /// Example: Map, Mode (could be "m" when used with "Map"), TileSet (could be "t").
         /// </remarks>
-        public Hashtable CustomRoomProperties;
+        public Hashtable CustomRoomProperties = new Hashtable();
 
         /// <summary>Defines the custom room properties that get listed in the lobby.</summary>
         /// <remarks>

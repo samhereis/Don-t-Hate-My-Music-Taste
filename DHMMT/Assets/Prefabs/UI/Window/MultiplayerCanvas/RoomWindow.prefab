@@ -745,6 +745,7 @@ MonoBehaviour:
     parentCanvas: {fileID: 0}
   _mainMenu: {fileID: 0}
   _exitRoomButton: {fileID: 1260871114887266713}
+  _startGameButton: {fileID: 0}
   _roomNameText: {fileID: 1245082264204350678}
   _roomPlayerContent: {fileID: 3014443713438312492}
   _roomPlayerUnit: {fileID: 2923666581022398899, guid: 7a7f1a914aa1a4f4ba56e6238ce5c7a7, type: 3}

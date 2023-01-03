@@ -18,6 +18,7 @@ namespace UI.Window
 
         [Header("Buttons")]
         [SerializeField] private Button _exitRoomButton;
+        [SerializeField] private Button _startGameButton;
 
         [Header("Other UI Elements")]
         [SerializeField] private TextMeshProUGUI _roomNameText;
@@ -52,6 +53,11 @@ namespace UI.Window
             NetworkEvents.onPlayerLeaveRoom -= DestroyPlayer;
 
             ClearPlayers();
+        }
+
+        private void StartGame()
+        {
+            PhotonNetwork.LoadLevel("");
         }
 
         private void PopulaterPlayers()

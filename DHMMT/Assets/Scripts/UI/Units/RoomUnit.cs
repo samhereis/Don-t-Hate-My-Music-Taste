@@ -28,6 +28,15 @@ namespace UI.Elements
         {
             _roomInfo = roomInfo;
             _roomName.text = roomInfo.Name;
+
+            try
+            {
+                _roomName.text += " " + PhotonNetwork.CurrentRoom.CustomProperties["SceneName"];
+            }
+            finally
+            {
+                
+            }
         }
 
         public void JoinRoom()

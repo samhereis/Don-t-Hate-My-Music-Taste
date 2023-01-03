@@ -866,6 +866,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165347884185267952, guid: 761514e2be7a3624aa534acd0f1dbf4b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -974.8845
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165347884185267952, guid: 761514e2be7a3624aa534acd0f1dbf4b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -987.07056
+      objectReference: {fileID: 0}
     - target: {fileID: 8793126389339414864, guid: 761514e2be7a3624aa534acd0f1dbf4b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1743,7 +1751,7 @@ GameObject:
   - component: {fileID: 2120308416}
   - component: {fileID: 2120308417}
   m_Layer: 0
-  m_Name: NetworkEvents
+  m_Name: Network
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

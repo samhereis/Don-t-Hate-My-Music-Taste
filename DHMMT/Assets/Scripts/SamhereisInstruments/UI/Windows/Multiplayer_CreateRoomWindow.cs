@@ -21,6 +21,7 @@ namespace UI.Window
 
         [Header("Other UI Elements")]
         [SerializeField] private TMP_InputField _roomNameText;
+        [SerializeField] private TMP_InputField _sceneName;
 
         [Header("Settings")]
         [SerializeField][Range(2, 10)] private int _maxPlayers;
@@ -45,14 +46,18 @@ namespace UI.Window
                 return;
             }
 
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 4;
-
             NetworkEvents.onJoinedRoom += OnJoinedARoom;
             NetworkEvents.onJoinedRoomFailed += OnJoinedARoomFailed;
 
             LoadingCanvas.instance.SetText("Creating room...");
             LoadingCanvas.instance.Open();
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 4;
+
+            SetCustomPropertiesForLobby(roomOptions);
+
+            roomOptions.CustomRoomProperties.Add("SceneName", _sceneName.text);
 
             PhotonNetwork.CreateRoom(_roomNameText.text, roomOptions);
         }
@@ -73,6 +78,11 @@ namespace UI.Window
             NetworkEvents.onJoinedRoomFailed -= OnJoinedARoomFailed;
 
             _mainWindow?.Open();
+        }
+
+        private void SetCustomPropertiesForLobby(RoomOptions roomOptions)
+        {
+            roomOptions.CustomRoomPropertiesForLobby = new string[1] { "SceneName" };
         }
     }
 }

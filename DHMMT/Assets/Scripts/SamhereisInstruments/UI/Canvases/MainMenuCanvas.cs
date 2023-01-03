@@ -62,7 +62,9 @@ namespace UI.Canvases
         private void OnConnectedToMaster()
         {
             _loadingCanvas?.SetText("Joining lobby...");
+
             PhotonNetwork.JoinLobby();
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         private void OnJoinedLobby()
