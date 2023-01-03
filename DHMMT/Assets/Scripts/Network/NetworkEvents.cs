@@ -23,6 +23,8 @@ namespace Network
         public static Action<Player> onPlayerEnterRoom;
         public static Action<Player> onPlayerLeaveRoom;
 
+        public static Action<Player> onMasterSwitched;
+
         [SerializeField] private static List<RoomInfo> _rooms = new List<RoomInfo>();
         public static List<RoomInfo> rooms => _rooms;
 
@@ -80,6 +82,11 @@ namespace Network
         {
             Debug.Log("OnPlayerLeftRoom");
             onPlayerLeaveRoom?.Invoke(otherPlayer);
+        }
+
+        public override void OnMasterClientSwitched(Player newMasterClient)
+        {
+            onMasterSwitched?.Invoke(newMasterClient);
         }
     }
 }

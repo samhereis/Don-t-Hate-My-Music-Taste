@@ -34,12 +34,14 @@ namespace UI.Window
             _roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
             _exitRoomButton.onClick.AddListener(LeaveRoom);
+            UpdateStartGameButton();
 
             NetworkEvents.onLeftRoom += OnLeftRoom;
-            NetworkEvents.onPlayerEnterRoom += SpawnPlayer;
+            NetworkEvents.onPlayerEnterRoom += OnPlayerAdded;
             NetworkEvents.onPlayerLeaveRoom += DestroyPlayer;
+            NetworkEvents.onMasterSwitched += OnMasterSwitched;
 
-            PopulaterPlayers();
+            UpdatePlayers();
         }
 
         public override void Disable(float? duration = null)
@@ -47,20 +49,22 @@ namespace UI.Window
             base.Disable(duration);
 
             _exitRoomButton.onClick.RemoveListener(LeaveRoom);
+            _startGameButton.onClick.RemoveListener(StartGame);
 
             NetworkEvents.onLeftRoom -= OnLeftRoom;
-            NetworkEvents.onPlayerEnterRoom -= SpawnPlayer;
+            NetworkEvents.onPlayerEnterRoom -= OnPlayerAdded;
             NetworkEvents.onPlayerLeaveRoom -= DestroyPlayer;
+            NetworkEvents.onMasterSwitched -= OnMasterSwitched;
 
             ClearPlayers();
         }
 
         private void StartGame()
         {
-            PhotonNetwork.LoadLevel("");
+            PhotonNetwork.LoadLevel("Escape From Haters");
         }
 
-        private void PopulaterPlayers()
+        private void UpdatePlayers()
         {
             ClearPlayers();
 
@@ -79,9 +83,15 @@ namespace UI.Window
             }
         }
 
-        private void SpawnPlayer(Player player)
+        private void OnPlayerAdded(Player player)
         {
-            PopulaterPlayers();
+            UpdatePlayers();
+            UpdateStartGameButton();
+        }
+
+        private void OnMasterSwitched(Player player)
+        {
+            UpdateStartGameButton();
         }
 
         private void DestroyPlayer(Player player)
@@ -103,6 +113,13 @@ namespace UI.Window
         {
             NetworkEvents.onLeftRoom -= OnLeftRoom;
             _mainMenu?.Open();
+        }
+
+        private void UpdateStartGameButton()
+        {
+            _startGameButton.onClick.RemoveListener(StartGame);
+            if (PhotonNetwork.IsMasterClient) _startGameButton.onClick.AddListener(StartGame);
+            _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
         }
     }
 }
