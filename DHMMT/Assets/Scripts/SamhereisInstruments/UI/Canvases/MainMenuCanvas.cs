@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Network;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,15 +18,34 @@ namespace UI.Canvases
 
         private void Start()
         {
-            _playMultiplayerButton.onClick.RemoveListener(PlayerMultiplayer);
-            _playMultiplayerButton.onClick.AddListener(PlayerMultiplayer);
+            Subscribe();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
+            UnSubscribe();
+        }
+
+        private void Subscribe()
+        {
+            UnSubscribe();
+
+            _playMultiplayerButton.onClick.AddListener(PlayerMultiplayer);
+
+            NetworkEvents.onConnectedToMaster += OnConnectedToMaster;
+            NetworkEvents.onJoinedLobby += OnJoinedLobby;
+            NetworkEvents.onLeftLobby += OnLeftLobby;
+        }
+
+        private void UnSubscribe()
+        {
             _playMultiplayerButton.onClick.RemoveListener(PlayerMultiplayer);
+
+            NetworkEvents.onConnectedToMaster -= OnConnectedToMaster;
+            NetworkEvents.onJoinedLobby -= OnJoinedLobby;
+            NetworkEvents.onLeftLobby -= OnLeftLobby;
         }
 
         private void PlayerMultiplayer()
@@ -39,18 +59,18 @@ namespace UI.Canvases
             }
         }
 
-        public override void OnConnectedToMaster()
+        private void OnConnectedToMaster()
         {
             _loadingCanvas?.SetText("Joining lobby...");
             PhotonNetwork.JoinLobby();
         }
 
-        public override void OnJoinedLobby()
+        private void OnJoinedLobby()
         {
             _multiplayerCanvas?.Open();
         }
 
-        public override void OnLeftLobby()
+        private void OnLeftLobby()
         {
             Open();
         }

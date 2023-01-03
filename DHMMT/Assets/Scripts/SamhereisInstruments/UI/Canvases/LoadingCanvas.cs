@@ -1,7 +1,9 @@
 using Helpers;
+using System;
 using System.Threading;
 using TMPro;
 using Tools;
+using UI.Window;
 using UnityEngine;
 
 namespace UI.Canvases
@@ -22,7 +24,20 @@ namespace UI.Canvases
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            CanvasWindowBase.onAWindowOpen += OnAWindowOpen;
         }
+
+        protected override void OnDestroy()
+        {
+            CanvasWindowBase.onAWindowOpen -= OnAWindowOpen;
+        }
+
+        private void OnAWindowOpen(CanvasWindowBase obj)
+        {
+            Close();
+        }
+
 
         public void SetText(string loadingText)
         {

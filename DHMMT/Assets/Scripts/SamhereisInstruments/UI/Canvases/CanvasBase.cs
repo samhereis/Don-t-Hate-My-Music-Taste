@@ -12,7 +12,7 @@ namespace UI.Canvases
     [RequireComponent(typeof(Canvas))]
     [RequireComponent(typeof(CanvasScaler))]
     [RequireComponent(typeof(GraphicRaycaster))]
-    public abstract class CanvasBase : MonoBehaviourPunCallbacks
+    public abstract class CanvasBase : MonoBehaviour
     {
         protected static Action<CanvasBase> onACanvasOpen;
 
@@ -43,6 +43,11 @@ namespace UI.Canvases
             Disable();
         }
 
+        public void EnsureIsOpen()
+        {
+            if (baseSettings.isOpen == false) Open();
+        }
+
         public virtual void OnACanvasOpen(CanvasBase UIWIndow)
         {
             if (UIWIndow != this) Disable();
@@ -50,11 +55,16 @@ namespace UI.Canvases
 
         public virtual void Enable(float? duration = null)
         {
-            if (baseSettings.notifyOthers == true) onACanvasOpen?.Invoke(this);
-            gameObject.SetActive(true);
+            if (baseSettings.isOpen == false)
+            {
+                baseSettings.isOpen = true;
+                
+                if (baseSettings.notifyOthers == true) onACanvasOpen?.Invoke(this);
+                gameObject.SetActive(true);
 
-            baseSettings.canvasGroup.FadeUp(duration != null ? duration.Value : baseSettings.animationDuration);
-            baseSettings.defaultWindow?.Open();
+                baseSettings.canvasGroup.FadeUp(duration != null ? duration.Value : baseSettings.animationDuration);
+                baseSettings.defaultWindow?.Open();
+            }
         }
 
         public virtual void Disable(float? duration = null)
@@ -65,6 +75,8 @@ namespace UI.Canvases
             {
                 if (baseSettings.enableDisable == true) gameObject.SetActive(false);
             });
+
+            baseSettings.isOpen = false;
         }
 
         [ContextMenu("Setup")]
@@ -78,6 +90,8 @@ namespace UI.Canvases
         [System.Serializable]
         protected class BaseSettings
         {
+            public bool isOpen;
+
             [Header("Settings")]
             public bool enableDisable = true;
             public bool notifyOthers = true;

@@ -9,22 +9,20 @@ namespace UI
     {
         public static MessageToUser instance;
 
-        [Header("Log")]
-        [SerializeField] private RectTransform _transform;
-        [SerializeField] private TextMeshProUGUI _text;
+        [Header("Errors")]
+        [SerializeField] private RectTransform _messageRect;
+        [field: SerializeField] public RectTransform roomNameIsTooShort;
 
-        [Header("Log Error")]
-        [SerializeField] private CanvasGroup _logErrorCanvas;
-        [SerializeField] private TextMeshProUGUI _logErrorText;
+        [Header("Texts")]
+        [SerializeField] private TextMeshProUGUI _errorText;
+        [SerializeField] private TextMeshProUGUI _messageText;
 
         [Header("Settings")]
+        [SerializeField] private float _showYPosition = -200;
+        [SerializeField] private float _hideYPosition = 200;
         [SerializeField] private float _animationDuration = 0.5f;
-        [SerializeField] private float _duration = 2;
-
-        [Header("Log Settings")]
-        [SerializeField] private float _showYPosition = 200f;
-        [SerializeField] private float _hideYPosition = 200f;
-        [SerializeField] private Ease _ease = Ease.InOutBack;
+        [SerializeField] private float _showDuration = 2f;
+        [SerializeField] private Ease _ease;
 
         [Header("Debug")]
         [SerializeField] private bool _isShowingMessage = false;
@@ -41,62 +39,49 @@ namespace UI
                 Destroy(gameObject);
                 return;
             }
+        }
 
-            Hide(0);
+        public async void Log(RectTransform messageToShow)
+        {
+            await AsyncHelper.Delay();
+
+            ShowUpLog(messageToShow);
         }
 
         public async void Log(string message)
         {
             await AsyncHelper.Delay();
 
-            ShowUpLog();
-            _text.text = message;
+            _messageText.text = message;
+            ShowUpLog(_messageRect);
         }
 
-        public async void LogError(string message)
-        {
-            await AsyncHelper.Delay();
-
-            ShowUpError();
-            _logErrorText.text = message;
-        }
-
-        private void ShowUpLog()
+        private void ShowUpLog(RectTransform messageToShow)
         {
             if (_isShowingMessage == false)
             {
                 _isShowingMessage = true;
 
-                _transform.DOAnchorPos3DY(_showYPosition, _animationDuration).SetEase(_ease).OnComplete(async () =>
+                messageToShow.gameObject.SetActive(true);
+
+                messageToShow.DOKill();
+                messageToShow.DOAnchorPos3DY(_showYPosition, _animationDuration).SetEase(_ease).OnComplete(async () =>
                 {
-                    await AsyncHelper.Delay(_duration);
-                    Hide(_animationDuration);
+                    await AsyncHelper.Delay(_showDuration);
+                    Hide(messageToShow);
 
                     _isShowingMessage = false;
                 });
             }
         }
 
-        private void ShowUpError()
+        private void Hide(RectTransform messageToShow)
         {
-            _transform.DOKill();
-            _logErrorCanvas.FadeUp(_animationDuration).SetEase(_ease).OnComplete(async () =>
+            messageToShow.DOKill();
+            messageToShow.DOAnchorPos3DY(_hideYPosition, _animationDuration).SetEase(_ease).OnComplete(() =>
             {
-                await AsyncHelper.DelayAndDo(_duration, () => Hide(_animationDuration));
+                messageToShow.gameObject.SetActive(false);
             });
-        }
-
-        private void Hide(float duration)
-        {
-            _transform.DOKill();
-            _logErrorCanvas.FadeDown(duration).SetEase(_ease);
-            _transform.DOAnchorPos3DY(_hideYPosition, duration).SetEase(_ease);
-        }
-
-        [ContextMenu("Debug")]
-        public void Debug()
-        {
-            Log("Test text");
         }
     }
 }

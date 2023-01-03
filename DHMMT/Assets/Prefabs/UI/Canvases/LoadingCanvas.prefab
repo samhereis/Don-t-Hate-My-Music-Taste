@@ -117,7 +117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2845022215434710106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -127,12 +127,12 @@ RectTransform:
   m_GameObject: {fileID: 2845022215434710109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3588520683212123192}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSettings:
+    isOpen: 0
     enableDisable: 1
-    notifyOthers: 1
+    notifyOthers: 0
     animationDuration: 0.5
     canvasGroup: {fileID: 8436655706292944500}
     defaultWindow: {fileID: 0}

@@ -2,6 +2,7 @@ using DG.Tweening;
 using Helpers;
 using Photon.Pun;
 using System;
+using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +10,16 @@ namespace UI.Window
 {
     [RequireComponent(typeof(UIWindowEditorHelper))]
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class CanvasWindowBase : MonoBehaviourPunCallbacks
+    public abstract class CanvasWindowBase : MonoBehaviour
     {
-        protected static Action<CanvasWindowBase> onAWindowOpen;
+        public static Action<CanvasWindowBase> onAWindowOpen;
 
         [SerializeField] protected BaseSettings baseSettings = new BaseSettings();
+
+        protected virtual void OnValidate()
+        {
+            Setup();
+        }
 
         protected virtual void Awake()
         {
@@ -43,14 +49,21 @@ namespace UI.Window
 
         public virtual void Enable(float? duration = null)
         {
-            if (baseSettings.notifyOthers == true) onAWindowOpen?.Invoke(this);
+            if (baseSettings.isOpen == false)
+            {
+                baseSettings.isOpen = true;
+                
+                baseSettings.parentCanvas?.EnsureIsOpen();
 
-            baseSettings.canvasGroup.DOKill();
+                if (baseSettings.notifyOthers == true) onAWindowOpen?.Invoke(this);
 
-            if (duration == null) duration = baseSettings.animationDuration;
+                baseSettings.canvasGroup.DOKill();
 
-            if (baseSettings.enableDisable) gameObject.SetActive(true);
-            baseSettings.canvasGroup.FadeUp(duration.Value);
+                if (duration == null) duration = baseSettings.animationDuration;
+
+                if (baseSettings.enableDisable) gameObject.SetActive(true);
+                baseSettings.canvasGroup.FadeUp(duration.Value);
+            }
         }
 
         public virtual void Disable(float? duration = null)
@@ -62,18 +75,23 @@ namespace UI.Window
             baseSettings.canvasGroup.FadeDown(duration.Value)?.OnComplete(() =>
             {
                 if (baseSettings.enableDisable) gameObject.SetActive(false);
-            }); ;
+            });
+
+            baseSettings.isOpen = false;
         }
 
         public virtual void Setup()
         {
             if (baseSettings.canvasGroup == null) baseSettings.canvasGroup = GetComponent<CanvasGroup>();
+            if (baseSettings.parentCanvas == null) baseSettings.parentCanvas = GetComponentInParent<CanvasBase>(true);
             this.TrySetDirty();
         }
 
         [System.Serializable]
         protected class BaseSettings
         {
+            public bool isOpen;
+
             [Header("Settings")]
             public bool enableDisable = true;
             public bool notifyOthers = true;
@@ -81,6 +99,7 @@ namespace UI.Window
 
             [Header("Components")]
             public CanvasGroup canvasGroup;
+            public CanvasBase parentCanvas;
         }
     }
 }

@@ -1345,7 +1345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSettings:
-    enableDisable: 0
+    isOpen: 0
+    enableDisable: 1
     notifyOthers: 1
     animationDuration: 0.5
     canvasGroup: {fileID: 4172754258452530401}

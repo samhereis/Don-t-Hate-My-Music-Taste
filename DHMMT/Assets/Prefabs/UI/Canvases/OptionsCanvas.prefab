@@ -2337,6 +2337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSettings:
+    isOpen: 0
     enableDisable: 1
     notifyOthers: 1
     animationDuration: 0.5

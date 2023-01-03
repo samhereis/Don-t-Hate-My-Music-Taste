@@ -65,6 +65,8 @@ namespace Helpers
 
         public static Tweener FadeeTo(this CanvasGroup obj, float value, float duration, Ease ease = Ease.OutBack)
         {
+            obj.DOKill();
+            
             return obj.DOFade(value, duration).SetEase(ease).SetUpdate(true);
         }
 
