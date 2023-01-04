@@ -33,14 +33,6 @@ namespace Pooling
             }
         }
 
-        public virtual void Spawn(int quantity = 5, Transform parent = null)
-        {
-            for (int i = 0; i < quantity; i++)
-            {
-                PutIn(Instantiate(poolable, parent));
-            }
-        }
-
         [ContextMenu(nameof(Clear))]
         public virtual void Clear()
         {

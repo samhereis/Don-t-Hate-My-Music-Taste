@@ -1,5 +1,8 @@
 using Gameplay;
+using Helpers;
 using Identifiers;
+using Network;
+using Photon.Pun;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,14 +31,18 @@ namespace Characters.States.Data
 
         private void OnValidate()
         {
-            if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
+            if (_identifier == null)
+            {
+                _identifier = GetComponent<IdentifierBase>();
+                this.TrySetDirty();
+            }
         }
 
         private void Awake()
         {
             if (_defaultWeapon != null)
             {
-                _firstWeapon = Instantiate(_defaultWeapon, transform);
+                _firstWeapon = PhotonNetwork.Instantiate(_defaultWeapon.name, transform.position, Quaternion.identity).GetComponent<InteractableEquipWeapon>();
                 _firstWeapon?.Interact(_identifier);
             }
 
@@ -45,14 +52,17 @@ namespace Characters.States.Data
 
         private void OnEnable()
         {
-            _input.Gameplay.Fire.performed += Fire;
-            _input.Gameplay.Fire.canceled += Fire;
+            if (_identifier.TryGet<PhotonView>().IsMine)
+            {
+                _input.Gameplay.Fire.performed += Fire;
+                _input.Gameplay.Fire.canceled += Fire;
 
-            _input.Gameplay.Reload.performed += Reload;
+                _input.Gameplay.Reload.performed += Reload;
 
-            _input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
+                _input.Gameplay.ChangeWeapon.performed += ChangeWeapon;
 
-            _input.Gameplay.Sprint.performed += Sprint;
+                _input.Gameplay.Sprint.performed += Sprint;
+            }
         }
 
         private void OnDisable()

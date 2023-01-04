@@ -1,3 +1,7 @@
+using Helpers;
+using Identifiers;
+using Network;
+using Photon.Pun;
 using PlayerInputHolder;
 using Settings;
 using UnityEngine;
@@ -8,7 +12,7 @@ namespace Gameplay.Camera
     public class CameraMovement : MonoBehaviour
     {
         [SerializeField] private Transform _moveCameraTowards;
-        [SerializeField] private Transform _playerBody;
+        [SerializeField] private PlayerIdentifier _identifier;
 
         [Header("SO")]
         [SerializeField] private FloatSetting_SO _sensitivity;
@@ -21,6 +25,15 @@ namespace Gameplay.Camera
         [SerializeField] private float _mouseY;
         [SerializeField] private float _xRotation;
 
+        private void OnValidate()
+        {
+            if (_identifier == null)
+            {
+                _identifier = GetComponentInParent<PlayerIdentifier>(true);
+                this.TrySetDirty();
+            }
+        }
+
         private void Awake()
         {
             transform.position = _moveCameraTowards.position;
@@ -28,8 +41,15 @@ namespace Gameplay.Camera
 
         private void OnEnable()
         {
-            _input.Gameplay.Look.performed += Look;
-            _input.Gameplay.Look.canceled += Look;
+            if (_identifier.TryGet<PhotonView>().IsMine)
+            {
+                _input.Gameplay.Look.performed += Look;
+                _input.Gameplay.Look.canceled += Look;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         private void OnDisable()
@@ -51,7 +71,7 @@ namespace Gameplay.Camera
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
             transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-            _playerBody.Rotate(Vector3.up * _mouseX);
+            _identifier.transform.Rotate(Vector3.up * _mouseX);
         }
     }
 }

@@ -213,6 +213,8 @@ GameObject:
   - component: {fileID: 2938201030753303005}
   - component: {fileID: 7838422122771901544}
   - component: {fileID: 4300912687411276486}
+  - component: {fileID: 5725343478945067804}
+  - component: {fileID: 5557960958217966862}
   m_Layer: 3
   m_Name: enemy Dark
   m_TagString: Untagged
@@ -343,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedf41e6510d034439fb7ca650d98d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <isAlive>k__BackingField: 0
+  <isAlive>k__BackingField: 1
   health: 100
   maxHealth: 100
   _onEnemyDie: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
@@ -360,6 +362,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e708654737c151d4ea34c88692091b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5725343478945067804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296317459984324053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5557960958217966862}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5557960958217966862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296317459984324053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3557701303690937443
 GameObject:
   m_ObjectHideFlags: 0

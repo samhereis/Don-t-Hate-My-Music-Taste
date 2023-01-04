@@ -10,8 +10,6 @@ namespace DI
 
         private void Awake()
         {
-            DIBox.RegisterSingle<Vector3>(new Vector3(9, 9, 9));
-
             foreach (var manual in _manualBind) manual.Create();
             foreach (var obj in _objects) DIBox.RegisterSingleType(obj.Instance, obj.id);
         }

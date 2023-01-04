@@ -36,24 +36,30 @@ namespace Gameplay
             _flash?.Play();
         }
 
-        public async Task OnEnd(Action callback = null)
+        public async Task OnEnd()
         {
-            _parent?.gameObject.SetActive(false);
-            _parent?.Stop();
-
-            _flash?.gameObject.SetActive(false);
-            _flash?.Stop();
-
-            _hit?.gameObject.SetActive(true);
-            _hit?.Play();
-
-            if (_hit != null)
+            try
             {
-                if (callback != null) await AsyncHelper.DelayAndDo(_hit.main.duration, () => callback.Invoke());
+                _parent?.gameObject?.SetActive(false);
+                _parent?.Stop();
+
+                _flash?.gameObject?.SetActive(false);
+                _flash?.Stop();
+
+                _hit?.gameObject.SetActive(true);
+                _hit?.Play();
+
             }
-            else
+            finally
             {
-                if (callback != null) await AsyncHelper.DelayAndDo(1, () => callback.Invoke());
+                if (_hit != null)
+                {
+                    await AsyncHelper.Delay(_hit.main.duration);
+                }
+                else
+                {
+                    await AsyncHelper.Delay(1);
+                }
             }
         }
     }

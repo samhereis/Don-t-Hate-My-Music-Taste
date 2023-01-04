@@ -1,4 +1,5 @@
 using Identifiers;
+using Photon.Pun;
 using Samhereis.Events;
 using UnityEngine;
 
@@ -14,10 +15,23 @@ namespace Characters.States.Data
             if (_enemyIdentifier == null) _enemyIdentifier = GetComponent<EnemyIdentifier>();
         }
 
-        private void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
+
             health = maxHealth;
             isAlive = true;
+        }
+
+        private void Die()
+        {
+            if (photonView.IsMine)
+            {
+                isAlive = false;
+                
+                PhotonNetwork.Destroy(photonView);
+                _onEnemyDie?.Invoke(_enemyIdentifier);
+            }
         }
 
         public override void TakeDamage(float damage)
@@ -29,11 +43,10 @@ namespace Characters.States.Data
             }
         }
 
-        private void Die()
+        [PunRPC]
+        public override void RPC_TakeDamage(float damage)
         {
-            isAlive = false;
-            Destroy(gameObject, 1);
-            _onEnemyDie?.Invoke(_enemyIdentifier);
+            TakeDamage(damage);
         }
     }
 }

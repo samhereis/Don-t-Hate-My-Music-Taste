@@ -1,5 +1,8 @@
+using Helpers;
 using Identifiers;
 using Interfaces;
+using Network;
+using Photon.Pun;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,12 +19,19 @@ namespace Gameplay
 
         private void OnValidate()
         {
-            if (_identifier == null) _identifier = GetComponent<IdentifierBase>();
+            if (_identifier == null)
+            {
+                _identifier = GetComponent<IdentifierBase>();
+                this.TrySetDirty();
+            }
         }
 
         private void OnEnable()
         {
-            _input.Gameplay.Interact.performed += Interact;
+            if (_identifier.TryGet<PhotonView>().IsMine)
+            {
+                _input.Gameplay.Interact.performed += Interact;
+            }
         }
 
         private void OnDisable()

@@ -1,6 +1,7 @@
 using Characters.States.Data;
 using Helpers;
 using Interfaces;
+using Photon.Pun;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,7 +10,6 @@ namespace Gameplay.Bullets
 {
     public class SimpleGunBullet : ProjectileBase
     {
-        public Action onCollided;
 
         [Header("Components")]
         [SerializeField] private Rigidbody _rigidbody;
@@ -30,50 +30,65 @@ namespace Gameplay.Bullets
             if (_projectileView == null) _projectileView = GetComponentInChildren<ProjectileView>();
         }
 
-        private async void OnEnable()
+        public override async void OnEnable()
         {
-            _projectileView?.Init();
+            base.OnEnable();
 
-            _angle = new Vector3(Random.Range(-_angleDifference, _angleDifference), Random.Range(-_angleDifference, _angleDifference), _speed * 100);
-            onCollided += OnEnd;
+            if (photonView.IsMine)
+            {
+                gameObject.GetPhotonView().RPC(nameof(RPC_OnStart), RpcTarget.All);
 
-            _rigidbody.AddRelativeForce(_angle);
+                _angle = new Vector3(Random.Range(-_angleDifference, _angleDifference), Random.Range(-_angleDifference, _angleDifference), _speed * 100);
 
-            await AsyncHelper.DelayAndDo(_selfPutinToPoolTime, () => OnEnd());
+                _rigidbody.AddRelativeForce(_angle);
+
+                await AsyncHelper.DelayAndDo(_selfPutinToPoolTime, () =>
+                {
+                    if (gameObject != null && gameObject.activeSelf)
+                    {
+                        gameObject.GetPhotonView().RPC(nameof(RPC_OnEnd), RpcTarget.All);
+                    }
+                });
+            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (photonView.IsMine)
             {
-                DamagePlayer(damagable, _damage);
-
-                _rigidbody.velocity = Vector3.zero;
-                _rigidbody.angularVelocity = Vector3.zero;
-                _rigidbody.ResetInertiaTensor();
-
-                onCollided?.Invoke();
+                if (other.TryGetComponent(out IDamagable damagable))
+                {
+                    other.gameObject.GetPhotonView().RPC(nameof(damagable.RPC_TakeDamage), RpcTarget.All, _damage);
+                    gameObject.GetPhotonView().RPC(nameof(RPC_OnEnd), RpcTarget.All);
+                }
             }
         }
 
-        private void DamagePlayer(IDamagable damagable, float damage)
+        [PunRPC]
+        private void RPC_OnStart()
         {
-            damagable.TakeDamage(damage);
+            gameObject.gameObject.SetActive(true);
+            _projectileView?.Init();
         }
 
-        private void OnEnd()
+        [PunRPC]
+        private async void RPC_OnEnd()
         {
-            onCollided -= OnEnd;
+            await _projectileView?.OnEnd();
 
-            _projectileView?.OnEnd(() =>
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.ResetInertiaTensor();
+
+            transform.position = Vector3.zero;
+
+            if (photonView.IsMine)
             {
-                _rigidbody.velocity = Vector3.zero;
-                _rigidbody.ResetInertiaTensor();
-
-                transform.position = Vector3.zero;
-
                 _pooling.PutIn(this);
-            });
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

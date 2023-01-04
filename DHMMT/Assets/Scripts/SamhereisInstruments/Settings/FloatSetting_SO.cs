@@ -16,7 +16,7 @@ namespace Settings
         [SerializeField] private string _KEY;
         public string KEY => _KEY;
 
-        [SerializeField] private float _defaultValue = 0.5f;
+        [SerializeField] private float _defaultValue = 0.25f;
 
         private void OnValidate()
         {

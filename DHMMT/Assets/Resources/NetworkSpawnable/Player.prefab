@@ -183,7 +183,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1440332666082851365}
   - component: {fileID: 4116582457067492845}
-  - component: {fileID: 2254379693423994758}
   - component: {fileID: 1601407200960980443}
   - component: {fileID: 666725337}
   - component: {fileID: 2754681447268202540}
@@ -248,29 +247,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!136 &2254379693423994758
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780828685733077151}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 1.65
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &1601407200960980443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1547030488171726249}
   _characterControllerComponent: {fileID: 4116582457067492845}
+  _identifier: {fileID: 8069684054741772957}
   _speedMultiplier: 2
   _speed: 3
   _isMoving: {fileID: 11400000, guid: e1bbc9f8f00489646a71b72dc6460ae1, type: 2}
@@ -307,14 +284,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8207bb788ecc07419f18d82dcbfcd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_playerVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   _animator: {fileID: 1547030488171726249}
   _characterController: {fileID: 4116582457067492845}
-  _jumpHeight: 0.1
-  _gravityValue: -0.1
+  _identifier: {fileID: 8069684054741772957}
+  _jumpHeight: 2.5
+  _gravityValue: -5
   _doubleJump: 0
   _doubleJumpable: 1
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
+  _isJumping: 0
+  _playerVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &2754681447268202540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAiming: {fileID: 11400000, guid: dce5fa242ca876d40a3b3fc11c2c8a9e, type: 2}
+  _identifier: {fileID: 8069684054741772957}
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
 --- !u!114 &7467988608207581382
 MonoBehaviour:
@@ -374,8 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8e518e2161c32488fc2bb0528dee20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <isAlive>k__BackingField: 0
-  health: 0
+  <isAlive>k__BackingField: 1
+  health: 100
   maxHealth: 100
 --- !u!114 &1835056285469830451
 MonoBehaviour:
@@ -498,7 +478,6 @@ GameObject:
   - component: {fileID: 7636539808764068491}
   - component: {fileID: 2486176284863231935}
   - component: {fileID: 295757704}
-  - component: {fileID: 1181777248}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -623,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveCameraTowards: {fileID: 194247547830913028}
-  _playerBody: {fileID: 1440332666082851365}
+  _identifier: {fileID: 8069684054741772957}
   _sensitivity: {fileID: 11400000, guid: b6db32550703799409a97017e49bcd9f, type: 2}
   _inputContainer: {fileID: 11400000, guid: 47fd6d77e8eb89e47aaa8d552fea046d, type: 2}
   _context: {x: 0, y: 0}
@@ -638,63 +617,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5933555776804787160}
   m_Enabled: 1
---- !u!114 &1181777248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933555776804787160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee76f5c3ca2d994abac24ddcc0ef49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CloudsMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  LightMask:
-    serializedVersion: 2
-    m_Bits: 0
-  WorldBlockingMask:
-    serializedVersion: 2
-    m_Bits: 0
-  ResolutionDivider: 3
-  WorldDepthResolutionDivider: 2
-  DepthPrecision: 5
-  LateCut: 1
-  BlurRadius: 10
-  BlurQuality: 10
-  LateCutThreshohld: 0
-  LateCutPower: 1.5
-  UseDepthFiltering: 0
-  DepthFilteringPower: 0
-  UseNoise: 1
-  Noise: {fileID: 2800000, guid: ea4ad7e4f21a143478fefc813c9174ab, type: 3}
-  Wind: {x: 2, y: 1, z: 3}
-  NoiseScale: 1
-  DepthNoiseScale: 1
-  NormalNoisePower: 1
-  DepthNoisePower: 1
-  DisplacementNoisePower: 1
-  NoiseSinTimeScale: 0.2
-  DistanceToClouds: 10
-  Light: {fileID: 0}
-  UseRamp: 0
-  Ramp: {fileID: 0}
-  LightColor: {r: 1, g: 1, b: 1, a: 1}
-  ShadowColor: {r: 0.6, g: 0.72, b: 0.84, a: 1}
-  LightEnd: 0.75
-  HaloPower: 3
-  HaloDistance: 0.5
-  FallbackDistance: 1
-  blurFastShader: {fileID: 4800000, guid: 7ab901123de490e4bad21fdb835edd20, type: 3}
-  blurShader: {fileID: 4800000, guid: fd4453f270eb2734b886efe5223588ce, type: 3}
-  blurHQShader: {fileID: 4800000, guid: 22d75b161fbf2d14b9cd656fde6d05bd, type: 3}
-  depthBlurShader: {fileID: 4800000, guid: 86ffe5743a2c74741be2ae7d00c19d9b, type: 3}
-  depthShader: {fileID: 4800000, guid: 009f6c8cf8d3c144792d6321909e830c, type: 3}
-  cloudShader: {fileID: 4800000, guid: ddd68a53b8f487941ac09b4480974963, type: 3}
-  clearColorShader: {fileID: 4800000, guid: e8f3ce2cbe4971147b1b7f04b791e52a, type: 3}
 --- !u!1 &7395853295611763805
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
+using Characters;
 using Events;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +24,7 @@ namespace Helpers
             _eventWithNoParameters?.AdListener(Spawn);
         }
 
-        private void OnEnable()
+        private void Start()
         {
             if (_spawnOnAwake) Spawn();
         }
@@ -44,7 +46,7 @@ namespace Helpers
         {
             try
             {
-                await AsyncHelper.DelayAndDo(_spawnDelay, () => Instantiate(_prefab, ApplyPosition(Vector3.zero), Quaternion.identity));
+                await AsyncHelper.DelayAndDo(_spawnDelay, () => PhotonNetwork.Instantiate(_prefab.name, ApplyPosition(FindObjectOfType<LeadingAgent>(true).transform.position), Quaternion.identity));
             }
             finally
             {

@@ -1,4 +1,8 @@
 using Characters.States.Data;
+using Helpers;
+using Identifiers;
+using Network;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Gameplay
@@ -16,6 +20,7 @@ namespace Gameplay
 
         [Header("Debug")]
         [SerializeField] float _currentSpeed;
+
 
         private void Awake()
         {

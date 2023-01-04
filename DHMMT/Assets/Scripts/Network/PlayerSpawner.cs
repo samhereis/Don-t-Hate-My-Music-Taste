@@ -17,6 +17,14 @@ namespace Network
             instance = this;
         }
 
+        private void Start()
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                SpawnPlayer();
+            }
+        }
+
         public void SpawnPlayer()
         {
             PhotonNetwork.Instantiate(_playerPrefab.name, Vector3.zero, Quaternion.identity);

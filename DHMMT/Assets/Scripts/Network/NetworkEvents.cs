@@ -9,6 +9,10 @@ namespace Network
 {
     public class NetworkEvents : MonoBehaviourPunCallbacks
     {
+        public static PhotonView photonViewComponent;
+
+        public static NetworkEvents instance;
+
         public static Action onConnectedToMaster;
 
         public static Action onJoinedLobby;
@@ -27,6 +31,21 @@ namespace Network
 
         [SerializeField] private static List<RoomInfo> _rooms = new List<RoomInfo>();
         public static List<RoomInfo> rooms => _rooms;
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                DontDestroyOnLoad(this);
+                instance = this;
+                photonViewComponent = photonView;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
 
         public override void OnConnectedToMaster()
         {
