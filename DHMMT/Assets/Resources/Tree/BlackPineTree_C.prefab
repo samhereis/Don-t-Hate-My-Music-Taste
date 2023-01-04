@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &118088259262823511
 Transform:
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 303285738808954427}
   m_RootOrder: 0
@@ -114,7 +115,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9159150659744303972
 Transform:
@@ -126,6 +127,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 303285738808954427}
   m_RootOrder: 1
@@ -187,7 +189,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &303285738808954427
 Transform:
@@ -199,6 +201,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 118088259262823511}
   - {fileID: 9159150659744303972}
@@ -297,7 +300,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
   m_ShaderKeywords: _WINDQUALITY_NONE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -410,7 +413,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
   m_ShaderKeywords: _WINDQUALITY_NONE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}

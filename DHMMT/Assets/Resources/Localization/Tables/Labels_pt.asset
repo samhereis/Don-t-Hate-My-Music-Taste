@@ -17,13 +17,13 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cf75feee0745d5044a8369dad6a30994, type: 2}
   m_Metadata:
     m_Items:
-    - id: 0
+    - rid: 0
   m_TableData:
   - m_Id: 13774180352
     m_Localized: '{InteractItem}'
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 10120941568
     m_Localized: Seleccione um mapa
     m_Metadata:
@@ -37,18 +37,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: "Certifique-se de que tem m\xFAsica em \"{MusicFolderPath}\""
+    m_Localized: "Certifique-se de que tem m\xFAsica em \"{music-folder.musicFolderPath}\""
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 472228869263360
-    m_Localized: "Voc\xEA tem {MusicCount} m\xFAsicas dispon\xEDveis"
+    m_Localized: "Voc\xEA tem {music-folder.musicCount} m\xFAsicas dispon\xEDveis"
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries: 005001350300000000508172950c00000050015a7dad0100

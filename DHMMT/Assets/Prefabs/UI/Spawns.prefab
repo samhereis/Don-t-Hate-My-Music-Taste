@@ -1,5 +1,114 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1186959928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186959929}
+  - component: {fileID: 1186959930}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186959929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186959928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 154, y: 0, z: 142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871517903394405511}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1186959930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186959928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47dd51c875c70e4ba0c4e46141802f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 2807167464053985135, guid: c153dd1ff548da24ea734f2a34a74a5e, type: 3}
+  _eventWithOneParameter: {fileID: 11400000, guid: e39419ff7cfd8ea47b0a3cc9517b1954, type: 2}
+  _eventWithNoParameters: {fileID: 0}
+  _spawnOnAwake: 1
+  _maxRadiusFromPlayer: 30
+  _minRadiusFromPlayer: 10
+--- !u!1 &1967160843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967160844}
+  - component: {fileID: 1967160845}
+  m_Layer: 0
+  m_Name: Poolables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1967160844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967160843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 154, y: 0, z: 142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871517903394405511}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1967160845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967160843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e735d41530fc344999acbd73ef35810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
+        m_TargetAssemblyTypeName: Pooling.PoolingManagerBase`1[[Bullet, Assembly-CSharp
+        m_MethodName: Clear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &871517903394405510
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,8 +118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871517903394405511}
-  - component: {fileID: 871517903394405508}
-  - component: {fileID: 871517903394405509}
   m_Layer: 0
   m_Name: Spawns
   m_TagString: Untagged
@@ -28,43 +135,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 121.777, y: 0, z: 115.85078}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1186959929}
+  - {fileID: 1967160844}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &871517903394405508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871517903394405510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cafd2f0abdebb1479c62bc9292786fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPointsList: []
-  PlayerSpawnPointList: []
---- !u!114 &871517903394405509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871517903394405510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867f5af2c33bc44a8ff9c9fa82a5b96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPref: {fileID: 1780828685733077151, guid: 707864e341b1de04e967beca971fdcc4, type: 3}
-  EnemyPref: {fileID: 0}
-  AddComponentToPlayer: {fileID: 0}
-  AddComponentToEnemy: {fileID: 0}
-  _waitBeforeSpawnEnemies: 4
-  WaitBeforeSpawnPlayer: 2
-  _spawnOnStart: 1
-  Enemies: []
-  EnemiesReserve: []
-  NumberOfEnemies: 0

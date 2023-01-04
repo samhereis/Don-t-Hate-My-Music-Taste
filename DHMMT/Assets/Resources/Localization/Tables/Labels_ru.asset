@@ -17,13 +17,13 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cf75feee0745d5044a8369dad6a30994, type: 2}
   m_Metadata:
     m_Items:
-    - id: 0
+    - rid: 0
   m_TableData:
   - m_Id: 13774180352
     m_Localized: '{InteractItem}'
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 10120941568
     m_Localized: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043A\u0430\u0440\u0442\u0443"
     m_Metadata:
@@ -39,19 +39,20 @@ MonoBehaviour:
   - m_Id: 13836010737664
     m_Localized: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E
       \u0443 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0430
-      \u0432 \u043F\u0430\u043F\u043A\u0435 \"{MusicFolderPath}\""
+      \u0432 \u043F\u0430\u043F\u043A\u0435 \"{music-folder.musicFolderPath}\""
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 472228869263360
     m_Localized: "\u041D\u0430\u0439\u0434\u0435\u043D\u043E \u043F\u0435\u0441\u0435\u043D:
-      {MusicCount}"
+      {music-folder.musicCount}"
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries: 005001350300000000508172950c00000050015a7dad0100

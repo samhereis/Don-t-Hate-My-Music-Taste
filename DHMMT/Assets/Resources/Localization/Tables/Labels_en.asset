@@ -17,7 +17,7 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cf75feee0745d5044a8369dad6a30994, type: 2}
   m_Metadata:
     m_Items:
-    - id: 0
+    - rid: 0
   m_TableData:
   - m_Id: 10120941568
     m_Localized: Select a map
@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Localized: '{InteractItem}'
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 17934929920
     m_Localized: Volume
     m_Metadata:
@@ -37,18 +37,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13836010737664
-    m_Localized: Please make sure you have music in "{MusicFolderPath}"
+    m_Localized: Please make sure you have music in "{music-folder.musicFolderPath}"
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   - m_Id: 472228869263360
-    m_Localized: You have {MusicCount} songs available
+    m_Localized: You have {music-folder.musicCount} songs available
     m_Metadata:
       m_Items:
-      - id: 0
+      - rid: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries: 005001350300000000508172950c00000050015a7dad0100

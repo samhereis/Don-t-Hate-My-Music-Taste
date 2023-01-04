@@ -1,113 +1,65 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Characters.States.Data;
+using Identifiers;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Events;
 
-public class InteractableEquipWeapon : MonoBehaviour, IInteractable
+namespace Gameplay
 {
-    // Controlls how a weapon equips
-
-    public bool Equiped = false;
-
-    public bool Interactable { get; set; }
-
-    private string _itemName = "Head Swaper";
-    public string ItemName { get { return _itemName;} set { _itemName = value; }}
-
-    public GameObject InteractableObject { get => gameObject; set { } }
-
-    //public Type InteractorDataType { get => typeof(HumanoidEquipWeaponData); set => throw new NotImplementedException(); }
-
-    public GunData GunDataComponent;
-
-    private void Awake ()
+    public class InteractableEquipWeapon : MonoBehaviour, IInteractable
     {
-        ExtentionMethods.SetWithNullCheck(ref GunDataComponent, GetComponent<GunData>());
-    }
+        public bool isInteractable => !_equiped;
+        public string ItemName { get { return _itemName; } private set { _itemName = value; } }
 
-    public void Interact(GameObject caller) // in other words - equiod this weapon to the humanoid
-    {
-        HumanoidEquipWeaponData equipData = caller.GetComponent<HumanoidEquipWeaponData>();
-        Animator animator = caller.GetComponent<Animator>();
+        [SerializeField] private bool _equiped = false;
+        [SerializeField] private string _itemName = "Head Swaper";
 
-        Equiped = true;
-        Interactable = false;
+        [Header("Inverse Kinematics Tramsform")]
+        [SerializeField] private Transform _rightHandIK;
+        [SerializeField] private Transform _leftHandIK;
 
-        {   //Manage Position and Rotation
-            transform.SetParent(equipData.WeaponPosition, false);
-            equipData.WeaponPosition.localPosition = gameObject.GetComponent<GunData>().initialLocalPosition;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
-        }
+        [Header("Components")]
+        [SerializeField] private Animator _animatorComponent;
+        [SerializeField] private Rigidbody _rigidbodyComponent;
+        [SerializeField] private Collider _colliderComponent;
 
-        {   //Manage RigidBody
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<BoxCollider>().enabled = false;
-        }
+        [Header("Events")]
+        public readonly UnityEvent<HumanoidData> onEquip = new UnityEvent<HumanoidData>();
+        public readonly UnityEvent<HumanoidData> onUnequip = new UnityEvent<HumanoidData>();
 
-        {   //Manage player animation layer
-            animator.SetBool("hands", false);
-            animator.SetLayerWeight(1, 1f);
-        }
-
-        {   //Manage constraints and IKs
-            equipData.RightHandIK.data.target = GunDataComponent.rightHandIK;
-            equipData.LeftHandIK.data.target = GunDataComponent.leftHandIK;
-        }
-
+        public void Interact(IdentifierBase caller) // in other words - equiod this weapon to the humanoid
         {
-            caller.GetComponent<WeaponDataHolder>().Set(GunDataComponent, GetComponent<GunUse>(), GetComponent<GunAim>());
+            HumanoidData equipData = caller.TryGet<HumanoidData>();
+            Animator animator = caller.TryGet<Animator>();
+
+            _equiped = true;
+
+            {   //Manage Position and Rotation
+                transform.SetParent(equipData.weaponHolder, false);
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+            }
+
+            {   //Manage RigidBody
+                _rigidbodyComponent.isKinematic = true;
+                _rigidbodyComponent.useGravity = false;
+
+                _colliderComponent.enabled = false;
+            }
+
+            {   //Manage player animation layer
+                animator.SetBool("hands", false);
+                animator.SetLayerWeight(1, 1f);
+            }
+
+            {   //Manage constraints and IKs
+                equipData.RightHandIK.data.target = _rightHandIK;
+                equipData.LeftHandIK.data.target = _leftHandIK;
+            }
+
+            caller.TryGet<RigBuilder>().Build();
+            onEquip?.Invoke(equipData);
         }
-        caller.GetComponent<RigBuilder>().Build();
-    }
-
-    public void Remove()
-    {
-        Destroy(gameObject);
-    }
-
-    public void Activate(bool value)
-    {
-        gameObject.SetActive(value);
-    }
-
-    public void MoveTo(Transform parent)
-    {
-        transform.SetParent(parent);
-    }
-
-    void setParentConstraint(Transform[] source)
-    {
-        var data = GetComponent<MultiParentConstraint>().data.sourceObjects;
-        data.Clear();
-        foreach (Transform obj in source)
-        {
-            data.Add(new WeightedTransform(obj, 0.05f));
-        }
-        GetComponent<MultiParentConstraint>().data.sourceObjects = data;
-        GetComponent<MultiParentConstraint>().data.constrainedObject = this.transform;
-    }
-
-    void clearParentConstraint()
-    {
-        GetComponent<MultiParentConstraint>().data.sourceObjects.Clear();
-        GetComponent<MultiParentConstraint>().data.constrainedObject = null;
-    }
-
-    void setAimConstraint(Transform source)
-    {
-        var data = GetComponent<MultiAimConstraint>().data.sourceObjects;
-        data.Clear();
-        data.Add(new WeightedTransform(source, 1));
-        GetComponent<MultiAimConstraint>().data.sourceObjects = data;
-        GetComponent<MultiAimConstraint>().data.constrainedObject = this.transform;
-    }
-
-    void clearAimConstraint()
-    {
-        GetComponent<MultiAimConstraint>().data.sourceObjects.Clear();
-        GetComponent<MultiAimConstraint>().data.constrainedObject = null;
     }
 }

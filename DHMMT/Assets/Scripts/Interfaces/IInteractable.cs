@@ -1,12 +1,12 @@
-using System;
-using UnityEngine;
+using Identifiers;
+using Samhereis;
 
-public interface IInteractable
+namespace Interfaces
 {
-    // Blueprint of an interactable  object
-
-    bool Interactable { get; set; }
-    string ItemName { get; set; }
-    GameObject InteractableObject { get; set; }
-    void Interact(GameObject caller);
+    public interface IInteractable
+    {
+        public bool isInteractable { get; }
+        public string ItemName { get; }
+        public void Interact(IdentifierBase caller);
+    }
 }

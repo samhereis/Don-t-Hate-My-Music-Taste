@@ -1,95 +1,122 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Characters.States.Data;
+using Helpers;
+using Pooling;
+using Sound;
 using UnityEngine;
+using static UnityEditor.Recorder.OutputPath;
 
-public class GunUse : MonoBehaviour
+namespace Gameplay
 {
-    // Controlls shoot of a weapon
-
-    public Animator WeaponAnimator;
-
-    [Header("Sounds")]
-    [SerializeField] private AudioClip _shootSound;
-    [SerializeField] private AudioSource _audioSource;
-
-    [Header("Shoot Capacity")]
-    public float Damage = 10;
-    public float Range = 100f;
-
-    [Header("Ammo")]
-    [SerializeField] private int _currentAmmo = 8;
-    public int CurrentAmmo { get { return _currentAmmo; } set { _currentAmmo = value; if (_currentAmmo <= 0) { CanShoot = false; StartCoroutine(Reload()); } } }
-    public int MaxAmmo = 50;
-    [SerializeField] private float _reloadTime;
-    [SerializeField] private GameObject _bullet;
-    [SerializeField] private Transform _bulletPosition;
-
-    [Header("Shoot Timing")]
-    public float FireRate = 0.2f;
-    public float NextFire;
-
-    [Header("Shoot States")]
-    public bool IsReloading = false;
-    public bool CanShoot = true;
-    public bool IsShooting = false;
-
-    private void OnEnable()
+    public class GunUse : MonoBehaviour
     {
-        _audioSource.clip = _shootSound;
+        [Header("Components")]
+        [SerializeField] private InteractableEquipWeapon _interactableEquipWeapon;
+        [SerializeField] private Animator _weaponAnimator;
 
-        ExtentionMethods.SetWithNullCheck(ref _audioSource, GetComponent<AudioSource>());
-        ExtentionMethods.SetWithNullCheck(ref WeaponAnimator, GetComponent<GunData>().animator);
-    }
+        [Header("Sounds")]
+        [SerializeField] private SimpleSoundPlayer _shootSound;
 
-    private void OnDisable()
-    {
-        WeaponAnimator = null;
-    }
+        [Header("Ammo")]
+        [SerializeField] private int _currentAmmo = 8;
+        [SerializeField] private int _maxAmmo = 50;
 
-    private void FixedUpdate()
-    {
-        if (IsShooting)
+        [Header("Bullet")]
+        [SerializeField] private BulletPooling_SO _bullet;
+        [SerializeField] private string _bulletPoolerKey;
+        [SerializeField] private Transform _bulletPosition;
+
+        [Header("Shoot Timing")]
+        [SerializeField] private float _fireRate = 0.2f;
+        [SerializeField] private float _nextFire;
+        [SerializeField] private float _reloadTime;
+
+        [Header("Shoot States")]
+        [SerializeField] private bool _isReloading = false;
+        [SerializeField] private bool _canShoot = true;
+        [SerializeField] private bool _shoot = false;
+
+        private async void Awake()
         {
-            Shoot();
+            _weaponAnimator ??= GetComponentInChildren<Animator>();
+
+            _interactableEquipWeapon?.onEquip.AddListener(OnEquip);
+            _interactableEquipWeapon?.onUnequip.AddListener(OnUnEquip);
+
+            if (_bullet == null) _bullet = await AddressablesHelper.GetAssetAsync<BulletPooling_SO>(_bulletPoolerKey);
         }
-    }
 
-    public void Use(bool use)
-    {
-        IsShooting = use;
-    }
-
-    public void Shoot()
-    {
-        if ((Time.time > NextFire) && (CanShoot == true))
+        private void OnDestroy()
         {
-            NextFire = Time.time + FireRate;
-            CurrentAmmo--;
-            Instantiate(_bullet, _bulletPosition.position, _bulletPosition.rotation);
-            _audioSource.Stop();
-            _audioSource.Play();
+            _interactableEquipWeapon?.onEquip.RemoveListener(OnEquip);
+            _interactableEquipWeapon?.onUnequip.RemoveListener(OnUnEquip);
+        }
 
-            WeaponAnimator.SetTrigger("Shoot");
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Range) && hit.collider.GetComponent<IHealthData>() != null)
+        private void FixedUpdate()
+        {
+            if (_shoot) TryShoot();
+        }
+
+        private void OnEquip(HumanoidData sentData)
+        {
+            sentData.humanoidAttackingStateData.onAttack += SetShoot;
+        }
+
+        private void OnUnEquip(HumanoidData sentData)
+        {
+            sentData.humanoidAttackingStateData.onAttack -= SetShoot;
+        }
+
+        public void SetShoot(bool value)
+        {
+            _shoot = value;
+        }
+
+        private async void TryShoot()
+        {
+            if ((Time.time > _nextFire) && (_canShoot == true))
             {
-                hit.collider.GetComponent<IHealthData>().TakeDamage(Damage);
+                _nextFire = Time.time + _fireRate;
+
+                var bullet = await _bullet.PutOffAsync(_bulletPosition, _bulletPosition.rotation);
+
+                _shootSound.Play();
+
+                _weaponAnimator.SetTrigger("Shoot");
+
+                DecreaseAmmo();
             }
         }
-    }
 
-    public IEnumerator Reload()
-    {
-        while(_currentAmmo < MaxAmmo)
+        public void DecreaseAmmo(int value = 1)
         {
-            _currentAmmo++;
-
-            yield return Wait.NewWait(_reloadTime);
+            _currentAmmo -= value;
+            if (_currentAmmo <= 0)
+            {
+                _canShoot = false;
+                Reload();
+            }
         }
-        if(_currentAmmo >= MaxAmmo)
+
+        public void IncreaseAmmo(int value = 1)
         {
-            CanShoot = true;
-            StopCoroutine(Reload());
+            _currentAmmo += value;
+        }
+
+        public void IncreaseAmmoAmmoInPersentageRelativeToMaxAmmo(int value)
+        {
+            _currentAmmo = _maxAmmo * value;
+            if (_currentAmmo > _maxAmmo) _currentAmmo = _maxAmmo;
+        }
+
+        public async void Reload()
+        {
+            while (_currentAmmo < _maxAmmo)
+            {
+                await AsyncHelper.Delay();
+                IncreaseAmmo();
+            }
+
+            if (_currentAmmo >= _maxAmmo) _canShoot = true;
         }
     }
 }

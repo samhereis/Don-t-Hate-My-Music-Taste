@@ -6,26 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/mainMenu.unity
+    path: Assets/Resources/Scenes/mainMenu.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Scenes/Essentials.unity
+    path: Assets/Resources/Scenes/Essentials.unity
     guid: e2a665373c77d7846b0da8ee09bcd467
   - enabled: 1
-    path: Assets/Scenes/Escape From Haters/Escape From Haters.unity
+    path: Assets/Resources/Scenes/Escape From Haters/Escape From Haters.unity
     guid: c076abb88656ab04cb6384c34237840c
   - enabled: 1
-    path: Assets/Scenes/Tsukuyomi Dram/Thukuyomi Deam.unity
+    path: Assets/Resources/Scenes/Tsukuyomi Dram/Thukuyomi Deam.unity
     guid: a10329056b402a843afd9637fab14b63
   - enabled: 1
-    path: Assets/Scenes/Shangri-the/Shangri-the.unity
+    path: Assets/Resources/Scenes/Shangri-the/Shangri-the.unity
     guid: bda0576655fa59240a4a4f748e202924
   - enabled: 1
-    path: Assets/Scenes/Whole Lotta Neon/Whole Lotta Neon.unity
+    path: Assets/Resources/Scenes/Whole Lotta Neon/Whole Lotta Neon.unity
     guid: fb952acd730dd7e40b4ce501ab712314
   - enabled: 1
-    path: Assets/Scenes/BeatleField/BeatleField.unity
+    path: Assets/Resources/Scenes/BeatleField/BeatleField.unity
     guid: 3afd80170f63b1e4eb8a385e94a803ec
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2adcab2d899e0244f87251b27a97a465, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: dc598a05783216046869963259146f4e, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 30181b0f9634c2546a8141c1f88e963b, type: 2}
