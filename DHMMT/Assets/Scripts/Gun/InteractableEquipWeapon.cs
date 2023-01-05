@@ -1,13 +1,15 @@
+using System.Linq;
 using Characters.States.Data;
 using Identifiers;
 using Interfaces;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
 
 namespace Gameplay
 {
-    public class InteractableEquipWeapon : MonoBehaviour, IInteractable
+    public class InteractableEquipWeapon : MonoBehaviourPunCallbacks, IInteractable
     {
         public bool isInteractable => !_equiped;
         public string ItemName { get { return _itemName; } private set { _itemName = value; } }
@@ -28,6 +30,22 @@ namespace Gameplay
         public readonly UnityEvent<HumanoidData> onEquip = new UnityEvent<HumanoidData>();
         public readonly UnityEvent<HumanoidData> onUnequip = new UnityEvent<HumanoidData>();
 
+        [PunRPC]
+
+        public void RPC_Interact(int identifierViewId)
+        {
+            var allPhotonViews = FindObjectsOfType<PhotonView>(true).ToList();
+
+            if (allPhotonViews.Count > 1)
+            {
+                var photonView = allPhotonViews.Find(x => x.ViewID == identifierViewId);
+
+                if (photonView != null && photonView.TryGetComponent<IdentifierBase>(out var identifier))
+                {
+                    Interact(identifier);
+                }
+            }
+        }
         public void Interact(IdentifierBase caller) // in other words - equiod this weapon to the humanoid
         {
             HumanoidData equipData = caller.TryGet<HumanoidData>();

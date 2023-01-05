@@ -11,6 +11,7 @@ namespace Network
         public static PlayerSpawner instance;
 
         [SerializeField] private PlayerIdentifier _playerPrefab;
+        [SerializeField] private GameObject _instantiatedPlayer;
 
         private void Awake()
         {
@@ -27,7 +28,14 @@ namespace Network
 
         public void SpawnPlayer()
         {
-            PhotonNetwork.Instantiate(_playerPrefab.name, Vector3.zero, Quaternion.identity);
+            _instantiatedPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, Vector3.zero, Quaternion.identity);
+        }
+
+        public void Die()
+        {
+            PhotonNetwork.Destroy(_instantiatedPlayer);
+
+            SpawnPlayer();
         }
     }
 }

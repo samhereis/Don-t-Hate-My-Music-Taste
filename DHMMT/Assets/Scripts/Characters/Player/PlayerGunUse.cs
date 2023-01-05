@@ -1,3 +1,4 @@
+using Agents;
 using Gameplay;
 using Helpers;
 using Identifiers;
@@ -13,7 +14,7 @@ namespace Characters.States.Data
     public class PlayerGunUse : HumanoidAttackingStateData //TODO: complete this
     {
         [Header("Components")]
-        [SerializeField] private Animator _animator;
+        [SerializeField] private AnimationAgent _animator;
         [SerializeField] private IdentifierBase _identifier;
 
         [Header("Guns")]
@@ -40,10 +41,10 @@ namespace Characters.States.Data
 
         private void Awake()
         {
-            if (_defaultWeapon != null)
+            if (_defaultWeapon != null && _identifier.TryGet<PhotonView>().IsMine)
             {
                 _firstWeapon = PhotonNetwork.Instantiate(_defaultWeapon.name, transform.position, Quaternion.identity).GetComponent<InteractableEquipWeapon>();
-                _firstWeapon?.Interact(_identifier);
+                _firstWeapon?.gameObject.GetPhotonView().RPC(nameof(_firstWeapon.RPC_Interact), RpcTarget.All, _identifier.TryGet<PhotonView>().ViewID);
             }
 
             _velocityHashY = Animator.StringToHash("moveVelocityY");
@@ -93,8 +94,8 @@ namespace Characters.States.Data
 
             onAttack?.Invoke(_isShooting.value);
 
-            _animator.SetFloat(_velocityHashY, 1);
-            _animator.SetFloat(_velocityHashX, 1);
+            _animator.gameObject.GetPhotonView().RPC(nameof(_animator.RPC_SetFloat), RpcTarget.All, _velocityHashY, 1f);
+            _animator.gameObject.GetPhotonView().RPC(nameof(_animator.RPC_SetFloat), RpcTarget.All, _velocityHashX, 1f);
         }
 
         private void Reload(InputAction.CallbackContext context)

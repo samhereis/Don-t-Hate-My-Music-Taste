@@ -61,8 +61,8 @@ namespace UI.Window
 
                 if (duration == null) duration = baseSettings.animationDuration;
 
-                if (baseSettings.enableDisable) gameObject.SetActive(true);
-                baseSettings.canvasGroup.FadeUp(duration.Value);
+                if (baseSettings.enableDisable) gameObject?.SetActive(true);
+                baseSettings.canvasGroup?.FadeUp(duration.Value);
             }
         }
 

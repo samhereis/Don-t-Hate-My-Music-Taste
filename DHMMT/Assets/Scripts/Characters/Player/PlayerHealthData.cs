@@ -1,6 +1,7 @@
 ﻿using Characters.States.Data;
 using Helpers;
 using Interfaces;
+using Network;
 using Photon.Pun;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -13,19 +14,13 @@ namespace Gameplay
         [PunRPC]
         public override void RPC_TakeDamage(float damage)
         {
-            Debug.Log(gameObject.name + " has been damaged for " + damage);
-
-            health -= damage;
-
-            if (health < 0)
-            {
-
-            }
             TakeDamage(damage);
         }
 
         public override void TakeDamage(float damage)
         {
+            if (isAlive == false) return;
+
             Debug.Log(gameObject.name + " has been damaged for " + damage);
 
             health -= damage;
@@ -34,10 +29,18 @@ namespace Gameplay
             {
                 isAlive = false;
 
-                PhotonNetwork.Destroy(photonView);
-                PhotonNetwork.Disconnect();
-                SceneManager.LoadSceneAsync(0);
+                if (photonView.IsMine)
+                {
+                    Die();
+                }
             }
+        }
+
+        private void Die()
+        {
+            Debug.Log("Die");
+
+            PlayerSpawner.instance.Die();
         }
 
         public async Task TakeDamageContinuously(float time, float damage)

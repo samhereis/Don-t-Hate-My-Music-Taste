@@ -39,6 +39,13 @@ MonoBehaviour:
   - RPC_TakeDamage
   - RPC_OnEnd
   - RPC_OnStart
+  - Interact
+  - RPC_Interact
+  - RPC_CallCallback
+  - RPC_CrossFade
+  - RPC_PlayAnimation
+  - RPC_SetBool
+  - RPC_SetFloat
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

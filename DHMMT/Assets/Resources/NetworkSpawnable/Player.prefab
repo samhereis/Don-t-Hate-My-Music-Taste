@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16268ce66aba0fa40a5f56c2c7c21f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3296115159790835888}
+  _animator: {fileID: 1547030488171726249}
   _identifier: {fileID: 8069684054741772957}
   _defaultWeapon: {fileID: 7110574739933375419, guid: a568e44e2ccfaf049985b1a33bc45cb5, type: 3}
   _firstWeapon: {fileID: 0}

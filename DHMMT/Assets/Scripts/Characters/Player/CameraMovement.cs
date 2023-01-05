@@ -48,7 +48,10 @@ namespace Gameplay.Camera
             }
             else
             {
-                gameObject.SetActive(false);
+                foreach (var behaviour in GetComponents<Behaviour>())
+                {
+                    behaviour.enabled = false;
+                }
             }
         }
 

@@ -107,8 +107,8 @@ namespace Characters.States.Data
 
         private void SetAnimation()
         {
-            _animator?.animator.SetFloat(_velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);
-            _animator?.animator.SetFloat(_velocityHashX, _moveInputValue.x * _currentSpeedMultiplier);
+            _animator?.gameObject.GetPhotonView().RPC(nameof(_animator.RPC_SetFloat), RpcTarget.All, _velocityHashY, _moveInputValue.y * _currentSpeedMultiplier);
+            _animator?.gameObject.GetPhotonView().RPC(nameof(_animator.RPC_SetFloat), RpcTarget.All, _velocityHashX, _moveInputValue.x * _currentSpeedMultiplier);
         }
 
         public void EnableInput()

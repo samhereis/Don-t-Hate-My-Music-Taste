@@ -21,38 +21,63 @@ namespace Gameplay
         [Header("Debug")]
         [SerializeField] float _currentSpeed;
 
+        private HumanoidData currentHumanoidData;
 
-        private void Awake()
+        private void OnEnable()
         {
-            _interactableEquipWeapon.onEquip.AddListener(RegisterEvents);
-            _interactableEquipWeapon.onUnequip.AddListener(DegisterEvents);
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                _interactableEquipWeapon.onEquip.AddListener(RegisterEvents);
+                _interactableEquipWeapon.onUnequip.AddListener(DegisterEvents);
+            }
+        }
+
+        private void OnDisable()
+        {
+            _interactableEquipWeapon.onEquip.RemoveListener(RegisterEvents);
+            _interactableEquipWeapon.onUnequip.RemoveListener(DegisterEvents);
+
+            DegisterEvents(currentHumanoidData);
         }
 
         private void RegisterEvents(HumanoidData sentData)
         {
-            _humanoidMovementStateData = sentData.humanoidMovementStateData;
+            DegisterEvents(currentHumanoidData);
+
+            currentHumanoidData = sentData;
+
+            _humanoidMovementStateData = currentHumanoidData.humanoidMovementStateData;
             _humanoidMovementStateData.onIsMovingChange += SetSpeed;
         }
 
         private void DegisterEvents(HumanoidData sentData)
         {
+            if (_humanoidMovementStateData == null || currentHumanoidData == null) return;
+
             _humanoidMovementStateData.onIsMovingChange -= SetSpeed;
             _humanoidMovementStateData = null;
         }
 
-        public void SetSpeed(bool value, float speed)
+        private void SetSpeed(bool value, float speed)
         {
-            if (_isMoving == true && _isSpring == false)
+            try
             {
-                _animator.SetFloat(_speed, speed);
+                if (_isMoving == true && _isSpring == false)
+                {
+                    _animator?.SetFloat(_speed, speed);
+                }
+                else if (_isMoving == true && _isSpring == true)
+                {
+                    _animator?.SetFloat(_speed, speed * 2);
+                }
+                else
+                {
+                    _animator?.SetFloat(_speed, 0);
+                }
             }
-            else if (_isMoving == true && _isSpring == true)
+            finally
             {
-                _animator.SetFloat(_speed, speed * 2);
-            }
-            else
-            {
-                _animator.SetFloat(_speed, 0);
+
             }
         }
     }
