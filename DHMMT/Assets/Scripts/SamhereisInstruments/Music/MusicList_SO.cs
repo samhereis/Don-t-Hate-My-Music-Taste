@@ -15,9 +15,9 @@ namespace Music
         [SerializeField] private List<AudioClip> _musicList = new List<AudioClip>();
         public List<AudioClip> musicList { get { if (_musicList.Count > 0) return _musicList; else return _defaultMusicList; } }
 
-        [SerializeField] private List<AudioClip> _defaultMusicList;
+        [SerializeField] private List<AudioClip> _defaultMusicList = new List<AudioClip>();
 
-        public int count => _musicList.Count;
+        public int count => musicList.Count;
 
         public async void LoadMusic()
         {

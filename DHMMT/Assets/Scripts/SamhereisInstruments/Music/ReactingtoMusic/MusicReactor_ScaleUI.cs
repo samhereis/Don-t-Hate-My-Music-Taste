@@ -5,22 +5,21 @@ using UnityEngine;
 namespace Music
 {
     [DisallowMultipleComponent]
-    public class MusicReactor_Scale : MonoBehaviour
+    public class MusicReactor_ScaleUI : MonoBehaviour
     {
         private Action _do;
 
-        private enum Axis { X, Y, Z }
+        private enum Axis { X, Y }
 
-        private float _value => _minValue + (_aFrequancyData.value * _multiplier);
+        private float _value => _minValue + (_aFrequancyData.value * _aFrequancyData.defaultMultiplierUI);
 
         [SerializeField] private AFrequancyData _aFrequancyData;
 
         [Header("Settings")]
         [SerializeField] private float _smoothness = 0.03f;
         [SerializeField] private float _minValue = 1;
-        [SerializeField] private float _multiplier = 1;
-        [SerializeField] private bool _useDefaultMultiplier;
         [SerializeField] private Axis _axis;
+
 
         private void OnValidate()
         {
@@ -28,28 +27,27 @@ namespace Music
 
             if (GetComponent<RectTransform>() != null)
             {
-                if (GetComponent<MusicReactor_ScaleUI>() == null)
+                if (GetComponents<MusicReactor_ScaleUI>().Length > 1)
                 {
-                    gameObject.AddComponent<MusicReactor_ScaleUI>().setData(_aFrequancyData);
+                    Debug.Log("MusicReactor_ScaleUI Here " + gameObject.name, this);
+
+                    GetComponent<MusicReactor_ScaleUI>().hideFlags = HideFlags.HideInInspector;
+                    DestroyImmediate(GetComponent<MusicReactor_ScaleUI>());
+                    Destroy(GetComponent<MusicReactor_ScaleUI>());
                 }
                 else
                 {
 
                 }
 
-                Debug.Log("MusicReactor_Scale Here " + gameObject.name, this);
-
-                this.hideFlags = HideFlags.HideInInspector;
-                DestroyImmediate(this);
-                Destroy(this);
-
                 this.TrySetDirty();
             }
         }
 
-        private void Awake()
+
+        public void setData(AFrequancyData data)
         {
-            if (_useDefaultMultiplier) _multiplier = _aFrequancyData.defaultMultiplier;
+            _aFrequancyData = data;
         }
 
         private void OnEnable()
@@ -61,10 +59,6 @@ namespace Music
             else if (_axis == Axis.Y)
             {
                 _do = () => { transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(transform.localScale.x, _value, transform.localScale.z), _smoothness); };
-            }
-            else
-            {
-                _do = () => { transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(transform.localScale.x, transform.localScale.y, _value), _smoothness); };
             }
         }
 

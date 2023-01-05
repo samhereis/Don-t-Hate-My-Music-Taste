@@ -9,11 +9,15 @@ namespace Music
         [SerializeField] private SpectrumData _spectrumData;
         [SerializeField] private MusicList_SO _musicList;
 
-        [Header("Search for music data")]
-        [SerializeField] private bool _shouldSearch;
+        [Header("Settings")]
+        [SerializeField] private bool _shouldSearch = true;
+        [SerializeField] private bool _autoPlay = false;
 
         [Header("Components")]
         [SerializeField] private AudioSource _audioSource;
+
+        [Header("Debug")]
+        [SerializeField] private bool _isCheckingForAudio = false;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -24,12 +28,10 @@ namespace Music
 
         private async void OnEnable()
         {
-            await AsyncHelper.DelayAndDo(2, () => CheckForAudio(_cancellationTokenSource = new CancellationTokenSource()));
-        }
+            if (_shouldSearch == true) _musicList.LoadMusic();
+            if (_autoPlay == true) await AsyncHelper.DelayAndDo(2000, () => CheckForAudio(_cancellationTokenSource = new CancellationTokenSource()));
 
-        private void Start()
-        {
-            if (_shouldSearch) _musicList.LoadMusic();
+            //PlayAudio();
         }
 
         private void Update()
@@ -47,7 +49,6 @@ namespace Music
             if (pause) _audioSource.Pause(); else _audioSource.UnPause();
         }
 
-        private bool _isCheckingForAudio = false;
         private async void CheckForAudio(CancellationTokenSource cancellationTokenSource)
         {
             if (_isCheckingForAudio) return;
@@ -55,17 +56,22 @@ namespace Music
 
             while (cancellationTokenSource.IsCancellationRequested == false)
             {
-                if ((_audioSource.isPlaying == false || _audioSource.clip == null) && _musicList.count > 0)
+                if (_audioSource.isPlaying == false && _musicList.count > 0)
                 {
-                    _audioSource.clip = null;
-                    _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];
-                    _audioSource.Play();
+                    PlayAudio();
                 }
 
                 await AsyncHelper.Delay(1);
             }
 
             _isCheckingForAudio = false;
+        }
+
+        private void PlayAudio()
+        {
+            _audioSource.clip = null;
+            _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];
+            _audioSource.Play();
         }
     }
 }

@@ -7,10 +7,13 @@ namespace Music
     {
         [field: SerializeField] public float value { get; private set; }
         public float valueWithDefaultMultiplier => value * defaultMultiplier;
+        public float valueWithDefaultMultiplierUI => value * defaultMultiplierUI;
 
         [Header("Multiplier")]
         [SerializeField] private float _multiplier = 1;
         [field: SerializeField] public float defaultMultiplier { get; private set; } = 1;
+        [field: SerializeField] public float defaultMultiplierUI { get; private set; } = 1;
+
 
         [Header("Frequency Ranges")]
         [SerializeField] private int _rangeStart = 1;

@@ -10,6 +10,8 @@ namespace Network
     {
         public static MatchManager instance;
 
+        [SerializeField] private AudioSource _auidoSourcePrefab;
+
         private void Awake()
         {
             instance = this;
@@ -17,10 +19,14 @@ namespace Network
 
         private void Start()
         {
-            if(PhotonNetwork.IsConnected == false)
+            if (PhotonNetwork.IsConnected == false)
             {
                 PhotonNetwork.Disconnect();
                 SceneManager.LoadSceneAsync(0);
+            }
+            else if(PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate(_auidoSourcePrefab.name, -Vector3.zero, Quaternion.identity);
             }
         }
     }
