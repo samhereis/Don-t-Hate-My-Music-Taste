@@ -22,31 +22,6 @@ namespace Music
         [SerializeField] private bool _useDefaultMultiplier;
         [SerializeField] private Axis _axis;
 
-        private void OnValidate()
-        {
-            if (Application.isPlaying) return;
-
-            if (GetComponent<RectTransform>() != null)
-            {
-                if (GetComponent<MusicReactor_ScaleUI>() == null)
-                {
-                    gameObject.AddComponent<MusicReactor_ScaleUI>().setData(_aFrequancyData);
-                }
-                else
-                {
-
-                }
-
-                Debug.Log("MusicReactor_Scale Here " + gameObject.name, this);
-
-                this.hideFlags = HideFlags.HideInInspector;
-                DestroyImmediate(this);
-                Destroy(this);
-
-                this.TrySetDirty();
-            }
-        }
-
         private void Awake()
         {
             if (_useDefaultMultiplier) _multiplier = _aFrequancyData.defaultMultiplier;

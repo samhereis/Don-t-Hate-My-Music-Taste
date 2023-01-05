@@ -20,36 +20,6 @@ namespace Music
         [SerializeField] private float _minValue = 1;
         [SerializeField] private Axis _axis;
 
-
-        private void OnValidate()
-        {
-            if (Application.isPlaying) return;
-
-            if (GetComponent<RectTransform>() != null)
-            {
-                if (GetComponents<MusicReactor_ScaleUI>().Length > 1)
-                {
-                    Debug.Log("MusicReactor_ScaleUI Here " + gameObject.name, this);
-
-                    GetComponent<MusicReactor_ScaleUI>().hideFlags = HideFlags.HideInInspector;
-                    DestroyImmediate(GetComponent<MusicReactor_ScaleUI>());
-                    Destroy(GetComponent<MusicReactor_ScaleUI>());
-                }
-                else
-                {
-
-                }
-
-                this.TrySetDirty();
-            }
-        }
-
-
-        public void setData(AFrequancyData data)
-        {
-            _aFrequancyData = data;
-        }
-
         private void OnEnable()
         {
             if (_axis == Axis.X)

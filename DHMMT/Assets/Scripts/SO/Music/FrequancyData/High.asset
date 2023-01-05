@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f53c0571bf4bfa45b716d867e8cc80d, type: 3}
   m_Name: High
   m_EditorClassIdentifier: 
-  _playingMusicFrequencies: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
-  _value: 0.5096644
+  <value>k__BackingField: 0.0000008799992
   _multiplier: 1
+  <defaultMultiplier>k__BackingField: 1
+  <defaultMultiplierUI>k__BackingField: 1000
   _rangeStart: 26
   _rangeEnd: 63
+  _playingMusicFrequencies: {fileID: 11400000, guid: 47b385365057c134594404bf9e6a50df, type: 2}
