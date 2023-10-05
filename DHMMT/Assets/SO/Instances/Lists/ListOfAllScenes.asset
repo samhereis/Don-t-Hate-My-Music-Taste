@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1d6f96e8ef1ac47b132be73cab3530, type: 3}
+  m_Name: ListOfAllScenes
+  m_EditorClassIdentifier: 
+  <scenes>k__BackingField:
+  - <sceneCode>k__BackingField: EscapeFromHaters
+    _scene: {fileID: 102900000, guid: f1ddf72421ef67b40b6082f77c7b2300, type: 3}
+    <sceneName>k__BackingField: Escape From Haters
+    <icon>k__BackingField: {fileID: 21300000, guid: 1d4d310b783b4d941b8a20fa34661888,
+      type: 3}
+    <description>k__BackingField: "   A mode where the players spawns in a random
+      position and needs to find the exit. To find the path there is a light that
+      gets spawned with the player which the player should follow. Along the path,
+      the player will encounter enemies (or haters) which the player needs to kill.\r\n\n  
+      You gain skulls when you kill an enemy, every enemy gives you different number
+      of skulls. But in the UI, there will be two indicators: all kills, and skulls
+      that you can spend."
+    <rules>k__BackingField: '- stay inside the lighted area.
+
+      - kill enemies
+      right away when you see them.
+
+      - find the way out.'
+  <mainMenu>k__BackingField:
+    <sceneCode>k__BackingField: MainMenu
+    _scene: {fileID: 102900000, guid: 8124e5870f4fd4c779e7a5f994e84ad1, type: 3}

@@ -3,21 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - reactingToNB
-  - reactingToBasses
-  - reactingToHighs
-  - reactingToMiddles
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Enemy
   - Water
   - UI
-  - Respawn
-  - 
-  - 
+  - MainPlayer
+  - Bullet
+  - Enviroment
   - 
   - 
   - 

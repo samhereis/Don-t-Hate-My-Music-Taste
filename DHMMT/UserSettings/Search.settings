@@ -1,28 +1,24 @@
 trackSelection = true
+refreshSearchWindowsInPlayMode = false
 fetchPreview = true
-wantsMore = false
+defaultFlags = 0
 keepOpen = false
 queryFolder = "Assets"
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.7F95D817" = ""
-	"InspectorPreview.7F95D817" = "0"
-	"currentGroup.7F95D817" = "scene"
+	"last_search.310DEAF1" = "missing "
+	"OpenInspectorPreview.310DEAF1" = "0"
+	"currentGroup.310DEAF1" = "menu"
 }
 providers = {
-	asset = {
-		active = true
-		priority = 25
-		defaultAction = null
-	}
-	store = {
-		active = true
+	performance = {
+		active = false
 		priority = 100
 		defaultAction = null
 	}
-	find = {
+	asset = {
 		active = true
 		priority = 25
 		defaultAction = null
@@ -32,9 +28,19 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
-	packages = {
+	profilermarkers = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
+	find = {
 		active = true
-		priority = 90
+		priority = 25
+		defaultAction = null
+	}
+	adb = {
+		active = false
+		priority = 2500
 		defaultAction = null
 	}
 	scene = {
@@ -42,15 +48,32 @@ providers = {
 		priority = 50
 		defaultAction = null
 	}
-	query = {
+	packages = {
+		active = true
+		priority = 90
+		defaultAction = null
+	}
+	store = {
 		active = true
 		priority = 100
 		defaultAction = null
 	}
 }
+objectSelectors = {
+}
 recentSearches = [
+	""
 ]
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+hideTabs = false
+expandedQueries = [
+]
+queryBuilder = false
+ignoredProperties = "id;name;classname;imagecontentshash"
+helperWidgetCurrentArea = "all"
+disabledIndexers = ""
+minIndexVariations = 2
+findProviderIndexHelper = true
