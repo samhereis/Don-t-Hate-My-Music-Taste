@@ -518,8 +518,7 @@ MonoBehaviour:
     <inventory>k__BackingField:
       items: []
     <target>k__BackingField: {fileID: 0}
-  _minDistanceToPlayer: 5
-  _maxDistanceToPlayer: 10
+  _distanceToPlayer: 10
   _enemyAgent: {fileID: 7198323842002707876}
   _enemyIdentifier: {fileID: -6355836029493348132}
   _isNearPlayer: {fileID: 11400000, guid: c5465a421d17b6741933486e0802dfa3, type: 2}
@@ -548,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 775bef9cd28a415449ff1cbcbcc4feec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <isAlive>k__BackingField: 1
   <currentHealth>k__BackingField: 100
   <maxHealth>k__BackingField: 100
   <damagedObjectIdentifier>k__BackingField: {fileID: 0}
@@ -587,6 +587,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   _animator: {fileID: 3518818648495301512}
   _healthSlider: {fileID: 8478029376830592693}
+  _enemyAgent: {fileID: 0}
 --- !u!136 &3114702836847640478
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6531,7 +6532,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &3518818648495301512
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6545,6 +6546,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -7357,52 +7359,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[0]
+      propertyPath: '_audioSourcePool.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[1]
+      propertyPath: '_audioSourcePool.Array.data[1]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[2]
+      propertyPath: '_audioSourcePool.Array.data[2]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[3]
+      propertyPath: '_audioSourcePool.Array.data[3]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[4]
+      propertyPath: '_audioSourcePool.Array.data[4]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[5]
+      propertyPath: '_audioSourcePool.Array.data[5]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[6]
+      propertyPath: '_audioSourcePool.Array.data[6]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[7]
+      propertyPath: '_audioSourcePool.Array.data[7]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[8]
+      propertyPath: '_audioSourcePool.Array.data[8]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4444587636745695621, guid: d3283fb22e94e034e9ca74494cc3640d,
         type: 3}
-      propertyPath: _audioSourcePool.Array.data[9]
+      propertyPath: '_audioSourcePool.Array.data[9]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7586471992461577051, guid: d3283fb22e94e034e9ca74494cc3640d,
