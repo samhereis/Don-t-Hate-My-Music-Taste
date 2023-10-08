@@ -3,6 +3,7 @@ using Identifiers;
 using Managers;
 using SO.GOAP;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace GOAP.Actions
 {
@@ -11,6 +12,8 @@ namespace GOAP.Actions
         [Header("Settings")]
         [SerializeField] private float _minDistanceToPlayer = 5;
         [SerializeField] private float _maxDistanceToPlayer = 10;
+        [SerializeField] private bool _checkForPathAvailability = false;
+        [SerializeField] private bool _destroyIfPathIsUnavailable = false;
 
         [Header("GOAP Strings")]
         [SerializeField] private GOAPStrings _isNearPlayer;
@@ -98,6 +101,16 @@ namespace GOAP.Actions
             if (_enemyIdentifier.TryGet<EnemyHealth>()?.isAlive == false)
             {
                 return false;
+            }
+
+            if (_checkForPathAvailability)
+            {
+                var navMeshPath = new NavMeshPath();
+                if (baseSettings.navMeshAgent.CalculatePath(baseSettings.target.transform.position, navMeshPath) == false || navMeshPath.status == NavMeshPathStatus.PathComplete == false)
+                {
+                    if (_destroyIfPathIsUnavailable) { _enemyIdentifier.TryGet<EnemyHealth>()?.Die(); };
+                    return false;
+                }
             }
 
             return base.IsActionValid();

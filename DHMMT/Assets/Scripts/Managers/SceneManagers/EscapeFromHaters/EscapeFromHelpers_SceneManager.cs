@@ -3,6 +3,7 @@ using ConstStrings;
 using DI;
 using Events;
 using Identifiers;
+using Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ using UnityEngine;
 
 namespace Managers.SceneManagers
 {
-    public class EscapeFromHelpers_SceneManager : SceneManagerBase, IDIDependent
+    public class EscapeFromHelpers_SceneManager : SceneManagerBase, IDIDependent, ISubscribesToEvents
     {
         [SerializeField] private List<ExitLocation_Identifier> _exitLocations = new List<ExitLocation_Identifier>();
-        [SerializeField] private List<TheLightLocation_Identifier> _theLightLocations = new List<TheLightLocation_Identifier>();
+        [SerializeField] private List<PlayerSpawnPoint_Identifier> _theLightLocations = new List<PlayerSpawnPoint_Identifier>();
 
         [Header("Actors")]
         [SerializeField] private Exit_Identifier _exitPrefab;
@@ -46,6 +47,7 @@ namespace Managers.SceneManagers
 
         [Header(HeaderStrings.di)]
         [DI(Event_DIStrings.onExitFound)][SerializeField] private EventWithOneParameters<Exit_Identifier> _onExitFound;
+        [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
 
         [Header(HeaderStrings.debug)]
         [SerializeField] private Exit_Identifier _exit;
@@ -59,29 +61,41 @@ namespace Managers.SceneManagers
             _gameplayMenu = GetComponentInChildren<EFH_GameplayMenu>(true);
         }
 
-        private void Start()
+        private async void OnEnable()
         {
             (this as IDIDependent).LoadDependencies();
+            await InitializeAsync();
 
-            _onExitFound.AddListener(Win);
+            SubscribeToEvents();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            _onExitFound.AddListener(Win);
+            _onEnemyDied.AddListener(OnEnemyDied);
+
+            _player.TryGet<PlayerHealth>().onDie += Lose;
+        }
+
+        public void UnsubscribeFromEvents()
         {
             _onExitFound.RemoveListener(Win);
+            _onEnemyDied.RemoveListener(OnEnemyDied);
+
+            _player.TryGet<PlayerHealth>().onDie -= Lose;
         }
 
-        private void OnEnable()
+        public override async Awaitable InitializeAsync()
         {
-            Initialize();
-        }
+            await base.InitializeAsync();
 
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            _exitLocations = FindObjectsOfType<ExitLocation_Identifier>().ToList();
-            _theLightLocations = FindObjectsOfType<TheLightLocation_Identifier>().ToList();
+            _exitLocations = FindObjectsByType<ExitLocation_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+            _theLightLocations = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
 
             if (_exitLocations.Count > 0)
             {
@@ -99,8 +113,6 @@ namespace Managers.SceneManagers
             }
 
             if (_isDebugMode == false) { _enemiesManager.SpawnEnemies(); }
-
-            _player.TryGet<PlayerHealth>().onDie += Lose;
 
             _checkForIsWithinTheLight_Coroutine = StartCoroutine(CheckForIsWithinTheLight());
         }
@@ -152,6 +164,12 @@ namespace Managers.SceneManagers
             {
                 _gameplayMenu.stayUnderTheLight_Popup.Disable();
             }
+        }
+
+        private void OnEnemyDied(IDamagable enemy)
+        {
+            _gameplayMenu.gameplayMenu.IncreaseKillsCount(enemy);
+            _enemiesManager.Respawn(enemy);
         }
 
         private void Lose()

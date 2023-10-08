@@ -1,6 +1,7 @@
-using Identifiers;
-
-public class BulletIdentifier : IdentifierBase
+namespace Identifiers
 {
+    public class BulletIdentifier : IdentifierBase
+    {
 
+    }
 }

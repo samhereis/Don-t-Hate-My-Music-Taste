@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <baseSettings>k__BackingField:
-    <agent>k__BackingField: {fileID: 3219247365996931485}
+    <navMeshAgent>k__BackingField: {fileID: 0}
     <actionName>k__BackingField: {fileID: 11400000, guid: f9cb3ba2d226f0a439d51fe0c4da4216,
       type: 2}
     <cost>k__BackingField: 1
@@ -488,6 +488,8 @@ MonoBehaviour:
     <target>k__BackingField: {fileID: 0}
   _minDistanceToPlayer: 5
   _maxDistanceToPlayer: 10
+  _checkForPathAvailability: 0
+  _destroyIfPathIsUnavailable: 0
   _isNearPlayer: {fileID: 11400000, guid: c5465a421d17b6741933486e0802dfa3, type: 2}
   _enemyIdentifier: {fileID: -6355836029493348132}
 --- !u!114 &-4858906397128523110
@@ -503,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <baseSettings>k__BackingField:
-    <agent>k__BackingField: {fileID: 0}
+    <navMeshAgent>k__BackingField: {fileID: 0}
     <actionName>k__BackingField: {fileID: 11400000, guid: 46a96e7ccff1d6b4bb974eac931f75e9,
       type: 2}
     <cost>k__BackingField: 1

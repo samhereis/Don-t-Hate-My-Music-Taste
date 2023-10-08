@@ -4,7 +4,7 @@ using IdentityCards;
 using Interfaces;
 using UnityEngine;
 
-namespace Charatcers.Enemy
+namespace Identifiers
 {
     public class EnemyIdentifier : IdentifierBase, IDamagerActor
     {

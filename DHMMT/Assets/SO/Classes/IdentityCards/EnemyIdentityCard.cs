@@ -1,4 +1,4 @@
-using Charatcers.Enemy;
+using Identifiers;
 using UnityEngine;
 
 namespace IdentityCards

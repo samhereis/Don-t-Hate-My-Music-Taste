@@ -273,33 +273,36 @@ MonoBehaviour:
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
     _scene:
-      <sceneName>k__BackingField: 
       <sceneCode>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
+      _scene: {fileID: 0}
+      <sceneName>k__BackingField: 
       <description>k__BackingField: 
       <rules>k__BackingField: 
+      <icon>k__BackingField: {fileID: 0}
   _descriptionBlock:
     _canvasGroup: {fileID: 6932958121828644654}
     _descriptionText: {fileID: 7622057661470135100}
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
     _scene:
-      <sceneName>k__BackingField: 
       <sceneCode>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
+      _scene: {fileID: 0}
+      <sceneName>k__BackingField: 
       <description>k__BackingField: 
       <rules>k__BackingField: 
+      <icon>k__BackingField: {fileID: 0}
   _rulesBlock:
     _canvasGroup: {fileID: 295394275062220485}
     _rulesText: {fileID: 4017050066527593910}
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
     _scene:
-      <sceneName>k__BackingField: 
       <sceneCode>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
+      _scene: {fileID: 0}
+      <sceneName>k__BackingField: 
       <description>k__BackingField: 
       <rules>k__BackingField: 
+      <icon>k__BackingField: {fileID: 0}
 --- !u!1 &1153903804522592023
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Identifier
+namespace Identifiers
 {
     public class CrosshairIdentifier : MonoBehaviour, IInitializable, IDIDependent
     {

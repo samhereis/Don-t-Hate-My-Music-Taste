@@ -147,10 +147,6 @@ MonoBehaviour:
     <eventName>k__BackingField: 
     <currentSubscribedObjectsCount>k__BackingField: 0
     <timesInvoked>k__BackingField: 0
-  _onEnemyDied:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
 --- !u!114 &5456306406172530793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0c5ed699fa6f64d8ae46968bfd73b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameplayMenu: {fileID: 1410461040904968264}
+  gameplayMenu: {fileID: 0}
   stayUnderTheLight_Popup: {fileID: 0}
 --- !u!1 &1523785178535940996
 GameObject:

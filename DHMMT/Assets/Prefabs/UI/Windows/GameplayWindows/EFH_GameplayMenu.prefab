@@ -530,7 +530,7 @@ PrefabInstance:
     - target: {fileID: 748106040948545542, guid: 27c44aa2e39855f4287f74925dce3d59,
         type: 3}
       propertyPath: m_Name
-      value: GameplayMenu_EFH
+      value: EFH_GameplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5456306406172530793, guid: 27c44aa2e39855f4287f74925dce3d59,
         type: 3}

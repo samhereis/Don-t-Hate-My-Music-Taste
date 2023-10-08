@@ -1,11 +1,12 @@
 using ConstStrings;
 using DI;
 using Managers;
+using SamhereisTools;
 using SO.Lists;
 using System;
-using SamhereisTools;
 using UI.Canvases;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Windows
 {
@@ -16,6 +17,10 @@ namespace UI.Windows
 
         public Action onSubscribeToEvents;
         public Action onUnsubscribeFromEvents;
+
+        [Header("UI Elements")]
+        [SerializeField] private Button _mainMenuButton;
+        [SerializeField] private Button _replayButton;
 
         [Header("DI")]
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
@@ -45,12 +50,18 @@ namespace UI.Windows
         {
             base.SubscribeToEvents();
 
+            _mainMenuButton.onClick.AddListener(GoToMainMenu);
+            _replayButton.onClick.AddListener(Replay);
+
             onSubscribeToEvents?.Invoke();
         }
 
         protected override void UnsubscribeFromEvents()
         {
             base.UnsubscribeFromEvents();
+
+            _mainMenuButton.onClick.RemoveListener(GoToMainMenu);
+            _replayButton.onClick.RemoveListener(Replay);
 
             onUnsubscribeFromEvents?.Invoke();
         }

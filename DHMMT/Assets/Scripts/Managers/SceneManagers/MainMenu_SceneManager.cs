@@ -8,7 +8,7 @@ namespace Managers.SceneManagers
     {
         [DI(ConstStrings.DIStrings.inputHolder)][SerializeField] private Input_SO _inputContainer;
 
-        private void OnEnable()
+        private async void OnEnable()
         {
             (this as IDIDependent).LoadDependencies();
 
@@ -16,7 +16,7 @@ namespace Managers.SceneManagers
             _inputContainer.input.Gameplay.Disable();
             _inputContainer.input.UI.Enable();
 
-            Initialize();
+            await InitializeAsync();
         }
     }
 }

@@ -1,14 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.Windows
 {
     public class EFH_WinMenu : MonoBehaviour
     {
-        [Header("UI Elements")]
-        [SerializeField] private Button _mainMenuButton;
-        [SerializeField] private Button _replayButton;
-
         [Header("Windows")]
         [SerializeField] private WinMenu _winMenu;
 
@@ -28,14 +23,11 @@ namespace UI.Windows
 
         private void OnSubscribeToEvents()
         {
-            _mainMenuButton.onClick.AddListener(_winMenu.GoToMainMenu);
-            _replayButton.onClick.AddListener(_winMenu.Replay);
         }
 
         private void OnUnsubscribeFromEvents()
         {
-            _mainMenuButton.onClick.RemoveListener(_winMenu.GoToMainMenu);
-            _replayButton.onClick.RemoveListener(_winMenu.Replay);
+
         }
     }
 }

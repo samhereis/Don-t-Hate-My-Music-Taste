@@ -7,13 +7,15 @@ namespace UI.Windows.GameplayMenus
     public class EFH_GameplayMenu : MonoBehaviour, IDIDependent
     {
         [Header("Components")]
-        [SerializeField] private GameplayMenu _gameplayMenu;
+        [field: SerializeField] public GameplayMenu gameplayMenu;
         [field: SerializeField] public StayUnderTheLight_Popup stayUnderTheLight_Popup;
 
         private void Awake()
         {
-            _gameplayMenu.onOpen += OnGameplayMenuOpen;
-            _gameplayMenu.onClose += OnGameplayMenuClose;
+            if (gameplayMenu == null) { gameplayMenu = GetComponent<GameplayMenu>(); }
+
+            gameplayMenu.onOpen += OnGameplayMenuOpen;
+            gameplayMenu.onClose += OnGameplayMenuClose;
 
             stayUnderTheLight_Popup = GetComponentInChildren<StayUnderTheLight_Popup>(true);
         }
@@ -25,8 +27,8 @@ namespace UI.Windows.GameplayMenus
 
         private void OnDestroy()
         {
-            _gameplayMenu.onOpen -= OnGameplayMenuOpen;
-            _gameplayMenu.onClose -= OnGameplayMenuClose;
+            gameplayMenu.onOpen -= OnGameplayMenuOpen;
+            gameplayMenu.onClose -= OnGameplayMenuClose;
         }
 
         private void OnGameplayMenuOpen()

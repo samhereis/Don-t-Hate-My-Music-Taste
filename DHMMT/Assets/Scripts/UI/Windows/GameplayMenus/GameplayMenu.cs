@@ -1,7 +1,6 @@
 using ConstStrings;
 using DI;
-using Events;
-using Identifier;
+using Identifiers;
 using Interfaces;
 using Managers;
 using System;
@@ -26,7 +25,6 @@ namespace UI.Windows
 
         [Header("DI")]
         [DI(Event_DIStrings.isPlayerAiming)][SerializeField] private ValueEvent<bool> _isPlayerAiming;
-        [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
 
         protected override void Awake()
         {
@@ -62,7 +60,6 @@ namespace UI.Windows
             base.SubscribeToEvents();
 
             _isPlayerAiming.AddListener(OnPlayerAimingChanged);
-            _onEnemyDied.AddListener(OnEnemyDied);
 
             onSubcsribeToEvents?.Invoke();
         }
@@ -71,8 +68,7 @@ namespace UI.Windows
         {
             base.UnsubscribeFromEvents();
 
-            _isPlayerAiming.RemoveListener(OnPlayerAimingChanged); 
-            _onEnemyDied.RemoveListener(OnEnemyDied);
+            _isPlayerAiming.RemoveListener(OnPlayerAimingChanged);
 
             onUnsubscribeFromEvents?.Invoke();
         }
@@ -89,7 +85,7 @@ namespace UI.Windows
             }
         }
 
-        private void OnEnemyDied(IDamagable damagable)
+        public void IncreaseKillsCount(IDamagable damagable)
         {
             killsCountDisplayer.IncreaseKillsCount();
         }

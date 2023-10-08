@@ -16,7 +16,7 @@ namespace GOAP
             public Dictionary<GOAPStrings, int> preConditions { get; protected internal set; } = new Dictionary<GOAPStrings, int>();
             public Dictionary<GOAPStrings, int> afterEffects { get; protected internal set; } = new Dictionary<GOAPStrings, int>();
 
-            [field: SerializeField] public NavMeshAgent agent { get; protected internal set; }
+            [field: SerializeField] public NavMeshAgent navMeshAgent { get; protected internal set; }
 
             [field: SerializeField, Header("Settings")] public GOAPActionName actionName { get; protected internal set; }
             [field: SerializeField] public float cost { get; protected internal set; } = 1.0f;
@@ -35,7 +35,7 @@ namespace GOAP
 
         protected virtual void Awake()
         {
-            baseSettings.agent = this.gameObject.GetComponent<NavMeshAgent>();
+            baseSettings.navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
 
             if (baseSettings.preConditionsInspector != null)
             {

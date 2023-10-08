@@ -11,6 +11,11 @@ namespace Helpers
             await Task.Yield();
         }
 
+        public static async Awaitable NextFrame()
+        {
+            await Awaitable.NextFrameAsync();
+        }
+
         public static async Task Delay(float delay)
         {
             int duration = (int)Mathf.Max(delay * 1000, 0);

@@ -80,7 +80,7 @@ namespace GOAP
                     baseSettings.destination = baseSettings.currentAction.baseSettings.target.transform.position;
                     Transform dest = baseSettings.currentAction.baseSettings.target.transform.Find("Destination");
                     if (dest != null) baseSettings.destination = dest.position;
-                    if (baseSettings.currentAction.baseSettings.agent.destination != baseSettings.destination) baseSettings.currentAction.baseSettings.agent.SetDestination(baseSettings.destination);
+                    if (baseSettings.currentAction.baseSettings.navMeshAgent.destination != baseSettings.destination) baseSettings.currentAction.baseSettings.navMeshAgent.SetDestination(baseSettings.destination);
                 }
             }
             else

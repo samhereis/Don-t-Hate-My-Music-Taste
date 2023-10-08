@@ -9,12 +9,14 @@ using UnityEngine;
 
 namespace Managers.SceneManagers
 {
-    public class SceneManagerBase : MonoBehaviour, IDIDependent, IInitializable
+    public class SceneManagerBase : MonoBehaviour, IDIDependent, IInitializableAsync
     {
         [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();
 
-        public virtual void Initialize()
+        public virtual async Awaitable InitializeAsync()
         {
+            await Awaitable.NextFrameAsync();
+
             _baseSettings.menus = GetComponentsInChildren<CanvasWindowBase>(true).ToList();
 
             StartCoroutine(Initialize_Coroutine());

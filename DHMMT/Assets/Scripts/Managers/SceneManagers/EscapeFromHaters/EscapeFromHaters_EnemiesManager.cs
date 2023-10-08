@@ -1,7 +1,4 @@
-using Charatcers.Enemy;
 using ConstStrings;
-using DI;
-using Events;
 using Helpers;
 using Identifiers;
 using IdentityCards;
@@ -11,30 +8,15 @@ using UnityEngine;
 
 namespace Managers.SceneManagers
 {
-    public class EscapeFromHaters_EnemiesManager : MonoBehaviour, IDIDependent, ISubscribesToEvents
+    public class EscapeFromHaters_EnemiesManager : MonoBehaviour
     {
         [Header(HeaderStrings.prefabs)]
         [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
-
-        [Header(HeaderStrings.di)]
-        [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
 
         [Header(HeaderStrings.settings)]
         [SerializeField] private LayerMask _enemyNavmeshLayerMask;
 
         private PlayerIdentifier _playerIdentifier;
-
-        private void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            SubscribeToEvents();
-        }
-
-        private void OnDestroy()
-        {
-            UnsubscribeFromEvents();
-        }
 
         public void SpawnEnemies()
         {
@@ -49,25 +31,9 @@ namespace Managers.SceneManagers
             }
         }
 
-        public void SubscribeToEvents()
+        public void Respawn(IDamagable damagable)
         {
-            _onEnemyDied.AddListener(OnEnemyDied);
-        }
-
-        public void UnsubscribeFromEvents()
-        {
-            _onEnemyDied.RemoveListener(OnEnemyDied);
-        }
-
-        private void OnEnemyDied(IDamagable damagable)
-        {
-            var enemyIdentifier = damagable.damagedObjectIdentifier.GetComponent<EnemyIdentifier>();
-            var canSpawn = enemyIdentifier != null && enemyIdentifier.identityCard != null;
-
-            if (canSpawn == true)
-            {
-                SpawnNearMainPlayer(enemyIdentifier.identityCard.target);
-            }
+            SpawnNearMainPlayer(_enemiesToSpawnOnStart.GetRandom().target);
         }
 
         private async void SpawnNearMainPlayer(EnemyIdentifier enemyIdentifier)

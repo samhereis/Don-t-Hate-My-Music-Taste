@@ -162,11 +162,12 @@ MonoBehaviour:
     <currentSubscribedObjectsCount>k__BackingField: 0
     <timesInvoked>k__BackingField: 0
   _scene:
-    <sceneName>k__BackingField: 
     <sceneCode>k__BackingField: 
-    <icon>k__BackingField: {fileID: 0}
+    _scene: {fileID: 0}
+    <sceneName>k__BackingField: 
     <description>k__BackingField: 
     <rules>k__BackingField: 
+    <icon>k__BackingField: {fileID: 0}
 --- !u!1 &2408915580852351605
 GameObject:
   m_ObjectHideFlags: 0

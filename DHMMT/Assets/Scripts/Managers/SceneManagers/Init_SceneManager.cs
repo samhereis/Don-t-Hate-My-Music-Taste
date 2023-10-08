@@ -1,7 +1,7 @@
 using DI;
 using Helpers;
-using SO.Lists;
 using SamhereisTools;
+using SO.Lists;
 using UnityEngine;
 
 namespace Managers.SceneManagers
@@ -14,7 +14,7 @@ namespace Managers.SceneManagers
 
         private async void OnEnable()
         {
-            Initialize();
+            await InitializeAsync();
 
             while (DependencyInjector.isGLoballyInjected == false)
             {
