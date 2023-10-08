@@ -3,6 +3,7 @@ using DataClasses;
 using Demo.Scripts.Runtime.Base;
 using DI;
 using Interfaces;
+using Settings;
 using UnityEngine;
 using Values;
 
@@ -10,17 +11,22 @@ namespace Identifiers
 {
     public class PlayerIdentifier : IdentifierBase, IDamagerActor, IDIDependent, ISubscribesToEvents
     {
+        [Header(HeaderStrings.components)]
         [SerializeField] private FPSController _fpsController;
+        [SerializeField] private Camera _camera;
 
         [Header("DI")]
         [DI(Event_DIStrings.isPlayerAiming)][SerializeField] private ValueEvent<bool> _isPlayerAiming;
         [DI(Event_DIStrings.playerWeaponData)][SerializeField] private ValueEvent<PlayerWeaponData> _playerWeaponData;
+        [DI(Event_DIStrings.fieldOfView_Settings)][SerializeField] private FloatSavable_SO _fieldOfView_Settings;
 
         [field: SerializeField] public IdentifierBase damagerIdentifier { get; private set; }
 
         private void Awake()
         {
             damagerIdentifier = this;
+
+            if (_camera == null) { _camera = GetComponentInChildren<Camera>(true); }
         }
 
         private void Start()
@@ -29,6 +35,8 @@ namespace Identifiers
 
             _fpsController.Initialize();
             SubscribeToEvents();
+
+            if (_camera != null && _fieldOfView_Settings != null) { _camera.fieldOfView = _fieldOfView_Settings.currentValue; }
         }
 
         public void SubscribeToEvents()

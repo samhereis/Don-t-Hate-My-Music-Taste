@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objects: []
   _configs: []
-  _scriptableObjects: []
+  _scriptableObjects:
+  - id: fieldOfView_Settings
+    instance: {fileID: 11400000, guid: 1c6b3ff030f5be5448ffe201f5c6a26b, type: 2}
   _eventsWithNoParameters:
   - id: OnPlayerChangedWeapon
     instance:
