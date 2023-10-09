@@ -23,7 +23,7 @@ namespace Gameplay
 
         private async void OnEnable()
         {
-            await AsyncHelper.Delay(1000);
+            await AsyncHelper.DelayInt(1000);
 
             _isLifting = false;
             _isRotating = true;

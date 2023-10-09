@@ -160,7 +160,7 @@ namespace UI.Canvases
                 {
                     uiAnimationElement?.TurnOn();
 
-                    await AsyncHelper.Delay(uiAnimationElementForeachDelay);
+                    await AsyncHelper.DelayFloat(uiAnimationElementForeachDelay);
                 }
                 catch (Exception ex)
                 {

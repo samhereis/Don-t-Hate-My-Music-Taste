@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 44.1
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 3008223442927651252}
   - component: {fileID: 7480167954130077072}
   - component: {fileID: 6751084863127433374}
+  - component: {fileID: 764431278993329298}
   m_Layer: 0
   m_Name: AmmoBar
   m_TagString: Untagged
@@ -187,9 +188,9 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _rectTransform: {fileID: 3008223442927651252}
   _scaleSettings:
-    <top>k__BackingField: 60
+    <top>k__BackingField: 65
     <bottom>k__BackingField: 25
-    <left>k__BackingField: 62.1
+    <left>k__BackingField: 70
     <right>k__BackingField: 5
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0
@@ -246,6 +247,24 @@ MonoBehaviour:
     <eventName>k__BackingField: 
     <currentSubscribedObjectsCount>k__BackingField: 0
     <timesInvoked>k__BackingField: 0
+--- !u!114 &764431278993329298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997635489046402995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d11859e7c77284fabe37400bd20f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSettings:
+    ease: 27
+    turnOffDuration: 0.25
+    turnOnDuration: 1
+  _holder: {fileID: 8728172524937751451}
+  _onOffPosition: {x: 500, y: 0, z: 0}
 --- !u!1 &2547685592852219010
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,8 +413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 118.44001, y: 0}
-  m_SizeDelta: {x: -236.88002, y: 0}
+  m_AnchoredPosition: {x: 90, y: 0}
+  m_SizeDelta: {x: -180, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2618529717206660046
 CanvasRenderer:
@@ -532,8 +551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39.480007, y: 0}
-  m_SizeDelta: {x: -78.96, y: 0}
+  m_AnchoredPosition: {x: -30, y: 0}
+  m_SizeDelta: {x: -60, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1616286597795053423
 MonoBehaviour:
@@ -647,8 +666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39.480003, y: 0}
-  m_SizeDelta: {x: -78.96001, y: 0}
+  m_AnchoredPosition: {x: -29.999996, y: 0}
+  m_SizeDelta: {x: -60.000008, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2323150764521651293
 CanvasRenderer:

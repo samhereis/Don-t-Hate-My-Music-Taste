@@ -45,7 +45,7 @@ namespace UI.Elements.SettingsTab
             gameObject.SetActive(true);
             _baseSettings.canvasGroup?.FadeUp(duration, ease: _fadeEase);
 
-            await AsyncHelper.Delay(duration);
+            await AsyncHelper.DelayFloat(duration);
 
             _baseSettings.isOpen = true;
         }
@@ -58,7 +58,7 @@ namespace UI.Elements.SettingsTab
 
             _baseSettings.canvasGroup?.FadeDown(duration, ease: _fadeEase);
 
-            await AsyncHelper.Delay(duration);
+            await AsyncHelper.DelayFloat(duration);
 
             gameObject.SetActive(false);
             _baseSettings.isOpen = false;

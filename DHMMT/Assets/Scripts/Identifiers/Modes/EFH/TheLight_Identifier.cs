@@ -6,10 +6,10 @@ namespace Identifiers
 {
     public class TheLight_Identifier : IdentifierBase
     {
-        [Header(HeaderStrings.components)]
+        [Header(HeaderStrings.Components)]
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
-        [Header(HeaderStrings.debug)]
+        [Header(HeaderStrings.Debug)]
         [SerializeField] private Exit_Identifier _exit;
 
         private void Start()

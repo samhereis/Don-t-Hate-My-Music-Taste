@@ -86,7 +86,7 @@ namespace UI.Popups
             public bool notifyOthers = true;
             public float animationDuration = 0.5f;
 
-            [Header(HeaderStrings.debug)]
+            [Header(HeaderStrings.Debug)]
             public bool isEnabled = false;
         }
     }

@@ -125,7 +125,7 @@ namespace UI.Windows
 
                     DontDestroyOnLoad(loadingScreenInstance);
 
-                    await AsyncHelper.Delay(1f);
+                    await AsyncHelper.DelayFloat(1f);
 
                     await _sceneLoader.LoadSceneAsync(scene, (percent) =>
                     {

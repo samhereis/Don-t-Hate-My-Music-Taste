@@ -77,7 +77,7 @@ namespace UI.Elements
                 activeTabIndicator.DOFade(1, _activeTabIndicatorMoveSpeed * 0.25f);
             }
 
-            await AsyncHelper.Delay(_activeTabIndicatorMoveSpeed);
+            await AsyncHelper.DelayFloat(_activeTabIndicatorMoveSpeed);
 
             _tabButton?.onClick.RemoveListener(OnClickedButton);
             _tabButton?.onClick.AddListener(OnClickedButton);

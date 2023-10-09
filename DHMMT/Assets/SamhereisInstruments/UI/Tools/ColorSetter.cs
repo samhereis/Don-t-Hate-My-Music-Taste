@@ -19,7 +19,7 @@ namespace UI.Elements
 
         private async void OnEnable()
         {
-            while (DependencyInjector.isGLoballyInjected == false) { await AsyncHelper.Delay(20); }
+            while (DependencyInjector.isGLoballyInjected == false) { await AsyncHelper.DelayInt(20); }
 
             if (_uIConfigs == null)
             {

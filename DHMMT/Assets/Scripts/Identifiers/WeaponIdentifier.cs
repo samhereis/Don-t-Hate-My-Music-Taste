@@ -97,7 +97,7 @@ namespace Identifiers
 
         private async void ResetCanShoot(float delay)
         {
-            await AsyncHelper.Delay(delay);
+            await AsyncHelper.DelayFloat(delay);
 
             if (currentAmmo > 0) canShoot = true;
         }

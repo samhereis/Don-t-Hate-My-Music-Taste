@@ -39,7 +39,7 @@ namespace Gameplay
 
             if (callback != null)
             {
-                await AsyncHelper.Delay(_hit.main.duration);
+                await AsyncHelper.DelayFloat(_hit.main.duration);
                 callback.Invoke();
             }
         }
@@ -54,7 +54,7 @@ namespace Gameplay
 
             if (callback != null)
             {
-                await AsyncHelper.Delay(_hit.main.duration);
+                await AsyncHelper.DelayFloat(_hit.main.duration);
                 callback.Invoke();
             }
         }

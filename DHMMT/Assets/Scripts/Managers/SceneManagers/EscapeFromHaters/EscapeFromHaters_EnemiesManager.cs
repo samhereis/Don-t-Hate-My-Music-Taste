@@ -10,10 +10,10 @@ namespace Managers.SceneManagers
 {
     public class EscapeFromHaters_EnemiesManager : MonoBehaviour
     {
-        [Header(HeaderStrings.prefabs)]
+        [Header(HeaderStrings.Prefabs)]
         [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
 
-        [Header(HeaderStrings.settings)]
+        [Header(HeaderStrings.Settings)]
         [SerializeField] private LayerMask _enemyNavmeshLayerMask;
 
         private PlayerIdentifier _playerIdentifier;
@@ -52,7 +52,7 @@ namespace Managers.SceneManagers
                 var enemyInstance = Instantiate(enemyIdentifier, nearPositionToPlayer, Quaternion.identity);
                 enemyInstance.gameObject.SetActive(false);
 
-                await AsyncHelper.Delay(1000);
+                await AsyncHelper.DelayInt(1000);
                 enemyInstance.gameObject.SetActive(true);
             }
         }

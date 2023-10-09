@@ -30,13 +30,29 @@ namespace Charatcers.Enemy
         [SerializeField] private Animator _animator;
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private EnemyAgent _enemyAgent;
+        [SerializeField] private Target _targetIndicator;
 
         private Image _healthSliderFillRectImage;
+        private MainCamera_Identifier _mainCamera_;
+
+        private MainCamera_Identifier _mainCamera
+        {
+            get
+            {
+                if (_mainCamera_ == null)
+                {
+                    _mainCamera_ = FindFirstObjectByType<MainCamera_Identifier>(FindObjectsInactive.Include);
+                }
+
+                return _mainCamera_;
+            }
+        }
 
         private void Awake()
         {
-            damagedObjectIdentifier = GetComponent<IdentifierBase>();
-            _enemyAgent = GetComponent<EnemyAgent>();
+            if (damagedObjectIdentifier == null) damagedObjectIdentifier = GetComponent<IdentifierBase>();
+            if (_enemyAgent == null) _enemyAgent = GetComponent<EnemyAgent>();
+            if (_targetIndicator == null) _targetIndicator = GetComponentInChildren<Target>(true);
         }
 
         private void Start()
@@ -112,12 +128,12 @@ namespace Charatcers.Enemy
                 characterJoint.enableProjection = true;
             }
 
+            isAlive = false;
+            _targetIndicator?.gameObject.SetActive(false);
+            Destroy(gameObject, 5);
+
             onDie?.Invoke();
             _onEnemyDied?.Invoke(this);
-
-            isAlive = false;
-
-            Destroy(gameObject, 5);
         }
 
         private void UpdateHealthSlider()
@@ -125,6 +141,8 @@ namespace Charatcers.Enemy
             if (_healthSlider != null)
             {
                 _healthSlider.DOKill();
+
+                if (_mainCamera != null) { _healthSlider.transform.DOLookAt(_mainCamera.transform.position, 0.25f); }
 
                 _healthSlider.transform.DOScaleY(1, 0.25f).OnComplete(() =>
                 {

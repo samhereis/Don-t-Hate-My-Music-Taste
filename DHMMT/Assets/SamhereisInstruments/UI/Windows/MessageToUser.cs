@@ -71,7 +71,7 @@ namespace UI
 
                 _transform.DOAnchorPos3DY(_showYPosition, _animationDuration).SetEase(_ease).OnComplete(async () =>
                 {
-                    await AsyncHelper.Delay(_duration);
+                    await AsyncHelper.DelayFloat(_duration);
                     Hide(_animationDuration);
 
                     _isShowingMessage = false;
@@ -84,7 +84,7 @@ namespace UI
             _transform.DOKill();
             _logErrorCanvas.FadeUp(_animationDuration).SetEase(_ease).OnComplete(async () =>
             {
-                await AsyncHelper.Delay(_duration);
+                await AsyncHelper.DelayFloat(_duration);
                 Hide(_animationDuration);
             });
         }

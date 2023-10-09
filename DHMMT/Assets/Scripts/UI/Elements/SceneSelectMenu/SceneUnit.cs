@@ -67,7 +67,7 @@ namespace UI.Elements.SceneSelectMenu
         {
             OnSelectClicked();
 
-            await AsyncHelper.Delay(_playButtonDelay);
+            await AsyncHelper.DelayFloat(_playButtonDelay);
             _onASceneLoadRequested?.Invoke(_scene);
         }
 

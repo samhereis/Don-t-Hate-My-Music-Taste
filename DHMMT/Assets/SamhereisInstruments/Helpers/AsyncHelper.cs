@@ -1,14 +1,12 @@
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Helpers
 {
     public static class AsyncHelper
     {
-        public static async Task Delay()
+        public static async Awaitable Delay()
         {
-            await Task.Yield();
+            await Awaitable.NextFrameAsync();
         }
 
         public static async Awaitable NextFrame()
@@ -16,28 +14,15 @@ namespace Helpers
             await Awaitable.NextFrameAsync();
         }
 
-        public static async Task Delay(float delay)
+        public static async Awaitable DelayFloat(float delay)
         {
-            int duration = (int)Mathf.Max(delay * 1000, 0);
-
-            await Task.Delay(duration);
+            await Awaitable.WaitForSecondsAsync(delay);
         }
 
-        public static async Task Delay(float delay, CancellationToken cancellationToken)
+        public static async Awaitable DelayInt(int delay)
         {
-            int duration = (int)Mathf.Max(delay * 1000, 0);
-
-            await Task.Delay(duration, cancellationToken);
-        }
-
-        public static async Task Delay(int delay)
-        {
-            await Task.Delay(delay);
-        }
-
-        public static async Task Delay(int delay, CancellationToken cancellationToken)
-        {
-            await Task.Delay(delay, cancellationToken);
+            float duration = delay / 1000;
+            await Awaitable.WaitForSecondsAsync(duration);
         }
     }
 }

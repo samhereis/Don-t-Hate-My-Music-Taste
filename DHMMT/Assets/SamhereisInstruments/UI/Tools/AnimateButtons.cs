@@ -21,7 +21,7 @@ namespace UI.Interaction
 
         public async void OnPointerEnter(PointerEventData eventData)
         {
-            await AsyncHelper.Delay(_delayBetweenAnimations);
+            await AsyncHelper.DelayFloat(_delayBetweenAnimations);
             transform.DOScale(_onOverScale, _animationDuration).SetEase(Ease.InOutBack);
 
             _events._onHover?.Invoke();
@@ -34,7 +34,7 @@ namespace UI.Interaction
 
         public async void OnPointerExit(PointerEventData eventData)
         {
-            await AsyncHelper.Delay(_delayBetweenAnimations);
+            await AsyncHelper.DelayFloat(_delayBetweenAnimations);
             transform.DOScale(_normaleScale, _animationDuration).SetEase(Ease.InOutBack);
 
             _events._onExit?.Invoke();

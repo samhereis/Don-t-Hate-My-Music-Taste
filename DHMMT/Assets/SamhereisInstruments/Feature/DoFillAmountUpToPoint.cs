@@ -40,7 +40,7 @@ namespace UI.Helpers
 
         private async void OnEnable()
         {
-            await AsyncHelper.Delay(500);
+            await AsyncHelper.DelayInt(500);
 
             _fillToThisPoint.rectTransform.DOAnchorPosX(0, 1);
         }

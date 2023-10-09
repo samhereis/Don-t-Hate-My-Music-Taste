@@ -31,7 +31,7 @@ namespace UI.Canvases
         {
             onAWindowOpen?.Invoke(this);
 
-            await AsyncHelper.Delay(500);
+            await AsyncHelper.DelayInt(500);
 
             base.Enable(duration);
         }

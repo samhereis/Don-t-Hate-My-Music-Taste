@@ -5,10 +5,12 @@ using Events;
 using Helpers;
 using Identifiers;
 using Interfaces;
+using Music;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UI.Canvases;
+using UI.Windows.GameplayMenus;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -19,13 +21,13 @@ namespace Managers.SceneManagers
         [Header("Actors")]
         [SerializeField] private PlayerIdentifier _playerPrefab;
 
-        [Header(HeaderStrings.components)]
+        [Header(HeaderStrings.Components)]
         [SerializeField] private TD_EnemiesManager _enemiesManager;
         [SerializeField] private Transform _terrainReactableGridCenter;
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
         [Header("Menus")]
-        [SerializeField] private CanvasWindowBase _winMenu;
+        [SerializeField] private TD_GameplayMenu _gameplayMenu;
         [SerializeField] private CanvasWindowBase _loseMenu;
 
 #if UNITY_EDITOR
@@ -38,36 +40,44 @@ namespace Managers.SceneManagers
 
 #endif
 
-        [Header(HeaderStrings.settings)]
+        [Header(HeaderStrings.Settings)]
         [SerializeField] private ReactorSpawnData[] _reactorSpawnDatas;
         [SerializeField] private int _xTerrainReactableSize;
         [SerializeField] private int _yTerrainReactableSize;
         [SerializeField] private int _xTerrainReactableGridSize;
         [SerializeField] private int _yTerrainReactableGridSize;
+        [SerializeField] private int _secondsToGiveOnEnemyDie = 25;
 
-        [Header(HeaderStrings.di)]
+        [Header(HeaderStrings.DI)]
         [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
+        [DI(DIStrings.playingMusicData)][SerializeField] private PlayingMusicData _playingMusicData;
 
         [Header("TerrainReactableParents")]
         [SerializeField] private Transform _bass_TerrainReactableParent;
         [SerializeField] private Transform _middle_TerrainReactableParent;
         [SerializeField] private Transform _high_TerrainReactableParent;
 
-        [Header(HeaderStrings.debug)]
+        [Header(HeaderStrings.Debug)]
         [SerializeField] private List<PlayerSpawnPoint_Identifier> _playerSpawnPoints = new List<PlayerSpawnPoint_Identifier>();
         [SerializeField] private PlayerIdentifier _player;
 
         private void Awake()
         {
-
+            if (_gameplayMenu == null) { _gameplayMenu = GetComponent<TD_GameplayMenu>(); }
         }
 
         private async void OnEnable()
         {
             (this as IDIDependent).LoadDependencies();
-            await InitializeAsync();
+
+            await SpawnTerrainReactables();
+            //_navMeshSurface.BuildNavMesh();
+            SpawnPlayer();
+            _enemiesManager.SpawnEnemies();
 
             SubscribeToEvents();
+
+            await InitializeAsync();
         }
 
         private void OnDisable()
@@ -77,23 +87,43 @@ namespace Managers.SceneManagers
 
         public void SubscribeToEvents()
         {
-            _onEnemyDied.AddListener(OnEnemyDied);
+            _onEnemyDied.AddListener(SpawnEnemy);
+            _player.TryGet<PlayerHealth>().onDie += SpawnPlayer;
 
-            _player.TryGet<PlayerHealth>().onDie += Lose;
+            _gameplayMenu.gameplayMenu.onOpen += PlayMusic;
+            _gameplayMenu.gameplayMenu.onClose += StopMusic;
+            _gameplayMenu.onTimerOver += Lose;
         }
 
         public void UnsubscribeFromEvents()
         {
-            _onEnemyDied.RemoveListener(OnEnemyDied);
+            _onEnemyDied.RemoveListener(SpawnEnemy);
+            _player.TryGet<PlayerHealth>().onDie -= SpawnPlayer;
 
-            _player.TryGet<PlayerHealth>().onDie -= Lose;
+            _gameplayMenu.gameplayMenu.onOpen -= PlayMusic;
+            _gameplayMenu.gameplayMenu.onClose -= StopMusic;
+            _gameplayMenu.onTimerOver -= Lose;
         }
 
         public override async Awaitable InitializeAsync()
         {
+            await base.InitializeAsync();
+        }
+
+        private void SpawnEnemy(IDamagable enemy)
+        {
+            _gameplayMenu.AddSeconds(_secondsToGiveOnEnemyDie);
+            _enemiesManager.Respawn(enemy);
+        }
+
+        private void SpawnPlayer()
+        {
             _playerSpawnPoints = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
             if (_playerSpawnPoints.Count > 0) _player = Instantiate(_playerPrefab, _playerSpawnPoints.GetRandom().transform.position, Quaternion.identity);
+        }
 
+        private async Awaitable SpawnTerrainReactables()
+        {
             for (int x = -_xTerrainReactableGridSize; x <= _xTerrainReactableGridSize; x++)
             {
                 for (int z = -_yTerrainReactableGridSize; z <= _yTerrainReactableGridSize; z++)
@@ -114,17 +144,6 @@ namespace Managers.SceneManagers
                     reactableInstance.transform.localEulerAngles = Vector3.zero;
                 }
             }
-
-            _navMeshSurface.BuildNavMesh();
-
-            _enemiesManager.SpawnEnemies();
-
-            await base.InitializeAsync();
-        }
-
-        private void OnEnemyDied(IDamagable enemy)
-        {
-            _enemiesManager.Respawn(enemy);
         }
 
         private void Lose()
@@ -134,11 +153,14 @@ namespace Managers.SceneManagers
             _loseMenu?.Enable();
         }
 
-        private void Win(Exit_Identifier identifier)
+        private void PlayMusic()
         {
-            Clear();
+            _playingMusicData.SetActive(true);
+        }
 
-            _winMenu?.Enable();
+        private void StopMusic()
+        {
+            _playingMusicData.SetActive(false);
         }
 
         private void Clear()

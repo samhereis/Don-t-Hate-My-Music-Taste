@@ -2,11 +2,12 @@ namespace ConstStrings
 {
     public static class HeaderStrings
     {
-        public const string settings = "Settings";
-        public const string components = "Components";
-        public const string prefabs = "Prefabs";
-        public const string di = "DI";
-        public const string debug = "Debug";
-        public const string addressableReferences = "Addressable References";
+        public const string Settings = "Settings";
+        public const string Components = "Components";
+        public const string Prefabs = "Prefabs";
+        public const string DI = "DI";
+        public const string Debug = "Debug";
+        public const string AddressableReferences = "Addressable References";
+        public const string UIElements = "UI Elements";
     }
 }

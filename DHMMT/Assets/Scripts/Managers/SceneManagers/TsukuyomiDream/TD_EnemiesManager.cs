@@ -11,13 +11,13 @@ namespace Managers.SceneManagers
 {
     public class TD_EnemiesManager : MonoBehaviour, IDIDependent
     {
-        [Header(HeaderStrings.prefabs)]
+        [Header(HeaderStrings.Prefabs)]
         [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
 
-        [Header(HeaderStrings.settings)]
+        [Header(HeaderStrings.Settings)]
         [SerializeField] private LayerMask _enemyNavmeshLayerMask;
 
-        [Header(HeaderStrings.debug)]
+        [Header(HeaderStrings.Debug)]
         [SerializeField] private EnemySpawnPoint_Identifier[] _enemySpawnPoint_Identifiers;
 
         private PlayerIdentifier _playerIdentifier;

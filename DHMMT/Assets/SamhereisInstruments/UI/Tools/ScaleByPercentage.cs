@@ -2,7 +2,6 @@ using DI;
 using Helpers;
 using LazyUpdators;
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -77,13 +76,13 @@ namespace UI.Helpers
 
 #endif
 
-        private IEnumerator AutoScaleAfterOnEnable()
+        private async Awaitable AutoScaleAfterOnEnable()
         {
             DoAutoScale();
 
             for (int i = 0; i < 60; i++)
             {
-                yield return new WaitForEndOfFrame();
+                await AsyncHelper.NextFrame();
                 DoAutoScale();
             }
         }

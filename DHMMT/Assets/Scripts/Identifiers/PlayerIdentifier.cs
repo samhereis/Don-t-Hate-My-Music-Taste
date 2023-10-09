@@ -11,7 +11,7 @@ namespace Identifiers
 {
     public class PlayerIdentifier : IdentifierBase, IDamagerActor, IDIDependent, ISubscribesToEvents
     {
-        [Header(HeaderStrings.components)]
+        [Header(HeaderStrings.Components)]
         [SerializeField] private FPSController _fpsController;
         [SerializeField] private Camera _camera;
 

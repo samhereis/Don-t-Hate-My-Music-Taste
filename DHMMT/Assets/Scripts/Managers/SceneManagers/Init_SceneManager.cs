@@ -18,7 +18,7 @@ namespace Managers.SceneManagers
 
             while (DependencyInjector.isGLoballyInjected == false)
             {
-                await AsyncHelper.Delay(1f);
+                await AsyncHelper.DelayFloat(1f);
             }
 
             (this as IDIDependent).LoadDependencies();

@@ -23,7 +23,7 @@ namespace Managers.SceneManagers
         [SerializeField] private TheLight_Identifier _theLightPrefab;
         [SerializeField] private PlayerIdentifier _playerPrefab;
 
-        [Header(HeaderStrings.components)]
+        [Header(HeaderStrings.Components)]
         [SerializeField] private EscapeFromHaters_EnemiesManager _enemiesManager;
         [SerializeField] protected EFH_GameplayMenu _gameplayMenu;
 
@@ -31,7 +31,7 @@ namespace Managers.SceneManagers
         [SerializeField] private CanvasWindowBase _winMenu;
         [SerializeField] private CanvasWindowBase _loseMenu;
 
-        [Header(HeaderStrings.settings)]
+        [Header(HeaderStrings.Settings)]
         [SerializeField] private int _secondsUntillLoseWhileOutsideOfTheLight = 25;
         [SerializeField] private float _lightRange = 10;
 
@@ -45,11 +45,11 @@ namespace Managers.SceneManagers
 
 #endif
 
-        [Header(HeaderStrings.di)]
+        [Header(HeaderStrings.DI)]
         [DI(Event_DIStrings.onExitFound)][SerializeField] private EventWithOneParameters<Exit_Identifier> _onExitFound;
         [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
 
-        [Header(HeaderStrings.debug)]
+        [Header(HeaderStrings.Debug)]
         [SerializeField] private Exit_Identifier _exit;
         [SerializeField] private TheLight_Identifier _theLight;
         [SerializeField] private PlayerIdentifier _player;

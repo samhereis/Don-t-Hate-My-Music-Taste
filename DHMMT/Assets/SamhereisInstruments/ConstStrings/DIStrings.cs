@@ -7,6 +7,7 @@ namespace ConstStrings
         public const string gameConfigs = "GameConfigs";
 
         public const string gameSaveManager = "GameSaveManager";
+        public const string playingMusicData = "PlayingMusicData";
 
         public const string spectrumDataContainer = "SpectrumDataContainer";
         public const string musicList = "MusicList";

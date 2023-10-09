@@ -95,7 +95,7 @@ namespace UI.Popups
             public float animationDuration = 0.5f;
             public Vector3 onDisableScale = Vector3.zero;
 
-            [Header(HeaderStrings.debug)]
+            [Header(HeaderStrings.Debug)]
             public bool isEnabled = false;
         }
     }

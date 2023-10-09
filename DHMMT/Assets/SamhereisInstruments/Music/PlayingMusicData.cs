@@ -1,7 +1,6 @@
-﻿using DI;
+﻿using ConstStrings;
+using DI;
 using Helpers;
-using ConstStrings;
-using System.Threading;
 using UnityEngine;
 
 namespace Music
@@ -16,8 +15,7 @@ namespace Music
 
         [Header("Debug")]
         [SerializeField] private bool _isCheckingForAudio = false;
-
-        private CancellationTokenSource _onDestroyCT = new CancellationTokenSource();
+        [SerializeField] private bool _isActive = false;
 
         private void Awake()
         {
@@ -26,44 +24,56 @@ namespace Music
             if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
         }
 
-        private void Start()
-        {
-            CheckForAudio(_onDestroyCT);
-        }
-
         private void Update()
         {
             _spectrumData.SetSpectrumWidth(_audioSource);
         }
 
-        private void OnDestroy()
+        public void SetActive(bool targetActiveStatus)
         {
-            _onDestroyCT.Cancel();
+            _isActive = targetActiveStatus;
+
+            if (_isActive == true)
+            {
+                CheckForAudio();
+            }
+            else
+            {
+                _audioSource.Stop();
+            }
         }
 
         public void PauseMusic(bool pause)
         {
-            if (pause) _audioSource.Pause(); else _audioSource.UnPause();
+            if (pause == true) { _audioSource.Pause(); } else { _audioSource.UnPause(); }
         }
 
-        private async void CheckForAudio(CancellationTokenSource cancellationTokenSource)
+        private async void CheckForAudio()
         {
             if (_isCheckingForAudio) return;
             _isCheckingForAudio = true;
 
-            while (cancellationTokenSource.IsCancellationRequested == false)
+            while (destroyCancellationToken.IsCancellationRequested == false)
             {
-                if ((_audioSource.isPlaying == false || _audioSource.clip == null) && _musicList.count > 0)
+                if (_isActive == true)
                 {
-                    _audioSource.clip = null;
-                    _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];
-                    _audioSource.Play();
+                    TryPlayMusicIfNotPlaying();
                 }
 
-                await AsyncHelper.Delay(1);
+                await AsyncHelper.DelayInt(1);
             }
 
             _isCheckingForAudio = false;
+        }
+
+        private void TryPlayMusicIfNotPlaying()
+        {
+            if ((_audioSource.isPlaying == false || _audioSource.clip == null) && _musicList.count > 0)
+            {
+                _audioSource.clip = null;
+                _audioSource.clip = _musicList.musicList[Random.Range(0, _musicList.count)];
+                _audioSource.Play();
+            }
         }
     }
 }

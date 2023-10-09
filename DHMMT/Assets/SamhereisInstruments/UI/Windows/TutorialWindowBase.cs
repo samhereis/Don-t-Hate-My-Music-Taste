@@ -20,7 +20,7 @@ namespace UI.Window.Tutorial
 
         public override async void Enable(float? duration = null)
         {
-            await AsyncHelper.Delay(_openDelayInMillisecods);
+            await AsyncHelper.DelayInt(_openDelayInMillisecods);
 
             if (AreDependenciesCompleted() == true)
             {

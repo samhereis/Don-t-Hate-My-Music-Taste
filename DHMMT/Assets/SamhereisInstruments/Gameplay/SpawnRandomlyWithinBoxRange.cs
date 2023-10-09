@@ -13,7 +13,7 @@ namespace Helpers
 
         private async void Spawn()
         {
-            await AsyncHelper.Delay(1f);
+            await AsyncHelper.DelayFloat(1f);
 
             Bounds bounds = _colliders[NumberHelper.GetRandom(_colliders.Length)].bounds;
 
