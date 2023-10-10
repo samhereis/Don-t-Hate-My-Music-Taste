@@ -1,4 +1,5 @@
 using DataClasses;
+using Helpers;
 using Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,17 @@ namespace SO.Lists
 
         public void Initialize()
         {
+
+#if UNITY_EDITOR
+
+            foreach (var item in scenes)
+            {
+                item.Initialize();
+            }
+
+            this.TrySetDirty();
+
+#endif
 
         }
 

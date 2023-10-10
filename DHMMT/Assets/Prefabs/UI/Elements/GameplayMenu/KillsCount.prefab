@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -50, y: -20}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1611092419637451200
 CanvasRenderer:
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 7083376983526032691}
   - component: {fileID: 7506845136185357542}
   - component: {fileID: 9205150835254798246}
+  - component: {fileID: 2442143614987250858}
   m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
@@ -168,8 +169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 50, y: 0}
+  m_AnchoredPosition: {x: 81, y: 0}
+  m_SizeDelta: {x: -162, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7506845136185357542
 CanvasRenderer:
@@ -209,6 +210,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2442143614987250858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031662899085165295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 2816706814950749743}
+  _rectTransform: {fileID: 7083376983526032691}
+  _scaleSettings:
+    <top>k__BackingField: 0
+    <bottom>k__BackingField: 0
+    <left>k__BackingField: 75
+    <right>k__BackingField: 0
+  _ignoreSettings:
+    <ignoreTop>k__BackingField: 0
+    <ignoreBottom>k__BackingField: 0
+    <ignoreLeft>k__BackingField: 0
+    <ignoreRight>k__BackingField: 0
+  _lazyUpdator: {fileID: 0}
 --- !u!1 &2343590239675267185
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +246,7 @@ GameObject:
   - component: {fileID: 7123441938587493526}
   - component: {fileID: 3279903923964261274}
   - component: {fileID: 2965976656662880767}
+  - component: {fileID: 6123200108496028692}
   m_Layer: 0
   m_Name: KillsLabel
   m_TagString: Untagged
@@ -244,8 +271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -37.5, y: 0}
-  m_SizeDelta: {x: -75, y: 0}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: -54, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3279903923964261274
 CanvasRenderer:
@@ -268,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -285,6 +312,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6123200108496028692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343590239675267185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 2816706814950749743}
+  _rectTransform: {fileID: 7123441938587493526}
+  _scaleSettings:
+    <top>k__BackingField: 0
+    <bottom>k__BackingField: 0
+    <left>k__BackingField: 0
+    <right>k__BackingField: 25
+  _ignoreSettings:
+    <ignoreTop>k__BackingField: 0
+    <ignoreBottom>k__BackingField: 0
+    <ignoreLeft>k__BackingField: 0
+    <ignoreRight>k__BackingField: 0
+  _lazyUpdator: {fileID: 0}
 --- !u!1 &4183134847437217515
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,10 +468,10 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _rectTransform: {fileID: 1517150444423754883}
   _scaleSettings:
-    <top>k__BackingField: 0
-    <bottom>k__BackingField: 0
-    <left>k__BackingField: 0
-    <right>k__BackingField: 0
+    <top>k__BackingField: 2.5
+    <bottom>k__BackingField: 90
+    <left>k__BackingField: 75
+    <right>k__BackingField: 2.5
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0
     <ignoreBottom>k__BackingField: 0

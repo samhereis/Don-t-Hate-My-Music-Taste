@@ -9,6 +9,7 @@ public class Indicator : MonoBehaviour
 {
     [SerializeField] private IndicatorType indicatorType;
     [SerializeField] private Image indicatorImage;
+    [SerializeField] private Image distanceTextHolder;
     [SerializeField] private TextMeshProUGUI distanceText;
 
     /// <summary>
@@ -45,8 +46,8 @@ public class Indicator : MonoBehaviour
     /// <param name="color"></param>
     public void SetImageColor(Color color)
     {
-        indicatorImage.color = color;
-        distanceText.color = color;
+        if (indicatorImage.color != color) { indicatorImage.color = color; }
+        //if (distanceText.color != color) { distanceText.color = color; }
     }
 
     /// <summary>
@@ -62,9 +63,9 @@ public class Indicator : MonoBehaviour
     /// Sets the distance text rotation of the indicator.
     /// </summary>
     /// <param name="rotation"></param>
-    public void SetTextRotation(Quaternion rotation)
+    public void SetRotation(Quaternion rotation)
     {
-        distanceText.rectTransform.rotation = rotation;
+        indicatorImage.rectTransform.rotation = rotation;
     }
 
     /// <summary>

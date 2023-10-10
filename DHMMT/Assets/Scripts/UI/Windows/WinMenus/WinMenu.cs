@@ -12,12 +12,6 @@ namespace UI.Windows
 {
     public class WinMenu : CanvasWindowBase
     {
-        public Action onEnable;
-        public Action onDisable;
-
-        public Action onSubscribeToEvents;
-        public Action onUnsubscribeFromEvents;
-
         [Header("UI Elements")]
         [SerializeField] private Button _mainMenuButton;
         [SerializeField] private Button _replayButton;

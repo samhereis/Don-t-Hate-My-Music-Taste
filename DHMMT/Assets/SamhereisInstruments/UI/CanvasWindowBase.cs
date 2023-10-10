@@ -20,6 +20,12 @@ namespace UI.Canvases
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class CanvasWindowBase : MonoBehaviour, IDIDependent, IUIWindow, IInitializable
     {
+        public Action onEnable;
+        public Action onDisable;
+
+        public Action onSubscribeToEvents;
+        public Action onUnsubscribeFromEvents;
+
         public static Action<CanvasWindowBase> onAWindowOpen { get; private set; }
 
         [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();

@@ -1,11 +1,14 @@
 using Charatcers.Player;
 using ConstStrings;
+using DataClasses;
 using DI;
 using Events;
 using Helpers;
 using Identifiers;
 using Interfaces;
 using Music;
+using SamhereisTools;
+using SO.Lists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,20 +45,16 @@ namespace Managers.SceneManagers
 
         [Header(HeaderStrings.Settings)]
         [SerializeField] private ReactorSpawnData[] _reactorSpawnDatas;
-        [SerializeField] private int _xTerrainReactableSize;
-        [SerializeField] private int _yTerrainReactableSize;
-        [SerializeField] private int _xTerrainReactableGridSize;
-        [SerializeField] private int _yTerrainReactableGridSize;
+        [SerializeField] private Vector2Int _tReactableSize;
+        [SerializeField] private Vector2Int _terrainReactableGridSize;
         [SerializeField] private int _secondsToGiveOnEnemyDie = 25;
 
         [Header(HeaderStrings.DI)]
         [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
         [DI(DIStrings.playingMusicData)][SerializeField] private PlayingMusicData _playingMusicData;
-
-        [Header("TerrainReactableParents")]
-        [SerializeField] private Transform _bass_TerrainReactableParent;
-        [SerializeField] private Transform _middle_TerrainReactableParent;
-        [SerializeField] private Transform _high_TerrainReactableParent;
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
         [Header(HeaderStrings.Debug)]
         [SerializeField] private List<PlayerSpawnPoint_Identifier> _playerSpawnPoints = new List<PlayerSpawnPoint_Identifier>();
@@ -63,7 +62,7 @@ namespace Managers.SceneManagers
 
         private void Awake()
         {
-            if (_gameplayMenu == null) { _gameplayMenu = GetComponent<TD_GameplayMenu>(); }
+            if (_gameplayMenu == null) { _gameplayMenu = GetComponentInChildren<TD_GameplayMenu>(true); }
         }
 
         private async void OnEnable()
@@ -71,7 +70,7 @@ namespace Managers.SceneManagers
             (this as IDIDependent).LoadDependencies();
 
             await SpawnTerrainReactables();
-            //_navMeshSurface.BuildNavMesh();
+            if (_navMeshSurface.navMeshData == null) { _navMeshSurface.BuildNavMesh(); }
             SpawnPlayer();
             _enemiesManager.SpawnEnemies();
 
@@ -90,8 +89,8 @@ namespace Managers.SceneManagers
             _onEnemyDied.AddListener(SpawnEnemy);
             _player.TryGet<PlayerHealth>().onDie += SpawnPlayer;
 
-            _gameplayMenu.gameplayMenu.onOpen += PlayMusic;
-            _gameplayMenu.gameplayMenu.onClose += StopMusic;
+            _gameplayMenu.gameplayMenu.onEnable += UnPauseMusic;
+            _gameplayMenu.gameplayMenu.onDisable += PauseMusic;
             _gameplayMenu.onTimerOver += Lose;
         }
 
@@ -100,14 +99,16 @@ namespace Managers.SceneManagers
             _onEnemyDied.RemoveListener(SpawnEnemy);
             _player.TryGet<PlayerHealth>().onDie -= SpawnPlayer;
 
-            _gameplayMenu.gameplayMenu.onOpen -= PlayMusic;
-            _gameplayMenu.gameplayMenu.onClose -= StopMusic;
+            _gameplayMenu.gameplayMenu.onEnable -= UnPauseMusic;
+            _gameplayMenu.gameplayMenu.onDisable -= PauseMusic;
             _gameplayMenu.onTimerOver -= Lose;
         }
 
         public override async Awaitable InitializeAsync()
         {
             await base.InitializeAsync();
+
+            _playingMusicData.SetActive(true, true);
         }
 
         private void SpawnEnemy(IDamagable enemy)
@@ -124,9 +125,9 @@ namespace Managers.SceneManagers
 
         private async Awaitable SpawnTerrainReactables()
         {
-            for (int x = -_xTerrainReactableGridSize; x <= _xTerrainReactableGridSize; x++)
+            for (int x = -_terrainReactableGridSize.x; x <= _terrainReactableGridSize.x; x++)
             {
-                for (int z = -_yTerrainReactableGridSize; z <= _yTerrainReactableGridSize; z++)
+                for (int z = -_terrainReactableGridSize.y; z <= _terrainReactableGridSize.y; z++)
                 {
                     await AsyncHelper.NextFrame();
 
@@ -134,9 +135,9 @@ namespace Managers.SceneManagers
 
                     var reactableInstance = Instantiate(reactableData.reactable_Identifiers.GetRandom(), reactableData.parent);
 
-                    var reactablePositionX = _terrainReactableGridCenter.transform.position.x + (x * _xTerrainReactableSize);
+                    var reactablePositionX = _terrainReactableGridCenter.transform.position.x + (x * _tReactableSize.x);
                     var reactablePositionY = _terrainReactableGridCenter.transform.position.y;
-                    var reactablePositionZ = _terrainReactableGridCenter.transform.position.z + (z * _yTerrainReactableSize);
+                    var reactablePositionZ = _terrainReactableGridCenter.transform.position.z + (z * _tReactableSize.y);
 
                     var reactablePosition = new Vector3(reactablePositionX, reactablePositionY, reactablePositionZ);
 
@@ -150,17 +151,35 @@ namespace Managers.SceneManagers
         {
             Clear();
 
+            var currentScene = _sceneLoader.lastLoadedScene;
+            var modeTDSave = _gameSaveManager.modeTDSaves;
+            var modeTDSaveUnit = modeTDSave.tD_Saves.Find(x => x.sceneName == currentScene.sceneCode);
+
+            if (modeTDSaveUnit == null)
+            {
+                modeTDSaveUnit = new TD_SaveUnit();
+                modeTDSaveUnit.sceneName = currentScene.sceneCode;
+
+                modeTDSave.tD_Saves.SafeAdd(modeTDSaveUnit);
+            }
+
+            if (modeTDSaveUnit != null)
+            {
+                modeTDSaveUnit.record = _gameplayMenu.currentDuration;
+            }
+
+            _gameSaveManager.Save(_gameSaveManager.modeTDSaves);
             _loseMenu?.Enable();
         }
 
-        private void PlayMusic()
+        private void UnPauseMusic()
         {
-            _playingMusicData.SetActive(true);
+            _playingMusicData.PauseMusic(false);
         }
 
-        private void StopMusic()
+        private void PauseMusic()
         {
-            _playingMusicData.SetActive(false);
+            _playingMusicData.PauseMusic(true);
         }
 
         private void Clear()

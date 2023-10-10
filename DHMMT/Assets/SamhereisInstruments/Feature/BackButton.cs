@@ -9,7 +9,7 @@ namespace UI.Interaction
 {
     public class BackButton : MonoBehaviour, IPointerClickHandler, IDIDependent
     {
-        public UnityEvent onBack { get; private set; } = new UnityEvent();
+        [field: SerializeField] public UnityEvent onBack { get; private set; } = new UnityEvent();
 
         [DI(ConstStrings.DIStrings.inputHolder)][SerializeField] private Input_SO _inputContainer;
 
@@ -19,7 +19,6 @@ namespace UI.Interaction
 
             if (_inputContainer != null) { _inputContainer.input.UI.Back.performed += Back; }
         }
-
 
         public void UnsubscribeFromEvents()
         {

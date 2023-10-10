@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2776331902833736201
 CanvasRenderer:
@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.1
+  m_fontSize: 27.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 5
-  m_fontSizeMax: 50
+  m_fontSizeMax: 35
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -188,10 +188,10 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _rectTransform: {fileID: 3008223442927651252}
   _scaleSettings:
-    <top>k__BackingField: 65
-    <bottom>k__BackingField: 25
-    <left>k__BackingField: 70
-    <right>k__BackingField: 5
+    <top>k__BackingField: 80
+    <bottom>k__BackingField: 12.5
+    <left>k__BackingField: 75
+    <right>k__BackingField: 2.5
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0
     <ignoreBottom>k__BackingField: 0
@@ -413,8 +413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 90, y: 0}
-  m_SizeDelta: {x: -180, y: 0}
+  m_AnchoredPosition: {x: 86.399994, y: 0}
+  m_SizeDelta: {x: -172.79999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2618529717206660046
 CanvasRenderer:
@@ -471,7 +471,7 @@ MonoBehaviour:
   _scaleSettings:
     <top>k__BackingField: 0
     <bottom>k__BackingField: 0
-    <left>k__BackingField: 75
+    <left>k__BackingField: 80
     <right>k__BackingField: 0
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0
@@ -551,8 +551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30, y: 0}
-  m_SizeDelta: {x: -60, y: 0}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: -54, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1616286597795053423
 MonoBehaviour:
@@ -666,8 +666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -29.999996, y: 0}
-  m_SizeDelta: {x: -60.000008, y: 0}
+  m_AnchoredPosition: {x: -26.999992, y: 0}
+  m_SizeDelta: {x: -54.000015, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2323150764521651293
 CanvasRenderer:
@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.39215687, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

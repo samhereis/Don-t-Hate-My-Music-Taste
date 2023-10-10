@@ -11,25 +11,26 @@ namespace UI.Windows.GameplayMenus
     {
         public Action onTimerOver;
 
-        [Header(HeaderStrings.Components)]
-        [field: SerializeField] public GameplayMenu gameplayMenu;
+        [field: SerializeField, Header(HeaderStrings.Components)] public GameplayMenu gameplayMenu { get; private set; }
 
         [Header(HeaderStrings.UIElements)]
         [SerializeField] private TextMeshProUGUI _timerText;
+        [SerializeField] private TextMeshProUGUI _durationText;
 
         [Header(HeaderStrings.Settings)]
         [SerializeField] private int _secondsOnStart;
 
         [Header(HeaderStrings.Debug)]
         [SerializeField] private bool _isTimerActive = false;
-        [SerializeField] private int _currentTimer = 0;
+        [field: SerializeField] public int currentTimer { get; private set; } = 0;
+        [field: SerializeField] public int currentDuration { get; private set; } = 0;
 
         private void Awake()
         {
             if (gameplayMenu == null) { gameplayMenu = GetComponent<GameplayMenu>(); }
 
-            gameplayMenu.onOpen += OnGameplayMenuOpen;
-            gameplayMenu.onClose += OnGameplayMenuClose;
+            gameplayMenu.onEnable += OnGameplayMenuOpen;
+            gameplayMenu.onDisable += OnGameplayMenuClose;
         }
 
         private void Start()
@@ -42,8 +43,8 @@ namespace UI.Windows.GameplayMenus
 
         private void OnDestroy()
         {
-            gameplayMenu.onOpen -= OnGameplayMenuOpen;
-            gameplayMenu.onClose -= OnGameplayMenuClose;
+            gameplayMenu.onEnable -= OnGameplayMenuOpen;
+            gameplayMenu.onDisable -= OnGameplayMenuClose;
         }
 
         private void OnGameplayMenuOpen()
@@ -63,7 +64,7 @@ namespace UI.Windows.GameplayMenus
 
         public void AddSeconds(int seconds)
         {
-            _currentTimer += seconds;
+            currentTimer += seconds;
         }
 
         private async void CalculateTimer()
@@ -74,23 +75,25 @@ namespace UI.Windows.GameplayMenus
             {
                 await AsyncHelper.DelayFloat(1f);
 
-                if (_isTimerActive && _currentTimer > 0)
+                if (_isTimerActive && currentTimer > 0)
                 {
-                    _currentTimer--;
+                    currentTimer--;
+                    currentDuration++;
                     UpdateTimerText();
-                }
 
-                if (_currentTimer <= 0)
-                {
-                    SetActiveStatusForTimer(false);
-                    onTimerOver?.Invoke();
+                    if (currentTimer <= 0)
+                    {
+                        SetActiveStatusForTimer(false);
+                        onTimerOver?.Invoke();
+                    }
                 }
             }
         }
 
         private void UpdateTimerText()
         {
-            _timerText.text = _currentTimer.ToString();
+            _timerText.text = TimeSpan.FromSeconds(currentTimer).ToString();
+            _durationText.text = TimeSpan.FromSeconds(currentDuration).ToString();
         }
     }
 }

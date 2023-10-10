@@ -3,21 +3,19 @@ using DI;
 using Identifiers;
 using Interfaces;
 using Managers;
-using System;
+using PlayerInputHolder;
 using UI.Canvases;
 using UI.Elements.GameplayTab;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Values;
 
 namespace UI.Windows
 {
     public class GameplayMenu : CanvasWindowBase, IDIDependent
     {
-        public Action onOpen;
-        public Action onClose;
-
-        public Action onSubcsribeToEvents;
-        public Action onUnsubscribeFromEvents;
+        [Header(HeaderStrings.Components)]
+        [SerializeField] private PauseMenu _pauseMenu;
 
         [Header("Elements")]
         [SerializeField] private CrosshairIdentifier _crosshairIdentifier;
@@ -25,6 +23,7 @@ namespace UI.Windows
 
         [Header("DI")]
         [DI(Event_DIStrings.isPlayerAiming)][SerializeField] private ValueEvent<bool> _isPlayerAiming;
+        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _input_SO;
 
         protected override void Awake()
         {
@@ -33,6 +32,8 @@ namespace UI.Windows
 
             _crosshairIdentifier = GetComponentInChildren<CrosshairIdentifier>(true);
             killsCountDisplayer = GetComponentInChildren<KillsCountDisplayer>(true);
+
+            if (_pauseMenu == null) { _pauseMenu = FindFirstObjectByType<PauseMenu>(FindObjectsInactive.Include); }
         }
 
         public override void Enable(float? duration = null)
@@ -43,7 +44,7 @@ namespace UI.Windows
 
             SubscribeToEvents();
 
-            onOpen?.Invoke();
+            onEnable?.Invoke();
         }
 
         public override void Disable(float? duration = null)
@@ -52,7 +53,7 @@ namespace UI.Windows
 
             base.Disable(duration);
 
-            onClose?.Invoke();
+            onDisable?.Invoke();
         }
 
         protected override void SubscribeToEvents()
@@ -60,8 +61,9 @@ namespace UI.Windows
             base.SubscribeToEvents();
 
             _isPlayerAiming.AddListener(OnPlayerAimingChanged);
+            _input_SO.input.Gameplay.Pause.performed += Pause;
 
-            onSubcsribeToEvents?.Invoke();
+            onSubscribeToEvents?.Invoke();
         }
 
         protected override void UnsubscribeFromEvents()
@@ -69,8 +71,14 @@ namespace UI.Windows
             base.UnsubscribeFromEvents();
 
             _isPlayerAiming.RemoveListener(OnPlayerAimingChanged);
+            _input_SO.input.Gameplay.Pause.performed -= Pause;
 
             onUnsubscribeFromEvents?.Invoke();
+        }
+
+        private void Pause(InputAction.CallbackContext context)
+        {
+            _pauseMenu.Enable();
         }
 
         private void OnPlayerAimingChanged(bool isAiming)

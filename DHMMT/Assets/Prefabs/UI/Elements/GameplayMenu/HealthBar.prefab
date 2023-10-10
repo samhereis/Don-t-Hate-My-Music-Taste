@@ -102,10 +102,10 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _rectTransform: {fileID: 3008223442927651252}
   _scaleSettings:
-    <top>k__BackingField: 85
-    <bottom>k__BackingField: 5
-    <left>k__BackingField: 70
-    <right>k__BackingField: 5
+    <top>k__BackingField: 90
+    <bottom>k__BackingField: 2.5
+    <left>k__BackingField: 75
+    <right>k__BackingField: 2.5
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0
     <ignoreBottom>k__BackingField: 0
@@ -277,8 +277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 90, y: 0}
-  m_SizeDelta: {x: -180, y: 0}
+  m_AnchoredPosition: {x: 86.399994, y: 0}
+  m_SizeDelta: {x: -172.79999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2618529717206660046
 CanvasRenderer:
@@ -335,7 +335,7 @@ MonoBehaviour:
   _scaleSettings:
     <top>k__BackingField: 0
     <bottom>k__BackingField: 0
-    <left>k__BackingField: 75
+    <left>k__BackingField: 80
     <right>k__BackingField: 0
   _ignoreSettings:
     <ignoreTop>k__BackingField: 0

@@ -19,21 +19,6 @@ namespace UI.Helpers
         [Header("DI")]
         [DI(ConstStrings.DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
 
-        private void OnValidate()
-        {
-            if (_rectTransform == null)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-                this.TrySetDirty();
-            }
-
-            if (transform.parent != null)
-            {
-                _parent = transform.parent.GetComponent<RectTransform>();
-                this.TrySetDirty();
-            }
-        }
-
         private void Awake()
         {
             if (Application.isPlaying == true)
@@ -115,6 +100,22 @@ namespace UI.Helpers
         {
             DoAutoScale();
             await AsyncHelper.Delay();
+        }
+
+        [ContextMenu(nameof(Setup))]
+        public void Setup()
+        {
+            //if (_rectTransform == null)
+            {
+                _rectTransform = GetComponent<RectTransform>();
+                this.TrySetDirty();
+            }
+
+            //if (transform.parent != null)
+            {
+                _parent = transform.parent.GetComponent<RectTransform>();
+                this.TrySetDirty();
+            }
         }
 
         [Serializable]

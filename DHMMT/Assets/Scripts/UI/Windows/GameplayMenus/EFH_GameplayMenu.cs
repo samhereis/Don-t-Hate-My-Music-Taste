@@ -14,8 +14,8 @@ namespace UI.Windows.GameplayMenus
         {
             if (gameplayMenu == null) { gameplayMenu = GetComponent<GameplayMenu>(); }
 
-            gameplayMenu.onOpen += OnGameplayMenuOpen;
-            gameplayMenu.onClose += OnGameplayMenuClose;
+            gameplayMenu.onEnable += OnGameplayMenuOpen;
+            gameplayMenu.onDisable += OnGameplayMenuClose;
 
             stayUnderTheLight_Popup = GetComponentInChildren<StayUnderTheLight_Popup>(true);
         }
@@ -27,8 +27,8 @@ namespace UI.Windows.GameplayMenus
 
         private void OnDestroy()
         {
-            gameplayMenu.onOpen -= OnGameplayMenuOpen;
-            gameplayMenu.onClose -= OnGameplayMenuClose;
+            gameplayMenu.onEnable -= OnGameplayMenuOpen;
+            gameplayMenu.onDisable -= OnGameplayMenuClose;
         }
 
         private void OnGameplayMenuOpen()

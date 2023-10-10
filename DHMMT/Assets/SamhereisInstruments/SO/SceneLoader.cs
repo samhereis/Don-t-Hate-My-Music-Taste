@@ -1,7 +1,9 @@
+using ConstStrings;
 using DataClasses;
 using DI;
 using Helpers;
 using Interfaces;
+using SO.Lists;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,11 +19,19 @@ namespace SamhereisTools
 
         [SerializeField] private bool _loading = false;
 
-        private AScene _lastLoadedScene;
+        [Header(HeaderStrings.DI)]
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+
+        [Header(HeaderStrings.Debug)]
+        [SerializeField] private string _lastLoadedSceneCode;
+
+        public AScene lastLoadedScene { get; private set; }
 
         public void Initialize()
         {
             (this as IDIDependent).LoadDependencies();
+
+            SetLastLoadedScene(_listOfAllScenes.GetScenes().Find(x => x.sceneCode == SceneManager.GetActiveScene().name));
         }
 
         public async Task LoadSceneAsync(AScene aScene, Action<float> onUpdate = null)
@@ -47,7 +57,7 @@ namespace SamhereisTools
                     }
                 }
 
-                _lastLoadedScene = aScene;
+                SetLastLoadedScene(aScene);
 
                 _loading = false;
             }
@@ -60,7 +70,17 @@ namespace SamhereisTools
 
         public async Task LoadLastScene()
         {
-            await LoadSceneAsync(_lastLoadedScene);
+            await LoadSceneAsync(lastLoadedScene);
+        }
+
+        public void SetLastLoadedScene(AScene aScene)
+        {
+            lastLoadedScene = aScene;
+
+            if (lastLoadedScene != null)
+            {
+                _lastLoadedSceneCode = lastLoadedScene.sceneCode;
+            }
         }
     }
 }

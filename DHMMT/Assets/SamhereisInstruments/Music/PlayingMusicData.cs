@@ -29,23 +29,35 @@ namespace Music
             _spectrumData.SetSpectrumWidth(_audioSource);
         }
 
-        public void SetActive(bool targetActiveStatus)
+        public void SetActive(bool targetActiveStatus, bool controlPlay = false)
         {
             _isActive = targetActiveStatus;
 
-            if (_isActive == true)
+            if (controlPlay)
             {
-                CheckForAudio();
-            }
-            else
-            {
-                _audioSource.Stop();
+                if (_isActive == true)
+                {
+                    CheckForAudio();
+                }
+                else
+                {
+                    _audioSource.Stop();
+                }
             }
         }
 
         public void PauseMusic(bool pause)
         {
-            if (pause == true) { _audioSource.Pause(); } else { _audioSource.UnPause(); }
+            if (pause == true)
+            {
+                SetActive(false);
+                _audioSource.Pause();
+            }
+            else
+            {
+                _audioSource.UnPause();
+                SetActive(true);
+            }
         }
 
         private async void CheckForAudio()
