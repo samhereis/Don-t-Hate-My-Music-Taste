@@ -6,9 +6,8 @@ namespace UI.Windows
 {
     public class MainMenu : CanvasWindowBase
     {
-        [Header("Menus")]
-        [SerializeField] private SceneSelectionMenu _sceneSelectionMenu;
-        [SerializeField] private SettingsMenu _settingsMenu;
+        [field: SerializeField] public SceneSelectionMenu sceneSelectionMenu { get; set; }
+        [field: SerializeField] public SettingsMenu settingsMenu { get; set; }
 
         [Header("Buttons")]
         [SerializeField] private Button _sceneSelectionMenuButton;
@@ -47,12 +46,12 @@ namespace UI.Windows
 
         public void OnClickedSceneSelectionMenuButton()
         {
-            _sceneSelectionMenu.Enable();
+            sceneSelectionMenu.Enable();
         }
 
         public void OnClickedSettingsButton()
         {
-            _settingsMenu.Enable();
+            settingsMenu.Enable();
         }
 
         public void OnClickedQuitButton()

@@ -18,5 +18,9 @@ namespace ConstStrings
 
         public const string lazyUpdator = "LazyUpdator";
         public const string sceneLoader = "SceneLoader";
+
+        public const string sceneSettings_MainMenu = "SceneSettings_MainMenu";
+        public const string sceneSettings_EFH = "SceneSettings_EFH";
+        public const string sceneSettings_TD = "SceneSettings_TD";
     }
 }

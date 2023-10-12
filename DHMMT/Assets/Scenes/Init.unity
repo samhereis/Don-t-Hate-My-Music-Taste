@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -465,7 +462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1981286021}
-  - component: {fileID: 1981286022}
+  - component: {fileID: 1981286023}
   m_Layer: 0
   m_Name: UI ---
   m_TagString: Untagged
@@ -488,7 +485,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1981286022
+--- !u!114 &1981286023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,15 +494,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1981286020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c438ffdbfa98a904cb1661d9ffb2c7b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5712a5dfeee896d49ba71a77878e7e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseSettings:
-    openOnStart: {fileID: 0}
-    openOnStartDelay: 1
-    menus: []
-  _sceneLoader: {fileID: 0}
-  _listOfAllScenes: {fileID: 0}
 --- !u!1 &2013410473
 GameObject:
   m_ObjectHideFlags: 1

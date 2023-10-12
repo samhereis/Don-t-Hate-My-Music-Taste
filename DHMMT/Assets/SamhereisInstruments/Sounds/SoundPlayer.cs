@@ -1,7 +1,7 @@
 using Configs;
 using ConstStrings;
 using DI;
-using System.Collections;
+using Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,9 +41,9 @@ namespace Sound
             }
         }
 
-        private IEnumerator Start()
+        private async void Start()
         {
-            yield return new WaitWhile(() => { return DependencyInjector.isGLoballyInjected == false; });
+            while (DependencyInjector.isGLoballyInjected == false) { await AsyncHelper.Delay(); }
 
             (this as IDIDependent).LoadDependencies();
         }
@@ -55,53 +55,46 @@ namespace Sound
 
         public void TryPlay(SoundBase sound)
         {
-            try
+            if (sound.audioClip == null) return;
+
+            if (sound.isMain)
             {
-                if (sound.audioClip == null) return;
+                if (_mainAudioSource.clip == sound.audioClip && _mainAudioSource.isPlaying) return;
 
-                if (sound.isMain)
+                StopMain();
+
+                _mainAudioSource.clip = sound.audioClip;
+                _mainAudioSource.volume = sound.volume;
+
+                if (sound.distance > 0)
                 {
-                    if (_mainAudioSource.clip == sound.audioClip && _mainAudioSource.isPlaying) return;
-
-                    StopMain();
-
-                    _mainAudioSource.clip = sound.audioClip;
-                    _mainAudioSource.volume = sound.volume;
-
-                    if (sound.distance > 0)
-                    {
-                        _mainAudioSource.maxDistance = sound.distance * 2;
-                        _mainAudioSource.minDistance = 0;
-                    }
-
-                    _mainAudioSource.loop = sound.loop;
-                    _mainAudioSource.Play();
-
-                    if (sound.disableOthers) DisableAll();
+                    _mainAudioSource.maxDistance = sound.distance * 2;
+                    _mainAudioSource.minDistance = 0;
                 }
-                else
-                {
-                    var freeAudioSurce = _audioSourcePool.Find(x => x.isPlaying == false);
 
-                    if (freeAudioSurce == null) freeAudioSurce = _audioSourcePool[0];
+                _mainAudioSource.loop = sound.loop;
+                _mainAudioSource.Play();
 
-                    freeAudioSurce.Stop();
-                    freeAudioSurce.clip = sound.audioClip;
-                    freeAudioSurce.volume = sound.volume;
-
-                    if (sound.distance > 0)
-                    {
-                        freeAudioSurce.maxDistance = sound.distance * 2;
-                        freeAudioSurce.minDistance = 0;
-                    }
-
-                    freeAudioSurce.loop = sound.loop;
-                    freeAudioSurce.Play();
-                }
+                if (sound.disableOthers) DisableAll();
             }
-            finally
+            else
             {
+                var freeAudioSurce = _audioSourcePool.Find(x => x.isPlaying == false);
 
+                if (freeAudioSurce == null) freeAudioSurce = _audioSourcePool[0];
+
+                freeAudioSurce.Stop();
+                freeAudioSurce.clip = sound.audioClip;
+                freeAudioSurce.volume = sound.volume;
+
+                if (sound.distance > 0)
+                {
+                    freeAudioSurce.maxDistance = sound.distance * 2;
+                    freeAudioSurce.minDistance = 0;
+                }
+
+                freeAudioSurce.loop = sound.loop;
+                freeAudioSurce.Play();
             }
         }
 
@@ -139,18 +132,7 @@ namespace Sound
 
             if (_audioSourcePool.Count != _auioSourcePoolCount)
             {
-                foreach (AudioSource audioSource in _audioSourcePool)
-                {
-                    if (Application.isPlaying == false)
-                    {
-                        DestroyImmediate(audioSource.gameObject);
-                    }
-                    else
-                    {
-                        Destroy(audioSource.gameObject);
-                    }
-                }
-
+                foreach (AudioSource audioSource in _audioSourcePool) DestroyImmediate(audioSource.gameObject);
                 _audioSourcePool.Clear();
 
                 for (int i = 0; i < _auioSourcePoolCount; i++)

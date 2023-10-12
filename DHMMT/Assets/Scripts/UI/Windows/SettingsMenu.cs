@@ -10,8 +10,7 @@ namespace UI.Windows
 {
     public class SettingsMenu : CanvasWindowBase
     {
-        [Header("Menus")]
-        [SerializeField] private MainMenu _mainMenu;
+        [field: SerializeField] public CanvasWindowBase openOnDisable { get; set; }
 
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup _activeTabIndicator;
@@ -57,6 +56,8 @@ namespace UI.Windows
 
             CloseAllSettingTabs();
             base.Disable(duration);
+
+            openOnDisable?.Enable();
         }
 
         protected override void SubscribeToEvents()

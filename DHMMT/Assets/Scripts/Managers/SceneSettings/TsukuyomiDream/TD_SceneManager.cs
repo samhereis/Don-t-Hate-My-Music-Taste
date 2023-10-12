@@ -12,10 +12,11 @@ using SO.Lists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UI.Canvases;
+using UI.Windows;
 using UI.Windows.GameplayMenus;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Managers.SceneManagers
 {
@@ -30,8 +31,8 @@ namespace Managers.SceneManagers
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
         [Header("Menus")]
-        [SerializeField] private TD_GameplayMenu _gameplayMenu;
-        [SerializeField] private CanvasWindowBase _loseMenu;
+        [SerializeField] private AssetReferenceGameObject _gameplayMenuReference;
+        [SerializeField] private AssetReferenceGameObject _loseMenuReference;
 
 #if UNITY_EDITOR
 
@@ -59,13 +60,10 @@ namespace Managers.SceneManagers
         [Header(HeaderStrings.Debug)]
         [SerializeField] private List<PlayerSpawnPoint_Identifier> _playerSpawnPoints = new List<PlayerSpawnPoint_Identifier>();
         [SerializeField] private PlayerIdentifier _player;
+        [SerializeField] private LoseMenu _loseMenu;
+        [SerializeField] private TD_GameplayMenu _gameplayMenu;
 
-        private void Awake()
-        {
-            if (_gameplayMenu == null) { _gameplayMenu = GetComponentInChildren<TD_GameplayMenu>(true); }
-        }
-
-        private async void OnEnable()
+        public override async Awaitable InitializeAsync()
         {
             (this as IDIDependent).LoadDependencies();
 
@@ -76,18 +74,18 @@ namespace Managers.SceneManagers
 
             SubscribeToEvents();
 
-            await InitializeAsync();
+            await base.InitializeAsync();
+
+            _playingMusicData.SetActive(true, true);
         }
 
-        private void OnDisable()
-        {
-            UnsubscribeFromEvents();
-        }
-
-        public void SubscribeToEvents()
+        public async void SubscribeToEvents()
         {
             _onEnemyDied.AddListener(SpawnEnemy);
             _player.TryGet<PlayerHealth>().onDie += SpawnPlayer;
+
+            _loseMenu = await AddressablesHelper.GetAssetAsync<LoseMenu>(_loseMenuReference);
+            _gameplayMenu = await AddressablesHelper.GetAssetAsync<TD_GameplayMenu>(_gameplayMenuReference);
 
             _gameplayMenu.gameplayMenu.onEnable += UnPauseMusic;
             _gameplayMenu.gameplayMenu.onDisable += PauseMusic;
@@ -102,13 +100,6 @@ namespace Managers.SceneManagers
             _gameplayMenu.gameplayMenu.onEnable -= UnPauseMusic;
             _gameplayMenu.gameplayMenu.onDisable -= PauseMusic;
             _gameplayMenu.onTimerOver -= Lose;
-        }
-
-        public override async Awaitable InitializeAsync()
-        {
-            await base.InitializeAsync();
-
-            _playingMusicData.SetActive(true, true);
         }
 
         private void SpawnEnemy(IDamagable enemy)
@@ -184,7 +175,7 @@ namespace Managers.SceneManagers
 
         private void Clear()
         {
-
+            UnsubscribeFromEvents();
         }
 
         [Serializable]

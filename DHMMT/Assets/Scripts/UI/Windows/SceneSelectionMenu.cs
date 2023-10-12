@@ -20,12 +20,11 @@ namespace UI.Windows
 {
     public class SceneSelectionMenu : CanvasWindowBase, IDIDependent
     {
+        [field: SerializeField] public MainMenu mainMenu { get; set; }
+
         [Header("Components")]
         [SerializeField] private Transform _scenesUnitsParent;
         [SerializeField] private BackButton _backButton;
-
-        [Header("Windows")]
-        [SerializeField] private MainMenu _mainMenu;
 
         [Header("Prefabs")]
         [SerializeField] private SceneUnit _sceneUnitPrefab;
@@ -96,7 +95,7 @@ namespace UI.Windows
 
         private void OnBackButtonClicked()
         {
-            _mainMenu?.Enable();
+            mainMenu?.Enable();
         }
 
         private void SelectScene(AScene_Extended scene)

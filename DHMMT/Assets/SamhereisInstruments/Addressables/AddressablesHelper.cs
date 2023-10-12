@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 
+using Object = UnityEngine.Object;
+
 namespace Helpers
 {
     public class AddressablesHelper
@@ -37,6 +39,28 @@ namespace Helpers
             await handle.Task;
 
             return handle.Result;
+        }
+
+        public static async Task<TOutComponent> GetAssetWithComponentAsync<TOutComponent>(AssetReferenceGameObject assetReference)
+        {
+            if (assetReference == null)
+            {
+                Debug.LogWarning($"Adrressable Reference is null: {assetReference.ToString()}");
+                return default;
+            }
+
+            var handle = Addressables.LoadAssetAsync<GameObject>(assetReference);
+            await handle.Task;
+            var result = handle.Result;
+
+            TOutComponent outComponent = default;
+
+            if (result is GameObject)
+            {
+                outComponent = (result as GameObject).GetComponent<TOutComponent>();
+            }
+
+            return outComponent;
         }
 
         public static async Task<T> InstantiateAsync<T>(string name, Vector3 position = new Vector3(), Quaternion rotation = new Quaternion(), Transform parent = null)
