@@ -1,8 +1,5 @@
 using DG.Tweening;
-using Helpers;
-using LazyUpdators;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,29 +7,30 @@ namespace Gameplay
 {
     public sealed class Levitator : MonoBehaviour
     {
-        [SerializeField] private RotationData _rotation = new RotationData();
-        [SerializeField] private LiftData _lift = new LiftData();
+        [SerializeField] private Vector3Data _rotationData = new Vector3Data();
+        [SerializeField] private Vector3Data _positionData = new Vector3Data();
+        [SerializeField] private Vector3Data _scaleData = new Vector3Data();
+
+        [Header("Settings")]
+        [SerializeField] private bool _rotationEnable = true;
+        [SerializeField] private bool _positionEnable = true;
+        [SerializeField] private bool _scaleEnable = true;
 
         [Header("Debug")]
-        [SerializeField] private bool _isLifting = false;
-        [SerializeField] private bool _isRotating = false;
+        [SerializeField] private bool _rotationReached = false;
+        [SerializeField] private bool _positionReached = false;
+        [SerializeField] private bool _scaleReached = false;
 
-        private bool _toRight = false;
 
-        bool _up = false;
-
-        private async void OnEnable()
+        private void OnEnable()
         {
-            await AsyncHelper.DelayInt(1000);
+            _rotationReached = true;
+            _positionReached = true;
+            _scaleReached = true;
 
-            _isLifting = false;
-            _isRotating = true;
-
-            _up = false;
-
-            _lift.originalYPosition = transform.localPosition.y;
-
-            _rotation.originalRotation = transform.localEulerAngles;
+            _rotationData.originalValue = transform.localEulerAngles;
+            _positionData.originalValue = transform.localPosition;
+            _scaleData.originalValue = transform.localScale;
         }
 
         private void OnDisable()
@@ -42,86 +40,78 @@ namespace Gameplay
 
         private void Update()
         {
-            Rotate();
-            Lift();
+            if (_rotationEnable) { Rotate(); }
+            if (_positionEnable) { Position(); }
+            if (_scaleReached) { Scale(); }
         }
 
         private void Rotate()
         {
-            if (_isLifting == false)
+            if (_rotationReached)
             {
-                _isLifting = true;
+                _rotationReached = false;
 
-                _rotation.randomRotationDuration = Random.Range(_rotation.rotationDuration.x, _rotation.rotationDuration.y);
+                _rotationData.currentDuration = Random.Range(_rotationData.duration.x, _rotationData.duration.y);
+                _rotationData.currentTargetValue = _rotationData.GetRandomValue();
 
-                float x = Random.Range(_rotation.rotationRandomX.x, _rotation.rotationRandomX.y);
-                float y = Random.Range(_rotation.rotationRandomY.x, _rotation.rotationRandomY.y);
-                float z = Random.Range(_rotation.rotationRandomZ.x, _rotation.rotationRandomZ.y);
-
-                _rotation.randomRot = new Vector3(x, y, z);
-
-                if (_toRight)
-                {
-                    _toRight = false;
-                    transform.DOLocalRotate(_rotation.originalRotation + _rotation.randomRot, _rotation.randomRotationDuration).SetEase(Ease.InOutBack).OnComplete(() => _isLifting = false);
-                }
-                else
-                {
-                    _toRight = true;
-                    transform.DOLocalRotate(_rotation.originalRotation + (_rotation.randomRot * -1), _rotation.randomRotationDuration).SetEase(Ease.InOutBack).OnComplete(() => _isLifting = false);
-                }
+                transform.DOLocalRotate(_rotationData.originalValue + _rotationData.currentTargetValue, _rotationData.currentDuration)
+                    .SetEase(Ease.InOutBack).OnComplete(() => _rotationReached = true);
             }
         }
 
-        private void Lift()
+        private void Position()
         {
-            if (_isRotating == false)
+            if (_positionReached)
             {
-                _isRotating = true;
+                _positionReached = false;
 
-                _lift.randomY = Random.Range(_lift.randomLiftValue.x, _lift.randomLiftValue.y);
-                _lift.randomLiftDuration = Random.Range(_lift.liftDuration.x, _lift.liftDuration.y);
+                _positionData.currentDuration = Random.Range(_positionData.duration.x, _positionData.duration.y);
+                _positionData.currentTargetValue = _positionData.GetRandomValue();
 
-                if (_up)
-                {
-                    transform.DOLocalMoveY(_lift.originalYPosition + _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).OnComplete(() => _isRotating = false);
-                    _up = false;
-                }
-                else
-                {
-                    transform.DOLocalMoveY(_lift.originalYPosition - _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).OnComplete(() => _isRotating = false);
-                    _up = true;
-                }
+                var target = _positionData.currentTargetValue;
+
+                transform.DOLocalMove(_positionData.originalValue + target, _positionData.currentDuration).SetEase(Ease.InOutBack).OnComplete(() => _positionReached = true);
+            }
+        }
+
+        private void Scale()
+        {
+            if (_scaleReached)
+            {
+                _scaleReached = false;
+
+                _scaleData.currentDuration = Random.Range(_scaleData.duration.x, _scaleData.duration.y);
+                _scaleData.currentTargetValue = _scaleData.GetRandomValue();
+
+                var target = _scaleData.currentTargetValue;
+
+                transform.DOScale(_scaleData.originalValue + target, _scaleData.currentDuration).SetEase(Ease.InOutBack).OnComplete(() => _scaleReached = true);
             }
         }
 
         [Serializable]
-        internal class RotationData
+        internal class Vector3Data
         {
-            [field: SerializeField] public Vector2 rotationDuration = new Vector2(3, 10);
+            [field: SerializeField] public Vector2 duration = new Vector2(3, 10);
 
             [Space(5)]
-            [field: SerializeField] public Vector2 rotationRandomX = new Vector2(1, 20);
-            [field: SerializeField] public Vector2 rotationRandomY = new Vector2(1, 20);
-            [field: SerializeField] public Vector2 rotationRandomZ = new Vector2(1, 20);
+            [field: SerializeField] public Vector2 valueRandomX = new Vector2(-1, 1);
+            [field: SerializeField] public Vector2 valueRandomY = new Vector2(-1, 1);
+            [field: SerializeField] public Vector2 valueRandomZ = new Vector2(-1, 1);
 
             [Header("Debug")]
-            [field: SerializeField] public Vector3 originalRotation;
-            [field: SerializeField] public Vector3 randomRot;
-            [field: SerializeField] public float randomRotationDuration = 0;
-        }
+            [field: SerializeField] public Vector3 originalValue;
+            [field: SerializeField] public Vector3 currentTargetValue;
+            [field: SerializeField] public float currentDuration = 0;
 
-        [Serializable]
-        internal class LiftData
-        {
-            [Header("Lift Settings")]
-            [field: SerializeField] public Vector2 liftDuration = new Vector2(4, 6);
-            [field: SerializeField] public Vector2 randomLiftValue = new Vector2(0, 3);
+            public Vector3 GetRandomValue()
+            {
+                float x = Random.Range(valueRandomX.x, valueRandomX.y);
+                float y = Random.Range(valueRandomY.x, valueRandomY.y);
+                float z = Random.Range(valueRandomZ.x, valueRandomZ.y);
 
-            [Header("Debug")]
-            [field: SerializeField] public float originalYPosition;
-            [field: SerializeField] public float randomY;
-            [field: SerializeField] public float randomLiftDuration = 0;
+                return new Vector3(x, y, z);
+            }
         }
     }
 }

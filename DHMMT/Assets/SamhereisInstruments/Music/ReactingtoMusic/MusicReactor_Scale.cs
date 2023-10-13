@@ -42,6 +42,11 @@ namespace Music
             }
         }
 
+        private void OnDisable()
+        {
+            transform.localScale = Vector3.one;
+        }
+
         private void Update()
         {
             _do();
