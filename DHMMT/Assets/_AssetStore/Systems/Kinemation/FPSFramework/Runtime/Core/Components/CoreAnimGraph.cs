@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 using UnityEngine.Playables;
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 namespace Kinemation.FPSFramework.Runtime.Core.Components
@@ -29,12 +29,12 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
         private CoreAnimMixer _overlayPoseMixer;
         private CoreAnimMixer _slotAnimMixer;
         private AnimationLayerMixerPlayable _masterMixer;
-        
+
         private float _poseProgress = 0f;
-        
+
 #if UNITY_EDITOR
-        [SerializeField] [HideInInspector] private AnimationClip previewClip;
-        [SerializeField] [HideInInspector] private bool loopPreview;
+        [SerializeField][HideInInspector] private AnimationClip previewClip;
+        [SerializeField][HideInInspector] private bool loopPreview;
 #endif
 
         public bool InitPlayableGraph()
@@ -43,7 +43,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             {
                 return true;
             }
-            
+
             _animator = GetComponent<Animator>();
             _playableGraph = _animator.playableGraph;
 
@@ -63,22 +63,22 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             //_overlayMixer = new CoreOverlayMixer(_playableGraph, 1 + maxPoseCount);
 
             var controllerPlayable = AnimatorControllerPlayable.Create(_playableGraph, _animator.runtimeAnimatorController);
-            
+
             _playableGraph.Connect(controllerPlayable, 0, _overlayPoseMixer.mixer, 0);
-            _playableGraph.Connect(_overlayPoseMixer.mixer, 0, _slotAnimMixer.mixer,0);
+            _playableGraph.Connect(_overlayPoseMixer.mixer, 0, _slotAnimMixer.mixer, 0);
             _playableGraph.Connect(_slotAnimMixer.mixer, 0, _masterMixer, 0);
 
             // Enable Animator layer by default
-            _overlayPoseMixer.mixer.SetInputWeight(0,1f);
-            _slotAnimMixer.mixer.SetInputWeight(0 ,1f);
+            _overlayPoseMixer.mixer.SetInputWeight(0, 1f);
+            _slotAnimMixer.mixer.SetInputWeight(0, 1f);
             _masterMixer.SetInputWeight(0, 1f);
-            
+
             output.SetSourcePlayable(_masterMixer);
-            
+
             _playableGraph.Play();
             return true;
         }
-        
+
         public void UpdateGraph()
         {
             if (Application.isPlaying)
@@ -109,7 +109,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             _overlayPoseMixer.SetMixerWeight(weight);
             _slotAnimMixer.SetMixerWeight(weight);
         }
-        
+
         //todo: implement custom animator controllers
         public void PlayController(RuntimeAnimatorController controller, AnimationClip clip, float blendTime)
         {
@@ -117,7 +117,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             {
                 return;
             }
-            
+
             CoreOverlayController controllerPlayable = new CoreOverlayController(_playableGraph, controller)
             {
                 blendTime = blendTime
@@ -125,17 +125,17 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
 
             controllerPlayable.controllerPlayable.SetTime(0f);
             //_overlayPoseMixer.AddController(controllerPlayable, upperBodyMask);
-            
+
             SamplePose(clip);
         }
-        
+
         public void PlayPose(AnimationClip clip, float blendIn, float playRate = 1f)
         {
             if (clip == null)
             {
                 return;
             }
-            
+
             CoreAnimPlayable animPlayable = new CoreAnimPlayable(_playableGraph, clip)
             {
                 blendTime = new BlendTime(blendIn, 0f)
@@ -147,15 +147,15 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
 
             SamplePose(clip);
         }
-    
-        public void PlayAnimation(AnimationClip clip, BlendTime blendTime, AnimCurve[] curves = null, 
+
+        public void PlayAnimation(AnimationClip clip, BlendTime blendTime, AnimCurve[] curves = null,
             AvatarMask mask = null)
         {
             if (clip == null)
             {
                 return;
             }
-            
+
             CoreAnimPlayable animPlayable = new CoreAnimPlayable(_playableGraph, clip)
             {
                 blendTime = blendTime,
@@ -179,18 +179,25 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
         public void BeginSample()
         {
             // Disable the animator layer
-            _overlayPoseMixer.mixer.SetInputWeight(0, 0f);
+            if (_overlayPoseMixer.mixer.IsNull() == false)
+            {
+                _overlayPoseMixer.mixer.SetInputWeight(0, 0f);
+            }
+
             // Make sure the overlay pose is applied to the whole body
             _overlayPoseMixer.SetAvatarMask(new AvatarMask());
             _slotAnimMixer.SetAvatarMask(new AvatarMask());
             // Apply graph
-            _playableGraph.Evaluate();
+            if (_playableGraph.IsValid()) { _playableGraph.Evaluate(); }
         }
 
         public void EndSample()
         {
             // Enable animator back
-            _overlayPoseMixer.mixer.SetInputWeight(0, 1f);
+            if (_overlayPoseMixer.mixer.IsNull() == false)
+            {
+                _overlayPoseMixer.mixer.SetInputWeight(0, 1f);
+            }
             // Restore original avatar mask
             _overlayPoseMixer.SetAvatarMask(upperBodyMask);
             _slotAnimMixer.SetAvatarMask(upperBodyMask);
@@ -198,7 +205,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             _overlayPoseMixer.UpdateMixerWeight();
             _slotAnimMixer.UpdateMixerWeight();
             // Apply graph
-            _playableGraph.Evaluate();
+            if (_playableGraph.IsValid()) { _playableGraph.Evaluate(); }
         }
 
         // Samples overlay static pose, must be called during Update()
@@ -206,7 +213,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
         {
             clip.SampleAnimation(transform.gameObject, 0f);
         }
-        
+
         private void OnDestroy()
         {
             if (!_playableGraph.IsValid())
@@ -225,14 +232,14 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             {
                 EditorApplication.update -= LoopPreview;
             }
-            
-            if (loopPreview && _playableGraph.IsValid() 
+
+            if (loopPreview && _playableGraph.IsValid()
                             && _masterMixer.GetInput(1).GetTime() >= previewClip.length)
             {
                 _masterMixer.GetInput(1).SetTime(0f);
             }
         }
-        
+
         public void StartPreview()
         {
             if (!InitPlayableGraph())
@@ -266,7 +273,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
                 _masterMixer.DisconnectInput(1);
                 _playableGraph.Stop();
             }
-            
+
             EditorApplication.update -= LoopPreview;
         }
 #endif

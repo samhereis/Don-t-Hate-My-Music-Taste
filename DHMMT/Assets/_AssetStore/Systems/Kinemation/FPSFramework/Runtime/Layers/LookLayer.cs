@@ -657,7 +657,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
 
             UpdateSpineBlending();
 
-            if (!Application.isPlaying || sampledSpinePose.Count == 0)
+            if (!Application.isPlaying || sampledSpinePose?.Count == 0)
             {
                 RotateSpine();
                 return;

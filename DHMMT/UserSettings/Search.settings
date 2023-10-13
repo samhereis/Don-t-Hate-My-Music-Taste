@@ -11,6 +11,9 @@ scopes = {
 	"last_search.310DEAF1" = "missing "
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "menu"
+	"last_search.8DF93126" = "StaticLightingSky"
+	"OpenInspectorPreview.8DF93126" = "0"
+	"currentGroup.8DF93126" = null
 }
 providers = {
 	performance = {
@@ -58,10 +61,16 @@ providers = {
 		priority = 100
 		defaultAction = null
 	}
+	presets_provider = {
+		active = false
+		priority = -10
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"StaticLightingSky"
 	""
 ]
 searchItemFavorites = [

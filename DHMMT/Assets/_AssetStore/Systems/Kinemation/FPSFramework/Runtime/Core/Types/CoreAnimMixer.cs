@@ -40,7 +40,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             blendTime = new BlendTime(0f, 0f);
             cachedWeight = 0f;
         }
-        
+
         public float GetLength()
         {
             return playableClip.IsValid() ? playableClip.GetAnimationClip().length : 0f;
@@ -55,11 +55,11 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             }
         }
     }
-    
+
     public struct CoreAnimMixer
     {
         public AnimationLayerMixerPlayable mixer;
-        
+
         private List<CoreAnimPlayable> _playables;
         private float _mixerWeight;
         private float _playingWeight;
@@ -68,21 +68,21 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         private bool _bForceBlendOut;
         private float _forceBlendTime;
         private float _forceStartBlendTime;
-        
+
         private AnimCurve[] _curves;
         private Dictionary<string, AnimCurveValue> _curveTable;
         private List<string> _inActiveCurves;
-        
+
         public CoreAnimMixer(PlayableGraph graph, int inputCount, bool bBlendOut)
         {
             mixer = AnimationLayerMixerPlayable.Create(graph, inputCount);
-            
+
             _playables = new List<CoreAnimPlayable>();
             for (int i = 0; i < inputCount - 1; i++)
             {
                 _playables.Add(new CoreAnimPlayable());
             }
-            
+
             _bBlendOut = bBlendOut;
             _playingIndex = -1;
             _mixerWeight = 1f;
@@ -100,7 +100,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             {
                 if (mixer.GetInput(i).IsValid())
                 {
-                    mixer.SetLayerMaskFromAvatarMask((uint) i, mask);
+                    mixer.SetLayerMaskFromAvatarMask((uint)i, mask);
                 }
             }
         }
@@ -110,13 +110,13 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             CacheCurves();
             _curves = curves;
             AddCurves();
-            
+
             UpdatePlayingIndex();
             clip.blendTime.Validate();
-            
+
             mixer.ConnectInput(_playingIndex, clip.playableClip, 0, 0);
             _playables[_playingIndex - 1] = clip;
-            mixer.SetLayerMaskFromAvatarMask((uint) _playingIndex, mask);
+            mixer.SetLayerMaskFromAvatarMask((uint)_playingIndex, mask);
             _bForceBlendOut = false;
         }
 
@@ -126,14 +126,15 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             {
                 return;
             }
-            
+
             _forceBlendTime = blendOutTime;
-            _forceStartBlendTime = (float) _playables[_playingIndex - 1].playableClip.GetTime();
+            _forceStartBlendTime = (float)_playables[_playingIndex - 1].playableClip.GetTime();
             _bForceBlendOut = true;
         }
 
         public float GetCurveValue(string curveName)
         {
+            if (_curveTable == null) return 0f;
             if (!_curveTable.ContainsKey(curveName)) return 0f;
             return _curveTable[curveName].value;
         }
@@ -154,7 +155,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                 BlendInPlayable();
                 BlendOutPlayable();
             }
-            
+
             return _playingWeight;
         }
 
@@ -162,7 +163,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         {
             BlendMixerWeight();
         }
-        
+
         public void SetMixerWeight(float weight)
         {
             _mixerWeight = Mathf.Clamp01(weight);
@@ -186,7 +187,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         private void CacheCurves()
         {
             if (_curves == null) return;
-            
+
             foreach (var curve in _curves)
             {
                 var newCurve = _curveTable[curve.name];
@@ -198,7 +199,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         private void AddCurves()
         {
             if (_curves == null) return;
-            
+
             _inActiveCurves.Clear();
             foreach (var curve in _curves)
             {
@@ -230,7 +231,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                 _playingIndex = 1;
                 return;
             }
-            
+
             // Try to use the next slot
             if (_playingIndex + 1 < mixer.GetInputCount())
             {
@@ -253,7 +254,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                 {
                     continue;
                 }
-                
+
                 float inputWeight = mixer.GetInputWeight(i + 1);
                 var clip = _playables[i];
                 clip.cachedWeight = inputWeight;
@@ -264,7 +265,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                 mixer.DisconnectInput(i + 1);
                 mixer.ConnectInput(i, source, 0, inputWeight);
             }
-            
+
             _playingIndex = mixer.GetInputCount() - 1;
             mixer.DisconnectInput(_playingIndex);
         }
@@ -282,7 +283,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             newCurve.value = Mathf.Lerp(newCurve.cache, newCurve.target, weight);
             _curveTable[curveName] = newCurve;
         }
-        
+
         private void BlendOutCurve(string curveName, float weight)
         {
             var newCurve = _curveTable[curveName];
@@ -294,18 +295,18 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         {
             var animation = _playables[_playingIndex - 1];
             float blendTime = animation.blendTime.blendInTime;
-            var time = (float) animation.playableClip.GetTime();
-            
+            var time = (float)animation.playableClip.GetTime();
+
             if (_bBlendOut && (time >= animation.GetLength()))
             {
                 return;
             }
-            
+
             // todo: use CurveLib easing functions
             float alpha = Mathf.Approximately(blendTime, 0f) ? 1f : time / blendTime;
             _playingWeight = Mathf.Lerp(0f, 1f, alpha);
             mixer.SetInputWeight(_playingIndex, _playingWeight);
-            
+
             BlendOutInactive();
 
             // Blend out inactive curves.
@@ -320,7 +321,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             }
 
             if (_curves == null) return;
-            
+
             //Blend curves here
             foreach (var curve in _curves)
             {
@@ -339,8 +340,8 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
             var animPlayable = _playables[_playingIndex - 1];
             var blendTime = animPlayable.blendTime;
-            var time = (float) animPlayable.playableClip.GetTime();
-            
+            var time = (float)animPlayable.playableClip.GetTime();
+
             if (time >= animPlayable.GetLength())
             {
                 // todo: use CurveLib ease functions
@@ -353,10 +354,10 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                 {
                     alpha = (time - animPlayable.GetLength()) / blendTime.blendOutTime;
                 }
-                
+
                 float weight = Mathf.Lerp(_playingWeight, 0f, alpha);
                 mixer.SetInputWeight(_playingIndex, weight);
-                
+
                 if (Mathf.Approximately(weight, 0f))
                 {
                     mixer.DisconnectInput(_playingIndex);
@@ -364,7 +365,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                     _playingIndex = -1;
                     alpha = 1f;
                 }
-                
+
                 // Blend out curves here
                 foreach (var curve in _curves)
                 {
@@ -381,12 +382,12 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         private void ForceBlendOut()
         {
             var animPlayable = _playables[_playingIndex - 1];
-            var time = (float) animPlayable.playableClip.GetTime();
+            var time = (float)animPlayable.playableClip.GetTime();
 
             //todo: check the zero case
             float blendOutWeight = (time - _forceStartBlendTime) / _forceBlendTime;
             blendOutWeight = Mathf.Clamp01(blendOutWeight);
-            
+
             for (int i = 1; i <= _playingIndex; i++)
             {
                 var animation = _playables[i - 1];
@@ -397,7 +398,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
                 _playingWeight *= 1f - blendOutWeight;
                 mixer.SetInputWeight(i, mixer.GetInputWeight(i) * (1f - blendOutWeight));
-                
+
                 if (Mathf.Approximately(blendOutWeight, 1f))
                 {
                     mixer.DisconnectInput(i);
@@ -427,7 +428,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             {
                 return;
             }
-            
+
             for (int i = 1; i < _playingIndex; i++)
             {
                 var animation = _playables[i - 1];
@@ -438,7 +439,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
                 float weight = Mathf.Lerp(animation.cachedWeight, 0f, _playingWeight);
                 mixer.SetInputWeight(i, weight);
-                
+
                 if (Mathf.Approximately(weight, 0f))
                 {
                     mixer.DisconnectInput(i);
