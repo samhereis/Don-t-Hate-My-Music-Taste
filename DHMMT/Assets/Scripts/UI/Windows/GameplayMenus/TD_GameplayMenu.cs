@@ -3,15 +3,17 @@ using DI;
 using Helpers;
 using System;
 using TMPro;
+using UI.Canvases;
 using UnityEngine;
 
 namespace UI.Windows.GameplayMenus
 {
-    public class TD_GameplayMenu : MonoBehaviour, IDIDependent
+    public class TD_GameplayMenu : CanvasWindowExtendorBase<GameplayMenu>, IDIDependent
     {
         public Action onTimerOver;
 
-        [field: SerializeField, Header(HeaderStrings.Components)] public GameplayMenu gameplayMenu { get; private set; }
+        public int currentTimer => _currentTimer;
+        public int currentDuration => _currentDuration;
 
         [Header(HeaderStrings.UIElements)]
         [SerializeField] private TextMeshProUGUI _timerText;
@@ -22,15 +24,13 @@ namespace UI.Windows.GameplayMenus
 
         [Header(HeaderStrings.Debug)]
         [SerializeField] private bool _isTimerActive = false;
-        [field: SerializeField] public int currentTimer { get; private set; } = 0;
-        [field: SerializeField] public int currentDuration { get; private set; } = 0;
+        [SerializeField] private int _currentTimer = 0;
+        [SerializeField] private int _currentDuration = 0;
 
         private void Awake()
         {
-            if (gameplayMenu == null) { gameplayMenu = GetComponent<GameplayMenu>(); }
-
-            gameplayMenu.onEnable += OnGameplayMenuOpen;
-            gameplayMenu.onDisable += OnGameplayMenuClose;
+            window.onEnable += OnGameplayMenuOpen;
+            window.onDisable += OnGameplayMenuClose;
         }
 
         private void Start()
@@ -43,8 +43,8 @@ namespace UI.Windows.GameplayMenus
 
         private void OnDestroy()
         {
-            gameplayMenu.onEnable -= OnGameplayMenuOpen;
-            gameplayMenu.onDisable -= OnGameplayMenuClose;
+            window.onEnable -= OnGameplayMenuOpen;
+            window.onDisable -= OnGameplayMenuClose;
         }
 
         private void OnGameplayMenuOpen()
@@ -64,7 +64,7 @@ namespace UI.Windows.GameplayMenus
 
         public void AddSeconds(int seconds)
         {
-            currentTimer += seconds;
+            _currentTimer += seconds;
         }
 
         private async void CalculateTimer()
@@ -75,13 +75,13 @@ namespace UI.Windows.GameplayMenus
             {
                 await AsyncHelper.DelayFloat(1f);
 
-                if (_isTimerActive && currentTimer > 0)
+                if (_isTimerActive && _currentTimer > 0)
                 {
-                    currentTimer--;
-                    currentDuration++;
+                    _currentTimer--;
+                    _currentDuration++;
                     UpdateTimerText();
 
-                    if (currentTimer <= 0)
+                    if (_currentTimer <= 0)
                     {
                         SetActiveStatusForTimer(false);
                         onTimerOver?.Invoke();
@@ -92,8 +92,8 @@ namespace UI.Windows.GameplayMenus
 
         private void UpdateTimerText()
         {
-            _timerText.text = TimeSpan.FromSeconds(currentTimer).ToString();
-            _durationText.text = TimeSpan.FromSeconds(currentDuration).ToString();
+            _timerText.text = TimeSpan.FromSeconds(_currentTimer).ToString();
+            _durationText.text = TimeSpan.FromSeconds(_currentDuration).ToString();
         }
     }
 }

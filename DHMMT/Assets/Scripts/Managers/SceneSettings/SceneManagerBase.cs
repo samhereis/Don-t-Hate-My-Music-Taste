@@ -1,19 +1,19 @@
-using Helpers;
 using Interfaces;
 using UnityEngine;
 
 namespace Managers.SceneManagers
 {
-    public class SceneManagerBase : MonoBehaviour, IInitializableAsync, IClearableAsync
+    public abstract class SceneManagerBase : MonoBehaviour, IInitializable, IClearable
     {
-        public virtual async Awaitable InitializeAsync()
-        {
-            await AsyncHelper.NextFrame();
-        }
+        public bool isInitialized { get; protected set; }
 
-        public virtual async Awaitable ClearAsync()
+        public abstract void Initialize();
+
+        public abstract void Clear();
+
+        public bool GetCanInitializeWithDI()
         {
-            await AsyncHelper.NextFrame();
+            return false;
         }
     }
 }

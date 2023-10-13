@@ -1,24 +1,20 @@
+using UI.Canvases;
 using UnityEngine;
 
 namespace UI.Windows
 {
-    public class EFH_WinMenu : MonoBehaviour
+    public class EFH_WinMenu : CanvasWindowExtendorBase<WinMenu>
     {
-        [Header("Windows")]
-        [SerializeField] private WinMenu _winMenu;
-
         private void Awake()
         {
-            _winMenu = GetComponent<WinMenu>();
-
-            _winMenu.onSubscribeToEvents += OnSubscribeToEvents;
-            _winMenu.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
+            window.onSubscribeToEvents += OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
         }
 
         private void OnDestroy()
         {
-            _winMenu.onSubscribeToEvents -= OnSubscribeToEvents;
-            _winMenu.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
+            window.onSubscribeToEvents -= OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
         }
 
         private void OnSubscribeToEvents()

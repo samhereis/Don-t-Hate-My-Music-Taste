@@ -6,7 +6,10 @@ namespace DataClasses
     [Serializable]
     public class AScene_Extended : AScene
     {
+        public enum GameMode { EscapeFromHaters, TsukuyomiDream }
+
         [field: SerializeField, Header("Settings")] public string sceneName { get; private set; }
+        [field: SerializeField] public GameMode gameMode { get; private set; }
         [field: SerializeField, TextArea] public string description { get; private set; }
         [field: SerializeField, TextArea] public string rules { get; private set; }
         [field: SerializeField] public Sprite icon { get; private set; }

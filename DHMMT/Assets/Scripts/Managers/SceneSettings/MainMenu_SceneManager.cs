@@ -13,5 +13,15 @@ namespace Managers.SceneManagers
         [field: SerializeField, Header("Menus")] public MainMenu mainMenuReference { get; private set; }
         [field: SerializeField] public SettingsMenu settingsMenuReference { get; private set; }
         [field: SerializeField] public SceneSelectionMenu selectMapMenuReference { get; private set; }
+
+        public override void Initialize()
+        {
+
+        }
+
+        public override void Clear()
+        {
+
+        }
     }
 }

@@ -11,16 +11,18 @@ namespace ConstStrings
 
         public const string spectrumDataContainer = "SpectrumDataContainer";
         public const string musicList = "MusicList";
-
         public const string inputHolder = "InputHolder";
-
         public const string listOfAllScenes = "ListOfAllScenes";
-
         public const string lazyUpdator = "LazyUpdator";
         public const string sceneLoader = "SceneLoader";
 
-        public const string sceneSettings_MainMenu = "SceneSettings_MainMenu";
-        public const string sceneSettings_EFH = "SceneSettings_EFH";
-        public const string sceneSettings_TD = "SceneSettings_TD";
+        public const string loadingMenu = "LoadingMenu";
+
+        public const string sceneManager_MainMenu = "SceneManager_MainMenu";
+        public const string sceneManager_EFH = "SceneManager_EFH";
+        public const string sceneManager_TD = "SceneManager_TD";
+
+        public const string EnemyManager_EFH = "EnemyManager_EFH";
+        public const string EnemyManager_TD = "EnemyManager_TD";
     }
 }

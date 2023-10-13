@@ -132,7 +132,18 @@ namespace Sound
 
             if (_audioSourcePool.Count != _auioSourcePoolCount)
             {
-                foreach (AudioSource audioSource in _audioSourcePool) DestroyImmediate(audioSource.gameObject);
+                foreach (AudioSource audioSource in _audioSourcePool)
+                {
+                    if (Application.isPlaying == false)
+                    {
+                        DestroyImmediate(audioSource.gameObject);
+                    }
+                    else
+                    {
+                        Destroy(audioSource.gameObject);
+                    }
+                }
+
                 _audioSourcePool.Clear();
 
                 for (int i = 0; i < _auioSourcePoolCount; i++)

@@ -1,50 +1,81 @@
 using ConstStrings;
 using DI;
+using Events;
 using Helpers;
 using Identifiers;
 using IdentityCards;
 using Interfaces;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Managers.SceneManagers
 {
-    public class TD_EnemiesManager : MonoBehaviour, IDIDependent
+    public class TD_EnemiesManager : IInitializable, IClearable, ISubscribesToEvents, IDIDependent
     {
-        [Header(HeaderStrings.Prefabs)]
-        [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
+        public Action<IDamagable> onEnemyKilled;
 
-        [Header(HeaderStrings.Settings)]
-        [SerializeField] private LayerMask _enemyNavmeshLayerMask;
+        private TD_SceneManager _sceneManager;
 
-        [Header(HeaderStrings.Debug)]
-        [SerializeField] private EnemySpawnPoint_Identifier[] _enemySpawnPoint_Identifiers;
+        [DI(Event_DIStrings.onEnemyDied)] private EventWithOneParameters<IDamagable> _onEnemyDied;
 
-        private PlayerIdentifier _playerIdentifier;
+        private List<EnemyIdentityCard> enemiesToSpawnOnStart { get; set; } = new List<EnemyIdentityCard>();
+        private EnemySpawnPoint_Identifier[] enemySpawnPoint_Identifiers { get; set; }
 
-        public void SpawnEnemies()
+        public TD_EnemiesManager(TD_SceneManager tD_SceneManager)
         {
-            _playerIdentifier = FindFirstObjectByType<PlayerIdentifier>();
-            _enemySpawnPoint_Identifiers = FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            _sceneManager = tD_SceneManager;
+        }
 
-            if (_playerIdentifier != null)
-            {
-                Spawn(_enemiesToSpawnOnStart.GetRandom().target);
-            }
+        public void Initialize()
+        {
+            (this as IDIDependent).LoadDependencies();
+
+            enemiesToSpawnOnStart = _sceneManager.enemiesToSpawnOnStart;
+            enemySpawnPoint_Identifiers = _sceneManager.enemySpawnPoint_Identifiers;
+
+            Spawn(enemiesToSpawnOnStart.GetRandom().target);
+        }
+
+        public void Clear()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            _onEnemyDied.AddListener(OnEnemyKilled);
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            _onEnemyDied.AddListener(OnEnemyKilled);
+        }
+
+        private void OnEnemyKilled(IDamagable enemy)
+        {
+            onEnemyKilled?.Invoke(enemy);
+            Respawn(enemy);
         }
 
         public void Respawn(IDamagable damagable)
         {
-            Spawn(_enemiesToSpawnOnStart.GetRandom().target);
+            Spawn(enemiesToSpawnOnStart.GetRandom().target);
         }
 
         private void Spawn(EnemyIdentifier enemyIdentifier)
         {
-            if (_enemySpawnPoint_Identifiers.Length > 0)
-            {
-                var position = _enemySpawnPoint_Identifiers.GetRandom().transform.position;
+            if (enemyIdentifier == null) { return; }
 
-                var enemyInstance = Instantiate<EnemyIdentifier>(enemyIdentifier, position, Quaternion.identity);
+            if (enemySpawnPoint_Identifiers.Length == 0) { enemySpawnPoint_Identifiers = Object.FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
+            if (enemySpawnPoint_Identifiers.Length == 0) { return; };
+
+            if (enemySpawnPoint_Identifiers.Length > 0)
+            {
+                var position = enemySpawnPoint_Identifiers.GetRandom().transform.position;
+
+                var enemyInstance = UnityEngine.Object.Instantiate<EnemyIdentifier>(enemyIdentifier, position, Quaternion.identity);
                 enemyInstance.transform.position = position;
             }
         }

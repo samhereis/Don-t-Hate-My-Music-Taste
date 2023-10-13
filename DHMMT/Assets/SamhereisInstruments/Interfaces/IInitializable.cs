@@ -4,6 +4,11 @@ namespace Interfaces
 {
     public interface IInitializable
     {
+        public virtual bool GetCanInitializeWithDI()
+        {
+            return true;
+        }
+
         public void Initialize();
     }
 

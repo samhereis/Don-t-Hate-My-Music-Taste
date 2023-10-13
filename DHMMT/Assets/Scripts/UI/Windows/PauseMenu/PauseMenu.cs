@@ -3,6 +3,7 @@ using DI;
 using Managers;
 using SamhereisTools;
 using SO.Lists;
+using System;
 using UI.Canvases;
 using UI.Interaction;
 using UnityEngine;
@@ -12,24 +13,17 @@ namespace UI.Windows
 {
     public class PauseMenu : CanvasWindowBase
     {
+        public Action onResumeRequest;
+        public Action onGoToMainMenuRequest;
+
         [Header("UI Elements")]
         [SerializeField] private Button _resumeButton;
         [SerializeField] private BackButton _backButton;
         [SerializeField] private Button _mainMenuButton;
 
-        [Header(HeaderStrings.Components)]
-        [SerializeField] private GameplayMenu _gameplayMenu;
-
         [Header("DI")]
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            if (_gameplayMenu == null) { _gameplayMenu = FindFirstObjectByType<GameplayMenu>(FindObjectsInactive.Include); }
-        }
 
         public override void Enable(float? duration = null)
         {
@@ -77,14 +71,14 @@ namespace UI.Windows
             onUnsubscribeFromEvents?.Invoke();
         }
 
-        public async void GoToMainMenu()
+        public void GoToMainMenu()
         {
-            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenu);
+            onGoToMainMenuRequest?.Invoke();
         }
 
         public void Resume()
         {
-            _gameplayMenu?.Enable();
+            onResumeRequest?.Invoke();
         }
     }
 }

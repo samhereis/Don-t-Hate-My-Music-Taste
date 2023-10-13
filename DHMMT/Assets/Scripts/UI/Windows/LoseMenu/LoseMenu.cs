@@ -12,6 +12,8 @@ namespace UI.Windows
 {
     public class LoseMenu : CanvasWindowBase
     {
+        public Action onGoToMainMenuRequest;
+
         [Header("UI Elements")]
         [SerializeField] private Button _mainMenuButton;
         [SerializeField] private Button _replayButton;
@@ -67,7 +69,7 @@ namespace UI.Windows
 
         public async void GoToMainMenu()
         {
-            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenu);
+            onGoToMainMenuRequest?.Invoke();
         }
 
         public async void Replay()

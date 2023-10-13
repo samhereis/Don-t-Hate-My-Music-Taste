@@ -1,117 +1,69 @@
-using Charatcers.Player;
 using ConstStrings;
-using DataClasses;
 using DI;
-using Events;
 using Helpers;
 using Identifiers;
-using Interfaces;
-using Music;
-using SamhereisTools;
-using SO.Lists;
+using IdentityCards;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UI.Windows;
 using UI.Windows.GameplayMenus;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Managers.SceneManagers
 {
     public class TD_SceneManager : SceneManagerBase, IDIDependent
     {
-        [Header("Actors")]
+        public TD_GameplayMenu modeTDGameplayMenuPrefab => _modeTDGameplayMenuPrefab;
+        public TD_LoseMenu modeLoseMenuPrefab => _modeLoseMenuPrefab;
+        public PauseMenu pauseMenuPrefab => _pauseMenuPrefab;
+        public PlayerIdentifier playerPrefab => _playerPrefab;
+        public List<EnemyIdentityCard> enemiesToSpawnOnStart => _enemiesToSpawnOnStart;
+
+        public PlayerSpawnPoint_Identifier[] playerSpawnPoints => _playerSpawnPoints;
+        public EnemySpawnPoint_Identifier[] enemySpawnPoint_Identifiers => _enemySpawnPoint_Identifiers;
+
+        public int secondsToGiveOnEnemyDie => _secondsToGiveOnEnemyDie;
+
+        [Header("Prefabs")]
         [SerializeField] private PlayerIdentifier _playerPrefab;
+        [SerializeField] private TD_GameplayMenu _modeTDGameplayMenuPrefab;
+        [SerializeField] private TD_LoseMenu _modeLoseMenuPrefab;
+        [SerializeField] private PauseMenu _pauseMenuPrefab;
 
         [Header(HeaderStrings.Components)]
-        [SerializeField] private TD_EnemiesManager _enemiesManager;
         [SerializeField] private Transform _terrainReactableGridCenter;
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
-        [Header("Menus")]
-        [SerializeField] private AssetReferenceGameObject _gameplayMenuReference;
-        [SerializeField] private AssetReferenceGameObject _loseMenuReference;
-
-#if UNITY_EDITOR
-
-        [SerializeField] private bool _isDebugMode = false;
-
-#else
-
-        private bool _isDebugMode => false;
-
-#endif
-
         [Header(HeaderStrings.Settings)]
-        [SerializeField] private ReactorSpawnData[] _reactorSpawnDatas;
+        [SerializeField] private int _secondsToGiveOnEnemyDie = 25;
         [SerializeField] private Vector2Int _tReactableSize;
         [SerializeField] private Vector2Int _terrainReactableGridSize;
-        [SerializeField] private int _secondsToGiveOnEnemyDie = 25;
+        [SerializeField] private LayerMask _enemyNavmeshLayerMask;
 
-        [Header(HeaderStrings.DI)]
-        [DI(Event_DIStrings.onEnemyDied)][SerializeField] private EventWithOneParameters<IDamagable> _onEnemyDied;
-        [DI(DIStrings.playingMusicData)][SerializeField] private PlayingMusicData _playingMusicData;
-        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+#if UNITY_EDITOR
+        [SerializeField] private bool _isDebugMode = false;
+#else
+        private bool _isDebugMode => false;
+#endif
 
-        [Header(HeaderStrings.Debug)]
-        [SerializeField] private List<PlayerSpawnPoint_Identifier> _playerSpawnPoints = new List<PlayerSpawnPoint_Identifier>();
-        [SerializeField] private PlayerIdentifier _player;
-        [SerializeField] private LoseMenu _loseMenu;
-        [SerializeField] private TD_GameplayMenu _gameplayMenu;
+        [SerializeField] private ReactorSpawnData[] _reactorSpawnDatas;
+        [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
+        [SerializeField] private PlayerSpawnPoint_Identifier[] _playerSpawnPoints;
+        [SerializeField] private EnemySpawnPoint_Identifier[] _enemySpawnPoint_Identifiers;
 
-        public override async Awaitable InitializeAsync()
+        [ContextMenu(nameof(Initialize))]
+        public override async void Initialize()
         {
             (this as IDIDependent).LoadDependencies();
 
             await SpawnTerrainReactables();
             if (_navMeshSurface.navMeshData == null) { _navMeshSurface.BuildNavMesh(); }
-            SpawnPlayer();
-            _enemiesManager.SpawnEnemies();
 
-            SubscribeToEvents();
+            if (_playerSpawnPoints.Length == 0) { _playerSpawnPoints = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
+            if (_enemySpawnPoint_Identifiers.Length == 0) { _enemySpawnPoint_Identifiers = FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
 
-            await base.InitializeAsync();
-
-            _playingMusicData.SetActive(true, true);
-        }
-
-        public async void SubscribeToEvents()
-        {
-            _onEnemyDied.AddListener(SpawnEnemy);
-            _player.TryGet<PlayerHealth>().onDie += SpawnPlayer;
-
-            _loseMenu = await AddressablesHelper.GetAssetAsync<LoseMenu>(_loseMenuReference);
-            _gameplayMenu = await AddressablesHelper.GetAssetAsync<TD_GameplayMenu>(_gameplayMenuReference);
-
-            _gameplayMenu.gameplayMenu.onEnable += UnPauseMusic;
-            _gameplayMenu.gameplayMenu.onDisable += PauseMusic;
-            _gameplayMenu.onTimerOver += Lose;
-        }
-
-        public void UnsubscribeFromEvents()
-        {
-            _onEnemyDied.RemoveListener(SpawnEnemy);
-            _player.TryGet<PlayerHealth>().onDie -= SpawnPlayer;
-
-            _gameplayMenu.gameplayMenu.onEnable -= UnPauseMusic;
-            _gameplayMenu.gameplayMenu.onDisable -= PauseMusic;
-            _gameplayMenu.onTimerOver -= Lose;
-        }
-
-        private void SpawnEnemy(IDamagable enemy)
-        {
-            _gameplayMenu.AddSeconds(_secondsToGiveOnEnemyDie);
-            _enemiesManager.Respawn(enemy);
-        }
-
-        private void SpawnPlayer()
-        {
-            _playerSpawnPoints = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
-            if (_playerSpawnPoints.Count > 0) _player = Instantiate(_playerPrefab, _playerSpawnPoints.GetRandom().transform.position, Quaternion.identity);
+            isInitialized = true;
         }
 
         private async Awaitable SpawnTerrainReactables()
@@ -138,44 +90,9 @@ namespace Managers.SceneManagers
             }
         }
 
-        private void Lose()
+        public override void Clear()
         {
-            Clear();
-
-            var currentScene = _sceneLoader.lastLoadedScene;
-            var modeTDSave = _gameSaveManager.modeTDSaves;
-            var modeTDSaveUnit = modeTDSave.tD_Saves.Find(x => x.sceneName == currentScene.sceneCode);
-
-            if (modeTDSaveUnit == null)
-            {
-                modeTDSaveUnit = new TD_SaveUnit();
-                modeTDSaveUnit.sceneName = currentScene.sceneCode;
-
-                modeTDSave.tD_Saves.SafeAdd(modeTDSaveUnit);
-            }
-
-            if (modeTDSaveUnit != null)
-            {
-                modeTDSaveUnit.record = _gameplayMenu.currentDuration;
-            }
-
-            _gameSaveManager.Save(_gameSaveManager.modeTDSaves);
-            _loseMenu?.Enable();
-        }
-
-        private void UnPauseMusic()
-        {
-            _playingMusicData.PauseMusic(false);
-        }
-
-        private void PauseMusic()
-        {
-            _playingMusicData.PauseMusic(true);
-        }
-
-        private void Clear()
-        {
-            UnsubscribeFromEvents();
+            isInitialized = false;
         }
 
         [Serializable]

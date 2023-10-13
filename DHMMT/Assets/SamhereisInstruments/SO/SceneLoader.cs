@@ -6,6 +6,7 @@ using Interfaces;
 using SO.Lists;
 using System;
 using System.Threading.Tasks;
+using UI.Windows;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -60,6 +61,35 @@ namespace SamhereisTools
                 SetLastLoadedScene(aScene);
 
                 _loading = false;
+            }
+        }
+
+        public static async Awaitable LoadSceneAsync(AScene scene, SceneLoader sceneLoader, LoadingMenu loadingMenu)
+        {
+            await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
+
+            if (sceneLoader == null)
+            {
+                await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
+            }
+            else
+            {
+                if (loadingMenu != null)
+                {
+                    loadingMenu.SetProgress(0f);
+                    loadingMenu.Enable();
+
+                    await AsyncHelper.DelayFloat(1f);
+
+                    await sceneLoader.LoadSceneAsync(scene, (percent) =>
+                    {
+                        loadingMenu.SetProgress(percent);
+                    });
+                }
+                else
+                {
+                    await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
+                }
             }
         }
 

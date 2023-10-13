@@ -17,7 +17,7 @@ namespace Music
         [SerializeField] private bool _isCheckingForAudio = false;
         [SerializeField] private bool _isActive = false;
 
-        private void Awake()
+        private void Start()
         {
             (this as IDIDependent).LoadDependencies();
 
@@ -26,7 +26,10 @@ namespace Music
 
         private void Update()
         {
-            _spectrumData.SetSpectrumWidth(_audioSource);
+            if (_spectrumData != null)
+            {
+                _spectrumData.SetSpectrumWidth(_audioSource);
+            }
         }
 
         public void SetActive(bool targetActiveStatus, bool controlPlay = false)

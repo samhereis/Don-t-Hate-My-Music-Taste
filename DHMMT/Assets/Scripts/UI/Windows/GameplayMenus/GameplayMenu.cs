@@ -4,6 +4,7 @@ using Identifiers;
 using Interfaces;
 using Managers;
 using PlayerInputHolder;
+using System;
 using UI.Canvases;
 using UI.Elements.GameplayTab;
 using UnityEngine;
@@ -14,8 +15,7 @@ namespace UI.Windows
 {
     public class GameplayMenu : CanvasWindowBase, IDIDependent
     {
-        [Header(HeaderStrings.Components)]
-        [SerializeField] private PauseMenu _pauseMenu;
+        public Action onPauseRequested;
 
         [Header("Elements")]
         [SerializeField] private CrosshairIdentifier _crosshairIdentifier;
@@ -32,8 +32,6 @@ namespace UI.Windows
 
             _crosshairIdentifier = GetComponentInChildren<CrosshairIdentifier>(true);
             killsCountDisplayer = GetComponentInChildren<KillsCountDisplayer>(true);
-
-            if (_pauseMenu == null) { _pauseMenu = FindFirstObjectByType<PauseMenu>(FindObjectsInactive.Include); }
         }
 
         public override void Enable(float? duration = null)
@@ -78,7 +76,7 @@ namespace UI.Windows
 
         private void Pause(InputAction.CallbackContext context)
         {
-            _pauseMenu.Enable();
+            onPauseRequested?.Invoke();
         }
 
         private void OnPlayerAimingChanged(bool isAiming)

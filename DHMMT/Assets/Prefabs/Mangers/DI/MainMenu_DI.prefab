@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objects:
-  - id: SceneSettings_MainMenu
+  - id: SceneManager_MainMenu
     instance: {fileID: 2396791581531485832}
   - id: PlayingMusicData
     instance: {fileID: 4036292846839890949}

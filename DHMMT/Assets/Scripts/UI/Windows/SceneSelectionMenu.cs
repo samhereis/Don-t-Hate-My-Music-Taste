@@ -4,22 +4,23 @@ using DI;
 using Events;
 using Helpers;
 using Interfaces;
+using SamhereisTools;
 using SO.Lists;
 using System;
 using TMPro;
-using SamhereisTools;
 using UI.Canvases;
 using UI.Elements.SceneSelectMenu;
 using UI.Interaction;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI.Windows
 {
     public class SceneSelectionMenu : CanvasWindowBase, IDIDependent
     {
+        public Action<AScene_Extended> onLoadSceneRequest;
+
         [field: SerializeField] public MainMenu mainMenu { get; set; }
 
         [Header("Components")]
@@ -28,9 +29,6 @@ namespace UI.Windows
 
         [Header("Prefabs")]
         [SerializeField] private SceneUnit _sceneUnitPrefab;
-
-        [Header("Addressables")]
-        [SerializeField] private AssetReferenceGameObject _loadingScreen;
 
         [Header("DI")]
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
@@ -105,39 +103,9 @@ namespace UI.Windows
             _rulesBlock.UpdateView(scene);
         }
 
-        private async void OpenScene(AScene_Extended scene)
+        private void OpenScene(AScene_Extended scene)
         {
-            if (_sceneLoader == null)
-            {
-                SceneManager.LoadSceneAsync(scene.sceneCode);
-            }
-            else
-            {
-                SceneLoadingMenu loadingScreenInstance = await AddressablesHelper.InstantiateAsync<SceneLoadingMenu>(_loadingScreen);
-
-                if (loadingScreenInstance != null)
-                {
-                    loadingScreenInstance.SetProgress(0f);
-
-                    Disable();
-                    loadingScreenInstance.Disable();
-
-                    DontDestroyOnLoad(loadingScreenInstance);
-
-                    await AsyncHelper.DelayFloat(1f);
-
-                    await _sceneLoader.LoadSceneAsync(scene, (percent) =>
-                    {
-                        loadingScreenInstance.SetProgress(percent);
-                    });
-
-                    Addressables.ReleaseInstance(loadingScreenInstance.gameObject);
-                }
-                else
-                {
-                    SceneManager.LoadSceneAsync(scene.sceneCode);
-                }
-            }
+            onLoadSceneRequest?.Invoke(scene);
         }
 
         private void FillSceneUnits()

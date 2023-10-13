@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a66f47d2db4df43a21a366c7f86004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loseMenu: {fileID: 2117073220930700335}
+  <loseMenu>k__BackingField: {fileID: 2117073220930700335}
   _tD_GameplayMenu: {fileID: 0}
   _bestScoreText: {fileID: 4750651086003273663}
   _currentScoreText: {fileID: 3482198140416833841}

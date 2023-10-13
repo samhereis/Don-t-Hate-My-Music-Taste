@@ -582,13 +582,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36fa0b0e46d86b46b5abde933d78f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <gameplayMenu>k__BackingField: {fileID: 0}
+  _gameplayMenu: {fileID: 0}
   _timerText: {fileID: 607427276421633924}
   _durationText: {fileID: 764651538166096394}
-  _secondsOnStart: 5
+  _secondsOnStart: 60
   _isTimerActive: 0
-  <currentTimer>k__BackingField: 0
-  <currentDuration>k__BackingField: 0
+  _currentTimer: 0
+  _currentDuration: 0
 --- !u!224 &6669467565693788715 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5004885532112136908, guid: 27c44aa2e39855f4287f74925dce3d59,

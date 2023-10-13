@@ -88,12 +88,6 @@ namespace UI.Canvases
             }
         }
 
-        public virtual void Exit()
-        {
-            Disable();
-            _baseSettings.openOnExit?.Enable();
-        }
-
         public virtual void Enable(float? duration = null)
         {
             TurnOn(duration);
@@ -148,7 +142,6 @@ namespace UI.Canvases
             void OnClosed()
             {
                 if (_baseSettings.enableDisable) { gameObject.SetActive(false); }
-                if (_baseSettings.openOnExit != null && duration.Value != 0) { _baseSettings.openOnExit.Enable(); }
             }
         }
 
@@ -217,9 +210,6 @@ namespace UI.Canvases
 
             [Header("DI")]
             [DI(DIStrings.uiConfigs)] public UIConfigs uIConfigs;
-
-            [Header("Optional")]
-            public CanvasWindowBase openOnExit;
 
             [Header("Debug")]
             public UIAnimationElement_Base[] uIAnimationElements;

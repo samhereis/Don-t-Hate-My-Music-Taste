@@ -1,24 +1,19 @@
-using UnityEngine;
+using UI.Canvases;
 
 namespace UI.Windows
 {
-    public class EFH_LoseMenu : MonoBehaviour
+    public class EFH_LoseMenu : CanvasWindowExtendorBase<LoseMenu>
     {
-        [Header("Windows")]
-        [SerializeField] private LoseMenu _loseMenu;
-
         private void Awake()
         {
-            _loseMenu = GetComponent<LoseMenu>();
-
-            _loseMenu.onSubscribeToEvents += OnSubscribeToEvents;
-            _loseMenu.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
+            window.onSubscribeToEvents += OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
         }
 
         private void OnDestroy()
         {
-            _loseMenu.onSubscribeToEvents -= OnSubscribeToEvents;
-            _loseMenu.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
+            window.onSubscribeToEvents -= OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
         }
 
         private void OnSubscribeToEvents()

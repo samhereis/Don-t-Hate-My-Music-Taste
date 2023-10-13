@@ -9,7 +9,7 @@ namespace Interfaces
 
     public interface IClearableAsync
     {
-        public Awaitable ClearAsync();
+        public Awaitable Clear();
     }
 
     public interface IClearable<T>

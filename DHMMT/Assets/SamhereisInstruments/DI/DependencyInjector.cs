@@ -126,7 +126,8 @@ namespace DI
             {
                 if (objectToInject.instance is IInitializable)
                 {
-                    (objectToInject.instance as IInitializable).Initialize();
+                    var initializable = (objectToInject.instance as IInitializable);
+                    if (initializable.GetCanInitializeWithDI() == true) { initializable.Initialize(); }
                 }
             }
 

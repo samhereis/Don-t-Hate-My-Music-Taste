@@ -4,15 +4,15 @@ using Managers;
 using SamhereisTools;
 using System;
 using TMPro;
+using UI.Canvases;
 using UI.Windows.GameplayMenus;
 using UnityEngine;
 
 namespace UI.Windows
 {
-    public class TD_LoseMenu : MonoBehaviour, IDIDependent
+    public class TD_LoseMenu : CanvasWindowExtendorBase<LoseMenu>, IDIDependent
     {
         [Header("Windows")]
-        [SerializeField] private LoseMenu _loseMenu;
         [SerializeField] private TD_GameplayMenu _tD_GameplayMenu;
 
         [Header(HeaderStrings.UIElements)]
@@ -25,22 +25,20 @@ namespace UI.Windows
 
         private void Awake()
         {
-            _loseMenu = GetComponent<LoseMenu>();
-
-            _loseMenu.onEnable += OnOpen;
-            _loseMenu.onDisable += OnClose;
-            _loseMenu.onSubscribeToEvents += OnSubscribeToEvents;
-            _loseMenu.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
+            window.onEnable += OnOpen;
+            window.onDisable += OnClose;
+            window.onSubscribeToEvents += OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents += OnUnsubscribeFromEvents;
 
             if (_tD_GameplayMenu == null) { _tD_GameplayMenu = FindFirstObjectByType<TD_GameplayMenu>(FindObjectsInactive.Include); }
         }
 
         private void OnDestroy()
         {
-            _loseMenu.onEnable -= OnOpen;
-            _loseMenu.onDisable -= OnClose;
-            _loseMenu.onSubscribeToEvents -= OnSubscribeToEvents;
-            _loseMenu.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
+            window.onEnable -= OnOpen;
+            window.onDisable -= OnClose;
+            window.onSubscribeToEvents -= OnSubscribeToEvents;
+            window.onUnsubscribeFromEvents -= OnUnsubscribeFromEvents;
         }
 
         private void OnOpen()

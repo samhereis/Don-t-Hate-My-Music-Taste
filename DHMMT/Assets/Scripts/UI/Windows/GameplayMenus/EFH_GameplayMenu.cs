@@ -1,23 +1,28 @@
 using DI;
+using UI.Canvases;
 using UI.Popups;
 using UnityEngine;
 
 namespace UI.Windows.GameplayMenus
 {
-    public class EFH_GameplayMenu : MonoBehaviour, IDIDependent
+    public class EFH_GameplayMenu : CanvasWindowExtendorBase<GameplayMenu>, IDIDependent
     {
-        [Header("Components")]
-        [field: SerializeField] public GameplayMenu gameplayMenu;
-        [field: SerializeField] public StayUnderTheLight_Popup stayUnderTheLight_Popup;
+        public StayUnderTheLight_Popup stayUnderTheLight_Popup
+        {
+            get
+            {
+                if (_stayUnderTheLight_Popup == null) { _stayUnderTheLight_Popup = GetComponentInChildren<StayUnderTheLight_Popup>(true); }
+
+                return _stayUnderTheLight_Popup;
+            }
+        }
+
+        [SerializeField] private StayUnderTheLight_Popup _stayUnderTheLight_Popup;
 
         private void Awake()
         {
-            if (gameplayMenu == null) { gameplayMenu = GetComponent<GameplayMenu>(); }
-
-            gameplayMenu.onEnable += OnGameplayMenuOpen;
-            gameplayMenu.onDisable += OnGameplayMenuClose;
-
-            stayUnderTheLight_Popup = GetComponentInChildren<StayUnderTheLight_Popup>(true);
+            window.onEnable += OnGameplayMenuOpen;
+            window.onDisable += OnGameplayMenuClose;
         }
 
         private void Start()
@@ -27,8 +32,8 @@ namespace UI.Windows.GameplayMenus
 
         private void OnDestroy()
         {
-            gameplayMenu.onEnable -= OnGameplayMenuOpen;
-            gameplayMenu.onDisable -= OnGameplayMenuClose;
+            window.onEnable -= OnGameplayMenuOpen;
+            window.onDisable -= OnGameplayMenuClose;
         }
 
         private void OnGameplayMenuOpen()

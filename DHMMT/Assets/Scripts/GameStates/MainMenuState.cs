@@ -1,6 +1,9 @@
 using ConstStrings;
+using DataClasses;
 using DI;
+using Interfaces;
 using Managers.SceneManagers;
+using Managers.UIManagers;
 using Music;
 using PlayerInputHolder;
 using SamhereisTools;
@@ -10,14 +13,16 @@ using UnityEngine;
 
 namespace GameStates
 {
-    public class MainMenuState : IGameState, IDIDependent
+    public class MainMenuState : IGameState, IDIDependent, ISubscribesToEvents
     {
         [DI(DIStrings.inputHolder)] private Input_SO _inputContainer;
         [DI(DIStrings.sceneLoader)] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.playingMusicData)] private PlayingMusicData _playingMusicData;
 
-        [DI(DIStrings.sceneSettings_MainMenu)] private MainMenu_SceneManager _mainMenuSceneManager;
+        [DI(DIStrings.sceneManager_MainMenu)] private MainMenu_SceneManager _mainMenuSceneManager;
+
+        [DI] private GameStatesManager _gameStatesManager;
 
         private MainMenu _mainMenu;
         private SettingsMenu _settingsMenu;
@@ -31,6 +36,22 @@ namespace GameStates
 
             (this as IDIDependent).LoadDependencies();
 
+            LoadUIs();
+            SetupInput();
+
+            _mainMenu?.Enable();
+            _playingMusicData?.SetActive(true, true);
+
+            SubscribeToEvents();
+        }
+
+        public void Exit()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        private void LoadUIs()
+        {
             _mainMenu = Object.Instantiate<MainMenu>(_mainMenuSceneManager.mainMenuReference);
             _settingsMenu = Object.Instantiate<SettingsMenu>(_mainMenuSceneManager.settingsMenuReference);
             _sceneSelectionMenu = Object.Instantiate<SceneSelectionMenu>(_mainMenuSceneManager.selectMapMenuReference);
@@ -38,23 +59,13 @@ namespace GameStates
             _mainMenu.sceneSelectionMenu = _sceneSelectionMenu;
             _mainMenu.settingsMenu = _settingsMenu;
 
-            _settingsMenu.openOnDisable = _mainMenu;
+            _settingsMenu.openOnBack = _mainMenu;
 
             _sceneSelectionMenu.mainMenu = _mainMenu;
 
             _mainMenu?.Initialize();
             _settingsMenu?.Initialize();
             _sceneSelectionMenu?.Initialize();
-
-            _mainMenu?.Enable();
-            _playingMusicData?.SetActive(true, true);
-
-            SetupInput();
-        }
-
-        public void Exit()
-        {
-
         }
 
         private void SetupInput()
@@ -62,6 +73,41 @@ namespace GameStates
             _inputContainer.Enable();
             _inputContainer.input.Gameplay.Disable();
             _inputContainer.input.UI.Enable();
+        }
+
+        public void SubscribeToEvents()
+        {
+            UnsubscribeFromEvents();
+
+            _sceneSelectionMenu.onLoadSceneRequest += OnLoadSceneRequest;
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            _sceneSelectionMenu.onLoadSceneRequest -= OnLoadSceneRequest;
+        }
+
+        private void OnLoadSceneRequest(AScene_Extended scene)
+        {
+            switch (scene.gameMode)
+            {
+                case AScene_Extended.GameMode.EscapeFromHaters:
+                    {
+                        _gameStatesManager.ChangeState(new EFH_GameState(scene));
+
+                        break;
+                    }
+                case AScene_Extended.GameMode.TsukuyomiDream:
+                    {
+                        _gameStatesManager.ChangeState(new TD_GameState(scene));
+
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
         }
     }
 }

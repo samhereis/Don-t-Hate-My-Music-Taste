@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UI.Canvases;
@@ -10,7 +11,7 @@ namespace UI.Windows
 {
     public class SettingsMenu : CanvasWindowBase
     {
-        [field: SerializeField] public CanvasWindowBase openOnDisable { get; set; }
+        [field: SerializeField] public CanvasWindowBase openOnBack { get; set; }
 
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup _activeTabIndicator;
@@ -56,8 +57,6 @@ namespace UI.Windows
 
             CloseAllSettingTabs();
             base.Disable(duration);
-
-            openOnDisable?.Enable();
         }
 
         protected override void SubscribeToEvents()
@@ -82,6 +81,11 @@ namespace UI.Windows
 
             _backButton?.UnsubscribeFromEvents();
             _backButton?.onBack.RemoveListener(Exit);
+        }
+
+        private void Exit()
+        {
+            openOnBack?.Enable();
         }
 
         public async void OnGameplayTabButtonClicked()

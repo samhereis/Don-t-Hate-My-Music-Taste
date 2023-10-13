@@ -16,6 +16,7 @@ MonoBehaviour:
   - <sceneCode>k__BackingField: EscapeFromHaters
     _scene: {fileID: 102900000, guid: f1ddf72421ef67b40b6082f77c7b2300, type: 3}
     <sceneName>k__BackingField: Escape From Haters
+    <gameMode>k__BackingField: 0
     <description>k__BackingField: "   A mode where the players spawns in a random
       position and needs to find the exit. To find the path there is a light that
       gets spawned with the player which the player should follow. Along the path,
@@ -34,6 +35,7 @@ MonoBehaviour:
   - <sceneCode>k__BackingField: TsukuyomiDream
     _scene: {fileID: 102900000, guid: 53005f868b3d046449bdd3541dbc6034, type: 3}
     <sceneName>k__BackingField: Tsukuyomi Dream
+    <gameMode>k__BackingField: 1
     <description>k__BackingField: "   A mode where the players spawns in a random
       position and needs to find the exit. To find the path there is a light that
       gets spawned with the player which the player should follow. Along the path,

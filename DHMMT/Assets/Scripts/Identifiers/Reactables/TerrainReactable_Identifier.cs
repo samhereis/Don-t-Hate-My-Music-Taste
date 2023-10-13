@@ -14,6 +14,8 @@ namespace Identifiers
         [SerializeField] private float _xOffset;
         [SerializeField] private float _zOffset;
 
+        [SerializeField] private bool _autoUpdate = false;
+
         [Header(HeaderStrings.Components)]
         [SerializeField] private NavMeshLink _topNavMeshLink;
         [SerializeField] private NavMeshLink _bottomNavMeshLink;
@@ -38,10 +40,10 @@ namespace Identifiers
             _rightNavMeshLink.width = _zSize;
             _leftNavMeshLink.width = _zSize;
 
-            _topNavMeshLink.autoUpdate = true;
-            _bottomNavMeshLink.autoUpdate = true;
-            _rightNavMeshLink.autoUpdate = true;
-            _leftNavMeshLink.autoUpdate = true;
+            _topNavMeshLink.autoUpdate = _autoUpdate;
+            _bottomNavMeshLink.autoUpdate = _autoUpdate;
+            _rightNavMeshLink.autoUpdate = _autoUpdate;
+            _leftNavMeshLink.autoUpdate = _autoUpdate;
 
             _topNavMeshLink.startPoint = new Vector3(0, _upYSize, (_zSize / 2) - _zOffset);
             _topNavMeshLink.endPoint = new Vector3(0, _downYSize, (_zSize / 2) + _zOffset);

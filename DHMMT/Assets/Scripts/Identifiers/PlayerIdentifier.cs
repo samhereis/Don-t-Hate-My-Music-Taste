@@ -25,18 +25,16 @@ namespace Identifiers
         private void Awake()
         {
             damagerIdentifier = this;
-
             if (_camera == null) { _camera = GetComponentInChildren<Camera>(true); }
         }
 
         private void Start()
         {
             (this as IDIDependent).LoadDependencies();
-
-            _fpsController.Initialize();
-            SubscribeToEvents();
-
             if (_camera != null && _fieldOfView_Settings != null) { _camera.fieldOfView = _fieldOfView_Settings.currentValue; }
+            _fpsController.Initialize();
+
+            SubscribeToEvents();
         }
 
         public void SubscribeToEvents()

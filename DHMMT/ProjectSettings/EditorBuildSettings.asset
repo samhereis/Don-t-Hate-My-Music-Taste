@@ -6,11 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/mainMenu.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   - enabled: 1
     path: Assets/Scenes/EscapeFromHaters/EscapeFromHaters.unity
     guid: f1ddf72421ef67b40b6082f77c7b2300
+  - enabled: 1
+    path: Assets/Scenes/TsukuyomiDream/TsukuyomiDream.unity
+    guid: 53005f868b3d046449bdd3541dbc6034
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: df8aa5f474d899440815524c7a441eee,
       type: 2}
+  m_UseUCBPForAssetBundles: 0

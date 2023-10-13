@@ -238,19 +238,13 @@ MonoBehaviour:
     isOpen: 1
     canvasGroup: {fileID: 7640579395730743378}
     uIConfigs: {fileID: 0}
-    openOnExit: {fileID: 0}
     uIAnimationElements: []
   _buttons: []
+  <mainMenu>k__BackingField: {fileID: 0}
   _scenesUnitsParent: {fileID: 1110650526190958077}
   _backButton: {fileID: 392769020227118655}
-  _mainMenu: {fileID: 0}
   _sceneUnitPrefab: {fileID: 7781370266589777065, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
     type: 3}
-  _loadingScreen:
-    m_AssetGUID: 1ff45515c5c94ee4299aac8cb00412d3
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
   _listOfAllScenes: {fileID: 0}
   _sceneLoader: {fileID: 0}
   _onASceneSelected:
@@ -276,6 +270,7 @@ MonoBehaviour:
       <sceneCode>k__BackingField: 
       _scene: {fileID: 0}
       <sceneName>k__BackingField: 
+      <gameMode>k__BackingField: 0
       <description>k__BackingField: 
       <rules>k__BackingField: 
       <icon>k__BackingField: {fileID: 0}
@@ -288,6 +283,7 @@ MonoBehaviour:
       <sceneCode>k__BackingField: 
       _scene: {fileID: 0}
       <sceneName>k__BackingField: 
+      <gameMode>k__BackingField: 0
       <description>k__BackingField: 
       <rules>k__BackingField: 
       <icon>k__BackingField: {fileID: 0}
@@ -300,6 +296,7 @@ MonoBehaviour:
       <sceneCode>k__BackingField: 
       _scene: {fileID: 0}
       <sceneName>k__BackingField: 
+      <gameMode>k__BackingField: 0
       <description>k__BackingField: 
       <rules>k__BackingField: 
       <icon>k__BackingField: {fileID: 0}
@@ -1281,7 +1278,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000080146594}
-  m_SizeDelta: {x: 0, y: 250}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3810396920780069360
 MonoBehaviour:
@@ -1810,11 +1807,12 @@ MonoBehaviour:
       m_Calls: []
   _clickSoundResponce:
     _audioClips: []
-    isMain: 0
-    loop: 0
-    disableOthers: 0
-    volume: 1
-    distance: 50
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 0}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
@@ -2629,7 +2627,7 @@ PrefabInstance:
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
@@ -2639,17 +2637,17 @@ PrefabInstance:
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 250
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
@@ -2689,12 +2687,12 @@ PrefabInstance:
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 624
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582605991051620563, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
         type: 3}

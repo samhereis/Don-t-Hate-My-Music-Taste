@@ -9,7 +9,7 @@ namespace Managers.UIManagers
 {
     public class GameStatesManager : MonoBehaviour, IDIDependent
     {
-        private static Dictionary<Type, IGameState> _gameStates = new Dictionary<Type, IGameState>();
+        private Dictionary<Type, IGameState> _gameStates = new Dictionary<Type, IGameState>();
         private IGameState _currentGameState;
 
         private async void Awake()
@@ -26,18 +26,42 @@ namespace Managers.UIManagers
             ChangeState<MainMenuState>();
         }
 
-        public void ChangeState<TGameState>(bool deletePrevious = false) where TGameState : IGameState, new()
+        public IGameState GetState<TGameState>() where TGameState : IGameState, new()
         {
-            if (_currentGameState is TGameState) { return; }
+            SetupStateIfNull<TGameState>();
+            var gameState = _gameStates[typeof(TGameState)];
+
+            return gameState;
+        }
+
+        public void ChangeState<TGameState>(bool deletePrevious = true) where TGameState : IGameState, new()
+        {
+            ChangeState(GetState<TGameState>(), deletePrevious);
+        }
+
+        public void ChangeState(IGameState gameState, bool deletePrevious = true)
+        {
+            if (_currentGameState == gameState) { return; }
 
             _currentGameState?.Exit();
-            if (deletePrevious) { _gameStates.Remove(typeof(TGameState)); }
+            if (deletePrevious) { _gameStates.Remove(gameState.GetType()); }
 
-            if (_gameStates.ContainsKey(typeof(TGameState)) == false) { _gameStates.Add(typeof(TGameState), new TGameState()); }
-            var gameState = _gameStates[typeof(TGameState)];
+            if (_gameStates.ContainsKey(gameState.GetType()) == false)
+            {
+                { _gameStates.Add(gameState.GetType(), gameState); }
+            }
+            else
+            {
+                _gameStates[gameState.GetType()] = gameState;
+            }
 
             _currentGameState = gameState;
             _currentGameState?.Enter();
+        }
+
+        private void SetupStateIfNull<TGameState>() where TGameState : IGameState, new()
+        {
+            if (_gameStates.ContainsKey(typeof(TGameState)) == false) { _gameStates.Add(typeof(TGameState), new TGameState()); }
         }
     }
 }

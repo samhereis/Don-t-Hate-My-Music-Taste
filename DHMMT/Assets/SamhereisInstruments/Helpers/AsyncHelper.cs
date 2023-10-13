@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Helpers
@@ -6,7 +7,7 @@ namespace Helpers
     {
         public static async Awaitable Delay()
         {
-            await Awaitable.NextFrameAsync();
+            await Awaitable.WaitForSecondsAsync(0);
         }
 
         public static async Awaitable NextFrame()

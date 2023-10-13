@@ -160,6 +160,7 @@ MonoBehaviour:
   _zSize: 20
   _xOffset: 1
   _zOffset: 1
+  _autoUpdate: 1
   _topNavMeshLink: {fileID: 7540107208885140097}
   _bottomNavMeshLink: {fileID: 349648872923879074}
   _rightNavMeshLink: {fileID: 6077584456304042789}
