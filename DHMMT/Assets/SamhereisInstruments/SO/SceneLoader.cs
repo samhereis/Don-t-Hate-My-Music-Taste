@@ -66,8 +66,6 @@ namespace SamhereisTools
 
         public static async Awaitable LoadSceneAsync(AScene scene, SceneLoader sceneLoader, LoadingMenu loadingMenu)
         {
-            await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
-
             if (sceneLoader == null)
             {
                 await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
