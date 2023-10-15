@@ -84,6 +84,8 @@ namespace GameStates.SceneManagers
 
         protected override void PauseGame()
         {
+            base.PauseGame();
+
             pauseMenu?.Enable();
 
             pauseMenu.onResumeRequest -= ResumeGame;
@@ -94,16 +96,13 @@ namespace GameStates.SceneManagers
 
         protected override void ResumeGame()
         {
+            base.ResumeGame();
+
             pauseMenu.onResumeRequest -= ResumeGame;
 
             gameplayMenu?.window?.Enable();
 
             _playingMusicData.PauseMusic(false);
-        }
-
-        protected override void GoToMainMenu()
-        {
-            onGoToMainMenuRequest?.Invoke();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace UI
             if (_scrollSnapRect == null)
             {
                 _scrollSnapRect = GetComponentInParent<ScrollSnapRect>();
-                if (_scrollSnapRect == null) _scrollSnapRect = FindObjectOfType<ScrollSnapRect>();
+                if (_scrollSnapRect == null) _scrollSnapRect = FindFirstObjectByType<ScrollSnapRect>(FindObjectsInactive.Include);
             }
 
             _scrollSnapRect?.RegidterElement(this);

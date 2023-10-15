@@ -1,13 +1,10 @@
-﻿using DataClasses;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Identifiers;
 using IdentityCards;
-using Helpers;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UI;
-using UI.Helpers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -61,7 +58,7 @@ namespace Gameplay.UI.Menu.Canvas
             ClearButtons(0);
             _playerName.text = string.Empty;
 
-            foreach (var podium in FindObjectsOfType<IdentifierBase>(true))
+            foreach (var podium in FindObjectsByType<IdentifierBase>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
                 Destroy(podium.gameObject);
             }
@@ -69,12 +66,12 @@ namespace Gameplay.UI.Menu.Canvas
 
         public void ViewNext()
         {
-            
+
         }
 
         public void ViewPrevious()
         {
-            
+
         }
 
         public void View(APlayerIdentityCard aPlayer, int direction = 0)

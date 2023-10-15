@@ -23,7 +23,7 @@ namespace GOAP.Actions
 
         public override bool IsAchievable()
         {
-            if (FindObjectOfType<PlayerIdentifier>() == null) return false;
+            if (FindFirstObjectByType<PlayerIdentifier>(FindObjectsInactive.Include) == null) return false;
 
             return true;
         }
@@ -32,7 +32,7 @@ namespace GOAP.Actions
         {
             if (baseSettings.target == null)
             {
-                baseSettings.target = FindObjectOfType<PlayerIdentifier>().gameObject;
+                baseSettings.target = FindFirstObjectByType<PlayerIdentifier>(FindObjectsInactive.Include).gameObject;
             }
 
             if (baseSettings.target == null) { return false; }

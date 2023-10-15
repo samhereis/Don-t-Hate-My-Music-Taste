@@ -21,7 +21,7 @@ namespace UI.Helpers
         [SerializeField] private int _screenWidth;
         [SerializeField] private Camera _cam;
 
-        private Camera _camera => _cam != null ? _cam : _cam = FindObjectOfType<Camera>();
+        private Camera _camera => _cam != null ? _cam : _cam = FindFirstObjectByType<Camera>(FindObjectsInactive.Include);
 
         public void Awake()
         {

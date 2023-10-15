@@ -12,7 +12,7 @@ namespace Identifiers
 
         private void Awake()
         {
-            _exitLocations = FindObjectsOfType<ExitLocation_Identifier>();
+            _exitLocations = FindObjectsByType<ExitLocation_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
             transform.position = _exitLocations[Random.Range(0, _exitLocations.Length)].transform.position;
         }

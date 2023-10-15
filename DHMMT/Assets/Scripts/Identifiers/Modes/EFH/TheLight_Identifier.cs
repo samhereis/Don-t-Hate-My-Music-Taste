@@ -16,7 +16,7 @@ namespace Identifiers
         {
             if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
 
-            _exit = FindObjectOfType<Exit_Identifier>();
+            _exit = FindFirstObjectByType<Exit_Identifier>(FindObjectsInactive.Include);
 
             _navMeshAgent.SetDestination(_exit.transform.position);
         }

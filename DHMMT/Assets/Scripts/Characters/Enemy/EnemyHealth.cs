@@ -67,7 +67,8 @@ namespace Charatcers.Enemy
                 _healthSliderFillRectImage = _healthSlider.fillRect.GetComponent<Image>();
             }
 
-            UpdateHealthSlider();
+
+            UpdateHealthSlider(0);
         }
 
         private void OnDestroy()
@@ -136,25 +137,33 @@ namespace Charatcers.Enemy
             _onEnemyDied?.Invoke(this);
         }
 
-        private void UpdateHealthSlider()
+        private void UpdateHealthSlider(float duration = 0.25f)
         {
             if (_healthSlider != null)
             {
                 _healthSlider.DOKill();
 
-                if (_mainCamera != null) { _healthSlider.transform.DOLookAt(_mainCamera.transform.position, 0.25f); }
-
-                _healthSlider.transform.DOScaleY(1, 0.25f).OnComplete(() =>
+                if (duration <= 0)
                 {
-                    _healthSliderFillRectImage.DOColor(_healthGradient.Evaluate(currentHealth / maxHealth), 0.25f);
+                    _healthSliderFillRectImage.color = _healthGradient.Evaluate(currentHealth / maxHealth);
+                    _healthSlider.value = currentHealth;
+                    _healthSlider.transform.localScale = new Vector3(1, 0, 1);
+                }
+                else
+                {
+                    if (_mainCamera != null) { _healthSlider.transform.DOLookAt(_mainCamera.transform.position, duration); }
 
-                    _healthSlider.DOValue(currentHealth, 0.25f).OnComplete(() =>
+                    _healthSlider.transform.DOScaleY(1, duration).OnComplete(() =>
                     {
-                        _healthSlider.transform.DOScaleY(0, 0.25f);
-                    });
-                });
-            }
+                        _healthSliderFillRectImage.DOColor(_healthGradient.Evaluate(currentHealth / maxHealth), duration);
 
+                        _healthSlider.DOValue(currentHealth, duration).OnComplete(() =>
+                        {
+                            _healthSlider.transform.DOScaleY(0, duration);
+                        });
+                    });
+                }
+            }
         }
     }
 }

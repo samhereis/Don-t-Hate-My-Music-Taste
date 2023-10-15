@@ -7,7 +7,6 @@ using GameStates.SceneManagers;
 using Helpers;
 using Identifiers;
 using Interfaces;
-using Managers.SceneManagers;
 using Managers.UIManagers;
 using SamhereisTools;
 using SO.Lists;
@@ -15,6 +14,7 @@ using System.Threading;
 using UI.Windows;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.AI;
 
 namespace GameStates
 {
@@ -85,7 +85,7 @@ namespace GameStates
 
         public void Exit()
         {
-
+            UnsubscribeFromEvents();
         }
 
         public void SubscribeToEvents()
@@ -99,6 +99,7 @@ namespace GameStates
             _efh_EnemiesManager.onEnemyKilled += OnEnemyKilled;
 
             _efh_UIManager.onGoToMainMenuRequest += GoToMainMenu;
+            _efh_UIManager.onGamePauseStatusChanged += OnGamePauseStatusChanged;
         }
 
         public void UnsubscribeFromEvents()
@@ -112,6 +113,7 @@ namespace GameStates
             _efh_EnemiesManager.onEnemyKilled -= OnEnemyKilled;
 
             _efh_UIManager.onGoToMainMenuRequest -= GoToMainMenu;
+            _efh_UIManager.onGamePauseStatusChanged -= OnGamePauseStatusChanged;
         }
 
 
@@ -190,6 +192,16 @@ namespace GameStates
         private void OnEnemyKilled(IDamagable enemy)
         {
             _efh_UIManager.gameplayMenu.window.IncreaseKillsCount(enemy);
+        }
+
+        private void OnGamePauseStatusChanged(bool isPaused)
+        {
+            var theLightNavMeshAgent = _theLight.TryGet<NavMeshAgent>();
+
+            if (theLightNavMeshAgent != null)
+            {
+                theLightNavMeshAgent.isStopped = isPaused;
+            }
         }
 
         private void Lose()

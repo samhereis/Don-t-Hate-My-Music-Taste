@@ -67,7 +67,7 @@ namespace UI.Windows
             Enable();
         }
 
-        public async void GoToMainMenu()
+        public void GoToMainMenu()
         {
             onGoToMainMenuRequest?.Invoke();
         }

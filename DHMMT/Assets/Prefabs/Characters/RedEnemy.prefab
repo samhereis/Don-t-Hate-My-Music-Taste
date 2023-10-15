@@ -590,7 +590,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   _animator: {fileID: 3518818648495301512}
   _healthSlider: {fileID: 8478029376830592693}
-  _enemyAgent: {fileID: 0}
+  _enemyAgent: {fileID: 7198323842002707876}
+  _targetIndicator: {fileID: 0}
 --- !u!136 &3114702836847640478
 CapsuleCollider:
   m_ObjectHideFlags: 0

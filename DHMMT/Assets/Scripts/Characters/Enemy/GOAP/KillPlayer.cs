@@ -26,7 +26,7 @@ namespace GOAP.Actions
         {
             if (_currentPlayer == null)
             {
-                _currentPlayer = FindObjectOfType<PlayerIdentifier>();
+                _currentPlayer = FindFirstObjectByType<PlayerIdentifier>(FindObjectsInactive.Include);
             }
 
             return _currentPlayer;

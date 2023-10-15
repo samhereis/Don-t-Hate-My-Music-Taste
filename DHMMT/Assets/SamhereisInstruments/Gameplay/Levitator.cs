@@ -7,9 +7,9 @@ namespace Gameplay
 {
     public sealed class Levitator : MonoBehaviour
     {
-        [SerializeField] private Vector3Data _rotationData = new Vector3Data();
-        [SerializeField] private Vector3Data _positionData = new Vector3Data();
-        [SerializeField] private Vector3Data _scaleData = new Vector3Data();
+        [SerializeField] private Vector3Data _rotationData = new Vector3Data(25f, 25f, 25);
+        [SerializeField] private Vector3Data _positionData = new Vector3Data(0.25f, 0.25f, 0.25f);
+        [SerializeField] private Vector3Data _scaleData = new Vector3Data(0.5f, 0.25f, 0.25f);
 
         [Header("Settings")]
         [SerializeField] private bool _rotationEnable = true;
@@ -42,7 +42,7 @@ namespace Gameplay
         {
             if (_rotationEnable) { Rotate(); }
             if (_positionEnable) { Position(); }
-            if (_scaleReached) { Scale(); }
+            if (_scaleEnable) { Scale(); }
         }
 
         private void Rotate()
@@ -55,7 +55,8 @@ namespace Gameplay
                 _rotationData.currentTargetValue = _rotationData.GetRandomValue();
 
                 transform.DOLocalRotate(_rotationData.originalValue + _rotationData.currentTargetValue, _rotationData.currentDuration)
-                    .SetEase(Ease.InOutBack).OnComplete(() => _rotationReached = true);
+                    .SetEase(Ease.InOutBack)
+                    .OnComplete(() => _rotationReached = true);
             }
         }
 
@@ -70,7 +71,9 @@ namespace Gameplay
 
                 var target = _positionData.currentTargetValue;
 
-                transform.DOLocalMove(_positionData.originalValue + target, _positionData.currentDuration).SetEase(Ease.InOutBack).OnComplete(() => _positionReached = true);
+                transform.DOLocalMove(_positionData.originalValue + target, _positionData.currentDuration)
+                    .SetEase(Ease.InOutBack)
+                    .OnComplete(() => _positionReached = true);
             }
         }
 
@@ -85,24 +88,32 @@ namespace Gameplay
 
                 var target = _scaleData.currentTargetValue;
 
-                transform.DOScale(_scaleData.originalValue + target, _scaleData.currentDuration).SetEase(Ease.InOutBack).OnComplete(() => _scaleReached = true);
+                transform.DOScale(_scaleData.originalValue + target, _scaleData.currentDuration)
+                    .SetEase(Ease.InOutBack)
+                    .OnComplete(() => _scaleReached = true);
             }
         }
 
         [Serializable]
         internal class Vector3Data
         {
-            [field: SerializeField] public Vector2 duration = new Vector2(3, 10);
+            [field: SerializeField] public Vector2 duration = new Vector2(0.25f, 0.75f);
 
             [Space(5)]
             [field: SerializeField] public Vector2 valueRandomX = new Vector2(-1, 1);
             [field: SerializeField] public Vector2 valueRandomY = new Vector2(-1, 1);
             [field: SerializeField] public Vector2 valueRandomZ = new Vector2(-1, 1);
 
-            [Header("Debug")]
-            [field: SerializeField] public Vector3 originalValue;
-            [field: SerializeField] public Vector3 currentTargetValue;
-            [field: SerializeField] public float currentDuration = 0;
+            [HideInInspector] public Vector3 originalValue;
+            [HideInInspector] public Vector3 currentTargetValue;
+            [HideInInspector] public float currentDuration = 0;
+
+            public Vector3Data(float x, float y, float z)
+            {
+                valueRandomX = new Vector2(-x, x);
+                valueRandomY = new Vector2(-y, y);
+                valueRandomZ = new Vector2(-z, z);
+            }
 
             public Vector3 GetRandomValue()
             {
