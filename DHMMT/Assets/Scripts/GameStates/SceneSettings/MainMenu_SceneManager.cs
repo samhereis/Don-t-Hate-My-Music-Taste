@@ -10,8 +10,19 @@ namespace GameStates.SceneManagers
     {
         public Action<AScene_Extended> onLoadGameplaySceneRequest;
 
+        public Camera cameraComponent
+        {
+            get
+            {
+                if(_cameraComponent == null) _cameraComponent = FindFirstObjectByType<Camera>();
+                return _cameraComponent;
+            }
+        }
+
         [field: SerializeField, Header("Menus")] public MainMenu mainMenuReference { get; private set; }
         [field: SerializeField] public SettingsMenu settingsMenuReference { get; private set; }
         [field: SerializeField] public SceneSelectionMenu selectMapMenuReference { get; private set; }
+
+        [SerializeField] private Camera _cameraComponent;
     }
 }

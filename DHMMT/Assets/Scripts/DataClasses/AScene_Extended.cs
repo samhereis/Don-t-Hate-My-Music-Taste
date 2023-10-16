@@ -13,6 +13,7 @@ namespace DataClasses
         [field: SerializeField, TextArea] public string description { get; private set; }
         [field: SerializeField, TextArea] public string rules { get; private set; }
         [field: SerializeField] public Sprite icon { get; private set; }
+        [field: SerializeField] public BackgroundSceneSettings backgroundSceneSettings { get; private set; } = new BackgroundSceneSettings();
 
         public Sprite GetIcon()
         {
@@ -32,6 +33,14 @@ namespace DataClasses
         public string GetRules()
         {
             return rules;
+        }
+
+        [Serializable]
+        public class BackgroundSceneSettings
+        {
+            [field: SerializeField] public GameObject visuals { get; private set; }
+            [field: SerializeField] public Material[] skyboxes { get; private set; }
+            [field: SerializeField] public float ambientIntencity { get; private set; } = 1f;
         }
     }
 }

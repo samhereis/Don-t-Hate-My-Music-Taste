@@ -78,12 +78,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4293d73b6cc1f4ea70911bef7b88ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDebugMode: 0
   _theLightPrefab: {fileID: -504128010224410714, guid: b43cb13e3ab988b4c9dfe8fed0ef2427,
     type: 3}
   _playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
     type: 3}
   _exitPrefab: {fileID: 7614115770728883014, guid: f48ec86ee81ae3f4ca40f3beb4823cbe,
     type: 3}
+  _directionalLight: {fileID: 0}
   _gameplayMenuPrefab: {fileID: 3852153733182596020, guid: 8d30b7869fab8bb448f0cea20bb2afc1,
     type: 3}
   _winMenuPrefab: {fileID: 672408869691582128, guid: 54ec6d32e0a530c4a84f2e22f60b679f,
@@ -92,12 +94,12 @@ MonoBehaviour:
     type: 3}
   _pauseMenuPrefab: {fileID: 2260329170480260227, guid: f2e4830622165bc48a5f796c45c9bf22,
     type: 3}
+  _directionalLightIntencity: 0.001
   _secondsUntillLoseWhileOutsideOfTheLight: 25
   _lightRange: 10
   _enemyNavmeshLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _isDebugMode: 0
   _exitLocations: []
   _theLightLocations: []
   _enemiesToSpawnOnStart:

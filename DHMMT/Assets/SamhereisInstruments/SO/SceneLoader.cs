@@ -91,9 +91,9 @@ namespace SamhereisTools
             }
         }
 
-        public void LoadSceneAdditively(int sceneId)
+        public async Awaitable LoadSceneAdditively(AScene scene)
         {
-            SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
+            await Awaitable.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode, LoadSceneMode.Additive));
         }
 
         public async Task LoadLastScene()
