@@ -5,6 +5,7 @@ using Identifiers;
 using IdentityCards;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UI.Windows;
 using UI.Windows.GameplayMenus;
 using Unity.AI.Navigation;
@@ -46,7 +47,6 @@ namespace GameStates.SceneManagers
         [SerializeField] private PlayerSpawnPoint_Identifier[] _playerSpawnPoints;
         [SerializeField] private EnemySpawnPoint_Identifier[] _enemySpawnPoint_Identifiers;
 
-        [ContextMenu(nameof(Initialize))]
         public override async void Initialize()
         {
             (this as IDIDependent).LoadDependencies();
@@ -58,6 +58,33 @@ namespace GameStates.SceneManagers
             if (_enemySpawnPoint_Identifiers.Length == 0) { _enemySpawnPoint_Identifiers = FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
 
             isInitialized = true;
+        }
+
+        [ContextMenu(nameof(SpawnTerrainReactables_Editor))]
+        public async void SpawnTerrainReactables_Editor()
+        {
+            ClearTerrainReactables();
+
+            for (int x = -_terrainReactableGridSize.x; x <= _terrainReactableGridSize.x; x++)
+            {
+                for (int z = -_terrainReactableGridSize.y; z <= _terrainReactableGridSize.y; z++)
+                {
+                    await Task.Yield();
+
+                    var reactableData = _reactorSpawnDatas.GetRandom();
+
+                    var reactableInstance = Instantiate(reactableData.reactable_Identifiers.GetRandom(), reactableData.parent);
+
+                    var reactablePositionX = _terrainReactableGridCenter.transform.position.x + (x * _tReactableSize.x);
+                    var reactablePositionY = _terrainReactableGridCenter.transform.position.y;
+                    var reactablePositionZ = _terrainReactableGridCenter.transform.position.z + (z * _tReactableSize.y);
+
+                    var reactablePosition = new Vector3(reactablePositionX, reactablePositionY, reactablePositionZ);
+
+                    reactableInstance.transform.localPosition = reactablePosition;
+                    reactableInstance.transform.localEulerAngles = Vector3.zero;
+                }
+            }
         }
 
         private async Awaitable SpawnTerrainReactables()
@@ -87,6 +114,15 @@ namespace GameStates.SceneManagers
         public override void Clear()
         {
             isInitialized = false;
+        }
+
+        [ContextMenu(nameof(ClearTerrainReactables))]
+        public void ClearTerrainReactables()
+        {
+            foreach (var terrainReactable in FindObjectsByType<TerrainReactable_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                DestroyImmediate(terrainReactable.gameObject);
+            }
         }
 
         [Serializable]

@@ -14,6 +14,8 @@ namespace GameStates.SceneManagers
 #else
         protected bool _isDebugMode => false;
 #endif
+
+        [ContextMenu(nameof(Initialize))]
         public virtual void Initialize()
         {
 

@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68b6714d886bd74e9e41d4ddfc11ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDebugMode: 0
   _playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
     type: 3}
   _modeTDGameplayMenuPrefab: {fileID: 7912298485958287785, guid: a260540d15fdf2f438e526428a22be97,
@@ -89,12 +90,11 @@ MonoBehaviour:
   _terrainReactableGridCenter: {fileID: 0}
   _navMeshSurface: {fileID: 0}
   _secondsToGiveOnEnemyDie: 25
-  _tReactableSize: {x: 20, y: 20}
+  _tReactableSize: {x: 10, y: 10}
   _terrainReactableGridSize: {x: 5, y: 5}
   _enemyNavmeshLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _isDebugMode: 0
   _reactorSpawnDatas:
   - parent: {fileID: 0}
     reactable_Identifiers:

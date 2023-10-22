@@ -43,20 +43,20 @@ Terrain:
   m_GameObject: {fileID: 1713437797395553706}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: d4c89efddd0a7fd4aa941027db71d5ba, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
+  m_TerrainData: {fileID: 15600000, guid: 9cd5b0f4b4942c341ad83d1934d49957, type: 2}
+  m_TreeDistance: 0
+  m_TreeBillboardDistance: 5
+  m_TreeCrossFadeLength: 0
+  m_TreeMaximumFullLODCount: 0
   m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
+  m_HeightmapPixelError: 1
+  m_SplatMapDistance: 0
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -92,7 +92,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: d4c89efddd0a7fd4aa941027db71d5ba, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 9cd5b0f4b4942c341ad83d1934d49957, type: 2}
   m_EnableTreeColliders: 1
 --- !u!114 &1476190867431331578
 MonoBehaviour:
