@@ -14,6 +14,16 @@ namespace Managers.UIManagers
 
         private async void Awake()
         {
+            var gameStatesManagers = FindObjectsByType<GameStatesManager>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            if (gameStatesManagers.Length > 1)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            transform.SetParent(null);
+
             DontDestroyOnLoad(gameObject);
 
             while (DependencyInjector.isGLoballyInjected == false)

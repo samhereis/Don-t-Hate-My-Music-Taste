@@ -557,8 +557,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5483799841557845792}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0008927482, y: -0.9269411, z: 0.0022257727, w: 0.37519938}
-  m_LocalPosition: {x: 386.94177, y: 1.4972267, z: 332.9823}
+  m_LocalRotation: {x: -0.00084969675, y: -0.30782235, z: 0.00029659976, w: -0.95144343}
+  m_LocalPosition: {x: 165.28606, y: 1.823857, z: 189.33911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -760,7 +760,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 4fe9d9b383a11d74691a9236265634dc, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 500
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
