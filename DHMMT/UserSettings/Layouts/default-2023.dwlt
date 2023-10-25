@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
-  controlID: 174
+  controlID: 24153
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 175
+  controlID: 24154
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 31
+  controlID: 24155
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 32
+  controlID: 24040
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -211,7 +211,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 397
+    width: 510
     height: 560
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
@@ -236,9 +236,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 397
+    x: 510
     y: 0
-    width: 1057
+    width: 944
     height: 560
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 138
+  controlID: 24156
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -404,9 +404,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 397
+    x: 510
     y: 73
-    width: 1055
+    width: 942
     height: 539
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -461,23 +461,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1055
+      width: 942
       height: 518
-    m_Scale: {x: 0.47962967, y: 0.47962964}
-    m_Translation: {x: 527.5, y: 259}
+    m_Scale: {x: 0.47962964, y: 0.47962964}
+    m_Translation: {x: 471, y: 259}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1099.8069
+      x: -982.0077
       y: -540
-      width: 2199.6138
+      width: 1964.0154
       height: 1080
     m_MinimalGUI: 1
   m_defaultScale: 0.47962964
-  m_LastWindowPixelSize: {x: 1055, y: 539}
+  m_LastWindowPixelSize: {x: 942, y: 539}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -507,7 +507,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 396
+    width: 509
     height: 539
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -926,9 +926,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: -372, y: -489}
+      snapOffset: {x: 133, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 3
+      snapCorner: 0
       id: Terrain Tools
       index: 0
       layout: 4
@@ -1012,9 +1012,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 12.969602, y: -381.6671, z: 637.6988}
+    m_Target: {x: 182.05975, y: 5.339032, z: 157.63138}
     speed: 2
-    m_Value: {x: -0.3687961, y: -4.7931557, z: -14.596212}
+    m_Value: {x: 182.05975, y: 5.339032, z: 157.63138}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1060,20 +1060,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.31518948, y: -0.19458935, z: 0.0661636, w: 0.9265186}
+    m_Target: {x: -0.24530302, y: 0.21649535, z: -0.056262303, w: -0.94332886}
     speed: 2
-    m_Value: {x: -0.01327652, y: 0.98446906, z: -0.15271527, w: -0.08557107}
+    m_Value: {x: -0.2512051, y: 0.21190505, z: -0.056428332, w: -0.9427662}
   m_Size:
-    m_Target: 101.57715
+    m_Target: 2.0208392
     speed: 2
-    m_Value: 10.06025
+    m_Value: 2.0208392
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 2
-    m_SpeedNormalized: 1
+    m_Speed: 0.5007509
+    m_SpeedNormalized: 0.25000045
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1167,9 +1167,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 229ef3ff98a1f3ffb6a1f3ffd0a1f3ffe0a1f3ffeaa1f3ff06def3ff4cf0f3fff402f4ff645af4ff0a6df4fffcf7ffff0cf8ffff50f8ffffe0faffffce9c000068f30000
+      m_SelectedIDs: 3acdccff
+      m_LastClickedID: -3355334
+      m_ExpandedIDs: 42cdccff24dbccff3edbccff4edbccff96dbccff0809cdff0e1bcdff403ccdffd801d3ff5a30d3ff6470d3ff0c26e3ff1079e4ff2079e4ff4679e4fffef2e6ff18f3e6ff28f3e6ff6cf3e6ff5c11e7ff2806e9ff3806e9ffb606e9ffdcade9ff92bbe9ffacbbe9ffbcbbe9fffcbbe9ffe405eafffe05eaff0e06eaff4e06eaff745cecffb05cecffec5cecfff85cecff065decff406becff5a6becff6a6becffaa6becffa65bedffe25bedff1e5cedff2a5cedff385cedff465cedffb86aedffe46aedff5465efff4273efff5c73efff6c73efffac73effff06cf2ff0c94f3ff04bef3ff1489f4ff641cfdff6a1cfdff202afdff382afdff222bfdff1ee2fdff180ffeff0051feffee51feff28afffff22faffff2cfaffff32faffff4afaffff5afaffffe0faffff286a0100d2740100a27c01000c810100488601004c870100c69b0100929d01006ca5010070a60100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1185,7 +1185,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 9}
+        m_ClientGUIView: {fileID: 12}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1241,7 +1241,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Gameplay/Reactables/TsukuyomiDream/Reactables
+    - Assets/Scenes/TsukuyomiDream
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1251,16 +1251,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Gameplay/Reactables/TsukuyomiDream/Reactables
+  - Assets/Scenes/TsukuyomiDream
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Git\Don-t-Hate-My-Music-Taste\DHMMT
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 226}
-    m_SelectedIDs: aef40000
-    m_LastClickedID: 62638
-    m_ExpandedIDs: 000000002e97000030970000329700003497000036970000389700003a9700003c9700003e97000040970000429700004497000046970000529c000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 7cfc0000
+    m_LastClickedID: 64636
+    m_ExpandedIDs: 0000000068b400006ab400006cb400006eb4000070b4000074b4000076b4000078b400007ab400007cb400007eb4000078b9000092b90000a0b90000b8ba00007cfc0000143b0100aa67010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1288,7 +1288,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002e97000030970000329700003497000036970000389700003a9700003c9700003e97000040970000429700004497000046970000
+    m_ExpandedIDs: 0000000068b400006ab400006cb400006eb4000070b4000074b4000076b4000078b400007ab400007cb400007eb4000092b90000a0b90000b8ba00007cfc0000143b0100aa67010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1316,7 +1316,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c623000000000000168a0000a8e6000058f80000bcf70000e2940000
+    m_ExpandedInstanceIDs: c6230000168a0000a8e6000058f80000bcf70000e2940000000000005ac70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2385,7 +2385,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -4942
+  m_LastSelectedObjectID: 80716
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52

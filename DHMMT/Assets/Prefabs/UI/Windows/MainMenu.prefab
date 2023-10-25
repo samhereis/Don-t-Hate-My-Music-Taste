@@ -138,11 +138,10 @@ MonoBehaviour:
     isOpen: 1
     canvasGroup: {fileID: 0}
     uIConfigs: {fileID: 0}
-    openOnExit: {fileID: 0}
     uIAnimationElements: []
   _buttons: []
-  _sceneSelectionMenu: {fileID: 0}
-  _settingsMenu: {fileID: 0}
+  <sceneSelectionMenu>k__BackingField: {fileID: 0}
+  <settingsMenu>k__BackingField: {fileID: 0}
   _sceneSelectionMenuButton: {fileID: 1993502815794465797}
   _settingsButton: {fileID: 2441220747854490271}
   _quitButton: {fileID: 1599126784465653815}
@@ -808,6 +807,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 36b5f0de79738a344bb31801a392a391,
         type: 3}
+    - target: {fileID: 4196722050511731644, guid: 06817a96f445b5f4e8f9f27d3518f61b,
+        type: 3}
+      propertyPath: _multiplier
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196722050511731644, guid: 06817a96f445b5f4e8f9f27d3518f61b,
+        type: 3}
+      propertyPath: _aFrequancyData
+      value: 
+      objectReference: {fileID: 11400000, guid: f088e47471e70184292155af20eeb020,
+        type: 2}
     - target: {fileID: 4864995010382812593, guid: 06817a96f445b5f4e8f9f27d3518f61b,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1128,6 +1138,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 76bac6eb6922e6b43942e370ea7218de,
         type: 3}
+    - target: {fileID: 4196722050511731644, guid: 06817a96f445b5f4e8f9f27d3518f61b,
+        type: 3}
+      propertyPath: _multiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196722050511731644, guid: 06817a96f445b5f4e8f9f27d3518f61b,
+        type: 3}
+      propertyPath: _aFrequancyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 108f1d784363a38459493f5f1c5a6bc7,
+        type: 2}
     - target: {fileID: 4864995010382812593, guid: 06817a96f445b5f4e8f9f27d3518f61b,
         type: 3}
       propertyPath: m_SizeDelta.x

@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7870765138657246922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4308032690172758265}
+  - component: {fileID: 1333271056699347080}
+  - component: {fileID: 3485026463617599842}
+  m_Layer: 0
+  m_Name: CameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4308032690172758265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870765138657246922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1333271056699347080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870765138657246922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e788316a75b61f419556453b8e3ae7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightPosition: {fileID: 0}
+--- !u!114 &3485026463617599842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870765138657246922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d9152e409f8084a8ad187936b03fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationData:
+    duration: {x: 5, y: 10}
+    valueRandomX: {x: -5, y: 5}
+    valueRandomY: {x: -5, y: 5}
+    valueRandomZ: {x: -5, y: 5}
+    originalValue: {x: 348.58646, y: 327.37753, z: 0.00079609227}
+    currentTargetValue: {x: 2.9998994, y: 2.5223136, z: -1.2671261}
+    currentDuration: 7.4860106
+  _positionData:
+    duration: {x: 5, y: 10}
+    valueRandomX: {x: -0.25, y: 0.25}
+    valueRandomY: {x: -0.25, y: 0.25}
+    valueRandomZ: {x: -0.25, y: 0.25}
+    originalValue: {x: 374.53702, y: 11.118155, z: 394.71063}
+    currentTargetValue: {x: -0.1560474, y: 0.07225632, z: 0.04820028}
+    currentDuration: 8.696129
+  _scaleData:
+    duration: {x: 0.25, y: 0.75}
+    valueRandomX: {x: -0.5, y: 0.5}
+    valueRandomY: {x: -0.25, y: 0.25}
+    valueRandomZ: {x: -0.25, y: 0.25}
+    originalValue: {x: 1, y: 1, z: 1}
+    currentTargetValue: {x: -0.16902167, y: 0.16657376, z: 0.1513598}
+    currentDuration: 0.6427891
+  _rotationEnable: 1
+  _positionEnable: 1
+  _scaleEnable: 0
+  _rotationReached: 0
+  _positionReached: 0
+  _scaleReached: 1
