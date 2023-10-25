@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3327686715959248082}
   - component: {fileID: 3827222034640008142}
   - component: {fileID: 7438373049582084033}
+  - component: {fileID: 5045916303392414232}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5045916303392414232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548000701931260919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a24918edbefad4e87d5c8586c81cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBecomeVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onBecomeInvisible:
+    m_PersistentCalls:
+      m_Calls: []
+  _activateOnVisible:
+  - {fileID: 6800231404879323224}
+  _deactivateOnVisible: []
 --- !u!1 &4910839503119999646
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5723263888650942500}
   - component: {fileID: 1198778960372822037}
+  - component: {fileID: 6800231404879323224}
   m_Layer: 0
   m_Name: plant_2
   m_TagString: Untagged
@@ -135,5 +158,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.025854863, y: 0.05576677, z: 0.02556475}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &6800231404879323224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910839503119999646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aFrequancyData: {fileID: 11400000, guid: 108f1d784363a38459493f5f1c5a6bc7, type: 2}
+  _smoothness: 0.25
+  _minValue: 1
+  _multiplier: 1
+  _useDefaultMultiplier: 1
+  _axis: 1

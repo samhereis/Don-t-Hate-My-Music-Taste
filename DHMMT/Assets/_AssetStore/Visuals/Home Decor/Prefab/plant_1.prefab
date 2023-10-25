@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5895005834042437183}
   - component: {fileID: 2327384190177082483}
   - component: {fileID: 8105029932451103557}
+  - component: {fileID: 5514018164947910695}
   m_Layer: 0
   m_Name: pCylinder15
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5514018164947910695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324232038038017562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a24918edbefad4e87d5c8586c81cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBecomeVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onBecomeInvisible:
+    m_PersistentCalls:
+      m_Calls: []
+  _activateOnVisible:
+  - {fileID: 5544630416029512514}
+  _deactivateOnVisible: []
 --- !u!1 &7647527825355915363
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9218221822711795723}
   - component: {fileID: 6034918400631058024}
+  - component: {fileID: 5544630416029512514}
   m_Layer: 0
   m_Name: plant_1
   m_TagString: Untagged
@@ -221,3 +244,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &5544630416029512514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405514901628242609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
+  _smoothness: 0.25
+  _minValue: 1
+  _multiplier: 1
+  _useDefaultMultiplier: 1
+  _axis: 1

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4503615687913712430}
   - component: {fileID: -811925315507442153}
+  - component: {fileID: 1340758834121807823}
   m_Layer: 0
   m_Name: plant_3
   m_TagString: Untagged
@@ -54,6 +55,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1340758834121807823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876436236252574100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aFrequancyData: {fileID: 11400000, guid: f088e47471e70184292155af20eeb020, type: 2}
+  _smoothness: 0.25
+  _minValue: 1
+  _multiplier: 1
+  _useDefaultMultiplier: 1
+  _axis: 1
 --- !u!1 &8946195425574731695
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,6 +84,7 @@ GameObject:
   - component: {fileID: 1892129397487015390}
   - component: {fileID: 4071934374437542981}
   - component: {fileID: 6505978204314696006}
+  - component: {fileID: 8120510890761877570}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -137,3 +157,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8120510890761877570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946195425574731695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a24918edbefad4e87d5c8586c81cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBecomeVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onBecomeInvisible:
+    m_PersistentCalls:
+      m_Calls: []
+  _activateOnVisible:
+  - {fileID: 1340758834121807823}
+  _deactivateOnVisible: []
