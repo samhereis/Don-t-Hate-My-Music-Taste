@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 375.83997, y: 0}
-  m_SizeDelta: {x: 918.72, y: 199.79999}
+  m_AnchoredPosition: {x: -56.160034, y: 0}
+  m_SizeDelta: {x: -137.28006, y: -16.199997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2501470120216379036
 CanvasRenderer:
@@ -136,8 +136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -417.59998, y: 0}
-  m_SizeDelta: {x: 835.19995, y: 0}
+  m_AnchoredPosition: {x: 62.400024, y: 0}
+  m_SizeDelta: {x: -124.80005, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6395705253344947656
 CanvasRenderer:
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
+  m_fontSize: 40
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 4999989824663626045}
   - component: {fileID: 432273934958897913}
   - component: {fileID: 2937356418709642609}
+  - component: {fileID: 239568754336248404}
   m_Layer: 0
   m_Name: Holder
   m_TagString: Untagged
@@ -335,6 +336,24 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &239568754336248404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618063405996043394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
+  _smoothness: 0.25
+  _minValue: 1
+  _multiplier: 1
+  _useDefaultMultiplier: 0
+  _axis: 1
 --- !u!1 &7775948535609565175
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +368,6 @@ GameObject:
   - component: {fileID: 8747317671123749399}
   - component: {fileID: 7100293784827456603}
   - component: {fileID: 6207549023925103720}
-  - component: {fileID: 7379409326399020789}
   - component: {fileID: 2787882013022800821}
   m_Layer: 0
   m_Name: BackButton
@@ -456,7 +474,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5794840030824190910}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -513,24 +531,6 @@ MonoBehaviour:
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
   _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
---- !u!114 &7379409326399020789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775948535609565175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f9bd13cd0d767468b273301e7d8f2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aFrequancyData: {fileID: 11400000, guid: cf9c7a4c1c6b5b442953d85d67f5ed71, type: 2}
-  _smoothness: 0.25
-  _minValue: 1
-  _multiplier: 1
-  _useDefaultMultiplier: 0
-  _axis: 0
 --- !u!114 &2787882013022800821
 MonoBehaviour:
   m_ObjectHideFlags: 0

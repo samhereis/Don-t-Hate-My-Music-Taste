@@ -52,16 +52,6 @@ namespace GameStates.SceneManagers
             {
                 gameplayMenu.window.onPauseRequested += PauseGame;
             }
-
-            if (pauseMenu != null)
-            {
-                pauseMenu.onGoToMainMenuRequest += GoToMainMenu;
-            }
-
-            if (loseMenu?.window != null)
-            {
-                loseMenu.window.onGoToMainMenuRequest += GoToMainMenu;
-            }
         }
 
         public override void UnsubscribeFromEvents()
@@ -69,16 +59,6 @@ namespace GameStates.SceneManagers
             if (gameplayMenu?.window != null)
             {
                 gameplayMenu.window.onPauseRequested -= PauseGame;
-            }
-
-            if (pauseMenu != null)
-            {
-                pauseMenu.onGoToMainMenuRequest -= GoToMainMenu;
-            }
-
-            if (loseMenu?.window != null)
-            {
-                loseMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
             }
         }
 

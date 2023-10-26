@@ -98,7 +98,9 @@ namespace GameStates
 
             _efh_EnemiesManager.onEnemyKilled += OnEnemyKilled;
 
-            _efh_UIManager.onGoToMainMenuRequest += GoToMainMenu;
+            _efh_UIManager.pauseMenu.onGoToMainMenuRequest += GoToMainMenu;
+            _efh_UIManager.loseMenu.window.onGoToMainMenuRequest += GoToMainMenu;
+
             _efh_UIManager.onGamePauseStatusChanged += OnGamePauseStatusChanged;
         }
 
@@ -112,7 +114,9 @@ namespace GameStates
 
             _efh_EnemiesManager.onEnemyKilled -= OnEnemyKilled;
 
-            _efh_UIManager.onGoToMainMenuRequest -= GoToMainMenu;
+            _efh_UIManager.pauseMenu.onGoToMainMenuRequest -= GoToMainMenu;
+            _efh_UIManager.loseMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
+
             _efh_UIManager.onGamePauseStatusChanged -= OnGamePauseStatusChanged;
         }
 

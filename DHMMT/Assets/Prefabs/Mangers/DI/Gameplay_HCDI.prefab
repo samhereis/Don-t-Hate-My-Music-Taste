@@ -53,6 +53,8 @@ MonoBehaviour:
   _scriptableObjects:
   - id: fieldOfView_Settings
     instance: {fileID: 11400000, guid: 1c6b3ff030f5be5448ffe201f5c6a26b, type: 2}
+  - id: LookSensitivity_Settings
+    instance: {fileID: 11400000, guid: 3910a20c11a4cae42b3cf11c7f677e83, type: 2}
   _eventsWithNoParameters:
   - id: OnPlayerChangedWeapon
     instance:

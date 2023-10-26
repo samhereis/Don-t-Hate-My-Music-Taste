@@ -12,7 +12,6 @@ namespace Settings
 
 #if UNITY_EDITOR
 
-        protected string _keyStartsWith = "";
         protected string _keyEndsWith = "_key";
 
 #endif

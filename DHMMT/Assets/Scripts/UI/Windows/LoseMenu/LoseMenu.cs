@@ -1,8 +1,4 @@
-using ConstStrings;
-using DI;
 using Managers;
-using SamhereisTools;
-using SO.Lists;
 using System;
 using UI.Canvases;
 using UnityEngine;
@@ -13,14 +9,11 @@ namespace UI.Windows
     public class LoseMenu : CanvasWindowBase
     {
         public Action onGoToMainMenuRequest;
+        public Action onReplayRequest;
 
         [Header("UI Elements")]
         [SerializeField] private Button _mainMenuButton;
         [SerializeField] private Button _replayButton;
-
-        [Header("DI")]
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
         public override void Enable(float? duration = null)
         {
@@ -72,9 +65,9 @@ namespace UI.Windows
             onGoToMainMenuRequest?.Invoke();
         }
 
-        public async void Replay()
+        public void Replay()
         {
-            await _sceneLoader.LoadLastScene();
+            onReplayRequest?.Invoke();
         }
     }
 }

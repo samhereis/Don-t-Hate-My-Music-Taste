@@ -18,7 +18,7 @@ namespace Identifiers
         [Header("DI")]
         [DI(Event_DIStrings.isPlayerAiming)][SerializeField] private ValueEvent<bool> _isPlayerAiming;
         [DI(Event_DIStrings.playerWeaponData)][SerializeField] private ValueEvent<PlayerWeaponData> _playerWeaponData;
-        [DI(Event_DIStrings.fieldOfView_Settings)][SerializeField] private FloatSavable_SO _fieldOfView_Settings;
+        [DI(DIStrings.fieldOfView_Settings)][SerializeField] private FloatSavable_SO _fieldOfView_Settings;
 
         [field: SerializeField] public IdentifierBase damagerIdentifier { get; private set; }
 

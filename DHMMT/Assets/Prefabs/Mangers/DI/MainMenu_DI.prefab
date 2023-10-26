@@ -53,7 +53,11 @@ MonoBehaviour:
   - id: PlayingMusicData
     instance: {fileID: 4036292846839890949}
   _configs: []
-  _scriptableObjects: []
+  _scriptableObjects:
+  - id: FieldOfView_Settings
+    instance: {fileID: 11400000, guid: 1c6b3ff030f5be5448ffe201f5c6a26b, type: 2}
+  - id: MouseSensitivity_Settings
+    instance: {fileID: 11400000, guid: 3910a20c11a4cae42b3cf11c7f677e83, type: 2}
   _eventsWithNoParameters: []
   _isGlobal: 0
   _hardCodeDependencyInjectors: []
@@ -81,12 +85,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd42242b8b8801c4696f3fdc1f49fa2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDebugMode: 0
   <mainMenuReference>k__BackingField: {fileID: 5385972763043107355, guid: 070cf11b906197943931d9f02b1c616e,
     type: 3}
   <settingsMenuReference>k__BackingField: {fileID: 9062426767583574906, guid: 8a95cb0f40c4c394891307f4e351ea7d,
     type: 3}
   <selectMapMenuReference>k__BackingField: {fileID: 2884567239992480939, guid: 5c510f6f87df80a4e8d70831bfeb60fc,
     type: 3}
+  _cameraComponent: {fileID: 0}
 --- !u!1001 &4868988339360379255
 PrefabInstance:
   m_ObjectHideFlags: 0

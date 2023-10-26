@@ -55,16 +55,6 @@ namespace GameStates.SceneManagers
 
                 gameplayMenu.onTimerOver += OnCountdownIsOver;
             }
-
-            if (pauseMenu != null)
-            {
-                pauseMenu.onGoToMainMenuRequest += GoToMainMenu;
-            }
-
-            if (loseMenu?.window != null)
-            {
-                loseMenu.window.onGoToMainMenuRequest += GoToMainMenu;
-            }
         }
 
         public override void UnsubscribeFromEvents()
@@ -73,16 +63,6 @@ namespace GameStates.SceneManagers
             {
                 gameplayMenu.window.onPauseRequested -= PauseGame;
                 gameplayMenu.onTimerOver -= OnCountdownIsOver;
-            }
-
-            if (pauseMenu != null)
-            {
-                pauseMenu.onGoToMainMenuRequest -= GoToMainMenu;
-            }
-
-            if (loseMenu?.window != null)
-            {
-                loseMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
             }
         }
 
@@ -103,11 +83,6 @@ namespace GameStates.SceneManagers
             gameplayMenu?.window?.Enable();
 
             _playingMusicData.PauseMusic(false);
-        }
-
-        protected override void GoToMainMenu()
-        {
-            onGoToMainMenuRequest?.Invoke();
         }
 
         private void OnCountdownIsOver()

@@ -1,4 +1,5 @@
-using System;
+using Helpers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UI.Canvases;
@@ -6,19 +7,23 @@ using UI.Elements;
 using UI.Elements.SettingsTab;
 using UI.Interaction;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Windows
 {
     public class SettingsMenu : CanvasWindowBase
     {
-        [field: SerializeField] public CanvasWindowBase openOnBack { get; set; }
+        public CanvasWindowBase openOnBack { get; set; }
 
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup _activeTabIndicator;
         [SerializeField] private Transform _activeTabIndicatorParent;
+        [SerializeField] private CanvasGroup _onChangedButtons;
 
         [Header("Buttons")]
         [SerializeField] private BackButton _backButton;
+        [SerializeField] private Button _restoreButton;
+        [SerializeField] private Button _applyButton;
 
         [Header("Tabs")]
         [SerializeField] private SettingsTabBase _gameplayTab;
@@ -31,10 +36,14 @@ namespace UI.Windows
         [SerializeField] private SettingsTabButton _audioTabButton;
         [SerializeField] private SettingsTabButton _graphicsTabButton;
 
+        private SettingsTabBase _currentSettingsTab;
+
         private void OnValidate()
         {
             _activeTabIndicatorParent = _activeTabIndicator.transform.parent;
         }
+
+        #region 
 
         public override void Enable(float? duration = null)
         {
@@ -49,6 +58,8 @@ namespace UI.Windows
             OnGameplayTabButtonClicked();
 
             SubscribeToEvents();
+
+            StartCoroutine(CheckOnChanged());
         }
 
         public override void Disable(float? duration = null)
@@ -57,6 +68,8 @@ namespace UI.Windows
 
             CloseAllSettingTabs();
             base.Disable(duration);
+
+            StopCoroutine(CheckOnChanged());
         }
 
         protected override void SubscribeToEvents()
@@ -69,6 +82,8 @@ namespace UI.Windows
 
             _backButton?.SubscribeToEvents();
             _backButton?.onBack.AddListener(Exit);
+            _restoreButton?.onClick.AddListener(RestoreCurrentSettingsTab);
+            _applyButton?.onClick.AddListener(ApplyCurrentSettingsTab);
         }
 
         protected override void UnsubscribeFromEvents()
@@ -81,12 +96,18 @@ namespace UI.Windows
 
             _backButton?.UnsubscribeFromEvents();
             _backButton?.onBack.RemoveListener(Exit);
+            _restoreButton?.onClick.RemoveListener(RestoreCurrentSettingsTab);
+            _applyButton?.onClick.RemoveListener(ApplyCurrentSettingsTab);
         }
 
         private void Exit()
         {
             openOnBack?.Enable();
         }
+
+        #endregion
+
+        #region TabOpennings
 
         public async void OnGameplayTabButtonClicked()
         {
@@ -108,8 +129,12 @@ namespace UI.Windows
 
         private async Task OpenSettingsTabAsync(SettingsTabBase settingsTab)
         {
-            CloseAllSettingTabs(settingsTab);
-            await settingsTab.OpenAsync();
+            RestoreCurrentSettingsTab();
+
+            _currentSettingsTab = settingsTab;
+
+            CloseAllSettingTabs(_currentSettingsTab);
+            await _currentSettingsTab.OpenAsync();
         }
 
         private void CloseAllSettingTabs(SettingsTabBase except = null)
@@ -127,5 +152,40 @@ namespace UI.Windows
                 await settingsTab.CloseAsync();
             }
         }
+
+        #endregion
+
+        #region OnChanged
+
+        private IEnumerator CheckOnChanged()
+        {
+            float duration = 0.25f;
+
+            while (gameObject.activeSelf)
+            {
+                if (_currentSettingsTab.hasChanged)
+                {
+                    _onChangedButtons.FadeUp(duration);
+                }
+                else
+                {
+                    _onChangedButtons.FadeDown(duration);
+                }
+
+                yield return new WaitForSecondsRealtime(duration);
+            }
+        }
+
+        private void RestoreCurrentSettingsTab()
+        {
+            _currentSettingsTab?.Restore();
+        }
+
+        private void ApplyCurrentSettingsTab()
+        {
+            _currentSettingsTab?.Apply();
+        }
+
+        #endregion
     }
 }

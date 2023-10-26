@@ -28,11 +28,5 @@ namespace ConstStrings
         public const string playerWeaponData = "PlayerWeaponData";
 
         #endregion
-
-        #region Settings
-
-        public const string fieldOfView_Settings = "fieldOfView_Settings";
-
-        #endregion
     }
 }

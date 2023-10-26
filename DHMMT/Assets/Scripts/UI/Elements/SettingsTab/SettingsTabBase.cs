@@ -13,7 +13,9 @@ namespace UI.Elements.SettingsTab
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class SettingsTabBase : MonoBehaviour, IDIDependent, IInitializable
     {
-        [SerializeField] private BaseSettings _baseSettings = new BaseSettings();
+        public virtual bool hasChanged => _baseSettings.hasChanged;
+
+        [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();
 
         protected float _fadeAnimationDuration => _baseSettings.uiConfigs != null ? _baseSettings.uiConfigs.uiFadeAnimationDuration : UIConfigs.defaultUIFadeAnimationDuration;
         protected Ease _fadeEase => _baseSettings.uiConfigs != null ? _baseSettings.uiConfigs.uiFadeEase : UIConfigs.defaultUIFadeEase;
@@ -65,6 +67,7 @@ namespace UI.Elements.SettingsTab
         }
 
         public abstract Task Apply();
+        public abstract Task Restore();
 
         [Serializable]
         protected class BaseSettings : IDIDependent
@@ -77,6 +80,7 @@ namespace UI.Elements.SettingsTab
 
             [Header("Debug")]
             public bool isOpen = false;
+            public bool hasChanged = false;
         }
     }
 }

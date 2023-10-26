@@ -72,6 +72,8 @@ namespace GameStates
         public void Exit()
         {
             UnsubscribeFromEvents();
+            _tD_EnemiesManager.Clear();
+            _tD_UIManager.Clear();
         }
 
         public void SubscribeToEvents()
@@ -84,7 +86,8 @@ namespace GameStates
 
             _player.TryGet<PlayerHealth>().onDie += SpawnPlayer;
 
-            _tD_UIManager.onGoToMainMenuRequest += GoToMainMenu;
+            _tD_UIManager.pauseMenu.onGoToMainMenuRequest += GoToMainMenu;
+            _tD_UIManager.loseMenu.window.onGoToMainMenuRequest += GoToMainMenu;
         }
 
         public void UnsubscribeFromEvents()
@@ -97,7 +100,8 @@ namespace GameStates
 
             _player.TryGet<PlayerHealth>().onDie -= SpawnPlayer;
 
-            _tD_UIManager.onGoToMainMenuRequest -= GoToMainMenu;
+            _tD_UIManager.pauseMenu.onGoToMainMenuRequest -= GoToMainMenu;
+            _tD_UIManager.loseMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
         }
 
         private void OnEnemyKilled(IDamagable enemy)
@@ -115,8 +119,6 @@ namespace GameStates
 
         private void Lose()
         {
-            Clear();
-
             var currentScene = _sceneLoader.lastLoadedScene;
             var modeTDSave = _gameSaveManager.modeTDSaves;
             var modeTDSaveUnit = modeTDSave.tD_Saves.Find(x => x.sceneName == currentScene.sceneCode);
@@ -135,7 +137,8 @@ namespace GameStates
             }
 
             _gameSaveManager.Save(_gameSaveManager.modeTDSaves);
-            _tD_UIManager.loseMenu?.window?.Enable();
+            _tD_UIManager.loseMenu.window?.Enable();
+            _tD_UIManager.loseMenu.window.onReplayRequest += Replay;
         }
 
         private void GoToMainMenu()
@@ -143,11 +146,10 @@ namespace GameStates
             _gameStatesManager?.ChangeState<MainMenuState>(true);
         }
 
-        private void Clear()
+        private void Replay()
         {
-            UnsubscribeFromEvents();
-            _tD_EnemiesManager.Clear();
-            _tD_UIManager.Clear();
+            _tD_UIManager.loseMenu.window.onReplayRequest -= Replay;
+            _gameStatesManager.ChangeState(this, isReenter: true);
         }
     }
 }

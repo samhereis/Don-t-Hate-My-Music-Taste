@@ -49,9 +49,12 @@ namespace Managers.UIManagers
             ChangeState(GetState<TGameState>(), deletePrevious);
         }
 
-        public void ChangeState(IGameState gameState, bool deletePrevious = true)
+        public void ChangeState(IGameState gameState, bool deletePrevious = true, bool isReenter = false)
         {
-            if (_currentGameState == gameState) { return; }
+            if (isReenter == false)
+            {
+                if (_currentGameState == gameState) { return; }
+            }
 
             _currentGameState?.Exit();
             if (deletePrevious) { _gameStates.Remove(gameState.GetType()); }

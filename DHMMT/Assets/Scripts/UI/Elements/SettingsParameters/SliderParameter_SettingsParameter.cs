@@ -12,6 +12,9 @@ namespace UI.Elements.SettingsParameters
 {
     public class SliderParameter_SettingsParameter : MonoBehaviour, IInitializable<float>, IDIDependent
     {
+        public float value => _value;
+        public bool hasChanged => _value != _initialValue;
+
         [Header("Components")]
         [SerializeField] private Slider _slider;
         [SerializeField] private TextMeshProUGUI _valueText;
@@ -19,18 +22,22 @@ namespace UI.Elements.SettingsParameters
         [Header("DI")]
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uiConfigs;
 
-        [field: SerializeField, Header("Debug")] public float value { get; private set; } = 1;
+        [Header("Debug")]
+        [SerializeField] private float _value = 0;
+        [SerializeField] private float _initialValue = 0;
 
         [Header("In Editor")]
         [SerializeField] private string _label;
         [SerializeField] private TextMeshProUGUI _labelText;
 
-        public void Initialize(float type)
+        public void Initialize(float value)
         {
             (this as IDIDependent).LoadDependencies();
 
-            _slider.value = type;
-            OnSliderValueChanged(type);
+            _initialValue = RoundValue(value);
+
+            _slider.value = _initialValue;
+            OnSliderValueChanged(_initialValue);
         }
 
         private void OnEnable()
@@ -45,10 +52,14 @@ namespace UI.Elements.SettingsParameters
 
         private void OnSliderValueChanged(float value)
         {
-            value = (float)Math.Round(value, 3);
+            _value = RoundValue(value);
+            _valueText.text = _value.ToString();
+        }
 
-            this.value = value;
-            _valueText.text = value.ToString();
+        public void SetSliderValues(float minValue, float maxValue)
+        {
+            _slider.minValue = minValue;
+            _slider.maxValue = maxValue;
         }
 
         [ContextMenu(nameof(UpdateLabel))]
@@ -56,6 +67,11 @@ namespace UI.Elements.SettingsParameters
         {
             _labelText.text = _label;
             _labelText.TrySetDirty();
+        }
+
+        private float RoundValue(float value)
+        {
+            return (float)Math.Round(value, 0);
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Settings
 
 #if UNITY_EDITOR
 
-            if (name.StartsWith("_Key") == false)
+            if (name.EndsWith(_keyEndsWith) == false)
             {
-                _key = _keyStartsWith + name + _keyEndsWith;
+                _key = name + _keyEndsWith;
                 this.TrySetDirty();
             }
 

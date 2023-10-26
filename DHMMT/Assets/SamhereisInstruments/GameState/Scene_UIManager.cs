@@ -7,7 +7,6 @@ namespace Managers.SceneManagers
 {
     public abstract class Scene_UIManager<TSceneManager> : IInitializable, IClearable, ISubscribesToEvents where TSceneManager : Scene_SceneManagerBase
     {
-        public Action onGoToMainMenuRequest;
         public Action<bool> onGamePauseStatusChanged;
 
         protected TSceneManager _sceneManager;
@@ -45,11 +44,6 @@ namespace Managers.SceneManagers
         protected virtual void ResumeGame()
         {
             onGamePauseStatusChanged?.Invoke(false);
-        }
-
-        protected virtual void GoToMainMenu()
-        {
-            onGoToMainMenuRequest?.Invoke();
         }
     }
 }

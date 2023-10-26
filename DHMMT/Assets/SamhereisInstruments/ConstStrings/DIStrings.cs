@@ -22,7 +22,14 @@ namespace ConstStrings
         public const string sceneManager_EFH = "SceneManager_EFH";
         public const string sceneManager_TD = "SceneManager_TD";
 
-        public const string EnemyManager_EFH = "EnemyManager_EFH";
-        public const string EnemyManager_TD = "EnemyManager_TD";
+        public const string enemyManager_EFH = "EnemyManager_EFH";
+        public const string enemyManager_TD = "EnemyManager_TD";
+
+        #region Settings
+
+        public const string fieldOfView_Settings = "FieldOfView_Settings";
+        public const string mouseSensitivity_Settings = "MouseSensitivity_Settings";
+
+        #endregion
     }
 }
