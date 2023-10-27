@@ -30,6 +30,10 @@ namespace ConstStrings
         public const string fieldOfView_Settings = "FieldOfView_Settings";
         public const string mouseSensitivity_Settings = "MouseSensitivity_Settings";
 
+        public const string masterVolume_Settings = "MasterVolume";
+        public const string musicVolume_Settings = "MusicVolume";
+        public const string effectsVolume_Settings = "EffectsVolume";
+
         #endregion
     }
 }

@@ -66,8 +66,8 @@ namespace UI.Elements.SettingsTab
             _baseSettings.isOpen = false;
         }
 
-        public abstract Task Apply();
-        public abstract Task Restore();
+        public abstract Task ApplyAsync();
+        public abstract Task RestoreAsync();
 
         [Serializable]
         protected class BaseSettings : IDIDependent

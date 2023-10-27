@@ -1,25 +1,25 @@
+using SO.DataHolders;
+using UnityEngine;
+
 namespace DI
 {
     public class Global_HCDI : HardCodeDependencyInjectorBase
     {
-        public override void InjectEventsWithParameters()
-        {
+        [SerializeField] private AudioMixerDataHolder _audioMixer;
 
+        public override void Inject()
+        {
+            base.Inject();
+
+            DIBox.Remove<AudioMixerDataHolder>();
+            DIBox.Add<AudioMixerDataHolder>(_audioMixer);
         }
 
-        public override void InjecValueEvents()
+        public override void Clear()
         {
+            base.Clear();
 
-        }
-
-        public override void ClearEventsWithParameters()
-        {
-
-        }
-
-        public override void ClearValueEvents()
-        {
-
+            DIBox.Remove<AudioMixerDataHolder>();
         }
     }
 }

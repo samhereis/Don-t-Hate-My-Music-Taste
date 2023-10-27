@@ -1,4 +1,5 @@
-﻿using Configs;
+﻿using AYellowpaper.SerializedCollections;
+using Configs;
 using Events;
 using Interfaces;
 using System;
@@ -23,7 +24,7 @@ namespace DI
 
         [Header("Debug")]
         [SerializeField] private HardCodeDependencyInjectorBase[] _hardCodeDependencyInjectors;
-        //[SerializeField] private SerializedDictionary<Type, SerializedDictionary<string, object>> _currentDIBox;
+        [SerializeField] private SerializedDictionary<string, SerializedDictionary<string, string>> _currentDIBox;
 
         private void Awake()
         {
@@ -45,22 +46,6 @@ namespace DI
                 transform.parent = null;
                 DontDestroyOnLoad(gameObject);
             }
-
-            /*#if UNITY_EDITOR
-
-                        WaitForSecondsRealtime wait = new WaitForSecondsRealtime(1f);
-
-                        StartCoroutine(UpdateDIBox());
-
-                        IEnumerator UpdateDIBox()
-                        {
-                            yield return wait;
-
-                            _currentDIBox.Clear();
-                            _currentDIBox = DIBox.GetCopy();
-                        }
-
-            #endif*/
         }
 
         private void OnDestroy()
@@ -78,6 +63,11 @@ namespace DI
             {
                 Clear();
             }
+        }
+
+        private void Update()
+        {
+            _currentDIBox = DIBox.GetCopy();
         }
 
         private void Inject()

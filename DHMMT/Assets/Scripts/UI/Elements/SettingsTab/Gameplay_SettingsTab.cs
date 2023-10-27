@@ -23,7 +23,7 @@ namespace UI.Elements.SettingsTab
         {
             base.Initialize();
 
-            await Restore();
+            await RestoreAsync();
         }
 
         public override async Task OpenAsync()
@@ -40,17 +40,17 @@ namespace UI.Elements.SettingsTab
             StopCoroutine(UpdateAndHandleHasChangedStatus());
         }
 
-        public override async Task Apply()
+        public override async Task ApplyAsync()
         {
             await AsyncHelper.Delay();
 
             _fieldOfView_Settings.SetData(_fieldOfView_Slider.value);
             _mouseSensitivity_Settings.SetData(_mouseSensitivity_Slider.value);
 
-            await Restore();
+            await RestoreAsync();
         }
 
-        public override async Task Restore()
+        public override async Task RestoreAsync()
         {
             await AsyncHelper.Delay();
 

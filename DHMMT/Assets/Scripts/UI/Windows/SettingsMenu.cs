@@ -29,12 +29,13 @@ namespace UI.Windows
         [SerializeField] private SettingsTabBase _gameplayTab;
         [SerializeField] private SettingsTabBase _audioTab;
         [SerializeField] private SettingsTabBase _graphicsTab;
-        [SerializeField] private List<SettingsTabBase> _allSettingsTabs;
 
         [Header("Tab buttons")]
         [SerializeField] private SettingsTabButton _gameplayTabButton;
         [SerializeField] private SettingsTabButton _audioTabButton;
         [SerializeField] private SettingsTabButton _graphicsTabButton;
+
+        private List<SettingsTabBase> _allSettingsTabs = new List<SettingsTabBase>();
 
         private SettingsTabBase _currentSettingsTab;
 
@@ -45,16 +46,27 @@ namespace UI.Windows
 
         #region 
 
-        public override void Enable(float? duration = null)
+        public override void Initialize()
         {
+            base.Initialize();
+
             _allSettingsTabs = new List<SettingsTabBase> { _gameplayTab, _audioTab, _graphicsTab };
 
             foreach (var settingsTab in _allSettingsTabs)
             {
                 settingsTab.Initialize();
             }
+        }
 
+        public override void Enable(float? duration = null)
+        {
             base.Enable(duration);
+
+            foreach (var settingsTab in _allSettingsTabs)
+            {
+                settingsTab.Initialize();
+            }
+
             OnGameplayTabButtonClicked();
 
             SubscribeToEvents();
@@ -178,12 +190,12 @@ namespace UI.Windows
 
         private void RestoreCurrentSettingsTab()
         {
-            _currentSettingsTab?.Restore();
+            _currentSettingsTab?.RestoreAsync();
         }
 
         private void ApplyCurrentSettingsTab()
         {
-            _currentSettingsTab?.Apply();
+            _currentSettingsTab?.ApplyAsync();
         }
 
         #endregion

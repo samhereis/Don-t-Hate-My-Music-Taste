@@ -12,6 +12,8 @@ namespace UI.Elements.SettingsParameters
 {
     public class SliderParameter_SettingsParameter : MonoBehaviour, IInitializable<float>, IDIDependent
     {
+        public Action<SliderParameter_SettingsParameter> onValueChanged;
+
         public float value => _value;
         public bool hasChanged => _value != _initialValue;
 
@@ -54,6 +56,8 @@ namespace UI.Elements.SettingsParameters
         {
             _value = RoundValue(value);
             _valueText.text = _value.ToString();
+
+            onValueChanged?.Invoke(this);
         }
 
         public void SetSliderValues(float minValue, float maxValue)

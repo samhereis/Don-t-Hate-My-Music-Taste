@@ -12,20 +12,20 @@ namespace DI
     {
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new Dictionary<Type, Dictionary<string, object>>();
 
-        public static SerializedDictionary<Type, SerializedDictionary<string, object>> GetCopy()
+        public static SerializedDictionary<string, SerializedDictionary<string, string>> GetCopy()
         {
-            var copy = new SerializedDictionary<Type, SerializedDictionary<string, object>>();
+            var copy = new SerializedDictionary<string, SerializedDictionary<string, string>>();
 
             foreach (var typeEntry in _dictionarySingle)
             {
-                var innerDictionaryCopy = new SerializedDictionary<string, object>();
+                var innerDictionaryCopy = new SerializedDictionary<string, string>();
 
                 foreach (var item in typeEntry.Value)
                 {
-                    innerDictionaryCopy.Add(item.Key, item.Value);
+                    innerDictionaryCopy.Add(item.Key, item.Value.ToString());
                 }
 
-                copy.Add(typeEntry.Key, innerDictionaryCopy);
+                copy.Add(typeEntry.Key.ToString(), innerDictionaryCopy);
             }
 
             return copy;
@@ -165,18 +165,31 @@ namespace DI
 
         private static void AddToDictionary(object instance, string id, Type typeInstance)
         {
+            bool wasAdded = false;
+
             if (_dictionarySingle.ContainsKey(typeInstance))
             {
-                if (_dictionarySingle[typeInstance].ContainsValue(id) == false)
+                if (_dictionarySingle[typeInstance].ContainsKey(id) == false)
                 {
                     _dictionarySingle[typeInstance].Add(id, instance);
-                    //Debug.Log($"Added to DI - Type: {typeInstance}- Id: '{id}'");
+
+                    wasAdded = true;
                 }
             }
             else
             {
                 _dictionarySingle.Add(typeInstance, new Dictionary<string, object>());
                 _dictionarySingle[typeInstance].Add(id, instance);
+
+                wasAdded = true;
+            }
+
+            if (id == string.Empty)
+            {
+                if (wasAdded == true)
+                {
+                    Debug.Log($"Added to DI - Type: {typeInstance}- Id: '{id}'");
+                }
             }
         }
     }

@@ -7,12 +7,12 @@ namespace UI.Elements.SettingsTab
     {
         public override bool hasChanged => false;
 
-        public override async Task Apply()
+        public override async Task ApplyAsync()
         {
             await AsyncHelper.Delay();
         }
 
-        public override async Task Restore()
+        public override async Task RestoreAsync()
         {
             await AsyncHelper.Delay();
         }

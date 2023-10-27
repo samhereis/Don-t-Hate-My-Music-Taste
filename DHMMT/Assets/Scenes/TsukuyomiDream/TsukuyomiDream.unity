@@ -695,6 +695,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Global_DI
       objectReference: {fileID: 0}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[6].id
+      value: MasterVolume_Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[7].id
+      value: MusicVolume_Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[8].id
+      value: EffectsVolume_Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[6].instance
+      value: 
+      objectReference: {fileID: 11400000, guid: f2cebac1c9266a7488c2825994490806,
+        type: 2}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[7].instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 905271f28bf226648a563ee0e9cfd0a1,
+        type: 2}
+    - target: {fileID: 6138060081738427588, guid: ab02c446857d950488917d44ba066fcd,
+        type: 3}
+      propertyPath: _scriptableObjects.Array.data[8].instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 68859daabcd5fc34daccaa14866ff8b4,
+        type: 2}
     - target: {fileID: 7377587347709886397, guid: ab02c446857d950488917d44ba066fcd,
         type: 3}
       propertyPath: m_LocalPosition.x

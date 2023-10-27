@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ecff9dffcb98641b00353604184d98, type: 3}
-  m_Name: LookSensitivity
+  m_Script: {fileID: 11500000, guid: 80214515ddf0dc342927733ba8374afb, type: 3}
+  m_Name: AudioMixerDataHolder
   m_EditorClassIdentifier: 
-  _currentValue: 25
-  _defaultValue: 25
-  _key: LookSensitivity_key
+  data: {fileID: 0}

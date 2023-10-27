@@ -16,10 +16,6 @@ namespace UI.Windows
         [SerializeField] private Button _mainMenuButton;
         [SerializeField] private Button _replayButton;
 
-        [Header("DI")]
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-
         public override void Enable(float? duration = null)
         {
             base.Enable(duration);
@@ -67,12 +63,12 @@ namespace UI.Windows
 
         public async void GoToMainMenu()
         {
-            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenu);
+
         }
 
         public async void Replay()
         {
-            await _sceneLoader.LoadLastScene();
+
         }
     }
 }

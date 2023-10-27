@@ -16,10 +16,10 @@ namespace DI
             ClearValueEvents();
         }
 
-        public abstract void InjectEventsWithParameters();
-        public abstract void InjecValueEvents();
+        public virtual void InjectEventsWithParameters() { }
+        public virtual void InjecValueEvents() { }
 
-        public abstract void ClearEventsWithParameters();
-        public abstract void ClearValueEvents();
+        public virtual void ClearEventsWithParameters() { }
+        public virtual void ClearValueEvents() { }
     }
 }
