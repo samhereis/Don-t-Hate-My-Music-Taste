@@ -46,16 +46,16 @@ namespace Identifiers
             _leftNavMeshLink.autoUpdate = _autoUpdate;
 
             _topNavMeshLink.startPoint = new Vector3(0, _upYSize, (_zSize / 2) - _zOffset);
-            _topNavMeshLink.endPoint = new Vector3(0, _downYSize, (_zSize / 2) + _zOffset);
+            _topNavMeshLink.endPoint = new Vector3(0, _downYSize, (_zSize / 2) + _zOffset * 2);
 
             _bottomNavMeshLink.startPoint = new Vector3(0, _upYSize, -((_zSize / 2) - _zOffset));
-            _bottomNavMeshLink.endPoint = new Vector3(0, _downYSize, -((_zSize / 2) + _zOffset));
+            _bottomNavMeshLink.endPoint = new Vector3(0, _downYSize, -((_zSize / 2) + _zOffset * 2));
 
             _rightNavMeshLink.startPoint = new Vector3(-((_xSize / 2) - _xOffset), _upYSize, 0);
-            _rightNavMeshLink.endPoint = new Vector3(-((_xSize / 2) + _xOffset), _downYSize, 0);
+            _rightNavMeshLink.endPoint = new Vector3(-((_xSize / 2) + _xOffset * 2), _downYSize, 0);
 
             _leftNavMeshLink.startPoint = new Vector3((_xSize / 2) - _xOffset, _upYSize, 0);
-            _leftNavMeshLink.endPoint = new Vector3((_xSize / 2) + _xOffset, _downYSize, 0);
+            _leftNavMeshLink.endPoint = new Vector3((_xSize / 2) + _xOffset * 2, _downYSize, 0);
         }
     }
 }

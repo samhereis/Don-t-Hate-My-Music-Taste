@@ -104,6 +104,8 @@ namespace UI.Elements.SettingsTab
 
         private float GetVolume(FloatSavable_SO volume)
         {
+            if (volume == null) { return -25; }
+
             var percent = NumberHelper.GetPercentageOf100(volume.currentValue, 100f);
             var volumeOfAudioMixer = NumberHelper.GetNumberFromPercentage(_minVolume, percent);
 

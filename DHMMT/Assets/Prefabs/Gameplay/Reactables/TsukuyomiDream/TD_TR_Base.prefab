@@ -115,10 +115,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3581334932711455897}
   - component: {fileID: 6518638798209054593}
-  - component: {fileID: 7540107208885140097}
-  - component: {fileID: 349648872923879074}
-  - component: {fileID: 6077584456304042789}
-  - component: {fileID: 531757857985164284}
+  - component: {fileID: 3911577704088348113}
+  - component: {fileID: 2348550411613783786}
+  - component: {fileID: 1032607812834200547}
+  - component: {fileID: 2998651669919771393}
   m_Layer: 0
   m_Name: TD_TR_Base
   m_TagString: Untagged
@@ -158,14 +158,14 @@ MonoBehaviour:
   _upYSize: 0.5
   _downYSize: 0.5
   _zSize: 10
-  _xOffset: 1
-  _zOffset: 1
+  _xOffset: 0.5
+  _zOffset: 0.5
   _autoUpdate: 1
-  _topNavMeshLink: {fileID: 7540107208885140097}
-  _bottomNavMeshLink: {fileID: 349648872923879074}
-  _rightNavMeshLink: {fileID: 6077584456304042789}
-  _leftNavMeshLink: {fileID: 531757857985164284}
---- !u!114 &7540107208885140097
+  _topNavMeshLink: {fileID: 3911577704088348113}
+  _bottomNavMeshLink: {fileID: 2348550411613783786}
+  _rightNavMeshLink: {fileID: 1032607812834200547}
+  _leftNavMeshLink: {fileID: 2998651669919771393}
+--- !u!114 &3911577704088348113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,13 +179,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_StartPoint: {x: 0, y: 0.5, z: 4}
-  m_EndPoint: {x: 0, y: 0.5, z: 6}
+  m_EndPoint: {x: 0, y: 0.5, z: 7}
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 1
   m_Area: 0
---- !u!114 &349648872923879074
+--- !u!114 &2348550411613783786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,13 +199,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_StartPoint: {x: 0, y: 0.5, z: -4}
-  m_EndPoint: {x: 0, y: 0.5, z: -6}
+  m_EndPoint: {x: 0, y: 0.5, z: -7}
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 1
   m_Area: 0
---- !u!114 &6077584456304042789
+--- !u!114 &1032607812834200547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,13 +219,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_StartPoint: {x: -4, y: 0.5, z: 0}
-  m_EndPoint: {x: -6, y: 0.5, z: 0}
+  m_EndPoint: {x: -7, y: 0.5, z: 0}
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 1
   m_Area: 0
---- !u!114 &531757857985164284
+--- !u!114 &2998651669919771393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_StartPoint: {x: 4, y: 0.5, z: 0}
-  m_EndPoint: {x: 6, y: 0.5, z: 0}
+  m_EndPoint: {x: 7, y: 0.5, z: 0}
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1

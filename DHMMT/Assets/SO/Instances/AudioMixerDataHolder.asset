@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80214515ddf0dc342927733ba8374afb, type: 3}
   m_Name: AudioMixerDataHolder
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 24100000, guid: e8ebffad94ccb9548a8efe7803ea6f72, type: 2}

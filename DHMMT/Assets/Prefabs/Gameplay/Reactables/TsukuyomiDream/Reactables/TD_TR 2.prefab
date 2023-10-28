@@ -44,7 +44,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: f88c9d9ed8cf2d344a04949e9c6150e4, type: 2}
-  m_TreeDistance: 0
+  m_TreeDistance: 250
   m_TreeBillboardDistance: 5
   m_TreeCrossFadeLength: 0
   m_TreeMaximumFullLODCount: 0
@@ -257,11 +257,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6391795341992614544, guid: e841f3e8994879e48a09eea3e026acba,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 7b3395367e75a374fb423e13f55f813c, type: 2}
     - target: {fileID: 8316285315273273293, guid: e841f3e8994879e48a09eea3e026acba,
         type: 3}
       propertyPath: m_Name

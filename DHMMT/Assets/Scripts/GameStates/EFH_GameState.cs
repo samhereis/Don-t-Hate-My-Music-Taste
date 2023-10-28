@@ -100,6 +100,10 @@ namespace GameStates
 
             _efh_UIManager.pauseMenu.onGoToMainMenuRequest += GoToMainMenu;
             _efh_UIManager.loseMenu.window.onGoToMainMenuRequest += GoToMainMenu;
+            _efh_UIManager.winMenu.window.onGoToMainMenuRequest += GoToMainMenu;
+
+            _efh_UIManager.loseMenu.window.onReplayRequest += Replay;
+            _efh_UIManager.winMenu.window.onReplayRequest += Replay;
 
             _efh_UIManager.onGamePauseStatusChanged += OnGamePauseStatusChanged;
         }
@@ -116,10 +120,13 @@ namespace GameStates
 
             _efh_UIManager.pauseMenu.onGoToMainMenuRequest -= GoToMainMenu;
             _efh_UIManager.loseMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
+            _efh_UIManager.winMenu.window.onGoToMainMenuRequest -= GoToMainMenu;
+
+            _efh_UIManager.loseMenu.window.onReplayRequest -= Replay;
+            _efh_UIManager.winMenu.window.onReplayRequest -= Replay;
 
             _efh_UIManager.onGamePauseStatusChanged -= OnGamePauseStatusChanged;
         }
-
 
         private void SpawnExit()
         {
@@ -225,6 +232,11 @@ namespace GameStates
         private void GoToMainMenu()
         {
             _gameStatesManager?.ChangeState<MainMenuState>(true);
+        }
+
+        private void Replay()
+        {
+            _gameStatesManager?.ChangeState(this, isReenter: true);
         }
 
         public void Clear()

@@ -1,8 +1,4 @@
-using ConstStrings;
-using DI;
 using Managers;
-using SamhereisTools;
-using SO.Lists;
 using System;
 using UI.Canvases;
 using UnityEngine;
@@ -12,6 +8,9 @@ namespace UI.Windows
 {
     public class WinMenu : CanvasWindowBase
     {
+        public Action onGoToMainMenuRequest;
+        public Action onReplayRequest;
+
         [Header("UI Elements")]
         [SerializeField] private Button _mainMenuButton;
         [SerializeField] private Button _replayButton;
@@ -61,14 +60,14 @@ namespace UI.Windows
             Enable();
         }
 
-        public async void GoToMainMenu()
+        public void GoToMainMenu()
         {
-
+            onGoToMainMenuRequest?.Invoke();
         }
 
-        public async void Replay()
+        public void Replay()
         {
-
+            onReplayRequest?.Invoke();
         }
     }
 }
