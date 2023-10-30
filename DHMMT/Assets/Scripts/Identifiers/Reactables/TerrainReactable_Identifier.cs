@@ -86,7 +86,7 @@ namespace Identifiers
             {
                 _grassList = grassRow.GetComponentsInChildren<Transform>(true).Where(x =>
                 {
-                    var isGrass = x.gameObject.name.StartsWith("Heather") && x.GetComponent<MeshRenderer>() != null; ;
+                    var isGrass = x.gameObject.name.StartsWith("Heather") && x.GetComponent<MeshRenderer>() != null;
                     return isGrass;
                 }).ToArray();
 
