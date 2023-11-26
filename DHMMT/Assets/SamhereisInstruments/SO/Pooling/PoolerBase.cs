@@ -38,6 +38,8 @@ namespace Pooling
             {
                 await AsyncHelper.Delay();
 
+                if (poolable == null) continue;
+
                 var poolableInstance = Instantiate(poolable, parent);
                 poolableInstance.gameObject.name += _spawnCount;
 

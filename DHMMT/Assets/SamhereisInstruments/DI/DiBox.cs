@@ -1,4 +1,3 @@
-using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +10,6 @@ namespace DI
     public static class DIBox
     {
         private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new Dictionary<Type, Dictionary<string, object>>();
-
-        public static SerializedDictionary<string, SerializedDictionary<string, string>> GetCopy()
-        {
-            var copy = new SerializedDictionary<string, SerializedDictionary<string, string>>();
-
-            foreach (var typeEntry in _dictionarySingle)
-            {
-                var innerDictionaryCopy = new SerializedDictionary<string, string>();
-
-                foreach (var item in typeEntry.Value)
-                {
-                    innerDictionaryCopy.Add(item.Key, item.Value.ToString());
-                }
-
-                copy.Add(typeEntry.Key.ToString(), innerDictionaryCopy);
-            }
-
-            return copy;
-        }
 
         public static void Clear()
         {

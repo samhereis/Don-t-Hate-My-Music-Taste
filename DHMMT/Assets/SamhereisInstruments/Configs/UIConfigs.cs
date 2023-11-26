@@ -1,7 +1,7 @@
-﻿using AYellowpaper.SerializedCollections;
-using DG.Tweening;
+﻿using DG.Tweening;
 using SO;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Configs
@@ -27,8 +27,7 @@ namespace Configs
         [field: SerializeField, Tooltip("Sceme select menu configs")] public UIConfings_ScemeSelectMenu scemeSelectMenuConfigs { get; private set; } = new UIConfings_ScemeSelectMenu();
         [field: SerializeField, Tooltip("Gameplay menu configs")] public UIConfings_GameplayMenu gameplayMenuConfigs { get; private set; } = new UIConfings_GameplayMenu();
 
-        [SerializedDictionary("Color Name", ("Color Value"))]
-        [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
+        [field: SerializeField] public Dictionary<ColorSetUnitString, Color> colorSetUnits = new Dictionary<ColorSetUnitString, Color>();
 
         public override void Initialize()
         {
@@ -38,8 +37,7 @@ namespace Configs
         [Serializable]
         public class ColorSet
         {
-            [SerializedDictionary("Color Name", ("Color Value"))]
-            [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
+            [field: SerializeField] public Dictionary<ColorSetUnitString, Color> colorSetUnits = new Dictionary<ColorSetUnitString, Color>();
         }
     }
 

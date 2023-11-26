@@ -1,5 +1,4 @@
-﻿using AYellowpaper.SerializedCollections;
-using Configs;
+﻿using Configs;
 using Events;
 using Interfaces;
 using System;
@@ -24,7 +23,6 @@ namespace DI
 
         [Header("Debug")]
         [SerializeField] private HardCodeDependencyInjectorBase[] _hardCodeDependencyInjectors;
-        [SerializeField] private SerializedDictionary<string, SerializedDictionary<string, string>> _currentDIBox;
 
         private void Awake()
         {
@@ -63,11 +61,6 @@ namespace DI
             {
                 Clear();
             }
-        }
-
-        private void Update()
-        {
-            _currentDIBox = DIBox.GetCopy();
         }
 
         private void Inject()

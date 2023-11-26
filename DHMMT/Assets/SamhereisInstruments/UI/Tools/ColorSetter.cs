@@ -1,10 +1,10 @@
-using AYellowpaper.SerializedCollections;
 using Configs;
 using ConstStrings;
 using DI;
 using Helpers;
 using SO;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +15,7 @@ namespace UI.Elements
         private static UIConfigs _uIConfigs;
 
         [Header("Components")]
-        [SerializeField] private SerializedDictionary<ColorSetUnitString, Graphic[]> _colorSetUnits = new SerializedDictionary<ColorSetUnitString, Graphic[]>();
+        [SerializeField] private Dictionary<ColorSetUnitString, Graphic[]> _colorSetUnits = new Dictionary<ColorSetUnitString, Graphic[]>();
 
         private async void OnEnable()
         {
