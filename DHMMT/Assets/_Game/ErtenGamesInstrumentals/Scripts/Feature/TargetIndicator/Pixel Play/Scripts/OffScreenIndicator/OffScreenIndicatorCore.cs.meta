@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7563adf359082cd40b2245f607b3a7c2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 71799
+  packageName: Off Screen Target Indicator
+  packageVersion: 3.0
+  assetPath: Assets/Pixel Play/Scripts/OffScreenIndicator/OffScreenIndicatorCore.cs
+  uploadId: 362973
