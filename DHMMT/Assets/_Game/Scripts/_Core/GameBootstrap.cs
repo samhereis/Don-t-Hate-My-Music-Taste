@@ -18,7 +18,7 @@ namespace Core
 
             DependencyContext.InjectDependencies(this);
 
-            _gameStateChanger.ChangeState(new MainMenuState());
+            _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
         }
     }
 }

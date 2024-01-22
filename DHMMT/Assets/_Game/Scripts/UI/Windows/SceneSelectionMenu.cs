@@ -4,7 +4,7 @@ using DependencyInjection;
 using Helpers;
 using Interfaces;
 using Observables;
-using Servies;
+using Services;
 using SO.Lists;
 using System;
 using TMPro;
@@ -19,8 +19,6 @@ namespace UI.Windows
     public class SceneSelectionMenu : MenuBase, INeedDependencyInjection
     {
         public Action<AScene_Extended> onLoadSceneRequest;
-
-        [field: SerializeField] public MainMenu mainMenu { get; set; }
 
         [Header("Components")]
         [SerializeField] private Transform _scenesUnitsParent;
@@ -39,6 +37,13 @@ namespace UI.Windows
         [SerializeField] private PlayButtonBlock _playButtonBlock = new PlayButtonBlock();
         [SerializeField] private DescriptionBlock _descriptionBlock = new DescriptionBlock();
         [SerializeField] private RulesBlock _rulesBlock = new RulesBlock();
+
+        private MainMenu _mainMenu;
+
+        public void Construct(MainMenu mainMenu)
+        {
+            _mainMenu = mainMenu;
+        }
 
         public override void Enable(float? duration = null)
         {
@@ -92,7 +97,7 @@ namespace UI.Windows
 
         private void OnBackButtonClicked()
         {
-            mainMenu?.Enable();
+            _mainMenu?.Enable();
         }
 
         private void SelectScene(AScene_Extended scene)
@@ -140,7 +145,7 @@ namespace UI.Windows
             [SerializeField] private float _downFadeDuration = 0.25f;
             [SerializeField] private float _upFadeDuration = 0.5f;
 
-            [SerializeField] private AScene_Extended _scene;
+            private AScene_Extended _scene;
 
             public void Initialize()
             {
@@ -182,7 +187,7 @@ namespace UI.Windows
             [SerializeField] private float _downFadeDuration = 0.25f;
             [SerializeField] private float _upFadeDuration = 0.5f;
 
-            [SerializeField] private AScene_Extended _scene;
+            private AScene_Extended _scene;
 
             public void Initialize()
             {
@@ -215,7 +220,7 @@ namespace UI.Windows
             [SerializeField] private float _downFadeDuration = 0.25f;
             [SerializeField] private float _upFadeDuration = 0.5f;
 
-            [SerializeField] private AScene_Extended _scene;
+            private AScene_Extended _scene;
 
             public void Initialize()
             {

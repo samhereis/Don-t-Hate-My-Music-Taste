@@ -1,6 +1,5 @@
 ﻿using DependencyInjection;
 using Helpers;
-using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
 
@@ -8,20 +7,12 @@ namespace Music
 {
     public class PlayingMusicData : MonoBehaviour, INeedDependencyInjection
     {
-        [Required]
-        [Inject]
-        [SerializeField] private SpectrumData _spectrumData;
-
-        [Required]
-        [Inject]
-        [SerializeField] private MusicList_SO _musicList;
-
-        [Header("Components")]
-        [Required]
-        [SerializeField] private AudioSource _audioSource;
-
         [Header("Debug")]
         [SerializeField] private bool _isCheckingForAudio = false;
+
+        [Inject] private SpectrumData _spectrumData;
+        [Inject] private MusicList_SO _musicList;
+        [Inject] private AudioSource _audioSource;
 
         private void Awake()
         {

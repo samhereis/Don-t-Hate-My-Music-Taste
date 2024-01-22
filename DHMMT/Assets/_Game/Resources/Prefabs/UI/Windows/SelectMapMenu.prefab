@@ -99,7 +99,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &748106040948545542
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +204,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 511
 --- !u!225 &7640579395730743378
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -235,18 +234,34 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration_Enable: 0.25
     animationDuration_Disable: 0.25
-    isOpen: 1
+    uiAnimationElementForeachDelay: 0.025
     canvasGroup: {fileID: 7640579395730743378}
-    uIConfigs: {fileID: 0}
     uIAnimationElements: []
+    isOpen: 1
   _buttons: []
-  <mainMenu>k__BackingField: {fileID: 0}
+  _scaleByPercentages:
+  - {fileID: 3825364231743917274}
+  - {fileID: 5738063932719023556}
+  - {fileID: 7869339778241223511}
+  - {fileID: 8949649938295389766}
+  - {fileID: 8538995369828027920}
+  - {fileID: 556787069978248301}
+  - {fileID: 966153402088243965}
+  - {fileID: 1179610381555481376}
+  - {fileID: 6611282590109809514}
+  - {fileID: 8814944303582505697}
+  - {fileID: 8020536335518731812}
+  - {fileID: 3018449726542026756}
+  - {fileID: 8044874775716477800}
+  - {fileID: 8233332799674366748}
+  - {fileID: 675817461595367195}
+  - {fileID: 3593747368837080588}
+  - {fileID: 3155534744843222878}
+  - {fileID: 5527896339724345226}
   _scenesUnitsParent: {fileID: 1110650526190958077}
   _backButton: {fileID: 392769020227118655}
   _sceneUnitPrefab: {fileID: 7781370266589777065, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
     type: 3}
-  _listOfAllScenes: {fileID: 0}
-  _sceneLoader: {fileID: 0}
   _onASceneSelected:
     <eventName>k__BackingField: 
     <currentSubscribedObjectsCount>k__BackingField: 0
@@ -266,40 +281,16 @@ MonoBehaviour:
     _sceneName: {fileID: 3578997650684520806}
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
-    _scene:
-      <sceneCode>k__BackingField: 
-      _scene: {fileID: 0}
-      <sceneName>k__BackingField: 
-      <gameMode>k__BackingField: 0
-      <description>k__BackingField: 
-      <rules>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
   _descriptionBlock:
     _canvasGroup: {fileID: 6932958121828644654}
     _descriptionText: {fileID: 7622057661470135100}
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
-    _scene:
-      <sceneCode>k__BackingField: 
-      _scene: {fileID: 0}
-      <sceneName>k__BackingField: 
-      <gameMode>k__BackingField: 0
-      <description>k__BackingField: 
-      <rules>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
   _rulesBlock:
     _canvasGroup: {fileID: 295394275062220485}
     _rulesText: {fileID: 4017050066527593910}
     _downFadeDuration: 0.25
     _upFadeDuration: 0.5
-    _scene:
-      <sceneCode>k__BackingField: 
-      _scene: {fileID: 0}
-      <sceneName>k__BackingField: 
-      <gameMode>k__BackingField: 0
-      <description>k__BackingField: 
-      <rules>k__BackingField: 
-      <icon>k__BackingField: {fileID: 0}
 --- !u!1 &1153903804522592023
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +406,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &1693273719747308526
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,15 +514,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -651,7 +643,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &2546028170028713089
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,15 +751,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -887,7 +880,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &2963330198536652739
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +981,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &3034645991510805469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1120,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &4164147922696762943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1425,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &4801381166543299760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1540,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &5331506198881293870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,15 +1648,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1809,18 +1799,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
-    <isMain>k__BackingField: 0
-    <loop>k__BackingField: 0
-    <disableOthers>k__BackingField: 0
-    <volume>k__BackingField: 1
-    <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 0}
+  _clickSound: {fileID: 0}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
+  _requireAudio: 1
 --- !u!114 &1179610381555481376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,7 +1829,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!114 &2641076872200406528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1858,19 +1841,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611d7382474c3e240a46a5a18ee10eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 4306684209970984920}
-  _ease: 27
   _onOverScale: 1.1
-  _randomize: 1
-  _positionOnHoverMin: {x: 0, y: 0, z: 0}
-  _positionOnHoverMax: {x: 40, y: 40, z: 40}
-  _rotationOnHoverMin: {x: -5, y: -5, z: -5}
-  _rotationOnHoverMax: {x: 5, y: 5, z: 5}
+  _normaleScale: 1
   _animationDuration: 0.5
-  _gameObjectsToDisableOnHover: []
-  _gameObjectsToEnableOnHover: []
-  _componentsToDisableOnHover: []
-  _componentsToEnableOnHover: []
+  _delayBetweenAnimations: 0.1
   _events:
     _onHover:
       m_PersistentCalls:
@@ -1989,15 +1963,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2123,15 +2099,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2257,15 +2235,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2399,7 +2379,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &8417268525106447912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,7 +2584,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1001 &3086239066758065304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2898,6 +2876,54 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7105358541867104385}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5738063932719023556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3259197984284638533, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7105358541867104385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7869339778241223511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1130068322980586454, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7105358541867104385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8538995369828027920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1448988094434424465, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7105358541867104385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8949649938295389766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2209234150227429063, guid: 6a1f4169c7bbc154cbb0ff83c06980d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7105358541867104385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7281357351284584323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3125,6 +3151,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6503308715179219134, guid: 23c157cc515d61440aa0b55e59909a49,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 7775948535609565175, guid: 23c157cc515d61440aa0b55e59909a49,
         type: 3}
       propertyPath: m_Name
@@ -3152,6 +3183,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5836f223cd6304185967756e39918b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3155534744843222878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5490060442156922170, guid: 23c157cc515d61440aa0b55e59909a49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7492347950394739300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3593747368837080588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6207549023925103720, guid: 23c157cc515d61440aa0b55e59909a49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7492347950394739300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4004054721288133082 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5794840030824190910, guid: 23c157cc515d61440aa0b55e59909a49,
@@ -3162,6 +3217,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5527896339724345226 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3120188243540448750, guid: 23c157cc515d61440aa0b55e59909a49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7492347950394739300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &5966834202195817293 stripped

@@ -123,18 +123,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
-    <isMain>k__BackingField: 0
-    <loop>k__BackingField: 0
-    <disableOthers>k__BackingField: 0
-    <volume>k__BackingField: 1
-    <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 0}
+  _clickSound: {fileID: 0}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
+  _requireAudio: 0
 --- !u!114 &7781370266589777065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,15 +146,6 @@ MonoBehaviour:
   _playButton: {fileID: 8314724014513122459}
   _selectButton: {fileID: 1195864251862375575}
   _onSelectPanel: {fileID: 4209531296221905257}
-  _uiConfigs: {fileID: 0}
-  _onASceneSelected:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
-  _onASceneLoadRequested:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
   _scene:
     <sceneCode>k__BackingField: 
     _scene: {fileID: 0}
@@ -169,6 +154,10 @@ MonoBehaviour:
     <description>k__BackingField: 
     <rules>k__BackingField: 
     <icon>k__BackingField: {fileID: 0}
+    <backgroundSceneSettings>k__BackingField:
+      <visuals>k__BackingField: {fileID: 0}
+      <skyboxes>k__BackingField: []
+      <ambientIntencity>k__BackingField: 1
 --- !u!114 &7086032628753904094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,19 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611d7382474c3e240a46a5a18ee10eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1357360329273477513}
-  _ease: 27
   _onOverScale: 1.1
-  _randomize: 1
-  _positionOnHoverMin: {x: -20, y: -20, z: -20}
-  _positionOnHoverMax: {x: 20, y: 20, z: 20}
-  _rotationOnHoverMin: {x: -5, y: -5, z: -5}
-  _rotationOnHoverMax: {x: 5, y: 5, z: 5}
+  _normaleScale: 1
   _animationDuration: 0.5
-  _gameObjectsToDisableOnHover: []
-  _gameObjectsToEnableOnHover: []
-  _componentsToDisableOnHover: []
-  _componentsToEnableOnHover: []
+  _delayBetweenAnimations: 0.1
   _events:
     _onHover:
       m_PersistentCalls:
@@ -327,18 +307,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
-    <isMain>k__BackingField: 0
-    <loop>k__BackingField: 0
-    <disableOthers>k__BackingField: 0
-    <volume>k__BackingField: 1
-    <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 0}
+  _clickSound: {fileID: 0}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
+  _requireAudio: 1
 --- !u!114 &2209234150227429063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +337,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!114 &2844412886994018302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,15 +463,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -639,18 +614,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
-    <isMain>k__BackingField: 0
-    <loop>k__BackingField: 0
-    <disableOthers>k__BackingField: 0
-    <volume>k__BackingField: 1
-    <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 0}
+  _clickSound: {fileID: 0}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
+  _requireAudio: 1
 --- !u!114 &1130068322980586454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +644,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!114 &1893458506148272154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parent: {fileID: 2582605991051620563}
+  _parent: {fileID: 1357360329273477513}
   _rectTransform: {fileID: 45240208704569165}
   _scaleSettings:
     <top>k__BackingField: 0
@@ -809,7 +777,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &4292696873811919356
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,15 +885,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1052,15 +1021,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1165,7 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc016740aa277cc4ea79efcf8e731fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parent: {fileID: 2582605991051620563}
+  _parent: {fileID: 1357360329273477513}
   _rectTransform: {fileID: 6377292397674965443}
   _scaleSettings:
     <top>k__BackingField: 0
@@ -1177,7 +1148,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1 &7170998934398769972
 GameObject:
   m_ObjectHideFlags: 0

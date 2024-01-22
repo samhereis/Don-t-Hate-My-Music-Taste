@@ -105,7 +105,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 511
 --- !u!225 &7640579395730743378
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -135,24 +135,18 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration_Enable: 1
     animationDuration_Disable: 0.25
-    isOpen: 1
+    uiAnimationElementForeachDelay: 0.025
     canvasGroup: {fileID: 0}
-    uIConfigs: {fileID: 0}
     uIAnimationElements: []
+    isOpen: 1
   _buttons: []
+  _scaleByPercentages: []
+  _progressSlider: {fileID: 7961847352168388543}
   _loadingCircle: {fileID: 5761732015208547624}
   _progressSlider: {fileID: 7961847352168388543}
   _videoPlayer: {fileID: 0}
   _loadingCirlceRotationSpeed: 500
-  _videoClipAddressables:
-  - m_AssetGUID: 6f893ffae32c617459f925a237489023
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 6d3acaa9d0b4b4f418ce5e804a585a43
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  _videoClips: []
 --- !u!1 &926189616117563930
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,15 +404,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1114,7 +1110,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1001 &3086239066758065304
 PrefabInstance:
   m_ObjectHideFlags: 0

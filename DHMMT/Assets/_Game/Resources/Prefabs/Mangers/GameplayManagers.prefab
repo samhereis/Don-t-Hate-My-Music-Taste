@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8569840260205341845}
-  - component: {fileID: 6808011115005127470}
   m_Layer: 0
   m_Name: GameplayManagers
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   - {fileID: 2794417400985526271}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6808011115005127470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107994557653413028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41bdd6b5919164488decccb88421fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  states: 
 --- !u!1 &8043871145111604885
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,5 +76,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b067de8e29e0be49a54849f9ea42d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolers:
-  - {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
+  _poolerBases: []

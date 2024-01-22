@@ -1,6 +1,4 @@
 using Managers;
-using Servies;
-using SO.Lists;
 using System;
 using UI.Canvases;
 using UI.Interaction;

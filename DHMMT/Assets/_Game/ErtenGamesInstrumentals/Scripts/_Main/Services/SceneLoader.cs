@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace Servies
+namespace Services
 {
     public class SceneLoader : INeedDependencyInjection
     {
@@ -69,7 +69,7 @@ namespace Servies
             }
             else
             {
-                await AsyncHelper.FromAsyncOperation(SceneManager.LoadSceneAsync(scene.sceneCode));
+                await LoadSceneAsync(scene, onUpdate);
             }
         }
 

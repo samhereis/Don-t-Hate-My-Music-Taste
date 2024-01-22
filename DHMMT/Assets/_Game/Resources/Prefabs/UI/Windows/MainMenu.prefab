@@ -135,11 +135,12 @@ MonoBehaviour:
     notifyOthers: 1
     animationDuration_Enable: 0.25
     animationDuration_Disable: 0.25
-    isOpen: 1
+    uiAnimationElementForeachDelay: 0.025
     canvasGroup: {fileID: 0}
-    uIConfigs: {fileID: 0}
     uIAnimationElements: []
+    isOpen: 1
   _buttons: []
+  _scaleByPercentages: []
   <sceneSelectionMenu>k__BackingField: {fileID: 0}
   <settingsMenu>k__BackingField: {fileID: 0}
   _sceneSelectionMenuButton: {fileID: 1993502815794465797}
@@ -264,7 +265,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!114 &2547926810651888054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad31d82b69391b4c8a83025380e45cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spectrumData: {fileID: 11400000, guid: 421e6fb8fb2deb94c9495ea52e43818c, type: 2}
+  _spectrumData: {fileID: 11400000, guid: 421e6fb8fb2deb94c9495ea52e43818c, type: 2}
   _prefab: {fileID: 691930059082152753, guid: 9e2c5e71167441e47b7bb904e3a71f84, type: 3}
   _parent: {fileID: 3414028037705843139}
   _axis: 0
@@ -361,7 +361,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!114 &7605209655961471675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +536,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2, type: 2}
 --- !u!1001 &522320966379072262
 PrefabInstance:
   m_ObjectHideFlags: 0

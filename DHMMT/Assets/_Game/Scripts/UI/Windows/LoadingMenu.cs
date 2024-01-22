@@ -10,7 +10,6 @@ namespace UI.Windows
     {
         [Header("UI Elements")]
         [SerializeField] private Transform _loadingCircle;
-        [SerializeField] private Slider _progressSlider;
         [SerializeField] private VideoPlayer _videoPlayer;
 
         [Header("Settings")]
