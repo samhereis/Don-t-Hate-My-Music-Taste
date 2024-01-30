@@ -60,7 +60,7 @@ namespace UI.Windows
             base.SubscribeToEvents();
 
             _isPlayerAiming.AddListener(OnPlayerAimingChanged);
-            _input_SO.input.Gameplay.Pause.performed += Pause;
+            _input_SO.input.Player.Pause.performed += Pause;
 
             onSubscribeToEvents?.Invoke();
         }
@@ -70,7 +70,7 @@ namespace UI.Windows
             base.UnsubscribeFromEvents();
 
             _isPlayerAiming.RemoveListener(OnPlayerAimingChanged);
-            _input_SO.input.Gameplay.Pause.performed -= Pause;
+            _input_SO.input.Player.Pause.performed -= Pause;
 
             onUnsubscribeFromEvents?.Invoke();
         }

@@ -16,14 +16,14 @@ namespace Charatcers.Player
         [field: SerializeField, Header("Debug")] public float currentHealth { get; private set; } = 100;
         [field: SerializeField] public float maxHealth { get; private set; } = 100;
         [field: SerializeField] public bool isAlive { get; private set; } = true;
-        [field: SerializeField] public IdentifierBase damagedGameobject { get; private set; }
+        [field: SerializeField] public IdentifierBase damagableIdentifier { get; private set; }
 
         [Header("DI")]
         [Inject(ObservableValue_ConstStrings.playerHealth)][SerializeField] private ObservableValue<PlayerHealthData> _playerHealthValue;
 
         private void Awake()
         {
-            damagedGameobject = GetComponent<IdentifierBase>();
+            damagableIdentifier = GetComponent<IdentifierBase>();
         }
 
         private void Update()
@@ -53,7 +53,7 @@ namespace Charatcers.Player
             onDie?.Invoke();
         }
 
-        public void TakeDamage(float damage, IDamager damager)
+        public void TakeDamage(float damage, IDamagerWeapon damagerWeapon)
         {
             if (isAlive == true)
             {
@@ -68,13 +68,13 @@ namespace Charatcers.Player
 
                 _playerHealthValue?.ChangeValue(new PlayerHealthData(healthBefore, currentHealth, maxHealth));
 
-                var aDamage = new ADamage();
-                aDamage.damagerObject = damager;
-                aDamage.damagedObject = this;
+                var aDamage = new PostDamageInfo();
+                aDamage.damagerObject = damagerWeapon;
+                aDamage.damagable = this;
                 aDamage.damageAmount = damage;
                 aDamage.healthAfterDamage = currentHealth;
 
-                damager.damagerActor.OnHasDamaged(aDamage);
+                damagerWeapon.damagerActor.OnHasDamaged(aDamage);
             }
         }
     }

@@ -68,14 +68,9 @@ namespace Identifiers
             _playerWeaponData?.ChangeValue(playerWeaponData);
         }
 
-        public void OnDamaged(ADamage aDamage)
+        public void OnHasDamaged(PostDamageInfo aDamage)
         {
 
-        }
-
-        public void OnHasDamaged(ADamage aDamage)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

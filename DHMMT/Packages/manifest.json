@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ertengames.instrumentals": "https://github.com/samhereis/ErtenGamesInstrumentals.git",
     "com.unity.2d.animation": "10.1.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.0",

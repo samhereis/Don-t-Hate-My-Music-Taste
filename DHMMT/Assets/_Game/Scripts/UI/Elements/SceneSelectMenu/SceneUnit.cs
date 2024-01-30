@@ -38,15 +38,15 @@ namespace UI.Elements.SceneSelectMenu
 
         private void Awake()
         {
+            DependencyContext.diBox.InjectDataTo(this);
+
             _playButton?.onClick.AddListener(OnPlayClicked);
             _selectButton?.onClick.AddListener(OnSelectClicked);
         }
 
-        public void Initialize(AScene_Extended type)
+        public void Initialize(AScene_Extended scene)
         {
-            DependencyContext.diBox.InjectDataTo(this);
-
-            _scene = type;
+            _scene = scene;
 
             _sceneImage.sprite = _scene.GetIcon();
             _sceneNameText.text = _scene.GetSceneName();

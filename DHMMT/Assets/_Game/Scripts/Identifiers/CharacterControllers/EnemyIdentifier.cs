@@ -16,11 +16,11 @@ namespace Identifiers
             damagerIdentifier = this;
         }
 
-        public void OnHasDamaged(ADamage aDamage)
+        public void OnHasDamaged(PostDamageInfo aDamage)
         {
-            //Debug.Log($"Enemy {aDamage.damagerActor.damagerIdentifier.gameObject.name} damaged " +
-            //$"{aDamage.damagable.damagedObjectIdentifier.gameObject.name}" +
-            //$" with {aDamage.damagerObject.damagerObjectIdentifier.gameObject.name}");
+            Debug.Log($"Enemy {aDamage.damagerObject.damagerGameobject.gameObject.name} damaged " +
+            $"{aDamage.damagable.damagableIdentifier.gameObject.name}" +
+            $" with {aDamage.damagerObject.damagerGameobject.gameObject.name}");
         }
     }
 }

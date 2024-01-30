@@ -2,16 +2,21 @@ using DependencyInjection;
 using GameState;
 using GameStates;
 using Helpers;
+using UnityEngine;
 
 namespace Core
 {
     public class GameBootstrap : GameBootstrapBase, INeedDependencyInjection
     {
+        [SerializeField] private DependencyContext _globalDependencyContext;
+
         [Inject] private IGameStateChanger _gameStateChanger;
 
         private async void Start()
         {
-            while(DependencyContext.isGloballyInjected == false)
+            _globalDependencyContext.Initialize();
+
+            while (DependencyContext.isGloballyInjected == false)
             {
                 await AsyncHelper.Skip();
             }

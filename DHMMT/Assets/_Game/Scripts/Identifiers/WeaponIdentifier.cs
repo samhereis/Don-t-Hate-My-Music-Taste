@@ -1,3 +1,4 @@
+using DataClasses;
 using Demo.Scripts.Runtime.Base;
 using Helpers;
 using Interfaces;
@@ -24,7 +25,7 @@ namespace Identifiers
         [field: SerializeField] public float fireRate { get; private set; } = 0.1f;
 
         [Header("Components")]
-        [SerializeField] private SoundPlayer _soundPlayer;
+        [SerializeField] private ISoundPlayer _soundPlayer;
         [field: SerializeField] public Weapon _weapon { get; private set; }
         [SerializeField] private Transform _shootPoint;
 
@@ -44,8 +45,6 @@ namespace Identifiers
 
         private void OnEnable()
         {
-            _soundPlayer?.Setup();
-
             _weapon.onEquip += OnEquip;
             _weapon.onUnequip += OnUnequip;
         }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6095904878367769174}
   - component: {fileID: 8284192308959651172}
   - component: {fileID: 1437873318293926861}
-  - component: {fileID: 2059816396667807491}
   - component: {fileID: 322811524481262607}
+  - component: {fileID: 8660428963570102114}
   m_Layer: 0
   m_Name: StandartMainButton
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2059816396667807491
+--- !u!114 &322811524481262607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 36659170625442543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
+  m_Script: {fileID: 11500000, guid: 611d7382474c3e240a46a5a18ee10eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onOverScale: 1.1
+  _normaleScale: 1
+  _animationDuration: 0.5
+  _delayBetweenAnimations: 0.1
+  _events:
+    _onHover:
+      m_PersistentCalls:
+        m_Calls: []
+    _onClick:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8660428963570102114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36659170625442543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -122,38 +148,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSound: {fileID: 11400000, guid: c3b342079b133f448aed84754f5bfd8e, type: 2}
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
-  _requireAudio: 1
---- !u!114 &322811524481262607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36659170625442543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611d7382474c3e240a46a5a18ee10eae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onOverScale: 1.1
-  _normaleScale: 1
-  _animationDuration: 0.5
-  _delayBetweenAnimations: 0.1
-  _events:
-    _onHover:
-      m_PersistentCalls:
-        m_Calls: []
-    _onClick:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExit:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &6111023651042837265
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,15 +21,12 @@ namespace UI.Elements.SettingsTab
         [Header("Settings")]
         [SerializeField] private float _minVolume = 50f;
 
-        [Space(20)]
-
-        [Inject(Savables_ConstStrings.masterVolume_Settings)][SerializeField] private FloatSavable_SO _masterVolume_Settings;
-        [Inject(Savables_ConstStrings.musicVolume_Settings)][SerializeField] private FloatSavable_SO _musicVolume_Settings;
-        [Inject(Savables_ConstStrings.effectsVolume_Settings)][SerializeField] private FloatSavable_SO _effectsVolume_Settings;
+        [Inject] private AudioMixerDataHolder _audioMixer;
+        [Inject(Savables_ConstStrings.masterVolume_Settings)] private FloatSavable_SO _masterVolume_Settings;
+        [Inject(Savables_ConstStrings.musicVolume_Settings)] private FloatSavable_SO _musicVolume_Settings;
+        [Inject(Savables_ConstStrings.effectsVolume_Settings)] private FloatSavable_SO _effectsVolume_Settings;
 
         private Dictionary<SliderParameter_SettingsParameter, FloatSavable_SO> _volumeSettings = new Dictionary<SliderParameter_SettingsParameter, FloatSavable_SO>();
-
-        private AudioMixerDataHolder _audioMixer;
 
         public override void Initialize()
         {

@@ -1,7 +1,7 @@
 using DataClasses;
 using DependencyInjection;
-using ErtenGamesInstrumentals.DataClasses;
-using Services;
+using Servies;
+using SO;
 using UI.Windows;
 using UnityEngine;
 
@@ -10,22 +10,27 @@ namespace GameState
     public static class GameState_ControllerBase_Extended
     {
         private static SceneLoader _sceneLoader;
+        private static ListOfAllViews _listOfAllViews;
 
-        public static async Awaitable<LoadingMenu> LoadSceneWithLoadingMenu(this GameState_ControllerBase gameState_ControllerBase, AScene aScene)
+        public static async Awaitable<LoadingMenu_Extended> LoadSceneWithLoadingMenu(
+            this GameState_ControllerBase gameState_ControllerBase,
+            AScene aScene)
         {
-            if (_sceneLoader == null) { DependencyContext.diBox.Get<SceneLoader>(); }
+            if (_sceneLoader == null) { _sceneLoader = DependencyContext.diBox.Get<SceneLoader>(); }
+            if (_listOfAllViews == null) { _listOfAllViews = DependencyContext.diBox.Get<ListOfAllViews>(); }
 
-            var loadingMenuReference = DependencyContext.diBox.Get<PrefabReference<LoadingMenu>>();
-
-            LoadingMenu loadingMenu = null;
-
-            if (loadingMenuReference != null)
-            {
-                loadingMenu = Object.Instantiate(await loadingMenuReference.GetAssetAsync());
-                if (loadingMenuReference != null) { Object.DontDestroyOnLoad(loadingMenu.gameObject); };
+            LoadingMenu_Extended loadingMenuPrefab = await _listOfAllViews?.GetViewAsync<LoadingMenu_Extended>();
+            LoadingMenu_Extended loadingMenu = null;
+            if (loadingMenuPrefab != null) 
+            { 
+                loadingMenu = Object.Instantiate(loadingMenuPrefab);
+                Object.DontDestroyOnLoad(loadingMenu.gameObject);
             }
 
-            await _sceneLoader.LoadSceneAsync(aScene, loadingMenu);
+            await _sceneLoader.LoadSceneAsync(aScene, loadingMenu, (loadUpdate) =>
+            {
+                Debug.Log(loadUpdate);
+            });
 
             return loadingMenu;
         }

@@ -35,3 +35,7 @@ MonoBehaviour:
     EnabledOverridden: 1
     Type: Sirenix.OdinValidator.Editor.Validators.ListNullElementValidator, Sirenix.OdinValidator.Editor
     Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.DuplicateComponentsValidator, Sirenix.OdinValidator.Editor
+    Override: 

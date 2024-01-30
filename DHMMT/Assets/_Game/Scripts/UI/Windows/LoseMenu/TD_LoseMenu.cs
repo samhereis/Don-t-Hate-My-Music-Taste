@@ -20,8 +20,7 @@ namespace UI.Windows
 
         [Header("DI")]
         [Inject] private GameSaveService _gameSaveManager;
-        [Inject] private SceneLoader _sceneLoader;
-        [Inject] private ListOfAllScenes _listOfAllScenes;
+        [Inject] private ListOfAllScenes_Extended _listOfAllScenes;
 
         private void Awake()
         {

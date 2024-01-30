@@ -4,7 +4,6 @@ using DependencyInjection;
 using Helpers;
 using Interfaces;
 using Observables;
-using Services;
 using SO.Lists;
 using System;
 using TMPro;
@@ -27,21 +26,32 @@ namespace UI.Windows
         [Header("Prefabs")]
         [SerializeField] private SceneUnit _sceneUnitPrefab;
 
-        [Header("DI")]
-        [Inject] private ListOfAllScenes _listOfAllScenes;
-        [Inject] private SceneLoader _sceneLoader;
-        [Inject(DataSignal_ConstStrings.onASceneSelected)][SerializeField] private DataSignal<AScene_Extended> _onASceneSelected;
-        [Inject(DataSignal_ConstStrings.onASceneLoadRequested)][SerializeField] private DataSignal<AScene_Extended> _onASceneLoadRequested;
-
         [Header("Blocks")]
         [SerializeField] private PlayButtonBlock _playButtonBlock = new PlayButtonBlock();
         [SerializeField] private DescriptionBlock _descriptionBlock = new DescriptionBlock();
         [SerializeField] private RulesBlock _rulesBlock = new RulesBlock();
 
+        private ListOfAllScenes_Extended _listOfAllScenes;
+        private DataSignal<AScene_Extended> _onASceneSelected;
+        private DataSignal<AScene_Extended> _onASceneLoadRequested;
+
         private MainMenu _mainMenu;
 
-        public void Construct(MainMenu mainMenu)
+        protected override void Awake()
         {
+            base.Awake();
+
+            DependencyContext.InjectDependencies(this);
+        }
+
+        public void Construct(ListOfAllScenes_Extended listOfAllScenes,
+            DataSignal<AScene_Extended> onASceneSelected,
+            DataSignal<AScene_Extended> onASceneLoadRequested,
+            MainMenu mainMenu)
+        {
+            _listOfAllScenes = listOfAllScenes;
+            _onASceneSelected = onASceneSelected;
+            _onASceneLoadRequested = onASceneLoadRequested;
             _mainMenu = mainMenu;
         }
 

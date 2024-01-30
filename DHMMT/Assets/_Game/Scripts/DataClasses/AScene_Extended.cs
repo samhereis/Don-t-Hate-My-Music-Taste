@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -8,11 +9,11 @@ namespace DataClasses
     {
         public enum GameMode { EscapeFromHaters, TsukuyomiDream }
 
-        [field: SerializeField, Header("Settings")] public string sceneName { get; private set; }
-        [field: SerializeField] public GameMode gameMode { get; private set; }
-        [field: SerializeField, TextArea] public string description { get; private set; }
-        [field: SerializeField, TextArea] public string rules { get; private set; }
-        [field: SerializeField] public Sprite icon { get; private set; }
+        [field: SerializeField, FoldoutGroup("Settings")] public string sceneName { get; private set; }
+        [field: SerializeField, FoldoutGroup("Settings")] public GameMode gameMode { get; private set; }
+        [field: SerializeField, FoldoutGroup("Settings")] public Sprite icon { get; private set; }
+        [field: SerializeField, FoldoutGroup("Descriptions"), TextArea] public string description { get; private set; }
+        [field: SerializeField, FoldoutGroup("Descriptions"), TextArea] public string rules { get; private set; }
         [field: SerializeField] public BackgroundSceneSettings backgroundSceneSettings { get; private set; } = new BackgroundSceneSettings();
 
         public Sprite GetIcon()

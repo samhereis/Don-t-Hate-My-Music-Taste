@@ -96,27 +96,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGlobal: 1
+  "_auto\u0399nitialize": 1
   _objects:
   - dependency: {fileID: 4590884804723414133}
     id: 
   _configs:
   - dependency: {fileID: 11400000, guid: aab14b74ca4be1e41aef33a867e6fdc0, type: 2}
     id: 
+  - dependency: {fileID: 11400000, guid: 244f884cc9a386c479a022cd12e5c2fd, type: 2}
+    id: 
   - dependency: {fileID: 11400000, guid: 79bcafb21010ddb4d9aee8662e12874d, type: 2}
     id: 
   - dependency: {fileID: 11400000, guid: cf408bffecb0999418156d5eb3ea1003, type: 2}
     id: 
+  - dependency: {fileID: 11400000, guid: 1d8c352c0858083438ba64dee7380e0d, type: 2}
+    id: 
   _scriptableObjects:
   - dependency: {fileID: 11400000, guid: ca3933e0519f2724880defefb47086aa, type: 2}
-    id: MusicList
+    id: 
   - dependency: {fileID: 11400000, guid: 421e6fb8fb2deb94c9495ea52e43818c, type: 2}
-    id: SpectrumDataContainer
+    id: 
   - dependency: {fileID: 11400000, guid: f2cebac1c9266a7488c2825994490806, type: 2}
-    id: MasterVolume
+    id: masterVolume_Settings
   - dependency: {fileID: 11400000, guid: 905271f28bf226648a563ee0e9cfd0a1, type: 2}
-    id: MusicVolume
+    id: musicVolume_Settings
   - dependency: {fileID: 11400000, guid: 68859daabcd5fc34daccaa14866ff8b4, type: 2}
-    id: EffectsVolume
+    id: effectsVolume_Settings
+  - dependency: {fileID: 11400000, guid: 3910a20c11a4cae42b3cf11c7f677e83, type: 2}
+    id: mouseSensitivity_Settings
+  - dependency: {fileID: 11400000, guid: 1c6b3ff030f5be5448ffe201f5c6a26b, type: 2}
+    id: fieldOfView_Settings
+  - dependency: {fileID: 11400000, guid: 786ac429d1401aa43baca6002a68be97, type: 2}
+    id: 
   _diLogger: {fileID: 4777240692786326203}
   _dependencyInstallers: []
 --- !u!114 &2612783209633280168
@@ -131,12 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468929dcb3b7e7e459edc6f5cb557d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingMenu:
-    <stringReference>k__BackingField: Prefabs/UI/Windows/LoadingMenu
-    <typeReference>k__BackingField: LoadingMenu
-    _removeFromStringReference: []
-    _resourceReference: {fileID: -8881472364547986042, guid: 1ff45515c5c94ee4299aac8cb00412d3,
-      type: 3}
 --- !u!1 &1644052754353849421
 GameObject:
   m_ObjectHideFlags: 0

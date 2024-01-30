@@ -13,8 +13,6 @@ namespace UI.Windows
 {
     public class SettingsMenu : MenuBase
     {
-        public MenuBase openOnBack { get; set; }
-
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup _activeTabIndicator;
         [SerializeField] private Transform _activeTabIndicatorParent;
@@ -39,15 +37,17 @@ namespace UI.Windows
 
         private SettingsTabBase _currentSettingsTab;
 
+        private MenuBase openOnBack;
+
         private void OnValidate()
         {
             _activeTabIndicatorParent = _activeTabIndicator.transform.parent;
         }
 
-        #region 
-
-        public void Initialize()
+        public void Construct(MenuBase openOnBack)
         {
+            this.openOnBack = openOnBack;
+
             _allSettingsTabs = new List<SettingsTabBase> { _gameplayTab, _audioTab, _graphicsTab };
 
             foreach (var settingsTab in _allSettingsTabs)
@@ -115,10 +115,6 @@ namespace UI.Windows
             openOnBack?.Enable();
         }
 
-        #endregion
-
-        #region TabOpennings
-
         public async void OnGameplayTabButtonClicked()
         {
             _gameplayTabButton.SetActiveTabIndicator(_activeTabIndicator, _activeTabIndicatorParent);
@@ -163,10 +159,6 @@ namespace UI.Windows
             }
         }
 
-        #endregion
-
-        #region OnChanged
-
         private IEnumerator CheckOnChanged()
         {
             float duration = 0.25f;
@@ -195,7 +187,5 @@ namespace UI.Windows
         {
             _currentSettingsTab?.ApplyAsync();
         }
-
-        #endregion
     }
 }

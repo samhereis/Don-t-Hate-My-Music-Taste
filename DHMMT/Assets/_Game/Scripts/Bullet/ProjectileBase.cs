@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Gameplay.Bullets
 {
     [RequireComponent(typeof(BulletIdentifier))]
-    public abstract class ProjectileBase : MonoBehaviour, IDamager
+    public abstract class ProjectileBase : MonoBehaviour, IDamagerWeapon
     {
         [SerializeField] protected BulletPooling_SO _pooling;
 
@@ -18,9 +18,9 @@ namespace Gameplay.Bullets
             damagerGameobject = GetComponent<IdentifierBase>();
         }
 
-        public virtual void Initialize(IDamagerActor damagerActor)
+        public virtual void Initialize(IDamagerActor newDamagerActor)
         {
-            this.damagerActor = damagerActor;
+            damagerActor = newDamagerActor;
         }
 
         public abstract void Damage(IDamagable damagable, float damage);

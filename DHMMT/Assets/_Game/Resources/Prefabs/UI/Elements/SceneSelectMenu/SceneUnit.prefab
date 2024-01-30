@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2582605991051620563}
   - component: {fileID: 6028600127829179738}
   - component: {fileID: 7704826320299315136}
-  - component: {fileID: 115175684694414830}
+  - component: {fileID: 7174253440864844712}
   - component: {fileID: 7781370266589777065}
   - component: {fileID: 7086032628753904094}
   m_Layer: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &115175684694414830
+--- !u!114 &7174253440864844712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1230425784360460494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -123,12 +123,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSound: {fileID: 0}
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
-  _requireAudio: 0
 --- !u!114 &7781370266589777065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,12 +137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneImage: {fileID: 5710935965491207890}
   _sceneNameText: {fileID: 5712678777925790303}
-  _playButton: {fileID: 8314724014513122459}
-  _selectButton: {fileID: 1195864251862375575}
+  _playButton: {fileID: 6517786285936979577}
+  _selectButton: {fileID: 4960521490013483274}
   _onSelectPanel: {fileID: 4209531296221905257}
   _scene:
     <sceneCode>k__BackingField: 
-    _scene: {fileID: 0}
+    _scene: {fileID: 102900000, guid: f1ddf72421ef67b40b6082f77c7b2300, type: 3}
     <sceneName>k__BackingField: 
     <gameMode>k__BackingField: 0
     <description>k__BackingField: 
@@ -195,7 +189,7 @@ GameObject:
   - component: {fileID: 2588314635572578109}
   - component: {fileID: 4971415199062497592}
   - component: {fileID: 3232186291145551312}
-  - component: {fileID: 1195864251862375575}
+  - component: {fileID: 4960521490013483274}
   - component: {fileID: 2209234150227429063}
   - component: {fileID: 2844412886994018302}
   m_Layer: 0
@@ -263,7 +257,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1195864251862375575
+--- !u!114 &4960521490013483274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2408915580852351605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -307,12 +301,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSound: {fileID: 0}
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
-  _requireAudio: 1
 --- !u!114 &2209234150227429063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +435,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -469,7 +457,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -502,7 +490,7 @@ GameObject:
   - component: {fileID: 4335855436356461592}
   - component: {fileID: 9140852085770043626}
   - component: {fileID: 8962578864199356148}
-  - component: {fileID: 8314724014513122459}
+  - component: {fileID: 6517786285936979577}
   - component: {fileID: 1130068322980586454}
   - component: {fileID: 1893458506148272154}
   m_Layer: 0
@@ -570,7 +558,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8314724014513122459
+--- !u!114 &6517786285936979577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -579,7 +567,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3528822750184658334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -614,12 +602,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSound: {fileID: 0}
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
-  _requireAudio: 1
 --- !u!114 &1130068322980586454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,7 +873,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1005,7 +987,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1027,7 +1009,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

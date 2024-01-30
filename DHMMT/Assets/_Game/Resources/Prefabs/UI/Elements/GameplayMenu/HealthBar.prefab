@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3008223442927651252}
   - component: {fileID: 5482500225665628890}
   - component: {fileID: 7480167954130077072}
-  - component: {fileID: 2757777329298110865}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -111,25 +110,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
---- !u!114 &2757777329298110865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997635489046402995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d11859e7c77284fabe37400bd20f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseSettings:
-    ease: 27
-    turnOffDuration: 0.25
-    turnOnDuration: 1
-  _holder: {fileID: 8728172524937751451}
-  _onOffPosition: {x: 500, y: 0, z: 0}
 --- !u!1 &2547685592852219010
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +322,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &7222459796138822121
 GameObject:
   m_ObjectHideFlags: 0

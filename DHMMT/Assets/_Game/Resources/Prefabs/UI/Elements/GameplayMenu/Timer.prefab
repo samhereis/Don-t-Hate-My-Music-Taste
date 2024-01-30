@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7307812535186048964}
   - component: {fileID: 8765266725823709295}
   - component: {fileID: 5165557813228314760}
-  - component: {fileID: 3581272956778573752}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -71,25 +70,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
---- !u!114 &3581272956778573752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045111733152404201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d11859e7c77284fabe37400bd20f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseSettings:
-    ease: 27
-    turnOffDuration: 0.25
-    turnOnDuration: 1
-  _holder: {fileID: 3868454520544694831}
-  _onOffPosition: {x: -500, y: 0, z: 0}
 --- !u!1 &3570541635037563253
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +171,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &5963898420602147319
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +241,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!114 &975627240881564755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,15 +379,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

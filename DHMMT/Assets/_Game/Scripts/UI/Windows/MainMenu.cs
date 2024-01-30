@@ -6,13 +6,19 @@ namespace UI.Windows
 {
     public class MainMenu : MenuBase
     {
-        [field: SerializeField] public SceneSelectionMenu sceneSelectionMenu { get; set; }
-        [field: SerializeField] public SettingsMenu settingsMenu { get; set; }
-
         [Header("Buttons")]
         [SerializeField] private Button _sceneSelectionMenuButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
+
+        private SceneSelectionMenu _sceneSelectionMenu;
+        private SettingsMenu _settingsMenu;
+
+        public void Construct(SceneSelectionMenu sceneSelectionMenu, SettingsMenu settingsMenu)
+        {
+            _sceneSelectionMenu = sceneSelectionMenu;
+            _settingsMenu = settingsMenu;
+        }
 
         public override void Enable(float? duration = null)
         {
@@ -46,12 +52,12 @@ namespace UI.Windows
 
         public void OnClickedSceneSelectionMenuButton()
         {
-            sceneSelectionMenu.Enable();
+            _sceneSelectionMenu.Enable();
         }
 
         public void OnClickedSettingsButton()
         {
-            settingsMenu.Enable();
+            _settingsMenu.Enable();
         }
 
         public void OnClickedQuitButton()

@@ -6,6 +6,7 @@ using Identifiers;
 using Interfaces;
 using Observables;
 using System;
+using TargetIndicator;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ namespace Charatcers.Enemy
         [field: SerializeField, Header("Debug")] public bool isAlive { get; private set; } = true;
         [field: SerializeField] public float currentHealth { get; private set; } = 100;
         [field: SerializeField] public float maxHealth { get; private set; } = 100;
-        [field: SerializeField] public IdentifierBase damagedGameobject { get; private set; }
+        [field: SerializeField] public IdentifierBase damagableIdentifier { get; private set; }
 
         [Header("DI")]
         [Inject(DataSignal_ConstStrings.onEnemyDied)][SerializeField] private DataSignal<IDamagable> _onEnemyDied;
@@ -50,7 +51,7 @@ namespace Charatcers.Enemy
 
         private void Awake()
         {
-            if (damagedGameobject == null) damagedGameobject = GetComponent<IdentifierBase>();
+            if (damagableIdentifier == null) damagableIdentifier = GetComponent<IdentifierBase>();
             if (_enemyAgent == null) _enemyAgent = GetComponent<EnemyAgent>();
             if (_targetIndicator == null) _targetIndicator = GetComponentInChildren<Target>(true);
         }
@@ -79,7 +80,7 @@ namespace Charatcers.Enemy
             }
         }
 
-        public void TakeDamage(float damage, IDamager damagerObject)
+        public void TakeDamage(float damage, IDamagerWeapon damagerWeapon)
         {
             if (isAlive == true)
             {
@@ -92,13 +93,13 @@ namespace Charatcers.Enemy
 
                 UpdateHealthSlider();
 
-                var aDamage = new ADamage();
-                aDamage.damagerObject = damagerObject;
-                aDamage.damagedObject = this;
+                var aDamage = new PostDamageInfo();
+                aDamage.damagerObject = damagerWeapon;
+                aDamage.damagable = this;
                 aDamage.damageAmount = damage;
                 aDamage.healthAfterDamage = currentHealth;
 
-                damagerObject.damagerActor.OnHasDamaged(aDamage);
+                damagerWeapon.damagerActor.OnHasDamaged(aDamage);
             }
         }
 

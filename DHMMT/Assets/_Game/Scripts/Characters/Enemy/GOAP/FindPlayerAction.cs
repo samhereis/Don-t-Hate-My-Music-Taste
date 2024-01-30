@@ -106,7 +106,7 @@ namespace GOAP.Actions
             if (_checkForPathAvailability)
             {
                 var navMeshPath = new NavMeshPath();
-                if (baseSettings.navMeshAgent.CalculatePath(baseSettings.target.transform.position, navMeshPath) == false || navMeshPath.status == NavMeshPathStatus.PathComplete == false)
+                if (baseSettings.agent.CalculatePath(baseSettings.target.transform.position, navMeshPath) == false || navMeshPath.status == NavMeshPathStatus.PathComplete == false)
                 {
                     if (_destroyIfPathIsUnavailable) { _enemyIdentifier.TryGet<EnemyHealth>()?.Die(); };
                     return false;

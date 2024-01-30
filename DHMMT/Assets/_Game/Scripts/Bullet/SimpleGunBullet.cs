@@ -61,11 +61,6 @@ namespace Gameplay.Bullets
             }
         }
 
-        public override void Initialize(IDamagerActor damagerActor)
-        {
-            base.Initialize(damagerActor);
-        }
-
         private void OnEnd()
         {
             onCollided -= OnEnd;

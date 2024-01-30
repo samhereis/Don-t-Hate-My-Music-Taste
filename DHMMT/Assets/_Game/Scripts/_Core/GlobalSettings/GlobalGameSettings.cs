@@ -1,6 +1,8 @@
 using DependencyInjection;
 using Services;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Managers
 {
@@ -23,8 +25,9 @@ namespace Managers
         public static void EnambleGameplayMode()
         {
             _inputHolder.input.Enable();
-            _inputHolder.input.Gameplay.Enable();
+            _inputHolder.input.Player.Enable();
             _inputHolder.input.UI.Disable();
+            _inputHolder.DisableOnUIBackPressed();
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -35,8 +38,9 @@ namespace Managers
         public static void EnableUIMode()
         {
             _inputHolder.input.Enable();
-            _inputHolder.input.Gameplay.Disable();
+            _inputHolder.input.Player.Disable();
             _inputHolder.input.UI.Enable();
+            _inputHolder.EnableOnUIBackPressed();
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

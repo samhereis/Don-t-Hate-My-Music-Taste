@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7794705167778087205}
   - component: {fileID: 4024779476798294564}
-  - component: {fileID: 8618992854540666040}
   - component: {fileID: 741064656608225237}
   m_Layer: 0
   m_Name: EFH_HCDI
@@ -46,26 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3707bf7f88f49f74cadc956dc6cdcca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isGlobal: 0
+  "_auto\u0399nitialize": 1
   _objects:
-  - id: SceneManager_EFH
-    instance: {fileID: 741064656608225237}
+  - dependency: {fileID: 741064656608225237}
+    id: 
   _configs: []
   _scriptableObjects: []
-  _eventsWithNoParameters: []
-  _isGlobal: 0
-  _hardCodeDependencyInjectors: []
---- !u!114 &8618992854540666040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6914363445230919676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd17a75a2feeed4418ab1b7073ae0e7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _diLogger: {fileID: 0}
+  _dependencyInstallers: []
 --- !u!114 &741064656608225237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,29 +66,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4293d73b6cc1f4ea70911bef7b88ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebugMode: 0
-  _theLightPrefab: {fileID: -504128010224410714, guid: b43cb13e3ab988b4c9dfe8fed0ef2427,
+  theLightPrefab: {fileID: -504128010224410714, guid: b43cb13e3ab988b4c9dfe8fed0ef2427,
     type: 3}
-  _playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
+  playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
     type: 3}
-  _exitPrefab: {fileID: 7614115770728883014, guid: f48ec86ee81ae3f4ca40f3beb4823cbe,
+  exitPrefab: {fileID: 7614115770728883014, guid: f48ec86ee81ae3f4ca40f3beb4823cbe,
     type: 3}
-  _directionalLight: {fileID: 0}
-  _gameplayMenuPrefab: {fileID: 3852153733182596020, guid: 8d30b7869fab8bb448f0cea20bb2afc1,
+  directionalLight: {fileID: 0}
+  gameplayMenuPrefab: {fileID: 3852153733182596020, guid: 8d30b7869fab8bb448f0cea20bb2afc1,
     type: 3}
-  _winMenuPrefab: {fileID: 672408869691582128, guid: 54ec6d32e0a530c4a84f2e22f60b679f,
+  winMenuPrefab: {fileID: 672408869691582128, guid: 54ec6d32e0a530c4a84f2e22f60b679f,
     type: 3}
-  _loseMenuPrefab: {fileID: 3083094122130186433, guid: 9bf4c9663916ba74cbc0358f0a42710e,
+  loseMenuPrefab: {fileID: 3083094122130186433, guid: 9bf4c9663916ba74cbc0358f0a42710e,
     type: 3}
-  _pauseMenuPrefab: {fileID: 2260329170480260227, guid: f2e4830622165bc48a5f796c45c9bf22,
+  pauseMenuPrefab: {fileID: 2260329170480260227, guid: f2e4830622165bc48a5f796c45c9bf22,
     type: 3}
-  _directionalLightIntencity: 0.001
-  _secondsUntillLoseWhileOutsideOfTheLight: 25
-  _lightRange: 10
-  _enemyNavmeshLayerMask:
+  isDebugMode: 0
+  directionalLightIntencity: 0.01
+  secondsUntillLoseWhileOutsideOfTheLight: 25
+  lightRange: 10
+  enemyNavmeshLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  _exitLocations: []
-  _theLightLocations: []
+    m_Bits: 256
+  _exitLocations:
+  - {fileID: 0}
+  _theLightLocations:
+  - {fileID: 0}
   _enemiesToSpawnOnStart:
   - {fileID: 11400000, guid: 302de41a7188e1b43bd7813b668e125b, type: 2}

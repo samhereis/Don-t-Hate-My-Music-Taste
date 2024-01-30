@@ -240,7 +240,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -256,15 +256,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -306,7 +308,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &7029020774551427219
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -416,15 +417,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -466,7 +469,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &8939838851426278685
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +534,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EFH_GameplayMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2746893064933306507, guid: 27c44aa2e39855f4287f74925dce3d59,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 511
+      objectReference: {fileID: 0}
     - target: {fileID: 5456306406172530793, guid: 27c44aa2e39855f4287f74925dce3d59,
         type: 3}
       propertyPath: stayUnderTheLight_Popup
@@ -546,6 +553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428902152920491557, guid: 27c44aa2e39855f4287f74925dce3d59,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8055608830930877087, guid: 27c44aa2e39855f4287f74925dce3d59,
         type: 3}
@@ -688,7 +700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0c5ed699fa6f64d8ae46968bfd73b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameplayMenu: {fileID: 0}
+  _baseSettings:
+    window: {fileID: 0}
   _stayUnderTheLight_Popup: {fileID: 5297044918347557826}
 --- !u!224 &8516619400869163640 stripped
 RectTransform:
