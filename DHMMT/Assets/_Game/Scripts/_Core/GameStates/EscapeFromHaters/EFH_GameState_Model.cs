@@ -15,7 +15,7 @@ namespace GameStates.SceneManagers
 
         [Inject] public PlayingMusicData playingMusicData;
 
-        [Inject(DataSignal_ConstStrings.onGameplayStatusChaned)] public DataSignal<GameplayStatus> onGameplayStatusChaned;
+        [Inject(DataSignal_ConstStrings.onGameplayStatusChaned)] public DataSignal<GameplayStatus> onGameplayStatusChanged;
         [Inject(DataSignal_ConstStrings.onExitFound)] public DataSignal<Exit_Identifier> onExitFound;
         [Inject(DataSignal_ConstStrings.onEnemyDied)] public DataSignal<IDamagable> onEnemyDied;
 

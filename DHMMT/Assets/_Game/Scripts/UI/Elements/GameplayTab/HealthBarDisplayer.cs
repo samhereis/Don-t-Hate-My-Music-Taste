@@ -19,8 +19,7 @@ namespace UI.Elements.GameplayTab
         [Header("Settings")]
         [SerializeField] private Gradient _healthBarGradient;
 
-        [Header("DI")]
-        [Inject(ObservableValue_ConstStrings.playerHealth)][SerializeField] private ObservableValue<PlayerHealthData> _playerHealthValue;
+        [Inject(ObservableValue_ConstStrings.playerHealth)] private ObservableValue<PlayerHealthData> _playerHealthValue;
 
         private void Awake()
         {

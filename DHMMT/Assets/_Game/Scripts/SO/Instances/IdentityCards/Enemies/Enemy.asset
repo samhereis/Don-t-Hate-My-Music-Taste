@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   identityCard:
-    <targetName>k__BackingField: RedEnemy (Identifiers.EnemyIdentifier)
+    <targetName>k__BackingField: 
     <target>k__BackingField: {fileID: -6355836029493348132, guid: 095c86544a3d20345b3de42e54078d54,
       type: 3}

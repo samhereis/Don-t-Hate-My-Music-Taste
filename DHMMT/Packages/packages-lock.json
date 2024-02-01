@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "2f34445ec0af4d1f50cc11b569422a515f28f460"
+      "hash": "dfca3b846fbb28797401a108fd7f954329a669c4"
     },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",

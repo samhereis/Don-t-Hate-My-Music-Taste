@@ -22,8 +22,7 @@ namespace UI.Elements.GameplayTab
         [Header("Settings")]
         [SerializeField] private Gradient _ammoBarGradient;
 
-        [Header("DI")]
-        [Inject(ObservableValue_ConstStrings.playerWeaponData)][SerializeField] private ObservableValue<PlayerWeaponData> _playerWeaponData;
+        [Inject(ObservableValue_ConstStrings.playerWeaponData)] private ObservableValue<PlayerWeaponData> _playerWeaponData;
 
         private void Awake()
         {

@@ -49,6 +49,7 @@ namespace GameStates.SceneManagers
 
         private async void SpawnNearMainPlayer(EnemyIdentifier enemyIdentifier)
         {
+            if (_model.playerIdentifier == null) { _model.playerIdentifier = Object.FindFirstObjectByType<PlayerIdentifier>(); }
             var canSpawn = _model.playerIdentifier != null;
 
             if (canSpawn)
@@ -62,7 +63,7 @@ namespace GameStates.SceneManagers
                 var enemyInstance = Object.Instantiate(enemyIdentifier, nearPositionToPlayer, Quaternion.identity);
                 enemyInstance.gameObject.SetActive(false);
 
-                await AsyncHelper.DelayInt(1000);
+                await AsyncHelper.DelayFloat(1);
                 enemyInstance.gameObject.SetActive(true);
             }
         }

@@ -32,7 +32,7 @@ namespace GameStates.SceneManagers
             loseMenu = Object.Instantiate(_model.sceneManager.loseMenuPrefab);
             pauseMenu = Object.Instantiate(_model.sceneManager.pauseMenuPrefab);
 
-            gameplayMenu?.window?.Enable();
+            gameplayMenu.window?.Enable();
         }
 
         public override void Dispose()

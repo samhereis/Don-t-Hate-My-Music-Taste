@@ -21,8 +21,7 @@ namespace UI.Windows
         [SerializeField] private CrosshairIdentifier _crosshairIdentifier;
         [field: SerializeField] public KillsCountDisplayer killsCountDisplayer { get; private set; }
 
-        [Header("DI")]
-        [Inject(ObservableValue_ConstStrings.isPlayerAiming)][SerializeField] private ObservableValue<bool> _isPlayerAiming;
+        [Inject(ObservableValue_ConstStrings.isPlayerAiming)] private ObservableValue<bool> _isPlayerAiming;
         [Inject] private PlayerInputService _input_SO;
 
         protected override void Awake()

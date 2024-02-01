@@ -80,7 +80,7 @@ namespace GameStates
             _efh_UIManager.loseMenu.window.onReplayRequest += Replay;
             _efh_UIManager.winMenu.window.onReplayRequest += Replay;
 
-            _model.onGameplayStatusChaned.AddListener(OnGamePauseStatusChanged);
+            _model.onGameplayStatusChanged.AddListener(OnGamePauseStatusChanged);
         }
 
         public void UnsubscribeFromEvents()
@@ -100,7 +100,7 @@ namespace GameStates
             _efh_UIManager.loseMenu.window.onReplayRequest -= Replay;
             _efh_UIManager.winMenu.window.onReplayRequest -= Replay;
 
-            _model.onGameplayStatusChaned.RemoveListener(OnGamePauseStatusChanged);
+            _model.onGameplayStatusChanged.RemoveListener(OnGamePauseStatusChanged);
         }
 
         private async void CheckForIsWithinTheLight()
