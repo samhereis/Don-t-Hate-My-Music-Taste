@@ -1,16 +1,21 @@
+using Agents;
 using DataClasses;
-using Demo.Scripts.Runtime.Base;
+using Demo.Scripts.Runtime;
 using Helpers;
 using Interfaces;
 using Pooling;
 using SO;
 using Sounds;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Identifiers
 {
     public class WeaponIdentifier : IdentifierBase
     {
+        public Action onReloaded;
+
         public enum WeaponType { Rifle, Pistol, Grenade }
 
         [field: SerializeField] public WeaponType weaponType { get; private set; } = WeaponType.Rifle;
@@ -28,66 +33,59 @@ namespace Identifiers
         [SerializeField] private ISoundPlayer _soundPlayer;
         [field: SerializeField] public Weapon _weapon { get; private set; }
         [SerializeField] private Transform _shootPoint;
-
-        [Header("Prefabs")]
-        [SerializeField] private CrosshairIdentifier _crosshairPrefab;
+        [SerializeField] private AnimationAgent _animationAgent;
 
         [Header("SO")]
         [SerializeField] private BulletPooling_SO _bulletPooling_SO;
 
         private IDamagerActor _damagerActor;
 
+        private Dictionary<string, Action> _animationAgentCallbackMethods;
+
         private void Awake()
         {
             _soundPlayer = GetComponentInChildren<SoundPlayer>(true);
             _weapon = GetComponentInChildren<Weapon>(true);
+            _animationAgent = GetComponentInChildren<AnimationAgent>(true);
+
+            if(_shootPoint == null) { _shootPoint = transform.Find("ShootPoint"); }
+
+            _animationAgentCallbackMethods = new Dictionary<string, Action>() { { "OnReload", onReloaded } };
         }
 
-        private void OnEnable()
-        {
-            _weapon.onEquip += OnEquip;
-            _weapon.onUnequip += OnUnequip;
-        }
-
-        private void OnDisable()
-        {
-            _weapon.onEquip -= OnEquip;
-            _weapon.onUnequip -= OnUnequip;
-        }
-
-        private void OnEquip(WeaponIdentifier weapon, IDamagerActor damagerActor)
+        public void OnEquip(IDamagerActor damagerActor)
         {
             _damagerActor = damagerActor;
 
             _weapon.onFire -= OnFire;
-            _weapon.onReloaded -= OnReload;
+            onReloaded -= OnReloaded;
 
             _weapon.onFire += OnFire;
-            _weapon.onReloaded += OnReload;
+            onReloaded += OnReloaded;
         }
 
-        private void OnUnequip(WeaponIdentifier weapon)
+        public void OnUnequip()
         {
             _damagerActor = null;
 
             _weapon.onFire -= OnFire;
-            _weapon.onReloaded -= OnReload;
+            onReloaded -= OnReloaded;
         }
 
-        private void OnReload(WeaponIdentifier weapon)
+        private void OnReloaded()
         {
             currentAmmo = maxAmmo;
             ResetCanShoot(1f);
         }
 
-        private void OnFire(WeaponIdentifier weapon)
+        private void OnFire()
         {
             if (canShoot == false) { return; }
 
             var bullet = _bulletPooling_SO.PutOff(_shootPoint.position, _shootPoint.rotation);
             bullet.Initialize(_damagerActor);
 
-            _soundPlayer.TryPlay(_fireSound);
+            _soundPlayer?.TryPlay(_fireSound);
 
             currentAmmo--;
 

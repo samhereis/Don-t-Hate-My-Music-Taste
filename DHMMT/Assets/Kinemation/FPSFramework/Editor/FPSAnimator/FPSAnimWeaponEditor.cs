@@ -1,4 +1,4 @@
-// Designed by Kinemation, 2023
+// Designed by KINEMATION, 2023
 
 using System.Reflection;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
@@ -26,7 +26,7 @@ namespace Kinemation.FPSFramework.Editor.FPSAnimator
             // Save the foldout state to EditorPrefs
             EditorPrefs.SetBool("MyAbstractClassEditor_showAbstractProperties", showAbstractProperties);
         }
-
+        
         public override void OnInspectorGUI()
         {
             // Draw the foldout header for the abstract class properties
@@ -66,16 +66,28 @@ namespace Kinemation.FPSFramework.Editor.FPSAnimator
                     }
                 }
                 
+                GUILayout.BeginHorizontal();
+                
                 if (GUILayout.Button("Setup Weapon"))
                 {
                     owner.SetupWeapon();
+
+                    if (PrefabUtility.IsPartOfPrefabInstance(owner.gameObject))
+                    {
+                        PrefabUtility.ApplyPrefabInstance(owner.gameObject, InteractionMode.AutomatedAction);
+                    }
                 }
+                
+                GUILayout.EndHorizontal();
 
                 if (GUILayout.Button("Save Weapon Position"))
                 {
                     owner.SavePose();
                     
-                    if (PrefabUtility.IsPartOfAnyPrefab(owner.gameObject))
+                    EditorUtility.SetDirty(owner.weaponAsset);
+                    AssetDatabase.SaveAssets();
+                    
+                    if (PrefabUtility.IsPartOfPrefabInstance(owner.gameObject))
                     {
                         // Apply the changes to the Prefab asset
                         PrefabUtility.ApplyPrefabInstance(owner.gameObject, InteractionMode.AutomatedAction);
