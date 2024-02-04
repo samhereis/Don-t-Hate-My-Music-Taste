@@ -3,6 +3,7 @@ using Helpers;
 using Identifiers;
 using IdentityCards;
 using Interfaces;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UI.Windows;
@@ -17,26 +18,23 @@ namespace GameStates.SceneManagers
         public List<PlayerSpawnPoint_Identifier> theLightLocations => _theLightLocations;
         public List<EnemyIdentityCard> enemiesToSpawnOnStart => _enemiesToSpawnOnStart;
 
-        [Header("Actors")]
-        [field: SerializeField] public TheLight_Identifier theLightPrefab;
-        [field: SerializeField] public PlayerIdentifier playerPrefab;
-        [field: SerializeField] public Exit_Identifier exitPrefab;
+        [field: FoldoutGroup("Prefabs"), SerializeField] public TheLight_Identifier theLightPrefab;
+        [field: FoldoutGroup("Prefabs"), SerializeField] public Exit_Identifier exitPrefab;
+        [field: FoldoutGroup("Prefabs"), SerializeField] public PlayerIdentifier playerPrefab;
 
-        [Header("Components")]
-        [field: SerializeField] private Light directionalLight;
+        [field: FoldoutGroup("Components"), SerializeField] private Light directionalLight;
 
-        [Header("Menus")]
-        [field: SerializeField] public EFH_GameplayMenu gameplayMenuPrefab;
-        [field: SerializeField] public EFH_WinMenu winMenuPrefab;
-        [field: SerializeField] public EFH_LoseMenu loseMenuPrefab;
-        [field: SerializeField] public PauseMenu pauseMenuPrefab;
 
-        [Header("Settings")]
-        [field: SerializeField] public bool isDebugMode;
-        [field: SerializeField] public float directionalLightIntencity = 0.01f;
-        [field: SerializeField] public int secondsUntillLoseWhileOutsideOfTheLight = 25;
-        [field: SerializeField] public float lightRange = 10;
-        [field: SerializeField] public LayerMask enemyNavmeshLayerMask;
+        [field: FoldoutGroup("Menus"), SerializeField] public EFH_GameplayMenu gameplayMenuPrefab;
+        [field: FoldoutGroup("Menus"), SerializeField] public EFH_WinMenu winMenuPrefab;
+        [field: FoldoutGroup("Menus"), SerializeField] public EFH_LoseMenu loseMenuPrefab;
+        [field: FoldoutGroup("Menus"), SerializeField] public PauseMenu pauseMenuPrefab;
+
+        [field: FoldoutGroup("Settings"), SerializeField] public bool isDebugMode;
+        [field: FoldoutGroup("Settings"), SerializeField] public float directionalLightIntencity = 0.01f;
+        [field: FoldoutGroup("Settings"), SerializeField] public int secondsUntillLoseWhileOutsideOfTheLight = 25;
+        [field: FoldoutGroup("Settings"), SerializeField] public float lightRange = 10;
+        [field: FoldoutGroup("Settings"), SerializeField] public LayerMask enemyNavmeshLayerMask;
 
         [SerializeField] private List<ExitLocation_Identifier> _exitLocations = new List<ExitLocation_Identifier>();
         [SerializeField] private List<PlayerSpawnPoint_Identifier> _theLightLocations = new List<PlayerSpawnPoint_Identifier>();

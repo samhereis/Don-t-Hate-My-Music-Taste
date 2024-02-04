@@ -1,6 +1,6 @@
 using ConstStrings;
 using DataClasses;
-using Demo.Scripts.Runtime.Base;
+using Demo.Scripts.Runtime;
 using DependencyInjection;
 using Interfaces;
 using Observables;
@@ -14,6 +14,7 @@ namespace Identifiers
         [Header("Components")]
         [SerializeField] private FPSController _fpsController;
         [SerializeField] private Camera _camera;
+        [SerializeField] private FPSData _fpsData;
 
         [Header("DI")]
         [Inject(ObservableValue_ConstStrings.isPlayerAiming)] private ObservableValue<bool> _isPlayerAiming;
@@ -26,6 +27,7 @@ namespace Identifiers
         {
             damagerIdentifier = this;
             if (_camera == null) { _camera = GetComponentInChildren<Camera>(true); }
+            if (_fpsData == null) { _fpsData = GetComponentInChildren<FPSData>(true); }
         }
 
         private void Start()
@@ -36,6 +38,32 @@ namespace Identifiers
             _fpsController.Initialize();
 
             SubscribeToEvents();
+        }
+
+        private void Update()
+        {
+            _fpsData.isChangeWeapon = Input.GetKeyUp(KeyCode.F);
+            _fpsData.isReload = Input.GetKeyUp(KeyCode.R);
+            _fpsData.isThwowGranade = Input.GetKeyUp(KeyCode.G);
+            _fpsData.isRightLean = Input.GetKeyUp(KeyCode.E);
+            _fpsData.leftLean = Input.GetKeyUp(KeyCode.Q);
+            _fpsData.mouseScrollWeel = Input.GetAxis("Mouse ScrollWheel");
+            _fpsData.isFirePressed = Input.GetKeyDown(KeyCode.Mouse0);
+            _fpsData.isFireReleased = Input.GetKeyUp(KeyCode.Mouse0);
+            _fpsData.isToggleAim = Input.GetKeyDown(KeyCode.Mouse1);
+            _fpsData.isChangeScope = Input.GetKeyDown(KeyCode.V);
+            _fpsData.isB = Input.GetKeyDown(KeyCode.B);
+            _fpsData.isH = Input.GetKeyDown(KeyCode.H);
+            _fpsData.isFreeLook = Input.GetKey(KeyCode.X);
+            _fpsData.deltaMouseX = Input.GetAxis("Mouse X");
+            _fpsData.deltaMouseY = -Input.GetAxis("Mouse Y");
+            _fpsData.isJump = Input.GetKeyDown(KeyCode.Space);
+            _fpsData.isSprint = Input.GetKey(KeyCode.LeftShift);
+            _fpsData.isSlide = Input.GetKey(KeyCode.X);
+            _fpsData.isProne = Input.GetKeyDown(KeyCode.LeftControl);
+            _fpsData.isCrouch = Input.GetKeyDown(KeyCode.C);
+            _fpsData.moveXRaw = Input.GetAxisRaw("Horizontal");
+            _fpsData.moveYRaw = Input.GetAxisRaw("Vertical");
         }
 
         public void SubscribeToEvents()

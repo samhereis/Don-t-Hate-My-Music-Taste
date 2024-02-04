@@ -2,13 +2,16 @@
 
 using UnityEngine;
 
-public class ScreenshotMaker : MonoBehaviour
+namespace Demo.Scripts.Runtime
 {
-    void Update()
+    public class ScreenshotMaker : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        void Update()
         {
-            ScreenCapture.CaptureScreenshot("scr.png", 2);
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                ScreenCapture.CaptureScreenshot("scr.png", 2);
+            }
         }
     }
 }

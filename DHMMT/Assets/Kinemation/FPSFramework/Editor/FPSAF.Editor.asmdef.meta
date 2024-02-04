@@ -5,3 +5,10 @@ AssemblyDefinitionImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 238641
+  packageName: FPS Animation Framework
+  packageVersion: 3.5.2
+  assetPath: Assets/Kinemation/FPSFramework/Editor/FPSAF.Editor.asmdef
+  uploadId: 641489

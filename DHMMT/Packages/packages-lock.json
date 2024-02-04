@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "dfca3b846fbb28797401a108fd7f954329a669c4"
+      "hash": "78d4593d349bfdd024e61933dd5238fd426941c3"
     },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",
@@ -206,7 +206,7 @@
       }
     },
     "com.unity.rendering.light-transport": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "depth": 2,
       "source": "builtin",
       "dependencies": {

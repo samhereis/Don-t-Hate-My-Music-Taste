@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGlobal: 0
+  "_auto\u0399nitialize": 0
   _objects:
   - dependency: {fileID: 0}
     id: SceneManager_TD
@@ -65,8 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68b6714d886bd74e9e41d4ddfc11ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
-    type: 3}
+  _playerPrefab: {fileID: 0}
   _modeTDGameplayMenuPrefab: {fileID: 7912298485958287785, guid: a260540d15fdf2f438e526428a22be97,
     type: 3}
   _modeLoseMenuPrefab: {fileID: 4599395570310097311, guid: ab7f3c57a933229478ba0536e94f4fd5,

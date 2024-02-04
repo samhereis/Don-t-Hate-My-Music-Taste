@@ -1,14 +1,12 @@
+using Helpers;
 using Interfaces;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Gameplay.Bullets
 {
     public class SimpleGunBullet : ProjectileBase
     {
-        public Quaternion quaternion;
-
         public Action onCollided;
 
         [Header("Components")]
@@ -19,18 +17,20 @@ namespace Gameplay.Bullets
         [SerializeField] private float _speed;
         [SerializeField] private float _damage;
         [SerializeField] private float _selfPutinToPoolTime = 3;
+        [SerializeField] private float _putinDelay = 1;
 
-        private void OnValidate()
+        private void Awake()
         {
-            if (_projectileView == null) _projectileView = GetComponentInChildren<ProjectileView>();
+            if (_projectileView == null) _projectileView = GetComponentInChildren<ProjectileView>(true);
         }
 
-        private void OnEnable()
+        private async void OnEnable()
         {
             _projectileView?.Init();
             onCollided += OnEnd;
 
-            StartCoroutine(AutoEnd());
+            await AsyncHelper.DelayFloat(_selfPutinToPoolTime);
+            OnEnd();
         }
 
         private void OnDisable()
@@ -43,7 +43,6 @@ namespace Gameplay.Bullets
 
         private void Update()
         {
-            quaternion = transform.rotation;
             transform.position += transform.forward * _speed * Time.deltaTime;
         }
 
@@ -61,21 +60,12 @@ namespace Gameplay.Bullets
             }
         }
 
-        private void OnEnd()
+        private async void OnEnd()
         {
             onCollided -= OnEnd;
 
-            _projectileView?.OnEnd(() =>
-            {
-                _pooling.PutIn(this);
-            });
-        }
-
-        private IEnumerator AutoEnd()
-        {
-            yield return new WaitForSeconds(_selfPutinToPoolTime);
-
-            OnEnd();
+            await AsyncHelper.DelayFloat(_putinDelay);
+            _pooling.PutIn(this);
         }
 
         private void ResetVelocity()

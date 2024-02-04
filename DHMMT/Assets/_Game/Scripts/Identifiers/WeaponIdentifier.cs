@@ -1,7 +1,6 @@
 using Agents;
 using DataClasses;
 using Demo.Scripts.Runtime;
-using Helpers;
 using Interfaces;
 using Pooling;
 using SO;
@@ -27,55 +26,77 @@ namespace Identifiers
         [field: SerializeField, Header("Ammo")] public int maxAmmo { get; private set; } = 30;
         [field: SerializeField] public int currentAmmo { get; private set; } = 30;
         [field: SerializeField] public bool canShoot { get; private set; } = true;
-        [field: SerializeField] public float fireRate { get; private set; } = 0.1f;
 
         [Header("Components")]
         [SerializeField] private ISoundPlayer _soundPlayer;
-        [field: SerializeField] public Weapon _weapon { get; private set; }
+        [SerializeField] private Weapon _weapon_;
         [SerializeField] private Transform _shootPoint;
-        [SerializeField] private AnimationAgent _animationAgent;
+        [SerializeField] private AnimationAgent _weaponAnimationAgent;
+        [SerializeField] private AnimationAgent _actorAnimationAgent;
 
         [Header("SO")]
         [SerializeField] private BulletPooling_SO _bulletPooling_SO;
 
         private IDamagerActor _damagerActor;
 
-        private Dictionary<string, Action> _animationAgentCallbackMethods;
+        private Dictionary<string, Action> _animationAgentCallbackMethods = new Dictionary<string, Action>();
+
+        public Weapon weapon
+        {
+            get
+            {
+                if (_weapon_ == null) { _weapon_ = GetComponentInChildren<Weapon>(true); };
+                return _weapon_;
+            }
+        }
 
         private void Awake()
         {
             _soundPlayer = GetComponentInChildren<SoundPlayer>(true);
-            _weapon = GetComponentInChildren<Weapon>(true);
-            _animationAgent = GetComponentInChildren<AnimationAgent>(true);
+            _weaponAnimationAgent = GetComponentInChildren<AnimationAgent>(true);
 
-            if(_shootPoint == null) { _shootPoint = transform.Find("ShootPoint"); }
+            if (_shootPoint == null) { _shootPoint = transform.Find("ShootPoint"); }
 
-            _animationAgentCallbackMethods = new Dictionary<string, Action>() { { "OnReload", onReloaded } };
+            _animationAgentCallbackMethods.Add("OnReload", OnReload);
         }
 
-        public void OnEquip(IDamagerActor damagerActor)
+        public void OnEquip(IDamagerActor damagerActor, AnimationAgent actorAnimationAgent)
         {
+            _actorAnimationAgent = actorAnimationAgent;
+
+            if (_actorAnimationAgent != null)
+            {
+                _actorAnimationAgent.onAnimationCallback -= OnAnimationEventRecieved;
+                _actorAnimationAgent.onAnimationCallback += OnAnimationEventRecieved;
+            }
+
             _damagerActor = damagerActor;
 
-            _weapon.onFire -= OnFire;
+            weapon.onFire -= OnFire;
             onReloaded -= OnReloaded;
 
-            _weapon.onFire += OnFire;
+            weapon.onFire += OnFire;
             onReloaded += OnReloaded;
         }
 
         public void OnUnequip()
         {
+            if (_actorAnimationAgent != null)
+            {
+                _actorAnimationAgent.onAnimationCallback -= OnAnimationEventRecieved;
+                _actorAnimationAgent = null;
+            }
+
             _damagerActor = null;
 
-            _weapon.onFire -= OnFire;
+            weapon.onFire -= OnFire;
             onReloaded -= OnReloaded;
         }
 
         private void OnReloaded()
         {
             currentAmmo = maxAmmo;
-            ResetCanShoot(1f);
+            canShoot = true;
         }
 
         private void OnFire()
@@ -89,15 +110,22 @@ namespace Identifiers
 
             currentAmmo--;
 
-            canShoot = false;
-            ResetCanShoot(fireRate);
+            if (currentAmmo <= 0) { canShoot = false; }
         }
 
-        private async void ResetCanShoot(float delay)
+        private void OnAnimationEventRecieved(string eventName)
         {
-            await AsyncHelper.DelayFloat(delay);
+            Debug.Log(eventName);
+            if (_animationAgentCallbackMethods.ContainsKey(eventName))
+            {
+                Action action = _animationAgentCallbackMethods[eventName];
+                action?.Invoke();
+            }
+        }
 
-            if (currentAmmo > 0) canShoot = true;
+        private void OnReload()
+        {
+            onReloaded?.Invoke();
         }
     }
 }

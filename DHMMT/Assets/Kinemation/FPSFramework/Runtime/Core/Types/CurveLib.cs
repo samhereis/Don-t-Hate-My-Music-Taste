@@ -1,4 +1,6 @@
-﻿// Designed by Kinemation, 2023
+﻿// Designed by KINEMATION, 2023
+
+using Kinemation.FPSFramework.Runtime.Attributes;
 
 using System;
 using System.Collections.Generic;
@@ -6,20 +8,14 @@ using UnityEngine;
 
 namespace Kinemation.FPSFramework.Runtime.Core.Types
 {
-    public struct AnimCurveValue
-    {
-        public float value;
-        public float cache;
-        public float target;
-    }
-
     [Serializable]
     public struct AnimCurve
     {
         [AnimCurveName] public string name;
         public AnimationCurve curve;
+        [NonSerialized] public float valueCache;
     }
-
+    
     [Serializable]
     public struct VectorCurve
     {
@@ -33,22 +29,21 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
             float curveTime = GetMaxTime(x);
             maxTime = curveTime > maxTime ? curveTime : maxTime;
-
+        
             curveTime = GetMaxTime(y);
             maxTime = curveTime > maxTime ? curveTime : maxTime;
-
+        
             curveTime = GetMaxTime(z);
             maxTime = curveTime > maxTime ? curveTime : maxTime;
 
             return maxTime;
         }
-
+        
         public static float GetMaxTime(AnimationCurve curve)
         {
-            if (curve == null || curve.length == 0) return 0f;
             return curve[curve.length - 1].time;
         }
-
+        
         public Vector3 Evaluate(float time)
         {
             return new Vector3(x.Evaluate(time), y.Evaluate(time), z.Evaluate(time));
@@ -66,7 +61,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             z = new AnimationCurve(keyFrame);
         }
     }
-
+    
     [Serializable]
     public enum EEaseFunc
     {
@@ -75,34 +70,67 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         Cubic,
         Custom
     }
-
+    
     [Serializable]
     public struct EaseMode
     {
         public EEaseFunc easeFunc;
         public AnimationCurve curve;
 
-        public EaseMode(Keyframe[] frames)
+        public EaseMode(EEaseFunc func)
         {
-            easeFunc = EEaseFunc.Linear;
-            curve = new AnimationCurve(frames);
+            easeFunc = func;
+            curve = AnimationCurve.Linear(0f, 0f, 1f, 0f);
         }
     }
 
     public static class CurveLib
     {
+        public static string Curve_MaskLeftHand = "MaskLeftHand";
+        public static string Curve_MaskLookLayer = "MaskLookLayer";
+        public static string Curve_WeaponBone = "WeaponBone";
+        public static string Curve_Overlay = "Overlay";
+
+        public static string Curve_Camera_Pitch = "Camera_Pitch";
+        public static string Curve_Camera_Yaw = "Camera_Yaw";
+        public static string Curve_Camera_Roll = "Camera_Roll";
+        
+        public static string Curve_IK_X = "IK_X";
+        public static string Curve_IK_Y = "IK_Y";
+        public static string Curve_IK_Z = "IK_Z";
+        
+        public static string Curve_IK_LeftHand_X = "IK_LeftHand_X";
+        public static string Curve_IK_LeftHand_Y = "IK_LeftHand_Y";
+        public static string Curve_IK_LeftHand_Z = "IK_LeftHand_Z";
+        
+        public static string Curve_IK_RightHand_X = "IK_RightHand_X";
+        public static string Curve_IK_RightHand_Y = "IK_RightHand_Y";
+        public static string Curve_IK_RightHand_Z = "IK_RightHand_Z";
+
         public static readonly List<string> AnimCurveNames = new()
         {
-            "MaskLeftHand",
-            "MaskLookLayer",
-            "WeaponBone",
-            "Overlay"
+            Curve_MaskLeftHand,
+            Curve_MaskLookLayer,
+            Curve_WeaponBone,
+            Curve_Overlay,
+            Curve_Camera_Pitch,
+            Curve_Camera_Yaw,
+            Curve_Camera_Roll,
+            Curve_IK_LeftHand_X,
+            Curve_IK_LeftHand_Y,
+            Curve_IK_LeftHand_Z,
+            Curve_IK_RightHand_X,
+            Curve_IK_RightHand_Y,
+            Curve_IK_RightHand_Z,
+            Curve_IK_X,
+            Curve_IK_Y,
+            Curve_IK_Z,
         };
 
         public static float Ease(float a, float b, float alpha, EaseMode ease)
         {
             alpha = Mathf.Clamp01(alpha);
-
+            
             switch (ease.easeFunc)
             {
                 case EEaseFunc.Sine:
@@ -115,7 +143,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
                     alpha = ease.curve?.Evaluate(alpha) ?? alpha;
                     break;
             }
-
+            
             return Mathf.Lerp(a, b, alpha);
         }
     }

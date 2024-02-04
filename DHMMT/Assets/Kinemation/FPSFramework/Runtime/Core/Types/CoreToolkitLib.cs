@@ -1,7 +1,8 @@
-// Designed by Kinemation, 2023
+// Designed by KINEMATION, 2023
 
 using System;
 using UnityEngine;
+using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -20,16 +21,6 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             this.angle = angle;
         }
     }
-    
-    [AttributeUsage(AttributeTargets.Field)]
-    public class AnimCurveName : PropertyAttribute
-    {
-        public bool isAnimator;
-        public AnimCurveName(bool isAnimator = false)
-        {
-            this.isAnimator = isAnimator;
-        }
-    }
 
     [Serializable]
     public struct LocRot
@@ -38,22 +29,91 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         
         public Vector3 position;
         public Quaternion rotation;
-
-        public bool Equals(LocRot b)
-        {
-            return position.Equals(b.position) && rotation.Equals(b.rotation);
-        }
-
+        
         public LocRot(Vector3 pos, Quaternion rot)
         {
             position = pos;
             rotation = rot;
         }
         
-        public LocRot(Transform t)
+        public LocRot(Transform t, bool worldSpace = true)
         {
-            position = t.position;
-            rotation = t.rotation;
+            position = t == null ? Vector3.zero : worldSpace ? t.position : t.localPosition;
+            rotation = t == null ? Quaternion.identity : worldSpace ? t.rotation : t.localRotation;
+        }
+
+        public static LocRot Lerp(LocRot a, LocRot b, float alpha)
+        {
+            Vector3 position = Vector3.Lerp(a.position, b.position, alpha);
+            Quaternion rotation = Quaternion.Slerp(a.rotation, b.rotation, alpha);
+            return new LocRot(position, rotation);
+        }
+
+        public LocRot FromSpace(Transform targetSpace)
+        {
+            if (targetSpace == null)
+            {
+                return this;
+            }
+
+            return new LocRot(targetSpace.TransformPoint(position), targetSpace.rotation * rotation);
+        }
+        
+        public LocRot FromSpace(LocRot targetSpace)
+        {
+            Vector3 newPosition = targetSpace.rotation * position + targetSpace.position;
+            Quaternion newRotation = targetSpace.rotation * rotation;
+            
+            return new LocRot(newPosition, newRotation);
+        }
+        
+        public LocRot ToSpace(Transform targetSpace)
+        {
+            if (targetSpace == null)
+            {
+                return this;
+            }
+
+            return new LocRot(targetSpace.InverseTransformPoint(position), 
+                Quaternion.Inverse(targetSpace.rotation) * rotation);
+        }
+        
+        public LocRot ToSpace(LocRot targetSpace)
+        {
+            Vector3 newPosition = Quaternion.Inverse(targetSpace.rotation) * (position - targetSpace.position);
+            Quaternion newRotation = Quaternion.Inverse(targetSpace.rotation) * rotation;
+            
+            return new LocRot(newPosition, newRotation);
+        }
+
+        public bool Equals(LocRot b)
+        {
+            return position.Equals(b.position) && rotation.Equals(b.rotation);
+        }
+    }
+
+    public struct SpringState
+    {
+        public float error;
+        public float velocity;
+
+        public void Reset()
+        {
+            error = velocity = 0f;
+        }
+    }
+
+    public struct VectorSpringState
+    {
+        public SpringState x;
+        public SpringState y;
+        public SpringState z;
+        
+        public void Reset()
+        {
+            x.Reset();
+            y.Reset();
+            z.Reset();
         }
     }
 
@@ -63,20 +123,14 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         public float stiffness;
         public float criticalDamping;
         public float speed;
-        public float mass;
         public float maxValue;
-        [NonSerialized] public float error;
-        [NonSerialized] public float velocity;
 
         public SpringData(float stiffness, float damping, float speed, float mass)
         {
             this.stiffness = stiffness;
             criticalDamping = damping;
             this.speed = speed;
-            this.mass = mass;
-
-            error = 0f;
-            velocity = 0f;
+            
             maxValue = 0f;
         }
         
@@ -85,10 +139,6 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             this.stiffness = stiffness;
             criticalDamping = damping;
             this.speed = speed;
-            mass = 1f;
-
-            error = 0f;
-            velocity = 0f;
             maxValue = 0f;
         }
     }
@@ -127,7 +177,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
         public Vector2 deltaAimInput;
         public Vector2 totalAimInput;
         public Vector2 moveInput;
-        public int leanDirection;
+        public float leanDirection;
         public LocRot recoilAnim;
 
         public void AddDeltaInput(Vector2 aimInput)
@@ -149,113 +199,110 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             totalAimInput.x = Mathf.Clamp(aimInput.x, -90f, 90f);
             totalAimInput.y = Mathf.Clamp(aimInput.y, -90f, 90f);
         }
+
+        public void SetLeanInput(float direction)
+        {
+            leanDirection = Mathf.Clamp(direction, -1f, 1f);
+        }
+        
+        public void AddLeanInput(float direction)
+        {
+            leanDirection += direction;
+            leanDirection = Mathf.Clamp(leanDirection, -1f ,1f);
+        }
+    }
+    
+    [Serializable]
+    public struct AdsBlend
+    {
+        [Range(0f, 1f)] public float x;
+        [Range(0f, 1f)] public float y;
+        [Range(0f, 1f)] public float z;
     }
     
     public static class CoreToolkitLib
     {
-        public delegate void PostUpdateDelegate();
-        
         private const float FloatMin = 1e-10f;
         private const float SqrEpsilon = 1e-8f;
 
-        public static float SpringInterp(float current, float target, ref SpringData springData)
+        public static float SpringInterp(float current, float target, ref SpringData springData, 
+            ref SpringState state, float deltaTime)
         {
-            float interpSpeed = Mathf.Min(Time.deltaTime * springData.speed, 1f);
+            float interpSpeed = Mathf.Min(deltaTime * springData.speed, 1f);
             target = Mathf.Clamp(target, -springData.maxValue, springData.maxValue);
             
             if (!Mathf.Approximately(interpSpeed, 0f))
             {
-                if (!Mathf.Approximately(springData.mass, 0f))
-                {
-                    float damping = 2 * Mathf.Sqrt(springData.mass * springData.stiffness) * springData.criticalDamping;
-                    float error = target - current;
-                    float errorDeriv = (error - springData.error);
-                    springData.velocity +=
-                        (error * springData.stiffness * interpSpeed + errorDeriv * damping) /
-                        springData.mass;
-                    springData.error = error;
+                float damping = 2 * Mathf.Sqrt(springData.stiffness) * springData.criticalDamping;
+                float error = target - current;
+                float errorDeriv = (error - state.error);
+                state.velocity += error * springData.stiffness * interpSpeed + errorDeriv * damping;
+                state.error = error;
 
-                    float value = current + springData.velocity * interpSpeed;
-                    return value;
-                }
-            
-                return target;
+                float value = current + state.velocity * interpSpeed;
+                return value;
             }
 
             return current;
         }
 
-        public static Vector3 SpringInterp(Vector3 current, Vector3 target, ref VectorSpringData springData)
+        public static Vector3 SpringInterp(Vector3 current, Vector3 target, ref VectorSpringData springData, 
+            ref VectorSpringState state, float deltaTime)
         {
             Vector3 final = Vector3.zero;
 
-            final.x = SpringInterp(current.x, target.x * springData.scale.x, ref springData.x);
-            final.y = SpringInterp(current.y, target.y * springData.scale.y, ref springData.y);
-            final.z = SpringInterp(current.z, target.z * springData.scale.z, ref springData.z);
+            final.x = SpringInterp(current.x, target.x * springData.scale.x, ref springData.x, ref state.x, deltaTime);
+            final.y = SpringInterp(current.y, target.y * springData.scale.y, ref springData.y, ref state.y, deltaTime);
+            final.z = SpringInterp(current.z, target.z * springData.scale.z, ref springData.z, ref state.z, deltaTime);
 
             return final;
         }
 
-        public static LocRot SpringInterp(LocRot current, LocRot target,
-            ref LocRotSpringData springData)
+        public static float ExpDecay(float value, float deltaTime)
         {
-            LocRot final = new LocRot(Vector3.zero, Quaternion.identity);
-
-            final.position = SpringInterp(current.position, target.position, ref springData.loc);
-            final.rotation = Quaternion.Euler(SpringInterp(current.rotation.eulerAngles, target.rotation.eulerAngles,
-                ref springData.rot));
-            
-            return final;
-        }
-
-        // Frame-rate independent interpolation
-        public static float Glerp(float a, float b, float speed)
-        {
-            return Mathf.Lerp(a, b, 1 - Mathf.Exp(-speed * Time.deltaTime));
+            return 1 - Mathf.Exp(-value * deltaTime);
         }
         
-        public static float GlerpLayer(float a, float b, float speed)
+        // Frame-rate independent interpolation
+        public static float Interp(float a, float b, float speed, float deltaTime)
         {
-            return Mathf.Approximately(speed, 0f)
-                ? b
-                : Mathf.Lerp(a, b, 1 - Mathf.Exp(-speed * Time.deltaTime));
+            return Mathf.Lerp(a, b, ExpDecay(speed, deltaTime));
+        }
+        
+        public static float InterpLayer(float a, float b, float speed, float deltaTime)
+        {
+            return Mathf.Approximately(speed, 0f) ? b : Interp(a, b, speed, deltaTime);
         }
 
-        public static Vector3 Glerp(Vector3 a, Vector3 b, float speed)
+        public static Vector3 Interp(Vector3 a, Vector3 b, float speed, float deltaTime)
         {
-            return Vector3.Lerp(a, b, 1 - Mathf.Exp(-speed * Time.deltaTime));
+            return Vector3.Lerp(a, b, 1 - Mathf.Exp(-speed * deltaTime));
         }
 
-        public static Vector2 Glerp(Vector2 a, Vector2 b, float speed)
+        public static Vector2 Interp(Vector2 a, Vector2 b, float speed, float deltaTime)
         {
-            return Vector2.Lerp(a, b, 1 - Mathf.Exp(-speed * Time.deltaTime));
+            return Vector2.Lerp(a, b, 1 - Mathf.Exp(-speed * deltaTime));
         }
 
-        public static Quaternion Glerp(Quaternion a, Quaternion b, float speed)
+        public static Quaternion Interp(Quaternion a, Quaternion b, float speed, float deltaTime)
         {
-            return Quaternion.Slerp(a, b, 1 - Mathf.Exp(-speed * Time.deltaTime));
+            return Quaternion.Slerp(a, b, 1 - Mathf.Exp(-speed * deltaTime));
         }
 
-        public static LocRot Glerp(LocRot a, LocRot b, float speed)
+        public static LocRot Interp(LocRot a, LocRot b, float speed, float deltaTime)
         {
-            var Rot = Quaternion.Slerp(a.rotation, b.rotation, 1 - Mathf.Exp(-speed * Time.deltaTime));
-            var Loc = Vector3.Lerp(a.position, b.position, 1 - Mathf.Exp(-speed * Time.deltaTime));
-            return new LocRot(Loc, Rot);
+            return LocRot.Lerp(a, b, ExpDecay(speed, deltaTime));
         }
 
-        public static LocRot Lerp(LocRot a, LocRot b, float alpha)
+        public static Quaternion RotateInBoneSpace(Quaternion parent, Quaternion boneRotation, Quaternion offset)
         {
-            var loc = Vector3.Lerp(a.position, b.position, alpha);
-            var rot = Quaternion.Slerp(a.rotation, b.rotation, alpha);
-            return new LocRot(loc, rot);
+            return parent * (offset * (Quaternion.Inverse(parent) * boneRotation));
         }
         
         public static void RotateInBoneSpace(Quaternion parent, Transform bone, Quaternion rotation, float alpha)
         {
-            Quaternion boneRot = bone.rotation;
-            //(parent * rotation) * (Quaternion.Inverse(parent) * boneRot);
-            Quaternion outRot = rotation * (Quaternion.Inverse(parent) * boneRot);
-            bone.rotation = Quaternion.Slerp(boneRot, parent * outRot, alpha);
+            Quaternion outRot = rotation * (Quaternion.Inverse(parent) * bone.rotation);
+            bone.rotation = Quaternion.Slerp(bone.rotation, parent * outRot, alpha);
         }
         
         public static void MoveInBoneSpace(Transform parent, Transform bone, Vector3 offset, float alpha)
@@ -264,6 +311,33 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             Vector3 finalOffset = root.TransformPoint(offset);
             finalOffset -= root.position;
             bone.position += finalOffset * alpha;
+        }
+        
+        public static void DrawBone(Vector3 start, Vector3 end, float size)
+        {
+            Vector3 midpoint = (start + end) / 2;
+                    
+            Vector3 direction = end - start;
+            float distance = direction.magnitude;
+                    
+            Matrix4x4 defaultMatrix = Gizmos.matrix;
+                    
+            Vector3 sizeVec = new Vector3(size, size, distance);
+                    
+            Gizmos.matrix = Matrix4x4.TRS(midpoint, Quaternion.LookRotation(direction), sizeVec);
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+            Gizmos.matrix = defaultMatrix;
+        }
+
+        public static Vector3 ToEuler(Quaternion rotation)
+        {
+            Vector3 newVec = rotation.eulerAngles;
+
+            newVec.x = NormalizeAngle(newVec.x);
+            newVec.y = NormalizeAngle(newVec.y);
+            newVec.z = NormalizeAngle(newVec.z);
+
+            return newVec;
         }
 
         // Adapted from Two Bone IK constraint, Unity Animation Rigging package
@@ -356,14 +430,23 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
             tip.rotation = tRotation;
         }
+
+        public static float NormalizeAngle(float angle)
+        {
+            while (angle < -180f)
+                angle += 360f;
+            while (angle >= 180f)
+                angle -= 360f;
+            return angle;
+        }
         
-        private static float TriangleAngle(float aLen, float aLen1, float aLen2)
+        public static float TriangleAngle(float aLen, float aLen1, float aLen2)
         {
             float c = Mathf.Clamp((aLen1 * aLen1 + aLen2 * aLen2 - aLen * aLen) / (aLen1 * aLen2) / 2.0f, -1.0f, 1.0f);
             return Mathf.Acos(c);
         }
 
-        private static Quaternion FromToRotation(Vector3 from, Vector3 to)
+        public static Quaternion FromToRotation(Vector3 from, Vector3 to)
         {
             float theta = Vector3.Dot(from.normalized, to.normalized);
             if (theta >= 1f)
@@ -381,7 +464,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             return Quaternion.AngleAxis(Mathf.Acos(theta) * Mathf.Rad2Deg, Vector3.Cross(from, to).normalized);
         }
 
-        private static Quaternion NormalizeSafe(Quaternion q)
+        public static Quaternion NormalizeSafe(Quaternion q)
         {
             float dot = Quaternion.Dot(q, q);
             if (dot > FloatMin)
@@ -392,19 +475,17 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
             return Quaternion.identity;
         }
-    }
-    
-    public class BoneAttribute : PropertyAttribute
-    {
-    }
-    
-    public class FoldAttribute : PropertyAttribute
-    {
-        public bool useDefaultDisplay;
 
-        public FoldAttribute(bool useDefaultDisplay = true)
+        public static float debugStartTime = 0f;
+
+        public static void DebugTimeStart()
         {
-            this.useDefaultDisplay = useDefaultDisplay;
+            debugStartTime = Time.realtimeSinceStartup;
+        }
+
+        public static void DebugTimeEnd(string eventName)
+        {
+            Debug.LogFormat("{0} took {1:F5} ms", eventName, (Time.realtimeSinceStartup - debugStartTime) * 1000f);
         }
     }
 }

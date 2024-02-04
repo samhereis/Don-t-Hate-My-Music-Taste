@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theLightPrefab: {fileID: -504128010224410714, guid: b43cb13e3ab988b4c9dfe8fed0ef2427,
     type: 3}
-  playerPrefab: {fileID: 3611823203958159465, guid: 6e23576f155e5c344882e7104c27788a,
+  playerPrefab: {fileID: 2428786341855766246, guid: 8b0aac6c89ad46c4b9863b1a800d7f91,
     type: 3}
   exitPrefab: {fileID: 7614115770728883014, guid: f48ec86ee81ae3f4ca40f3beb4823cbe,
     type: 3}
