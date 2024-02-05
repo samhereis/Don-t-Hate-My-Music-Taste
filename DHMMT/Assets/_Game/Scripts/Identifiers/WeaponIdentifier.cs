@@ -13,11 +13,7 @@ namespace Identifiers
 {
     public class WeaponIdentifier : IdentifierBase
     {
-        public Action onReloaded;
-
-        public enum WeaponType { Rifle, Pistol, Grenade }
-
-        [field: SerializeField] public WeaponType weaponType { get; private set; } = WeaponType.Rifle;
+        public Action<WeaponIdentifier> onReloaded;
 
         [Header("Sounds")]
         [SerializeField] private Sound_String_SO _fireSound;
@@ -93,7 +89,7 @@ namespace Identifiers
             onReloaded -= OnReloaded;
         }
 
-        private void OnReloaded()
+        private void OnReloaded(WeaponIdentifier weapon)
         {
             currentAmmo = maxAmmo;
             canShoot = true;
@@ -125,7 +121,7 @@ namespace Identifiers
 
         private void OnReload()
         {
-            onReloaded?.Invoke();
+            onReloaded?.Invoke(this);
         }
     }
 }

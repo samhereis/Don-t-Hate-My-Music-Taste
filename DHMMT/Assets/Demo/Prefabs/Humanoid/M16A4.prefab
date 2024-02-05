@@ -55,8 +55,8 @@ MonoBehaviour:
     pivotPoint: {fileID: 9114370651732886887}
     aimPoint: {fileID: 3929461778726672608}
     leftHandTarget: {fileID: 2589768430931831945}
-  fireMode: 1
-  fireRate: 750
+  fireMode: 0
+  fireRate: 10
   burstAmount: 3
   reloadClip: {fileID: 11400000, guid: 36470a5ebcec4f74a83e9664c5927c0b, type: 2}
   grenadeClip: {fileID: 11400000, guid: ea84837baf9c7324ea9a6e0d2da5e68f, type: 2}
@@ -79,18 +79,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcd89c03b4946d42b3eb0bd7a2f0b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <weaponType>k__BackingField: 0
   _fireSound: {fileID: 0}
   _reloadSound: {fileID: 0}
   <maxAmmo>k__BackingField: 30
   <currentAmmo>k__BackingField: 30
   <canShoot>k__BackingField: 1
-  <fireRate>k__BackingField: 0.1
-  <_weapon>k__BackingField: {fileID: 0}
+  _weapon_: {fileID: 0}
   _shootPoint: {fileID: 0}
-  _animationAgent: {fileID: 0}
-  _crosshairPrefab: {fileID: 0}
-  _bulletPooling_SO: {fileID: 0}
+  _weaponAnimationAgent: {fileID: 0}
+  _actorAnimationAgent: {fileID: 0}
+  _bulletPooling_SO: {fileID: 11400000, guid: 03131798ee05e434f95c9d7b7d75bec9, type: 2}
 --- !u!1 &2822190184522707183
 GameObject:
   m_ObjectHideFlags: 0

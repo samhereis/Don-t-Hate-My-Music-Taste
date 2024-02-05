@@ -28,16 +28,12 @@ namespace Identifiers
             damagerIdentifier = this;
             if (_camera == null) { _camera = GetComponentInChildren<Camera>(true); }
             if (_fpsData == null) { _fpsData = GetComponentInChildren<FPSData>(true); }
-        }
 
-        private void Start()
-        {
             DependencyContext.diBox.InjectDataTo(this);
-
             if (_camera != null && _fieldOfView_Settings != null) { _camera.fieldOfView = _fieldOfView_Settings.currentValue; }
-            _fpsController.Initialize();
-
             SubscribeToEvents();
+
+            _fpsController.Initialize();
         }
 
         private void Update()

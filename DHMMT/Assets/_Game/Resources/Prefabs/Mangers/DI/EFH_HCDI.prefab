@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theLightPrefab: {fileID: -504128010224410714, guid: b43cb13e3ab988b4c9dfe8fed0ef2427,
     type: 3}
-  playerPrefab: {fileID: 2428786341855766246, guid: 8b0aac6c89ad46c4b9863b1a800d7f91,
-    type: 3}
   exitPrefab: {fileID: 7614115770728883014, guid: f48ec86ee81ae3f4ca40f3beb4823cbe,
+    type: 3}
+  playerPrefab: {fileID: 2428786341855766246, guid: 8b0aac6c89ad46c4b9863b1a800d7f91,
     type: 3}
   directionalLight: {fileID: 0}
   gameplayMenuPrefab: {fileID: 3852153733182596020, guid: 8d30b7869fab8bb448f0cea20bb2afc1,
@@ -122,6 +122,8 @@ MonoBehaviour:
   "_auto\u0399nitialize": 1
   _objects:
   - dependency: {fileID: 8237012943212201804}
+    id: 
+  - dependency: {fileID: 0}
     id: 
   _configs: []
   _scriptableObjects: []

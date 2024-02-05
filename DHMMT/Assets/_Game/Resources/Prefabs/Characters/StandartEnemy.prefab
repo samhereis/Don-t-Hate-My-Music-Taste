@@ -348,13 +348,14 @@ GameObject:
   - component: {fileID: 1392203706}
   - component: {fileID: 1705761416278817639}
   - component: {fileID: 6976527339608198415}
+  - component: {fileID: 6966769516386955762}
   - component: {fileID: 4817383006650133674}
   - component: {fileID: 4423524014111370777}
   - component: {fileID: -6990017351525888321}
   - component: {fileID: -8816134816016017388}
   - component: {fileID: -8367067481174842849}
   - component: {fileID: -2633149305839604426}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StandartEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,6 +1048,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6966769516386955762
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065919089169516030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4817383006650133674
 MonoBehaviour:
   m_ObjectHideFlags: 0

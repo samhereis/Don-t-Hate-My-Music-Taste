@@ -111,8 +111,8 @@ namespace Demo.Scripts.Runtime
         private int _bursts;
         private bool _freeLook;
 
-        private FPSAimState aimState;
         private FPSActionState actionState;
+        private FPSAimState _aimState;
 
         private static readonly int Crouching = Animator.StringToHash("Crouching");
         private static readonly int OverlayType = Animator.StringToHash("OverlayType");
@@ -126,6 +126,23 @@ namespace Demo.Scripts.Runtime
 
         private bool _isUnarmed;
         private float _lastRecoilTime;
+
+        private FPSAimState aimState
+        {
+            get => _aimState;
+            set
+            {
+                _aimState = value;
+                isPlayerAimingChangedEvent?.Invoke(_aimState == FPSAimState.Aiming);
+            }
+        }
+
+        public WeaponIdentifier GetGun()
+        {
+            if (weapons.Count == 0) return null;
+
+            return weapons[_currentWeaponIndex];
+        }
 
         public void Initialize()
         {
@@ -224,17 +241,19 @@ namespace Demo.Scripts.Runtime
             var lastGun = weapons[_lastIndex];
             lastGun?.GetComponent<WeaponIdentifier>()?.OnUnequip();
 
-            var gun = weapons[_currentWeaponIndex].TryGet<Weapon>();
+            var gun = weapons[_currentWeaponIndex];
 
-            _bursts = gun.burstAmount;
+            _bursts = gun.weapon.burstAmount;
 
-            InitWeapon(gun);
+            InitWeapon(gun.weapon);
             gun.gameObject.SetActive(true);
 
-            animator.SetFloat(OverlayType, (float)gun.overlayType);
+            animator.SetFloat(OverlayType, (float)gun.weapon.overlayType);
             actionState = FPSActionState.None;
 
             gun.GetComponent<WeaponIdentifier>()?.OnEquip(_damagerActor, _animationAgent);
+
+            onChangeWeapon?.Invoke(gun);
         }
 
         private void EnableUnarmedState()
@@ -278,7 +297,8 @@ namespace Demo.Scripts.Runtime
                 DisableAim();
             }
 
-            recoilComponent.isAiming = IsAiming();
+            bool isAiming = IsAiming();
+            recoilComponent.isAiming = isAiming;
         }
 
         public void ChangeScope()
@@ -286,29 +306,29 @@ namespace Demo.Scripts.Runtime
             InitAimPoint(GetGun().TryGet<Weapon>());
         }
 
-        private void Fire()
+        private void TryFire()
         {
+            WeaponIdentifier weapon = GetGun();
+
+            DateTime currentTime = DateTime.Now;
+            if ((currentTime - lastShotTime).TotalSeconds <= 1f / weapon.weapon.fireRate) { return; }
             if (HasActiveAction()) return;
 
-            Weapon weapon = GetGun().TryGet<Weapon>();
+            weapon.weapon.OnFire();
+            PlayAnimation(weapon.weapon.fireClip);
+            PlayCameraShake(weapon.weapon.cameraShake);
 
-            weapon.OnFire();
-            PlayAnimation(weapon.fireClip);
+            onPlayerShoot?.Invoke(weapon);
 
-            PlayCameraShake(weapon.cameraShake);
-
-            if (GetGun().TryGet<Weapon>().recoilPattern != null)
+            if (weapon.weapon.recoilPattern != null)
             {
-                float aimRatio = IsAiming() ? weapon.recoilPattern.aimRatio : 1f;
-                float hRecoil = Random.Range(weapon.recoilPattern.horizontalVariation.x,
-                    weapon.recoilPattern.horizontalVariation.y);
+                float aimRatio = IsAiming() ? weapon.weapon.recoilPattern.aimRatio : 1f;
+                float hRecoil = Random.Range(weapon.weapon.recoilPattern.horizontalVariation.x,
+                    weapon.weapon.recoilPattern.horizontalVariation.y);
                 _controllerRecoil += new Vector2(hRecoil, _recoilStep) * aimRatio;
             }
 
-            if (recoilComponent == null || weapon.weaponAsset.recoilData == null)
-            {
-                return;
-            }
+            if (recoilComponent == null || weapon.weapon.weaponAsset.recoilData == null) { return; }
 
             recoilComponent.Play();
 
@@ -329,17 +349,15 @@ namespace Demo.Scripts.Runtime
                 return;
             }
 
-            _recoilStep += weapon.recoilPattern.acceleration;
+            _recoilStep += weapon.weapon.recoilPattern.acceleration;
+            lastShotTime = currentTime;
         }
 
         private void OnFirePressed()
         {
             if (weapons.Count == 0 || HasActiveAction()) return;
 
-            if (Mathf.Approximately(GetGun().TryGet<Weapon>().fireRate, 0f))
-            {
-                return;
-            }
+            if (Mathf.Approximately(GetGun().TryGet<Weapon>().fireRate, 0f)) { return; }
 
             _lastRecoilTime = Time.unscaledTime;
             _bursts = GetGun().TryGet<Weapon>().burstAmount - 1;
@@ -350,14 +368,8 @@ namespace Demo.Scripts.Runtime
             }
 
             _isFiring = true;
-            lastShotTime = DateTime.Now;
-        }
 
-        private WeaponIdentifier GetGun()
-        {
-            if (weapons.Count == 0) return null;
-
-            return weapons[_currentWeaponIndex];
+            TryFire();
         }
 
         private void OnFireReleased()
@@ -469,15 +481,18 @@ namespace Demo.Scripts.Runtime
         {
             if (HasActiveAction()) return;
 
-            var reloadClip = GetGun().TryGet<Weapon>().reloadClip;
-
-            if (reloadClip == null) return;
+            WeaponIdentifier weapon = GetGun();
 
             OnFireReleased();
 
-            PlayAnimation(reloadClip);
+            var reloadClip = weapon.weapon.reloadClip;
+            if (reloadClip != null) { PlayAnimation(reloadClip); };
+
             GetGun().TryGet<Weapon>().Reload();
             actionState = FPSActionState.Reloading;
+
+            weapon.onReloaded -= InvokeOnReloaded;
+            weapon.onReloaded += InvokeOnReloaded;
         }
 
         private void TryGrenadeThrow()
@@ -561,6 +576,18 @@ namespace Demo.Scripts.Runtime
                     charAnimData.AddLeanInput(leanValue);
                 }
 
+                if (_isFiring)
+                {
+                    if (GetGun().canShoot == true)
+                    {
+                        TryFire();
+                    }
+                    else
+                    {
+                        TryReload();
+                    }
+                }
+
                 if (_fpsData.isFirePressed)
                 {
                     if (GetGun().canShoot == true)
@@ -576,23 +603,6 @@ namespace Demo.Scripts.Runtime
                 if (_fpsData.isFireReleased)
                 {
                     OnFireReleased();
-                }
-
-                if (_isFiring)
-                {
-                    if (GetGun().canShoot == true)
-                    {
-                        DateTime currentTime = DateTime.Now;
-                        if ((currentTime - lastShotTime).TotalSeconds >= 1f / GetGun().weapon.fireRate)
-                        {
-                            Fire();
-                            lastShotTime = currentTime;
-                        }
-                    }
-                    else
-                    {
-                        TryReload();
-                    }
                 }
 
                 if (_fpsData.isToggleAim)
@@ -806,6 +816,12 @@ namespace Demo.Scripts.Runtime
             cameraHolder.position = cameraTransform.Item2;
 
             mainCamera.rotation = cameraHolder.rotation * Quaternion.Euler(_freeLookInput.y, _freeLookInput.x, 0f);
+        }
+
+        private void InvokeOnReloaded(WeaponIdentifier weapon)
+        {
+            weapon.onReloaded -= InvokeOnReloaded;
+            onPlayerReloaded?.Invoke(weapon);
         }
     }
 }

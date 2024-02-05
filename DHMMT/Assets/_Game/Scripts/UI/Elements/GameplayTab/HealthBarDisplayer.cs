@@ -2,15 +2,13 @@ using ConstStrings;
 using DataClasses;
 using DependencyInjection;
 using DG.Tweening;
-using Interfaces;
 using Observables;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Elements.GameplayTab
 {
-    public class HealthBarDisplayer : MonoBehaviour, IInitializable, IDisposable, INeedDependencyInjection
+    public class HealthBarDisplayer : MonoBehaviour, INeedDependencyInjection
     {
         [Header("Components")]
         [SerializeField] private Slider _healthBar;
@@ -26,32 +24,27 @@ namespace UI.Elements.GameplayTab
             _healthBar = GetComponentInChildren<Slider>(true);
             _healthBarFill = _healthBar.fillRect.GetComponent<Image>();
 
-            _healthBar.maxValue = 100;
-        }
-
-        private void Start()
-        {
             DependencyContext.diBox.InjectDataTo(this);
-
-            Initialize();
         }
 
-        public void Initialize()
+        private void OnEnable()
         {
             _playerHealthValue.AddListener(OnPlayerHealthValueChanged);
 
             OnPlayerHealthValueChanged(_playerHealthValue.value);
         }
 
-        public void Dispose()
+        private void OnDisable()
         {
-            _playerHealthValue.AddListener(OnPlayerHealthValueChanged);
+            _playerHealthValue.RemoveListener(OnPlayerHealthValueChanged);
         }
 
         private void OnPlayerHealthValueChanged(PlayerHealthData damageData)
         {
             if (_healthBar != null)
             {
+                _healthBar.maxValue = damageData.maxHealth;
+
                 _healthBar.DOKill();
                 _healthBar.DOValue(damageData.healthAfter, 0.5f);
             }

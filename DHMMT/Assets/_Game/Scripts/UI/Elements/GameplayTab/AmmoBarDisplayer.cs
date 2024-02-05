@@ -42,6 +42,8 @@ namespace UI.Elements.GameplayTab
             DependencyContext.diBox.InjectDataTo(this);
 
             _playerWeaponData.AddListener(OnPlayerWeaponChanged);
+
+            OnPlayerWeaponChanged(_playerWeaponData.value);
         }
 
         public void Dispose()

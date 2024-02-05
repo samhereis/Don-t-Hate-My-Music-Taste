@@ -58,7 +58,7 @@ namespace GameStates.SceneManagers
 
         protected void PauseGame()
         {
-            pauseMenu?.Enable();
+            pauseMenu.Enable();
 
             pauseMenu.onResumeRequest -= ResumeGame;
             pauseMenu.onResumeRequest += ResumeGame;

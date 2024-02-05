@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Charatcers.Player
 {
-    public class PlayerHealth : MonoBehaviour, IDamagable, IInitializable, IDisposable, INeedDependencyInjection
+    public class PlayerHealth : MonoBehaviour, IDamagable, INeedDependencyInjection
     {
         public Action onDie { get; set; }
 
@@ -18,31 +18,14 @@ namespace Charatcers.Player
         [field: SerializeField] public bool isAlive { get; private set; } = true;
         [field: SerializeField] public IdentifierBase damagableIdentifier { get; private set; }
 
-        [Header("DI")]
-        [Inject(ObservableValue_ConstStrings.playerHealth)][SerializeField] private ObservableValue<PlayerHealthData> _playerHealthValue;
+        [Inject(ObservableValue_ConstStrings.playerHealth)] private ObservableValue<PlayerHealthData> _playerHealthValue;
 
         private void Awake()
         {
             damagableIdentifier = GetComponent<IdentifierBase>();
-        }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                TakeDamage(10, null);
-            }
-        }
-
-        public void Initialize()
-        {
             currentHealth = maxHealth;
             DependencyContext.diBox.InjectDataTo(this);
-        }
-
-        public void Dispose()
-        {
-
         }
 
         public void Die()

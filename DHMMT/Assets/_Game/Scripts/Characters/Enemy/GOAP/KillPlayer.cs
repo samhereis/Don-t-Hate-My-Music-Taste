@@ -55,8 +55,6 @@ namespace GOAP.Actions
             {
                 OnActionFail();
 
-                _enemyIdentifier.TryGet<EnemyController>()?.Reload();
-
                 return false;
             }
 

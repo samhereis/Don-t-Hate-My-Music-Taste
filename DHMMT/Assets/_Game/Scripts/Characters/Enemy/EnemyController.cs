@@ -25,10 +25,7 @@ namespace Charatcers.Enemy
             {
                 rigidBody.isKinematic = true;
             }
-        }
 
-        private void Start()
-        {
             _fpsController.Initialize();
         }
 

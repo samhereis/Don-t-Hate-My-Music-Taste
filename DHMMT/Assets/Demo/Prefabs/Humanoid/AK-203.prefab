@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcd89c03b4946d42b3eb0bd7a2f0b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <weaponType>k__BackingField: 0
   _fireSound: {fileID: 0}
   _reloadSound: {fileID: 0}
   <maxAmmo>k__BackingField: 30

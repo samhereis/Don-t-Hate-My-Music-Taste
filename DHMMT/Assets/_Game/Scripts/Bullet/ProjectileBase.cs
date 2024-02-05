@@ -11,12 +11,6 @@ namespace Gameplay.Bullets
         [SerializeField] protected BulletPooling_SO _pooling;
 
         public IDamagerActor damagerActor { get; private set; }
-        public IdentifierBase damagerGameobject { get; private set; }
-
-        private void Awake()
-        {
-            damagerGameobject = GetComponent<IdentifierBase>();
-        }
 
         public virtual void Initialize(IDamagerActor newDamagerActor)
         {
