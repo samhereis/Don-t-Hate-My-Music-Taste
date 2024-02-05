@@ -2,7 +2,6 @@ using DependencyInjection;
 using Helpers;
 using Identifiers;
 using IdentityCards;
-using Interfaces;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ using UnityEngine;
 
 namespace GameStates.SceneManagers
 {
-    public class EFH_Scene : MonoBehaviour, INeedDependencyInjection, IInitializable
+    public class EFH_Scene : MonoBehaviour, INeedDependencyInjection
     {
         public List<ExitLocation_Identifier> exitLocations => _exitLocations;
         public List<PlayerSpawnPoint_Identifier> theLightLocations => _theLightLocations;
@@ -62,10 +61,7 @@ namespace GameStates.SceneManagers
             if (exitLocations.Count > 0)
             {
                 var randomExitLocation = exitLocations[Random.Range(0, exitLocations.Count)];
-
-                exit = Object.Instantiate(exitPrefab,
-                    randomExitLocation.transform.position,
-                    Quaternion.identity);
+                exit = Object.Instantiate(exitPrefab, randomExitLocation.transform.position, Quaternion.identity);
             }
 
             return exit;

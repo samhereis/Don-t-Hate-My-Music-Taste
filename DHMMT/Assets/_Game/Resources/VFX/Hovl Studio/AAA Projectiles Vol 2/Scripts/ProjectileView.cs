@@ -10,7 +10,7 @@ namespace Gameplay
         [SerializeField] private ParticleSystem _flash;
         [SerializeField] private ParticleSystem _hit;
 
-        private void OnValidate()
+        private void Awake()
         {
             foreach (var trans in GetComponentsInChildren<Transform>(true))
             {

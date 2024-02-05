@@ -1,16 +1,17 @@
 ﻿using Helpers;
+using Sirenix.OdinInspector;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Gameplay
 {
-    public class ProjectileView : MonoBehaviour
+    public class ProjectileView : MonoBehaviour, ISelfValidator
     {
         [SerializeField] private ParticleSystem _flash;
         [SerializeField] private ParticleSystem _hit;
 
-        private void OnValidate()
+        public void Validate(SelfValidationResult result)
         {
             foreach (var trans in GetComponentsInChildren<Transform>(true))
             {

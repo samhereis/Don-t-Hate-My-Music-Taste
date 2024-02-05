@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identityCard:
     <targetName>k__BackingField: 
-    <target>k__BackingField: {fileID: 8156385541149459888, guid: 3a56374ecd9661a44b9fc310d6b858c7,
-      type: 3}
+    <target>k__BackingField: {fileID: 0}

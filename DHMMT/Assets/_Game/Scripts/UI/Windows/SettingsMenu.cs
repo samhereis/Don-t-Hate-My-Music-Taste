@@ -39,13 +39,10 @@ namespace UI.Windows
 
         private MenuBase openOnBack;
 
-        private void OnValidate()
-        {
-            _activeTabIndicatorParent = _activeTabIndicator.transform.parent;
-        }
-
         public void Construct(MenuBase openOnBack)
         {
+            _activeTabIndicatorParent = _activeTabIndicator.transform.parent;
+
             this.openOnBack = openOnBack;
 
             _allSettingsTabs = new List<SettingsTabBase> { _gameplayTab, _audioTab, _graphicsTab };

@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using Bitgem.Core;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ using UnityEngine;
 
 namespace Bitgem.VFX.StylisedWater
 {
-    [ExecuteInEditMode]
     [RequireComponent(typeof(MeshFilter))]
     public class WaterVolumeBase : MonoBehaviour
     {
@@ -370,7 +370,8 @@ namespace Bitgem.VFX.StylisedWater
 
         #region MonoBehaviour events
 
-        void OnValidate()
+        [Button]
+        void Setup()
         {
             // keep tile size in a sensible range
             TileSize = Mathf.Clamp(TileSize, 0.1f, 100f);
@@ -382,6 +383,7 @@ namespace Bitgem.VFX.StylisedWater
             isDirty = true;
         }
 
+        [Button]
         void Update()
         {
             // rebuild if needed

@@ -44,8 +44,7 @@ MonoBehaviour:
     <backgroundSceneSettings>k__BackingField:
       <visuals>k__BackingField: {fileID: 8981804170155201978, guid: eaf8937928bb5a94aa587be7f5160e0b,
         type: 3}
-      <skyboxes>k__BackingField:
-      - {fileID: 2100000, guid: 59573b088aaea0442bf29e0a0e9d1339, type: 2}
+      <skyboxes>k__BackingField: []
       <ambientIntencity>k__BackingField: 1
   <lastLoadedScene>k__BackingField:
     <sceneCode>k__BackingField: 
