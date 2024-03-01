@@ -17,7 +17,6 @@ namespace GameStates
 {
     public class TD_GameState_Controller : GameState_ControllerBase, INeedDependencyInjection
     {
-
         [Inject] private TD_SceneManager _tD_SceneManager;
 
         [Inject] private SceneLoader _sceneLoader;
@@ -68,9 +67,16 @@ namespace GameStates
 
         public override void Exit()
         {
-            UnsubscribeFromEvents();
-            _tD_EnemiesManager.Dispose();
-            _tD_UIManager.Dispose();
+            try
+            {
+                UnsubscribeFromEvents();
+                _tD_EnemiesManager.Dispose();
+                _tD_UIManager.Dispose();
+            }
+            catch
+            {
+                Debug.LogError("Could not exit the state: " + GetType().Name);
+            }
         }
 
         public void SubscribeToEvents()
