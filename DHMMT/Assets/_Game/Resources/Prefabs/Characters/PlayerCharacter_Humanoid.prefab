@@ -857,7 +857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fpsData: {fileID: 1705761416278817639}
   _animationAgent: {fileID: 9211034172267330718}
-  animator: {fileID: 4505190999055681087}
+  _sensitivityMultiplier: 3
+  _animator: {fileID: 0}
   turnInPlaceAngle: 85
   turnCurve:
     serializedVersion: 2
@@ -897,18 +898,17 @@ MonoBehaviour:
   onStartStopMoving: {fileID: 11400000, guid: dafa5bd76c09ec246bdf49fd3b3f4314, type: 2}
   sprintPose: {fileID: 11400000, guid: 2bb2d2e9c599c5e4696a1972f42d49b5, type: 2}
   pronePose: {fileID: 11400000, guid: 45eaf4229c3e7f04581276191af997dd, type: 2}
-  lookLayer: {fileID: 0}
-  adsLayer: {fileID: 0}
-  swayLayer: {fileID: 0}
-  locoLayer: {fileID: 0}
-  slotLayer: {fileID: 0}
-  collisionLayer: {fileID: 0}
+  _lookLayer: {fileID: 0}
+  _adsLayer: {fileID: 0}
+  _swayLayer: {fileID: 0}
+  _locoLayer: {fileID: 0}
+  _slotLayer: {fileID: 0}
+  _collisionLayer: {fileID: 0}
   timeScale: 1
   equipDelay: 0.9
   mainCamera: {fileID: 6624334008321366733}
   cameraHolder: {fileID: 7333732395697125981}
   firstPersonCamera: {fileID: 7832979088296095766}
-  sensitivity: 2
   freeLookAngle: {x: 60, y: 30}
   movementComponent: {fileID: 4496267191253631901}
   weapons: []

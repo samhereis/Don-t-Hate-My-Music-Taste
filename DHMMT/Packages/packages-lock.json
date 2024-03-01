@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "78d4593d349bfdd024e61933dd5238fd426941c3"
+      "hash": "1a0031153146b9a50be9aff623a9a8aed7984302"
     },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",
@@ -18,32 +18,6 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
-    },
-    "com.unity.2d.animation": {
-      "version": "10.1.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.common": "9.0.3",
-        "com.unity.2d.sprite": "1.0.0",
-        "com.unity.collections": "1.2.4",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.2d.common": {
-      "version": "9.0.3",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.sprite": "1.0.0",
-        "com.unity.mathematics": "1.1.0",
-        "com.unity.modules.uielements": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.burst": "1.8.4"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

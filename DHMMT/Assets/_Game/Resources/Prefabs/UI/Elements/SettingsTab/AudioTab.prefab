@@ -70,10 +70,7 @@ MonoBehaviour:
   _masterVolume_Slider: {fileID: 7238632330418268908}
   _musicVolume_Slider: {fileID: 3354931960155764398}
   _effectsVolume_Slider: {fileID: 4014165686184884256}
-  _audioMixer: {fileID: 0}
-  _masterVolume_Settings: {fileID: 0}
-  _musicVolume_Settings: {fileID: 0}
-  _effectsVolume_Settings: {fileID: 0}
+  _minVolume: 50
 --- !u!1 &1530590615932678611
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +776,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -886,6 +888,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: music volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
@@ -1065,6 +1072,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1172,6 +1184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: effects volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
@@ -1351,6 +1368,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1453,6 +1475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: master volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}

@@ -631,6 +631,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 8377269748297775446}
     uiConfigs: {fileID: 0}
     isOpen: 0
+    hasChanged: 0
   _fieldOfView_Slider: {fileID: 4373504997733460172}
   _mouseSensitivity_Slider: {fileID: 8539017880007757426}
   _fieldOfView_Settings: {fileID: 0}
@@ -774,6 +775,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -832,6 +838,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5ebcc8fe08865454a8988fc81b85fdf2,
         type: 2}
+    - target: {fileID: 3718209467956757459, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: m_Value
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718209467956757459, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718209467956757459, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: m_MinValue
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3952317329267571159, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -854,6 +875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4532029001439434157, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532029001439434157, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -861,6 +887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: field of view
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
@@ -1034,6 +1065,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1074,6 +1110,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -1462.9049
       objectReference: {fileID: 0}
+    - target: {fileID: 3718209467956757459, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3952317329267571159, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1096,8 +1137,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4532029001439434157, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532029001439434157, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}

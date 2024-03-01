@@ -21,8 +21,10 @@ namespace UI.Elements
 
         [Inject] private UIConfigs _iuConfigs;
 
-        private void Start()
+        private void Awake()
         {
+            _tabButton ??= GetComponent<Button>();
+
             DependencyContext.diBox.InjectDataTo(this);
         }
 
@@ -58,7 +60,10 @@ namespace UI.Elements
 
             void OnInitialFadeComplete()
             {
-                activeTabIndicator.transform.DOMove(_activeTabIndicatorParent.position, _activeTabIndicatorMoveSpeed * 0.5f).SetEase(_ease).OnComplete(OnMoveComplete);
+                activeTabIndicator.transform
+                    .DOMove(_activeTabIndicatorParent.position, _activeTabIndicatorMoveSpeed * 0.5f)
+                    .SetEase(_ease)
+                    .OnComplete(OnMoveComplete);
             }
 
             void OnMoveComplete()

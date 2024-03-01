@@ -37,13 +37,13 @@ namespace UI.Windows
 
         private SettingsTabBase _currentSettingsTab;
 
-        private MenuBase openOnBack;
+        private MenuBase _openOnBack;
 
         public void Construct(MenuBase openOnBack)
         {
             _activeTabIndicatorParent = _activeTabIndicator.transform.parent;
 
-            this.openOnBack = openOnBack;
+            this._openOnBack = openOnBack;
 
             _allSettingsTabs = new List<SettingsTabBase> { _gameplayTab, _audioTab, _graphicsTab };
 
@@ -109,7 +109,7 @@ namespace UI.Windows
 
         private void Exit()
         {
-            openOnBack?.Enable();
+            _openOnBack?.Enable();
         }
 
         public async void OnGameplayTabButtonClicked()

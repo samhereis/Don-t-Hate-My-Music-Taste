@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ecff9dffcb98641b00353604184d98, type: 3}
   m_Name: FieldOfView
   m_EditorClassIdentifier: 
-  _currentValue: 75
+  _currentValue: 100
   _defaultValue: 75
   _key: FieldOfView_key

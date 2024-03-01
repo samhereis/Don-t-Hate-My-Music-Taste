@@ -193,7 +193,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 4772495386665145049}
   - component: {fileID: 7100293784827456603}
   - component: {fileID: 6207549023925103720}
-  - component: {fileID: 2787882013022800821}
+  - component: {fileID: 3432004754269589470}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -514,7 +514,7 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
---- !u!114 &2787882013022800821
+--- !u!114 &3432004754269589470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -523,13 +523,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7775948535609565175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611d7382474c3e240a46a5a18ee10eae, type: 3}
+  m_Script: {fileID: 11500000, guid: d7998711d3a970d46b8dba96108f3f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 4999989824663626045}
+  _positionOnHoverMin: {x: -20, y: -20, z: -20}
+  _positionOnHoverMax: {x: 20, y: 20, z: 20}
+  _rotationOnHoverMin: {x: -5, y: -5, z: -5}
+  _rotationOnHoverMax: {x: 5, y: 5, z: 5}
   _onOverScale: 1.1
-  _normaleScale: 1
+  _rotate: 1
+  _scale: 0
+  _move: 1
+  _randomize: 1
+  _ease: 27
   _animationDuration: 0.5
-  _delayBetweenAnimations: 0.1
+  _gameObjectsToDisableOnHover: []
+  _gameObjectsToEnableOnHover: []
+  _componentsToDisableOnHover:
+  - {fileID: 239568754336248404}
+  _componentsToEnableOnHover: []
   _events:
     _onHover:
       m_PersistentCalls:

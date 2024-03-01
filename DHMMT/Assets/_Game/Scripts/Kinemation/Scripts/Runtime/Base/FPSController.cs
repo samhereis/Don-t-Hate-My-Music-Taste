@@ -1,12 +1,15 @@
 ﻿// Designed by KINEMATION, 2023
 
 using Agents;
+using ConstStrings;
 using DataClasses;
+using DependencyInjection;
 using Identifiers;
 using Interfaces;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using Kinemation.FPSFramework.Runtime.Layers;
 using Kinemation.FPSFramework.Runtime.Recoil;
+using Settings;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -43,20 +46,26 @@ namespace Demo.Scripts.Runtime
     }
 
     // An example-controller class
-    public class FPSController : FPSAnimController
+    public class FPSController : FPSAnimController, INeedDependencyInjection
     {
         public Action<bool> isPlayerAimingChangedEvent;
         public Action<WeaponIdentifier> onChangeWeapon;
         public Action<WeaponIdentifier> onPlayerShoot;
         public Action<WeaponIdentifier> onPlayerReloaded;
 
-        [ShowInInspector] private IDamagerActor _damagerActor;
         [SerializeField] protected FPSData _fpsData;
         [SerializeField] private AnimationAgent _animationAgent;
-        private DateTime lastShotTime;
+
+        [SerializeField, FoldoutGroup("Settings")] private float _sensitivityMultiplier = 2;
+
+        private DateTime _lastShotTime;
+
+        private IDamagerActor _damagerActor;
+
+        [Inject(Savables_ConstStrings.mouseSensitivity_Settings)] private FloatSavable_SO _sensitivity;
 
         [Tab("Animation")]
-        [SerializeField, FoldoutGroup("General")] private Animator animator;
+        [SerializeField, FoldoutGroup("General")] private Animator _animator;
 
         [SerializeField, FoldoutGroup("Turn In Place")] private float turnInPlaceAngle;
         [SerializeField, FoldoutGroup("Turn In Place")] private AnimationCurve turnCurve = new AnimationCurve(new Keyframe(0f, 0f));
@@ -77,12 +86,12 @@ namespace Demo.Scripts.Runtime
         [SerializeField, FoldoutGroup("Dynamic Motions")] private IKPose pronePose;
 
         // Animation Layers
-        [SerializeField][HideInInspector] private LookLayer lookLayer;
-        [SerializeField][HideInInspector] private AdsLayer adsLayer;
-        [SerializeField][HideInInspector] private SwayLayer swayLayer;
-        [SerializeField][HideInInspector] private LocomotionLayer locoLayer;
-        [SerializeField][HideInInspector] private SlotLayer slotLayer;
-        [SerializeField][HideInInspector] private WeaponCollision collisionLayer;
+        [SerializeField][HideInInspector] private LookLayer _lookLayer;
+        [SerializeField][HideInInspector] private AdsLayer _adsLayer;
+        [SerializeField][HideInInspector] private SwayLayer _swayLayer;
+        [SerializeField][HideInInspector] private LocomotionLayer _locoLayer;
+        [SerializeField][HideInInspector] private SlotLayer _slotLayer;
+        [SerializeField][HideInInspector] private WeaponCollision _collisionLayer;
         // Animation Layers
 
         [Tab("Controller")]
@@ -92,7 +101,6 @@ namespace Demo.Scripts.Runtime
         [SerializeField, FoldoutGroup("Camera")] private Transform mainCamera;
         [SerializeField, FoldoutGroup("Camera")] private Transform cameraHolder;
         [SerializeField, FoldoutGroup("Camera")] private Transform firstPersonCamera;
-        [SerializeField, FoldoutGroup("Camera")] private float sensitivity;
         [SerializeField, FoldoutGroup("Camera")] private Vector2 freeLookAngle;
 
         [SerializeField, FoldoutGroup("Movement")] private FPSMovement movementComponent;
@@ -111,14 +119,14 @@ namespace Demo.Scripts.Runtime
         private int _bursts;
         private bool _freeLook;
 
-        private FPSActionState actionState;
-        private FPSAimState _aimState;
+        private FPSActionState _actionState;
+        private FPSAimState _aimState_;
 
-        private static readonly int Crouching = Animator.StringToHash("Crouching");
-        private static readonly int OverlayType = Animator.StringToHash("OverlayType");
-        private static readonly int TurnRight = Animator.StringToHash("TurnRight");
-        private static readonly int TurnLeft = Animator.StringToHash("TurnLeft");
-        private static readonly int UnEquip = Animator.StringToHash("UnEquip");
+        private static readonly int _crouching = Animator.StringToHash("Crouching");
+        private static readonly int _overlayType = Animator.StringToHash("OverlayType");
+        private static readonly int _turnRight = Animator.StringToHash("TurnRight");
+        private static readonly int _turnLeft = Animator.StringToHash("TurnLeft");
+        private static readonly int _unEquip = Animator.StringToHash("UnEquip");
 
         private Vector2 _controllerRecoil;
         private float _recoilStep;
@@ -127,13 +135,13 @@ namespace Demo.Scripts.Runtime
         private bool _isUnarmed;
         private float _lastRecoilTime;
 
-        private FPSAimState aimState
+        private FPSAimState _aimState
         {
-            get => _aimState;
+            get => _aimState_;
             set
             {
-                _aimState = value;
-                isPlayerAimingChangedEvent?.Invoke(_aimState == FPSAimState.Aiming);
+                _aimState_ = value;
+                isPlayerAimingChangedEvent?.Invoke(_aimState_ == FPSAimState.Aiming);
             }
         }
 
@@ -146,6 +154,8 @@ namespace Demo.Scripts.Runtime
 
         public void Initialize()
         {
+            DependencyContext.InjectDependencies(this);
+
             _damagerActor = GetComponent<IDamagerActor>();
 
             weapons = GetComponentsInChildren<WeaponIdentifier>(true).ToList();
@@ -172,14 +182,14 @@ namespace Demo.Scripts.Runtime
             movementComponent.onSlideStarted.AddListener(OnSlideStarted);
             movementComponent.onSlideEnded.AddListener(OnSlideEnded);
 
-            movementComponent.onProneStarted.AddListener(() => collisionLayer.SetLayerAlpha(0f));
-            movementComponent.onProneEnded.AddListener(() => collisionLayer.SetLayerAlpha(1f));
+            movementComponent.onProneStarted.AddListener(() => _collisionLayer.SetLayerAlpha(0f));
+            movementComponent.onProneEnded.AddListener(() => _collisionLayer.SetLayerAlpha(1f));
 
             movementComponent.slideCondition += () => !HasActiveAction();
             movementComponent.sprintCondition += () => !HasActiveAction();
             movementComponent.proneCondition += () => !HasActiveAction();
 
-            actionState = FPSActionState.None;
+            _actionState = FPSActionState.None;
 
             InitLayers();
             EquipWeapon();
@@ -189,36 +199,36 @@ namespace Demo.Scripts.Runtime
         {
             InitAnimController();
 
-            animator = GetComponentInChildren<Animator>();
-            lookLayer = GetComponentInChildren<LookLayer>();
-            adsLayer = GetComponentInChildren<AdsLayer>();
-            locoLayer = GetComponentInChildren<LocomotionLayer>();
-            swayLayer = GetComponentInChildren<SwayLayer>();
-            slotLayer = GetComponentInChildren<SlotLayer>();
-            collisionLayer = GetComponentInChildren<WeaponCollision>();
+            _animator = GetComponentInChildren<Animator>();
+            _lookLayer = GetComponentInChildren<LookLayer>();
+            _adsLayer = GetComponentInChildren<AdsLayer>();
+            _locoLayer = GetComponentInChildren<LocomotionLayer>();
+            _swayLayer = GetComponentInChildren<SwayLayer>();
+            _slotLayer = GetComponentInChildren<SlotLayer>();
+            _collisionLayer = GetComponentInChildren<WeaponCollision>();
         }
 
         private bool HasActiveAction()
         {
-            return actionState != FPSActionState.None;
+            return _actionState != FPSActionState.None;
         }
 
         private bool IsAiming()
         {
-            return aimState is FPSAimState.Aiming or FPSAimState.PointAiming;
+            return _aimState is FPSAimState.Aiming or FPSAimState.PointAiming;
         }
 
         private void UnequipWeapon()
         {
             DisableAim();
 
-            actionState = FPSActionState.WeaponChange;
-            GetAnimGraph().GetFirstPersonAnimator().CrossFade(UnEquip, 0.1f);
+            _actionState = FPSActionState.WeaponChange;
+            GetAnimGraph().GetFirstPersonAnimator().CrossFade(_unEquip, 0.1f);
         }
 
         public void ResetActionState()
         {
-            actionState = FPSActionState.None;
+            _actionState = FPSActionState.None;
         }
 
         public void RefreshStagedState()
@@ -248,8 +258,8 @@ namespace Demo.Scripts.Runtime
             InitWeapon(gun.weapon);
             gun.gameObject.SetActive(true);
 
-            animator.SetFloat(OverlayType, (float)gun.weapon.overlayType);
-            actionState = FPSActionState.None;
+            _animator.SetFloat(_overlayType, (float)gun.weapon.overlayType);
+            _actionState = FPSActionState.None;
 
             gun.GetComponent<WeaponIdentifier>()?.OnEquip(_damagerActor, _animationAgent);
 
@@ -261,36 +271,36 @@ namespace Demo.Scripts.Runtime
             if (weapons.Count == 0) return;
 
             weapons[_currentWeaponIndex].gameObject.SetActive(false);
-            animator.SetFloat(OverlayType, 0);
+            _animator.SetFloat(_overlayType, 0);
         }
 
         private void DisableAim()
         {
             if (!GetGun().TryGet<Weapon>().canAim) return;
 
-            aimState = FPSAimState.None;
+            _aimState = FPSAimState.None;
             OnInputAim(false);
 
-            adsLayer.SetAds(false);
-            adsLayer.SetPointAim(false);
-            swayLayer.SetFreeAimEnable(true);
-            swayLayer.SetLayerAlpha(1f);
+            _adsLayer.SetAds(false);
+            _adsLayer.SetPointAim(false);
+            _swayLayer.SetFreeAimEnable(true);
+            _swayLayer.SetLayerAlpha(1f);
         }
 
         public void ToggleAim()
         {
             if (!GetGun().TryGet<Weapon>().canAim) return;
 
-            slotLayer.PlayMotion(aimMotionAsset);
+            _slotLayer.PlayMotion(aimMotionAsset);
 
             if (!IsAiming())
             {
-                aimState = FPSAimState.Aiming;
+                _aimState = FPSAimState.Aiming;
                 OnInputAim(true);
 
-                adsLayer.SetAds(true);
-                swayLayer.SetFreeAimEnable(false);
-                swayLayer.SetLayerAlpha(0.5f);
+                _adsLayer.SetAds(true);
+                _swayLayer.SetFreeAimEnable(false);
+                _swayLayer.SetLayerAlpha(0.5f);
             }
             else
             {
@@ -311,7 +321,7 @@ namespace Demo.Scripts.Runtime
             WeaponIdentifier weapon = GetGun();
 
             DateTime currentTime = DateTime.Now;
-            if ((currentTime - lastShotTime).TotalSeconds <= 1f / weapon.weapon.fireRate) { return; }
+            if ((currentTime - _lastShotTime).TotalSeconds <= 1f / weapon.weapon.fireRate) { return; }
             if (HasActiveAction()) return;
 
             weapon.weapon.OnFire();
@@ -350,7 +360,7 @@ namespace Demo.Scripts.Runtime
             }
 
             _recoilStep += weapon.weapon.recoilPattern.acceleration;
-            lastShotTime = currentTime;
+            _lastShotTime = currentTime;
         }
 
         private void OnFirePressed()
@@ -387,39 +397,39 @@ namespace Demo.Scripts.Runtime
 
         private void OnMoveStarted()
         {
-            if (slotLayer != null)
+            if (_slotLayer != null)
             {
-                slotLayer.PlayMotion(onStartStopMoving);
+                _slotLayer.PlayMotion(onStartStopMoving);
             }
 
             if (movementComponent.PoseState == FPSPoseState.Prone)
             {
-                locoLayer.BlendInIkPose(pronePose);
+                _locoLayer.BlendInIkPose(pronePose);
             }
         }
 
         private void OnMoveEnded()
         {
-            if (slotLayer != null)
+            if (_slotLayer != null)
             {
-                slotLayer.PlayMotion(onStartStopMoving);
+                _slotLayer.PlayMotion(onStartStopMoving);
             }
 
             if (movementComponent.PoseState == FPSPoseState.Prone)
             {
-                locoLayer.BlendOutIkPose();
+                _locoLayer.BlendOutIkPose();
             }
         }
 
         private void OnSlideStarted()
         {
-            lookLayer.SetLayerAlpha(0.3f);
+            _lookLayer.SetLayerAlpha(0.3f);
             GetAnimGraph().GetBaseAnimator().CrossFade("Sliding", 0.1f);
         }
 
         private void OnSlideEnded()
         {
-            lookLayer.SetLayerAlpha(1f);
+            _lookLayer.SetLayerAlpha(1f);
         }
 
         private void OnSprintStarted()
@@ -427,14 +437,14 @@ namespace Demo.Scripts.Runtime
             OnFireReleased();
             DisableAim();
 
-            lookLayer.SetLayerAlpha(0.5f);
+            _lookLayer.SetLayerAlpha(0.5f);
 
             if (GetGun().TryGet<Weapon>().overlayType == Runtime.OverlayType.Rifle)
             {
-                locoLayer.BlendInIkPose(sprintPose);
+                _locoLayer.BlendInIkPose(sprintPose);
             }
 
-            aimState = FPSAimState.None;
+            _aimState = FPSAimState.None;
 
             if (recoilComponent != null)
             {
@@ -444,37 +454,37 @@ namespace Demo.Scripts.Runtime
 
         private void OnSprintEnded()
         {
-            lookLayer.SetLayerAlpha(1f);
-            adsLayer.SetLayerAlpha(1f);
-            locoLayer.BlendOutIkPose();
+            _lookLayer.SetLayerAlpha(1f);
+            _adsLayer.SetLayerAlpha(1f);
+            _locoLayer.BlendOutIkPose();
         }
 
         private void OnCrouch()
         {
-            lookLayer.SetPelvisWeight(0f);
-            animator.SetBool(Crouching, true);
-            slotLayer.PlayMotion(crouchMotionAsset);
+            _lookLayer.SetPelvisWeight(0f);
+            _animator.SetBool(_crouching, true);
+            _slotLayer.PlayMotion(crouchMotionAsset);
 
             GetAnimGraph().GetFirstPersonAnimator().SetFloat("MovementPlayRate", .7f);
         }
 
         private void OnUncrouch()
         {
-            lookLayer.SetPelvisWeight(1f);
-            animator.SetBool(Crouching, false);
-            slotLayer.PlayMotion(unCrouchMotionAsset);
+            _lookLayer.SetPelvisWeight(1f);
+            _animator.SetBool(_crouching, false);
+            _slotLayer.PlayMotion(unCrouchMotionAsset);
 
             GetAnimGraph().GetFirstPersonAnimator().SetFloat("MovementPlayRate", 1f);
         }
 
         private void OnJump()
         {
-            slotLayer.PlayMotion(onJumpMotionAsset);
+            _slotLayer.PlayMotion(onJumpMotionAsset);
         }
 
         private void OnLand()
         {
-            slotLayer.PlayMotion(onLandedMotionAsset);
+            _slotLayer.PlayMotion(onLandedMotionAsset);
         }
 
         private void TryReload()
@@ -489,7 +499,7 @@ namespace Demo.Scripts.Runtime
             if (reloadClip != null) { PlayAnimation(reloadClip); };
 
             GetGun().TryGet<Weapon>().Reload();
-            actionState = FPSActionState.Reloading;
+            _actionState = FPSActionState.Reloading;
 
             weapon.onReloaded -= InvokeOnReloaded;
             weapon.onReloaded += InvokeOnReloaded;
@@ -503,7 +513,7 @@ namespace Demo.Scripts.Runtime
             OnFireReleased();
             DisableAim();
             PlayAnimation(GetGun().TryGet<Weapon>().grenadeClip);
-            actionState = FPSActionState.Reloading;
+            _actionState = FPSActionState.Reloading;
         }
 
         private bool _isLeaning;
@@ -555,7 +565,7 @@ namespace Demo.Scripts.Runtime
 
             HandleWeaponChangeInput();
 
-            if (aimState != FPSAimState.Ready)
+            if (_aimState != FPSAimState.Ready)
             {
                 bool wasLeaning = _isLeaning;
 
@@ -566,7 +576,7 @@ namespace Demo.Scripts.Runtime
 
                 if (_isLeaning != wasLeaning)
                 {
-                    slotLayer.PlayMotion(leanMotionAsset);
+                    _slotLayer.PlayMotion(leanMotionAsset);
                     charAnimData.SetLeanInput(wasLeaning ? 0f : rightLean ? -startLean : startLean);
                 }
 
@@ -617,30 +627,30 @@ namespace Demo.Scripts.Runtime
 
                 if (_fpsData.isB && IsAiming())
                 {
-                    if (aimState == FPSAimState.PointAiming)
+                    if (_aimState == FPSAimState.PointAiming)
                     {
-                        adsLayer.SetPointAim(false);
-                        aimState = FPSAimState.Aiming;
+                        _adsLayer.SetPointAim(false);
+                        _aimState = FPSAimState.Aiming;
                     }
                     else
                     {
-                        adsLayer.SetPointAim(true);
-                        aimState = FPSAimState.PointAiming;
+                        _adsLayer.SetPointAim(true);
+                        _aimState = FPSAimState.PointAiming;
                     }
                 }
             }
 
             if (_fpsData.isH)
             {
-                if (aimState == FPSAimState.Ready)
+                if (_aimState == FPSAimState.Ready)
                 {
-                    aimState = FPSAimState.None;
-                    lookLayer.SetLayerAlpha(1f);
+                    _aimState = FPSAimState.None;
+                    _lookLayer.SetLayerAlpha(1f);
                 }
                 else
                 {
-                    aimState = FPSAimState.Ready;
-                    lookLayer.SetLayerAlpha(.5f);
+                    _aimState = FPSAimState.Ready;
+                    _lookLayer.SetLayerAlpha(.5f);
                     OnFireReleased();
                 }
             }
@@ -664,10 +674,10 @@ namespace Demo.Scripts.Runtime
                 {
                     turnProgress = 0f;
 
-                    animator.ResetTrigger(TurnRight);
-                    animator.ResetTrigger(TurnLeft);
+                    _animator.ResetTrigger(_turnRight);
+                    _animator.ResetTrigger(_turnLeft);
 
-                    animator.SetTrigger(sign > 0f ? TurnRight : TurnLeft);
+                    _animator.SetTrigger(sign > 0f ? _turnRight : _turnLeft);
                 }
 
                 isTurning = true;
@@ -700,6 +710,8 @@ namespace Demo.Scripts.Runtime
 
             _freeLook = _fpsData.isFreeLook;
 
+            float sensitivity = _sensitivity.currentValue * _sensitivityMultiplier;
+
             float deltaMouseX = _fpsData.deltaMouseX * sensitivity;
             float deltaMouseY = _fpsData.deltaMouseY * sensitivity;
 
@@ -722,7 +734,7 @@ namespace Demo.Scripts.Runtime
             _playerInput.x += deltaMouseX;
             _playerInput.y += deltaMouseY;
 
-            float proneWeight = animator.GetFloat("ProneWeight");
+            float proneWeight = _animator.GetFloat("ProneWeight");
             Vector2 pitchClamp = Vector2.Lerp(new Vector2(-90f, 90f), new Vector2(-30, 0f), proneWeight);
 
             _playerInput.y = Mathf.Clamp(_playerInput.y, pitchClamp.x, pitchClamp.y);

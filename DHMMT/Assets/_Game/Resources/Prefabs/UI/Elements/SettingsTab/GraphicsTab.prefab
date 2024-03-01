@@ -462,7 +462,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 4192524038675341520}
     uiConfigs: {fileID: 0}
     isOpen: 0
-  _lookSensitivity_Slider: {fileID: 0}
+    hasChanged: 0
 --- !u!1 &8913452596974272194
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +770,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234378196482439197, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1305640401215570845, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -877,6 +882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: field of view
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091427583942765779, guid: 61cade2daf3d40e4fadd27abbb31e80f,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6322612952693485524, guid: 61cade2daf3d40e4fadd27abbb31e80f,
         type: 3}

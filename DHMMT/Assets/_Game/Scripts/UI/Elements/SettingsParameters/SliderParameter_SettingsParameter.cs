@@ -1,6 +1,5 @@
 using Configs;
 using DependencyInjection;
-using Helpers;
 using Interfaces;
 using System;
 using TMPro;
@@ -26,10 +25,6 @@ namespace UI.Elements.SettingsParameters
         [Header("Debug")]
         [SerializeField] private float _value = 0;
         [SerializeField] private float _initialValue = 0;
-
-        [Header("In Editor")]
-        [SerializeField] private string _label;
-        [SerializeField] private TextMeshProUGUI _labelText;
 
         public void Initialize(float value)
         {
@@ -65,16 +60,9 @@ namespace UI.Elements.SettingsParameters
             _slider.maxValue = maxValue;
         }
 
-        [ContextMenu(nameof(UpdateLabel))]
-        public void UpdateLabel()
-        {
-            _labelText.text = _label;
-            _labelText.TrySetDirty();
-        }
-
         private float RoundValue(float value)
         {
-            return (float)Math.Round(value, 0);
+            return (float)Math.Round(value, 2);
         }
     }
 }

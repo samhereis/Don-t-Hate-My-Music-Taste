@@ -61,10 +61,7 @@ namespace UI.Elements.SettingsTab
 
         private void SetSliders()
         {
-            _fieldOfView_Slider.SetSliderValues(0f, 100f);
             _fieldOfView_Slider.Initialize(_fieldOfView_Settings.currentValue);
-
-            _mouseSensitivity_Slider.SetSliderValues(0f, 100f);
             _mouseSensitivity_Slider.Initialize(_mouseSensitivity_Settings.currentValue);
         }
 
