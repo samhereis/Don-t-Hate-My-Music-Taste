@@ -23,6 +23,8 @@ namespace UI.Elements.SettingsTab
         {
             base.Initialize();
 
+            DependencyContext.diBox.InjectDataTo(this);
+
             await RestoreAsync();
         }
 

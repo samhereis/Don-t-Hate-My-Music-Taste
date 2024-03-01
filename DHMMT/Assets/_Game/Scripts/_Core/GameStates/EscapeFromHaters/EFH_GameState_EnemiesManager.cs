@@ -58,7 +58,7 @@ namespace GameStates.SceneManagers
                     _model.playerIdentifier.transform.position,
                     40,
                     50,
-                    _model.sceneManager.enemyNavmeshLayerMask);
+                    _model.sceneManager.enemySpawnAreaMask);
 
                 var enemyInstance = Object.Instantiate(enemyIdentifier, nearPositionToPlayer, Quaternion.identity);
                 enemyInstance.gameObject.SetActive(false);

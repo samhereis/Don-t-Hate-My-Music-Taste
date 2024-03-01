@@ -14,9 +14,9 @@ scopes = {
 	"last_search.8DF93126" = "StaticLightingSky"
 	"OpenInspectorPreview.8DF93126" = "0"
 	"currentGroup.8DF93126" = null
-	"last_search.5A656512" = "ref=\"Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Plane mat.mat\""
+	"last_search.5A656512" = "ref=\"Assets/_Game/Resources/Prefabs/Mangers/DI/Global_DI.prefab\""
 	"OpenInspectorPreview.5A656512" = "0"
-	"currentGroup.5A656512" = null
+	"currentGroup.5A656512" = "all"
 }
 providers = {
 	performance = {

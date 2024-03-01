@@ -1,26 +1,20 @@
 using Charatcers.Player;
 using DataClasses;
 using DependencyInjection;
-using ErtenGamesInstrumentals.DataClasses;
 using GameState;
 using GameStates.SceneManagers;
 using Helpers;
 using Identifiers;
 using Interfaces;
-using SO.Lists;
 using System;
 using System.Threading;
-using UI.Windows;
 using UnityEngine;
 using UnityEngine.AI;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace GameStates
 {
     public class EFH_GameState_Controller : GameState_ControllerBase, INeedDependencyInjection, IDisposable
     {
-        [Inject] private ListOfAllScenes_Extended _listOfAllScenes;
         [Inject] private IGameStateChanger _gameStatesManager;
 
         private EFH_GameState_Model _model;
@@ -42,7 +36,7 @@ namespace GameStates
 
             DependencyContext.diBox.InjectDataTo(this);
 
-            LoadingMenu loadingMenu = await this.LoadSceneWithLoadingMenu(_currentScene);
+            await this.LoadSceneWithLoadingMenu(_currentScene);
 
             _model = new EFH_GameState_Model();
             _efh_UIManager = new EFH_GameState_View(_model);
@@ -54,8 +48,6 @@ namespace GameStates
 
             SubscribeToEvents();
             CheckForIsWithinTheLight();
-
-            Object.Destroy(loadingMenu);
         }
 
         public override void Exit()

@@ -1019,10 +1019,6 @@ MonoBehaviour:
   <maxHealth>k__BackingField: 1000
   <isAlive>k__BackingField: 1
   <damagableIdentifier>k__BackingField: {fileID: 2428786341855766246}
-  _playerHealthValue:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
 --- !u!114 &1705761416278817639
 MonoBehaviour:
   m_ObjectHideFlags: 0

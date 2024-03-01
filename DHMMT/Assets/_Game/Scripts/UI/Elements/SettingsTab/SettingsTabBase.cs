@@ -21,9 +21,7 @@ namespace UI.Elements.SettingsTab
 
         public virtual void Initialize()
         {
-            DependencyContext.diBox.InjectDataTo(this);
             _baseSettings.Initialize();
-
             _baseSettings.canvasGroup = GetComponent<CanvasGroup>();
         }
 

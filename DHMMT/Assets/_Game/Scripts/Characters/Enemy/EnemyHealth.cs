@@ -5,6 +5,7 @@ using DG.Tweening;
 using Identifiers;
 using Interfaces;
 using Observables;
+using Sirenix.OdinInspector;
 using System;
 using TargetIndicator;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Charatcers.Enemy
 
         [Header("Components")]
         [SerializeField] private Animator _animator;
+        [SerializeField] private Transform _ragdollHolder;
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private EnemyAgent _enemyAgent;
         [SerializeField] private Target _targetIndicator;
@@ -54,6 +56,8 @@ namespace Charatcers.Enemy
             if (damagableIdentifier == null) damagableIdentifier = GetComponent<IdentifierBase>();
             if (_enemyAgent == null) _enemyAgent = GetComponent<EnemyAgent>();
             if (_targetIndicator == null) _targetIndicator = GetComponentInChildren<Target>(true);
+
+            SetEnalbRagdoll(false);
         }
 
         private void Start()
@@ -103,11 +107,9 @@ namespace Charatcers.Enemy
             }
         }
 
+        [Button]
         public void Die()
         {
-            _enemyAgent?.Stop();
-            _animator.enabled = false;
-
             foreach (var weapon in _animator.GetComponentsInChildren<WeaponIdentifier>(true))
             {
                 weapon.gameObject.SetActive(false);
@@ -118,23 +120,18 @@ namespace Charatcers.Enemy
                 monoBeh.enabled = false;
             }
 
-            foreach (var rigidBody in _animator.GetComponentsInChildren<Rigidbody>(true))
-            {
-                rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-                rigidBody.isKinematic = false;
-            }
+            SetEnalbRagdoll(true);
 
-            foreach (var characterJoint in _animator.GetComponentsInChildren<CharacterJoint>(true))
-            {
-                characterJoint.enableProjection = true;
-            }
+            _enemyAgent?.Stop();
+            _animator.enabled = false;
 
             isAlive = false;
             _targetIndicator?.gameObject.SetActive(false);
-            Destroy(gameObject, 5);
 
             onDie?.Invoke();
             _onEnemyDied?.Invoke(this);
+
+            Destroy(gameObject, 5);
         }
 
         private void UpdateHealthSlider(float duration = 0.25f)
@@ -163,6 +160,27 @@ namespace Charatcers.Enemy
                         });
                     });
                 }
+            }
+        }
+
+        [Button]
+        private void SetEnalbRagdoll(bool isEnabled)
+        {
+            foreach (var rigidBody in _ragdollHolder.GetComponentsInChildren<Rigidbody>(true))
+            {
+                rigidBody.GetComponent<Collider>().enabled = isEnabled;
+                if (rigidBody.TryGetComponent<CharacterJoint>(out var characterJoint))
+                {
+                    characterJoint.enableProjection = isEnabled;
+                    characterJoint.enableCollision = false;
+                }
+
+                if (isEnabled) { rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous; }
+                else { rigidBody.collisionDetectionMode = CollisionDetectionMode.Discrete; }
+
+                rigidBody.isKinematic = !isEnabled;
+                rigidBody.useGravity = isEnabled;
+                rigidBody.mass = 10;
             }
         }
     }

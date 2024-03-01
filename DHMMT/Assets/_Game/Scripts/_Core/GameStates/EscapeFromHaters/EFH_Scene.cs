@@ -2,6 +2,7 @@ using DependencyInjection;
 using Helpers;
 using Identifiers;
 using IdentityCards;
+using Music;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,9 @@ namespace GameStates.SceneManagers
         [field: FoldoutGroup("Prefabs"), SerializeField] public Exit_Identifier exitPrefab;
         [field: FoldoutGroup("Prefabs"), SerializeField] public PlayerIdentifier playerPrefab;
 
-        [field: FoldoutGroup("Components"), SerializeField] private Light directionalLight;
-
+        [field: FoldoutGroup("Components"), SerializeField] private Light _directionalLight;
+        [field: FoldoutGroup("Components"), SerializeField] private MusicInitializer _musicInitializer;
+        [field: FoldoutGroup("Components"), SerializeField] private PlayingMusicData _playingMusicData;
 
         [field: FoldoutGroup("Menus"), SerializeField] public EFH_GameplayMenu gameplayMenuPrefab;
         [field: FoldoutGroup("Menus"), SerializeField] public EFH_WinMenu winMenuPrefab;
@@ -33,7 +35,7 @@ namespace GameStates.SceneManagers
         [field: FoldoutGroup("Settings"), SerializeField] public float directionalLightIntencity = 0.01f;
         [field: FoldoutGroup("Settings"), SerializeField] public int secondsUntillLoseWhileOutsideOfTheLight = 25;
         [field: FoldoutGroup("Settings"), SerializeField] public float lightRange = 10;
-        [field: FoldoutGroup("Settings"), SerializeField] public LayerMask enemyNavmeshLayerMask;
+        [field: FoldoutGroup("Settings"), SerializeField] public int enemySpawnAreaMask = 1;
 
         [SerializeField] private List<ExitLocation_Identifier> _exitLocations = new List<ExitLocation_Identifier>();
         [SerializeField] private List<PlayerSpawnPoint_Identifier> _theLightLocations = new List<PlayerSpawnPoint_Identifier>();
@@ -48,8 +50,11 @@ namespace GameStates.SceneManagers
             _exitLocations = FindObjectsByType<ExitLocation_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
             _theLightLocations = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
 
-            if (directionalLight == null) { directionalLight = FindFirstObjectByType<Light>(FindObjectsInactive.Include); }
-            if (isDebugMode == false) { directionalLight.intensity = directionalLightIntencity; }
+            if (_directionalLight == null) { _directionalLight = FindFirstObjectByType<Light>(FindObjectsInactive.Include); }
+            if (isDebugMode == false) { _directionalLight.intensity = directionalLightIntencity; }
+
+            _musicInitializer?.Initialize();
+            _playingMusicData?.Initialize();
 
             isInitialized = true;
         }
@@ -88,6 +93,9 @@ namespace GameStates.SceneManagers
 
         public PlayerIdentifier SpawnPlayer(Vector3 position)
         {
+            var player = FindAnyObjectByType<PlayerIdentifier>(FindObjectsInactive.Include);
+            if (player != null) { Destroy(player.gameObject); }
+
             return Instantiate(playerPrefab, position, Quaternion.identity);
         }
 

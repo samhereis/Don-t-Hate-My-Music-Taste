@@ -42,9 +42,10 @@ MonoBehaviour:
     <description>k__BackingField: TsukuyomiDream
     <rules>k__BackingField: TsukuyomiDream
     <backgroundSceneSettings>k__BackingField:
-      <visuals>k__BackingField: {fileID: 8981804170155201978, guid: eaf8937928bb5a94aa587be7f5160e0b,
+      <visuals>k__BackingField: {fileID: 4210652595421852305, guid: 4dc731c0a76ef8e419ff75976aae60cd,
         type: 3}
-      <skyboxes>k__BackingField: []
+      <skyboxes>k__BackingField:
+      - {fileID: 2100000, guid: 59573b088aaea0442bf29e0a0e9d1339, type: 2}
       <ambientIntencity>k__BackingField: 1
   <lastLoadedScene>k__BackingField:
     <sceneCode>k__BackingField: 

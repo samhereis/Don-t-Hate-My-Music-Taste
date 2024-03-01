@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGlobal: 1
-  "_auto\u0399nitialize": 1
+  "_auto\u0399nitialize": 0
   _objects:
   - dependency: {fileID: 4590884804723414133}
     id: 
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 8360661420132835935}
   - component: {fileID: 5185207400549101816}
   m_Layer: 0
-  m_Name: "\u0130nEditorHelpers"
+  m_Name: InEditorHelpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

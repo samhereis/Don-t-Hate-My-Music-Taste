@@ -58,21 +58,9 @@ MonoBehaviour:
   _zOffset: 0.5
   _autoUpdate: 1
   _topNavMeshLink: {fileID: 4976484280365454984}
+  _bottomNavMeshLink: {fileID: 0}
   _rightNavMeshLink: {fileID: 3256094065787188685}
-  _grassList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _xGrassDistance: 0.5
-  _firstGrassXPosition: 4.75
-  _grassRowList:
-  - {fileID: 0}
-  _zGrassRowDistance: 1
-  _firstGrassRowZPosition: -4.75
+  _leftNavMeshLink: {fileID: 0}
 --- !u!114 &4976484280365454984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,13 +76,13 @@ MonoBehaviour:
   m_AgentTypeID: 0
   m_StartPoint: {x: 0, y: 0.5, z: 4.5}
   m_EndPoint: {x: 0, y: 0.5, z: 6}
-  m_StartTransform: {fileID: 0}
-  m_EndTransform: {fileID: 0}
+  m_StartTransform: {fileID: 3581334932711455897}
+  m_EndTransform: {fileID: 3581334932711455897}
   m_Activated: 1
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!114 &3256094065787188685
 MonoBehaviour:
@@ -111,13 +99,13 @@ MonoBehaviour:
   m_AgentTypeID: 0
   m_StartPoint: {x: 4.5, y: 0.5, z: 0}
   m_EndPoint: {x: 6, y: 0.5, z: 0}
-  m_StartTransform: {fileID: 0}
-  m_EndTransform: {fileID: 0}
+  m_StartTransform: {fileID: 3581334932711455897}
+  m_EndTransform: {fileID: 3581334932711455897}
   m_Activated: 1
   m_Width: 10
   m_CostModifier: -1
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!65 &2785037323059835716
 BoxCollider:

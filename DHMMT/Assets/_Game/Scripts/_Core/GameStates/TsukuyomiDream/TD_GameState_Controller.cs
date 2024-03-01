@@ -1,16 +1,13 @@
 using Charatcers.Player;
 using DataClasses;
 using DependencyInjection;
-using ErtenGamesInstrumentals.DataClasses;
 using GameState;
 using GameStates.SceneManagers;
 using Helpers;
 using Identifiers;
 using Interfaces;
 using Services;
-using Servies;
 using SO.Lists;
-using UI.Windows;
 using UnityEngine;
 
 namespace GameStates
@@ -19,7 +16,6 @@ namespace GameStates
     {
         [Inject] private TD_SceneManager _tD_SceneManager;
 
-        [Inject] private SceneLoader _sceneLoader;
         [Inject] private GameSaveService _gameSaveManager;
         [Inject] private ListOfAllScenes_Extended _listOfAllScenes;
 
@@ -30,8 +26,6 @@ namespace GameStates
         private TD_GameState_EnemiesManager _tD_EnemiesManager;
         private TD_GameState_View _tD_UIManager;
 
-        [Inject] private PrefabReference<LoadingMenu_Extended> _loadingMenu;
-
         private AScene_Extended _scene;
 
         public TD_GameState_Controller(AScene_Extended scene)
@@ -41,11 +35,7 @@ namespace GameStates
 
         public async override void Enter()
         {
-            _sceneLoader = DependencyContext.diBox.Get<SceneLoader>();
-            var loadingMenu = Object.Instantiate(await _loadingMenu.GetAssetAsync());
-            if (_loadingMenu != null) { Object.DontDestroyOnLoad(loadingMenu.gameObject); };
-
-            await _sceneLoader.LoadSceneAsync(_scene, loadingMenu);
+            await this.LoadSceneWithLoadingMenu(_scene);
 
             DependencyContext.diBox.InjectDataTo(this);
 
@@ -61,8 +51,6 @@ namespace GameStates
             _tD_EnemiesManager.Initialize();
 
             SubscribeToEvents();
-
-            Object.Destroy(loadingMenu.gameObject);
         }
 
         public override void Exit()
@@ -116,7 +104,9 @@ namespace GameStates
         {
             if (_tD_SceneManager.playerSpawnPoints.Length > 0)
             {
-                _player = Object.Instantiate(_tD_SceneManager.playerPrefab, _tD_SceneManager.playerSpawnPoints.GetRandom().transform.position, Quaternion.identity);
+                _player = Object.Instantiate(_tD_SceneManager.playerPrefab,
+                    _tD_SceneManager.playerSpawnPoints.GetRandom().transform.position,
+                    Quaternion.identity);
             }
         }
 

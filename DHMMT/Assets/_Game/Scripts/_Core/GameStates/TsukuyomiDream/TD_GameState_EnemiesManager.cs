@@ -16,8 +16,8 @@ namespace GameStates.SceneManagers
     {
         [Inject(DataSignal_ConstStrings.onEnemyDied)] public DataSignal<IDamagable> onEnemyDied;
 
-        private List<EnemyIdentityCard> enemiesToSpawnOnStart { get; set; } = new List<EnemyIdentityCard>();
-        private EnemySpawnPoint_Identifier[] enemySpawnPoint_Identifiers { get; set; }
+        private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
+        private EnemySpawnPoint_Identifier[] _enemySpawnPoint_Identifiers;
 
         private TD_SceneManager _sceneManager;
 
@@ -30,10 +30,10 @@ namespace GameStates.SceneManagers
         {
             DependencyContext.diBox.InjectDataTo(this);
 
-            enemiesToSpawnOnStart = _sceneManager.enemiesToSpawnOnStart;
-            enemySpawnPoint_Identifiers = _sceneManager.enemySpawnPoint_Identifiers;
+            _enemiesToSpawnOnStart = _sceneManager.enemiesToSpawnOnStart;
+            _enemySpawnPoint_Identifiers = _sceneManager.enemySpawnPoint_Identifiers;
 
-            Spawn(enemiesToSpawnOnStart.GetRandom().identityCard.target);
+            Spawn(_enemiesToSpawnOnStart.GetRandom().identityCard.target);
         }
 
         public void Dispose()
@@ -43,36 +43,29 @@ namespace GameStates.SceneManagers
 
         public void SubscribeToEvents()
         {
-            onEnemyDied.AddListener(OnEnemyDied);
+            onEnemyDied.AddListener(Respawn);
         }
 
         public void UnsubscribeFromEvents()
         {
-            onEnemyDied.AddListener(OnEnemyDied);
-        }
-
-        protected void OnEnemyDied(IDamagable enemy)
-        {
-            onEnemyDied?.Invoke(enemy);
-
-            Respawn(enemy);
+            onEnemyDied.AddListener(Respawn);
         }
 
         public void Respawn(IDamagable damagable)
         {
-            Spawn(enemiesToSpawnOnStart.GetRandom().identityCard.target);
+            Spawn(_enemiesToSpawnOnStart.GetRandom().identityCard.target);
         }
 
         private void Spawn(EnemyIdentifier enemyIdentifier)
         {
             if (enemyIdentifier == null) { return; }
 
-            if (enemySpawnPoint_Identifiers.Length == 0) { enemySpawnPoint_Identifiers = Object.FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
-            if (enemySpawnPoint_Identifiers.Length == 0) { return; };
+            if (_enemySpawnPoint_Identifiers.Length == 0) { _enemySpawnPoint_Identifiers = Object.FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
+            if (_enemySpawnPoint_Identifiers.Length == 0) { return; };
 
-            if (enemySpawnPoint_Identifiers.Length > 0)
+            if (_enemySpawnPoint_Identifiers.Length > 0)
             {
-                var position = enemySpawnPoint_Identifiers.GetRandom().transform.position;
+                var position = _enemySpawnPoint_Identifiers.GetRandom().transform.position;
 
                 var enemyInstance = UnityEngine.Object.Instantiate<EnemyIdentifier>(enemyIdentifier, position, Quaternion.identity);
                 enemyInstance.transform.position = position;

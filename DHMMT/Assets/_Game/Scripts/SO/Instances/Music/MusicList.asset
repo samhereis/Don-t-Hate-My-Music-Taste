@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d558afc62cc53b4f81628b4d5a21703, type: 3}
   m_Name: MusicList
   m_EditorClassIdentifier: 
-  _musicList: []
+  _musicList:
+  - {fileID: 8300000, guid: 9e0e18909ded53449bd6b7997d5b7dab, type: 3}
+  - {fileID: 8300000, guid: 7a49232e9a9ab2f489efadaacfba2f75, type: 3}
   _defaultMusicList:
-  - {fileID: 8300000, guid: b3c253360e78e764aaa02ebe95b20d02, type: 3}
-  - {fileID: 8300000, guid: f84da089eab246a44be429560dc5bef4, type: 3}
-  - {fileID: 8300000, guid: a0d375bb7ca3e1b409b497a2c3410227, type: 3}
-  - {fileID: 8300000, guid: 195fdca46198e884e80d5eff1c44a80e, type: 3}
-  - {fileID: 8300000, guid: 091d83c9442f6274b81af68d48fb52d8, type: 3}
+  - {fileID: 8300000, guid: 9e0e18909ded53449bd6b7997d5b7dab, type: 3}
+  - {fileID: 8300000, guid: 7a49232e9a9ab2f489efadaacfba2f75, type: 3}

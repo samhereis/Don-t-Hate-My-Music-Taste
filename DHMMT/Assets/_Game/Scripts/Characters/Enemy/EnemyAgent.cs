@@ -81,8 +81,6 @@ namespace Charatcers.Enemy
 
         private void SetDestination(Vector3 position, float speed, float animatorSpeed)
         {
-            _enemyController.Sprint(animatorSpeed);
-
             _navMeshAgent.isStopped = false;
             _navMeshAgent.SetDestination(position);
             _navMeshAgent.speed = speed;
@@ -90,8 +88,6 @@ namespace Charatcers.Enemy
 
         public void Stop()
         {
-            _enemyController.Stop(0);
-
             _navMeshAgent.isStopped = true;
             _navMeshAgent.ResetPath();
         }

@@ -32,6 +32,8 @@ namespace UI.Elements.SettingsTab
         {
             base.Initialize();
 
+            DependencyContext.diBox.InjectDataTo(this);
+
             _volumeSettings = new Dictionary<SliderParameter_SettingsParameter, FloatSavable_SO>
             {
                 { _masterVolume_Slider, _masterVolume_Settings },

@@ -64,7 +64,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &201948050087151800
 MonoBehaviour:
@@ -131,10 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
-    enableDisable: 1
+    enableDisable: 0
     notifyOthers: 1
     animationDuration_Enable: 1
-    animationDuration_Disable: 0.25
+    animationDuration_Disable: 0.5
     uiAnimationElementForeachDelay: 0.025
     canvasGroup: {fileID: 7640579395730743378}
     uIAnimationElements: []
@@ -613,7 +613,7 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:

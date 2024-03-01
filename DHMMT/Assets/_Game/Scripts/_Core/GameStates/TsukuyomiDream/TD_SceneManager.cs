@@ -2,6 +2,8 @@ using DependencyInjection;
 using Helpers;
 using Identifiers;
 using IdentityCards;
+using Music;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,21 +27,20 @@ namespace GameStates.SceneManagers
 
         public int secondsToGiveOnEnemyDie => _secondsToGiveOnEnemyDie;
 
-        [Header("Prefabs")]
-        [SerializeField] private PlayerIdentifier _playerPrefab;
-        [SerializeField] private TD_GameplayMenu _modeTDGameplayMenuPrefab;
-        [SerializeField] private TD_LoseMenu _modeLoseMenuPrefab;
-        [SerializeField] private PauseMenu _pauseMenuPrefab;
+        [FoldoutGroup("Prefabs"), SerializeField] private PlayerIdentifier _playerPrefab;
+        [FoldoutGroup("Prefabs"), SerializeField] private TD_GameplayMenu _modeTDGameplayMenuPrefab;
+        [FoldoutGroup("Prefabs"), SerializeField] private TD_LoseMenu _modeLoseMenuPrefab;
+        [FoldoutGroup("Prefabs"), SerializeField] private PauseMenu _pauseMenuPrefab;
 
-        [Header("Components")]
-        [SerializeField] private Transform _terrainReactableGridCenter;
-        [SerializeField] private NavMeshSurface _navMeshSurface;
+        [FoldoutGroup("Components"), SerializeField] private Transform _terrainReactableGridCenter;
+        [FoldoutGroup("Components"), SerializeField] private NavMeshSurface _navMeshSurface;
+        [FoldoutGroup("Components"), SerializeField] private MusicInitializer _musicInitializer;
+        [FoldoutGroup("Components"), SerializeField] private PlayingMusicData _playingMusicData;
 
-        [Header("Settings")]
-        [SerializeField] private int _secondsToGiveOnEnemyDie = 25;
-        [SerializeField] private Vector2Int _tReactableSize;
-        [SerializeField] private Vector2Int _terrainReactableGridSize;
-        [SerializeField] private LayerMask _enemyNavmeshLayerMask;
+        [FoldoutGroup("Settings"), SerializeField] private int _secondsToGiveOnEnemyDie = 25;
+        [FoldoutGroup("Settings"), SerializeField] private Vector2Int _tReactableSize;
+        [FoldoutGroup("Settings"), SerializeField] private Vector2Int _terrainReactableGridSize;
+        [FoldoutGroup("Settings"), SerializeField] private LayerMask _enemyNavmeshLayerMask;
 
         [SerializeField] private ReactorSpawnData[] _reactorSpawnDatas;
         [SerializeField] private List<EnemyIdentityCard> _enemiesToSpawnOnStart = new List<EnemyIdentityCard>();
@@ -58,6 +59,9 @@ namespace GameStates.SceneManagers
 
             if (_playerSpawnPoints.Length == 0) { _playerSpawnPoints = FindObjectsByType<PlayerSpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
             if (_enemySpawnPoint_Identifiers.Length == 0) { _enemySpawnPoint_Identifiers = FindObjectsByType<EnemySpawnPoint_Identifier>(FindObjectsInactive.Include, FindObjectsSortMode.None); }
+
+            _musicInitializer?.Initialize();
+            _playingMusicData?.Initialize();
 
             isInitialized = true;
         }

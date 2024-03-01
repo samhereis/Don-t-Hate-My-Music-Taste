@@ -1,11 +1,8 @@
 using DataClasses;
 using DependencyInjection;
 using GameState;
-using Helpers;
 using Managers;
 using SO.Lists;
-using UI.Windows;
-using UnityEngine;
 
 namespace GameStates
 {
@@ -24,7 +21,7 @@ namespace GameStates
             base.Enter();
 
             _listOfAllScenes = DependencyContext.diBox.Get<ListOfAllScenes_Extended>();
-            LoadingMenu loadingMenu = await this.LoadSceneWithLoadingMenu(_listOfAllScenes.mainMenuScene);
+            await this.LoadSceneWithLoadingMenu(_listOfAllScenes.mainMenuScene);
 
             DependencyContext.InjectDependencies(this);
             _sceneManager.Initialize();
@@ -37,13 +34,6 @@ namespace GameStates
 
             SetupInput();
             SubscribeToEvents();
-
-            loadingMenu?.Disable(0.5f);
-            if (loadingMenu != null)
-            {
-                await AsyncHelper.DelayFloat(0.5f);
-                Object.Destroy(loadingMenu.gameObject);
-            }
         }
 
         public override void Exit()

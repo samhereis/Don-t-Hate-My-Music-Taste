@@ -32,5 +32,19 @@ namespace UI.Windows
                 _loadingCircle.eulerAngles = new Vector3(0, 0, _loadingCircle.eulerAngles.z - _loadingCirlceRotationSpeed * Time.deltaTime);
             }
         }
+
+        public override void Disable(float? duration = null)
+        {
+            if (duration == null) duration = _baseSettings.animationDuration_Disable;
+
+            TweeningHelper.TweenFloat(_progressSlider.value, 1, duration.Value, onUpdateCallback: (value) =>
+            {
+                _progressSlider.value = value;
+            }, completedCallback: (value) =>
+            {
+                base.Disable(duration);
+                Destroy(gameObject, duration.Value + 1);
+            });
+        }
     }
 }

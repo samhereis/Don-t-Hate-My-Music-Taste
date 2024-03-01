@@ -101,6 +101,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3256094065787188685, guid: e841f3e8994879e48a09eea3e026acba,
+        type: 3}
+      propertyPath: m_EndTransform
+      value: 
+      objectReference: {fileID: 1600283574562097618}
+    - target: {fileID: 3256094065787188685, guid: e841f3e8994879e48a09eea3e026acba,
+        type: 3}
+      propertyPath: m_StartTransform
+      value: 
+      objectReference: {fileID: 1600283574562097618}
     - target: {fileID: 3581334932711455897, guid: e841f3e8994879e48a09eea3e026acba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -151,21 +161,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6518638798209054593, guid: e841f3e8994879e48a09eea3e026acba,
+    - target: {fileID: 4976484280365454984, guid: e841f3e8994879e48a09eea3e026acba,
         type: 3}
-      propertyPath: _xGrassDistance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6518638798209054593, guid: e841f3e8994879e48a09eea3e026acba,
+      propertyPath: m_EndTransform
+      value: 
+      objectReference: {fileID: 1600283574562097618}
+    - target: {fileID: 4976484280365454984, guid: e841f3e8994879e48a09eea3e026acba,
         type: 3}
-      propertyPath: _grassList.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6518638798209054593, guid: e841f3e8994879e48a09eea3e026acba,
-        type: 3}
-      propertyPath: _grassRowList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_StartTransform
+      value: 
+      objectReference: {fileID: 1600283574562097618}
     - target: {fileID: 8316285315273273293, guid: e841f3e8994879e48a09eea3e026acba,
         type: 3}
       propertyPath: m_Name

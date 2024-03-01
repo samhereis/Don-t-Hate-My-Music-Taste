@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f53c0571bf4bfa45b716d867e8cc80d, type: 3}
   m_Name: Bass
   m_EditorClassIdentifier: 
-  <value>k__BackingField: 0.008544308
   _multiplier: 1
-  <defaultMultiplier>k__BackingField: 2
   _rangeStart: 1
   _rangeEnd: 3
   _playingMusicFrequencies: {fileID: 11400000, guid: 421e6fb8fb2deb94c9495ea52e43818c,
