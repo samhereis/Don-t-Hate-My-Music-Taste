@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Types;
@@ -728,6 +728,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
                 ikRigData.leftFoot.hintTarget = ikRigData.animator.GetBoneTransform(HumanBodyBones.LeftLowerLeg);
 
                 Transform head = ikRigData.animator.GetBoneTransform(HumanBodyBones.Head);
+                Debug.Log(head);
                 SetupIKBones(head);
                 SetupWeaponBones();
                 return;

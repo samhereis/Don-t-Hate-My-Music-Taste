@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Core.Types;
 
@@ -50,7 +50,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Playables
             }
             
             _animator = GetComponent<Animator>();
-            _playableGraph = PlayableGraph.Create("FPSAnimatorGraph");
+            _playableGraph = _animator.playableGraph;
 
             if (!_playableGraph.IsValid())
             {
@@ -94,7 +94,6 @@ namespace Kinemation.FPSFramework.Runtime.Core.Playables
             output.SetSourcePlayable(_masterMixer);
 
             _playableGraph.Play();
-            _animator.runtimeAnimatorController = null;
             return true;
         }
 

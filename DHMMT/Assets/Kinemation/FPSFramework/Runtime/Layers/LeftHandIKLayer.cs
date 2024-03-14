@@ -1,5 +1,4 @@
-// Designed by KINEMATION, 2023
-
+// Designed by KINEMATION, 2024.
 
 using System.Collections.Generic;
 using Kinemation.FPSFramework.Runtime.Attributes;
@@ -152,8 +151,6 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             LocRot blendedPose = LocRot.Lerp(_leftHandPoseCache, _leftHandPose, progress);
             blendedPose = blendedPose.FromSpace(GetMasterPivot());
             GetLeftHandIK().Override(blendedPose, smoothLayerAlpha);
-            
-            
         }
     }
 }

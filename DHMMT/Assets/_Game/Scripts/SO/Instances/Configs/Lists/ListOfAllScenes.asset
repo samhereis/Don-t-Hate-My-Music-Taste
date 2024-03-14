@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ListOfAllScenes
   m_EditorClassIdentifier: 
   <mainMenuScene>k__BackingField:
-    <sceneCode>k__BackingField: MainMenu
+    <sceneCode>k__BackingField: mainMenu
     _scene: {fileID: 102900000, guid: 8124e5870f4fd4c779e7a5f994e84ad1, type: 3}
   <gameScene>k__BackingField:
-    <sceneCode>k__BackingField: MainMenu
+    <sceneCode>k__BackingField: mainMenu
     _scene: {fileID: 102900000, guid: 8124e5870f4fd4c779e7a5f994e84ad1, type: 3}
   <scenes>k__BackingField:
   - <sceneCode>k__BackingField: EscapeFromHaters

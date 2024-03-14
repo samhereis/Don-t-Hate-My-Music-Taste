@@ -1,3 +1,5 @@
+// Designed by KINEMATION, 2024.
+
 using System;
 using UnityEditor;
 using UnityEngine;

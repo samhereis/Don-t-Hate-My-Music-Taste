@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Types;
@@ -23,6 +23,8 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
         [SerializeField] protected bool drawDebugInfo = true;
         [SerializeField] public bool runInEditor;
         protected CoreAnimComponent core;
+
+        public float testCurveValue;
 
         public void SetLayerAlpha(float weight)
         {
@@ -158,9 +160,10 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
             return core.ikRigData;
         }
 
-        protected float GetCurveValue(string curve)
+        public float GetCurveValue(string curve)
         {
-            return core.animGraph.GetCurveValue(curve);
+            testCurveValue = core.animGraph.GetCurveValue(curve);
+            return testCurveValue;
         }
 
         // Offsets master pivot only, without affecting the child IK bones

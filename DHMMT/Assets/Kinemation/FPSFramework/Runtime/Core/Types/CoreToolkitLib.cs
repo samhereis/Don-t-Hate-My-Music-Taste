@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using System;
 using UnityEngine;
@@ -345,7 +345,8 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             Transform root,
             Transform mid,
             Transform tip,
-            Transform target,
+            Vector3 targetPosition,
+            Quaternion targetRotation,
             Transform hint,
             float posWeight,
             float rotWeight,
@@ -355,8 +356,8 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             Vector3 aPosition = root.position;
             Vector3 bPosition = mid.position;
             Vector3 cPosition = tip.position;
-            Vector3 tPosition = Vector3.Lerp(cPosition, target.position, posWeight);
-            Quaternion tRotation = Quaternion.Lerp(tip.rotation, target.rotation, rotWeight);
+            Vector3 tPosition = Vector3.Lerp(cPosition, targetPosition, posWeight);
+            Quaternion tRotation = Quaternion.Lerp(tip.rotation, targetRotation, rotWeight);
             bool hasHint = hint != null && hintWeight > 0f;
 
             Vector3 ab = bPosition - aPosition;
@@ -433,10 +434,16 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
 
         public static float NormalizeAngle(float angle)
         {
-            while (angle < -180f)
-                angle += 360f;
-            while (angle >= 180f)
-                angle -= 360f;
+            if (angle <= -180)
+            {
+                return angle + 360f;
+            }
+
+            if (angle >= 180f)
+            {
+                return angle - 360f;
+            }
+
             return angle;
         }
         
@@ -474,18 +481,6 @@ namespace Kinemation.FPSFramework.Runtime.Core.Types
             }
 
             return Quaternion.identity;
-        }
-
-        public static float debugStartTime = 0f;
-
-        public static void DebugTimeStart()
-        {
-            debugStartTime = Time.realtimeSinceStartup;
-        }
-
-        public static void DebugTimeEnd(string eventName)
-        {
-            Debug.LogFormat("{0} took {1:F5} ms", eventName, (Time.realtimeSinceStartup - debugStartTime) * 1000f);
         }
     }
 }

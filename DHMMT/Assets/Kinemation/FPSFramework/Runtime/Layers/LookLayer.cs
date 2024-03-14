@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Components;
@@ -6,6 +6,7 @@ using Kinemation.FPSFramework.Runtime.Core.Types;
 
 using System;
 using System.Collections.Generic;
+using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -106,7 +107,33 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         
         protected float leanInput;
         protected Vector2 lerpedAim;
-  
+        
+        [SerializeField] [Range(0, 90f)] protected float lookAtMaxUpAngle;
+        [SerializeField] [Range(0, 90f)] protected float lookAtMaxRightAngle;
+        [SerializeField] [Min(0f)] protected float lookAtSmoothing;
+        [SerializeField] [Min(0f)] protected float maxDistance;
+        [SerializeField] [Min(0f)] protected float minDistance;
+
+        protected Vector3 lookAtPoint;
+        protected Vector2 lookAtInput;
+        protected bool useLookAt;
+        protected float lookAtWeight;
+
+        public void SetLookAtEnabled(bool isEnabled)
+        {
+            useLookAt = isEnabled;
+        }
+
+        public void SetLookAtTarget(Transform target)
+        {
+            lookAtPoint = target.position;
+        }
+
+        public void SetLookAtTarget(Vector3 point)
+        {
+            lookAtPoint = point;
+        }
+        
         public void SetAimOffsetTable(AimOffsetTable table)
         {
             if (table == null)
@@ -230,14 +257,9 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             return base.CanUpdate() || !Application.isPlaying;
         }
 
-        public override void PreUpdateLayer()
-        {
-            base.PreUpdateLayer();
-            UpdateSpineBlending();
-        }
-
         public override void UpdateLayer()
         {
+            UpdateSpineBlending();
             RotateSpine();
         }
 
@@ -271,6 +293,40 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             Gizmos.color = color;
         }
 
+        private void ComputeLookAt()
+        {
+            float alpha = CoreToolkitLib.ExpDecay(lookAtSmoothing, Time.deltaTime);
+            lookAtWeight = Mathf.Lerp(lookAtWeight, useLookAt ? 1f : 0f, alpha);
+
+            var projected = Vector3.ProjectOnPlane(lookAtPoint - GetRootBone().position, 
+                GetRootBone().up);
+            float angle = Vector3.Angle(GetRootBone().forward, projected);
+            
+            if (Mathf.Abs(angle) > 120f)
+            {
+                return;
+            }
+            
+            if (!useLookAt) return;
+
+            Vector2 lookAtTarget = Vector2.zero;
+            Vector3 lookVector = lookAtPoint - GetMasterPivot().position;
+
+            if (lookVector.magnitude < minDistance)
+            {
+                return;
+            }
+            
+            if(lookVector.magnitude <= maxDistance)
+            {
+                lookAtTarget = FPSAnimLib.GetLookAtInput(GetRootBone(), GetMasterPivot(), lookAtPoint);
+                lookAtTarget.x = Mathf.Clamp(lookAtTarget.x, -lookAtMaxRightAngle, lookAtMaxRightAngle);
+                lookAtTarget.y = Mathf.Clamp(lookAtTarget.y, -lookAtMaxUpAngle, lookAtMaxUpAngle);
+            }
+            
+            lookAtInput = Vector2.Lerp(lookAtInput, lookAtTarget, alpha);
+        }
+
         private void UpdateSpineBlending()
         {
             interpPelvis = CoreToolkitLib.Interp(interpPelvis, pelvisLayerAlpha * smoothLayerAlpha,
@@ -288,6 +344,9 @@ namespace Kinemation.FPSFramework.Runtime.Layers
 
                 leanInput = CoreToolkitLib.Interp(leanInput, leanAmount * GetCharData().leanDirection,
                     leanSpeed, Time.deltaTime);
+
+                aimUp = Mathf.Lerp(aimUp, lookAtInput.y, lookAtWeight);
+                aimRight = Mathf.Lerp(aimRight, lookAtInput.x, lookAtWeight);
             }
             else
             {
@@ -386,6 +445,12 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             }
         }
 
+        private void Update()
+        {
+            ComputeLookAt();
+        }
+
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (!lookUpOffset.IsValid() || lookUpOffset.IsChanged())
@@ -469,7 +534,6 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             }
         }
         
-#if UNITY_EDITOR
         public AimOffsetTable SaveTable()
         {
             Transform[] bones = null;

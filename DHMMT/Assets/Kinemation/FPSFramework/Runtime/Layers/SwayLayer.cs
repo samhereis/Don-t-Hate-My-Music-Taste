@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Components;
@@ -19,10 +19,10 @@ namespace Kinemation.FPSFramework.Runtime.Layers
 
         public VectorSpringState aimSwayPositionSpring;
         public VectorSpringState aimSwayRotationSpring;
-
+        
         public Vector3 aimSwayPositionResult;
         public Vector3 aimSwayRotationResult;
-
+        
         public Vector3 moveSwayRotationTarget;
         public Vector3 moveSwayPositionTarget;
 
@@ -60,14 +60,12 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             swayData[0] = data;
         }
     }
-
+    
     public class SwayLayer : AnimLayer
     {
-        [Header("Deadzone Rotation")]
-        [SerializeField]
-        [Bone]
+        [Header("Deadzone Rotation")] [SerializeField] [Bone]
         protected Transform headBone;
-
+        
         [SerializeField] protected bool bFreeAim = true;
         [SerializeField] protected bool useCircleMethod;
 
@@ -76,7 +74,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
 
         private JobHandle _jobHandle;
         private NativeArray<SwayLayerData> _jobData;
-
+        
         public void SetFreeAimEnable(bool enable)
         {
             bFreeAim = enable;
@@ -86,10 +84,10 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         {
             _layerData.aimSwayPositionSpring.Reset();
             _layerData.aimSwayRotationSpring.Reset();
-
+            
             _layerData.moveSwayPositionSpring.Reset();
             _layerData.moveSwayRotationSpring.Reset();
-
+            
             _layerInput.freeAimSettings = GetGunAsset().freeAimSettings;
             _layerInput.moveSwaySettings = GetGunAsset().moveSwaySettings;
             _layerInput.aimSwaySettings = GetGunAsset().aimSwaySettings;
@@ -105,7 +103,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
 
             if (!bFreeAim) _layerData.freeAimTarget = Vector2.zero;
             _layerData.freeAimResult = Vector2.Lerp(_layerData.freeAimResult, _layerData.freeAimTarget, alpha);
-
+            
             Quaternion q =
                 Quaternion.Euler(new Vector3(_layerData.freeAimResult.x, _layerData.freeAimResult.y, 0f));
             q.Normalize();
@@ -121,18 +119,18 @@ namespace Kinemation.FPSFramework.Runtime.Layers
                 position = -offset,
                 rotation = q
             };
-
+            
             Quaternion aimSwayRotation = Quaternion.Euler(_layerData.aimSwayRotationResult);
             Vector3 aimSwayPosition = _layerData.aimSwayPositionResult;
-
+            
             Vector3 swayOffset = GetGunAsset().adsSwayOffset * GetRigData().aimWeight;
             swayOffset = aimSwayRotation * swayOffset - swayOffset;
             aimSwayPosition += swayOffset;
-
+            
             swayResult.position += aimSwayPosition + _layerData.moveSwayPositionResult;
             swayResult.rotation *= aimSwayRotation;
             swayResult.rotation *= Quaternion.Euler(_layerData.moveSwayRotationResult);
-
+            
             GetMasterIK().Offset(GetRootBone(), swayResult.position, smoothLayerAlpha);
             GetMasterIK().Offset(GetRootBone(), swayResult.rotation, smoothLayerAlpha);
         }
@@ -140,12 +138,12 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         public override void PreUpdateLayer()
         {
             base.PreUpdateLayer();
-
+            
             _layerInput.deltaTime = Time.deltaTime;
 
             _layerInput.aimInput = GetCharData().deltaAimInput;
             _layerInput.moveInput = GetCharData().moveInput;
-
+            
             _layerInput.useCircleMethod = useCircleMethod;
         }
 
@@ -157,13 +155,13 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         public override void ScheduleJobs()
         {
             _jobData[0] = _layerData;
-
+            
             var job = new SwayLayerJob()
             {
                 inputData = _layerInput,
                 swayData = _jobData
             };
-
+            
             _jobHandle = job.Schedule();
         }
 
@@ -171,20 +169,13 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         {
             _jobHandle.Complete();
             _layerData = _jobData[0];
-
+            
             ApplyTransforms();
         }
 
         private void OnDestroy()
         {
-            if (_jobData != null)
-            {
-                if (_jobData.IsCreated)
-                {
-                    CompleteJobs();
-                    _jobData.Dispose();
-                }
-            }
+            if (_jobData.IsCreated) _jobData.Dispose();
         }
 
         public override void InitializeLayer()
@@ -198,7 +189,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             ApplySway(ref _layerInput, ref _layerData);
             ApplyMoveSway(ref _layerInput, ref _layerData);
             ApplyFreeAim(ref _layerInput, ref _layerData);
-
+            
             ApplyTransforms();
         }
 
@@ -217,7 +208,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
             }
             else
             {
-                data.freeAimTarget.y = Mathf.Clamp(data.freeAimTarget.y,
+                data.freeAimTarget.y = Mathf.Clamp(data.freeAimTarget.y, 
                     -maxValue, maxValue);
             }
         }
@@ -225,10 +216,10 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         public static void ApplySway(ref SwayLayerInputData input, ref SwayLayerData data)
         {
             float deltaTime = input.deltaTime;
-
+            
             float deltaRight = input.aimInput.x / deltaTime;
             float deltaUp = input.aimInput.y / deltaTime;
-
+            
             data.aimSwayTarget += new Vector2(deltaRight, deltaUp) * 0.01f;
             data.aimSwayTarget.x = CoreToolkitLib.InterpLayer(data.aimSwayTarget.x * 0.01f, 0f, 5f, deltaTime);
             data.aimSwayTarget.y = CoreToolkitLib.InterpLayer(data.aimSwayTarget.y * 0.01f, 0f, 5f, deltaTime);
@@ -239,7 +230,7 @@ namespace Kinemation.FPSFramework.Runtime.Layers
                 y = data.aimSwayTarget.y,
                 z = 0f
             };
-
+            
             Vector3 targetRot = new Vector3()
             {
                 x = data.aimSwayTarget.y,
@@ -274,10 +265,10 @@ namespace Kinemation.FPSFramework.Runtime.Layers
                 z = moveInput.y * moveSwayData.translationScale.z
             };
 
-            data.moveSwayRotationTarget = CoreToolkitLib.Interp(data.moveSwayRotationTarget,
+            data.moveSwayRotationTarget = CoreToolkitLib.Interp(data.moveSwayRotationTarget, 
                 moveRotTarget, moveSwayData.rotationDampingFactor, deltaTime);
-
-            data.moveSwayPositionTarget = CoreToolkitLib.Interp(data.moveSwayPositionTarget,
+            
+            data.moveSwayPositionTarget = CoreToolkitLib.Interp(data.moveSwayPositionTarget, 
                 moveLocTarget, moveSwayData.translationDampingFactor, deltaTime);
 
             data.moveSwayRotationResult = CoreToolkitLib.SpringInterp(data.moveSwayRotationResult,

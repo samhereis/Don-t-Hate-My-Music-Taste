@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2023
+// Designed by KINEMATION, 2024.
 
 using Kinemation.FPSFramework.Runtime.Layers;
 
@@ -10,7 +10,7 @@ namespace Kinemation.FPSFramework.Editor.Layers
     [CustomEditor(typeof(LookLayer), true)]
     public class LookLayerEditor : UnityEditor.Editor
     {
-        private string[] tabs = {"Blending", "Aim Offset", "Leaning"};
+        private string[] tabs = {"Blending", "Aim Offset", "Leaning", "Look At"};
         private int selectedTab;
         
         private SerializedProperty runInEditor;
@@ -35,6 +35,12 @@ namespace Kinemation.FPSFramework.Editor.Layers
         private SerializedProperty leanSpeed;
         
         private SerializedProperty curveName;
+        
+        private SerializedProperty lookAtMaxUpAngle;
+        private SerializedProperty lookAtMaxRightAngle;
+        private SerializedProperty lookAtSmoothing;
+        private SerializedProperty maxDistance;
+        private SerializedProperty minDistance;
         
         private void OnEnable()
         {
@@ -65,6 +71,12 @@ namespace Kinemation.FPSFramework.Editor.Layers
             leanSpeed = serializedObject.FindProperty("leanSpeed");
             
             curveName = serializedObject.FindProperty("curveName");
+
+            lookAtMaxUpAngle = serializedObject.FindProperty("lookAtMaxUpAngle");
+            lookAtMaxRightAngle = serializedObject.FindProperty("lookAtMaxRightAngle");
+            lookAtSmoothing = serializedObject.FindProperty("lookAtSmoothing");
+            maxDistance = serializedObject.FindProperty("maxDistance");
+            minDistance = serializedObject.FindProperty("minDistance");
         }
 
         private void DrawBlendingTab()
@@ -135,6 +147,15 @@ namespace Kinemation.FPSFramework.Editor.Layers
             EditorGUILayout.PropertyField(pelvisLean);
             EditorGUILayout.PropertyField(leanSpeed);
         }
+
+        private void DrawLookAtTab()
+        {
+            EditorGUILayout.PropertyField(lookAtMaxUpAngle);
+            EditorGUILayout.PropertyField(lookAtMaxRightAngle);
+            EditorGUILayout.PropertyField(lookAtSmoothing);
+            EditorGUILayout.PropertyField(maxDistance);
+            EditorGUILayout.PropertyField(minDistance);
+        }
         
         public override void OnInspectorGUI()
         {
@@ -153,7 +174,10 @@ namespace Kinemation.FPSFramework.Editor.Layers
                     DrawOffsetTab();
                     break;
                 case 2:
-                    DrawLeanTab(); ;
+                    DrawLeanTab();
+                    break;
+                case 3:
+                    DrawLookAtTab();
                     break;
             }
             serializedObject.ApplyModifiedProperties();

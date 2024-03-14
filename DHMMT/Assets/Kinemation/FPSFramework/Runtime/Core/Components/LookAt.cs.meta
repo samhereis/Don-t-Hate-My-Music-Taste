@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 04154e79e2454224b1ced29d23ab1301
+timeCreated: 1709897993
+AssetOrigin:
+  serializedVersion: 1
+  productId: 238641
+  packageName: FPS Animation Framework
+  packageVersion: 3.6.0
+  assetPath: Assets/Kinemation/FPSFramework/Runtime/Core/Components/LookAt.cs
+  uploadId: 649151

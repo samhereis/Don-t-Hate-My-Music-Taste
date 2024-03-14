@@ -1,3 +1,5 @@
+// Designed by KINEMATION, 2024.
+
 using Kinemation.FPSFramework.Runtime.Core.Components;
 using UnityEditor;
 using UnityEngine;
